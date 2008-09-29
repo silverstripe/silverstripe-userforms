@@ -5,14 +5,6 @@
  */
 class SubmittedFormReportField extends FormField {
 	
-	/**
-	 * Displays the form (without defaults) submitted as it appears on the front of the site
-	 * Users will use this instance of the form to filter results
-	 */
-	function Form() {
-		/*return $this->form->Form();*/
-	}
-	
 	function Field() {
 		Requirements::css(SAPPHIRE_DIR . "/css/SubmittedFormReportField.css");
 		
@@ -22,5 +14,12 @@ class SubmittedFormReportField extends FormField {
 	function Submissions() {
 		return $this->form->getRecord()->Submissions();
 	}
+	
+	function ExportLink() {
+		if($this->Submissions() && $this->Submissions()->Count() > 0) {
+			return $this->form->getRecord()->Link() . 'export/' . $this->form->getRecord()->ID;
+		}
+	}
+	
 }
 ?>
