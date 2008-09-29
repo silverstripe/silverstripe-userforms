@@ -86,13 +86,15 @@ class EditableFormField extends DataObject {
 	function populateFromPostData( $data ) {
 		
 		$this->Title = $data['Title'];
+		
 		if(isset($data['Default'])) {
 			$this->setField('Default', $data['Default']);
 		}
+		
 		$this->Sort = isset($data['Sort']) ? $data['Sort'] : null;
-  		$this->CustomParameter = $data['CustomParameter'];
-		$this->Required = !empty( $data['Required'] ) ? 1 : 0;
-  		$this->CanDelete = ( isset( $data['CanDelete'] ) && !$data['CanDelete'] ) ? 0 : 1;
+  		$this->CustomParameter = isset($data['CustomParameter']) ? $data['CustomParameter'] : null;
+		$this->Required = !empty($data['Required']) ? 1 : 0;
+  		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;
 		$this->write();
 		
 		// The field must be written to ensure a unique ID.
