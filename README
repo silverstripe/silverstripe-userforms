@@ -1,0 +1,26 @@
+###############################################
+User defined forms ("userforms") Module
+###############################################
+
+Maintainer Contact
+-----------------------------------------------
+Sean Harvey (Nickname: sharvey, halkyon)
+<sean (at) silverstripe (dot) com>
+
+Requirements
+-----------------------------------------------
+
+Documentation
+-----------------------------------------------
+http://doc.silverstripe.com/doku.php?id=userdefinedform
+
+Installation Instructions
+-----------------------------------------------
+See INSTALL
+
+Usage Overview
+-----------------------------------------------
+
+Known issues
+-----------------------------------------------
+- WorldPay - Email receipt is not sent after being redirected back from payment gateway.
