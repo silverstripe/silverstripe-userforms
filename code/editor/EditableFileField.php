@@ -12,13 +12,13 @@ class EditableFileField extends EditableFormField {
 	);
 	
 	/**
-	 * @see {Upload->allowedMaxFileSize}
+	 * @see Upload->allowedMaxFileSize
 	 * @var int
 	 */
 	public static $allowed_max_file_size;
 	
 	/**
-	 * @see {Upload->allowedExtensions}
+	 * @see Upload->allowedExtensions
 	 * @var array
 	 */
 	public static $allowed_extensions = array();
