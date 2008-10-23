@@ -5,7 +5,7 @@
 		<% else %>
 		<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% end_if %>
-		<img class="icon" src="sapphire/images/fe_icons/dropdown.png" alt="<% _t('DROPDOWN', 'Dropdown box') %>" title="<% _t('DROPDOWN', 'Dropdown box') %>"/>
+		<img class="icon" src="userforms/images/fe_icons/dropdown.png" alt="<% _t('DROPDOWN', 'Dropdown box') %>" title="<% _t('DROPDOWN', 'Dropdown box') %>"/>
 		$TitleField
 		<a class="toggler" href="#" title="<% _t('MORE', 'More options') %>"><img src="cms/images/edit.gif" alt="<% _t('MORE', 'More options') %>" /></a>
 		<% if isReadonly %>

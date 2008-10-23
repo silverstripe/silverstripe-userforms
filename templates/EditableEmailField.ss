@@ -1,7 +1,7 @@
 <div class="EditableEmailField EditableFormField" id="$Name.Attr">
 	<div class="FieldInfo">
 		<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
-		<img class="icon" src="sapphire/images/fe_icons/text-email.png" alt="<% _t('EMAIL', 'Email address field') %>" />
+		<img class="icon" src="userforms/images/fe_icons/text-email.png" alt="<% _t('EMAIL', 'Email address field') %>" />
 		$TitleField
 		<a class="toggler" href="#" title="<% _t('MORE', 'More options') %>"><img src="cms/images/edit.gif" alt="<% _t('MORE', 'More options') %>" /></a>
 		<% if CanDelete %>

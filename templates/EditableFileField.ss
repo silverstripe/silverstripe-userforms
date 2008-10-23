@@ -1,7 +1,7 @@
 <div id="$Name.Attr" class="EditableFormField EditableFileField">
 	<div class="FieldInfo">
 		<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
-		<img class="icon" src="sapphire/images/fe_icons/file-upload.png" alt="<% _t('FILE', 'File upload field') %>" />
+		<img class="icon" src="userforms/images/fe_icons/file-upload.png" alt="<% _t('FILE', 'File upload field') %>" />
 		$TitleField
 		<a class="toggler" href="#" title="<% _t('MORE', 'More options') %>"><img src="cms/images/edit.gif" alt="<% _t('MORE', 'More options') %>" /></a>
 		<a class="delete" href="#" title="<% _t('DELETE', 'Delete this field') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete this field') %>" /></a>

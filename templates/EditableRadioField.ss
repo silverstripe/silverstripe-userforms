@@ -5,7 +5,7 @@
 		<% else %>
 		<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% end_if %>
-		<img class="handle" src="sapphire/images/fe_icons/radio.png" alt="<% _t('SET', 'Radio button set') %>" title="<% _t('SET', 'Radio button set') %>" />
+		<img class="handle" src="userforms/images/fe_icons/radio.png" alt="<% _t('SET', 'Radio button set') %>" title="<% _t('SET', 'Radio button set') %>" />
 		$TitleField
 		<input type="hidden" name="hiddenDefaultOption" value="$DefaultOption" />
 		<a class="toggler" href="#" title="<% _t('MORE', 'More options') %>"><img src="cms/images/edit.gif" alt="<% _t('MORE', 'More options') %>" /></a>
