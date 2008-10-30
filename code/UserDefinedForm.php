@@ -392,13 +392,32 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 		}
 		
+		// Redirect to the finished method on this controller with the referrer data
+		Director::redirect($this->Link() . 'finished?referrer=' . urlencode($data['Referrer']));
+	}
+
+	/**
+	 * This action handles rendering the "finished" message
+	 * editable in the CMS for a User Defined Form page type.
+	 * It should be redirected to after the user submits the
+	 * User Defined Form on the front end of the site.
+	 *
+	 * @return ViewableData
+	 */
+	function finished() {
+		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
+		
 		$custom = $this->customise(array(
-			"Content" => $this->customise( array( 'Link' => $data['Referrer'] ) )->renderWith('ReceivedFormSubmission'),
-			"Form" => " ",
+			'Content' => $this->customise(
+				array(
+					'Link' => $referrer
+				))->renderWith('ReceivedFormSubmission'),
+			'Form' => ' ',
 		));
 		
 		return $custom->renderWith('Page');
 	}
+	
 }
 
 /**
