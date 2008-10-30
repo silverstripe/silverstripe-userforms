@@ -397,17 +397,16 @@ class UserDefinedForm_Controller extends Page_Controller {
 	}
 
 	/**
-	 * This action handles rendering the "finished" message
-	 * editable in the CMS for a User Defined Form page type.
-	 * It should be redirected to after the user submits the
-	 * User Defined Form on the front end of the site.
+	 * This action handles rendering the "finished" message,
+	 * which is customisable by editing the ReceivedFormSubmission.ss
+	 * template.
 	 *
 	 * @return ViewableData
 	 */
 	function finished() {
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
-		$custom = $this->customise(array(
+		$templateData = $this->customise(array(
 			'Content' => $this->customise(
 				array(
 					'Link' => $referrer
@@ -415,7 +414,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			'Form' => ' ',
 		));
 		
-		return $custom->renderWith('Page');
+		return $templateData;
 	}
 	
 }
