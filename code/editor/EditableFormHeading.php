@@ -10,8 +10,9 @@ class EditableFormHeading extends EditableFormField {
 	
 	function getFormField() {
 		// TODO customise this
-		return new LabelField( $this->Title, 'FormHeading' );
-		// return '<h3>' . $this->Title . '</h3>';
+		$labelField = new LabelField('FormHeadingLabel',$this->Title);
+		$labelField->addExtraClass('FormHeading');
+		return $labelField;
 	}
 	
 	function showInReports() {
