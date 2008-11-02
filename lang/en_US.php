@@ -15,11 +15,6 @@ $lang['en_US']['EditableCheckbox']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableCheckbox']['db_Checked'] = array(
-	'Checked',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
 $lang['en_US']['EditableCheckbox.ss']['CHECKBOX'] = 'Checkbox field';
 $lang['en_US']['EditableCheckbox.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableCheckbox.ss']['DRAG'] = 'Drag to rearrange order of fields';
@@ -34,11 +29,6 @@ $lang['en_US']['EditableCheckboxGroupField']['SINGULARNAME'] = array(
 	'Checkbox group',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableCheckboxGroupField']['has_many_Options'] = array(
-	'Options',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
 );
 $lang['en_US']['EditableCheckboxGroupField.ss']['ADD'] = 'Add new option';
 $lang['en_US']['EditableCheckboxGroupField.ss']['CHECKBOXGROUP'] = 'Checkbox group';
@@ -56,26 +46,6 @@ $lang['en_US']['EditableCheckboxOption']['SINGULARNAME'] = array(
 	'Checkbox option',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableCheckboxOption']['db_Default'] = array(
-	'Default',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableCheckboxOption']['db_Name'] = array(
-	'Name',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableCheckboxOption']['db_Sort'] = array(
-	'Sort',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableCheckboxOption']['db_Title'] = array(
-	'Title',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
 );
 $lang['en_US']['EditableCheckboxOption.ss']['DELETE'] = 'Remove this option';
 $lang['en_US']['EditableCheckboxOption.ss']['DRAG'] = 'Drag to rearrange order of options';
@@ -104,11 +74,6 @@ $lang['en_US']['EditableDropdown']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableDropdown']['has_many_Options'] = array(
-	'Options',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
-);
 $lang['en_US']['EditableDropdown.ss']['ADD'] = 'Add new option';
 $lang['en_US']['EditableDropdown.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableDropdown.ss']['DRAG'] = 'Drag to rearrange order of fields';
@@ -126,26 +91,6 @@ $lang['en_US']['EditableDropdownOption']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableDropdownOption']['db_Default'] = array(
-	'Default',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableDropdownOption']['db_Name'] = array(
-	'Name',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableDropdownOption']['db_Sort'] = array(
-	'Sort',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableDropdownOption']['db_Title'] = array(
-	'Title',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
 $lang['en_US']['EditableDropdownOption.ss']['DELETE'] = 'Remove this option';
 $lang['en_US']['EditableDropdownOption.ss']['DRAG'] = 'Drag to rearrange order of options';
 $lang['en_US']['EditableDropdownOption.ss']['LOCKED'] = 'These fields cannot be modified';
@@ -159,11 +104,6 @@ $lang['en_US']['EditableEmailField']['SINGULARNAME'] = array(
 	'Email field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableEmailField']['db_SendCopy'] = array(
-	'SendCopy',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
 );
 $lang['en_US']['EditableEmailField.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableEmailField.ss']['DRAG'] = 'Drag to rearrange order of fields';
@@ -195,41 +135,6 @@ $lang['en_US']['EditableFormField']['SINGULARNAME'] = array(
 	'Editable Form Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableFormField']['db_CanDelete'] = array(
-	'CanDelete',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_CustomParameter'] = array(
-	'CustomParameter',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_Default'] = array(
-	'Default',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_Name'] = array(
-	'Name',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_Required'] = array(
-	'Required',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_Sort'] = array(
-	'Sort',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableFormField']['db_Title'] = array(
-	'Title',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
 );
 $lang['en_US']['EditableFormField.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableFormField.ss']['DRAG'] = 'Drag to rearrange order of fields';
@@ -273,11 +178,6 @@ $lang['en_US']['EditableRadioField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableRadioField']['has_many_Options'] = array(
-	'Options',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
-);
 $lang['en_US']['EditableRadioField.ss']['ADD'] = 'Add new option';
 $lang['en_US']['EditableRadioField.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableRadioField.ss']['DRAG'] = 'Drag to rearrange order of fields';
@@ -294,31 +194,6 @@ $lang['en_US']['EditableRadioOption']['SINGULARNAME'] = array(
 	'Radio option',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableRadioOption']['db_Default'] = array(
-	'Default',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableRadioOption']['db_Name'] = array(
-	'Name',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableRadioOption']['db_Sort'] = array(
-	'Sort',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableRadioOption']['db_Title'] = array(
-	'Title',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableRadioOption']['db_Value'] = array(
-	'Value',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
 );
 $lang['en_US']['EditableRadioOption.ss']['DELETE'] = 'Remove this option';
 $lang['en_US']['EditableRadioOption.ss']['DRAG'] = 'Drag to rearrange order of options';
@@ -337,26 +212,6 @@ $lang['en_US']['EditableTextField']['SINGULARNAME'] = array(
 );
 $lang['en_US']['EditableTextField']['TEXTBOXLENGTH'] = 'Length of text box';
 $lang['en_US']['EditableTextField']['TEXTLENGTH'] = 'Text length';
-$lang['en_US']['EditableTextField']['db_MaxLength'] = array(
-	'MaxLength',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableTextField']['db_MinLength'] = array(
-	'MinLength',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableTextField']['db_Rows'] = array(
-	'Rows',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['EditableTextField']['db_Size'] = array(
-	'Size',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
 $lang['en_US']['EditableTextField.ss']['DELETE'] = 'Delete this field';
 $lang['en_US']['EditableTextField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableTextField.ss']['MORE'] = 'More options';
@@ -404,16 +259,6 @@ $lang['en_US']['SubmittedForm']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['SubmittedForm']['db_Recipient'] = array(
-	'Recipient',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['SubmittedForm']['has_many_FieldValues'] = array(
-	'FieldValues',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
-);
 $lang['en_US']['SubmittedFormEmail.ss']['SUBMITTED'] = 'The following data was submitted to your website:';
 $lang['en_US']['SubmittedFormField']['PLURALNAME'] = array(
 	'Submitted Form Fields',
@@ -424,21 +269,6 @@ $lang['en_US']['SubmittedFormField']['SINGULARNAME'] = array(
 	'Submitted Form Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['SubmittedFormField']['db_Name'] = array(
-	'Name',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['SubmittedFormField']['db_Title'] = array(
-	'Title',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['SubmittedFormField']['db_Value'] = array(
-	'Value',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
 );
 $lang['en_US']['SubmittedFormReportField.ss']['EXPORTSUBMISSIONS'] = 'Export submissions to CSV';
 $lang['en_US']['SubmittedFormReportField.ss']['SUBMITTED'] = 'Submitted at';
@@ -460,36 +290,6 @@ $lang['en_US']['UserDefinedForm']['SINGULARNAME'] = array(
 $lang['en_US']['UserDefinedForm']['SUBMISSIONS'] = 'Submissions';
 $lang['en_US']['UserDefinedForm']['SUBMIT'] = 'Submit';
 $lang['en_US']['UserDefinedForm']['TEXTONSUBMIT'] = 'Text on submit button:';
-$lang['en_US']['UserDefinedForm']['db_EmailOnSubmit'] = array(
-	'EmailOnSubmit',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['UserDefinedForm']['db_EmailTo'] = array(
-	'EmailTo',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['UserDefinedForm']['db_OnCompleteMessage'] = array(
-	'OnCompleteMessage',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['UserDefinedForm']['db_SubmitButtonText'] = array(
-	'SubmitButtonText',
-	50,
-	'Name of the object property, mainly used for automatically generating forms'
-);
-$lang['en_US']['UserDefinedForm']['has_many_Fields'] = array(
-	'Fields',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
-);
-$lang['en_US']['UserDefinedForm']['has_many_Submissions'] = array(
-	'Submissions',
-	50,
-	'Name of an object relation, mainly used for automatically generating forms'
-);
 $lang['en_US']['UserDefinedForm_SubmittedFormEmail']['EMAILSUBJECT'] = 'Submission of form';
 
 ?>
