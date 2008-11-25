@@ -24,13 +24,15 @@ FieldEditor.prototype = {
 			var i, j, div, field, editables = fieldEditor.childNodes;
 			
 			for( i = 0; div = editables[i]; i++ ) {
-				var fields = div.getElementsByTagName('input');
-				/*fields[fields.length - 1].value = i;*/
-				for( j = 0; field = fields.item(j); j++ ) {
-					if( field.name == div.id + '[Sort]' ) {
-						field.value = i;
-					}
-				}
+			    if(div.getElementsByTagName) {
+    				var fields = div.getElementsByTagName('input');
+    				/*fields[fields.length - 1].value = i;*/
+    				for( j = 0; field = fields.item(j); j++ ) {
+    					if( field.name == div.id + '[Sort]' ) {
+    						field.value = i;
+    					}
+				    }
+			    }
 			}
 		}
 	},
