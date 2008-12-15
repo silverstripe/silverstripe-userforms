@@ -63,7 +63,7 @@ FieldEditorField.prototype = {
 	initialize: function() {
 		var fieldInfoDiv = this.findDescendant( 'div', 'FieldInfo' );
 		
-		this.titleField = this.findDescendant( 'input', 'text', element );
+		this.titleField = this.findDescendant( 'input', 'text');
 		
 		this.titleField.onchange = this.changeTitle.bind(this);
 		this.titleField.onblur = this.changeTitle.bind(this);
