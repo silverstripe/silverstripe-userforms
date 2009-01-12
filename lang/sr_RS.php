@@ -16,6 +16,8 @@ if(array_key_exists('sr_RS', $lang) && is_array($lang['sr_RS'])) {
 	$lang['sr_RS'] = $lang['en_US'];
 }
 
+$lang['sr_RS']['EditableCheckbox']['NOTSELECTED'] = 'Није изабран';
+$lang['sr_RS']['EditableCheckbox']['SELECTED'] = 'Изабран';
 $lang['sr_RS']['EditableCheckbox.ss']['DELETE'] = 'Обриши ово поље';
 $lang['sr_RS']['EditableCheckbox.ss']['LOCKED'] = 'Ово поље не може да буде измењено';
 $lang['sr_RS']['EditableCheckbox.ss']['MORE'] = 'Више опција';
@@ -24,12 +26,15 @@ $lang['sr_RS']['EditableCheckboxGroupField.ss']['DELETE'] = 'Обриши ово
 $lang['sr_RS']['EditableCheckboxGroupField.ss']['LOCKED'] = 'Ова поља не могу да буду измењена';
 $lang['sr_RS']['EditableCheckboxGroupField.ss']['MORE'] = 'Више опција';
 $lang['sr_RS']['EditableCheckboxOption.ss']['DELETE'] = 'Уклони ову опцију';
+$lang['sr_RS']['EditableCheckboxOption.ss']['DRAG'] = 'Превуците да бисте распоредили опције';
 $lang['sr_RS']['EditableCheckboxOption.ss']['LOCKED'] = 'Ова поља не могу да буду измењена';
 $lang['sr_RS']['EditableDateField.ss']['DATE'] = 'Поље за датум';
 $lang['sr_RS']['EditableDateField.ss']['DELETE'] = 'Обриши ово поље';
+$lang['sr_RS']['EditableDateField.ss']['DRAG'] = 'Превуците да бисте распоредили поља';
 $lang['sr_RS']['EditableDateField.ss']['MORE'] = 'Више опција';
 $lang['sr_RS']['EditableDropdown.ss']['ADD'] = 'Додај нову опцију';
 $lang['sr_RS']['EditableDropdown.ss']['DELETE'] = 'Обриши ово поље';
+$lang['sr_RS']['EditableDropdown.ss']['DRAG'] = 'Превуците да бисте распоредили поља';
 $lang['sr_RS']['EditableDropdown.ss']['LOCKED'] = 'Ова поља не могу да буду измењена';
 $lang['sr_RS']['EditableDropdown.ss']['MORE'] = 'Више опција';
 $lang['sr_RS']['EditableDropdownOption.ss']['DELETE'] = 'Уклони ову опцију';
@@ -38,6 +43,7 @@ $lang['sr_RS']['EditableEmailField.ss']['DELETE'] = 'Обриши ово пољ�
 $lang['sr_RS']['EditableEmailField.ss']['EMAIL'] = 'Поље за имејл адресу';
 $lang['sr_RS']['EditableEmailField.ss']['MORE'] = 'Више опција';
 $lang['sr_RS']['EditableFileField.ss']['DELETE'] = 'Обриши ово поље';
+$lang['sr_RS']['EditableFileField.ss']['FILE'] = 'Поље за достављање датотека';
 $lang['sr_RS']['EditableFileField.ss']['MORE'] = 'Више опција';
 $lang['sr_RS']['EditableFormField']['ENTERQUESTION'] = 'Унесите питање';
 $lang['sr_RS']['EditableFormField']['REQUIRED'] = 'Захтевано?';
@@ -63,11 +69,13 @@ $lang['sr_RS']['FieldEditor.ss']['DATE'] = 'Датум';
 $lang['sr_RS']['FieldEditor.ss']['EMAIL'] = 'Имејл';
 $lang['sr_RS']['FieldEditor.ss']['EMAILTITLE'] = 'Додај поље за имејл';
 $lang['sr_RS']['FieldEditor.ss']['FILE'] = 'Датотека';
+$lang['sr_RS']['FieldEditor.ss']['FILETITLE'] = 'Додај поље за достављање датотека';
 $lang['sr_RS']['FieldEditor.ss']['FORMHEADING'] = 'Наслов';
 $lang['sr_RS']['FieldEditor.ss']['MEMBER'] = 'Списак чланова';
 $lang['sr_RS']['FieldEditor.ss']['TEXT'] = 'Текст';
 $lang['sr_RS']['FieldEditor.ss']['TEXTTITLE'] = 'Додај текстуално поље';
 $lang['sr_RS']['SubmittedFormEmail.ss']['SUBMITTED'] = 'Следећи подацу су послати на ваш сајт:';
+$lang['sr_RS']['UserDefinedForm']['NORESULTS'] = 'Нема пронађених резултата';
 $lang['sr_RS']['UserDefinedForm']['SUBMIT'] = 'Сачувај';
 
 ?>
