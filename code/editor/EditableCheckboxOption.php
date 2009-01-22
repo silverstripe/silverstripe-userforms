@@ -66,9 +66,13 @@ class EditableCheckboxOption extends DataObject {
 	function DefaultSelect() {
 		if( $this->readonly )
 			$disabled = " disabled=\"disabled\"";
+		else
+			$disabled = '';
 		
 		if( $this->getField('Default') )
 			$default = " checked=\"checked\"";
+		else
+			$default = '';
 	
 		return "<input class=\"checkbox\" type=\"checkbox\" name=\"Fields[{$this->ParentID}][{$this->ID}][Default]\" value=\"1\"".$disabled.$default." />";
 	}
