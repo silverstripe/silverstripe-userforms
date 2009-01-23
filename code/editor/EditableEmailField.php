@@ -47,7 +47,7 @@ class EditableEmailField extends EditableFormField {
 	function DefaultField() {
 		$disabled = ($this->readonly) ? " disabled=\"disabled\"" : '';
 		
-		return '<input class="defaultText" name="Fields['.Convert::raw2att( $this->ID ).'][Default]" type="text" value="'.Convert::raw2att( $this->getField('Default') ).'"'.$disabled.' />';
+		return '<div class="field text"><label class="left">'._t('EditableEmailField.DEFAULTTEXT', 'Default Text').' </label><input class="defaultText" name="Fields['.Convert::raw2att( $this->ID ).'][Default]" type="text" value="'.Convert::raw2att( $this->getField('Default') ).'"'.$disabled.' /></div>';
 	}
 }
 ?>
