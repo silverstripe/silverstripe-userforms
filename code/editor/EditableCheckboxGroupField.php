@@ -56,31 +56,32 @@ class EditableCheckboxGroupField extends EditableFormField {
 		$fieldSet = $this->Options();
 		
 		$deletedOptions = explode( ',', $data['Deleted'] );
-		
+		$optionNumber = 0;
 		
 		// store default, etc
-		foreach( $fieldSet as $option ) {
-			if( $deletedOptions && array_search( $option->ID, $deletedOptions ) !== false ) {
+		foreach($fieldSet as $option) {
+			if($deletedOptions && array_search($option->ID, $deletedOptions) !== false) {
 				$option->delete();
 				continue;
 			}
 			
-			if( $data[$option->ID] )
+			if($data[$option->ID]) {
 				$option->populateFromPostData( $data[$option->ID] );
+			}
 				
 			unset( $data[$option->ID] );
 		}
 		
-		foreach( $data as $tempID => $optionData ) {
-			
-			if( !$tempID || !is_array( $optionData ) || empty( $optionData ) || !preg_match('/^_?\d+$/', $tempID ) )
+		foreach($data as $tempID => $optionData) {
+			if(!$tempID || !is_array($optionData) || empty($optionData) || !preg_match('/^_?\d+$/', $tempID)) {
 				continue;
+			}
 			
 			// what will we name the new option?
 			$newOption = new EditableCheckboxOption();
-			$newOption->Name =  'option' . (string)$optionNumber++;
+			$newOption->Name = 'option' . (string)$optionNumber++;
 			$newOption->ParentID = $this->ID;
-			$newOption->populateFromPostData( $optionData );
+			$newOption->populateFromPostData($optionData);
 		}
 	}
 	
@@ -105,23 +106,13 @@ class EditableCheckboxGroupField extends EditableFormField {
 		return $this->createField( true );
 	}
 	
-	function createField( $asFilter = false ) {
+	function createField($asFilter = false) {
 		$optionSet = $this->Options();
 		$options = array();
 		
-		if( $asFilter )
-			$options['-1'] = '(Any)';
+		$optionMap = ($optionSet) ? $optionSet->map('ID', 'Title') : array();
 		
-		$defaultOption = '-1';
-		
-		/*foreach( $optionSet as $option ) {
-			$options[$option->Title] = $option->Title;
-		}*/
-		
-		// return radiofields
-		$checkboxSet = new CheckboxSetField( $this->Name, $this->Title, $optionSet, $optionSet );
-			
-		return $checkboxSet;
+		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
 	}
 	
 	function getValueFromData($data) {
@@ -129,6 +120,7 @@ class EditableCheckboxGroupField extends EditableFormField {
 			return "";
 		}
 		
+		$result = '';
 		$entries = $data[$this->Name];
 		
 		if(!is_array($data[$this->Name])) {

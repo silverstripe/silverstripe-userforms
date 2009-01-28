@@ -34,9 +34,11 @@ class EditableCheckboxOption extends DataObject {
 		return "Fields[{$this->ParentID}][{$this->ID}]";
 	}
 
-	function populateFromPostData( $data ) {
+	function populateFromPostData($data) {
 		$this->Title = $data['Title'];
-		$this->setField('Default', $data['Default']);
+		if(isset($data['Default'])) {
+			$this->setField('Default', $data['Default']);
+		}
 		$this->Sort = $data['Sort'];
 		$this->write();
 	}
