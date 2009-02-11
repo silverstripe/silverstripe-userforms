@@ -16,7 +16,8 @@ class UserDefinedForm extends Page {
 		"EmailTo" => "Varchar",
 		"EmailOnSubmit" => "Boolean",
 		"SubmitButtonText" => "Varchar",
-		"OnCompleteMessage" => "HTMLText"
+		"OnCompleteMessage" => "HTMLText",
+		"EmailMessageToSubmitter" => "HTMLText",
 	);
 	
 	static $defaults = array(
@@ -35,7 +36,13 @@ class UserDefinedForm extends Page {
 
 		$fields->addFieldToTab("Root."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
 		$fields->addFieldToTab("Root."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
-		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.ONCOMPLETE','On complete'), new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this ) );
+		
+		$onCompleteFieldSet = new FieldSet(
+			new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this ),
+			new HtmlEditorField( "EmailMessageToSubmitter", _t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', 'Email message to submitter'),3,"",_t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', $this->EmailMessageToSubmitter), $this )
+		);
+		
+		$fields->addFieldsToTab("Root.Content."._t('UserDefinedForm.ONCOMPLETE','On complete'), $onCompleteFieldSet);
 		
 		return $fields;
 	}
@@ -384,11 +391,16 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 			
 			$email->send();
-					
+			
 			// send to each of email fields
+			$emailToSubmiter = new UserDefinedForm_SubmittedFormEmailToSubmitter($submittedFields);
+			$emailToSubmiter->populateTemplate($emailData);
+			$emailToSubmiter->setSubject( $this->Title );
+			
 			foreach( $recipientAddresses as $addr ) {
-				$email->setTo( $addr );
-				$email->send();
+				$emailToSubmiter->setBody( $this->EmailMessageToSubmitter );
+				$emailToSubmiter->setTo( $addr );
+				$emailToSubmiter->send();
 			}
 		}
 		
@@ -426,6 +438,30 @@ class UserDefinedForm_Controller extends Page_Controller {
  */
 class UserDefinedForm_SubmittedFormEmail extends Email {
 	protected $ss_template = "SubmittedFormEmail";
+	protected $from = '$Sender.Email';
+	protected $to = '$Recipient.Email';
+	protected $subject = 'Submission of form';
+	protected $data;
+	
+	function __construct($values) {
+	        $this->subject = _t('UserDefinedForm_SubmittedFormEmail.EMAILSUBJECT', 'Submission of form');
+		parent::__construct();
+		
+		$this->data = $values;
+	}
+	
+	function Data() {
+		return $this->data;
+	}
+}
+
+/**
+ * Email that gets sent to submitter when a submission is made.
+ * @package cms
+ * @subpackage pagetypes
+ */
+class UserDefinedForm_SubmittedFormEmailToSubmitter extends Email {
+	protected $ss_template = "SubmittedFormEmailToSubmitter";
 	protected $from = '$Sender.Email';
 	protected $to = '$Recipient.Email';
 	protected $subject = 'Submission of form';

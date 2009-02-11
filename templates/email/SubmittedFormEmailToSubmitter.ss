@@ -2,12 +2,12 @@
 	<head>
 	</head>
 	<body>
-		<h1>$Subject</h1>
+		
+		$Body
+		
 		<p>
-			<% _t('SUBMITTED','The following data was submitted to your website:') %>
-
+			<% _t('SUBMITTED',"You have submitted the following information:") %>
 		</p>
-			$Body
 
 			<table>
 			<% control Fields %>
