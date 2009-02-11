@@ -371,13 +371,14 @@ class UserDefinedForm_Controller extends Page_Controller {
 			
 		}	
 		
-		if( $this->EmailOnSubmit || $sendCopy ) {
-			$emailData = array(
-				"Recipient" => $this->EmailTo,
-				"Sender" => Member::currentUser(),
-				"Fields" => $submittedFields,
-			);
-			
+		// Extract email data
+		$emailData = array(
+			"Recipient" => $this->EmailTo,
+			"Sender" => Member::currentUser(),
+			"Fields" => $submittedFields,
+		);
+
+		if( $this->EmailOnSubmit ) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);			
 			$email->populateTemplate($emailData);
 			$email->setTo( $this->EmailTo );
@@ -391,7 +392,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 			
 			$email->send();
-			
+		}
+		
+		if($sendCopy) {
 			// send to each of email fields
 			$emailToSubmiter = new UserDefinedForm_SubmittedFormEmailToSubmitter($submittedFields);
 			$emailToSubmiter->populateTemplate($emailData);
