@@ -13,8 +13,9 @@ class FieldEditor extends FormField {
 	}
 	
 	function performReadonlyTransformation() {
-		$this->readonly = true;
-		return $this;
+		$clone = clone $this;
+		$clone->setReadonly(true);
+		return $clone;
 	}
 	
 	function makeReadonly() {
