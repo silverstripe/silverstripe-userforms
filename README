@@ -9,6 +9,7 @@ Sean Harvey (Nickname: sharvey, halkyon)
 
 Requirements
 -----------------------------------------------
+SilverStripe 2.3.0+
 
 Documentation
 -----------------------------------------------
@@ -16,11 +17,5 @@ http://doc.silverstripe.com/doku.php?id=userdefinedform
 
 Installation Instructions
 -----------------------------------------------
-See INSTALL
-
-Usage Overview
------------------------------------------------
-
-Known issues
------------------------------------------------
-- WorldPay - Email receipt is not sent after being redirected back from payment gateway.
+Extract the userforms folder into the top level of your site, and visit
+http://www.mysite.com/dev/build to rebuild the database.
