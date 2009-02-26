@@ -85,7 +85,7 @@ class EditableFormField extends DataObject {
 		
 	function populateFromPostData( $data ) {
 		
-		$this->Title = $data['Title'];
+		$this->Title = isset($data['Title']) ? $data['Title']: "";
 		
 		if(isset($data['Default'])) {
 			$this->setField('Default', $data['Default']);
