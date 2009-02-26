@@ -65,7 +65,7 @@ class EditableCheckboxGroupField extends EditableFormField {
 				continue;
 			}
 			
-			if($data[$option->ID]) {
+			if(isset($data[$option->ID])) {
 				$option->populateFromPostData( $data[$option->ID] );
 			}
 				
