@@ -13,7 +13,7 @@ class UserDefinedForm extends Page {
 	static $need_permission = 'ADMIN';
 
 	static $db = array(
-		"EmailTo" => "Varchar",
+		"EmailTo" => "Varchar(255)",
 		"EmailOnSubmit" => "Boolean",
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
@@ -309,7 +309,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$sendCopy = false;
         
         $attachments = array();
-		
+
+
 		$submittedFields = new DataObjectSet();			
 		foreach( $this->Fields() as $field ) {
 			$submittedField = new SubmittedFormField();

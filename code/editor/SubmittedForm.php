@@ -10,7 +10,7 @@ class SubmittedForm extends DataObject {
 	);
 	
 	static $db = array(
-		"Recipient" => "Varchar"	
+		"Recipient" => "Varchar(255)"	
 	);
 	
 	static $has_many = array( 
