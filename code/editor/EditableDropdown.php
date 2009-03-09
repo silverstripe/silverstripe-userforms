@@ -43,7 +43,7 @@ class EditableDropdown extends EditableFormField {
 				continue;
 			}
 			
-			if(isset($data[$option->ID])) {
+			if(isset($option) && isset($data[$option->ID])) {
 				$option->setField('Default', isset($data['Default']) ? ($option->ID == $data['Default']) : false);
 				$option->populateFromPostData( $data[$option->ID] );
 			} 
