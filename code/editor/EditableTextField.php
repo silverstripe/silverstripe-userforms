@@ -7,21 +7,30 @@
  */
 class EditableTextField extends EditableFormField {
 	
-	static $db = array(
+	public static $db = array(
 		"Size" => "Int",
 		"MinLength" => "Int",
 		"MaxLength" => "Int",
 		"Rows" => "Int"
 	);
 	
+	public static $size = 32;
+	
+	public static $min_length = 1;
+	
+	public static $max_length = 32;
+	
+	public static $rows = 1;
+	
 	static $singular_name = 'Text field';
+	
 	static $plural_name = 'Text fields';
 	
 	function __construct( $record = null, $isSingleton = false ) {
-		$this->Size = 32;
-		$this->MinLength = 1;
-		$this->MaxLength = 32;
-		$this->Rows = 1;
+		$this->Size = self::$size;
+		$this->MinLength = self::$min_length;
+		$this->MaxLength = self::$max_length;
+		$this->Rows = self::$rows;
 		parent::__construct( $record, $isSingleton );
 	}	
 	
@@ -50,10 +59,10 @@ class EditableTextField extends EditableFormField {
 	
 	function populateFromPostData( $data ) {
 
-		$this->Size = !empty( $data['Size'] ) ? $data['Size'] : 32;
-		$this->MinLength = !empty( $data['MinLength'] ) ? $data['MinLength'] : 1;
-		$this->MaxLength = !empty( $data['MaxLength'] ) ? $data['MaxLength'] : 32;
-		$this->Rows = !empty( $data['Rows'] ) ? $data['Rows'] : 1;
+		$this->Size = !empty( $data['Size'] ) ? $data['Size'] : self::$size;
+		$this->MinLength = !empty( $data['MinLength'] ) ? $data['MinLength'] : self::$min_length;
+		$this->MaxLength = !empty( $data['MaxLength'] ) ? $data['MaxLength'] : self::$max_length;
+		$this->Rows = !empty( $data['Rows'] ) ? $data['Rows'] : self::$rows;
 		parent::populateFromPostData( $data );
 	}
 	
@@ -67,9 +76,9 @@ class EditableTextField extends EditableFormField {
 	
 	function createField( $asFilter = false ) {
 		if( $this->Rows == 1 )
-			return new TextField( $this->Name, $this->Title, ( $asFilter ) ? "" : $this->getField('Default'), ( $this->Size && $this->Size > 0 ) ? $this->Size : null );
+			return new TextField( $this->Name, $this->Title, ( $asFilter ) ? "" : $this->getField('Default'), $this->MaxLength);
 		else
-			return new TextareaField( $this->Name, $this->Title, $this->Rows, $this->Size, ( $asFilter ) ? "" : $this->getField('Default') );
+			return new TextareaField( $this->Name, $this->Title, $this->Rows, $this->MaxLength, ( $asFilter ) ? "" : $this->getField('Default') );
 	}
 	
 	/**
