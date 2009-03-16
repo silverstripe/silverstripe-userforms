@@ -21,7 +21,7 @@ class EditableTextField extends EditableFormField {
 	public static $max_length = 32;
 	
 	public static $rows = 1;
-	
+
 	static $singular_name = 'Text field';
 	
 	static $plural_name = 'Text fields';
@@ -32,7 +32,7 @@ class EditableTextField extends EditableFormField {
 		$this->MaxLength = self::$max_length;
 		$this->Rows = self::$rows;
 		parent::__construct( $record, $isSingleton );
-	}	
+	}
 	
 	function ExtraOptions() {
 		
