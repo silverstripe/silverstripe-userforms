@@ -198,7 +198,7 @@ class EditableFormField extends DataObject {
         
         // exit();   
     }
-    
+
     function Type() {
         return $this->class;   
     }
@@ -206,10 +206,5 @@ class EditableFormField extends DataObject {
     function CustomParameter() {
         return $this->CustomParameter;   
     }
-    /*
-  function saveInto( DataObject $record ) {
-		if(	
-	}
-		*/
 }
 ?>

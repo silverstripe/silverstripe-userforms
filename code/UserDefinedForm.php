@@ -290,6 +290,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		// set the name of the form
 		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields( $required ) );
 		$form->loadDataFrom($this->failover);
+
 		return $form;
 	}	
 	

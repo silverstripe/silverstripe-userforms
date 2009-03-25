@@ -48,6 +48,36 @@ class FieldEditor extends FormField {
 		return $fields;
 	}
 	
+	/**
+	 * Return a DataObjectSet of all the addable fields to populate 
+	 * the add field menu
+	 * 
+	 * @return DataObjectSet
+	 */
+	function CreatableFields() {
+		$fields = ClassInfo::subclassesFor('EditableFormField');
+
+		if($fields) {
+			array_shift($fields); // get rid of subclass 0
+			$output = new DataObjectSet();
+			foreach($fields as $field => $title) {
+				// get the nice title and strip out field
+				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
+				
+				// keep old javascript happy
+				$title = trim(str_ireplace("Editable", "", $title));
+				
+				$output->push(new ArrayData(array(
+					'ClassName' => $title,
+					'Title' => "$niceTitle"
+				)));
+			}
+			return $output;
+		}
+		return false;
+	}
+	
+	
 	function saveInto(DataObject $record) {
 		
 		$name = $this->name;
@@ -113,12 +143,6 @@ class FieldEditor extends FormField {
 			$record->processNewFormFields();
 		}
 	}
-	
-	/*function addNewField( $newField ) {
-		$newField->ParentID = $this->ID;
-		$newField->write();
-		return $this->renderWith("FieldEditor");
-	}*/
 
 	function addfield() {
 		// get the last field in this form editor

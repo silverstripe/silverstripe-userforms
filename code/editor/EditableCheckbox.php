@@ -34,11 +34,10 @@ class EditableCheckbox extends EditableFormField {
 	}
 	
 	function getFilterField() {
-		return new OptionsetField( $this->Name, 
-															 $this->Title, 
-															 array( '-1' => '('._t('EditableCheckbox.ANY', 'Any').')',
-															 				'on' => _t('EditableCheckbox.SELECTED', 'Selected'),
-															 				'0' => _t('EditableCheckbox.NOTSELECTED', 'Not selected') )
+		return new OptionsetField( $this->Name, $this->Title, 
+			array( '-1' => '('._t('EditableCheckbox.ANY', 'Any').')',
+				'on' => _t('EditableCheckbox.SELECTED', 'Selected'),
+				'0' => _t('EditableCheckbox.NOTSELECTED', 'Not selected') )
 		);
 	}
 }
