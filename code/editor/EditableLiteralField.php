@@ -13,8 +13,8 @@ class EditableLiteralField extends EditableFormField {
 		'Content' => 'Text'
 	);
 	
-	static $singular_name = 'Literal Field';
-	static $plural_name = 'Literal Fields';
+	static $singular_name = 'HTML Block';
+	static $plural_name = 'HTML Blocks';
 	
 	function __construct( $record = null, $isSingleton = false ) {
 
