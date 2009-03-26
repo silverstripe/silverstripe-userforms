@@ -8,7 +8,7 @@ div.FieldEditor {
 	padding: 0px;
 }
 
-div.FieldEditor ul.Menu {
+div.FieldEditor div.MenuHolder {
 	margin: 0;
 	padding: 3px;
 	background-color: #eee;
@@ -39,20 +39,23 @@ div.FieldEditor ul.Menu {
 		background-color: transparent;
 	}
 	
+	div.FieldEditor div.FieldListHolder {
+		height: 75%;
+	}
 	div.FieldEditor div.FieldList {
 		background-color: white;
 		border-bottom: 1px solid #CCCCCC;
 		border-top: 1px solid #CCCCCC;
-		height: 75%;
-		/*overflow-y: scroll;*/
+		height: 100%;
+		overflow-y: scroll;
 	}
 	
-	div.FieldEditor div.FormOptions {
+	/*div.FieldEditor div.FormOptions {
 		background-color: #EEEEEE;
 		position: relative;
 		float: left;
 		width:100%;
-	}
+	}*/
 	
 		div.FieldEditor div.FormOptions div.field {
 			position: relative;
