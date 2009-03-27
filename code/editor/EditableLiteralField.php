@@ -48,7 +48,7 @@ class EditableLiteralField extends EditableFormField {
 	
 	function createField() {
 		return new LiteralField("LiteralField[$this->ID]", 
-			"<label class='left'>$this->Name</label><div class='middleColumn literalFieldArea'>". $this->Content."</div>");
+			"<label class='left'>$this->Title</label><div class='middleColumn literalFieldArea'>". $this->Content."</div>");
 	}
 	/**
 	 * Populates the default fields. 
