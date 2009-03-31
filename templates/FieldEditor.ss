@@ -2,7 +2,6 @@
 	<div class="MenuHolder">
 		<ul class="TopMenu Menu">
 			<li><% _t('ADD', 'Add') %>:</li>
-		
 			<% control CreatableFields %>
 				<li><a href="#" title="<% _t('ADD', 'Add') %> $Title" id="$ClassName">$Title</a></li>
 			<% end_control %>
@@ -26,10 +25,10 @@
 				<li><a href="#" title="<% _t('ADD', 'Add') %> $Title" id="$ClassName">$Title</a></li>
 			<% end_control %>
 		</ul>
-	<div class="FormOptions">
-		<% control FormOptions %>
-			$FieldHolder
-		<% end_control %>
+		<div class="FormOptions">
+			<% control FormOptions %>
+				$FieldHolder
+			<% end_control %>
+		</div>
 	</div>
-</div>
 </div>

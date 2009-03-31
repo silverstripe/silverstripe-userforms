@@ -53,7 +53,8 @@ FieldEditor.prototype = {
 		}
 	},
 	deleteOption: function( optionToRemove ) {
-		this.getElementsByTagName('div')[0].removeChild( optionToRemove );
+		var fields = document.getElementById('Fields_fields');
+		fields.removeChild(optionToRemove);
 	}
 }
 
@@ -127,7 +128,7 @@ FieldEditorField.prototype = {
 	},
 	confirmDelete: function() {
 		if( confirm( 'Are you sure you want to delete this field from the form?' ) )
-			this.parentNode.parentNode.deleteOption( this );
+			this.parentNode.parentNode.parentNode.deleteOption( this );
 		
 		return false;
 	},
