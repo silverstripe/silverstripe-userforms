@@ -335,13 +335,14 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$fields = new FieldSet();
 		$required = array();
         
-        if( !$this->SubmitButtonText )
+        if(!$this->SubmitButtonText) {
             $this->SubmitButtonText = 'Submit';
-		
-		foreach( $this->Fields() as $field ) {
-			$fields->push( $field->getFormField() );
-			if( $field->Required )
-				$required[] = $field->Name;
+		}
+		foreach($this->Fields() as $field) {
+			$fields->push($field->getFormField());
+			if($field->Required) {
+				$required[] = $field->Name;	
+			}
 		}
 		
 		if(!isset($_SERVER['HTTP_REFERER'])) {

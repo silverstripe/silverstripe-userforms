@@ -9,5 +9,23 @@ class SubmittedFileField extends SubmittedFormField {
 		"UploadedFile" => "File"
 	);
 	
+	/**
+	 * Return the Value of this Field
+	 * 
+	 * @return String
+	 */
+	function getValue() {
+		return ($this->UploadedFile()) ? $this->UploadedFile()->Title : "";
+	}
+	
+	/**
+	 * Return the Link object for this field
+	 * 
+	 * @return String
+	 */
+	function getLink() {
+		return ($this->UploadedFile()) ? $this->UploadedFile()->URL : "";
+	}
+	
 }
 ?>

@@ -27,11 +27,10 @@ class EditableFileField extends EditableFormField {
 	static $plural_names = 'File fields';
 	
 	function getFormField() {
-		if($field = parent::getFormField())
+		if($field = parent::getFormField()) {
 			return $field;
-			return new FileField($this->Name, $this->Title, $this->getField('Default'));
-			// TODO We can't use the preview feature because FileIFrameField also shows the "From the file store" functionality
-			//return new FileIFrameField( $this->Name, $this->Title, $this->getField('Default') );
+		}
+		return new FileField($this->Name, $this->Title, $this->getField('Default'));
 	}
 	
 	function getSimpleFormField(){
