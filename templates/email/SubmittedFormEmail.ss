@@ -3,10 +3,6 @@
 	</head>
 	<body>
 		<h1>$Subject</h1>
-		<p>
-			<% _t('SUBMITTED','The following data was submitted to your website:') %>
-
-		</p>
 			$Body
 
 			<table>

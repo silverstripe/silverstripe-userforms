@@ -1,44 +1,102 @@
 <?php
 /**
- * Page type that lets users build a contact form.
- * @package cms
- * @subpackage pagetypes
+ * User Defined Form Page type that lets users build a form in the CMS 
+ * using the FieldEditor Field. 
+ * 
+ * @package userforms
  */
+
 class UserDefinedForm extends Page {
 	
-	static $add_action = "a contact form";
+	/**
+	 * Add Action in the CMS
+	 *
+	 * @var String
+	 */
+	static $add_action = "A User Form";
 
+	/**
+	 * Icon for the User Defined Form in the CMS. Without the extension
+	 * or the -file
+	 *
+	 * @var String
+	 */
 	static $icon = "cms/images/treeicons/task";
 	
+	/**
+	 * What level permission is needed to edit / add 
+	 * this page type
+	 *
+	 * @var String
+	 */
 	static $need_permission = 'ADMIN';
 
+	/**
+	 * Fields on the user defined form page. 
+	 * 
+	 * @var Array
+	 */
 	static $db = array(
-		"EmailTo" => "Varchar(255)",
 		"EmailOnSubmit" => "Boolean",
+		"EmailOnSubmitSubject" => "Varchar(200)",
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
-		"EmailMessageToSubmitter" => "HTMLText",
 	);
 	
+	/**
+	 * Default values of variables when this page is created
+	 * in the CMS
+	 * 
+	 * @var Array
+	 */ 
 	static $defaults = array(
-		"OnCompleteMessage" => "<p>Thanks, we've received your submission.</p>",
+		'Content' => '$UserDefinedForm',
+		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
+	/**
+	 * @var Array
+	 */
 	static $has_many = array( 
 		"Fields" => "EditableFormField",
-		"Submissions" => "SubmittedForm"
+		"Submissions" => "SubmittedForm",
+		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
 	);
 	
 	protected $fields;
 
-	function getCMSFields($cms) {
-		$fields = parent::getCMSFields($cms);
+	/**
+	 * Setup the CMS Fields for the User Defined Form
+	 * 
+	 * @return FieldSet
+	 */
+	function getCMSFields() {
+		$fields = parent::getCMSFields();
 
+		// field editor
 		$fields->addFieldToTab("Root."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
+		
+		// view the submissions
 		$fields->addFieldToTab("Root."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
 		
+		// who do we email on submission
+		$emailRecipients = new HasManyComplexTableField($this,
+	    	'EmailRecipients',
+	    	'UserDefinedForm_EmailRecipient',
+	    	array(
+				'EmailAddress' => 'Email',
+				'EmailSubject' => 'Subject',
+				'EmailFrom' => 'From'
+	    	),
+	    	'getCMSFields_forPopup'
+	    );
+		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
+		$fields->addFieldToTab("Root."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
+	
+		// text to show on complete
 		$onCompleteFieldSet = new FieldSet(
 			new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this ),
+			new TextField("EmailOnSubmitSubject", _t('UserDefinedForm.ONSUBMITSUBJECT', 'Email Subject')),
 			new HtmlEditorField( "EmailMessageToSubmitter", _t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', 'Email message to submitter'),3,"",_t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', $this->EmailMessageToSubmitter), $this )
 		);
 		
@@ -137,7 +195,7 @@ class UserDefinedForm extends Page {
       parent::delete();   
   }
   
-  public function customFormActions( $isReadonly = false ) {
+  	public function customFormActions( $isReadonly = false ) {
           return new FieldSet( new TextField( "SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText ) );
 	}
 	
@@ -158,9 +216,11 @@ class UserDefinedForm extends Page {
 
 /**
  * Controller for the {@link UserDefinedForm} page type.
- * @package cms
+ *
+ * @package userform
  * @subpackage pagetypes
  */
+
 class UserDefinedForm_Controller extends Page_Controller {
 	
 	function init() {
@@ -176,6 +236,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * 
 	 * In order to run this export function, the user must be
 	 * able to edit the page, so we check canEdit()
+	 *
+	 * @return HTTPResponse / bool
 	 */
 	function export() {
 		if(!$this->canEdit()) return false;
@@ -252,7 +314,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 					user_error("No submissions to export.", E_USER_ERROR);
 				}
 				
-				HTTP::sendFileToBrowser($csvData, $fileName);		
+				HTTPRequest::send_file($csvData, $fileName)->output();		
 			} else {
 				user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
 			}
@@ -261,6 +323,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 		}
 	}	
 	
+	/**
+	 * User Defined Form. Feature of the user defined form is if you want the
+	 * form to appear in a custom location on the page you can use $UserDefinedForm 
+	 * in the content area to describe where you want the form
+	 *
+	 * @return Form
+	 */
 	function Form() {
 		// Build fields
 		$fields = new FieldSet();
@@ -298,47 +367,56 @@ class UserDefinedForm_Controller extends Page_Controller {
 		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
 	}
 	
-	function process( $data, $form ) {
+	/**
+	 * Process the form that is submitted through the site
+	 * 
+	 * @param Array Data
+	 * @param Form Form 
+	 * @return Redirection
+	 */
+	function process($data, $form) {
+		
+		// submitted form object
 		$submittedForm = new SubmittedForm();
 		$submittedForm->SubmittedBy = Member::currentUser();
 		$submittedForm->ParentID = $this->ID;
 		$submittedForm->Recipient = $this->EmailTo;
 		$submittedForm->write();
 		
+		// email values
 		$values = array();
 		$recipientAddresses = array();
 		$sendCopy = false;
-        
         $attachments = array();
 
-
-		$submittedFields = new DataObjectSet();			
-		foreach( $this->Fields() as $field ) {
+		$submittedFields = new DataObjectSet();	
+				
+		foreach($this->Fields() as $field) {
 			$submittedField = new SubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->Title;
 					
-			if( $field->hasMethod( 'getValueFromData' ) )
+			if($field->hasMethod( 'getValueFromData' )) {
 				$submittedField->Value = $field->getValueFromData( $data );
-			else
+			}
+			else {
 				if(isset($data[$field->Name])) $submittedField->Value = $data[$field->Name];
-				
+			}
+			
 			$submittedField->write();
 			$submittedFields->push($submittedField);
 			
 			if(!empty( $data[$field->Name])){
-				// execute the appropriate functionality based on the form field.
+
 				switch($field->ClassName){
 					
 					case "EditableEmailField" : 
-					
 						if($field->SendCopy){
 							$recipientAddresses[] = $data[$field->Name];
 							$sendCopy = true;
 							$values[$field->Title] = '<a style="white-space: nowrap" href="mailto:'.$data[$field->Name].'">'.$data[$field->Name].'</a>';
-						}
-					
+						}	
 					break;
 					
 					case "EditableFileField" :
@@ -372,39 +450,38 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 			
 		}	
-		
-		// Extract email data
 		$emailData = array(
-			"Recipient" => $this->EmailTo,
 			"Sender" => Member::currentUser(),
 			"Fields" => $submittedFields,
 		);
-
-		if( $this->EmailOnSubmit ) {
-			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);			
+		
+		// email users on submit. All have their own custom options
+		if($this->EmailRecipients()) {
+			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);                     
 			$email->populateTemplate($emailData);
-			$email->setTo( $this->EmailTo );
-			$email->setSubject( $this->Title );
-
-			// add attachments to email (<1MB)
 			if($attachments){
 				foreach($attachments as $file){
 					$email->attachFile($filename,$filename);
 				}
 			}
-			
-			$email->send();
+			foreach($this->EmailRecipients() as $recipient) {
+				$email->populateTemplate($emailData);
+				$email->setFrom($recipient->EmailFrom);
+				$email->setBody($recipient->EmailBody);
+				$email->setSubject($recipient->EmailSubject);
+				$email->setTo($recipient->EmailAddress);
+				$email->send();
+			}
 		}
 		
+		// send a copy to the author of the form
 		if($sendCopy) {
-			// send to each of email fields
 			$emailToSubmiter = new UserDefinedForm_SubmittedFormEmailToSubmitter($submittedFields);
-			$emailToSubmiter->populateTemplate($emailData);
-			$emailToSubmiter->setSubject( $this->Title );
+			$emailToSubmiter->setSubject($this->EmailOnSubmitSubject);
 			
-			foreach( $recipientAddresses as $addr ) {
-				$emailToSubmiter->setBody( $this->EmailMessageToSubmitter );
-				$emailToSubmiter->setTo( $addr );
+			foreach($recipientAddresses as $addr) {
+				$emailToSubmiter->setBody($this->EmailMessageToSubmitter);
+				$emailToSubmiter->setTo($addr);
 				$emailToSubmiter->send();
 			}
 		}
@@ -437,33 +514,43 @@ class UserDefinedForm_Controller extends Page_Controller {
 }
 
 /**
- * Email that gets sent when a submission is made.
- * @package cms
- * @subpackage pagetypes
+ * A Form can have multiply members / emails to email the submission 
+ * to and custom subjects
+ * 
+ * @package userforms
+ */
+class UserDefinedForm_EmailRecipient extends DataObject {
+	
+	static $db = array(
+		'EmailAddress' => 'Varchar(200)',
+		'EmailSubject' => 'Varchar(200)',
+		'EmailFrom' => 'Varchar(200)',
+		'EmailBody' => 'HTMLText'
+	);
+	
+	static $has_one = array(
+		'Form' => 'UserDefinedForm'
+	);
+}
+/**
+ * Email that gets sent to the people listed in the Email Recipients 
+ * when a submission is made
+ *
+ * @package userforms
  */
 class UserDefinedForm_SubmittedFormEmail extends Email {
 	protected $ss_template = "SubmittedFormEmail";
-	protected $from = '$Sender.Email';
-	protected $to = '$Recipient.Email';
-	protected $subject = 'Submission of form';
 	protected $data;
-	
-	function __construct($values) {
-	        $this->subject = _t('UserDefinedForm_SubmittedFormEmail.EMAILSUBJECT', 'Submission of form');
+
+	function __construct() {
 		parent::__construct();
-		
-		$this->data = $values;
-	}
-	
-	function Data() {
-		return $this->data;
 	}
 }
 
 /**
  * Email that gets sent to submitter when a submission is made.
- * @package cms
- * @subpackage pagetypes
+ *
+ * @package userforms
  */
 class UserDefinedForm_SubmittedFormEmailToSubmitter extends Email {
 	protected $ss_template = "SubmittedFormEmailToSubmitter";
