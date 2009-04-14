@@ -14,5 +14,6 @@ class SubmittedFormField extends DataObject {
 	static $has_one = array(
 		"Parent" => "SubmittedForm"
 	);
+
 }
 ?>

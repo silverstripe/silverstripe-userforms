@@ -41,6 +41,7 @@ class UserDefinedForm extends Page {
 		"EmailOnSubmitSubject" => "Varchar(200)",
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
+		"ShowClearButton" => "Boolean"
 	);
 	
 	/**
@@ -63,8 +64,6 @@ class UserDefinedForm extends Page {
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
 	);
 	
-	protected $fields;
-
 	/**
 	 * Setup the CMS Fields for the User Defined Form
 	 * 
@@ -74,11 +73,36 @@ class UserDefinedForm extends Page {
 		$fields = parent::getCMSFields();
 
 		// field editor
-		$fields->addFieldToTab("Root."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
+		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
 		
 		// view the submissions
-		$fields->addFieldToTab("Root."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
+		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
+		/*
+		 Trying to get submissions working as a tablelistfield. close, but not close enough
+		$query = new SQLQuery();
+		$query->from("SubmittedForm");
+		$query->where("SubmittedForm.ParentID = '$this->ID'");
+		$query->orderby("SubmittedForm.Created");
+		$query->limit("20");
+		$query->leftJoin("SubmittedFormField", "SubmittedFormField.ParentID = SubmittedForm.ID");
 		
+		
+		$myTableListField = new TableListField(
+			'Submissions',
+			'SubmittedForm'
+		);
+		$myTableListField->setCustomQuery($query);
+		$fieldValues = array(
+			"Title" => "Title",
+			"Value" => "$Value",
+			"Name" => "$Name",
+			"ID" => "$ID",
+			"ParentID" => "$ParentID"
+		);
+		$myTableListField->setFieldList($fieldValues);
+		
+		$fields->addFieldToTab("Root.Test", $myTableListField);
+		*/
 		// who do we email on submission
 		$emailRecipients = new HasManyComplexTableField($this,
 	    	'EmailRecipients',
@@ -91,7 +115,7 @@ class UserDefinedForm extends Page {
 	    	'getCMSFields_forPopup'
 	    );
 		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
-		$fields->addFieldToTab("Root."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
+		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
 	
 		// text to show on complete
 		$onCompleteFieldSet = new FieldSet(
@@ -186,22 +210,35 @@ class UserDefinedForm extends Page {
 	function ReportFilterForm() {
 		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
 	}
-    
-  function delete() {
-      // remove all the fields associated with this page
-      foreach( $this->Fields() as $field )
-          $field->delete();
-          
-      parent::delete();   
-  }
+	
+	/**
+	 * Called on before delete remove all the fields from the database
+	 */
+  	public function delete() {
+		foreach($this->Fields() as $field) {
+			$field->delete();
+		}
+		parent::delete();   
+	}
   
-  	public function customFormActions( $isReadonly = false ) {
-          return new FieldSet( new TextField( "SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText ) );
+	/**
+	 * Custom Form Actions for the form
+	 *
+	 * @param bool Is the Form readonly
+	 * @return FieldSet
+	 */
+  	public function customFormActions($isReadonly = false) {
+		return new FieldSet(
+			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText),
+			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton)
+		);
 	}
 	
 	/**
 	 * Duplicate this UserDefinedForm page, and its form fields.
 	 * Submissions, on the other hand, won't be duplicated.
+	 *
+	 * @return Page
 	 */
 	public function duplicate() {
 		$page = parent::duplicate();
@@ -224,9 +261,8 @@ class UserDefinedForm extends Page {
 class UserDefinedForm_Controller extends Page_Controller {
 	
 	function init() {
-		Requirements::javascript(THIRDPARTY_DIR . 'jsparty/prototype-safe.js');
-		Requirements::javascript(THIRDPARTY_DIR . 'jsparty/behaviour.js');
-		
+		Requirements::javascript(THIRDPARTY_DIR . '/prototype.js');
+		Requirements::javascript(THIRDPARTY_DIR . '/behaviour.js');
 		parent::init();
 	}
 	
@@ -323,6 +359,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		}
 	}	
 	
+	function ReportFilterForm() {
+		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
+	}
+	
 	/**
 	 * User Defined Form. Feature of the user defined form is if you want the
 	 * form to appear in a custom location on the page you can use $UserDefinedForm 
@@ -353,19 +393,30 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$fields->push( new HiddenField( "Referrer", "", $referer ) );
 				
 		// Build actions
-		$actions = new FieldSet( 
-			new FormAction( "process", $this->SubmitButtonText )
+		$actions = new FieldSet(
+			new FormAction("process", $this->SubmitButtonText)
 		);
 		
-		// set the name of the form
-		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields( $required ) );
+		// Do we want to add a clear form. Should do this via js
+		if($this->ShowClearButton) {
+			$actions->push(new ResetFormAction("clearForm"));
+		}
+		
+		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields($required));
 		$form->loadDataFrom($this->failover);
 
 		return $form;
 	}	
-	
-	function ReportFilterForm() {
-		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
+	/**
+	 * Clear a form action. This is the fall back to if it doesn't work
+	 * with the javascript
+	 * 
+	 * @param Array data
+	 * @param Form The form to clear
+	 */
+	public function clearForm($data, $form) {
+		Session::clear('FormInfo.Form');
+		return Director::redirectBack();
 	}
 	
 	/**
@@ -521,6 +572,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 		return $templateData;
 	}
 	
+	function deletesubmissions() {
+		// delete all the submissions
+		
+		return true;
+	}
 }
 
 /**
