@@ -77,32 +77,7 @@ class UserDefinedForm extends Page {
 		
 		// view the submissions
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
-		/*
-		 Trying to get submissions working as a tablelistfield. close, but not close enough
-		$query = new SQLQuery();
-		$query->from("SubmittedForm");
-		$query->where("SubmittedForm.ParentID = '$this->ID'");
-		$query->orderby("SubmittedForm.Created");
-		$query->limit("20");
-		$query->leftJoin("SubmittedFormField", "SubmittedFormField.ParentID = SubmittedForm.ID");
-		
-		
-		$myTableListField = new TableListField(
-			'Submissions',
-			'SubmittedForm'
-		);
-		$myTableListField->setCustomQuery($query);
-		$fieldValues = array(
-			"Title" => "Title",
-			"Value" => "$Value",
-			"Name" => "$Name",
-			"ID" => "$ID",
-			"ParentID" => "$ParentID"
-		);
-		$myTableListField->setFieldList($fieldValues);
-		
-		$fields->addFieldToTab("Root.Test", $myTableListField);
-		*/
+
 		// who do we email on submission
 		$emailRecipients = new HasManyComplexTableField($this,
 	    	'EmailRecipients',
@@ -112,7 +87,8 @@ class UserDefinedForm extends Page {
 				'EmailSubject' => 'Subject',
 				'EmailFrom' => 'From'
 	    	),
-	    	'getCMSFields_forPopup'
+	    	'getCMSFields_forPopup',
+			"FormID = '$this->ID'"
 	    );
 		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
@@ -406,17 +382,6 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$form->loadDataFrom($this->failover);
 
 		return $form;
-	}	
-	/**
-	 * Clear a form action. This is the fall back to if it doesn't work
-	 * with the javascript
-	 * 
-	 * @param Array data
-	 * @param Form The form to clear
-	 */
-	public function clearForm($data, $form) {
-		Session::clear('FormInfo.Form');
-		return Director::redirectBack();
 	}
 	
 	/**
@@ -591,7 +556,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
-		'EmailBody' => 'HTMLText'
+		'EmailBody' => 'Text'
 	);
 	
 	static $has_one = array(
@@ -605,10 +570,13 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getCMSFields_forPopup() {
+		$forms = DataObject::get("UserDefinedForm");
+		if($forms) $forms = $forms->toDropdownMap('ID', 'Title');
 		$fields = new FieldSet(
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
 			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','From Address')),
-			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To'))
+			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
+			new DropdownField('FormID', 'Form', $forms)
 		);
 		
 		if($this->Form()) {
