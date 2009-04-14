@@ -9,32 +9,22 @@
 class UserDefinedForm extends Page {
 	
 	/**
-	 * Add Action in the CMS
-	 *
-	 * @var String
+	 * @var String Add Action in the CMS
 	 */
 	static $add_action = "A User Form";
 
 	/**
-	 * Icon for the User Defined Form in the CMS. Without the extension
-	 * or the -file
-	 *
-	 * @var String
+	 * @var String Icon for the User Defined Form in the CMS. Without the extension
 	 */
 	static $icon = "cms/images/treeicons/task";
 	
 	/**
-	 * What level permission is needed to edit / add 
-	 * this page type
-	 *
-	 * @var String
+	 * @var String What level permission is needed to edit / add 
 	 */
 	static $need_permission = 'ADMIN';
 
 	/**
-	 * Fields on the user defined form page. 
-	 * 
-	 * @var Array
+	 * @var Array Fields on the user defined form page. 
 	 */
 	static $db = array(
 		"EmailOnSubmit" => "Boolean",
@@ -45,10 +35,7 @@ class UserDefinedForm extends Page {
 	);
 	
 	/**
-	 * Default values of variables when this page is created
-	 * in the CMS
-	 * 
-	 * @var Array
+	 * @var Array Default values of variables when this page is created
 	 */ 
 	static $defaults = array(
 		'Content' => '$UserDefinedForm',
@@ -69,7 +56,7 @@ class UserDefinedForm extends Page {
 	 * 
 	 * @return FieldSet
 	 */
-	function getCMSFields() {
+	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
 		// field editor
@@ -105,45 +92,49 @@ class UserDefinedForm extends Page {
 		return $fields;
 	}
 	
-	function FilterForm() {
-		// Build fields
+	/**
+	 * Filter the Submissions page form
+	 * 
+	 * @return Form
+	 */
+	public function FilterForm() {
+
 		$fields = new FieldSet();
 		$required = array();
 		
-		foreach( $this->Fields() as $field ) {
-			$fields->push( $field->getFilterField() );
+		foreach($this->Fields() as $field) {
+			$fields->push($field->getFilterField());
 		}
 		
-		// Build actions
 		$actions = new FieldSet( 
-			new FormAction( "filter", _t('UserDefinedForm.SUBMIT', 'Submit') )
+			new FormAction("filter", _t('UserDefinedForm.SUBMIT', 'Submit'))
 		);
 		
-		// set the name of the form
 		return new Form( $this, "Form", $fields, $actions );
 	}
 	
 	/**
 	 * Filter the submissions by the given criteria
+	 *
+	 * @param Array the filter data
+	 * @param Form the form used
+	 * @return Array|String
 	 */
-	function filter( $data, $form ) {
+	public function filter( $data, $form ) {
 		
-		$filterClause = array( "`SubmittedForm`.`ParentID` = '{$this->ID}'" );
-		
-		$keywords = preg_split( '/\s+/', $data['FilterKeyword'] );
-		
+		$filterClause = array( "`SubmittedForm`.`ParentID` = '{$this->ID}'" );	
+		$keywords = preg_split( '/\s+/', $data['FilterKeyword'] );	
 		$keywordClauses = array();
 		
 		// combine all keywords into one clause
-		foreach( $keywords as $keyword ) {
+		foreach($keywords as $keyword) {
 		
 			// escape %, \ and _ in the keyword. These have special meanings in a LIKE string
 			$keyword = preg_replace( '/([%_])/', '\\\\1', addslashes( $keyword ) );
-			
 			$keywordClauses[] = "`Value` LIKE '%$keyword%'";	
 		}
 		
-		if( count( $keywordClauses ) > 0 ) {
+		if(count($keywordClauses) > 0) {
 			$filterClause[] = "( " . implode( ' OR ', $keywordClauses ) . ")";
 			$searchQuery = 'keywords \'' . implode( "', '", $keywords ) . '\' ';
 		}
@@ -243,6 +234,30 @@ class UserDefinedForm_Controller extends Page_Controller {
 	}
 	
 	/**
+	 * Using $UserDefinedForm in the Content area of the page shows
+	 * where the form should be rendered into. If it does not exist
+	 * then default back to $Form
+	 *
+	 * @return Array
+	 */
+	public function index() {
+		if($this->Content && $this->Form()) {
+			$hasLocation = stristr($this->Content, '$UserDefinedForm');
+			if($hasLocation) {
+				$content = str_ireplace('$UserDefinedForm', $this->Form()->forTemplate(), $this->Content);
+				return array(
+					'Content' => $content,
+					'Form' => ""
+				);
+			}
+		}
+		return array(
+			'Content' => $this->Content,
+			'Form' => $this->Form
+		);
+	}
+
+	/**
 	 * Export each of the form submissions for this UserDefinedForm
 	 * instance into a CSV file.
 	 * 
@@ -251,7 +266,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return HTTPResponse / bool
 	 */
-	function export() {
+	public function export() {
 		if(!$this->canEdit()) return false;
 
 		$now = Date("Y-m-d_h.i.s");
