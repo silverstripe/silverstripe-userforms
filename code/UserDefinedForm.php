@@ -455,7 +455,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			"Fields" => $submittedFields,
 		);
 		
-		// email users on submit. All have their own custom options
+		// email users on submit. All have their own custom options. 
 		if($this->EmailRecipients()) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);                     
 			$email->populateTemplate($emailData);
@@ -470,6 +470,15 @@ class UserDefinedForm_Controller extends Page_Controller {
 				$email->setBody($recipient->EmailBody);
 				$email->setSubject($recipient->EmailSubject);
 				$email->setTo($recipient->EmailAddress);
+				// check to see if they are a dynamic recipient. eg based on a field
+				// a user selected
+				if($recipient->SendEmailFromFieldID) {
+					$name = Convert::raw2sql($recipient->SendEmailFromField()->Name);
+					$SubmittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
+					if($SubmittedFormField) {
+						$email->setTo($SubmittedFormField->Value);	
+					}
+				}
 				$email->send();
 			}
 		}
@@ -529,8 +538,33 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	);
 	
 	static $has_one = array(
-		'Form' => 'UserDefinedForm'
+		'Form' => 'UserDefinedForm',
+		'SendEmailFromField' => 'EditableFormField'
 	);
+	
+	/**
+	 * Return the fields to edit this email. 
+	 *
+	 * @return FieldSet
+	 */
+	public function getCMSFields_forPopup() {
+		$fields = new FieldSet(
+			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
+			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','From Address')),
+			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To'))
+		);
+		
+		if($this->Form()) {
+			$validEmailFields = DataObject::get("EditableFormField", "ParentID = '$this->FormID'");
+			
+			if($validEmailFields) {
+				$validEmailFields = $validEmailFields->toDropdownMap('ID', 'Title');
+				$fields->push(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.SENDEMAILINSTEAD', 'Send Email Instead To'),$validEmailFields, '', null, 'Use Fixed Email'));
+			}
+		}
+		$fields->push(new HTMLEditorField('EmailBody', 'Body'));
+		return $fields;
+	}
 }
 /**
  * Email that gets sent to the people listed in the Email Recipients 
