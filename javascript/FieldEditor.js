@@ -492,64 +492,61 @@ FieldEditorCheckboxGroupField = Class.extend('FieldEditorRadioField');
 
 FieldEditorDropdown = Class.extend('FieldEditorRadioField');
 
-Behaviour.register(
-	{
-		'div.FieldEditor ul.Menu li a': {
+Behaviour.register({
+
+	'div.FieldEditor ul.Menu li a': {
+		urlForFieldMethod: function(methodName) {
+			return this.ownerForm().action + '/field/Fields/' + methodName + '?NewID=' + this.numNewFields; 
+		},
+		ownerForm: function() {
+			var f = this.parentNode;
+			while(f && f.tagName.toLowerCase() != 'form') f = f.parentNode;
+			return f;
+		},
+
+		onclick: function() {
+			// get the ID of the field editor here
 			
-
-			urlForFieldMethod: function(methodName) {
-				return this.ownerForm().action + '/field/Fields/' + methodName + '?NewID=' + this.numNewFields; 
-			},
-			ownerForm: function() {
-				var f = this.parentNode;
-				while(f && f.tagName.toLowerCase() != 'form') f = f.parentNode;
-				return f;
-			},
-
-			onclick: function() {
-				// get the ID of the field editor here
-				
-				if( Element.hasClassName( $('Fields'), 'readonly' ) )
-					return false;
-				
-				action = this.urlForFieldMethod("addfield") + "&Type=" + this.id + ($('SecurityID') ? '&SecurityID=' + $('SecurityID').value : '');;
-				
-				statusMessage('Adding new field' );
-
-				new Ajax.Request(action, {
-					method: 'get',
-					onFailure: reportError,
-					onSuccess: this.appendNewField.bind(this)
-				});
-				
+			if( Element.hasClassName( $('Fields'), 'readonly' ) )
 				return false;
-			},
 			
-			appendNewField: function(response) {
-				this.numNewFields++;
-				
-				var el = document.createElement('div');
-				el.innerHTML = response.responseText;
-				
-				var i=0;
-				while(!el.childNodes[i].tagName) i++;
-				var newField = el.childNodes[i];
-				$('Fields_fields').appendChild(newField);
-				
-				// Behaviour.debug();
-				if(newField) {
-					Behaviour.apply(newField,true);
-					FieldEditor.applyTo('div.FieldEditor');
-				}
-				
-				// do we want to make sorting explicit?
-				Sortable.create('Fields_fields', {tag: 'div', handle:'handle'});
-				
-				statusMessage('Added new field','good');
+			action = this.urlForFieldMethod("addfield") + "&Type=" + this.id + ($('SecurityID') ? '&SecurityID=' + $('SecurityID').value : '');;
+			
+			statusMessage('Adding new field' );
+
+			new Ajax.Request(action, {
+				method: 'get',
+				onFailure: reportError,
+				onSuccess: this.appendNewField.bind(this)
+			});
+			
+			return false;
+		},
+		
+		appendNewField: function(response) {
+			this.numNewFields++;
+			
+			var el = document.createElement('div');
+			el.innerHTML = response.responseText;
+			
+			var i=0;
+			while(!el.childNodes[i].tagName) i++;
+			var newField = el.childNodes[i];
+			$('Fields_fields').appendChild(newField);
+			
+			// Behaviour.debug();
+			if(newField) {
+				Behaviour.apply(newField,true);
+				FieldEditor.applyTo('div.FieldEditor');
 			}
+			
+			// do we want to make sorting explicit?
+			Sortable.create('Fields_fields', {tag: 'div', handle:'handle'});
+			
+			statusMessage('Added new field','good');
 		}
 	}
-);
+});
 
 function reportError(request){
 	// More complex error for developers

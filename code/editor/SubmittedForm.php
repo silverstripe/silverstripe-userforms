@@ -14,16 +14,17 @@ class SubmittedForm extends DataObject {
 	);
 
 	/**
-	 * Return the Link to DeleteLink
+	 * Before we delete this form make sure we delete all the
+	 * field values so that we don't leave old data round
 	 *
-	 * @return String
 	 */
-	public function DeleteLink() {
-		return $this->Parent()->Link().'deletesubmission/'.$this->ID;
-	}
-	
-	function SubmitTime() {
-		return $this->Created;
+	protected function onBeforeDelete() {
+		if($this->FieldValues()) {
+			foreach($this->FieldValues() as $value) {
+				$value->delete();
+			}
+		}
+		parent::onBeforeDelete();
 	}
 }
 ?>

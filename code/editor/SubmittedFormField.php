@@ -1,7 +1,8 @@
 <?php
 /**
  * Data received from a UserDefinedForm submission
- * @package cms
+ *
+ * @package userforms
  */
 class SubmittedFormField extends DataObject {
 	

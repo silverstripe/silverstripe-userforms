@@ -1,8 +1,8 @@
 <?php
 /**
  * Allows CMS user to create forms dynamically.
- * @package forms
- * @subpackage fieldeditor
+ *
+ * @package userforms
  */
 class FieldEditor extends FormField {
 	
@@ -63,8 +63,6 @@ class FieldEditor extends FormField {
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
-				
-				// keep old javascript happy
 				$title = trim(str_ireplace("Editable", "", $title));
 				
 				$output->push(new ArrayData(array(
