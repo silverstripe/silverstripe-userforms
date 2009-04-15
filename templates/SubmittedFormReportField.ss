@@ -7,13 +7,13 @@
 	<a href="$ExportLink" title="<% _t('EXPORTCSVFILE', 'Export CSV file') %>"><strong><% _t('EXPORTSUBMISSIONS', 'Export submissions to CSV') %></strong></a>
 <% end_if %>
 
-<% if DeleteLink %>
+<!-- <% if DeleteLink %>
 	<a href="$DeleteLink" title="<% _t('DELETEALLSUBMISSIONS', 'Delete Submissions') %>"><strong><% _t('DELETEALLSUBMISSIONS', 'Delete Submissions') %></strong></a>
 <% end_if %>
-
+-->
 <% control Submissions %>
 	<div class="report">
-		<span class="submitted"><% _t('SUBMITTED', 'Submitted at') %> $Created.Nice. <a href="$DeleteLink"><% _t('DELETESUBMISSION', 'Delete Submission') %></a></span>
+		<span class="submitted"><% _t('SUBMITTED', 'Submitted at') %> $Created.Nice. <!--<a href="$DeleteLink"><% _t('DELETESUBMISSION', 'Delete Submission') %></a>--></span>
 		<table>
 			<% control FieldValues %>
 				<tr>
