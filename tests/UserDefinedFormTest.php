@@ -22,6 +22,7 @@ class UserDefinedFormTest extends SapphireTest {
 			$object->write();
 			
 			$this->assertEquals($field, $object->Name);
+			$object->delete();
 		}
 	}
 }
