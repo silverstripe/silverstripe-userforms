@@ -1,8 +1,8 @@
 <?php
 /**
- * Allows a user to add a field that can be used to upload a file 
- * @package forms
- * @subpackage fieldeditor
+ * Allows a user to add a field that can be used to upload a file
+ *
+ * @package userforms
  */
 class EditableFileField extends EditableFormField {
 	

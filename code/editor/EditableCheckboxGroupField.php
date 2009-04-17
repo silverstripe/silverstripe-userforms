@@ -1,90 +1,17 @@
 <?php
 /**
- * EditableDropdown
+ * EditableCheckboxGroup
+ *
  * Represents a set of selectable radio buttons
- * @package forms
- * @subpackage fieldeditor
+ * 
+ * @package userforms
  */
-class EditableCheckboxGroupField extends EditableFormField {
-	
-	protected $readonly;
+class EditableCheckboxGroupField extends EditableMultipleOptionField {
 
-	function ReadonlyOption() {
-		$this->readonly = true;
-		return $this->Option();
-	}
-
-	function isReadonly() {
-		return $this->readonly;
-	}
-	
-	static $has_many = array(
-		"Options" => "EditableCheckboxOption"
-	);
-	
 	static $singular_name = "Checkbox group";
+	
 	static $plural_name = "Checkbox groups";
-	
-	function duplicate() {
-		$clonedNode = parent::duplicate();
-		
-		foreach( $this->Options() as $field ) {
-			$newField = $field->duplicate();
-			$newField->ParentID = $clonedNode->ID;
-			$newField->write();
-		}
-		
-		return $clonedNode;
-	}
-	
-	function delete() {
-		$options = $this->Options();
-		
-		foreach( $options as $option )
-			$option->delete();
-			
-		parent::delete();
-	}
-	
-	function EditSegment() {
-		return $this->renderWith( $this->class );
-	}
-	
-	function populateFromPostData( $data ) {
-		parent::populateFromPostData( $data );
-		
-		$fieldSet = $this->Options();
-		
-		$deletedOptions = explode( ',', $data['Deleted'] );
-		$optionNumber = 0;
-		
-		// store default, etc
-		foreach($fieldSet as $option) {
-			if($deletedOptions && array_search($option->ID, $deletedOptions) !== false) {
-				$option->delete();
-				continue;
-			}
-			
-			if(isset($data[$option->ID])) {
-				$option->populateFromPostData( $data[$option->ID] );
-			}
-				
-			unset( $data[$option->ID] );
-		}
-		
-		foreach($data as $tempID => $optionData) {
-			if(!$tempID || !is_array($optionData) || empty($optionData) || !preg_match('/^_?\d+$/', $tempID)) {
-				continue;
-			}
-			
-			// what will we name the new option?
-			$newOption = new EditableCheckboxOption();
-			$newOption->Name = 'option' . (string)$optionNumber++;
-			$newOption->ParentID = $this->ID;
-			$newOption->populateFromPostData($optionData);
-		}
-	}
-	
+
 	function DefaultOption() {
 		$defaultOption = 0;
 		
@@ -96,14 +23,6 @@ class EditableCheckboxGroupField extends EditableFormField {
 		}
 		
 		return -1;
-	}
-	
-	function getFormField() {
-		return $this->createField();
-	}
-	
-	function getFilterField() {
-		return $this->createField( true );
 	}
 	
 	function createField($asFilter = false) {
@@ -127,7 +46,7 @@ class EditableCheckboxGroupField extends EditableFormField {
 			$entries = array($data[$this->Name]);
 		}
 			
-		$selectedOptions = DataObject::get('EditableCheckboxOption', "ParentID={$this->ID} AND ID IN (" . implode(',', $entries) . ")");
+		$selectedOptions = DataObject::get('EditableOption', "ParentID={$this->ID} AND ID IN (" . implode(',', $entries) . ")");
 		foreach($selectedOptions as $selected) {
 			if(!$result) {
 				$result = $selected->Title;
@@ -137,11 +56,6 @@ class EditableCheckboxGroupField extends EditableFormField {
 		}
 		
 		return $result;
-	}
-		
-	function TemplateOption() {
-		$option = new EditableCheckboxOption();
-		return $option->EditSegment();
 	}
 }
 

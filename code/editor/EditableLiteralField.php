@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Editable Spam Protecter Field. Used with the User Defined Forms module (if 
- * installed) to allow the user to have captcha fields with their custom forms
+ * Editable Literal Field. A literal field is just a blank slate where
+ * you can add your own HTML / Images / Flash
  * 
- * @package SpamProtection
+ * @package userforms
  */
 
 class EditableLiteralField extends EditableFormField {
@@ -14,15 +14,10 @@ class EditableLiteralField extends EditableFormField {
 	);
 	
 	static $singular_name = 'HTML Block';
+	
 	static $plural_name = 'HTML Blocks';
 	
-	function __construct( $record = null, $isSingleton = false ) {
-
-		parent::__construct( $record, $isSingleton );
-	}
-	
 	function ExtraOptions() {
-		
 		// eventually replace hard-coded "Fields"?
 		$baseName = "Fields[$this->ID]";
 		
@@ -33,32 +28,13 @@ class EditableLiteralField extends EditableFormField {
 	}
 	
 	function populateFromPostData($data) {
-
 		$this->Content = $data['Content'];
 		parent::populateFromPostData($data);
-	}
-	
-	function getFormField() {
-		return $this->createField();
-	}
-	
-	function getFilterField() {
-		return $this->createField(true);
 	}
 	
 	function createField() {
 		return new LiteralField("LiteralField[$this->ID]", 
 			"<div class='field text'><label class='left'>$this->Title</label><div class='middleColumn literalFieldArea'>". $this->Content."</div></div>");
-	}
-	/**
-	 * Populates the default fields. 
-	 */
-	function DefaultField() {
-		return "";
-	}
-	
-	function EditSegment() {
-		return $this->renderWith( $this->class );
 	}
 }
 ?>

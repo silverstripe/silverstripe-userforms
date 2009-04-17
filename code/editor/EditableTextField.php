@@ -1,9 +1,10 @@
 <?php
 /**
  * EditableTextField
- * This control represents a user-defined field in a user defined form
- * @package forms
- * @subpackage fieldeditor
+ *
+ * This control represents a user-defined text field in a user defined form
+ *
+ * @package userforms
  */
 class EditableTextField extends EditableFormField {
 	

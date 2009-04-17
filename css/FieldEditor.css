@@ -73,7 +73,7 @@ div.FieldEditor div.MenuHolder {
 	border: 0;
 }
 
-div.FieldEditor ul li {
+div.FieldEditor .MenuHolder ul li {
 	display: inline;
 }
 
@@ -121,12 +121,10 @@ div.EditableFormField.mouseOver {
 			margin-left: 0px;
 		}
 	
-	div.EditableFormField div.ExtraOptions {
+	div.EditableFormField div.extraOptions {
 		display: none;
 		margin: 3px 0px 3px 57px;
 		background-color: #EEEEEE;
-		/* IE has background issues without this */
-		/*position: relative;*/
 		padding: 3px;
 	}
 
@@ -151,10 +149,7 @@ div.EditableDateField div.FieldDefault input {
  ********************************************************************/ 
 
 #right #Form_EditForm div.EditableMultiOptionFormField div.FieldDefault ul.EditableDropdownOptions {
-	border: solid 1px #7F9DB9;
-	/* IE */
 	margin: 0px;
-	/* display: none; */
 	display: block;
 	position: relative;
 }

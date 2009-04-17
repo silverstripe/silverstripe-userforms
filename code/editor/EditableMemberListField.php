@@ -1,8 +1,8 @@
 <?php
 /**
  * Creates an editable field that displays members in a given group
- * @package forms
- * @subpackage fieldeditor
+ *
+ * @package userforms
  */
 class EditableMemberListField extends EditableFormField {
 	

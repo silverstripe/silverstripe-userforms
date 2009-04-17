@@ -1,9 +1,9 @@
 <?php
 /**
  * EditableButton
- * Allows a user to modify the text on the button
- * @package forms
- * @subpackage fieldeditor
+ * Allows a user to modify the text on a button html element
+ * 
+ * @package userforms
  */
 class EditableButton extends FormField {
 	

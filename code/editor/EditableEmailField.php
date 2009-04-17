@@ -1,9 +1,10 @@
 <?php
 /**
  * EditableEmailField
+ *
  * Allow users to define a validating editable email field for a UserDefinedForm
- * @package forms
- * @subpackage fieldeditor
+ *
+ * @package userforms
  */
 class EditableEmailField extends EditableFormField {
 	

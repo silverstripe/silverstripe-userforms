@@ -2,8 +2,8 @@
 /**
  * EditableCheckbox
  * A user modifiable checkbox on a UserDefinedForm
- * @package forms
- * @subpackage fieldeditor
+ * 
+ * @package userforms
  */
 class EditableCheckbox extends EditableFormField {
 	
