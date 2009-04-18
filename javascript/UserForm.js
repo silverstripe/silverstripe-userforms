@@ -147,23 +147,50 @@
 		/**
 		 * Sort Fields in the Field List
 		 */
-		$("#Fields_fields").sortable({ 
-	    	handle : '.fieldHandler',
-			cursor: 'pointer',
-			items: 'li.EditableFormField',
-			placeholder: 'removed-form-field',
-			opacity: 0.6,
-			revert: true,
-			change : function (event, ui) {
-				$("#Fields_fields").sortable('refreshPositions');
-			},
-	    	update : function (event, ui) {
-	      		// get all the fields
-				var sort = 1;
-				$("li.EditableFormField").each(function() {
-					$(this).find(".sortHidden").val(sort++);
-				});
-	    	}
+		$("#Fields_fields").livequery(function() {
+			$(this).sortable({ 
+	  	 		handle : '.fieldHandler',
+				cursor: 'pointer',
+				items: 'li.EditableFormField',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$("#Fields_fields").sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$("li.EditableFormField").each(function() {
+						$(this).find(".sortHidden").val(sort++);
+					});
+		    	}
+			});
+		});
+		
+		/**
+		 * Sort Options in a Field List - Such as options in a 
+		 * dropdown field.
+		 */
+		$(".editableOptions").livequery(function() {
+			$(this).sortable({
+				handle : '.handle',
+				cursor: 'pointer',
+				items: 'li',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$(this).sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$(".editableOptions li").each(function() {
+						$(this).find(".sortOptionHidden").val(sort++);
+					});
+		    	}
+			});
 		});
 	});
 })
