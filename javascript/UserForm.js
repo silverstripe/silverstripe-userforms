@@ -42,7 +42,7 @@
 			// variables
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addfield';
 			var length = $(".FieldInfo").length + 1;
-			var securityID = ($("#SecurityID")) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
+			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
 			var type = $(this).attr("ID");
 			
 			//send ajax request to the page
@@ -143,6 +143,28 @@
 			return false;
 		});
 		
+		
+		/**
+		 * Sort Fields in the Field List
+		 */
+		$("#Fields_fields").sortable({ 
+	    	handle : '.fieldHandler',
+			cursor: 'pointer',
+			items: 'li.EditableFormField',
+			placeholder: 'removed-form-field',
+			opacity: 0.6,
+			revert: true,
+			change : function (event, ui) {
+				$("#Fields_fields").sortable('refreshPositions');
+			},
+	    	update : function (event, ui) {
+	      		// get all the fields
+				var sort = 1;
+				$("li.EditableFormField").each(function() {
+					$(this).find(".sortHidden").val(sort++);
+				});
+	    	}
+		});
 	});
 })
 (jQuery);

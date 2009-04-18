@@ -1,9 +1,9 @@
-<div class="$ClassName EditableFormField" id="$Name.Attr">
+<li class="$ClassName EditableFormField" id="$Name.Attr EditableItem_$Pos">
 	<div class="FieldInfo">
 		<% if isReadonly %>
-			<img class="handle" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
+			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
 		<% else %>
-			<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
+			<img class="fieldHandler" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% end_if %>
 		
 		<img class="icon" src="userforms/images/{$ClassName.LowerCase}.png" alt="$ClassName" title="$singular_name" />
@@ -54,8 +54,9 @@
 		</div>
 	<% end_if %>
 	
-  	<input type="hidden" name="$Name.Attr[CanDelete]" value="$CanDelete" />
-  	<input type="hidden" name="$Name.Attr[CustomParameter]" value="$CustomParameter" />
-  	<input type="hidden" name="$Name.Attr[Type]" value="$ClassName" />   
-	<input type="hidden" name="$Name.Attr[Sort]" value="-1" />
-</div>
+	<!-- Hidden option Fields -->
+  	<input type="hidden" class="canDeleteHidden" name="$Name.Attr[CanDelete]" value="$CanDelete" />
+  	<input type="hidden" class="customParameterHidden" name="$Name.Attr[CustomParameter]" value="$CustomParameter" />
+  	<input type="hidden" class="typeHidden" name="$Name.Attr[Type]" value="$ClassName" />   
+	<input type="hidden" class="sortHidden" name="$Name.Attr[Sort]" value="-1" />
+</li>

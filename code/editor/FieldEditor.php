@@ -6,6 +6,8 @@
  */
 class FieldEditor extends FormField {
 	
+	protected $haveFormOptions = true;
+	
 	protected $readonly = false;
 	
 	function isReadonly() {
@@ -28,6 +30,8 @@ class FieldEditor extends FormField {
 	
 	function Fields() {
 		Requirements::css("userforms/css/FieldEditor.css");
+		Requirements::javascript("jsparty/jquery/ui/ui.core.js");
+		Requirements::javascript("jsparty/jquery/ui/ui.sortable.js");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		
 		$relationName = $this->name;
@@ -198,8 +202,6 @@ class FieldEditor extends FormField {
 		}
 		return false;
 	}
-
-	protected $haveFormOptions = true;
 	
 	function setHaveFormOptions($bool){
 		$this->haveFormOptions = $bool;

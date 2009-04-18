@@ -88,40 +88,50 @@ div.FieldEditor ul a:hover {
 /*********************************************************************
  * EditableFormField - Default class for all editable form fields
  ********************************************************************/
-
-div.EditableFormField {
-	padding: 3px;
-	border-top: 1px dashed #CCCCCC;
+#Fields_fields {
+	padding: 10px 0;
 }
-
-div.EditableFormField.mouseOver {
+.fieldHandler {
+	cursor: pointer;
+}
+.EditableFormField {
+	margin: 2px;
+	padding: 3px;
+	border-top: 1px dotted #CCCCCC;
+}
+.removed-form-field {
+	height: 40px;
+	display: block;
+	overflow: hidden;
+}
+.EditableFormField.mouseOver {
 	background-color: #f3ef9d;
 }
 
-	div.EditableFormField div.hidden {
+	.EditableFormField div.hidden {
 		display: none;
 		margin: 0px;
 	}
 
-	div.EditableFormField div.FieldInfo {
+	.EditableFormField div.FieldInfo {
 		margin: 0px;
 		padding-right: -3px;
 	}
 	
-		div.EditableFormField div.FieldInfo * {
+		.EditableFormField div.FieldInfo * {
 			display: inline;
 			margin-right: 3px;
 			margin-left: 0px;
 			vertical-align: middle;
 		}
 		
-		div.EditableFormField div.FieldInfo input,
-		div.EditableFormField div.FieldDefault input {
+		.EditableFormField div.FieldInfo input,
+		.EditableFormField div.FieldDefault input {
 			width: 250px;
 			margin-left: 0px;
 		}
 	
-	div.EditableFormField div.extraOptions {
+	.EditableFormField div.extraOptions {
 		display: none;
 		margin: 3px 0px 3px 57px;
 		background-color: #EEEEEE;

@@ -8,15 +8,15 @@
 		</ul>
 	</div>
 	<div class="FieldListHold">
-		<div class="FieldList" id="Fields_fields">
-		<% control Fields %>
-			<% if isReadonly %>
-				$ReadonlyEditSegment	
-			<% else %>
-				$EditSegment
-			<% end_if %>
-		<% end_control %>
-		</div>
+		<ul class="FieldList" id="Fields_fields">
+			<% control Fields %>
+				<% if isReadonly %>
+					$ReadonlyEditSegment	
+				<% else %>
+					$EditSegment
+				<% end_if %>
+			<% end_control %>
+		</ul>
 	</div>
 	<div class="MenuHolder">
 		<ul class="BottomMenu Menu">
