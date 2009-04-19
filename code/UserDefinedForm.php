@@ -380,10 +380,14 @@ class UserDefinedForm_Controller extends Page_Controller {
 								$submittedField->Value = "";
 							}
 							$submittedField->write();
-						}
-								
+						}				
 					break;						
 				}
+			}
+			elseif($field->hasMethod('getValueFromData')) { 
+				$values[$field->Title] = Convert::linkIfMatch($field->getValueFromData($data)); 
+			} else { 
+				if(isset($data[$field->Name])) $values[$field->Title] = Convert::linkIfMatch($data[$field->Name]); 
 			}
 		}	
 		$emailData = array(
