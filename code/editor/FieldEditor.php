@@ -38,17 +38,16 @@ class FieldEditor extends FormField {
 		
 		$fields = $this->form->getRecord()->$relationName();
 		
-		if( $this->readonly ) {
+		if($this->readonly) {
 			$readonlyFields = new DataObjectSet();
 			
-			foreach( $fields as $field ) {
-				$field->setEditor( $this );
-				$readonlyFields->push( $field->makeReadonly() );
+			foreach($fields as $field) {
+				$field->setEditor($this);
+				$readonlyFields->push($field->makeReadonly());
 			}
 				
 			$fields = $readonlyFields;
 		}
-		
 		return $fields;
 	}
 	
