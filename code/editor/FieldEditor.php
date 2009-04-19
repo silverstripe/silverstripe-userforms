@@ -37,7 +37,7 @@ class FieldEditor extends FormField {
 		$relationName = $this->name;
 		
 		$fields = $this->form->getRecord()->$relationName();
-		
+
 		if($this->readonly) {
 			$readonlyFields = new DataObjectSet();
 			

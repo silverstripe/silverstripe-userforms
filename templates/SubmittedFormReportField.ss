@@ -18,7 +18,7 @@
 					<% control FieldValues %>
 						<tr>
 							<td class="field">$Title</td>
-							<td class="value"><% if Link %><a href="$Link"><% end_if %>$Value<% if Link %></a><% end_if %></td>
+							<td class="value">$Value.RAW</td>
 						</tr>
 					<% end_control %>	
 				</table>

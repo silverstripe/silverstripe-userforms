@@ -89,6 +89,7 @@
 		 */
 		$(".EditableFormField .delete").livequery('click', function() {
 			$(this).parents(".EditableFormField").remove();
+			return false;
 		});
 		
 		/**

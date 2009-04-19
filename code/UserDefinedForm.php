@@ -345,11 +345,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 			
 			$submittedField->write();
 			$submittedFields->push($submittedField);
-			
-			if(!empty( $data[$field->Name])){
 
-				switch($field->ClassName){
-					
+			if(!empty($data[$field->Name])){
+
+				switch($field->ClassName){	
 					case "EditableEmailField" : 
 						if($field->SendCopy){
 							$recipientAddresses[] = $data[$field->Name];
@@ -359,50 +358,52 @@ class UserDefinedForm_Controller extends Page_Controller {
 					break;
 					
 					case "EditableFileField" :
-						
-						// Returns a file type which we attach to the email. 
-						$submittedfile = $field->createSubmittedField($data[$field->Name], $submittedForm);
-						$file = $submittedfile->UploadedFile();
-									
-						$filename = $file->getFilename();
-										
-						// Attach the file if its less than 1MB, provide a link if its over.
-						if($file->getAbsoluteSize() < 1024*1024*1){
-							$attachments[] = $file;
-						}
-						
-						// Always provide the link if present.
-						if($file->ID) {
-							$submittedField->Value = $values[$field->Title] = "<a href=\"". $filename ."\" title=\"". Director::absoluteBaseURL(). $filename. "\">Uploaded to: ". Director::absoluteBaseURL(). $filename . "</a>";
-						} else {
-							$submittedField->Value = $values[$field->Title] = "";
+						if(isset($_FILES[$field->Name])) {
+							
+							// create the file from post data
+							$upload = new Upload();
+							$file = new File();
+							$upload->loadIntoFile($_FILES[$field->Name], $file);
+
+							// write file to form field
+							$submittedField->UploadedFileID = $file->ID;
+							
+							// Attach the file if its less than 1MB, provide a link if its over.
+							if($file->getAbsoluteSize() < 1024*1024*1){
+								$attachments[] = $file;
+							}
+
+							// Always provide the link if present.
+							if($file->ID) {
+								$submittedField->Value = "<a href=\"". $file->getFilename() ."\" title=\"". $file->getFilename() . "\">". $file->Title . "</a>";
+							} else {
+								$submittedField->Value = "";
+							}
+							$submittedField->write();
 						}
 								
 					break;						
 				}
-				
-			}elseif( $field->hasMethod( 'getValueFromData' ) ) {
-				$values[$field->Title] = Convert::linkIfMatch($field->getValueFromData( $data ));
-			
-			} else {
-				if(isset($data[$field->Name])) $values[$field->Title] = Convert::linkIfMatch($data[$field->Name]);
 			}
-			
 		}	
 		$emailData = array(
 			"Sender" => Member::currentUser(),
 			"Fields" => $submittedFields,
 		);
-		
+
 		// email users on submit. All have their own custom options. 
 		if($this->EmailRecipients()) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);                     
 			$email->populateTemplate($emailData);
 			if($attachments){
 				foreach($attachments as $file){
-					$email->attachFile($filename,$filename);
+					// bug with double decorated fields, valid ones should have an ID.
+					if($file->ID != 0) {
+						$email->attachFile($file->Filename,$file->Filename, $file->getFileType());
+					}
 				}
 			}
+
 			foreach($this->EmailRecipients() as $recipient) {
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
@@ -457,12 +458,6 @@ class UserDefinedForm_Controller extends Page_Controller {
 		));
 		
 		return $templateData;
-	}
-	
-	function deletesubmissions() {
-		// delete all the submissions
-		
-		return true;
 	}
 }
 

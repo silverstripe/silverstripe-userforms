@@ -40,7 +40,7 @@ class SubmittedFormReportField extends FormField {
 	 * @return HTTPResponse / bool
 	 */
 	public function export() {
-		$now = Date("Y-m-d_h.i.s");
+		$now = Date("Y-m-d_h.i.s");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$fileName = "export-$now.csv";
 		$separator = ",";
 		
