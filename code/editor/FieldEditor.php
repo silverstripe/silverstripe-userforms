@@ -92,9 +92,8 @@ class FieldEditor extends FormField {
 		$fieldSet = $record->$name();		        
 		
 		// @todo shouldn't we deal with customFormActions on that object?
-		$record->EmailTo = $_REQUEST[$name]['EmailTo'];
 		$record->EmailOnSubmit = isset( $_REQUEST[$name]['EmailOnSubmit'] ) ? "1" : "0";
-		$record->SubmitButtonText = $_REQUEST[$name]['SubmitButtonText'];
+		$record->SubmitButtonText = isset($_REQUEST[$name]['SubmitButtonText']) ? $_REQUEST[$name]['SubmitButtonText'] : "";
 		$record->ShowClearButton = isset($_REQUEST[$name]['ShowClearButton']) ? "1" : "0";
 		
 		// store the field IDs and delete the missing fields
