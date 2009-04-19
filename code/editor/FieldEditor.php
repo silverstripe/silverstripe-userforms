@@ -159,12 +159,13 @@ class FieldEditor extends FormField {
 			$className = "Editable" . ucfirst($_REQUEST['Type']);
 			$name = $this->name;
 			if(is_subclass_of($className, "EditableFormField")) {
-				$e = new $className();
-				$e->write();
-				$e->ParentID = $this->form->getRecord()->ID;
-				$e->Name = $e->class . $e->ID;
-				$e->write();
-				return $e->EditSegment();
+				$field = new $className();
+				$field->write();
+				$field->ParentID = $this->form->getRecord()->ID;
+				$field->Name = $e->class . $e->ID;
+				$field->Sort = $sort;
+				$field->write();
+				return $field->EditSegment();
 			}
 		}
 		return false;

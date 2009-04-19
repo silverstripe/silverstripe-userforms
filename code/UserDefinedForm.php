@@ -328,8 +328,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$sendCopy = false;
         $attachments = array();
 
-		$submittedFields = new DataObjectSet();	
-				
+		$submittedFields = new DataObjectSet();
+		
 		foreach($this->Fields() as $field) {
 			$submittedField = new SubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;

@@ -58,5 +58,5 @@
   	<input type="hidden" class="canDeleteHidden" name="$Name.Attr[CanDelete]" value="$CanDelete" />
   	<input type="hidden" class="customParameterHidden" name="$Name.Attr[CustomParameter]" value="$CustomParameter" />
   	<input type="hidden" class="typeHidden" name="$Name.Attr[Type]" value="$ClassName" />   
-	<input type="hidden" class="sortHidden" name="$Name.Attr[Sort]" value="-1" />
+	<input type="hidden" class="sortHidden" name="$Name.Attr[Sort]" value="$Sort" />
 </li>

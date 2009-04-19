@@ -86,13 +86,9 @@ class EditableTextField extends EditableFormField {
 	 * Populates the default fields. 
 	 */
 	function DefaultField() {
-		$disabled = '';
-		if( $this->readonly ){
-			$disabled = " disabled=\"disabled\"";
-		} else {
-			$disabled = '';
-		}
-		if( $this->Rows == 1 ){
+		$disabled = ($this->readonly) ? " disabled=\"disabled\"" : '';
+		
+		if($this->Rows == 1){
 		        return '<div class="field text"><label class="left">'._t('EditableTextField.DEFAULTTEXT', 'Default Text').' </label> <input class="defaultText" name="Fields['.Convert::raw2att( $this->ID ).'][Default]" type="text" value="'.Convert::raw2att( $this->getField('Default') ).'"'.$disabled.' /></div>';
 		}else{
 			return '<div class="field text"><label class="left">'._t('EditableTextField.DEFAULTTEXT', 'Default Text').' </label> <textarea class="defaultText" name="Fields['.Convert::raw2att( $this->ID ).'][Default]"'.$disabled.'>'.Convert::raw2att( $this->getField('Default') ).'</textarea></div>';
