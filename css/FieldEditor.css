@@ -93,7 +93,7 @@ div.FieldEditor ul a:hover {
 }
 .fieldHandler,
 .handle {
-	cursor: pointer;
+	cursor: move;
 }
 .EditableFormField {
 	margin: 2px;
