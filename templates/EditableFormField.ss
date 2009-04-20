@@ -6,7 +6,7 @@
 			<img class="fieldHandler" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% end_if %>
 		
-		<img class="icon" src="userforms/images/{$ClassName.LowerCase}.png" alt="$ClassName" title="$singular_name" />
+		<img class="icon" src="$Icon" alt="$ClassName" title="$singular_name" />
 		
 		$TitleField
 		

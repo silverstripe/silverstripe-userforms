@@ -15,9 +15,10 @@ class EditableFormField extends DataObject {
 		"Default" => "Varchar",
 		"Sort" => "Int",
 		"Required" => "Boolean",
-	  	"CanDelete" => "Boolean",
-    	"CustomParameter" => "Varchar",
-		"OptionallyDisplay" => "Boolean"
+		"CanDelete" => "Boolean",
+		"CustomParameter" => "Varchar",
+		"OptionallyDisplay" => "Boolean",
+		"CustomErrorMessage" => "Varchar(255)"
 	);
     
 	static $defaults = array(
@@ -68,6 +69,15 @@ class EditableFormField extends DataObject {
 	
 	function ClassName() {
 		return $this->class;
+	}
+	
+	/**
+	 * Get the path to the icon for this field type, relative to the site root.
+	 *
+	 * @return string
+	 */
+	public function Icon() {
+		return 'userforms/images/' . strtolower($this->class) . '.png';
 	}
 	
 	/**
@@ -129,6 +139,7 @@ class EditableFormField extends DataObject {
 		$this->Required = !empty($data['Required']) ? 1 : 0;
   		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;
 		$this->Name = $this->class.$this->ID;
+		$this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
 		$this->write();
 	}
 	
@@ -158,6 +169,9 @@ class EditableFormField extends DataObject {
 		
 		// support for optionally display field
 		// $extraOptions->push(new CheckboxField($baseName ."[OptionallyDisplay]", _t('EditableFormField.OPTIONALLYDISPLAY', 'Optionally Display Field'), $this->OptionallyDisplay));
+		
+		// support for custom error messaging
+		$extraOptions->push(new TextField($baseName.'[CustomErrorMessage]', _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage));
 		
 		return $extraOptions;
 	}

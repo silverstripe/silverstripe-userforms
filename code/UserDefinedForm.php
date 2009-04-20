@@ -274,10 +274,15 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$required = array();
         
         if(!$this->SubmitButtonText) {
-            $this->SubmitButtonText = 'Submit';
+            $this->SubmitButtonText =  _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		}
 		foreach($this->Fields() as $field) {
-			$fields->push($field->getFormField());
+			$fieldToAdd = $field->getFormField();
+			if($field->CustomErrorMessage) {				
+				$fieldToAdd->setCustomValidationMessage($field->CustomErrorMessage);
+			}
+			
+			$fields->push($fieldToAdd);
 			if($field->Required) {
 				$required[] = $field->Name;	
 			}
@@ -295,7 +300,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			new FormAction("process", $this->SubmitButtonText)
 		);
 		
-		// Do we want to add a clear form. Should do this via js
+		// Do we want to add a clear form.
 		if($this->ShowClearButton) {
 			$actions->push(new ResetFormAction("clearForm"));
 		}
@@ -539,10 +544,10 @@ class UserDefinedForm_SubmittedFormEmailToSubmitter extends Email {
 	protected $subject = 'Submission of form';
 	protected $data;
 	
-	function __construct($values) {
-	        $this->subject = _t('UserDefinedForm_SubmittedFormEmail.EMAILSUBJECT', 'Submission of form');
-		parent::__construct();
+	function __construct($values = null) {
+		$this->subject = _t('UserDefinedForm_SubmittedFormEmail.EMAILSUBJECT', 'Submission of form');
 		
+		parent::__construct();
 		$this->data = $values;
 	}
 	
