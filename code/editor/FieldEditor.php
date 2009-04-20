@@ -162,7 +162,7 @@ class FieldEditor extends FormField {
 				$field = new $className();
 				$field->write();
 				$field->ParentID = $this->form->getRecord()->ID;
-				$field->Name = $e->class . $e->ID;
+				$field->Name = $field->class . $field->ID;
 				$field->Sort = $sort;
 				$field->write();
 				return $field->EditSegment();
