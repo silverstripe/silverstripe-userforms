@@ -1,31 +1,27 @@
 <li class="$ClassName EditableFormField" id="$Name.Attr EditableItem_$Pos">
-	<div class="FieldInfo">
+	<div class="fieldInfo">
 		<% if isReadonly %>
 			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
 		<% else %>
 			<img class="fieldHandler" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% end_if %>
-		
+	
 		<img class="icon" src="$Icon" alt="$ClassName" title="$singular_name" />
-		
+	
 		$TitleField
-		
+	</div>
+	
+	<div class="fieldActions">
 		<% if showExtraOptions %>
-			<a class="moreOptions" href="#" title="<% _t('MORE', 'More options') %>">
-				<img src="cms/images/edit.gif" alt="<% _t('MORE', 'More options') %>" />
-			</a>
+			<a class="moreOptions" href="#" title="<% _t('MOREOPTIONS', 'More Options') %>"><% _t('MOREOPTIONS','More Options') %></a>
 		<% end_if %>
 		
-		<% if isReadonly %>
-			<img src="cms/images/locked.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
-		<% else %>
-			<% if CanDelete %>
-    			<a class="delete" href="#" title="<% _t('DELETE', 'Delete this field') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete this field') %>" /></a>
-	  		<% else %>
-    			<img src="cms/images/locked.gif" alt="<% _t('REQUIRED', 'This field is required for this form and cannot be deleted') %>" />
-    		<% end_if %>
-    	<% end_if %>
-  	</div>
+		<% if CanDelete %>
+   			<a class="delete" href="#" title="<% _t('DELETE', 'Delete') %>">
+				<% _t('DELETE', 'Delete') %>
+			</a>
+   		<% end_if %> 	
+	</div>
 	
 	<% if showExtraOptions %>
 		<div class="extraOptions hidden" id="$Name.Attr-extraOptions">

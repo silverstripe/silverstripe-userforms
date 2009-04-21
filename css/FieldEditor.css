@@ -1,211 +1,122 @@
-* {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
+/**
+ * User Defined Form Builder CSS
+ *
+ */
+
+/* Add a Field Menu 
+---------------------------------------- */
+.MenuHolder {
+	color: #999;	
 }
-
-div.FieldEditor {
-	border: 1px solid #CCCCCC;
-	padding: 0px;
-}
-
-div.FieldEditor div.MenuHolder {
-	margin: 0;
-	padding: 3px;
-	background-color: #eee;
-	position: relative;
-}
-
-    div.FieldEditor div.FormOptions div.CompositeField {
-        margin-left: 4em;
-    }
-
-    div.FieldEditor div.FormOptions label.left {
-        position: relative;
-    }
-
-    div.FieldEditor div.FormOptions label.right,
-    div.FieldEditor div.FormOptions label.CustomActionLabel {
-        margin-left: 0em;
-        float: none;
-        line-height: auto;
-        display: inline;
-    }
-
-	div.FieldEditor input.checkbox {
-		width: auto !important;
+	.MenuHolder ul {
+		background: #e7e7e7;
+		border: 1px solid #c6c6c6;
+		padding: 8px;
 	}
-	
-	div.FieldEditor ul.Menu li {
-		background-color: transparent;
-	}
-	
-	div.FieldEditor div.FieldListHolder {
-		height: 75%;
-	}
-	div.FieldEditor div.FieldList {
-		background-color: white;
-		border-bottom: 1px solid #CCCCCC;
-		border-top: 1px solid #CCCCCC;
-		height: 100%;
-		overflow-y: scroll;
-	}
-	
-	/*div.FieldEditor div.FormOptions {
-		background-color: #EEEEEE;
-		position: relative;
-		float: left;
-		width:100%;
-	}*/
-	
-		div.FieldEditor div.FormOptions div.field {
-			position: relative;
+		.MenuHolder li {
+			display: inline;
+			font-size: 11px;
+			padding: 2px 0;
 		}
-		
-		div.FieldEditor div.FormOptions div.optionset li {
-			display: block;
-		}
-		
-			div.FieldEditor div.FormOptions div.optionset li label {
-				float: none !important;
+			.MenuHolder li a {
+				padding: 5px 4px 3px 4px;
+				font-weight: bold;
+				border: 1px solid transparent;
+				text-decoration: none;
+			}
+				.MenuHolder li a:hover {
+					background: #f4f4f4;
+					border: 1px solid #c6c6c6;
+				}
+			.MenuHolder li.addField {
+				background: url(../../cms/images/add.gif) no-repeat center left;
+				padding-left: 20px;
+				text-transform: uppercase;
 			}
 
-.DragEditable {
-	border: 0;
+/* Options / Settings Area 
+---------------------------------------- */
+.FormOptions {
+	padding: 10px 0 0 0;
 }
 
-div.FieldEditor .MenuHolder ul li {
-	display: inline;
-}
-
-div.FieldEditor ul a {
-	padding: 3px;
-}
-
-div.FieldEditor ul a:hover {
-	background-color: #CCCCCC;
-}
-
-/*********************************************************************
- * EditableFormField - Default class for all editable form fields
- ********************************************************************/
+/* Field Listing
+---------------------------------------- */	
 #Fields_fields {
 	padding: 10px 0;
 }
-.fieldHandler,
-.handle {
-	cursor: move;
-}
-.EditableFormField {
-	margin: 2px;
-	padding: 3px;
-	border-top: 1px dotted #CCCCCC;
-}
-.removed-form-field {
-	height: 40px;
-	display: block;
-	overflow: hidden;
-}
-.EditableFormField.mouseOver {
-	background-color: #f3ef9d;
-}
 
-	.EditableFormField div.hidden {
-		display: none;
-		margin: 0px;
+	#Fields_fields .EditableFormField {
+		margin: 2px;
+		padding: 3px;
+		border-top: 1px dotted #ccc;
+		overflow: hidden;
 	}
-
-	.EditableFormField div.FieldInfo {
-		margin: 0px;
-		padding-right: -3px;
-	}
-	
-		.EditableFormField div.FieldInfo * {
+		#Fields_fields .EditableFormField * {
 			display: inline;
-			margin-right: 3px;
-			margin-left: 0px;
 			vertical-align: middle;
 		}
-		
-		.EditableFormField div.FieldInfo input,
-		.EditableFormField div.FieldDefault input {
+		#Fields_fields .EditableFormField .fieldHandler,
+		#Fields_fields .EditableFormField .handle {
+			cursor: move;
+		}
+		#Fields_fields .EditableFormField .fieldInfo {
+			float: left;
+			padding-right: 10px;
+		}
+		#Fields_fields .EditableFormField .fieldActions {
+			float: left;
+			margin-top: 10px;
+		}
+			#Fields_fields .EditableFormField .fieldActions a {
+				padding: 0 5px 5px 20px;
+				font-size: 12px;
+			}
+				#Fields_fields .EditableFormField .moreOptions {
+					background: url(../../cms/images/edit.gif) no-repeat top left;
+				}
+					#Fields_fields .EditableFormField .moreOptions.showing {
+						color: #666;
+						text-decoration: none;
+					}
+				#Fields_fields .EditableFormField .delete {
+					background: url(../../cms/images/delete.gif) no-repeat top left;
+				}
+	
+		#Fields_fields .EditableFormField input {
 			width: 250px;
 			margin-left: 0px;
 		}
 	
-	.EditableFormField div.extraOptions {
-		display: none;
-		margin: 3px 0px 3px 57px;
-		background-color: #EEEEEE;
-		padding: 3px;
-	}
-
-/*********************************************************************
- * EditableDateField
- ********************************************************************/
- 
-div.EditableDateField div.FieldDefault input {
-	width: 2em;
-}
-
-	div.EditableDateField div.FieldDefault input.year {
-		width: 4em;
-	}
- 
-/*********************************************************************
- * EditableEmailField
- ********************************************************************/ 
-
-/*********************************************************************
- * EditableDropdown
- ********************************************************************/ 
-
-#right #Form_EditForm div.EditableMultiOptionFormField div.FieldDefault ul.EditableDropdownOptions {
-	margin: 0px;
-	display: block;
-	position: relative;
-}
-
-#right #Form_EditForm div.EditableDropdown select {
-	margin-bottom: 0px;
-}
-
-#right #Form_EditForm div.EditableDropdown select,
-#right #Form_EditForm div.EditableMultiOptionFormField ul.EditableDropdownOptions {
-	width: 250px;
-	padding: 3px;
-}
-
-	#right #Form_EditForm li.EditableFormFieldOption {
-		display: block;
-		padding: 2px 0px;
-	}
-
-		#right #Form_EditForm li.EditableFormFieldOption * {
-			vertical-align: middle;
-			display: inline;
-		}
+		/** Field Options **/
 		
-		#right #Form_EditForm li.EditableFormFieldOption a {
-			width: 16px;
+		#Fields_fields .EditableFormField div.extraOptions {
+			display: block;
+			margin: 3px 0px 3px 57px;
+			background-color: #eee;
+			padding: 3px;
+			clear: both;			
 		}
-		
-		#right #Form_EditForm li.EditableFormFieldOption input.text {
-			width: 170px !important;
-		}
-		
-		#right #Form_EditForm li.EditableFormFieldOption input.radio,
-		#right #Form_EditForm li.EditableFormFieldOption input.checkbox {
-			width: 20px;
-		}
-		
-	  #right #Form_EditForm li.AddDropdownOption {
-			border-top: dashed 1px #7F9DB9;
-			padding-left: 37px;
-			height: auto;
-		}
+			#Fields_fields .EditableFormField div.extraOptions * {
+				display: block;
+			}
+			
+			/* CHECKBOX */
+			#Fields_fields .EditableFormField .checkbox { }
+			
+				#Fields_fields .EditableFormField .checkbox input {
+					float: left;
+					margin: 0 8px 0 0;
+				}
+			
 	
-		/* Need first rule in order to overwrite */
-		#right #Form_EditForm li.AddDropdownOption input.text {
-			width: 170px !important;	
-			margin-left: 0px;
+		#Fields_fields .EditableFormField div.hidden {
+			display: none;
+		}
+
+		/* Holder to prevent form from collapsing */
+		#Fields_fields .removed-form-field {
+			height: 40px;
+			display: block;
+			overflow: hidden;
 		}

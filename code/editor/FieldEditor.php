@@ -67,11 +67,12 @@ class FieldEditor extends FormField {
 				// get the nice title and strip out field
 				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
 				$title = trim(str_ireplace("Editable", "", $title));
-				
-				$output->push(new ArrayData(array(
-					'ClassName' => $title,
-					'Title' => "$niceTitle"
-				)));
+				if($title != 'MultipleOptionField') {
+					$output->push(new ArrayData(array(
+						'ClassName' => $title,
+						'Title' => "$niceTitle"
+					)));
+				}
 			}
 			return $output;
 		}

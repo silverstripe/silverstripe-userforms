@@ -69,14 +69,19 @@
 		 * currently have it open
 		 */
 		$(".EditableFormField .moreOptions").livequery('click',function() {
+			
 			var parentID = $(this).parents(".EditableFormField");
 			if(parentID) {
 				var extraOptions = parentID.children(".extraOptions");
 				if(extraOptions) {
 					if(extraOptions.hasClass('hidden')) {
+						$(this).html("Hide More Options");
+						$(this).addClass("showing");
 						extraOptions.removeClass('hidden').show();
 					}
 					else {
+						$(this).html("More Options");
+						$(this).removeClass("showing");
 						extraOptions.addClass('hidden').hide();	
 					}
 				}

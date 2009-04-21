@@ -75,6 +75,7 @@ class EditableTextField extends EditableFormField {
 		return $this->createField( true );
 	}
 	
+
 	function createField( $asFilter = false ) {
 		if( $this->Rows == 1 )
 			return new TextField( $this->Name, $this->Title, ( $asFilter ) ? "" : $this->getField('Default'), $this->MaxLength);

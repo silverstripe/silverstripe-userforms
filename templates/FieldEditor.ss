@@ -1,7 +1,7 @@
 <div class="FieldEditor <% if isReadonly %>readonly<% end_if %>" id="Fields" name="$Name.Attr">
 	<div class="MenuHolder">
 		<ul class="TopMenu Menu">
-			<li><% _t('ADD', 'Add') %>:</li>
+			<li class="addField"><% _t('ADD', 'Add') %>:</li>
 			<% control CreatableFields %>
 				<li><a href="#" title="<% _t('ADD', 'Add') %> $Title" id="$ClassName">$Title</a></li>
 			<% end_control %>
@@ -19,16 +19,18 @@
 		</ul>
 	</div>
 	<div class="MenuHolder">
-		<ul class="BottomMenu Menu">
-			<li><% _t('ADD', 'Add') %>:</li>
+		<ul class="TopMenu Menu">
+			<li class="addField"><% _t('ADD', 'Add') %>:</li>
 			<% control CreatableFields %>
 				<li><a href="#" title="<% _t('ADD', 'Add') %> $Title" id="$ClassName">$Title</a></li>
 			<% end_control %>
 		</ul>
-		<div class="FormOptions">
-			<% control FormOptions %>
-				$FieldHolder
-			<% end_control %>
-		</div>
+	</div>
+
+	<div class="FormOptions">
+		<h3>Form Options</h3>
+		<% control FormOptions %>
+			$FieldHolder
+		<% end_control %>
 	</div>
 </div>
