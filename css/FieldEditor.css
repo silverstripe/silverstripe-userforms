@@ -92,15 +92,43 @@
 		
 		#Fields_fields .EditableFormField div.extraOptions {
 			display: block;
-			margin: 3px 0px 3px 57px;
+			overflow:hidden;
+			margin: 3px 0px 3px 38px;
 			background-color: #eee;
 			padding: 3px;
 			clear: both;			
 		}
-			#Fields_fields .EditableFormField div.extraOptions * {
+			#Fields_fields .EditableFormField .extraOptions * {
 				display: block;
 			}
 			
+				#Fields_fields .EditableFormField .extraOptions .handle {
+					float: left;
+					margin-right: 3px;
+				}
+				#Fields_fields .EditableFormField .extraOptions ul {
+					padding: 5px 0;
+				}
+					#Fields_fields .EditableFormField .extraOptions li {
+						padding: 3px 0;
+						overflow: hidden;
+					}
+				#Fields_fields .EditableFormField .extraOptions input {
+					font-size: 11px;
+					padding: 2px;
+					float: left;
+				}
+				#Fields_fields .EditableFormField .extraOptions .deleteOption {
+					width: 20px;
+					margin: 4px 0 0 4px;
+					background: none;
+					height: 20px;
+					float: left;
+					display: block;
+				}
+			#Fields_fields .EditableFormField .middleColumn {
+				background: none;
+			}
 			/* CHECKBOX */
 			#Fields_fields .EditableFormField .checkbox { }
 			
@@ -110,7 +138,7 @@
 				}
 			
 	
-		#Fields_fields .EditableFormField div.hidden {
+		#Fields_fields li.EditableFormField .hidden {
 			display: none;
 		}
 
