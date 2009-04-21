@@ -94,5 +94,21 @@ class EditableTextField extends EditableFormField {
 			return '<div class="field text"><label class="left">'._t('EditableTextField.DEFAULTTEXT', 'Default Text').' </label> <textarea class="defaultText" name="Fields['.Convert::raw2att( $this->ID ).'][Default]"'.$disabled.'>'.Convert::raw2att( $this->getField('Default') ).'</textarea></div>';
 		}
 	}
+	
+	/**
+	 * Return the validation information related to this field. This is 
+	 * interrupted as a JSON object for validate plugin and used in the 
+	 * PHP. 
+	 *
+	 * @see http://docs.jquery.com/Plugins/Validation/Methods
+	 * @return Array
+	 */
+	public function getValidation() {
+		$options = array();
+		if($this->MinLength) $options['minlength'] = $this->MinLength;
+		if($this->MaxLength) $options['maxlength'] = $this->MinLength;
+		
+		return $options;
+	}
 }
 ?>

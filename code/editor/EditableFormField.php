@@ -177,13 +177,23 @@ class EditableFormField extends DataObject {
 	}
 	
 	/**
-	 * Return a FormField to appear on the front end
+	 * Return a FormField to appear on the front end. Implement on 
+	 * your subclass
+	 *
+	 * @return FormField
 	 */
-	function getFormField() {
+	public function getFormField() {
+		user_error("Please implement a getFormField() on your EditableFormClass "+ $this->ClassName, E_USER_ERROR);
 	}
 	
-	function getFilterField() {
-		
+	/**
+	 * Return the form field to appear on the filter form 
+	 * in the cms view
+	 *
+	 * @return FormField
+	 */
+	public function getFilterField() {
+		user_error("Please implement a getFilterField() on your EditableFormClass "+ $this->ClassName, E_USER_ERROR);
 	}
 	
 	/**
@@ -242,5 +252,17 @@ class EditableFormField extends DataObject {
     function CustomParameter() {
         return $this->CustomParameter;   
     }
+
+	/**
+	 * Return the validation information related to this field. This is 
+	 * interrupted as a JSON object for validate plugin and used in the 
+	 * PHP. 
+	 *
+	 * @see http://docs.jquery.com/Plugins/Validation/Methods
+	 * @return Array
+	 */
+	public function getValidation() {
+		return array();
+	}
 }
 ?>

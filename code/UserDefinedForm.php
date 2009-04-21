@@ -227,9 +227,18 @@ class UserDefinedForm extends Page {
 
 class UserDefinedForm_Controller extends Page_Controller {
 	
-	function init() {
-		Requirements::javascript(THIRDPARTY_DIR . '/prototype.js');
-		Requirements::javascript(THIRDPARTY_DIR . '/behaviour.js');
+	/**
+	 * Load all the custom jquery needed to run the custom 
+	 * validation 
+	 */
+	public function init() {
+		// block prototype validation
+		Validator::set_javascript_validation_handler('none');
+		
+		// load the jquery
+		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+		Requirements::javascript(THIRDPARTY_DIR . '/jquery/plugins/validate/jquery.validate.min.js');
+
 		parent::init();
 	}
 	
@@ -241,10 +250,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * @return Array
 	 */
 	public function index() {
-		if($this->Content && $this->Form()) {
+		if($this->Content && $form = $this->Form()) {
 			$hasLocation = stristr($this->Content, '$UserDefinedForm');
 			if($hasLocation) {
-				$content = str_ireplace('$UserDefinedForm', $this->Form()->forTemplate(), $this->Content);
+				$content = str_ireplace('$UserDefinedForm', $form->forTemplate(), $this->Content);
 				return array(
 					'Content' => $content,
 					'Form' => ""
@@ -268,31 +277,45 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return Form
 	 */
-	function Form() {
-		// Build fields
+	public function Form() {
 		$fields = new FieldSet();
-		$required = array();
-        
-        if(!$this->SubmitButtonText) {
-            $this->SubmitButtonText =  _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
-		}
-		foreach($this->Fields() as $field) {
-			$fieldToAdd = $field->getFormField();
-			if($field->CustomErrorMessage) {				
-				$fieldToAdd->setCustomValidationMessage($field->CustomErrorMessage);
-			}
-			
-			$fields->push($fieldToAdd);
-			if($field->Required) {
-				$required[] = $field->Name;	
-			}
-		}
+		$fieldValidation = array();
+		$fieldValidationRules = array();
 		
-		if(!isset($_SERVER['HTTP_REFERER'])) {
-			$_SERVER['HTTP_REFERER'] = "";
+		$this->SubmitButtonText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
+		
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$fieldToAdd = $field->getFormField();
+				$fieldValidationOptions = array();
+				
+				// Set the Error Messages
+				$errorMessage = sprintf(_t('Form.FIELDISREQUIRED').'.', strip_tags("'". ($field->Title ? $field->Title : $field->Name) . "'"));
+				$errorMessage = ($field->CustomErrorMessage) ? $field->CustomErrorMessage : $errorMessage;
+				$fieldToAdd->setCustomValidationMessage($errorMessage);
+				
+				// Is this field required
+				if($field->Required) {
+					$fieldValidation[$field->Name] = $errorMessage;
+					$fieldValidationOptions['required'] = true;
+				}
+				
+				// Add field to the form
+				$fields->push($fieldToAdd);
+				
+				// Ask our form field for some more information on hour it should be validated
+				$fieldValidationOptions = array_merge($fieldValidationOptions, $field->getValidation());
+				
+				// Check if we have need to update the global validation
+				if($fieldValidationOptions) {
+					$fieldValidationRules[$field->Name] = $fieldValidationOptions;
+				}
+			}
 		}
 		
 		$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+		
+		// Keep track of the referer
 		$fields->push( new HiddenField( "Referrer", "", $referer ) );
 				
 		// Build actions
@@ -304,11 +327,52 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->ShowClearButton) {
 			$actions->push(new ResetFormAction("clearForm"));
 		}
-		
-		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields($required));
+		// return the form
+		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields(array_keys($fieldValidation)));
 		$form->loadDataFrom($this->failover);
+		
+		$FormName = $form->FormName();
+		
+		$rules = $this->array2json($fieldValidationRules);
+		$messages = $this->array2json($fieldValidation);
+		
+		// set the custom script for this form
+		Requirements::customScript(<<<JS
+			(function($) {
+				$(document).ready(function() {
+					$("#$FormName").validate({
+						errorClass: "required",	
+						messages:
+							$messages
+						,
+						
+						rules: 
+						 	$rules
+					});
+				});
+			})(jQuery);
+JS
+);
 
 		return $form;
+	}
+	
+	/**
+	 * Convert a PHP array to a JSON string. We cannot use {@link Convert::array2json}
+	 * as it escapes our values with "" which appears to break the validate plugin
+	 *
+	 * @param Array array to convert
+	 * @return JSON 
+	 */
+	protected function array2json($array) {
+		foreach($array as $key => $value)
+			if(is_array( $value )) {
+				$result[] = "$key:" . $this->array2json($value);
+			} else {
+				$value = (is_bool($value)) ? $value : "\"$value\"";
+				$result[] = "$key:$value \n";
+			}
+		return (isset($result)) ? "{\n".implode( ', ', $result ) ."} \n": '';
 	}
 	
 	/**
