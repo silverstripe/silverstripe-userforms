@@ -6,6 +6,10 @@
  */
 class EditableFormHeading extends EditableFormField {
 	
+	static $db = array(
+		'Level' => 'Varchar'
+	);
+	
 	static $singular_name = 'Form heading';
 	
 	static $plural_name = 'Form headings';
