@@ -281,11 +281,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$fields = new FieldSet();
 		$fieldValidation = array();
 		$fieldValidationRules = array();
-		
+		$CustomDisplayRules = "";
+		$defaults = "";
 		$this->SubmitButtonText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
+			
 				$fieldToAdd = $field->getFormField();
 				$fieldValidationOptions = array();
 				
@@ -310,9 +312,58 @@ class UserDefinedForm_Controller extends Page_Controller {
 				if($fieldValidationOptions) {
 					$fieldValidationRules[$field->Name] = $fieldValidationOptions;
 				}
+				
+				// Is this Field Show by Default
+				if(!$field->ShowOnLoad) {
+					$defaults .= "$(\"#" . $field->Name . "\").hide();\n";
+				}
+
+				// Check for field dependencies / default
+				if($field->Dependencies()) {
+					
+					foreach($field->Dependencies() as $dependency) {
+						if(is_array($dependency) && isset($dependency['ConditionField']) && $dependency['ConditionField'] != "") {
+							// get the field which is effected
+							$formName = Convert::raw2sql($dependency['ConditionField']);
+							$formFieldWatch = DataObject::get_one("EditableFormField", "Name = '$formName'");
+							if(!$formFieldWatch) break;
+							
+							$fieldToWatch = "$(\"#Form_Form_".$dependency['ConditionField']."\")";
+							
+							// show or hide?
+							$view = (isset($dependency['Display']) && $dependency['Display'] == "Show") ? "show" : "hide";
+							$opposite = ($view == "show") ? "hide" : "show";
+
+							$Action = ($formFieldWatch->ClassName == "EditableTextField") ? "keyup" : "change";
+							
+							switch($dependency['ConditionOption']) {
+								case 'IsNotBlank':
+									$matches = '!= ""';
+									break;
+								case 'IsBlank':
+									$matches = '== ""';
+									break;
+								case 'HasValue':
+									$matches = '== "'. $dependency['Value'] .'"';
+									break;
+								default:
+									$matches = '!= "'. $dependency['Value'] .'"';
+									break;
+							}
+							// put it all together
+							$CustomDisplayRules .= $fieldToWatch.".$Action(function() {
+								if($(this).val() ". $matches ." ) {
+									$(\"#". $field->Name ."\").".$view."();
+								}
+								else {
+									$(\"#". $field->Name ."\").".$opposite."();
+								}
+							});";
+						}
+					}
+				}
 			}
 		}
-		
 		$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 		
 		// Keep track of the referer
@@ -332,14 +383,17 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$form->loadDataFrom($this->failover);
 		
 		$FormName = $form->FormName();
-		
+
+		// Set the Form Name
 		$rules = $this->array2json($fieldValidationRules);
 		$messages = $this->array2json($fieldValidation);
 		
+
 		// set the custom script for this form
 		Requirements::customScript(<<<JS
 			(function($) {
 				$(document).ready(function() {
+					$defaults
 					$("#$FormName").validate({
 						errorClass: "required",	
 						messages:
@@ -349,6 +403,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 						rules: 
 						 	$rules
 					});
+					$CustomDisplayRules
 				});
 			})(jQuery);
 JS
@@ -372,7 +427,7 @@ JS
 				$value = (is_bool($value)) ? $value : "\"$value\"";
 				$result[] = "$key:$value \n";
 			}
-		return (isset($result)) ? "{\n".implode( ', ', $result ) ."} \n": '';
+		return (isset($result)) ? "{\n".implode( ', ', $result ) ."} \n": '{}';
 	}
 	
 	/**

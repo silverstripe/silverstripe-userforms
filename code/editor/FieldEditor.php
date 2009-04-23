@@ -202,7 +202,7 @@ class FieldEditor extends FormField {
 		}
 		return false;
 	}
-	
+
 	function setHaveFormOptions($bool){
 		$this->haveFormOptions = $bool;
 	}

@@ -1,4 +1,5 @@
-<li class="$ClassName EditableFormField" id="$Name.Attr EditableItem_$Pos">
+<!-- JS Relys on EditableFormField as a class - and the 3 ids in this order - do not change -->
+<li class="$ClassName EditableFormField" id="$Name.Attr EditableItem_$Pos $BaseName">
 	<div class="fieldInfo">
 		<% if isReadonly %>
 			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
@@ -43,10 +44,27 @@
 					<% end_if %>
 				<% end_if %>
 			</ul>
-
+			
 			<% control ExtraOptions %>
 				$FieldHolder
 			<% end_control %>
+			
+			<div class="customRules">
+				<h4>Custom Rules</h4>
+				<select name="$Name.Attr[ShowOnLoad]">
+					<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
+					<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
+				</select>
+				<label class="left">Field On Default</label>
+				
+				<ul id="$Name.Attr-customRules">
+					<% control CustomRules %>
+						<li class="customRule">
+							<% include CustomRule %>
+						</li>
+					<% end_control %>
+				</ul>
+			</div>
 		</div>
 	<% end_if %>
 	

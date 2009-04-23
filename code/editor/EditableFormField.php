@@ -17,8 +17,9 @@ class EditableFormField extends DataObject {
 		"Required" => "Boolean",
 		"CanDelete" => "Boolean",
 		"CustomParameter" => "Varchar",
-		"OptionallyDisplay" => "Boolean",
-		"CustomErrorMessage" => "Varchar(255)"
+		"CustomErrorMessage" => "Varchar(255)",
+		"CustomRules" => "Text",
+		"ShowOnLoad" => "Boolean",
 	);
     
 	static $defaults = array(
@@ -99,6 +100,56 @@ class EditableFormField extends DataObject {
 	public function showExtraOptions() {
 		return true;
 	}
+	/**
+	 * Return the Custom Validation fields for this
+	 * field for the CMS
+	 *
+	 * @return array
+	 */
+	public function Dependencies() {
+		return ($this->CustomRules) ? unserialize($this->CustomRules) : array();
+	}
+	/**
+	 * Return the custom validation fields for the field
+	 * 
+	 * @return DataObjectSet
+	 */
+	public function CustomRules() {
+		$output = new DataObjectSet();
+		$fields = $this->Parent()->Fields();
+
+		// add the default add
+		$output->push(new ArrayData(array(
+			'Name' => $this->Name(),
+			'AddableOption' => true,
+			'Fields' => $fields
+		)));
+		
+		// check for existing ones
+		if($this->CustomRules) {
+			$rules = unserialize($this->CustomRules);
+			if($rules) {
+				foreach($rules as $rule => $data) {
+					// recreate all the field object to prevent caching
+					$outputFields = new DataObjectSet();
+					foreach($fields as $field) {
+						$new = clone $field;
+						$new->isSelected = ($new->Name == $data['ConditionField']) ? true : false;
+						$outputFields->push($new);
+					}
+					$output->push(new ArrayData(array(
+						'Name' => $this->Name(),
+						'Display' => $data['Display'],
+						'Fields' => $outputFields,
+						'ConditionField' => $data['ConditionField'],
+						'ConditionOption' => $data['ConditionOption'],
+						'Value' => $data['Value']
+					)));
+				}
+			}
+		}
+		return $output;
+	}
 	
 	function makeReadonly() {
 		$this->readonly = true;
@@ -117,8 +168,21 @@ class EditableFormField extends DataObject {
 		return "<input type=\"text\" class=\"text\" title=\"("._t('EditableFormField.ENTERQUESTION', 'Enter Question').")\" value=\"$titleAttr\" name=\"Fields[{$this->ID}][Title]\"$readOnlyAttr />";
 	}
 	
-	function Name() {
+	/**
+	 * Return the base name for this form field in the 
+	 * form builder
+	 *
+	 * @return String
+	 */
+	public function Name() {
 		return "Fields[".$this->ID."]";
+	}
+	
+	/**
+	 * @todo Fix this - shouldn't name be returning name?!?
+	 */
+	public function BaseName() {
+		return $this->Name;
 	}
 	
 	/**
@@ -140,6 +204,28 @@ class EditableFormField extends DataObject {
   		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;
 		$this->Name = $this->class.$this->ID;
 		$this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
+		$this->CustomRules = "";
+		$this->ShowOnLoad = (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
+		
+		// custom validation
+		if(isset($data['CustomRules'])) {
+			$rules = array();
+			foreach($data['CustomRules'] as $key => $value) {
+				if(is_array($value)) {
+					$fieldValue = (isset($value['Value'])) ? $value['Value'] : '';
+					if(isset($value['ConditionOption']) && $value['ConditionOption'] == "Blank" || $value['ConditionOption'] == "NotBlank") {
+						$fieldValue = "";
+					}
+					$rules[] = array(
+						'Display' => (isset($value['Display'])) ? $value['Display'] : "",
+						'ConditionField' => (isset($value['ConditionField'])) ? $value['ConditionField'] : "",
+						'ConditionOption' => (isset($value['ConditionOption'])) ? $value['ConditionOption'] : "",
+						'Value' => $fieldValue
+					);
+				}
+			}
+			$this->CustomRules = serialize($rules);
+		}
 		$this->write();
 	}
 	
@@ -148,6 +234,7 @@ class EditableFormField extends DataObject {
 		$baseName = "Fields[$this->ID]";
 		$extraOptions = new FieldSet();
 		
+		// Is this field required
 		if(!$this->Parent()->hasMethod('hideExtraOption')){
 			$extraOptions->push(new CheckboxField($baseName . "[Required]", _t('EditableFormField.REQUIRED', 'Required?'), $this->Required));
 		}
@@ -167,12 +254,9 @@ class EditableFormField extends DataObject {
 			$extraOptions = $extraOptions->makeReadonly();		
 		}
 		
-		// support for optionally display field
-		// $extraOptions->push(new CheckboxField($baseName ."[OptionallyDisplay]", _t('EditableFormField.OPTIONALLYDISPLAY', 'Optionally Display Field'), $this->OptionallyDisplay));
-		
-		// support for custom error messaging
+		// custom error messaging
 		$extraOptions->push(new TextField($baseName.'[CustomErrorMessage]', _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage));
-		
+
 		return $extraOptions;
 	}
 	
@@ -201,12 +285,7 @@ class EditableFormField extends DataObject {
 	 * @todo: escape the string
 	 */
 	function filterClause( $value ) {
-		// Not filtering on this field
-		
-		if( $value == '-1' ) 
-			return "";
-		else
-			return "`{$this->name}` = '$value'";
+		return ($value == '-1') ? "" : "`{$this->name}` = '$value'";
 	}
 	
 	function showInReports() {

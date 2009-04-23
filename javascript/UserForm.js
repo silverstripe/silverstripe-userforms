@@ -55,6 +55,13 @@
 				success: function(msg){
 					$('#Fields_fields').append(msg);
 					statusMessage(ss.i18n._t('UserForms.ADDEDNEWFIELD', 'Added New Field'));
+					
+					//update the internal lists
+					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
+
+					//$("#Fields_fields select.fieldOption").each(function(i, domElement) {
+					//	$(domElement).append("<option='"+ name[2] +"'>New "+ name[2] + "</option>");
+					//});
 				},
 				
 				// error creating new field
@@ -62,8 +69,22 @@
 					statusMessage(ss.i18n._t('UserForms.ERRORCREATINGFIELD', 'Error Creating Field'));
 				} 
 			});
+
 		});
-		
+		/** 
+		 * Upon renaming a field we should go through and rename all the
+		 * fields in the select fields to use this new field title. We can
+		 * just worry about the title text - don't mess around with the keys
+		 */
+		$('.EditableFormField .fieldInfo .text').livequery('change', function() {
+			var value = $(this).val();
+			var name = $(this).parents("li").attr("id").split(' ');
+			$("#Fields_fields select.fieldOption option").each(function(i, domElement) {
+				if($(domElement).val() == name[2]) {
+					$(domElement).text(value);	
+				}
+			});
+		})
 		/**
 		 * Show the more options popdown. Or hide it if we 
 		 * currently have it open
@@ -93,6 +114,21 @@
 		 * Delete a field from the user defined form
 		 */
 		$(".EditableFormField .delete").livequery('click', function() {
+			// remove all the rules with relate to this field
+			var text = $(this).parents("li").find(".fieldInfo .text").val();
+			$("#Fields_fields .customRules select.fieldOption option").each(function(i, domElement) {
+				if($(domElement).text() == text) {
+					
+					// check to see if this is selected. If it is then just remove the whole rule
+					if($(domElement).parent('select.customRuleField').val() == $(domElement).val()) {
+						$(domElement).parents('li.customRule').remove();
+					}
+					// otherwise remove the option
+					else {
+						$(domElement).remove();	
+					}
+				}
+			});
 			$(this).parents(".EditableFormField").remove();
 			return false;
 		});
@@ -197,6 +233,57 @@
 					});
 		    	}
 			});
+		});
+		
+		/**
+		 * Custom Rules Interface
+		 */
+		$(".customRules .conditionOption").livequery('change', function(){
+			var valueInput = $(this).siblings(".ruleValue");
+			if($(this).val() == "ValueNot" || $(this).val() == "HasValue") {
+				valueInput.show();
+			}
+			else {
+				valueInput.hide();
+			}
+		});
+		/**
+		 * Delete a custom rule
+		 */
+		$(".customRules .deleteCondition").livequery('click', function() {
+			$(this).parent("li").fadeOut().remove();
+		});
+		/**
+		 * Adding a custom rule to a given form
+		 */
+		$(".customRules .addCondition").livequery('click', function() {
+			
+			// Give the user some feedback
+			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
+			// get the parent li which to duplicate
+			var parent = $(this).parent("li");
+			var grandParent = parent.parent("ul");
+			var newCondition = parent.clone();
+			
+			// remove add icon
+			newCondition.find(".addCondition").hide();
+			newCondition.find("a.hidden").removeClass("hidden");
+
+			newCondition.children(".customRuleField").each(function(i, domElement) {
+				// go through and fix names. We need to insert an id number into the middle of them at least
+				$(domElement).val($(parent).find("select").eq(i).val());
+				var currentName = domElement.name.split("][");
+				currentName[3] = currentName[2];
+				currentName[2] = grandParent.children().size() + 1;
+				domElement.name = currentName.join("][");
+			});
+			grandParent.append(newCondition);
+			
+			// clear fields
+			parent.each(function(i, domElement) {
+				$(domElement).find(".customRuleField").val("");
+			});
+			return false;
 		});
 	});
 })

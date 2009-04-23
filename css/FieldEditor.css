@@ -113,6 +113,9 @@
 						padding: 3px 0;
 						overflow: hidden;
 					}
+				#Fields_fields .EditableFormField .extraOptions a {
+					background: none;
+				}
 				#Fields_fields .EditableFormField .extraOptions input {
 					font-size: 11px;
 					padding: 2px;
@@ -137,7 +140,37 @@
 					margin: 0 8px 0 0;
 				}
 			
-	
+		/* CUSTOM RULES */
+		#Fields_fields .customRules {
+			clear: both;
+		}
+			#Fields_fields .customRules li {
+				clear: both;
+			}
+				#Fields_fields .customRules li.firstField {
+					padding-bottom: 5px;
+					margin: 0 5px;
+					border-bottom: 1px solid #bbb;
+				}
+				#Fields_fields .customRules label {
+					float: left;
+					margin: 0;
+					padding: 2px 4px;
+					font-size: 11px;
+				}
+				#Fields_fields .customRules select {
+					float: left;
+					font-size: 11px;
+					width: 120px;
+					margin-right: 4px;
+				}
+				#Fields_fields .customRules a {
+					background: none;
+					width: 20px;
+					float: left;
+				}
+				
+		/* HIDE */
 		#Fields_fields li.EditableFormField .hidden {
 			display: none;
 		}
