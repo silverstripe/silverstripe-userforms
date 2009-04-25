@@ -7,30 +7,19 @@
  */
 class EditableCheckbox extends EditableFormField {
 	
-	// Could remove this and just use value
-	static $db = array(
-		"Checked" => "Boolean"
-	);
-	
 	static $singular_name = 'Checkbox';
+	
 	static $plural_name = 'Checkboxes';
 	
-	function CheckboxField() {
-		$checkbox = new CheckboxField("Fields[".$this->ID."][Default]", "Checked by default", $this->getField('Default'));
-		
-		if( $this->readonly )
-			$checkbox = $checkbox->performReadonlyTransformation();
-		
-		return $checkbox->FieldHolder();
+	function ExtraOptions() {
+		$fields = new FieldSet(
+			new CheckboxField("Fields[$this->ID][CustomSettings][Default]", _t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?'), $this->getSetting('Default'))
+		);
+		$fields->merge(parent::ExtraOptions());
+		return $fields;
 	}
-	
-	function populateFromPostData( $data ) {
-		$this->setField('Checked', isset($data['Checked']) ? $data['Checked'] : null);
-		parent::populateFromPostData( $data );
-	}
-	
 	function getFormField() {
-		return new CheckboxField( $this->Name, $this->Title, $this->getField('Default') );
+		return new CheckboxField( $this->Name, $this->Title, $this->getSetting('Default'));
 	}
 	
 	function getFilterField() {
