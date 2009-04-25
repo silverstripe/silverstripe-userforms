@@ -53,7 +53,7 @@
 				<h4>Custom Rules</h4>
 				<select name="$Name.Attr[ShowOnLoad]">
 					<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
-					<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
+					<option value="Hide" <% if ShowOnLoad %><% else %><% if Title %><% else %>selected="selected"<% end_if %><% end_if %>><% _t('HIDE', 'Hide') %></option>
 				</select>
 				<label class="left">Field On Default</label>
 				
