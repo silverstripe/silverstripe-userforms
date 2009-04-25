@@ -20,6 +20,7 @@ class EditableFormField extends DataObject {
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
 		"ShowOnLoad" => "Boolean",
+		"CustomSettings" => "Text"
 	);
     
 	static $defaults = array(
@@ -70,6 +71,43 @@ class EditableFormField extends DataObject {
 	
 	function ClassName() {
 		return $this->class;
+	}
+	
+	/**
+	 * To prevent having tables for each fields minor settings we store it as 
+	 * a serialized array in the database. 
+	 * 
+	 * @return Array Return all the Settings
+	 */
+	protected function getFieldSettings() {
+		return (isset($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
+	}
+	
+	/**
+	 * Set the custom settings for this field as we store the minor details in
+	 * a serialized array in the database
+	 *
+	 * @param Array the custom settings
+	 */
+	protected function setFieldSettings($settings = array()) {
+		$this->CustomSettings = serialize($settings);
+	}
+	
+	/**
+	 * Return just one custom setting or empty string if it does
+	 * not exist
+	 *
+	 * @param String Value to use as key
+	 * @return String
+	 */
+	protected function getSetting($setting) {
+		$settings = $this->getFieldSettings();
+		if(isset($settings) && count($settings) > 0) {
+			if(isset($settings[$setting])) {
+				return $settings[$setting];
+			}
+		}
+		return '';
 	}
 	
 	/**
@@ -205,8 +243,14 @@ class EditableFormField extends DataObject {
 		$this->Name = $this->class.$this->ID;
 		$this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
 		$this->CustomRules = "";
+		$this->CustomSettings = "";
 		$this->ShowOnLoad = (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
 		
+		// custom settings
+		if(isset($data['CustomSettings'])) {
+			$this->setFieldSettings($data['CustomSettings']);
+		}
+
 		// custom validation
 		if(isset($data['CustomRules'])) {
 			$rules = array();

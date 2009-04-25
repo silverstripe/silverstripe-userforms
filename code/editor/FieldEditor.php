@@ -66,10 +66,9 @@ class FieldEditor extends FormField {
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
-				$title = trim(str_ireplace("Editable", "", $title));
 				if($title != 'MultipleOptionField') {
 					$output->push(new ArrayData(array(
-						'ClassName' => $title,
+						'ClassName' => $field,
 						'Title' => "$niceTitle"
 					)));
 				}
@@ -157,8 +156,8 @@ class FieldEditor extends FormField {
 			$highestSort = DB::query("SELECT MAX(Sort) FROM EditableFormField WHERE ParentID = '$parentID'");
 			$sort = $highestSort->value() + 1;
 
-			$className = "Editable" . ucfirst($_REQUEST['Type']);
-			$name = $this->name;
+			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
+
 			if(is_subclass_of($className, "EditableFormField")) {
 				$field = new $className();
 				$field->write();
