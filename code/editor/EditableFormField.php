@@ -24,7 +24,8 @@ class EditableFormField extends DataObject {
 	);
     
 	static $defaults = array(
-		"CanDelete" => "1"
+		"CanDelete" => "1",
+		"ShowOnLoad" => "1"
 	);
     
 	static $has_one = array(
