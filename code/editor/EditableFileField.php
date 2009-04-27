@@ -27,15 +27,8 @@ class EditableFileField extends EditableFormField {
 	
 	static $plural_names = 'File fields';
 	
-	function getFormField() {
-		if($field = parent::getFormField()) {
-			return $field;
-		}
-		return new FileField($this->Name, $this->Title, $this->getField('Default'));
-	}
-	
-	function getSimpleFormField(){
-		return new FileField($this->Name, $this->Title, $this->getField('Default'));
+	public function getFormField() {
+		return new FileField($this->Name, $this->Title);
 	}
 }
 ?>

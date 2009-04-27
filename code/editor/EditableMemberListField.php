@@ -6,36 +6,26 @@
  */
 class EditableMemberListField extends EditableFormField {
 	
-	static $has_one = array(
-		'Group' => 'Group'
-	);
-	
 	static $singular_name = 'Member list field';
+	
 	static $plural_name = 'Member list fields';
 	
 	public function DefaultField() {
-		// return new TreeDropdownField( "Fields[{$this->ID}][GroupID]", 'Group' );
 		
 		$groups = DataObject::get('Group');
 		
 		foreach( $groups as $group )
 			$groupArray[$group->ID] = $group->Title;
 		
-		return new DropdownField( "Fields[{$this->ID}][GroupID]", 'Group', $groupArray, $this->GroupID );
-	}
-	
-	public function populateFromPostData( $data ) {
-		$this->GroupID = $data['GroupID'];
-		
-		parent::populateFromPostData( $data );
+		return new DropdownField( "Fields[{$this->ID}][CustomSetting][GroupID]", 'Group', $groupArray, $this->getSetting('GroupID'));
 	}
 	
 	function getFormField() {
-		return new DropdownField( $this->Name, $this->Title, Member::mapInGroups( $this->GroupID ) );
+		return new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting($this->GroupID)));
 	}
 	
-	function getValueFromData( $data ) {
-		$value = $data[$this->Name];
+	function getValueFromData($data) {
+		$value = Convert::raw2sql($data[$this->Name]);
 		
 		$member = DataObject::get_one('Member', "Member.ID = {$value}");
 		return $member->getName();
