@@ -27,8 +27,6 @@ class UserDefinedForm extends Page {
 	 * @var Array Fields on the user defined form page. 
 	 */
 	static $db = array(
-		"EmailOnSubmit" => "Boolean",
-		"EmailOnSubmitSubject" => "Varchar(200)",
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean"
@@ -473,14 +471,6 @@ JS
 			if(!empty($data[$field->Name])){
 
 				switch($field->ClassName){	
-					case "EditableEmailField" : 
-						if($field->SendCopy){
-							$recipientAddresses[] = $data[$field->Name];
-							$sendCopy = true;
-							$values[$field->Title] = '<a style="white-space: nowrap" href="mailto:'.$data[$field->Name].'">'.$data[$field->Name].'</a>';
-						}	
-					break;
-					
 					case "EditableFileField" :
 						if(isset($_FILES[$field->Name])) {
 							
@@ -548,18 +538,6 @@ JS
 					}
 				}
 				$email->send();
-			}
-		}
-		
-		// send a copy to the author of the form
-		if($sendCopy) {
-			$emailToSubmiter = new UserDefinedForm_SubmittedFormEmailToSubmitter($submittedFields);
-			$emailToSubmiter->setSubject($this->EmailOnSubmitSubject);
-			
-			foreach($recipientAddresses as $addr) {
-				$emailToSubmiter->setBody($this->EmailMessageToSubmitter);
-				$emailToSubmiter->setTo($addr);
-				$emailToSubmiter->send();
 			}
 		}
 		
