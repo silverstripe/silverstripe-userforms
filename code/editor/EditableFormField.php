@@ -312,7 +312,7 @@ class EditableFormField extends DataObject {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		user_error("Please implement a getFormField() on your EditableFormClass "+ $this->ClassName, E_USER_ERROR);
+		user_error("Please implement a getFormField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
 	}
 	
 	/**
@@ -322,7 +322,7 @@ class EditableFormField extends DataObject {
 	 * @return FormField
 	 */
 	public function getFilterField() {
-		user_error("Please implement a getFilterField() on your EditableFormClass "+ $this->ClassName, E_USER_ERROR);
+		user_error("Please implement a getFilterField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
 	}
 	
 	/**
