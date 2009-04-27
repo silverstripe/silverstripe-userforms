@@ -9,10 +9,6 @@
 
 class EditableLiteralField extends EditableFormField {
 	
-	static $db = array(
-		'Content' => 'Text'
-	);
-	
 	static $singular_name = 'HTML Block';
 	
 	static $plural_name = 'HTML Blocks';
@@ -22,19 +18,14 @@ class EditableLiteralField extends EditableFormField {
 		$baseName = "Fields[$this->ID]";
 		
 		$extraFields = new FieldSet();
-		$extraFields->push(new TextareaField($baseName . "[Content]", "Text", 4, 20, $this->Content));
+		$extraFields->push(new TextareaField($baseName . "[CustomSettings][Content]", "Text", 4, 20, $this->getSetting('Content')));
 		
 		return $extraFields;		
 	}
-	
-	function populateFromPostData($data) {
-		$this->Content = $data['Content'];
-		parent::populateFromPostData($data);
-	}
-	
-	function createField() {
+
+	function getFormField() {
 		return new LiteralField("LiteralField[$this->ID]", 
-			"<div class='field text'><label class='left'>$this->Title</label><div class='middleColumn literalFieldArea'>". $this->Content."</div></div>");
+			"<div class='field text'><label class='left'>$this->Title</label><div class='middleColumn literalFieldArea'>". $this->getSetting('Content') ."</div></div>");
 	}
 }
 ?>

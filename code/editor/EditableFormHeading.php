@@ -5,26 +5,16 @@
  * @subpackage userforms
  */
 class EditableFormHeading extends EditableFormField {
-	
-	static $db = array(
-		'Level' => 'Varchar'
-	);
-	
+
 	static $singular_name = 'Form heading';
 	
 	static $plural_name = 'Form headings';
 	
-	function populateFromPostData($data) {
-		$this->Level = (isset($data['Level'])) ? $data['Level'] : 2;
-		
-		parent::populateFromPostData($data);
-	}
-	
 	function ExtraOptions() {
-		$levels = array('1','2','3','4','5','6');
-		$default = ($this->Level) ? $this->Level : 2;
+		$levels = array('1' => '1','2' => '2','3' => '3','4' => '4','5' => '5','6' => '6');
+		$level = ($this->getSetting('Level')) ? $this->getSetting('Level') : 3;
 		$extraFields = new FieldSet(
-			new DropdownField("Fields[$this->ID][Level]", _t('EditableFormHeading.LEVEL', 'Select Heading Level'), $levels, $default)
+			new DropdownField("Fields[$this->ID][CustomSettings][Level]", _t('EditableFormHeading.LEVEL', 'Select Heading Level'), $levels, $level)
 		);
 
 		if($this->readonly) {
@@ -34,7 +24,7 @@ class EditableFormHeading extends EditableFormField {
 	}
 	
 	function getFormField() {
-		$labelField = new HeaderField('FormHeadingLabel',$this->Title, $this->Level);
+		$labelField = new HeaderField('FormHeadingLabel',$this->Title, $this->getSetting('Level'));
 		$labelField->addExtraClass('FormHeading');
 		
 		return $labelField;
