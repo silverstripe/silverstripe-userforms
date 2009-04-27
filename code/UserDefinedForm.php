@@ -579,7 +579,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
-		'EmailBody' => 'Text'
+		'EmailBody' => 'HTMLText'
 	);
 	
 	static $has_one = array(
