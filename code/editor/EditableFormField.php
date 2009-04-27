@@ -101,7 +101,7 @@ class EditableFormField extends DataObject {
 	 * @param String Value to use as key
 	 * @return String
 	 */
-	protected function getSetting($setting) {
+	public function getSetting($setting) {
 		$settings = $this->getFieldSettings();
 		if(isset($settings) && count($settings) > 0) {
 			if(isset($settings[$setting])) {
