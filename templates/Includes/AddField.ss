@@ -8,5 +8,5 @@
 		<% end_control %>
 	</select>
 	
-	<input type="submit" class="submit" value="<% _t('ADD', 'Add') %>" /> 
+	<input type="submit" class="action" value="<% _t('ADD', 'Add') %>" /> 
 </div>
