@@ -197,6 +197,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 			foreach($this->Fields() as $field) {
 			
 				$fieldToAdd = $field->getFormField();
+				
+				if(!$fieldToAdd) break;
+				
 				$fieldValidationOptions = array();
 				
 				// Set the Error Messages
@@ -368,8 +371,8 @@ JS
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->Title;
 					
-			if($field->hasMethod( 'getValueFromData' )) {
-				$submittedField->Value = $field->getValueFromData( $data );
+			if($field->hasMethod('getValueFromData')) {
+				$submittedField->Value = $field->getValueFromData($data);
 			}
 			else {
 				if(isset($data[$field->Name])) $submittedField->Value = $data[$field->Name];
