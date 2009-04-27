@@ -31,8 +31,8 @@
 		 * area. the type information should all be on this object
 		 */
 		
-		$("div.FieldEditor .MenuHolder .submit").livequery('click',function() {
-			
+		$("div.FieldEditor .MenuHolder .action").livequery('click',function() {
+
 			// if this form is readonly...
 			if($("#Fields").hasClass('readonly')) return false;
 			
@@ -44,7 +44,7 @@
 			var length = $(".FieldInfo").length + 1;
 			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
 			var type = $(this).siblings("select").val();
-
+	
 			//send ajax request to the page
 			$.ajax({
 				type: "GET",
