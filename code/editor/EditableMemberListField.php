@@ -21,14 +21,14 @@ class EditableMemberListField extends EditableFormField {
 	}
 	
 	function getFormField() {
-		return new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting($this->GroupID)));
+		return ($this->getSetting($this->GroupID)) ? new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting($this->GroupID))) : false;
 	}
 	
 	function getValueFromData($data) {
 		$value = Convert::raw2sql($data[$this->Name]);
 		
 		$member = DataObject::get_one('Member', "Member.ID = {$value}");
-		return $member->getName();
+		return ($member) ? $member->getName() : "";
 	}
 }
 ?>
