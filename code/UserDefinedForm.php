@@ -80,9 +80,7 @@ class UserDefinedForm extends Page {
 	
 		// text to show on complete
 		$onCompleteFieldSet = new FieldSet(
-			new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this ),
-			new TextField("EmailOnSubmitSubject", _t('UserDefinedForm.ONSUBMITSUBJECT', 'Email Subject')),
-			new HtmlEditorField( "EmailMessageToSubmitter", _t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', 'Email message to submitter'),3,"",_t('UserDefinedForm.EMAILMESSAGETOSUBMITTER', $this->EmailMessageToSubmitter), $this )
+			new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this )
 		);
 		
 		$fields->addFieldsToTab("Root.Content."._t('UserDefinedForm.ONCOMPLETE','On complete'), $onCompleteFieldSet);
