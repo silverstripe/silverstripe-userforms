@@ -1,6 +1,3 @@
-<div class="reportfilter">
-	$FilterForm
-</div>
 <div class="reports" id="FormSubmissions">
 
 	<% if Submissions %>

@@ -315,24 +315,6 @@ class EditableFormField extends DataObject {
 		user_error("Please implement a getFormField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
 	}
 	
-	/**
-	 * Return the form field to appear on the filter form 
-	 * in the cms view
-	 *
-	 * @return FormField
-	 */
-	public function getFilterField() {
-		user_error("Please implement a getFilterField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
-	}
-	
-	/**
-	 * Return an evaluation appropriate for a filter clause
-	 * @todo: escape the string
-	 */
-	function filterClause( $value ) {
-		return ($value == '-1') ? "" : "`{$this->name}` = '$value'";
-	}
-	
 	function showInReports() {
 		return true;
 	}

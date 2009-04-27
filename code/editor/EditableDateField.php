@@ -12,15 +12,6 @@ class EditableDateField extends EditableFormField {
 	
 	static $plural_name = 'Date fields';
 	
-	function DefaultField() {
-		$dmyField = new CalendarDateField( "Fields[{$this->ID}][Default]", "", $this->getField('Default') );
-	
-		if( $this->readonly )
-			$dmyField = $dmyField->performReadonlyTransformation();
-			
-		return $dmyField;
-	}
-	
 	function populateFromPostData($data) {
 		$fieldPrefix = 'Default-';
 		

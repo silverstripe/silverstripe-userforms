@@ -16,10 +16,6 @@ class EditableEmailField extends EditableFormField {
 		return new EmailField($this->Name, $this->Title);
 	}
 	
-	function getFilterField() {
-		return $this->createField(true);
-	}
-	
 	/**
 	 * Return the validation information related to this field. This is 
 	 * interrupted as a JSON object for validate plugin and used in the 

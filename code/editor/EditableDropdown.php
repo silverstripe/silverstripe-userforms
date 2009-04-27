@@ -13,21 +13,15 @@ class EditableDropdown extends EditableMultipleOptionField {
 	static $plural_name = 'Dropdowns';
 
 	
-	function createField($asFilter = false) {
+	function getFormField($asFilter = false) {
 		$optionSet = $this->Options();
 		$options = array();
-		
-		if($asFilter) {
-			$options['-1'] = "(Any)";
+		if($optionSet) {
+			foreach( $optionSet as $option ) {
+				$options[$option->Title] = $option->Title;
+			}
 		}
-		$defaultOption = '-1';
-		
-		foreach( $optionSet as $option ) {
-			$options[$option->Title] = $option->Title;
-			if($option->getField('Default') && !$asFilter) $defaultOption = $option->Title;
-		}
-		
-		return new DropdownField( $this->Name, $this->Title, $options, $defaultOption );	
+		return new DropdownField( $this->Name, $this->Title, $options);	
 	}
 
 }

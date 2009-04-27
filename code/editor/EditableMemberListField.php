@@ -10,16 +10,6 @@ class EditableMemberListField extends EditableFormField {
 	
 	static $plural_name = 'Member list fields';
 	
-	public function DefaultField() {
-		
-		$groups = DataObject::get('Group');
-		
-		foreach( $groups as $group )
-			$groupArray[$group->ID] = $group->Title;
-		
-		return new DropdownField( "Fields[{$this->ID}][CustomSetting][GroupID]", 'Group', $groupArray, $this->getSetting('GroupID'));
-	}
-	
 	function getFormField() {
 		return ($this->getSetting($this->GroupID)) ? new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting($this->GroupID))) : false;
 	}

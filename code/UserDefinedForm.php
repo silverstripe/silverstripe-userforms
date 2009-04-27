@@ -89,93 +89,7 @@ class UserDefinedForm extends Page {
 		
 		return $fields;
 	}
-	
-	/**
-	 * Filter the Submissions page form
-	 * 
-	 * @return Form
-	 */
-	public function FilterForm() {
 
-		$fields = new FieldSet();
-		$required = array();
-		
-		foreach($this->Fields() as $field) {
-			$fields->push($field->getFilterField());
-		}
-		
-		$actions = new FieldSet( 
-			new FormAction("filter", _t('UserDefinedForm.SUBMIT', 'Submit'))
-		);
-		
-		return new Form( $this, "Form", $fields, $actions );
-	}
-	
-	/**
-	 * Filter the submissions by the given criteria
-	 *
-	 * @param Array the filter data
-	 * @param Form the form used
-	 * @return Array|String
-	 */
-	public function filter( $data, $form ) {
-		
-		$filterClause = array( "`SubmittedForm`.`ParentID` = '{$this->ID}'" );	
-		$keywords = preg_split( '/\s+/', $data['FilterKeyword'] );	
-		$keywordClauses = array();
-		
-		// combine all keywords into one clause
-		foreach($keywords as $keyword) {
-		
-			// escape %, \ and _ in the keyword. These have special meanings in a LIKE string
-			$keyword = preg_replace( '/([%_])/', '\\\\1', addslashes( $keyword ) );
-			$keywordClauses[] = "`Value` LIKE '%$keyword%'";	
-		}
-		
-		if(count($keywordClauses) > 0) {
-			$filterClause[] = "( " . implode( ' OR ', $keywordClauses ) . ")";
-			$searchQuery = 'keywords \'' . implode( "', '", $keywords ) . '\' ';
-		}
-		
-		$fromDate = addslashes( $data['FilterFromDate'] );
-		$toDate = addslashes( $data['FilterToDate'] );
-		
-		// use date objects to convert date to value expected by database
-		if( ereg('^([0-9]+)/([0-9]+)/([0-9]+)$', $fromDate, $parts) )
-			$fromDate = $parts[3] . '-' . $parts[2] . '-' . $parts[1];
-			
-		if( ereg('^([0-9]+)/([0-9]+)/([0-9]+)$', $toDate, $parts) )
-			$toDate = $parts[3] . '-' . $parts[2] . '-' . $parts[1];
-			
-		if( $fromDate ) {
-			$filterClause[] = "`SubmittedForm`.`Created` >= '$fromDate'";
-			$searchQuery .= 'from ' . $fromDate . ' ';
-		}
-			
-		if( $toDate ) {
-			$filterClause[] = "`SubmittedForm`.`Created` <= '$toDate'";
-			$searchQuery .= 'to ' . $toDate;
-		}
-		
-		$submittedValues = DataObject::get( 'SubmittedFormField', implode( ' AND ', $filterClause ), "", "INNER JOIN `SubmittedForm` ON `SubmittedFormField`.`ParentID`=`SubmittedForm`.`ID`" );
-	
-		if( !$submittedValues || $submittedValues->Count() == 0 )
-		        return _t('UserDefinedForm.NORESULTS', 'No matching results found');
-			
-		$submissions = $submittedValues->groupWithParents( 'ParentID', 'SubmittedForm' );
-		
-		if( !$submissions || $submissions->Count() == 0 )
-		        return _t('UserDefinedForm.NORESULTS', 'No matching results found');
-		
-		return $submissions->customise( 
-			array( 'Submissions' => $submissions )
-		)->renderWith( 'SubmittedFormReportField_Reports' );
-	}
-	
-	function ReportFilterForm() {
-		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
-	}
-	
 	/**
 	 * Called on before delete remove all the fields from the database
 	 */
@@ -263,11 +177,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			'Form' => $this->Form
 		);
 	}
-	
-	function ReportFilterForm() {
-		return new SubmittedFormReportField_FilterForm( $this, 'ReportFilterForm' );
-	}
-	
+
 	/**
 	 * User Defined Form. Feature of the user defined form is if you want the
 	 * form to appear in a custom location on the page you can use $UserDefinedForm 
@@ -626,30 +536,6 @@ class UserDefinedForm_SubmittedFormEmail extends Email {
 
 	function __construct() {
 		parent::__construct();
-	}
-}
-
-/**
- * Email that gets sent to submitter when a submission is made.
- *
- * @package userforms
- */
-class UserDefinedForm_SubmittedFormEmailToSubmitter extends Email {
-	protected $ss_template = "SubmittedFormEmailToSubmitter";
-	protected $from = '$Sender.Email';
-	protected $to = '$Recipient.Email';
-	protected $subject = 'Submission of form';
-	protected $data;
-	
-	function __construct($values = null) {
-		$this->subject = _t('UserDefinedForm_SubmittedFormEmail.EMAILSUBJECT', 'Submission of form');
-		
-		parent::__construct();
-		$this->data = $values;
-	}
-	
-	function Data() {
-		return $this->data;
 	}
 }
 

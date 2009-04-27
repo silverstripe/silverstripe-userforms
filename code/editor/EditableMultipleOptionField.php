@@ -6,7 +6,7 @@
  * one of these directly, rather you would instantiate a subclass
  * such as EditableDropdownField
  *
- * @todo Make it would make more sense to have dropdownfield and
+ * @todo Maybe it would make more sense to have dropdownfield and
  * 			checkboxset just transformations on this class
  *
  * @package userforms
@@ -117,44 +117,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		return $this->createField();
-	}
-	
-	/**
-	 * Return the form field as a field suitable for insertion 
-	 * into the filter form
-	 *
-	 * @return FormField
-	 */
-	public function getFilterField() {
-		return $this->createField(true);
-	}
-	
-	/**
-	 * Return the correct form field for this object. Note this
-	 * does a transformation between being a field on the form and
-	 * a field in the filter search form
-	 * 
-	 * This should be extended on your subclass
-	 *
-	 * @param bool - Filter Field?
-	 * @return UserError - You should implement it on your subclass
-	 */
-	public function createField($filter = false) {
-		return user_error('Please implement createField() on '. $this->class, E_USER_ERROR);
-	}
-	
-	/**
-	 * Checkbox to show if this option is the default option selected 
-	 * in the form  
-	 *
-	 * @return HTML
-	 */
-	public function DefaultSelect() {
-		$disabled = ($this->readonly) ? " disabled=\"disabled\"" : '';
-		$default = ($this->Parent()->getField('Default') == $this->ID) ? " checked=\"checked\"" : '';
-
-		return "<input class=\"radio\" type=\"radio\" name=\"Fields[{$this->ParentID}][Default]\" value=\"{$this->ID}\"".$disabled.$default." />";
+		return user_error('Please implement getFormField() on '. $this->class, E_USER_ERROR);
 	}
 }
 ?>

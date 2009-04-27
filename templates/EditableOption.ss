@@ -1,6 +1,5 @@
 <li>
 	<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of options') %>" />
-	$DefaultSelect
 	<input type="text" name="$Name.Attr[Title]" value="$Title" />
 	<input type="hidden" class="sortOptionHidden hidden" name="$Name[Sort]" value="$Sort" />
 	
