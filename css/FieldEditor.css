@@ -6,34 +6,28 @@
 /* Add a Field Menu 
 ---------------------------------------- */
 .MenuHolder {
-	color: #999;	
+	color: #999;
+	border: 1px solid #ddd;
+	background: #f4f4f4;
+	overflow: hidden;
+	padding: 4px 10px;
 }
-	.MenuHolder ul {
-		background: #e7e7e7;
-		border: 1px solid #c6c6c6;
-		padding: 8px;
+	.MenuHolder h2 {
+		float: left;
 	}
-		.MenuHolder li {
-			display: inline;
-			font-size: 11px;
-			padding: 2px 0;
-		}
-			.MenuHolder li a {
-				padding: 5px 4px 3px 4px;
-				font-weight: bold;
-				border: 1px solid transparent;
-				text-decoration: none;
-			}
-				.MenuHolder li a:hover {
-					background: #f4f4f4;
-					border: 1px solid #c6c6c6;
-				}
-			.MenuHolder li.addField {
-				background: url(../../cms/images/add.gif) no-repeat center left;
-				padding-left: 20px;
-				text-transform: uppercase;
-			}
-
+	
+	.MenuHolder select {
+		float: left;
+		width: 240px;
+		margin: 7px 0 0 8px;
+		font-size: 11px;
+	}
+	
+	.MenuHolder .submit {
+		float: left;
+		margin: 7px 0 0 4px;
+		font-size: 11px;
+	}
 /* Options / Settings Area 
 ---------------------------------------- */
 .FormOptions {

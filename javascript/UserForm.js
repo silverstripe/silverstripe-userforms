@@ -31,7 +31,7 @@
 		 * area. the type information should all be on this object
 		 */
 		
-		$("div.FieldEditor ul.Menu li a").livequery('click',function() {
+		$("div.FieldEditor .MenuHolder .submit").livequery('click',function() {
 			
 			// if this form is readonly...
 			if($("#Fields").hasClass('readonly')) return false;
@@ -43,8 +43,8 @@
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addfield';
 			var length = $(".FieldInfo").length + 1;
 			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
-			var type = $(this).attr("ID");
-			
+			var type = $(this).siblings("select").val();
+
 			//send ajax request to the page
 			$.ajax({
 				type: "GET",
@@ -69,7 +69,7 @@
 					statusMessage(ss.i18n._t('UserForms.ERRORCREATINGFIELD', 'Error Creating Field'));
 				} 
 			});
-
+			return false;
 		});
 		/** 
 		 * Upon renaming a field we should go through and rename all the

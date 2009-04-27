@@ -66,7 +66,7 @@ class FieldEditor extends FormField {
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
-				if($title != 'MultipleOptionField') {
+				if($niceTitle) {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,
 						'Title' => "$niceTitle"
@@ -77,7 +77,7 @@ class FieldEditor extends FormField {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Handles saving the page. Needs to keep an eye on fields
 	 * and options which have been removed / added 
