@@ -30,5 +30,6 @@ class EditableFileField extends EditableFormField {
 	public function getFormField() {
 		return new FileField($this->Name, $this->Title);
 	}
+	
 }
 ?>

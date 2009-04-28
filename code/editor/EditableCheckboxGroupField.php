@@ -23,12 +23,12 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	
 	function getValueFromData($data) {
 		$result = '';
-		$entries = $data[$this->Name];
+		$entries = (isset($data[$this->Name])) ? $data[$this->Name] : false;
 		
-		if(!is_array($data[$this->Name])) {
-			$entries = array($data[$this->Name]);
-		}
 		if($entries) {
+			if(!is_array($data[$this->Name])) {
+				$entries = array($data[$this->Name]);
+			}
 			foreach($entries as $selected => $value) {
 				if(!$result) {
 					$result = $value;

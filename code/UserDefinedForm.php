@@ -347,7 +347,6 @@ JS
 	 * @return Redirection
 	 */
 	function process($data, $form) {
-		
 		// submitted form object
 		$submittedForm = new SubmittedForm();
 		$submittedForm->SubmittedBy = Member::currentUser();
@@ -380,40 +379,38 @@ JS
 			$submittedFields->push($submittedField);
 
 			if(!empty($data[$field->Name])){
+				/**
+				 * @todo this should be on the EditableFile class. Just need to sort out
+				 * 		attachments array
+				 */
+				if($field->ClassName == "EditableFileField"){	
+					if(isset($_FILES[$field->Name])) {
+						
+						// create the file from post data
+						$upload = new Upload();
+						$file = new File();
+						$upload->loadIntoFile($_FILES[$field->Name], $file);
 
-				switch($field->ClassName){	
-					case "EditableFileField" :
-						if(isset($_FILES[$field->Name])) {
-							
-							// create the file from post data
-							$upload = new Upload();
-							$file = new File();
-							$upload->loadIntoFile($_FILES[$field->Name], $file);
+						// write file to form field
+						$submittedField->UploadedFileID = $file->ID;
+						
+						// Attach the file if its less than 1MB, provide a link if its over.
+						if($file->getAbsoluteSize() < 1024*1024*1){
+							$attachments[] = $file;
+						}
 
-							// write file to form field
-							$submittedField->UploadedFileID = $file->ID;
-							
-							// Attach the file if its less than 1MB, provide a link if its over.
-							if($file->getAbsoluteSize() < 1024*1024*1){
-								$attachments[] = $file;
-							}
-
-							// Always provide the link if present.
-							if($file->ID) {
-								$submittedField->Value = "<a href=\"". $file->getFilename() ."\" title=\"". $file->getFilename() . "\">". $file->Title . "</a>";
-							} else {
-								$submittedField->Value = "";
-							}
-							$submittedField->write();
-						}				
-					break;						
+						// Always provide the link if present.
+						if($file->ID) {
+							$submittedField->Value = "<a href=\"". $file->getFilename() ."\" title=\"". $file->getFilename() . "\">". $file->Title . "</a>";
+						} else {
+							$submittedField->Value = "";
+						}
+					}									
 				}
 			}
-			elseif($field->hasMethod('getValueFromData')) { 
-				$values[$field->Title] = Convert::linkIfMatch($field->getValueFromData($data)); 
-			} else { 
-				if(isset($data[$field->Name])) $values[$field->Title] = Convert::linkIfMatch($data[$field->Name]); 
-			}
+			
+			// make sure we save
+			$submittedField->write();
 		}	
 		$emailData = array(
 			"Sender" => Member::currentUser(),
