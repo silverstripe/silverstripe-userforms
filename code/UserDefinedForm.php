@@ -148,6 +148,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		// load the jquery
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/plugins/validate/jquery.validate.min.js');
+		
+		Requirements::css(SAPPHIRE_DIR . '/css/Form.css');
 
 		parent::init();
 	}
