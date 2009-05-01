@@ -163,10 +163,10 @@ class EditableFormField extends DataObject {
 			'AddableOption' => true,
 			'Fields' => $fields
 		)));
-		
 		// check for existing ones
 		if($this->CustomRules) {
 			$rules = unserialize($this->CustomRules);
+
 			if($rules) {
 				foreach($rules as $rule => $data) {
 					// recreate all the field object to prevent caching
@@ -256,6 +256,7 @@ class EditableFormField extends DataObject {
 		if(isset($data['CustomRules'])) {
 			$rules = array();
 			foreach($data['CustomRules'] as $key => $value) {
+
 				if(is_array($value)) {
 					$fieldValue = (isset($value['Value'])) ? $value['Value'] : '';
 					if(isset($value['ConditionOption']) && $value['ConditionOption'] == "Blank" || $value['ConditionOption'] == "NotBlank") {

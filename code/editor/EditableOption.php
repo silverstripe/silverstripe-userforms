@@ -66,6 +66,5 @@ class EditableOption extends DataObject {
 		$this->readonly = true;
 		return $this->EditSegment();
 	}
-	
 }
 ?>

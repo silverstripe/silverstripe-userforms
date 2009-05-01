@@ -229,39 +229,64 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 				// Check for field dependencies / default
 				if($field->Dependencies()) {
-					
 					foreach($field->Dependencies() as $dependency) {
 						if(is_array($dependency) && isset($dependency['ConditionField']) && $dependency['ConditionField'] != "") {
 							// get the field which is effected
 							$formName = Convert::raw2sql($dependency['ConditionField']);
 							$formFieldWatch = DataObject::get_one("EditableFormField", "Name = '$formName'");
+							
 							if(!$formFieldWatch) break;
 							
-							$fieldToWatch = "$(\"#Form_Form_".$dependency['ConditionField']."\")";
+							// watch out for multiselect options - radios and check boxes
+							if(is_a($formFieldWatch, 'EditableDropdownField')) {
+								$fieldToWatch = "$(\"select[name='".$dependency['ConditionField']."]'\")";	
+							}
+							
+							// watch out for checkboxs as the inputs don't have values but are 'checked
+							else if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
+								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."[".$dependency['Value']."]']\")";
+							}
+							else {
+								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";		
+							}
 							
 							// show or hide?
 							$view = (isset($dependency['Display']) && $dependency['Display'] == "Show") ? "show" : "hide";
 							$opposite = ($view == "show") ? "hide" : "show";
-
+							
+							// what action do we need to keep track of
 							$Action = ($formFieldWatch->ClassName == "EditableTextField") ? "keyup" : "change";
 							
+							// and what should we evaluate
 							switch($dependency['ConditionOption']) {
 								case 'IsNotBlank':
-									$matches = '!= ""';
+									$expression = '$(this).val() != ""';
+									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
+										$expression = '$(this).attr("checked")';
+									}
 									break;
 								case 'IsBlank':
-									$matches = '== ""';
+									$expression = '$(this).val() == ""';
+									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
+										$expression = '!($(this).attr("checked"))';
+									}									
 									break;
 								case 'HasValue':
-									$matches = '== "'. $dependency['Value'] .'"';
+									$expression = '$(this).val() == "'. $dependency['Value'] .'"';
+									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
+										$expression = '$(this).attr("checked")';
+									}
 									break;
 								default:
-									$matches = '!= "'. $dependency['Value'] .'"';
+									$expression = '$(this).val() != "'. $dependency['Value'] .'"';
+									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
+										$expression = '!($(this).attr("checked"))';
+									}
 									break;
 							}
 							// put it all together
 							$CustomDisplayRules .= $fieldToWatch.".$Action(function() {
-								if($(this).val() ". $matches ." ) {
+								if(". $expression ." ) {
 									$(\"#". $field->Name ."\").".$view."();
 								}
 								else {
