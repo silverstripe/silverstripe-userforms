@@ -96,12 +96,12 @@
 				var extraOptions = parentID.children(".extraOptions");
 				if(extraOptions) {
 					if(extraOptions.hasClass('hidden')) {
-						$(this).html("Hide More Options");
+						$(this).html(ss.i18n._t('UserForms.HIDEOPTIONS', 'Hide Options'));
 						$(this).addClass("showing");
 						extraOptions.removeClass('hidden').show();
 					}
 					else {
-						$(this).html("More Options");
+						$(this).html(ss.i18n._t('UserForms.SHOWOPTIONS', 'Show Options'));
 						$(this).removeClass("showing");
 						extraOptions.addClass('hidden').hide();	
 					}

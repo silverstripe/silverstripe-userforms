@@ -16,7 +16,7 @@ $lang['en_US']['EditableCheckbox']['SINGULARNAME'] = array(
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
 $lang['en_US']['EditableCheckbox.ss']['CHECKBOX'] = 'Checkbox field';
-$lang['en_US']['EditableCheckbox.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableCheckbox.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableCheckbox.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableCheckbox.ss']['LOCKED'] = 'This field cannot be modified';
 $lang['en_US']['EditableCheckbox.ss']['MORE'] = 'More options';
@@ -32,7 +32,7 @@ $lang['en_US']['EditableCheckboxGroupField']['SINGULARNAME'] = array(
 );
 $lang['en_US']['EditableCheckboxGroupField.ss']['ADD'] = 'Add new option';
 $lang['en_US']['EditableCheckboxGroupField.ss']['CHECKBOXGROUP'] = 'Checkbox group';
-$lang['en_US']['EditableCheckboxGroupField.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableCheckboxGroupField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableCheckboxGroupField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableCheckboxGroupField.ss']['LOCKED'] = 'These fields cannot be modified';
 $lang['en_US']['EditableCheckboxGroupField.ss']['MORE'] = 'More options';
@@ -61,7 +61,7 @@ $lang['en_US']['EditableDateField']['SINGULARNAME'] = array(
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
 $lang['en_US']['EditableDateField.ss']['DATE'] = 'Date Field';
-$lang['en_US']['EditableDateField.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableDateField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableDateField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableDateField.ss']['MORE'] = 'More options';
 $lang['en_US']['EditableDropdown']['PLURALNAME'] = array(
@@ -75,7 +75,7 @@ $lang['en_US']['EditableDropdown']['SINGULARNAME'] = array(
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
 $lang['en_US']['EditableDropdown.ss']['ADD'] = 'Add new option';
-$lang['en_US']['EditableDropdown.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableDropdown.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableDropdown.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableDropdown.ss']['DROPDOWN'] = 'Dropdown box';
 $lang['en_US']['EditableDropdown.ss']['LOCKED'] = 'These fields cannot be modified';
@@ -105,7 +105,7 @@ $lang['en_US']['EditableEmailField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableEmailField.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableEmailField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableEmailField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableEmailField.ss']['EMAIL'] = 'Email address field';
 $lang['en_US']['EditableEmailField.ss']['MORE'] = 'More options';
@@ -120,7 +120,7 @@ $lang['en_US']['EditableFileField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableFileField.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableFileField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableFileField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableFileField.ss']['FILE'] = 'File upload field';
 $lang['en_US']['EditableFileField.ss']['MORE'] = 'More options';
@@ -136,7 +136,7 @@ $lang['en_US']['EditableFormField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableFormField.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableFormField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableFormField.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableFormField.ss']['LOCKED'] = 'These fields cannot be modified';
 $lang['en_US']['EditableFormField.ss']['MORE'] = 'More options';
@@ -154,7 +154,7 @@ $lang['en_US']['EditableFormHeading']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableFormHeading.ss']['DELETE'] = 'Delete this field';
+$lang['en_US']['EditableFormHeading.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableFormHeading.ss']['DRAG'] = 'Drag to rearrange order of fields';
 $lang['en_US']['EditableFormHeading.ss']['HEADING'] = 'Heading field';
 $lang['en_US']['EditableFormHeading.ss']['MORE'] = 'More options';

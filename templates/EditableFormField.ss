@@ -14,7 +14,7 @@
 	
 	<div class="fieldActions">
 		<% if showExtraOptions %>
-			<a class="moreOptions" href="#" title="<% _t('MOREOPTIONS', 'More Options') %>"><% _t('MOREOPTIONS','More Options') %></a>
+			<a class="moreOptions" href="#" title="<% _t('SHOWOPTIONS', 'Show Options') %>"><% _t('SHOWOPTIONS','Show Options') %></a>
 		<% end_if %>
 		
 		<% if CanDelete %>
