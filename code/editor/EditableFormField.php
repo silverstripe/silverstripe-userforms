@@ -73,7 +73,7 @@ class EditableFormField extends DataObject {
 	}
 	
 	function ShowOnLoad() {
-		return ($this->getSetting('ShowOnLoad') == "Show") ? true : false;
+		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
 	}
 	
 	/**
