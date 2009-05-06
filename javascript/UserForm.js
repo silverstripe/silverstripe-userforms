@@ -60,7 +60,7 @@
 					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
 
 					$("#Fields_fields select.fieldOption").each(function(i, domElement) {
-						$(domElement).append("<option='"+ name[2] +"'>New "+ name[2] + "</option>");
+						$(domElement).append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
 					});
 				},
 				
@@ -253,7 +253,7 @@
 		 * Adding a custom rule to a given form
 		 */
 		$(".customRules .addCondition").livequery('click', function() {
-			
+
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
 			
@@ -268,15 +268,16 @@
 				currentName[2] = currentRules.children().size() + 1;
 				domElement.name = currentName.join("][");
 			});
+
 			// remove hidden tag
 			newRule.removeClass("hidden");
 			
 			// update the fields dropdown
 			newRule.children("select.fieldOption").empty();
-			
+
 			$("#Fields_fields li.EditableFormField").each(function (i, domElement) {
-				var name = $(this).attr("id").split(' ');
-				newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).children(".fieldInfo .text").val() + "</option>");
+				var name = $(domElement).attr("id").split(' ');
+				newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).find(".text").val() + "</option>");
 			});
 			
 			// append to the list
