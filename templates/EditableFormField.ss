@@ -26,51 +26,100 @@
 	
 	<% if showExtraOptions %>
 		<div class="extraOptions hidden" id="$Name.Attr-extraOptions">
-			<ul class="editableOptions" id="$Name.Attr-list">
+			<% if HasAddableOptions %>
+				<fieldset class="fieldOptionsGroup">
+					<legend><% _t('OPTIONS', 'Options') %></legend>
+					<ul class="editableOptions" id="$Name.Attr-list">
 
-				<% if isReadonly %>
-					<% control Options %>
-						$ReadonlyOption
-					<% end_control %>			
-				<% else %>
-					<% control Options %>
-						$EditSegment
+						<% if isReadonly %>
+							<% control Options %>
+								$ReadonlyOption
+							<% end_control %>			
+						<% else %>
+							<% control Options %>
+								$EditSegment
+							<% end_control %>
+							<% if HasAddableOptions %>
+								<li class="{$ClassName}Option">
+									<a href="#" rel="$ID" class="addableOption" title="<% _t('ADD', 'Add option to field') %>">
+										Add Option
+									</a>
+								</li>
+							<% end_if %>
+						<% end_if %>
+					</ul>
+				</fieldset>
+			<% end_if %>
+			
+			<% if FieldConfiguration %>
+				<fieldset class="fieldOptionsGroup">
+					<legend><% _t('FIELDCONFIGURATION', 'Field Configuration') %></legend>
+					<% control FieldConfiguration %>
+						$FieldHolder
 					<% end_control %>
-					<% if hasAddableOptions %>
-						<li class="{$ClassName}Option">
-							<input class="text" type="text" name="$Name.Attr[NewOption]" value="" />
-							<a href="#" rel="$ID" class="addableOption" title="<% _t('ADD', 'Add option to field') %>"><img src="cms/images/add.gif" alt="<% _t('ADD', 'Add new option') %>" /></a>
-						</li>
-					<% end_if %>
-				<% end_if %>
-			</ul>
+				</fieldset>
+			<% end_if %>
 			
-			<% control ExtraOptions %>
-				$FieldHolder
-			<% end_control %>
-			
-			<div class="customRules">
-				<h4>Custom Rules</h4>
-				<select name="$Name.Attr[ShowOnLoad]">
-					<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
-					<option value="Hide" <% if ShowOnLoad %><% else %><% if Title %><% else %>selected="selected"<% end_if %><% end_if %>><% _t('HIDE', 'Hide') %></option>
-				</select>
-				<label class="left">Field On Default</label>
-				
+			<% if FieldValidationOptions %>
+				<fieldset class="fieldOptionsGroup">
+					<legend><% _t('VALIDATION', 'Validation') %></legend>
+					<% control FieldValidationOptions %>
+						$FieldHolder
+					<% end_control %>
+				</fieldset>
+			<% end_if %>
+				<fieldset class="customRules fieldOptionsGroup">
+				<legend>Custom Rules</legend>
 				<ul id="$Name.Attr-customRules">
+					<li>
+						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>">
+							Add Rule
+						</a>
+					</li>
+					<li class="addCustomRule">
+						<select name="$Name.Attr[CustomSettings][ShowOnLoad]">
+							<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
+							<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
+						</select>
+
+						<label class="left">Field On Default</label>
+					</li>
+					<li class="hidden">
+						<select class="displayOption customRuleField" name="{$Name}[CustomRules][Display]">
+							<option value="Show"><% _t('SHOWTHISFIELD', 'Show This Field') %></option>
+							<option value="Hide"><% _t('HIDETHISFIELD', 'Hide This Field') %></option>
+						</select>
+
+						<label><% _t('WHEN', 'When') %></label>
+						<select class="fieldOption customRuleField" name="{$Name}[CustomRules][ConditionField]">
+				
+						</select>
+
+						<label><% _t('IS', 'Is') %></label>
+						<select class="conditionOption customRuleField" name="{$Name}[CustomRules][ConditionOption]">
+							<option value=""></option>
+							<option value="IsBlank"><% _t('BLANK', 'Blank') %></option>
+							<option value="IsNotBlank"><% _t('NOTBLANK', 'Not Blank') %></option>
+							<option value="HasValue"><% _t('VALUE', 'Value') %></option>
+							<option value="ValueNot"><% _t('NOTVALUE', 'Not Value') %></option>
+						</select>
+
+						<input type="text" class="ruleValue hidden customRuleField" name="{$Name}[CustomRules][Value]" />
+
+						<a href="#" class="deleteCondition" title="<% _t('DELETE', 'Delete') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete') %>" /></a>
+					</li>
 					<% control CustomRules %>
-						<li class="customRule">
+						<li>
 							<% include CustomRule %>
 						</li>
 					<% end_control %>
 				</ul>
-			</div>
+			</fieldset>
 		</div>
 	<% end_if %>
 	
 	<!-- Hidden option Fields -->
   	<input type="hidden" class="canDeleteHidden" name="$Name.Attr[CanDelete]" value="$CanDelete" />
-  	<input type="hidden" class="customParameterHidden" name="$Name.Attr[CustomParameter]" value="$CustomParameter" />
   	<input type="hidden" class="typeHidden" name="$Name.Attr[Type]" value="$ClassName" />   
 	<input type="hidden" class="sortHidden" name="$Name.Attr[Sort]" value="$Sort" />
 </li>

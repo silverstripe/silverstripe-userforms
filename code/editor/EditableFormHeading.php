@@ -6,21 +6,21 @@
  */
 class EditableFormHeading extends EditableFormField {
 
-	static $singular_name = 'Form heading';
+	static $singular_name = 'Heading';
 	
-	static $plural_name = 'Form headings';
+	static $plural_name = 'Headings';
 	
-	function ExtraOptions() {
+	function getFieldConfiguration() {
 		$levels = array('1' => '1','2' => '2','3' => '3','4' => '4','5' => '5','6' => '6');
 		$level = ($this->getSetting('Level')) ? $this->getSetting('Level') : 3;
-		$extraFields = new FieldSet(
-			new DropdownField("Fields[$this->ID][CustomSettings][Level]", _t('EditableFormHeading.LEVEL', 'Select Heading Level'), $levels, $level)
-		);
+		
+		$options = parent::getFieldConfiguration();
+		$options->push(new DropdownField("Fields[$this->ID][CustomSettings][Level]", _t('EditableFormHeading.LEVEL', 'Select Heading Level'), $levels, $level));
 
 		if($this->readonly) {
-			$extraFields = $extraFields->makeReadonly();		
+			$extraFields = $options->makeReadonly();		
 		}
-		return $extraFields;
+		return $options;
 	}
 	
 	function getFormField() {
@@ -31,6 +31,10 @@ class EditableFormHeading extends EditableFormField {
 	}
 	
 	function showInReports() {
+		return false;
+	}
+	
+	function getFieldValidationOptions() {
 		return false;
 	}
 }

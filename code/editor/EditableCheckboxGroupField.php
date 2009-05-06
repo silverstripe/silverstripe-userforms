@@ -8,9 +8,9 @@
  */
 class EditableCheckboxGroupField extends EditableMultipleOptionField {
 
-	static $singular_name = "Checkbox group";
+	static $singular_name = "Checkbox Group";
 	
-	static $plural_name = "Checkbox groups";
+	static $plural_name = "Checkbox Groups";
 	
 	function getFormField() {
 		$optionSet = $this->Options();

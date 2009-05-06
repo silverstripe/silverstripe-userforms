@@ -16,10 +16,8 @@ class EditableFormField extends DataObject {
 		"Sort" => "Int",
 		"Required" => "Boolean",
 		"CanDelete" => "Boolean",
-		"CustomParameter" => "Varchar",
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
-		"ShowOnLoad" => "Boolean",
 		"CustomSettings" => "Text"
 	);
     
@@ -74,6 +72,10 @@ class EditableFormField extends DataObject {
 		return $this->class;
 	}
 	
+	function ShowOnLoad() {
+		return ($this->getSetting('ShowOnLoad') == "Show") ? true : false;
+	}
+	
 	/**
 	 * To prevent having tables for each fields minor settings we store it as 
 	 * a serialized array in the database. 
@@ -126,7 +128,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function hasAddableOptions() {
+	public function getHasAddableOptions() {
 		return false;
 	}
 	
@@ -157,12 +159,6 @@ class EditableFormField extends DataObject {
 		$output = new DataObjectSet();
 		$fields = $this->Parent()->Fields();
 
-		// add the default add
-		$output->push(new ArrayData(array(
-			'Name' => $this->Name(),
-			'AddableOption' => true,
-			'Fields' => $fields
-		)));
 		// check for existing ones
 		if($this->CustomRules) {
 			$rules = unserialize($this->CustomRules);
@@ -206,7 +202,7 @@ class EditableFormField extends DataObject {
 		
 		return "<input type=\"text\" class=\"text\" title=\"("._t('EditableFormField.ENTERQUESTION', 'Enter Question').")\" value=\"$titleAttr\" name=\"Fields[{$this->ID}][Title]\"$readOnlyAttr />";
 	}
-	
+
 	/**
 	 * Return the base name for this form field in the 
 	 * form builder
@@ -275,35 +271,27 @@ class EditableFormField extends DataObject {
 		$this->write();
 	}
 	
-	function ExtraOptions() {
-		
-		$baseName = "Fields[$this->ID]";
-		$extraOptions = new FieldSet();
-		
-		// Is this field required
-		if(!$this->Parent()->hasMethod('hideExtraOption')){
-			$extraOptions->push(new CheckboxField($baseName . "[Required]", _t('EditableFormField.REQUIRED', 'Required?'), $this->Required));
-		}
-		elseif(!$this->Parent()->hideExtraOption('Required')){
-			$extraOptions->push(new CheckboxField($baseName . "[Required]", _t('EditableFormField.REQUIRED', 'Required?'), $this->Required));
-		}
-		
-		if($this->Parent()->hasMethod('getExtraOptionsForField')) {
-			$extraFields = $this->Parent()->getExtraOptionsForField($this);
-		
-			foreach($extraFields as $extraField) {
-				$extraOptions->push($extraField);
-			}
-		}
-		
-		if($this->readonly) {
-			$extraOptions = $extraOptions->makeReadonly();		
-		}
-		
-		// custom error messaging
-		$extraOptions->push(new TextField($baseName.'[CustomErrorMessage]', _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage));
-
-		return $extraOptions;
+	/**
+	 * Implement custom field Configuration on this field. Includes such things as
+	 * settings and options of a given editable form field
+	 *
+	 * @return FieldSet
+	 */
+	public function getFieldConfiguration() {
+		return new FieldSet();
+	}
+	
+	/**
+	 * Append custom validation fields to the default 'Validation' 
+	 * section in the editable options view
+	 * 
+	 * @return FieldSet
+	 */
+	public function getFieldValidationOptions() {
+		return new FieldSet(
+			new CheckboxField("Fields[$this->ID][Required]", _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
+			new TextField("Fields[$this->ID][CustomErrorMessage]", _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
+		);
 	}
 	
 	/**
@@ -320,21 +308,21 @@ class EditableFormField extends DataObject {
 		return true;
 	}
     
-    function prepopulate( $value ) {
-        $this->prepopulateFromMap( $this->parsePrepopulateValue( $value ) );
+    function prepopulate($value) {
+        $this->prepopulateFromMap($this->parsePrepopulateValue($value));
     }
     
-    protected function parsePrepopulateValue( $value ) {
-        $paramList = explode( ',', $value );
+    protected function parsePrepopulateValue($value) {
+        $paramList = explode(',', $value);
         $paramMap = array();
         
-        foreach( $paramList as $param ) {
+        foreach($paramList as $param) {
     
-            if( preg_match( '/([^=]+)=(.+)/', $param, $match ) ) {
-                if( isset( $paramMap[$match[1]] ) && is_array( $paramMap[$match[1]] ) ) {
+            if(preg_match( '/([^=]+)=(.+)/', $param, $match)) {
+                if(isset($paramMap[$match[1]]) && is_array($paramMap[$match[1]])) {
                     $paramMap[$match[1]][] = $match[2];
-                } else if( isset( $paramMap[$match[1]] ) ) {
-                    $paramMap[$match[1]] = array( $paramMap[$match[1]] );
+                } else if(isset( $paramMap[$match[1]])) {
+                    $paramMap[$match[1]] = array($paramMap[$match[1]]);
                     $paramMap[$match[1]][] = $match[2];
                 } else {
                     $paramMap[$match[1]] = $match[2];
@@ -344,7 +332,7 @@ class EditableFormField extends DataObject {
         return $paramMap;   
     }
     
-    protected function prepopulateFromMap( $paramMap ) {
+    protected function prepopulateFromMap($paramMap) {
         foreach($paramMap as $field => $fieldValue) {
             if(!is_array($fieldValue)) {
                 $this->$field = $fieldValue;
@@ -355,11 +343,7 @@ class EditableFormField extends DataObject {
     function Type() {
         return $this->class;   
     }
-    
-    function CustomParameter() {
-        return $this->CustomParameter;   
-    }
-
+   
 	/**
 	 * Return the validation information related to this field. This is 
 	 * interrupted as a JSON object for validate plugin and used in the 

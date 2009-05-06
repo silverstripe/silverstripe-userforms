@@ -90,7 +90,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 *
 	 * @return bool
 	 */
-	public function hasAddableOptions() {
+	public function getHasAddableOptions() {
 		return true;
 	}
 

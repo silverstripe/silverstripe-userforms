@@ -23,9 +23,9 @@ class EditableFileField extends EditableFormField {
 	 */
 	public static $allowed_extensions = array();
 	
-	static $singular_name = 'File field';
+	static $singular_name = 'File Upload Field';
 	
-	static $plural_names = 'File fields';
+	static $plural_names = 'File Fields';
 	
 	public function getFormField() {
 		return new FileField($this->Name, $this->Title);

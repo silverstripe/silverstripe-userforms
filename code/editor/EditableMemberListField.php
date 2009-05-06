@@ -6,11 +6,11 @@
  */
 class EditableMemberListField extends EditableFormField {
 	
-	static $singular_name = 'Member list field';
+	static $singular_name = 'Member List Field';
 	
-	static $plural_name = 'Member list fields';
+	static $plural_name = 'Member List Fields';
 	
-	function ExtraOptions() {
+	function getFieldConfiguration() {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
 		$groups = DataObject::get("Group");
 		if($groups) $groups = $groups->toDropdownMap('ID', 'Title');
@@ -21,6 +21,7 @@ class EditableMemberListField extends EditableFormField {
 		
 		return $fields;
 	}
+	
 	function getFormField() {
 		return ($this->getSetting('GroupID')) ? new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting('GroupID'))) : false;
 	}

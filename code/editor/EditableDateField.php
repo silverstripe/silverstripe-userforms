@@ -8,19 +8,18 @@
  */
 class EditableDateField extends EditableFormField {
 	
-	static $singular_name = 'Date field';
+	static $singular_name = 'Date Field';
 	
-	static $plural_name = 'Date fields';
+	static $plural_name = 'Date Fields';
 	
 	function populateFromPostData($data) {
 		$fieldPrefix = 'Default-';
 		
-		if( empty( $data['Default'] ) && !empty( $data[$fieldPrefix.'Year'] ) && !empty( $data[$fieldPrefix.'Month'] ) && !empty( $data[$fieldPrefix.'Day'] ) )
-			$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];
-			
-		// Debug::show( $data );
-	
-		parent::populateFromPostData( $data );
+		if(empty($data['Default']) && !empty($data[$fieldPrefix.'Year']) && !empty($data[$fieldPrefix.'Month']) && !empty($data[$fieldPrefix.'Day'])) {
+			$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];		
+		}
+		
+		parent::populateFromPostData($data);
 	}
 	
 	/**

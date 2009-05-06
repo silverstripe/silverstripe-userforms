@@ -62,10 +62,11 @@ class FieldEditor extends FormField {
 
 		if($fields) {
 			array_shift($fields); // get rid of subclass 0
+			asort($fields); // get in order
 			$output = new DataObjectSet();
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
-				$niceTitle = trim(str_ireplace("Field", "", eval("return $title::\$singular_name;"))); 
+				$niceTitle = trim(eval("return $title::\$singular_name;")); 
 				if($niceTitle) {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,
@@ -180,8 +181,7 @@ class FieldEditor extends FormField {
 	public function addoptionfield() {
 		// passed via the ajax
 		$parent = (isset($_REQUEST['Parent'])) ? $_REQUEST['Parent'] : false;
-		$text = (isset($_REQUEST['Text'])) ? $_REQUEST['Text'] : "";
-		
+
 		// work out the sort by getting the sort of the last field in the form +1
 		if($parent) {
 			$sql_parent = Convert::raw2sql($parent);
@@ -194,7 +194,6 @@ class FieldEditor extends FormField {
 				$object->ParentID = $parent;
 				$object->Sort = $sort;
 				$object->Name = 'option' . $object->ID;
-				$object->Title = $text;
 				$object->write();
 				return $object->EditSegment();
 			}

@@ -59,9 +59,9 @@
 					//update the internal lists
 					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
 
-					//$("#Fields_fields select.fieldOption").each(function(i, domElement) {
-					//	$(domElement).append("<option='"+ name[2] +"'>New "+ name[2] + "</option>");
-					//});
+					$("#Fields_fields select.fieldOption").each(function(i, domElement) {
+						$(domElement).append("<option='"+ name[2] +"'>New "+ name[2] + "</option>");
+					});
 				},
 				
 				// error creating new field
@@ -146,16 +146,12 @@
 			var options = $(this).parent("li");
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
 			var parent = $(this).attr("rel");
-			var text = $(this).parents("li").children(".text").val();
-			
-			// clear input
-			$(this).parents("li").children(".text").val("");
 			
 			//send ajax request to the page
 			$.ajax({
 				type: "GET",
 				url: action,
-				data: 'Parent='+ parent +"&Text="+ text,
+				data: 'Parent='+ parent,
 				
 				// create a new field
 				success: function(msg){
@@ -177,8 +173,8 @@
 		 */
 		$(".EditableFormField .deleteOption").livequery('click', function() {
 			// pass the deleted status onto the element
-			$(this).parents("li").children("[type=text]").attr("value", "field-node-deleted");
-			$(this).parents("li").hide();
+			$(this).parent("li").children("[type=text]").attr("value", "field-node-deleted");
+			$(this).parent("li").hide();
 			
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.REMOVINGOPTION', 'Removed Option'));
@@ -260,29 +256,32 @@
 			
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
-			// get the parent li which to duplicate
-			var parent = $(this).parent("li");
-			var grandParent = parent.parent("ul");
-			var newCondition = parent.clone();
 			
-			// remove add icon
-			newCondition.find(".addCondition").hide();
-			newCondition.find("a.hidden").removeClass("hidden");
+			// get the fields li which to duplicate
+			var currentRules = $(this).parent("li").parent("ul");
+			var defaultRule = currentRules.children("li.hidden:first");
+			var newRule = defaultRule.clone();
 
-			newCondition.children(".customRuleField").each(function(i, domElement) {
-				// go through and fix names. We need to insert an id number into the middle of them at least
-				$(domElement).val($(parent).find("select").eq(i).val());
+			newRule.children(".customRuleField").each(function(i, domElement) {
 				var currentName = domElement.name.split("][");
 				currentName[3] = currentName[2];
-				currentName[2] = grandParent.children().size() + 1;
+				currentName[2] = currentRules.children().size() + 1;
 				domElement.name = currentName.join("][");
 			});
-			grandParent.append(newCondition);
+			// remove hidden tag
+			newRule.removeClass("hidden");
 			
-			// clear fields
-			parent.each(function(i, domElement) {
-				$(domElement).find(".customRuleField").val("");
+			// update the fields dropdown
+			newRule.children("select.fieldOption").empty();
+			
+			$("#Fields_fields li.EditableFormField").each(function (i, domElement) {
+				var name = $(this).attr("id").split(' ');
+				newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).children(".fieldInfo .text").val() + "</option>");
 			});
+			
+			// append to the list
+			currentRules.append(newRule);
+			
 			return false;
 		});
 	});

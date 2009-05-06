@@ -223,7 +223,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				}
 				
 				// Is this Field Show by Default
-				if(!$field->ShowOnLoad) {
+				if(!$field->ShowOnLoad()) {
 					$defaults .= "$(\"#" . $field->Name . "\").hide();\n";
 				}
 
@@ -251,37 +251,35 @@ class UserDefinedForm_Controller extends Page_Controller {
 							}
 							
 							// show or hide?
-							$view = (isset($dependency['Display']) && $dependency['Display'] == "Show") ? "show" : "hide";
+							$view = (isset($dependency['Display']) && $dependency['Display'] == "Hide") ? "hide" : "show";
 							$opposite = ($view == "show") ? "hide" : "show";
 							
 							// what action do we need to keep track of
 							$Action = ($formFieldWatch->ClassName == "EditableTextField") ? "keyup" : "change";
 							
+							// is this field a special option field
+							$checkboxField = false;
+							if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
+								$checkboxField = true;
+							}
+							
 							// and what should we evaluate
 							switch($dependency['ConditionOption']) {
 								case 'IsNotBlank':
-									$expression = '$(this).val() != ""';
-									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-										$expression = '$(this).attr("checked")';
-									}
+									$expression = ($checkboxField) ? '$(this).attr("checked")' :'$(this).val() != ""';
+
 									break;
 								case 'IsBlank':
-									$expression = '$(this).val() == ""';
-									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-										$expression = '!($(this).attr("checked"))';
-									}									
+									$expression = ($checkboxField) ? '!($(this).attr("checked"))' : '$(this).val() == ""';
+									
 									break;
 								case 'HasValue':
-									$expression = '$(this).val() == "'. $dependency['Value'] .'"';
-									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-										$expression = '$(this).attr("checked")';
-									}
+									$expression = ($checkboxField) ? '$(this).attr("checked")' : '$(this).val() == "'. $dependency['Value'] .'"';
+
 									break;
 								default:
-									$expression = '$(this).val() != "'. $dependency['Value'] .'"';
-									if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-										$expression = '!($(this).attr("checked"))';
-									}
+									$expression = ($checkboxField) ? '!($(this).attr("checked"))' : '$(this).val() != "'. $dependency['Value'] .'"';
+
 									break;
 							}
 							// put it all together
@@ -536,7 +534,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		);
 		
 		if($this->Form()) {
-			$validEmailFields = DataObject::get("EditableFormField", "ParentID = '$this->FormID'");
+			$validEmailFields = DataObject::get("EditableEmailField", "ParentID = '$this->FormID'");
 			
 			if($validEmailFields) {
 				$validEmailFields = $validEmailFields->toDropdownMap('ID', 'Title');
