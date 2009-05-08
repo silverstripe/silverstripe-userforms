@@ -221,10 +221,15 @@ class UserDefinedForm_Controller extends Page_Controller {
 				if($fieldValidationOptions) {
 					$fieldValidationRules[$field->Name] = $fieldValidationOptions;
 				}
+				$fieldId = $field->Name;
+				
+				if($field->ClassName == 'EditableFormHeading') { 
+					$fieldId = 'Form_Form_'.$field->Name;
+				}
 				
 				// Is this Field Show by Default
 				if(!$field->ShowOnLoad()) {
-					$defaults .= "$(\"#" . $field->Name . "\").hide();\n";
+					$defaults .= "$(\"#" . $fieldId . "\").hide();\n";
 				}
 
 				// Check for field dependencies / default
@@ -254,8 +259,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 							$view = (isset($dependency['Display']) && $dependency['Display'] == "Hide") ? "hide" : "show";
 							$opposite = ($view == "show") ? "hide" : "show";
 							
-							// what action do we need to keep track of
-							$Action = ($formFieldWatch->ClassName == "EditableTextField") ? "keyup" : "change";
+							// what action do we need to keep track of. Something nicer here maybe?
+							// @todo encapulsation
+							$action = "change";
+							
+							if($formFieldWatch->ClassName == "EditableTextField" || $formFieldWatch->ClassName == "EditableDateField") {
+								$action = "keyup";
+							}
 							
 							// is this field a special option field
 							$checkboxField = false;
@@ -283,12 +293,12 @@ class UserDefinedForm_Controller extends Page_Controller {
 									break;
 							}
 							// put it all together
-							$CustomDisplayRules .= $fieldToWatch.".$Action(function() {
+							$CustomDisplayRules .= $fieldToWatch.".$action(function() {
 								if(". $expression ." ) {
-									$(\"#". $field->Name ."\").".$view."();
+									$(\"#". $fieldId ."\").".$view."();
 								}
 								else {
-									$(\"#". $field->Name ."\").".$opposite."();
+									$(\"#". $fieldId ."\").".$opposite."();
 								}
 							});";
 						}

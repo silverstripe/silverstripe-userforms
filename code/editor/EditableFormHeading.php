@@ -24,7 +24,7 @@ class EditableFormHeading extends EditableFormField {
 	}
 	
 	function getFormField() {
-		$labelField = new HeaderField('FormHeadingLabel',$this->Title, $this->getSetting('Level'));
+		$labelField = new HeaderField($this->Name,$this->Title, $this->getSetting('Level'));
 		$labelField->addExtraClass('FormHeading');
 		
 		return $labelField;
