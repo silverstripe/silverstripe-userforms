@@ -60,7 +60,12 @@ class SubmittedFormReportField extends FormField {
 					}
 
 					// Get the CSV header rows from the database
-					$tmp = DB::query("SELECT DISTINCT Name, Title FROM SubmittedFormField LEFT JOIN SubmittedForm ON SubmittedForm.ID = SubmittedFormField.ParentID WHERE SubmittedFormField.ParentID IN (" . implode(',', $inClause) . ")");
+					
+					if(defined('Database::USE_ANSI_SQL')) {
+						$tmp = DB::query("SELECT DISTINCT \"Name\", \"Title\" FROM \"SubmittedFormField\" LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\" WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")");
+					} else {
+						$tmp = DB::query("SELECT DISTINCT Name, Title FROM SubmittedFormField LEFT JOIN SubmittedForm ON SubmittedForm.ID = SubmittedFormField.ParentID WHERE SubmittedFormField.ParentID IN (" . implode(',', $inClause) . ")");
+					}
 					
 					// Sort the Names and Titles from the database query into separate keyed arrays
 					foreach($tmp as $array) {

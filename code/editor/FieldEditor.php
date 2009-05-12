@@ -86,9 +86,7 @@ class FieldEditor extends FormField {
 	 * @param DataObject Record to Save it In
 	 */
 	function saveInto(DataObject $record) {
-		
 		$name = $this->name;
-
 		$fieldSet = $record->$name();		        
 		
 		// @todo shouldn't we deal with customFormActions on that object?
@@ -100,16 +98,22 @@ class FieldEditor extends FormField {
 		// alternatively, we could delete all the fields and re add them
 		$missingFields = array();
 
-	    foreach($fieldSet as $existingField){
-	    	$missingFields[$existingField->ID] = $existingField;
-	    }    	    
+		foreach($fieldSet as $existingField) {
+			$missingFields[$existingField->ID] = $existingField;
+		}
 
-		if($_REQUEST[$name]){
-			foreach( array_keys( $_REQUEST[$name] ) as $newEditableID ) {
-				$newEditableData  = $_REQUEST[$name][$newEditableID];
-
-		  		$editable = DataObject::get_one('EditableFormField', "(`ParentID`='{$record->ID}' OR `ParentID`=0) AND `EditableFormField`.`ID`='$newEditableID'" ); 
-
+		if($_REQUEST[$name]) {
+			foreach(array_keys($_REQUEST[$name]) as $newEditableID) {
+				if(!is_numeric($newEditableID)) continue;
+				
+				$newEditableData = $_REQUEST[$name][$newEditableID];
+				
+				if(defined('Database::USE_ANSI_SQL')) {
+			  		$editable = DataObject::get_one('EditableFormField', "(\"ParentID\" = '{$record->ID}' OR \"ParentID\" = '0') AND \"EditableFormField\".\"ID\" = '$newEditableID'"); 
+				} else {
+			  		$editable = DataObject::get_one('EditableFormField', "(`ParentID` = '{$record->ID}' OR `ParentID` = 0) AND `EditableFormField`.`ID`='$newEditableID'" ); 
+				}
+				
 		  		// check if we are updating an existing field. One odd thing is a 'deleted' field
 		 		// still exists in the post data (ID) so we need to check for type.
 		  		if($editable && isset($missingFields[$editable->ID]) && isset($newEditableData['Type'])) {
@@ -154,7 +158,13 @@ class FieldEditor extends FormField {
 		
 		if($parentID) {
 			$parentID = Convert::raw2sql($parentID); // who knows what could happen
-			$highestSort = DB::query("SELECT MAX(Sort) FROM EditableFormField WHERE ParentID = '$parentID'");
+			
+			if(defined('Database::USE_ANSI_SQL')) {
+				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
+			} else {
+				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableFormField WHERE ParentID = '$parentID'");
+			}
+			
 			$sort = $highestSort->value() + 1;
 
 			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
@@ -185,7 +195,13 @@ class FieldEditor extends FormField {
 		// work out the sort by getting the sort of the last field in the form +1
 		if($parent) {
 			$sql_parent = Convert::raw2sql($parent);
-			$highestSort = DB::query("SELECT MAX(Sort) FROM EditableOption WHERE ParentID = '$sql_parent'");
+			
+			if(defined('Database::USE_ANSI_SQL')) {
+				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
+			} else {
+				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableOption WHERE ParentID = '$sql_parent'");
+			}
+			
 			$sort = $highestSort->value() + 1;
 			
 			if($parent) {

@@ -473,9 +473,15 @@ JS
 				// a user selected
 				if($recipient->SendEmailFromFieldID) {
 					$name = Convert::raw2sql($recipient->SendEmailFromField()->Name);
-					$SubmittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
-					if($SubmittedFormField) {
-						$email->setTo($SubmittedFormField->Value);	
+					
+					if(defined('Database::USE_ANSI_SQL')) {
+						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
+					} else {
+						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
+					}
+					
+					if($submittedFormField) {
+						$email->setTo($submittedFormField->Value);	
 					}
 				}
 				$email->send();
