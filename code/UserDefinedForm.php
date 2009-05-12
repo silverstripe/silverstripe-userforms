@@ -396,6 +396,9 @@ JS
 		$submittedFields = new DataObjectSet();
 		
 		foreach($this->Fields() as $field) {
+			// don't show fields that shouldn't be shown
+			if(!$field->showInReports()) continue;
+			
 			$submittedField = new SubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
 			$submittedField->Name = $field->Name;
@@ -484,7 +487,19 @@ JS
 						$email->setTo($submittedFormField->Value);	
 					}
 				}
-				$email->send();
+				if($recipient->SendPlain) {
+					$body = strip_tags($recipient->EmailBody) . "\n ";
+					if(isset($emailData['Fields'])) {
+						foreach($emailData['Fields'] as $Field) {
+							$body .= $Field->Title .' - '. $Field->Value .'\n';
+						}
+					}
+					$email->setBody($body);
+					$email->sendPlain();
+				}
+				else {
+					$email->send();	
+				}
 			}
 		}
 		
@@ -526,7 +541,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
-		'EmailBody' => 'HTMLText'
+		'EmailBody' => 'HTMLText',
+		'SendPlain' => 'Boolean'
 	);
 	
 	static $has_one = array(
@@ -546,6 +562,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
 			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','From Address')),
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
+			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
 			new DropdownField('FormID', 'Form', $forms)
 		);
 		
