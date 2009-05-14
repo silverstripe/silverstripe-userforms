@@ -13,7 +13,7 @@ class EditableLiteralField extends EditableFormField {
 	
 	static $plural_name = 'HTML Blocks';
 	
-	function getFieldOptions() {
+	function getFieldConfiguration() {
 		return new FieldSet(
 			new TextareaField("Fields[$this->ID]" . "[CustomSettings][Content]", "HTML", 4, 20, $this->getSetting('Content'))
 		);
