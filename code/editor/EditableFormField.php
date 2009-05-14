@@ -29,12 +29,7 @@ class EditableFormField extends DataObject {
 	static $has_one = array(
 		"Parent" => "SiteTree",
 	);
-	
-	/**
-	 * @var bool Is this field readonly to the user
-	 */
-	protected $readonly;
-	
+
 	/**
 	 * @var FieldEditor The current editor
 	 */
@@ -47,8 +42,7 @@ class EditableFormField extends DataObject {
 	 * @param boolean $isSingleton This this to true if this is a singleton() object, a stub for calling methods. 
 	 */
 	public function __construct($record = null, $isSingleton = false) {
-		$this->setField('Default', -1);
-		parent::__construct( $record, $isSingleton );
+		parent::__construct($record, $isSingleton);
 	}	
 	
 	/**
@@ -56,7 +50,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @param FieldEditor The Editor window you wish to use
 	 */
-	protected function setEditor($editor) {
+	public function setEditor($editor) {
 		$this->editor = $editor;
 	}
 	
@@ -64,14 +58,35 @@ class EditableFormField extends DataObject {
 		return $this->renderWith('EditableFormField');
 	}
 	
-	function isReadonly() {
-		return $this->readonly;
-	}
-	
 	function ClassName() {
 		return $this->class;
 	}
 	
+	/**
+	 * Return whether a user can delete this form field
+	 * based on whether they can edit the page
+	 *
+	 * @return bool
+	 */
+	public function canDelete() {
+		return $this->Parent()->canEdit();
+	}
+	
+	/**
+	 * Return whether a user can edit this form field
+	 * based on whether they can edit the page
+	 *
+	 * @return bool
+	 */
+	public function canEdit() {
+		return $this->Parent()->canEdit();
+	}
+	
+	/**
+	 * Show this form on load or not
+	 *
+	 * @return bool
+	 */
 	function ShowOnLoad() {
 		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
 	}
@@ -185,20 +200,10 @@ class EditableFormField extends DataObject {
 		}
 		return $output;
 	}
-	
-	function makeReadonly() {
-		$this->readonly = true;
-		return $this;
-	}
-	
-	function ReadonlyEditSegment() {
-		$this->readonly = true;
-		return $this->EditSegment();
-	}
-	
+
 	function TitleField() {
 		$titleAttr = Convert::raw2att($this->Title);
-		$readOnlyAttr = ($this->readonly) ? ' disabled="disabled"' : '';
+		$readOnlyAttr = (!$this->canEdit()) ? ' disabled="disabled"' : '';
 		
 		return "<input type=\"text\" class=\"text\" title=\"("._t('EditableFormField.ENTERQUESTION', 'Enter Question').")\" value=\"$titleAttr\" name=\"Fields[{$this->ID}][Title]\"$readOnlyAttr />";
 	}
@@ -288,10 +293,16 @@ class EditableFormField extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getFieldValidationOptions() {
-		return new FieldSet(
+		$fields = new FieldSet(
 			new CheckboxField("Fields[$this->ID][Required]", _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
 			new TextField("Fields[$this->ID][CustomErrorMessage]", _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
 		);
+		
+		if(!$this->canEdit()) {
+			foreach($fields as $field) {
+				$fields->performReadonlyTransformation();
+			}
+		}
 	}
 	
 	/**

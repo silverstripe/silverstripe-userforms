@@ -7,27 +7,19 @@
 class FieldEditor extends FormField {
 	
 	protected $haveFormOptions = true;
-	
-	protected $readonly = false;
-	
-	function isReadonly() {
-		return $this->readonly;
-	}
-	
-	function performReadonlyTransformation() {
-		$clone = clone $this;
-		$clone->setReadonly(true);
-		return $clone;
-	}
-	
-	function makeReadonly() {
-		return $this->performReadonlyTransformation();
-	}
-	
+
 	function FieldHolder() {
 		return $this->renderWith("FieldEditor");
 	}
 	
+	/**
+	 * Can a user edit this field
+	 *
+	 * @return bool
+	 */
+	public function canEdit() {
+		return $this->form->getRecord()->canEdit();
+	}
 	function Fields() {
 		Requirements::css("userforms/css/FieldEditor.css");
 		Requirements::javascript("jsparty/jquery/ui/ui.core.js");
@@ -37,16 +29,15 @@ class FieldEditor extends FormField {
 		$relationName = $this->name;
 		
 		$fields = $this->form->getRecord()->$relationName();
-
-		if($this->readonly) {
-			$readonlyFields = new DataObjectSet();
-			
-			foreach($fields as $field) {
-				$field->setEditor($this);
-				$readonlyFields->push($field->makeReadonly());
+		
+		foreach($fields as $field) {
+			if(!$this->canEdit()) {
+				if(is_a($field, 'FormField')) {
+					$readonlyFields->push($field->performReadonlyTransformation());
+				}
 			}
-				
-			$fields = $readonlyFields;
+			
+			$field->setEditor($this);
 		}
 		return $fields;
 	}

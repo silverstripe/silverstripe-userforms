@@ -17,7 +17,7 @@
 			<a class="moreOptions" href="#" title="<% _t('SHOWOPTIONS', 'Show Options') %>"><% _t('SHOWOPTIONS','Show Options') %></a>
 		<% end_if %>
 		
-		<% if CanDelete %>
+		<% if canDelete %>
    			<a class="delete" href="#" title="<% _t('DELETE', 'Delete') %>">
 				<% _t('DELETE', 'Delete') %>
 			</a>
@@ -31,7 +31,7 @@
 					<legend><% _t('OPTIONS', 'Options') %></legend>
 					<ul class="editableOptions" id="$Name.Attr-list">
 
-						<% if isReadonly %>
+						<% if canEdit %>
 							<% control Options %>
 								$ReadonlyOption
 							<% end_control %>			
