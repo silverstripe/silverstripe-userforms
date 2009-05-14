@@ -1,11 +1,9 @@
 <h1>$Subject</h1>
 $Body
 
-<table>
+<dl>
 	<% control Fields %>
-		<tr>
-			<td style="padding: 5px"><b>$Title</b></td>
-			<td style="padding: 5px">$Value.RAW</td>
-		</tr>			
+		<dt><strong>$Title</strong></dt>
+		<dd>$Value.RAW</dd>
 	<% end_control %>
-</table>
+</dl>
