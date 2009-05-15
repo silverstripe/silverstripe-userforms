@@ -244,7 +244,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							
 							// watch out for multiselect options - radios and check boxes
 							if(is_a($formFieldWatch, 'EditableDropdown')) {
-								$fieldToWatch = "$(\"select[name='".$dependency['ConditionField']."]'\")";	
+								$fieldToWatch = "$(\"select[name='".$dependency['ConditionField']."']\")";	
 							}
 							
 							// watch out for checkboxs as the inputs don't have values but are 'checked
