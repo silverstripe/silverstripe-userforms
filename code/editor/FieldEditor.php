@@ -6,7 +6,7 @@
  */
 class FieldEditor extends FormField {
 	
-	protected $haveFormOptions = true;
+	protected $hasFormOptions = true;
 
 	function FieldHolder() {
 		return $this->renderWith("FieldEditor");
@@ -104,10 +104,11 @@ class FieldEditor extends FormField {
 				} else {
 			  		$editable = DataObject::get_one('EditableFormField', "(`ParentID` = '{$record->ID}' OR `ParentID` = 0) AND `EditableFormField`.`ID`='$newEditableID'" ); 
 				}
-				
+	
 		  		// check if we are updating an existing field. One odd thing is a 'deleted' field
 		 		// still exists in the post data (ID) so we need to check for type.
-		  		if($editable && isset($missingFields[$editable->ID]) && isset($newEditableData['Type'])) {
+				
+		  		if($editable && isset($missingFields[$editable->ID]) && isset($newEditableData)) {
 		  			// check if it has been labelled as deleted
 					if(isset($newEditableData['Title']) && $newEditableData['Title'] != 'field-node-deleted') {
 						unset($missingFields[$editable->ID]);
@@ -129,10 +130,10 @@ class FieldEditor extends FormField {
     	}
 
     	if($record->hasMethod('customFormSave')) {
-			$record->customFormSave( $_REQUEST[$name], $record );
+			$record->customFormSave($_REQUEST[$name], $record);
 		}	
 		
-		if($record->hasMethod( 'processNewFormFields')) {
+		if($record->hasMethod('processNewFormFields')) {
 			$record->processNewFormFields();
 		}
 	}
@@ -208,21 +209,21 @@ class FieldEditor extends FormField {
 		return false;
 	}
 
-	function setHaveFormOptions($bool){
-		$this->haveFormOptions = $bool;
+	function setHasFormOptions($bool){
+		$this->hasFormOptions = $bool;
 	}
 	
-	function getHaveFormOptions(){
-		return $this->haveFormOptions;
+	function hasFormOptions(){
+		return $this->hasFormOptions;
 	}
 	
 	function FormOptions() {
-		if($this->haveFormOptions){
+		if($this->hasFormOptions()){
 		    if($this->form->getRecord()->hasMethod('customFormActions')) {
 		        $newFields = $this->form->getRecord()->customFormActions($this->readonly);
-		        
-		        foreach( $newFields as $newField ) {
-		        	$newField->setName( "{$this->name}[{$newField->Name()}]" );
+
+		        foreach($newFields as $newField) {
+		        	$newField->setName("{$this->name}[{$newField->Name()}]" );
 		        }
 			    if($this->readonly) {
 					$newFields = $newFields->makeReadonly();

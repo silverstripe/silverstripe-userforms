@@ -188,7 +188,7 @@ class EditableFormField extends DataObject {
 						$outputFields->push($new);
 					}
 					$output->push(new ArrayData(array(
-						'Name' => $this->Name(),
+						'FieldName' => $this->FieldName(),
 						'Display' => $data['Display'],
 						'Fields' => $outputFields,
 						'ConditionField' => $data['ConditionField'],
@@ -214,7 +214,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return String
 	 */
-	public function Name() {
+	public function FieldName() {
 		return "Fields[".$this->ID."]";
 	}
 	
@@ -238,7 +238,7 @@ class EditableFormField extends DataObject {
 	public function populateFromPostData($data) {
 		$this->Title = (isset($data['Title'])) ? $data['Title']: "";
 		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
-		$this->Sort = isset($data['Sort']) ? $data['Sort'] : null;
+		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : null;
   		$this->CustomParameter = isset($data['CustomParameter']) ? $data['CustomParameter'] : null;
 		$this->Required = !empty($data['Required']) ? 1 : 0;
   		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;

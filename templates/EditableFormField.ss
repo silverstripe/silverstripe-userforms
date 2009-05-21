@@ -29,13 +29,9 @@
 			<% if HasAddableOptions %>
 				<fieldset class="fieldOptionsGroup">
 					<legend><% _t('OPTIONS', 'Options') %></legend>
-					<ul class="editableOptions" id="$Name.Attr-list">
+					<ul class="editableOptions" id="$FieldName.Attr-list">
 
 						<% if canEdit %>
-							<% control Options %>
-								$ReadonlyOption
-							<% end_control %>			
-						<% else %>
 							<% control Options %>
 								$EditSegment
 							<% end_control %>
@@ -46,6 +42,10 @@
 									</a>
 								</li>
 							<% end_if %>
+						<% else %>
+							<% control Options %>
+								$ReadonlyOption
+							<% end_control %>
 						<% end_if %>
 					</ul>
 				</fieldset>
@@ -70,14 +70,14 @@
 			<% end_if %>
 				<fieldset class="customRules fieldOptionsGroup">
 				<legend>Custom Rules</legend>
-				<ul id="$Name.Attr-customRules">
+				<ul id="$FieldName.Attr-customRules">
 					<li>
 						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>">
 							Add Rule
 						</a>
 					</li>
 					<li class="addCustomRule">
-						<select name="$Name.Attr[CustomSettings][ShowOnLoad]">
+						<select name="$FieldName.Attr[CustomSettings][ShowOnLoad]">
 							<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
 							<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
 						</select>
@@ -85,18 +85,18 @@
 						<label class="left">Field On Default</label>
 					</li>
 					<li class="hidden">
-						<select class="displayOption customRuleField" name="{$Name}[CustomRules][Display]">
+						<select class="displayOption customRuleField" name="{$FieldName}[CustomRules][Display]">
 							<option value="Show"><% _t('SHOWTHISFIELD', 'Show This Field') %></option>
 							<option value="Hide"><% _t('HIDETHISFIELD', 'Hide This Field') %></option>
 						</select>
 
 						<label><% _t('WHEN', 'When') %></label>
-						<select class="fieldOption customRuleField" name="{$Name}[CustomRules][ConditionField]">
+						<select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][ConditionField]">
 				
 						</select>
 
 						<label><% _t('IS', 'Is') %></label>
-						<select class="conditionOption customRuleField" name="{$Name}[CustomRules][ConditionOption]">
+						<select class="conditionOption customRuleField" name="{$FieldName}[CustomRules][ConditionOption]">
 							<option value=""></option>
 							<option value="IsBlank"><% _t('BLANK', 'Blank') %></option>
 							<option value="IsNotBlank"><% _t('NOTBLANK', 'Not Blank') %></option>
@@ -104,7 +104,7 @@
 							<option value="ValueNot"><% _t('NOTVALUE', 'Not Value') %></option>
 						</select>
 
-						<input type="text" class="ruleValue hidden customRuleField" name="{$Name}[CustomRules][Value]" />
+						<input type="text" class="ruleValue hidden customRuleField" name="{$FieldName}[CustomRules][Value]" />
 
 						<a href="#" class="deleteCondition" title="<% _t('DELETE', 'Delete') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete') %>" /></a>
 					</li>
@@ -119,7 +119,7 @@
 	<% end_if %>
 	
 	<!-- Hidden option Fields -->
-  	<input type="hidden" class="canDeleteHidden" name="$Name.Attr[CanDelete]" value="$CanDelete" />
-  	<input type="hidden" class="typeHidden" name="$Name.Attr[Type]" value="$ClassName" />   
-	<input type="hidden" class="sortHidden" name="$Name.Attr[Sort]" value="$Sort" />
+  	<input type="hidden" class="canDeleteHidden" name="$FieldName.Attr[CanDelete]" value="$CanDelete" />
+  	<input type="hidden" class="typeHidden" name="$FieldName.Attr[Type]" value="$ClassName" />   
+		<input type="hidden" class="sortHidden" name="$FieldName.Attr[Sort]" value="$Sort" />
 </li>

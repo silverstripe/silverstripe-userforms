@@ -72,7 +72,7 @@ class EditableMultipleOptionField extends EditableFormField {
 		
 		// get the current options
 		$fieldSet = $this->Options();
-		
+
 		// go over all the current options and check if ID and Title still exists
 		foreach($fieldSet as $option) {
 			if(isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {

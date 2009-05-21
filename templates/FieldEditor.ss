@@ -1,4 +1,4 @@
-<div class="FieldEditor <% if isReadonly %>readonly<% end_if %>" id="Fields" name="$Name.Attr">
+<div class="FieldEditor <% if isReadonly %>readonly<% end_if %>" id="Fields">
 
 	<% include AddField %>
 	

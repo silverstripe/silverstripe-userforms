@@ -43,7 +43,7 @@ class EditableOption extends DataObject {
 	 * 
 	 * @return String
 	 */
-	public function Name() {
+	public function FieldName() {
 		return "Fields[{$this->ParentID}][{$this->ID}]";
 	}
 
