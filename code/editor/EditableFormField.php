@@ -303,6 +303,7 @@ class EditableFormField extends DataObject {
 				$fields->performReadonlyTransformation();
 			}
 		}
+		return $fields;
 	}
 	
 	/**
