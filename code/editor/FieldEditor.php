@@ -127,10 +127,10 @@ class FieldEditor extends FormField {
 		}
 
     	// remove the fields not saved
-    	foreach($missingFields as $removedField) {
-    		if(is_numeric($removedField->ID)) {
-				// check we can edit this
-				if($this->canEdit()) {
+		if($this->canEdit()) {
+    		foreach($missingFields as $removedField) {
+    			if(is_numeric($removedField->ID)) {
+					// check we can edit this
 					$removedField->delete();
 				}
 			}
