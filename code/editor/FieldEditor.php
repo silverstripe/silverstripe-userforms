@@ -20,6 +20,12 @@ class FieldEditor extends FormField {
 	public function canEdit() {
 		return $this->form->getRecord()->canEdit();
 	}
+	
+	/**
+	 * Return the Form Fields for the user forms
+	 * 
+	 * @return DataObjectSet
+	 */
 	function Fields() {
 		Requirements::css("userforms/css/FieldEditor.css");
 		Requirements::javascript("jsparty/jquery/ui/ui.core.js");
@@ -33,7 +39,8 @@ class FieldEditor extends FormField {
 		foreach($fields as $field) {
 			if(!$this->canEdit()) {
 				if(is_a($field, 'FormField')) {
-					$readonlyFields->push($field->performReadonlyTransformation());
+					$fields->remove($field);
+					$fields->push($field->performReadonlyTransformation());
 				}
 			}
 			
@@ -81,7 +88,7 @@ class FieldEditor extends FormField {
 		$fieldSet = $record->$name();		        
 		
 		// @todo shouldn't we deal with customFormActions on that object?
-		$record->EmailOnSubmit = isset( $_REQUEST[$name]['EmailOnSubmit'] ) ? "1" : "0";
+		$record->EmailOnSubmit = isset($_REQUEST[$name]['EmailOnSubmit']) ? "1" : "0";
 		$record->SubmitButtonText = isset($_REQUEST[$name]['SubmitButtonText']) ? $_REQUEST[$name]['SubmitButtonText'] : "";
 		$record->ShowClearButton = isset($_REQUEST[$name]['ShowClearButton']) ? "1" : "0";
 		
@@ -94,31 +101,26 @@ class FieldEditor extends FormField {
 		}
 
 		if($_REQUEST[$name]) {
-			foreach(array_keys($_REQUEST[$name]) as $newEditableID) {
+			foreach($_REQUEST[$name] as $newEditableID => $newEditableData) {
 				if(!is_numeric($newEditableID)) continue;
 				
-				$newEditableData = $_REQUEST[$name][$newEditableID];
-				
-				if(defined('Database::USE_ANSI_SQL')) {
-			  		$editable = DataObject::get_one('EditableFormField', "(\"ParentID\" = '{$record->ID}' OR \"ParentID\" = '0') AND \"EditableFormField\".\"ID\" = '$newEditableID'"); 
-				} else {
-			  		$editable = DataObject::get_one('EditableFormField', "(`ParentID` = '{$record->ID}' OR `ParentID` = 0) AND `EditableFormField`.`ID`='$newEditableID'" ); 
-				}
+				// get it from the db
+			  	$editable = DataObject::get_by_id('EditableFormField', $newEditableID); 
 	
-		  		// check if we are updating an existing field. One odd thing is a 'deleted' field
-		 		// still exists in the post data (ID) so we need to check for type.
-				
-		  		if($editable && isset($missingFields[$editable->ID]) && isset($newEditableData)) {
-		  			// check if it has been labelled as deleted
-					if(isset($newEditableData['Title']) && $newEditableData['Title'] != 'field-node-deleted') {
+		  		// if it exists in the db update it
+		  		if($editable) {
+			
+					// remove it from the removed fields list
+					if(isset($missingFields[$editable->ID]) && isset($newEditableData) && is_array($newEditableData)) {
 						unset($missingFields[$editable->ID]);
 					}
-				}
-				
-				if($editable) {
+
+					// set form id
 					if($editable->ParentID == 0) {
 						$editable->ParentID = $record->ID;
 					}
+					
+					// save data
 					$editable->populateFromPostData($newEditableData);
 				}
 		    }
@@ -126,7 +128,12 @@ class FieldEditor extends FormField {
 
     	// remove the fields not saved
     	foreach($missingFields as $removedField) {
-    		if(is_numeric($removedField->ID)) $removedField->delete();
+    		if(is_numeric($removedField->ID)) {
+				// check we can edit this
+				if($this->canEdit()) {
+					$removedField->delete();
+				}
+			}
     	}
 
     	if($record->hasMethod('customFormSave')) {
