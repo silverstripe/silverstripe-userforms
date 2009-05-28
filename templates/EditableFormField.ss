@@ -119,7 +119,7 @@
 	<% end_if %>
 	
 	<!-- Hidden option Fields -->
-  	<input type="hidden" class="canDeleteHidden" name="$FieldName.Attr[CanDelete]" value="$CanDelete" />
-  	<input type="hidden" class="typeHidden" name="$FieldName.Attr[Type]" value="$ClassName" />   
-		<input type="hidden" class="sortHidden" name="$FieldName.Attr[Sort]" value="$Sort" />
+  	<input type="hidden" class="canDeleteHidden" name="{$FieldName}[CanDelete]" value="$CanDelete" />
+  	<input type="hidden" class="typeHidden" name="{$FieldName}[Type]" value="$ClassName" />   
+		<input type="hidden" class="sortHidden" name="{$FieldName}[Sort]" value="$Sort" />
 </li>
