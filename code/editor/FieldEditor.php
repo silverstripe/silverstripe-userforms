@@ -100,7 +100,7 @@ class FieldEditor extends FormField {
 			$missingFields[$existingField->ID] = $existingField;
 		}
 
-		if($_REQUEST[$name]) {
+		if(isset($_REQUEST[$name]) && is_array($_REQUEST[$name])) {
 			foreach($_REQUEST[$name] as $newEditableID => $newEditableData) {
 				if(!is_numeric($newEditableID)) continue;
 				
