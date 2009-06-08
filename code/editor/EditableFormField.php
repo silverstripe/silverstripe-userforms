@@ -35,6 +35,8 @@ class EditableFormField extends DataObject {
 	 */
 	protected $editor;
 
+	protected $readonly;
+
 	/**
 	 * Construct a new EditableFormField Object.
 	 * 
@@ -52,6 +54,22 @@ class EditableFormField extends DataObject {
 	 */
 	public function setEditor($editor) {
 		$this->editor = $editor;
+	}
+	
+	/**
+	 * Set this formfield to readonly
+	 */
+	public function setReadonly() {
+		$this->readonly = true;
+	}
+
+	/**
+	 * Is this multipleoption field readonly to the user
+	 *
+	 * @return bool
+	 */
+	public function isReadonly() {
+		return $this->readonly;
 	}
 	
 	function EditSegment() {
@@ -156,6 +174,7 @@ class EditableFormField extends DataObject {
 	public function showExtraOptions() {
 		return true;
 	}
+	
 	/**
 	 * Return the Custom Validation fields for this
 	 * field for the CMS

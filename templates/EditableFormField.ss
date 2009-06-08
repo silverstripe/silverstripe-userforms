@@ -18,10 +18,8 @@
 		<% end_if %>
 		
 		<% if canDelete %>
-   			<a class="delete" href="#" title="<% _t('DELETE', 'Delete') %>">
-				<% _t('DELETE', 'Delete') %>
-			</a>
-   		<% end_if %> 	
+			<a class="delete" href="#" title="<% _t('DELETE', 'Delete') %>"><% _t('DELETE', 'Delete') %></a>
+		<% end_if %> 	
 	</div>
 	
 	<% if showExtraOptions %>

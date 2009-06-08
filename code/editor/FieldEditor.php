@@ -13,12 +13,31 @@ class FieldEditor extends FormField {
 	}
 	
 	/**
-	 * Can a user edit this field
-	 *
-	 * @return bool
+	 * Can a user edit this field?
+	 * @return boolean
 	 */
 	public function canEdit() {
+		if($this->readonly) return false;
 		return $this->form->getRecord()->canEdit();
+	}
+	
+	/**
+	 * Can a user delete this field?
+	 * @return boolean
+	 */
+	public function canDelete() {
+		if($this->readonly) return false;
+		return $this->form->getRecord()->canDelete();
+	}
+
+	function performReadonlyTransformation() {
+		$this->readonly = true;
+		$fields = $this->Fields();
+		if($fields) foreach($fields as $field) {
+			$field->setReadonly();
+		}
+		
+		return $this->customise(array('Fields' => $fields));
 	}
 	
 	/**
@@ -33,19 +52,20 @@ class FieldEditor extends FormField {
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		
 		$relationName = $this->name;
-		
 		$fields = $this->form->getRecord()->$relationName();
 		
-		foreach($fields as $field) {
-			if(!$this->canEdit()) {
-				if(is_a($field, 'FormField')) {
-					$fields->remove($field);
-					$fields->push($field->performReadonlyTransformation());
+		if($fields) {
+			foreach($fields as $field) {
+				if(!$this->canEdit()) {
+					if(is_a($field, 'FormField')) {
+						$fields->remove($field);
+						$fields->push($field->performReadonlyTransformation());
+					}
 				}
+				$field->setEditor($this);
 			}
-			
-			$field->setEditor($this);
 		}
+		
 		return $fields;
 	}
 	

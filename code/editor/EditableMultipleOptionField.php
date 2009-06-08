@@ -22,8 +22,6 @@ class EditableMultipleOptionField extends EditableFormField {
 		"Options" => "EditableOption"
 	);
 	
-	protected $readonly;
-	
 	/**
 	 * Deletes all the options attached to this field before
 	 * deleting the field. Keeps stray options from floating 
@@ -94,22 +92,6 @@ class EditableMultipleOptionField extends EditableFormField {
 		return true;
 	}
 
-	/**
-	 * Set this multipleoptionfield to readonly
-	 */
-	protected function ReadonlyOption() {
-		$this->readonly = true;
-	}
-
-	/**
-	 * Is this multipleoption field readonly to the user
-	 *
-	 * @return bool
-	 */
-	public function isReadonly() {
-		return $this->readonly;
-	}
-	
 	/**
 	 * Return the form field for this object in the front 
 	 * end form view

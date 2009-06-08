@@ -5,11 +5,7 @@
 	<div class="FieldListHold">
 		<ul class="FieldList" id="Fields_fields">
 			<% control Fields %>
-				<% if isReadonly %>
-					$ReadonlyEditSegment	
-				<% else %>
-					$EditSegment
-				<% end_if %>
+				$EditSegment
 			<% end_control %>
 		</ul>
 	</div>
