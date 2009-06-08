@@ -31,13 +31,14 @@ class FieldEditor extends FormField {
 	}
 
 	function performReadonlyTransformation() {
-		$this->readonly = true;
-		$fields = $this->Fields();
+		$clone = clone $this;
+		$clone->readonly = true;
+		$fields = $clone->Fields();
 		if($fields) foreach($fields as $field) {
 			$field->setReadonly();
 		}
 		
-		return $this->customise(array('Fields' => $fields));
+		return $clone->customise(array('Fields' => $fields));
 	}
 	
 	/**
@@ -50,23 +51,27 @@ class FieldEditor extends FormField {
 		Requirements::javascript("jsparty/jquery/ui/ui.core.js");
 		Requirements::javascript("jsparty/jquery/ui/ui.sortable.js");
 		Requirements::javascript("userforms/javascript/UserForm.js");
+
+		// Don't return any fields unless we actually have the dependent parameters set on the form field
+		if($this->form && $this->form->getRecord() && $this->name) {
+			$relationName = $this->name;
+			$fields = $this->form->getRecord()->$relationName();
 		
-		$relationName = $this->name;
-		$fields = $this->form->getRecord()->$relationName();
-		
-		if($fields) {
-			foreach($fields as $field) {
-				if(!$this->canEdit()) {
-					if(is_a($field, 'FormField')) {
-						$fields->remove($field);
-						$fields->push($field->performReadonlyTransformation());
+			if($fields) {
+				foreach($fields as $field) {
+					if(!$this->canEdit()) {
+						if(is_a($field, 'FormField')) {
+							$fields->remove($field);
+							$fields->push($field->performReadonlyTransformation());
+						}
 					}
+					$field->setEditor($this);
 				}
-				$field->setEditor($this);
 			}
+			return $fields;
+
 		}
 		
-		return $fields;
 	}
 	
 	/**
