@@ -187,6 +187,7 @@ class FieldEditor extends FormField {
 			$sort = $highestSort->value() + 1;
 
 			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
+			if(!$className) user_error('Please select a field type to created', E_USER_WARNING);
 
 			if(is_subclass_of($className, "EditableFormField")) {
 				$field = new $className();
