@@ -17,7 +17,6 @@ class EditableMemberListField extends EditableFormField {
 		$fields = new FieldSet(
 			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
 		);
-		$fields->merge(parent::ExtraOptions());
 		
 		return $fields;
 	}
