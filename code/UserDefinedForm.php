@@ -64,7 +64,8 @@ class UserDefinedForm extends Page {
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
 
 		// who do we email on submission
-		$emailRecipients = new HasManyComplexTableField($this,
+		$emailRecipients = new ComplexTableField(
+			$this,
 	    	'EmailRecipients',
 	    	'UserDefinedForm_EmailRecipient',
 	    	array(
@@ -74,8 +75,9 @@ class UserDefinedForm extends Page {
 	    	),
 	    	'getCMSFields_forPopup',
 			"FormID = '$this->ID'"
-	    );
+		);
 		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
+		
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
 	
 		// text to show on complete
@@ -552,18 +554,14 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	
 	/**
 	 * Return the fields to edit this email. 
-	 *
 	 * @return FieldSet
 	 */
 	public function getCMSFields_forPopup() {
-		$forms = DataObject::get("UserDefinedForm");
-		if($forms) $forms = $forms->toDropdownMap('ID', 'Title');
 		$fields = new FieldSet(
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
 			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','From Address')),
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
-			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
-			new DropdownField('FormID', 'Form', $forms)
+			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)'))
 		);
 		
 		if($this->Form()) {
