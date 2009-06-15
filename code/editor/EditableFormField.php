@@ -116,7 +116,7 @@ class EditableFormField extends DataObject {
 	 * @return Array Return all the Settings
 	 */
 	protected function getFieldSettings() {
-		return (isset($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
+		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
 	}
 	
 	/**
