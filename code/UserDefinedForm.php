@@ -543,7 +543,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
-		'EmailBody' => 'HTMLText',
+		'EmailBody' => 'Text',
 		'SendPlain' => 'Boolean'
 	);
 	
@@ -572,7 +572,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				$fields->push(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.SENDEMAILINSTEAD', 'Send Email Instead To'),$validEmailFields, '', null, 'Use Fixed Email'));
 			}
 		}
-		$fields->push(new HTMLEditorField('EmailBody', 'Body'));
+		$fields->push(new TextareaField('EmailBody', 'Body'));
 		return $fields;
 	}
 }
