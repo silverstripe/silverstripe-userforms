@@ -266,7 +266,6 @@ class EditableFormField extends DataObject {
 		$this->CustomRules = "";
 		$this->CustomSettings = "";
 		$this->ShowOnLoad = (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
-		
 		// custom settings
 		if(isset($data['CustomSettings'])) {
 			$this->setFieldSettings($data['CustomSettings']);

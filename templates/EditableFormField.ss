@@ -66,16 +66,17 @@
 					<% end_control %>
 				</fieldset>
 			<% end_if %>
-				<fieldset class="customRules fieldOptionsGroup">
+		
+			<fieldset class="customRules fieldOptionsGroup">
 				<legend>Custom Rules</legend>
-				<ul id="$FieldName.Attr-customRules">
+				<ul id="{$FieldName}-customRules">
 					<li>
 						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>">
 							Add Rule
 						</a>
 					</li>
 					<li class="addCustomRule">
-						<select name="$FieldName.Attr[CustomSettings][ShowOnLoad]">
+						<select name="{$FieldName}[CustomSettings][ShowOnLoad]">
 							<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
 							<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
 						</select>
