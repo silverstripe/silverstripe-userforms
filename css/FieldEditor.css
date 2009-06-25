@@ -195,7 +195,7 @@
 				}
 				
 		/* HIDE */
-		#Fields_fields li.EditableFormField div.hidden {
+		#Fields_fields li.EditableFormField .hidden {
 			display: none;
 		}
 

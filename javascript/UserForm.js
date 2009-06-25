@@ -59,9 +59,7 @@
 					//update the internal lists
 					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
 
-					$("#Fields_fields select.fieldOption").each(function(i, domElement) {
-						$(domElement).append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
-					});
+					$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
 				},
 				
 				// error creating new field

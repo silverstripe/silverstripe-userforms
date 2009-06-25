@@ -91,7 +91,14 @@
 
 						<label><% _t('WHEN', 'When') %></label>
 						<select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][ConditionField]">
-				
+							<option></option>
+							<% control Parent %>
+								<% if Fields %>
+									<% control Fields %>
+										<option value="$Name"><% if Title %>$Title<% else %>$Name<% end_if %></option>
+									<% end_control %>
+								<% end_if %>
+							<% end_control %>
 						</select>
 
 						<label><% _t('IS', 'Is') %></label>
@@ -120,5 +127,5 @@
 	<!-- Hidden option Fields -->
   	<input type="hidden" class="canDeleteHidden" name="{$FieldName}[CanDelete]" value="$CanDelete" />
   	<input type="hidden" class="typeHidden" name="{$FieldName}[Type]" value="$ClassName" />   
-		<input type="hidden" class="sortHidden" name="{$FieldName}[Sort]" value="$Sort" />
+	<input type="hidden" class="sortHidden" name="{$FieldName}[Sort]" value="$Sort" />
 </li>
