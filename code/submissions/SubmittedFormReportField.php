@@ -18,9 +18,30 @@ class SubmittedFormReportField extends FormField {
 	 * @return ComponentSet
 	 */ 
 	function Submissions() {
-		return $this->form->getRecord()->Submissions();
+		$pageStart = isset($_REQUEST['start']) && is_numeric($_REQUEST['start']) ? $_REQUEST['start'] : 0;
+		$pageLength = 10;
+		
+		$items = $this->form->getRecord()->getComponents('Submissions', null, null, null, "$pageStart,$pageLength");
+		$formId = $this->form->getRecord()->ID;
+
+		foreach(DB::query("SELECT COUNT(*) AS CountRows FROM SubmittedForm WHERE ParentID = $formId") as $r) $totalCount = $r['CountRows'];
+
+		$items->setPageLimits($pageStart, $pageLength, $totalCount);
+		$items->NextStart = $pageStart + $pageLength;
+		$items->PrevStart = $pageStart - $pageLength;
+		$items->Start = $pageStart;
+		$items->StartPlusOffset = $pageStart+$pageLength;
+		$items->TotalCount = $totalCount;
+
+		return $items;
 	}
 	
+	function getSubmissions() {
+		return $this->customise(array(
+			'Submissions' => $this->Submissions()
+		))->renderWith(array('SubmittedFormReportField'));
+	}
+
 	/**
 	 * ID of this forms record
 	 * 
