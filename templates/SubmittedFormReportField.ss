@@ -24,13 +24,13 @@
 		<% if Submissions.MoreThanOnePage %>
 			<div class="pagination"> 
 				<% if Submissions.NotFirstPage %>
-					<a class="prev" href="javascript:void(0)" onclick="jQuery('.middleColumn').parent().load($('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.PrevStart}');" title="View the previous page">Previous page</a> 
+					<a class="prev" href="javascript:void(0)" onclick="jQuery('.middleColumn').parent().load(jQuery('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.PrevStart}');" title="View the previous page">Previous page</a> 
 				<% end_if %>
 				
 				<span>Viewing rows $Submissions.Start - $Submissions.StartPlusOffset of $Submissions.TotalCount rows</span>
 				
 				<% if Submissions.NotLastPage %>
-					<a class="next" href="javascript:void(0)" onclick="jQuery('#FormSubmissions').parent().load($('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.NextStart}');" title="View the next page">Next page</a> 
+					<a class="next" href="javascript:void(0)" onclick="jQuery('#FormSubmissions').parent().load(jQuery('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.NextStart}');" title="View the next page">Next page</a> 
 				<% end_if %>
 			</div>
 		<% end_if %>
