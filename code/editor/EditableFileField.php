@@ -31,5 +31,12 @@ class EditableFileField extends EditableFormField {
 		return new FileField($this->Name, $this->Title);
 	}
 	
+	/**
+	 * Workaround to handle uploads on the UserFormPage
+	 */
+	public function getValueFromData($data) {
+		return "";
+	}
+	
 }
 ?>
