@@ -536,15 +536,13 @@ JS
 	function finished() {
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
-		$templateData = $this->customise(array(
+		return $this->customise(array(
 			'Content' => $this->customise(
 				array(
 					'Link' => $referrer
 				))->renderWith('ReceivedFormSubmission'),
 			'Form' => ' ',
 		));
-		
-		return $templateData;
 	}
 }
 
