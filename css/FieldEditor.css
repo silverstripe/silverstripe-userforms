@@ -161,6 +161,7 @@
 			
 				#Fields_fields .EditableFormField .checkbox input {
 					float: left;
+					width:auto;
 					margin: 0 8px 0 0;
 				}
 			

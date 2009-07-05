@@ -474,10 +474,26 @@ JS
 				$email->setBody($recipient->EmailBody);
 				$email->setSubject($recipient->EmailSubject);
 				$email->setTo($recipient->EmailAddress);
-				// check to see if they are a dynamic recipient. eg based on a field
+				
+				// check to see if they are a dynamic sender. eg based on a email field
 				// a user selected
-				if($recipient->SendEmailFromFieldID) {
+				if($recipient->SendEmailFromField()) {
 					$name = Convert::raw2sql($recipient->SendEmailFromField()->Name);
+					
+					if(defined('Database::USE_ANSI_SQL')) {
+						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
+					} else {
+						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
+					}
+					
+					if($submittedFormField) {
+						$email->setFrom($submittedFormField->Value);	
+					}
+				}
+				// check to see if they are a dynamic reciever eg based on a dropdown field
+				// a user selected
+				if($recipient->SendEmailToField()) {
+					$name = Convert::raw2sql($recipient->SendEmailToField()->Name);
 					
 					if(defined('Database::USE_ANSI_SQL')) {
 						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
@@ -489,6 +505,7 @@ JS
 						$email->setTo($submittedFormField->Value);	
 					}
 				}
+				
 				if($recipient->SendPlain) {
 					$body = strip_tags($recipient->EmailBody) . "\n ";
 					if(isset($emailData['Fields'])) {
@@ -549,7 +566,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	
 	static $has_one = array(
 		'Form' => 'UserDefinedForm',
-		'SendEmailFromField' => 'EditableFormField'
+		'SendEmailFromField' => 'EditableFormField',
+		'SendEmailToField' => 'EditableFormField'
 	);
 	
 	/**
@@ -569,7 +587,13 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			
 			if($validEmailFields) {
 				$validEmailFields = $validEmailFields->toDropdownMap('ID', 'Title');
-				$fields->push(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.SENDEMAILINSTEAD', 'Send Email Instead To'),$validEmailFields, '', null, 'Use Fixed Email'));
+				$fields->push(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.SENDEMAILINSTEAD', 'Send Email Instead From'),$validEmailFields, '', null, _t('UserDefinedForm.USEDEFINEDVALUE', 'Use Defined Value')));
+			}
+			
+			$dropdownFields = DataObject::get("EditableMultipleOptionField", "ParentID = '$this->FormID'");
+			if($dropdownFields) {
+				$dropdownFields = $dropdownFields->toDropdownMap('ID', 'Title');
+				$fields->push(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.SENDEMAILTO', 'Send Email Instead To'), $dropdownFields, '', null, _t('UserDefinedForm.USEDEFINEDVALUE', 'Use Defined Value')));
 			}
 		}
 		$fields->push(new TextareaField('EmailBody', 'Body'));

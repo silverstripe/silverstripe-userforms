@@ -12,8 +12,8 @@ class EditableOption extends DataObject {
 	static $default_sort = "Sort";
 
 	static $db = array(
-		"Name" => "Varchar",
-		"Title" => "Varchar",
+		"Name" => "Varchar(255)",
+		"Title" => "Varchar(255)",
 		"Default" => "Boolean",
 		"Sort" => "Int"
 	);

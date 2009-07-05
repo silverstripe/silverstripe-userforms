@@ -1,6 +1,4 @@
 <div class="FieldEditor <% if isReadonly %>readonly<% end_if %>" id="Fields">
-
-	<% include AddField %>
 	
 	<div class="FieldListHold">
 		<ul class="FieldList" id="Fields_fields">
