@@ -128,8 +128,8 @@ class SubmittedFormReportField extends FormField {
 						
 						// Loop over all the names we can use
 						for($i=0;$i<count($csvHeaderNames);$i++) {
-							if(!$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead
-							else $csvData .= '"'.$row[$i].'",'; // Otherwise, output the value for this column
+							if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
+                            else $csvData .= '"'.str_replace('"', '\"', $row[$i]).'",';
 						}
 						// Start a new row for each submission
 						$csvData .= "\n";

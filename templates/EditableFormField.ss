@@ -68,12 +68,10 @@
 			<% end_if %>
 		
 			<fieldset class="customRules fieldOptionsGroup">
-				<legend>Custom Rules</legend>
+				<legend><% _t('CUSTOMRULES', 'Custom Rules') %></legend>
 				<ul id="{$FieldName}-customRules">
 					<li>
-						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>">
-							Add Rule
-						</a>
+						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>"><% _t('ADDRULE', 'Add Rule') %></a>
 					</li>
 					<li class="addCustomRule">
 						<select name="{$FieldName}[CustomSettings][ShowOnLoad]">
@@ -81,7 +79,7 @@
 							<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>
 						</select>
 
-						<label class="left">Field On Default</label>
+						<label class="left"><% _t('FIELDONDEFAULT', 'Field On Default') %></label>
 					</li>
 					<li class="hidden">
 						<select class="displayOption customRuleField" name="{$FieldName}[CustomRules][Display]">
