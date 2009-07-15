@@ -246,6 +246,8 @@
 		 */
 		$(".customRules .deleteCondition").livequery('click', function() {
 			$(this).parent("li").fadeOut().remove();
+			
+			return false;
 		});
 		/**
 		 * Adding a custom rule to a given form
