@@ -2,172 +2,169 @@
 
 global $lang;
 
-$lang['en_US']['EditableCheckbox']['ANY'] = 'Any';
-$lang['en_US']['EditableCheckbox']['NOTSELECTED'] = 'Not selected';
+$lang['en_US']['AddField.ss']['ADD'] = 'Add';
+$lang['en_US']['AddField.ss']['SELECTAFIELD'] = 'Select a Field';
+$lang['en_US']['CustomRule.ss']['BLANK'] = 'Blank';
+$lang['en_US']['CustomRule.ss']['DELETE'] = 'Delete';
+$lang['en_US']['CustomRule.ss']['HIDETHISFIELD'] = 'Hide This Field';
+$lang['en_US']['CustomRule.ss']['IS'] = 'Is';
+$lang['en_US']['CustomRule.ss']['NOTBLANK'] = 'Not Blank';
+$lang['en_US']['CustomRule.ss']['NOTVALUE'] = 'Not Value';
+$lang['en_US']['CustomRule.ss']['SHOWTHISFIELD'] = 'Show This Field';
+$lang['en_US']['CustomRule.ss']['VALUE'] = 'Value';
+$lang['en_US']['CustomRule.ss']['WHEN'] = 'When';
 $lang['en_US']['EditableCheckbox']['PLURALNAME'] = array(
 	'Checkboxes',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
-$lang['en_US']['EditableCheckbox']['SELECTED'] = 'Selected';
 $lang['en_US']['EditableCheckbox']['SINGULARNAME'] = array(
-	'Checkbox',
+	'Checkbox Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableCheckbox.ss']['CHECKBOX'] = 'Checkbox field';
-$lang['en_US']['EditableCheckbox.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableCheckbox.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableCheckbox.ss']['LOCKED'] = 'This field cannot be modified';
-$lang['en_US']['EditableCheckbox.ss']['MORE'] = 'More options';
 $lang['en_US']['EditableCheckboxGroupField']['PLURALNAME'] = array(
-	'Checkbox groups',
+	'Checkbox Groups',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableCheckboxGroupField']['SINGULARNAME'] = array(
-	'Checkbox group',
+	'Checkbox Group',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableCheckboxGroupField.ss']['ADD'] = 'Add new option';
-$lang['en_US']['EditableCheckboxGroupField.ss']['CHECKBOXGROUP'] = 'Checkbox group';
-$lang['en_US']['EditableCheckboxGroupField.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableCheckboxGroupField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableCheckboxGroupField.ss']['LOCKED'] = 'These fields cannot be modified';
-$lang['en_US']['EditableCheckboxGroupField.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableCheckboxGroupField.ss']['REQUIRED'] = 'This field is required for this form and cannot be deleted';
-$lang['en_US']['EditableCheckboxOption']['PLURALNAME'] = array(
-	'Checkbox options',
-	50,
-	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
-);
-$lang['en_US']['EditableCheckboxOption']['SINGULARNAME'] = array(
-	'Checkbox option',
-	50,
-	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableCheckboxOption.ss']['DELETE'] = 'Remove this option';
-$lang['en_US']['EditableCheckboxOption.ss']['DRAG'] = 'Drag to rearrange order of options';
-$lang['en_US']['EditableCheckboxOption.ss']['LOCKED'] = 'These fields cannot be modified';
 $lang['en_US']['EditableDateField']['PLURALNAME'] = array(
-	'Date fields',
+	'Date Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableDateField']['SINGULARNAME'] = array(
-	'Date field',
+	'Date Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableDateField.ss']['DATE'] = 'Date Field';
-$lang['en_US']['EditableDateField.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableDateField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableDateField.ss']['MORE'] = 'More options';
 $lang['en_US']['EditableDropdown']['PLURALNAME'] = array(
 	'Dropdowns',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableDropdown']['SINGULARNAME'] = array(
-	'Dropdown',
+	'Dropdown Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableDropdown.ss']['ADD'] = 'Add new option';
-$lang['en_US']['EditableDropdown.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableDropdown.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableDropdown.ss']['DROPDOWN'] = 'Dropdown box';
-$lang['en_US']['EditableDropdown.ss']['LOCKED'] = 'These fields cannot be modified';
-$lang['en_US']['EditableDropdown.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableDropdown.ss']['REQUIRED'] = 'This field is required for this form and cannot be deleted';
-$lang['en_US']['EditableDropdownOption']['PLURALNAME'] = array(
-	'Dropdown options',
-	50,
-	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
-);
-$lang['en_US']['EditableDropdownOption']['SINGULARNAME'] = array(
-	'Dropdown option',
-	50,
-	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableDropdownOption.ss']['DELETE'] = 'Remove this option';
-$lang['en_US']['EditableDropdownOption.ss']['DRAG'] = 'Drag to rearrange order of options';
-$lang['en_US']['EditableDropdownOption.ss']['LOCKED'] = 'These fields cannot be modified';
 $lang['en_US']['EditableEmailField']['PLURALNAME'] = array(
-	'Email fields',
+	'Email Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
-$lang['en_US']['EditableEmailField']['SENDCOPY'] = 'Send copy of submission to this address';
 $lang['en_US']['EditableEmailField']['SINGULARNAME'] = array(
-	'Email field',
+	'Email Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableEmailField.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableEmailField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableEmailField.ss']['EMAIL'] = 'Email address field';
-$lang['en_US']['EditableEmailField.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableEmailField.ss']['REQUIRED'] = 'This field is required for this form and cannot be deleted';
 $lang['en_US']['EditableFileField']['PLURALNAME'] = array(
-	'File fields',
+	'File Upload Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableFileField']['SINGULARNAME'] = array(
-	'File field',
+	'File Upload Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableFileField.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableFileField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableFileField.ss']['FILE'] = 'File upload field';
-$lang['en_US']['EditableFileField.ss']['MORE'] = 'More options';
+$lang['en_US']['EditableFormField']['CHECKEDBYDEFAULT'] = 'Checked by Default?';
+$lang['en_US']['EditableFormField']['CUSTOMERROR'] = 'Custom Error Message';
 $lang['en_US']['EditableFormField']['ENTERQUESTION'] = 'Enter Question';
+$lang['en_US']['EditableFormField']['GROUP'] = 'Group';
+$lang['en_US']['EditableFormField']['NO'] = 'No';
 $lang['en_US']['EditableFormField']['PLURALNAME'] = array(
 	'Editable Form Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
-$lang['en_US']['EditableFormField']['REQUIRED'] = 'Required?';
+$lang['en_US']['EditableFormField']['REQUIRED'] = 'Is this field Required?';
 $lang['en_US']['EditableFormField']['SINGULARNAME'] = array(
 	'Editable Form Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
+$lang['en_US']['EditableFormField']['YES'] = 'Yes';
+$lang['en_US']['EditableFormField.ss']['ADD'] = 'Add';
+$lang['en_US']['EditableFormField.ss']['ADDRULE'] = 'Add Rule';
+$lang['en_US']['EditableFormField.ss']['BLANK'] = 'Blank';
+$lang['en_US']['EditableFormField.ss']['CUSTOMRULES'] = 'Custom Rules';
 $lang['en_US']['EditableFormField.ss']['DELETE'] = 'Delete';
 $lang['en_US']['EditableFormField.ss']['DRAG'] = 'Drag to rearrange order of fields';
+$lang['en_US']['EditableFormField.ss']['FIELDCONFIGURATION'] = 'Field Configuration';
+$lang['en_US']['EditableFormField.ss']['FIELDONDEFAULT'] = 'Field On Default';
+$lang['en_US']['EditableFormField.ss']['HIDE'] = 'Hide';
+$lang['en_US']['EditableFormField.ss']['HIDETHISFIELD'] = 'Hide This Field';
+$lang['en_US']['EditableFormField.ss']['IS'] = 'Is';
 $lang['en_US']['EditableFormField.ss']['LOCKED'] = 'These fields cannot be modified';
-$lang['en_US']['EditableFormField.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableFormField.ss']['REQUIRED'] = 'This field is required for this form and cannot be deleted';
-$lang['en_US']['EditableFormFieldOption.ss']['DELETE'] = 'Remove this option';
-$lang['en_US']['EditableFormFieldOption.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableFormFieldOption.ss']['LOCKED'] = 'These fields cannot be modified';
+$lang['en_US']['EditableFormField.ss']['NOTBLANK'] = 'Not Blank';
+$lang['en_US']['EditableFormField.ss']['NOTVALUE'] = 'Not Value';
+$lang['en_US']['EditableFormField.ss']['OPTIONS'] = 'Options';
+$lang['en_US']['EditableFormField.ss']['SHOW'] = 'Show';
+$lang['en_US']['EditableFormField.ss']['SHOWOPTIONS'] = 'Show Options';
+$lang['en_US']['EditableFormField.ss']['SHOWTHISFIELD'] = 'Show This Field';
+$lang['en_US']['EditableFormField.ss']['VALIDATION'] = 'Validation';
+$lang['en_US']['EditableFormField.ss']['VALUE'] = 'Value';
+$lang['en_US']['EditableFormField.ss']['WHEN'] = 'When';
+$lang['en_US']['EditableFormHeading']['LEVEL'] = 'Select Heading Level';
 $lang['en_US']['EditableFormHeading']['PLURALNAME'] = array(
-	'Form headings',
+	'Headings',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableFormHeading']['SINGULARNAME'] = array(
-	'Form heading',
+	'Heading',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableFormHeading.ss']['DELETE'] = 'Delete';
-$lang['en_US']['EditableFormHeading.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableFormHeading.ss']['HEADING'] = 'Heading field';
-$lang['en_US']['EditableFormHeading.ss']['MORE'] = 'More options';
+$lang['en_US']['EditableLiteralField']['PLURALNAME'] = array(
+	'HTML Blocks',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['en_US']['EditableLiteralField']['SINGULARNAME'] = array(
+	'HTML Block',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
 $lang['en_US']['EditableMemberListField']['PLURALNAME'] = array(
-	'Member list fields',
+	'Member List Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableMemberListField']['SINGULARNAME'] = array(
-	'Member list field',
+	'Member List Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
+$lang['en_US']['EditableMultipleOptionField']['PLURALNAME'] = array(
+	'Editable Multiple Option Fields',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['en_US']['EditableMultipleOptionField']['SINGULARNAME'] = array(
+	'Editable Multiple Option Field',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['en_US']['EditableOption']['PLURALNAME'] = array(
+	'Editable Options',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['en_US']['EditableOption']['SINGULARNAME'] = array(
+	'Editable Option',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['en_US']['EditableOption.ss']['DELETE'] = 'Remove this option';
+$lang['en_US']['EditableOption.ss']['DRAG'] = 'Drag to rearrange order of options';
+$lang['en_US']['EditableOption.ss']['LOCKED'] = 'These fields cannot be modified';
 $lang['en_US']['EditableRadioField']['PLURALNAME'] = array(
 	'Radio fields',
 	50,
@@ -178,27 +175,6 @@ $lang['en_US']['EditableRadioField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['EditableRadioField.ss']['ADD'] = 'Add new option';
-$lang['en_US']['EditableRadioField.ss']['DELETE'] = 'Delete this field';
-$lang['en_US']['EditableRadioField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableRadioField.ss']['LOCKED'] = 'These fields cannot be modified';
-$lang['en_US']['EditableRadioField.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableRadioField.ss']['REQUIRED'] = 'This field is required for this form and cannot be deleted';
-$lang['en_US']['EditableRadioField.ss']['SET'] = 'Radio button set';
-$lang['en_US']['EditableRadioOption']['PLURALNAME'] = array(
-	'Radio options',
-	50,
-	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
-);
-$lang['en_US']['EditableRadioOption']['SINGULARNAME'] = array(
-	'Radio option',
-	50,
-	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
-);
-$lang['en_US']['EditableRadioOption.ss']['DELETE'] = 'Remove this option';
-$lang['en_US']['EditableRadioOption.ss']['DRAG'] = 'Drag to rearrange order of options';
-$lang['en_US']['EditableRadioOption.ss']['LOCKED'] = 'These fields cannot be modified';
-$lang['en_US']['EditableTextField']['DEFAULTTEXT'] = 'Default Text';
 $lang['en_US']['EditableTextField']['NUMBERROWS'] = 'Number of rows';
 $lang['en_US']['EditableTextField']['PLURALNAME'] = array(
 	'Text fields',
@@ -212,33 +188,6 @@ $lang['en_US']['EditableTextField']['SINGULARNAME'] = array(
 );
 $lang['en_US']['EditableTextField']['TEXTBOXLENGTH'] = 'Length of text box';
 $lang['en_US']['EditableTextField']['TEXTLENGTH'] = 'Text length';
-$lang['en_US']['EditableTextField.ss']['DELETE'] = 'Delete this field';
-$lang['en_US']['EditableTextField.ss']['DRAG'] = 'Drag to rearrange order of fields';
-$lang['en_US']['EditableTextField.ss']['MORE'] = 'More options';
-$lang['en_US']['EditableTextField.ss']['TEXTFIELD'] = 'Text Field';
-$lang['en_US']['FieldEditor']['EMAILONSUBMIT'] = 'Email form on submit:';
-$lang['en_US']['FieldEditor']['EMAILSUBMISSION'] = 'Email submission to:';
-$lang['en_US']['FieldEditor.ss']['ADD'] = 'Add';
-$lang['en_US']['FieldEditor.ss']['CHECKBOX'] = 'Checkbox';
-$lang['en_US']['FieldEditor.ss']['CHECKBOXGROUP'] = 'Checkboxes';
-$lang['en_US']['FieldEditor.ss']['CHECKBOXGROUPTITLE'] = 'Add checkbox group field';
-$lang['en_US']['FieldEditor.ss']['CHECKBOXTITLE'] = 'Add checkbox';
-$lang['en_US']['FieldEditor.ss']['DATE'] = 'Date';
-$lang['en_US']['FieldEditor.ss']['DATETITLE'] = 'Add date heading';
-$lang['en_US']['FieldEditor.ss']['DROPDOWN'] = 'Dropdown';
-$lang['en_US']['FieldEditor.ss']['DROPDOWNTITLE'] = 'Add dropdown';
-$lang['en_US']['FieldEditor.ss']['EMAIL'] = 'Email';
-$lang['en_US']['FieldEditor.ss']['EMAILTITLE'] = 'Add email field';
-$lang['en_US']['FieldEditor.ss']['FILE'] = 'File';
-$lang['en_US']['FieldEditor.ss']['FILETITLE'] = 'Add file upload field';
-$lang['en_US']['FieldEditor.ss']['FORMHEADING'] = 'Heading';
-$lang['en_US']['FieldEditor.ss']['FORMHEADINGTITLE'] = 'Add form heading';
-$lang['en_US']['FieldEditor.ss']['MEMBER'] = 'Member List';
-$lang['en_US']['FieldEditor.ss']['MEMBERTITLE'] = 'Add member list field';
-$lang['en_US']['FieldEditor.ss']['RADIOSET'] = 'Radio';
-$lang['en_US']['FieldEditor.ss']['RADIOSETTITLE'] = 'Add radio button set';
-$lang['en_US']['FieldEditor.ss']['TEXT'] = 'Text';
-$lang['en_US']['FieldEditor.ss']['TEXTTITLE'] = 'Add text field';
 $lang['en_US']['SubmittedFileField']['PLURALNAME'] = array(
 	'Submitted File Fields',
 	50,
@@ -259,7 +208,6 @@ $lang['en_US']['SubmittedForm']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
-$lang['en_US']['SubmittedFormEmail.ss']['SUBMITTED'] = 'The following data was submitted to your website:';
 $lang['en_US']['SubmittedFormField']['PLURALNAME'] = array(
 	'Submitted Form Fields',
 	50,
@@ -270,10 +218,16 @@ $lang['en_US']['SubmittedFormField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
+$lang['en_US']['SubmittedFormReportField.ss']['DELETEALLSUBMISSIONS'] = 'Delete All Submissions';
+$lang['en_US']['SubmittedFormReportField.ss']['DELETESUBMISSION'] = 'Delete Submission';
 $lang['en_US']['SubmittedFormReportField.ss']['EXPORTSUBMISSIONS'] = 'Export submissions to CSV';
+$lang['en_US']['SubmittedFormReportField.ss']['NOSUBMISSIONS'] = 'No Submissions';
 $lang['en_US']['SubmittedFormReportField.ss']['SUBMITTED'] = 'Submitted at';
+$lang['en_US']['UserDefinedForm']['AEMAILRECIPIENT'] = 'A Email Recipient';
+$lang['en_US']['UserDefinedForm']['EMAILRECIPIENTS'] = 'Email Recipients';
+$lang['en_US']['UserDefinedForm']['EMAILSUBJECT'] = 'Email Subject';
 $lang['en_US']['UserDefinedForm']['FORM'] = 'Form';
-$lang['en_US']['UserDefinedForm']['NORESULTS'] = 'No matching results found';
+$lang['en_US']['UserDefinedForm']['FROMADDRESS'] = 'From Address';
 $lang['en_US']['UserDefinedForm']['ONCOMPLETE'] = 'On complete';
 $lang['en_US']['UserDefinedForm']['ONCOMPLETELABEL'] = 'Show on completion';
 $lang['en_US']['UserDefinedForm']['PLURALNAME'] = array(
@@ -282,14 +236,18 @@ $lang['en_US']['UserDefinedForm']['PLURALNAME'] = array(
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['UserDefinedForm']['RECEIVED'] = 'Received Submissions';
+$lang['en_US']['UserDefinedForm']['SENDEMAILINSTEAD'] = 'Send Email Instead From';
+$lang['en_US']['UserDefinedForm']['SENDEMAILTO'] = 'Send Email Instead To';
+$lang['en_US']['UserDefinedForm']['SENDPLAIN'] = 'Send Email as Plain Text (HTML will be stripped)';
+$lang['en_US']['UserDefinedForm']['SHOWCLEARFORM'] = 'Show Clear Form Button';
 $lang['en_US']['UserDefinedForm']['SINGULARNAME'] = array(
 	'User Defined Form',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
 $lang['en_US']['UserDefinedForm']['SUBMISSIONS'] = 'Submissions';
-$lang['en_US']['UserDefinedForm']['SUBMIT'] = 'Submit';
+$lang['en_US']['UserDefinedForm']['SUBMITBUTTON'] = 'Submit';
 $lang['en_US']['UserDefinedForm']['TEXTONSUBMIT'] = 'Text on submit button:';
-$lang['en_US']['UserDefinedForm_SubmittedFormEmail']['EMAILSUBJECT'] = 'Submission of form';
+$lang['en_US']['UserDefinedForm']['USEDEFINEDVALUE'] = 'Use Defined Value';
 
 ?>
