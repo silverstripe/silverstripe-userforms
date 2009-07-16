@@ -211,6 +211,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				if($field->Required) {
 					$fieldValidation[$field->Name] = $errorMessage;
 					$fieldValidationOptions['required'] = true;
+					$fieldToAdd->addExtraClass('requiredField');
 				}
 				
 				// Add field to the form
