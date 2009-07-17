@@ -237,7 +237,7 @@ $lang['en_US']['UserDefinedForm']['PLURALNAME'] = array(
 );
 $lang['en_US']['UserDefinedForm']['RECEIVED'] = 'Received Submissions';
 $lang['en_US']['UserDefinedForm']['SENDEMAILINSTEAD'] = 'Send Email Instead From';
-$lang['en_US']['UserDefinedForm']['SENDEMAILTO'] = 'Send Email Instead To';
+$lang['en_US']['UserDefinedForm']['SENDEMAILTO'] = 'Send Email To';
 $lang['en_US']['UserDefinedForm']['SENDPLAIN'] = 'Send Email as Plain Text (HTML will be stripped)';
 $lang['en_US']['UserDefinedForm']['SHOWCLEARFORM'] = 'Show Clear Form Button';
 $lang['en_US']['UserDefinedForm']['SINGULARNAME'] = array(
