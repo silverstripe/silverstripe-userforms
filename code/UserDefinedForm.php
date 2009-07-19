@@ -589,12 +589,17 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			
 			// if they have email fields then we could send from it
 			if($validEmailFields) {
-				$validEmailFields = $validEmailFields->toDropdownMap('ID', 'Title');
-				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'),$validEmailFields, '', null,""), 'EmailFrom');
+				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'), $validEmailFields->toDropdownMap('ID', 'Title'), '', null,""), 'EmailFrom');
 			}
 			
 			// if they have multiple options
-			if($multiOptionFields) {
+			if($multiOptionFields || $validEmailFields) {
+				if($multiOptionFields && $validEmailFields) {
+					$multiOptionFields->merge($validEmailFields);
+				}
+				else {
+					$multiOptionFields = $validEmailFields;
+				}
 				$multiOptionFields = $multiOptionFields->toDropdownMap('ID', 'Title');
 				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""), 'EmailAddress');
 			}
