@@ -29,7 +29,8 @@ class UserDefinedForm extends Page {
 	static $db = array(
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
-		"ShowClearButton" => "Boolean"
+		"ShowClearButton" => "Boolean",
+		'DisableSaveSubmissions' => 'Boolean'
 	);
 	
 	/**
@@ -37,6 +38,7 @@ class UserDefinedForm extends Page {
 	 */ 
 	static $defaults = array(
 		'Content' => '$UserDefinedForm',
+		'DisableSaveSubmissions' => 0,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
@@ -61,6 +63,7 @@ class UserDefinedForm extends Page {
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
 		
 		// view the submissions
+		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
 		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
 
 		// who do we email on submission
@@ -388,7 +391,7 @@ JS
 		$submittedForm->SubmittedBy = Member::currentUser();
 		$submittedForm->ParentID = $this->ID;
 		$submittedForm->Recipient = $this->EmailTo;
-		$submittedForm->write();
+		if(!$this->DisableSaveSubmissions) $submittedForm->write();
 		
 		// email values
 		$values = array();
@@ -413,9 +416,6 @@ JS
 			else {
 				if(isset($data[$field->Name])) $submittedField->Value = $data[$field->Name];
 			}
-			
-			$submittedField->write();
-			$submittedFields->push($submittedField);
 
 			if(!empty($data[$field->Name])){
 				/**
@@ -447,9 +447,9 @@ JS
 					}									
 				}
 			}
+			if(!$this->DisableSaveSubmissions) $submittedField->write();
 			
-			// make sure we save
-			$submittedField->write();
+			$submittedFields->push($submittedField);
 		}	
 		$emailData = array(
 			"Sender" => Member::currentUser(),
@@ -522,9 +522,8 @@ JS
 				}
 			}
 		}
-		
-		// Redirect to the finished method on this controller with the referrer data
-		Director::redirect($this->Link() . 'finished?referrer=' . urlencode($data['Referrer']));
+			
+		return Director::redirect($this->Link() . 'finished?referrer=' . urlencode($data['Referrer']));
 	}
 
 	/**
