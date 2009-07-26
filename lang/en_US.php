@@ -227,16 +227,19 @@ $lang['en_US']['UserDefinedForm']['AEMAILRECIPIENT'] = 'A Email Recipient';
 $lang['en_US']['UserDefinedForm']['EMAILRECIPIENTS'] = 'Email Recipients';
 $lang['en_US']['UserDefinedForm']['EMAILSUBJECT'] = 'Email Subject';
 $lang['en_US']['UserDefinedForm']['FORM'] = 'Form';
-$lang['en_US']['UserDefinedForm']['FROMADDRESS'] = 'From Address';
+$lang['en_US']['UserDefinedForm']['FROMADDRESS'] = 'Send Email From';
+$lang['en_US']['UserDefinedForm']['HIDEFORMDATA'] = 'Hide Form Data from Email';
 $lang['en_US']['UserDefinedForm']['ONCOMPLETE'] = 'On complete';
 $lang['en_US']['UserDefinedForm']['ONCOMPLETELABEL'] = 'Show on completion';
+$lang['en_US']['UserDefinedForm']['ORSELECTAFIELDTOUSEASFROM'] = '.. or Select a Form Field to use as the From Address';
+$lang['en_US']['UserDefinedForm']['ORSELECTAFIELDTOUSEASTO'] = '.. or Select a Field to use as the To Address';
 $lang['en_US']['UserDefinedForm']['PLURALNAME'] = array(
 	'User Defined Forms',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['UserDefinedForm']['RECEIVED'] = 'Received Submissions';
-$lang['en_US']['UserDefinedForm']['SENDEMAILINSTEAD'] = 'Send Email Instead From';
+$lang['en_US']['UserDefinedForm']['SAVESUBMISSIONS'] = 'Disable Saving Submissions to Server';
 $lang['en_US']['UserDefinedForm']['SENDEMAILTO'] = 'Send Email To';
 $lang['en_US']['UserDefinedForm']['SENDPLAIN'] = 'Send Email as Plain Text (HTML will be stripped)';
 $lang['en_US']['UserDefinedForm']['SHOWCLEARFORM'] = 'Show Clear Form Button';
@@ -248,6 +251,5 @@ $lang['en_US']['UserDefinedForm']['SINGULARNAME'] = array(
 $lang['en_US']['UserDefinedForm']['SUBMISSIONS'] = 'Submissions';
 $lang['en_US']['UserDefinedForm']['SUBMITBUTTON'] = 'Submit';
 $lang['en_US']['UserDefinedForm']['TEXTONSUBMIT'] = 'Text on submit button:';
-$lang['en_US']['UserDefinedForm']['USEDEFINEDVALUE'] = 'Use Defined Value';
 
 ?>

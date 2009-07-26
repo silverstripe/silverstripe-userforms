@@ -34,7 +34,6 @@
 				<% end_if %>
 			</div>
 		<% end_if %>
-	<% else %>
-		<p><% _t('NOSUBMISSIONS', 'No Submissions') %></p>
 	<% end_if %>
+	<p class="noSubmissions" <% if Submissions %>style="display: none"<% end_if %>"><% _t('NOSUBMISSIONS', 'No Submissions') %></p>
 </div>

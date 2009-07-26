@@ -453,7 +453,7 @@ JS
 		}	
 		$emailData = array(
 			"Sender" => Member::currentUser(),
-			"Fields" => $submittedFields,
+			"Fields" => $submittedFields
 		);
 
 		// email users on submit. All have their own custom options. 
@@ -470,6 +470,7 @@ JS
 			}
 
 			foreach($this->EmailRecipients() as $recipient) {
+				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
 				$email->setBody($recipient->EmailBody);
@@ -559,7 +560,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
 		'EmailBody' => 'Text',
-		'SendPlain' => 'Boolean'
+		'SendPlain' => 'Boolean',
+		'HideFormData' => 'Boolean'
 	);
 	
 	static $has_one = array(
@@ -578,6 +580,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
 			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send Email From')),
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
+			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide Form Data from Email')),
 			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
 			new TextareaField('EmailBody', 'Body')
 		);
