@@ -598,10 +598,12 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			if($multiOptionFields || $validEmailFields) {
 				if($multiOptionFields && $validEmailFields) {
 					$multiOptionFields->merge($validEmailFields);
+					
 				}
-				else {
-					$multiOptionFields = $validEmailFields;
+				elseif(!$multiOptionFields) {
+					$multiOptionFields = $validEmailFields;	
 				}
+				
 				$multiOptionFields = $multiOptionFields->toDropdownMap('ID', 'Title');
 				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""), 'EmailAddress');
 			}
