@@ -18,7 +18,8 @@ class EditableFormField extends DataObject {
 		"CanDelete" => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
-		"CustomSettings" => "Text"
+		"CustomSettings" => "Text",
+		"ShowOnLoad" => "Boolean"
 	);
     
 	static $defaults = array(
@@ -36,7 +37,7 @@ class EditableFormField extends DataObject {
 	protected $editor;
 
 	protected $readonly;
-
+	
 	/**
 	 * Construct a new EditableFormField Object.
 	 * 
@@ -258,7 +259,6 @@ class EditableFormField extends DataObject {
 		$this->Title = (isset($data['Title'])) ? $data['Title']: "";
 		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
 		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : null;
-  		$this->CustomParameter = isset($data['CustomParameter']) ? $data['CustomParameter'] : null;
 		$this->Required = !empty($data['Required']) ? 1 : 0;
   		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;
 		$this->Name = $this->class.$this->ID;
