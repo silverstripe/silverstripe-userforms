@@ -197,7 +197,7 @@
 				
 		/* HIDE */
 		#Fields_fields li.EditableFormField .hidden {
-			display: none;
+			display: none !important;
 		}
 
 		/* Holder to prevent form from collapsing */
