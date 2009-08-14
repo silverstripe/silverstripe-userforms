@@ -235,10 +235,10 @@
 		$(".customRules .conditionOption").livequery('change', function(){
 			var valueInput = $(this).siblings(".ruleValue");
 			if($(this).val() == "ValueNot" || $(this).val() == "HasValue") {
-				valueInput.show();
+				valueInput.removeClass("hidden");
 			}
 			else {
-				valueInput.hide();
+				valueInput.addClass("hidden");
 			}
 		});
 		/**
