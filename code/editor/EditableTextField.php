@@ -37,11 +37,11 @@ class EditableTextField extends EditableFormField {
 	}
 
 	function getFormField() {
-		if($this->getSetting('Rows') && $this->getSetting('Rows') <= 1) {
-			return new TextField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
+		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
+			return new TextareaField($this->Name, $this->Title, $this->getSetting('Rows'));
 		}
 		else {
-			return new TextareaField($this->Name, $this->Title, $this->getSetting('Rows'));
+			return new TextField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
 		}
 	}
 	

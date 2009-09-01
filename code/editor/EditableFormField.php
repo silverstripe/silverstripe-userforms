@@ -116,7 +116,7 @@ class EditableFormField extends DataObject {
 	 * 
 	 * @return Array Return all the Settings
 	 */
-	protected function getFieldSettings() {
+	public function getFieldSettings() {
 		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
 	}
 	
@@ -126,7 +126,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @param Array the custom settings
 	 */
-	protected function setFieldSettings($settings = array()) {
+	public function setFieldSettings($settings = array()) {
 		$this->CustomSettings = serialize($settings);
 	}
 	
