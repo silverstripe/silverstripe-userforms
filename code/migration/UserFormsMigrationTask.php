@@ -29,7 +29,7 @@ class UserFormsMigrationTask extends MigrationTask {
 	 */
 	function run($request) {
 		// load the forms
-		$forms = DataObject::get_by_id("UserDefinedForm");
+		$forms = DataObject::get("UserDefinedForm");
 		
 		if(!$forms) return;
 		echo "Proceeding to update ". $forms->Count() . " Forms to ensure proper structure<br />";
