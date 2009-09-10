@@ -251,5 +251,16 @@ $lang['en_US']['UserDefinedForm']['SINGULARNAME'] = array(
 $lang['en_US']['UserDefinedForm']['SUBMISSIONS'] = 'Submissions';
 $lang['en_US']['UserDefinedForm']['SUBMITBUTTON'] = 'Submit';
 $lang['en_US']['UserDefinedForm']['TEXTONSUBMIT'] = 'Text on submit button:';
+$lang['en_US']['UserDefinedForm_EmailRecipient']['PLURALNAME'] = array(
+	'User Defined Form Email Recipients',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['en_US']['UserDefinedForm_EmailRecipient']['SINGULARNAME'] = array(
+	'User Defined Form Email Recipient',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['en_US']['UserFormsMigrationTask']['DEFAULTSUBMISSIONTITLE'] = 'Submission Data';
 
 ?>
