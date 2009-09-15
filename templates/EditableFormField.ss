@@ -1,5 +1,5 @@
 <!-- JS Relys on EditableFormField as a class - and the 3 ids in this order - do not change -->
-<li class="$ClassName EditableFormField" id="$Name.Attr EditableItem_$Pos $BaseName">
+<li class="$ClassName EditableFormField" id="$Name.ATT EditableItem_$Pos $BaseName">
 	<div class="fieldInfo">
 		<% if isReadonly %>
 			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
@@ -23,11 +23,11 @@
 	</div>
 	
 	<% if showExtraOptions %>
-		<div class="extraOptions hidden" id="$Name.Attr-extraOptions">
+		<div class="extraOptions hidden" id="$Name.ATT-extraOptions">
 			<% if HasAddableOptions %>
 				<fieldset class="fieldOptionsGroup">
 					<legend><% _t('OPTIONS', 'Options') %></legend>
-					<ul class="editableOptions" id="$FieldName.Attr-list">
+					<ul class="editableOptions" id="$FieldName.ATT-list">
 
 						<% if canEdit %>
 							<% control Options %>
