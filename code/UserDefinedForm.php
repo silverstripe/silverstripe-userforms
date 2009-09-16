@@ -276,6 +276,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							// is this field a special option field
 							$checkboxField = false;
 							if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
+								$action = "click";
 								$checkboxField = true;
 							}
 							
@@ -512,7 +513,7 @@ JS
 					$body = strip_tags($recipient->EmailBody) . "\n ";
 					if(isset($emailData['Fields'])) {
 						foreach($emailData['Fields'] as $Field) {
-							$body .= $Field->Title .' - '. $Field->Value .'\n';
+							$body .= $Field->Title .' - '. $Field->Value .' \n';
 						}
 					}
 					$email->setBody($body);
