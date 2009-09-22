@@ -8,7 +8,7 @@
  * @package userforms
  */
 
-class UserDefinedFormTest extends SapphireTest {
+class UserDefinedFormFieldTest extends SapphireTest {
 	
 	/**
 	 * Basic Test creating all the editable form fields
@@ -26,4 +26,3 @@ class UserDefinedFormTest extends SapphireTest {
 		}
 	}
 }
-?>

@@ -42,6 +42,10 @@ class UserDefinedForm extends Page {
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
+	static $extensions = array(
+		"Versioned('Stage', 'Live')"
+	);
+
 	/**
 	 * @var Array
 	 */
@@ -92,28 +96,73 @@ class UserDefinedForm extends Page {
 		
 		return $fields;
 	}
-
+	
 	/**
-	 * Called on before delete remove all the fields from the database
-	 */
-  	public function delete() {
-		foreach($this->Fields() as $field) {
-			$field->delete();
-		}
-		parent::delete();   
-	}
-  
-	/**
-	 * Custom Form Actions for the form
+	 * Publishing Versioning support.
 	 *
-	 * @param bool Is the Form readonly
-	 * @return FieldSet
+	 * When publishing copy the editable form fields to the live database
+	 * Not going to version emails and submissions as they are likely to 
+	 * persist over multiple versions
+	 *
+	 * @return void
 	 */
-  	public function customFormActions($isReadonly = false) {
-		return new FieldSet(
-			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText),
-			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton)
-		);
+	public function doPublish() {
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$field->publish('Stage', 'Live');
+			}
+		}
+
+		parent::doPublish();
+	}
+	
+	/**
+	 * Unpublishing Versioning support
+	 * 
+	 * When unpublishing the page it has to remove all the fields from 
+	 * the live database table
+	 *
+	 * @return void
+	 */
+	public function doUnpublish() {
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$field->deleteFromStage('Live');
+			}
+		}
+		
+		parent::doUnpublish();
+	}
+	
+	/**
+	 * Roll back a form to a previous version
+	 *
+	 * @param String|int Version to roll back to
+	 */
+	public function doRollbackTo($version) {
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$field->publish($version, "Stage", true);
+				$field->writeWithoutVersion();
+			}
+		}
+		
+		parent::doRollbackTo($version);
+	}
+	
+	/**
+	 * Revert the draft site to the current live site
+	 *
+	 * @return void
+	 */
+	public function doRevertToLive() {
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$field->writeToStage('Live', 'Stage');
+			}
+		}
+		
+		parent::doRevertToLive();
 	}
 	
 	/**
@@ -130,6 +179,19 @@ class UserDefinedForm extends Page {
 			$newField->write();
 		}
 		return $page;
+	}
+	
+	/**
+	 * Custom Form Actions for the form
+	 *
+	 * @param bool Is the Form readonly
+	 * @return FieldSet
+	 */
+  	public function customFormActions($isReadonly = false) {
+		return new FieldSet(
+			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText),
+			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton)
+		);
 	}
 }
 

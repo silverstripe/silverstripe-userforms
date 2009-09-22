@@ -30,7 +30,10 @@ class EditableFormField extends DataObject {
 	static $has_one = array(
 		"Parent" => "SiteTree",
 	);
-
+	
+	static $extensions = array(
+		"Versioned('Stage', 'Live')"
+	);
 	/**
 	 * @var FieldEditor The current editor
 	 */
