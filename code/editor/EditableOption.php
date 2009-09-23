@@ -21,6 +21,10 @@ class EditableOption extends DataObject {
 	static $has_one = array(
 		"Parent" => "EditableMultipleOptionField",
 	);
+	
+	static $extensions = array(
+		"Versioned('Stage', 'Live')"
+	);
 
 	/**
 	 * Template for the editing view of this option field

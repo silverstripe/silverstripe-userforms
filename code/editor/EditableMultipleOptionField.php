@@ -23,6 +23,46 @@ class EditableMultipleOptionField extends EditableFormField {
 	);
 	
 	/**
+	 * Publishing Versioning support.
+	 *
+	 * When publishing it needs to handle copying across / publishing
+	 * each of the individual field options
+	 * 
+	 * @return void
+	 */
+	public function publish($fromStage, $toStage, $createNewVersion = false) {
+		$live = Versioned::get_by_stage("EditableOption", "Live", "`EditableOption`.ParentID = $this->ID");
+		if($live) {
+			foreach($live as $option) {
+				$option->delete();
+			}
+		}
+		if($this->Options()) {
+			foreach($this->Options() as $option) {
+				$option->publish($fromStage, $toStage, $createNewVersion);
+			}
+		}
+		parent::publish($fromStage, $toStage, $createNewVersion);
+	}
+	
+	/**
+	 * Unpublishing Versioning support
+	 * 
+	 * When unpublishing the field it has to remove all options attached
+	 *
+	 * @return void
+	 */
+	public function deleteFromStage($stage) {
+		if($this->Options()) {
+			foreach($this->Options() as $option) {
+				$option->deleteFromStage($stage);
+			}
+		}
+		
+		parent::deleteFromStage($stage);
+	}
+	
+	/**
 	 * Deletes all the options attached to this field before
 	 * deleting the field. Keeps stray options from floating 
 	 * around

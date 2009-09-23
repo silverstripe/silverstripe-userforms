@@ -34,6 +34,7 @@ class EditableFormField extends DataObject {
 	static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
+	
 	/**
 	 * @var FieldEditor The current editor
 	 */
