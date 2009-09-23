@@ -18,13 +18,11 @@ class EditableTextField extends EditableFormField {
 		// eventually replace hard-coded "Fields"?
 		$baseName = "Fields[$this->ID]";
 		
-		$size = ($this->getSetting('Size')) ? $this->getSetting('Size') : '32';
-		$minLength = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '0';
-		$maxLength = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '32';
+		$minLength = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
+		$maxLength = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
 		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
 		
 		$extraFields = new FieldSet(
-			new TextField($baseName . "[CustomSettings][Size]", _t('EditableTextField.TEXTBOXLENGTH', 'Length of text box'), $size),
 			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
 				new TextField($baseName . "[CustomSettings][MinLength]", "", $minLength),
 				new TextField($baseName . "[CustomSettings][MaxLength]", " - ", $maxLength)
