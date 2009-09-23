@@ -9,11 +9,6 @@
 class UserDefinedForm extends Page {
 	
 	/**
-	 * @var String Add Action in the CMS
-	 */
-	static $add_action = "A User Form";
-
-	/**
 	 * @var String Icon for the User Defined Form in the CMS. Without the extension
 	 */
 	static $icon = "cms/images/treeicons/task";
@@ -63,12 +58,18 @@ class UserDefinedForm extends Page {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
+		// define tabs
+		$fields->findOrMakeTab('Root.Content.Form', _t('UserDefinedForm.FORM', 'Form'));
+		$fields->findOrMakeTab('Root.Content.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
+		$fields->findOrMakeTab('Root.Content.EmailRecipients', _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'));
+		$fields->findOrMakeTab('Root.Content.OnComplete', _t('UserDefinedForm.ONCOMPLETE', 'On Complete'));
+
 		// field editor
-		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.FORM', 'Form'), new FieldEditor("Fields", 'Fields', "", $this ));
+		$fields->addFieldToTab("Root.Content.Form", new FieldEditor("Fields", 'Fields', "", $this ));
 		
 		// view the submissions
-		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
-		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.SUBMISSIONS','Submissions'), new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
+		$fields->addFieldToTab("Root.Content.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
+		$fields->addFieldToTab("Root.Content.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
 
 		// who do we email on submission
 		$emailRecipients = new ComplexTableField(
@@ -76,26 +77,27 @@ class UserDefinedForm extends Page {
 	    	'EmailRecipients',
 	    	'UserDefinedForm_EmailRecipient',
 	    	array(
-				'EmailAddress' => 'Email',
-				'EmailSubject' => 'Subject',
-				'EmailFrom' => 'From'
+				'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
+				'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
+				'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
 	    	),
 	    	'getCMSFields_forPopup',
 			"FormID = '$this->ID'"
 		);
 		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
 		
-		$fields->addFieldToTab("Root.Content."._t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $emailRecipients);
+		$fields->addFieldToTab("Root.Content.EmailRecipients", $emailRecipients);
 	
 		// text to show on complete
 		$onCompleteFieldSet = new FieldSet(
 			new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'),3,"",_t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage), $this )
 		);
 		
-		$fields->addFieldsToTab("Root.Content."._t('UserDefinedForm.ONCOMPLETE','On complete'), $onCompleteFieldSet);
+		$fields->addFieldsToTab("Root.Content.OnComplete", $onCompleteFieldSet);
 		
 		return $fields;
 	}
+	
 	
 	/**
 	 * Publishing Versioning support.
