@@ -34,33 +34,9 @@ class EditableFormField extends DataObject {
 	static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
-	
-	/**
-	 * @var FieldEditor The current editor
-	 */
-	protected $editor;
 
 	protected $readonly;
-	
-	/**
-	 * Construct a new EditableFormField Object.
-	 * 
-	 * @param array|null $record This will be null for a new database record. 
-	 * @param boolean $isSingleton This this to true if this is a singleton() object, a stub for calling methods. 
-	 */
-	public function __construct($record = null, $isSingleton = false) {
-		parent::__construct($record, $isSingleton);
-	}	
-	
-	/**
-	 * Set the FieldEditor object for this field.
-	 *
-	 * @param FieldEditor The Editor window you wish to use
-	 */
-	public function setEditor($editor) {
-		$this->editor = $editor;
-	}
-	
+
 	/**
 	 * Set this formfield to readonly
 	 */

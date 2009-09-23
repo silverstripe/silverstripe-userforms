@@ -65,13 +65,10 @@ class FieldEditor extends FormField {
 							$fields->push($field->performReadonlyTransformation());
 						}
 					}
-					$field->setEditor($this);
 				}
 			}
 			return $fields;
-
 		}
-		
 	}
 	
 	/**
