@@ -107,6 +107,15 @@ class UserDefinedForm extends Page {
 	 * @return void
 	 */
 	public function doPublish() {
+		// remove fields on the live table which could have been orphaned.
+		$live = Versioned::get_by_stage("EditableFormField", "Live", "`EditableFormField`.ParentID = $this->ID");
+		if($live) {
+			foreach($live as $field) {
+				$field->deleteFromStage('Live');
+			}
+		}
+		
+		// publish the draft pages
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 				$field->publish('Stage', 'Live');
