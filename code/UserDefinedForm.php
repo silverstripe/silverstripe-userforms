@@ -110,7 +110,11 @@ class UserDefinedForm extends Page {
 	 */
 	public function doPublish() {
 		// remove fields on the live table which could have been orphaned.
-		$live = Versioned::get_by_stage("EditableFormField", "Live", "`EditableFormField`.ParentID = $this->ID");
+		if(defined('Database::USE_ANSI_SQL')) {
+			$live = Versioned::get_by_stage("EditableFormField", "Live", "\"EditableFormField\".\"ParentID\" = $this->ID");
+		} else {
+			$live = Versioned::get_by_stage("EditableFormField", "Live", "`EditableFormField`.ParentID = $this->ID");
+		}
 		if($live) {
 			foreach($live as $field) {
 				$field->deleteFromStage('Live');
