@@ -22,7 +22,7 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 		$id = $this->form->ID;
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doPublish();
-		$live =  Versioned::get_one_by_stage("UserDefinedForm", "Live", "`UserDefinedForm`.ID = $id");
+		$live =  Versioned::get_one_by_stage("UserDefinedForm", "Live", "UserDefinedForm.ID = $id");
 		$this->assertEquals($live->Fields()->Count(), 1);
 	}
 	
@@ -31,8 +31,8 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 		$this->form->Fields()->removeAll();
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doUnPublish();
-		$live =  Versioned::get_one_by_stage("UserDefinedForm", "Live", "`UserDefinedForm`.ID = $id");
-		$stage =  Versioned::get_one_by_stage("UserDefinedForm", "Stage", "`UserDefinedForm`.ID = $id");
+		$live =  Versioned::get_one_by_stage("UserDefinedForm", "Live", "UserDefinedForm.ID = $id");
+		$stage =  Versioned::get_one_by_stage("UserDefinedForm", "Stage", "UserDefinedForm.ID = $id");
 		$this->assertEquals($live, false);
 		$this->assertEquals($stage->Fields()->Count(), 1);
 	}
