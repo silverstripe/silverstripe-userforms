@@ -297,9 +297,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 					$fieldValidation[$field->Name] = $errorMessage;
 					$fieldValidationOptions['required'] = true;
 					$fieldToAdd->addExtraClass('requiredField');
-					
-					if(self::$required_identifier) {
-						$fieldToAdd->setLeftTitle($fieldToAdd->getLeftTitle . ' <span class="requiredIdentifier">'. UserDefinedForm::$required_identifier . '</span>');
+					if(UserDefinedForm::$required_identifier) {
+						$title = $fieldToAdd->Title() ." <span class='requiredIdentifier'>". UserDefinedForm::$required_identifier . "</span>";
+						$fieldToAdd->setTitle($title);
 					}
 				}
 				
