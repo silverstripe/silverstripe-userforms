@@ -22,7 +22,7 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 		$id = $this->form->ID;
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doPublish();
-		$whereClause = defined('Database::USE_ANSI_SQL') ? "\"UserDefinedForm\".\"ID\" = $id" : "UserDefinedForm.ID = $id";
+		$whereClause = defined('Database::USE_ANSI_SQL') ? "\"UserDefinedForm_Live\".\"ID\" = $id" : "UserDefinedForm_Live.ID = $id";
 		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", $whereClause);
 		$this->assertEquals($live->Fields()->Count(), 1);
 	}
@@ -32,9 +32,10 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 		$this->form->Fields()->removeAll();
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doUnPublish();
-		$whereClause = defined('Database::USE_ANSI_SQL') ? "\"UserDefinedForm\".\"ID\" = $id" : "UserDefinedForm.ID = $id";
-		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", $whereClause);
-		$stage = Versioned::get_one_by_stage("UserDefinedForm", "Stage", $whereClause);
+		$whereClauseStage = defined('Database::USE_ANSI_SQL') ? "\"UserDefinedForm\".\"ID\" = $id" : "UserDefinedForm.ID = $id";
+		$whereClauseLive = defined('Database::USE_ANSI_SQL') ? "\"UserDefinedForm_Live\".\"ID\" = $id" : "UserDefinedForm_Live.ID = $id";
+		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", $whereClauseLive);
+		$stage = Versioned::get_one_by_stage("UserDefinedForm", "Stage", $whereClauseStage);
 		$this->assertEquals($live, false);
 		$this->assertEquals($stage->Fields()->Count(), 1);
 	}
