@@ -299,7 +299,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 					$fieldToAdd->addExtraClass('requiredField');
 					
 					if(self::$required_identifier) {
-						$fieldToAdd->setLeftTitle($fieldToAdd->getLeftTitle . ' '. self::$required_identifier);
+						$fieldToAdd->setLeftTitle($fieldToAdd->getLeftTitle . ' <span class="requiredIdentifier">'. self::$required_identifier . '</span>');
 					}
 				}
 				
