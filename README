@@ -16,9 +16,13 @@ SilverStripe 2.3.0+
 
 Documentation
 -----------------------------------------------
-http://doc.silverstripe.com/doku.php?id=userdefinedform
+http://doc.silverstripe.com/doku.php?id=modules:userforms
 
 Installation Instructions
 -----------------------------------------------
-Extract the userforms folder into the top level of your site, and visit
-http://www.mysite.com/dev/build to rebuild the database.
+- Download the module from the link above.
+- Extract the file (if you are on windows try 7-zip for extracting tar.gz files)
+- Make sure the folder after being extracted is named ‘userforms’
+- Place this directory in your sites root directory. (The root is the one with sapphire/cms/jsparty in it)
+- Run in your browser - http://www.yoursite.com/dev/build to rebuild the database.
+- You should see a new PageType in the CMS ‘User Defined Form’. This has a new ‘Form’ tab which has your form builder.
