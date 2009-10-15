@@ -19,6 +19,11 @@ class UserDefinedForm extends Page {
 	static $need_permission = 'ADMIN';
 
 	/**
+	 * @var String Required Identifier
+	 */
+	static $required_identifier = null;
+	
+	/**
 	 * @var Array Fields on the user defined form page. 
 	 */
 	static $db = array(
@@ -292,6 +297,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 					$fieldValidation[$field->Name] = $errorMessage;
 					$fieldValidationOptions['required'] = true;
 					$fieldToAdd->addExtraClass('requiredField');
+					
+					if(self::$required_identifier) {
+						$fieldToAdd->setLeftTitle($fieldToAdd->getLeftTitle . ' '. self::$required_identifier);
+					}
 				}
 				
 				// Add field to the form
