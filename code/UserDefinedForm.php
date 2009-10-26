@@ -115,7 +115,7 @@ class UserDefinedForm extends Page {
 	 */
 	public function doPublish() {
 		// remove fields on the live table which could have been orphaned.
-		if(defined('Database::USE_ANSI_SQL')) {
+		if(defined('DB::USE_ANSI_SQL')) {
 			$live = Versioned::get_by_stage("EditableFormField", "Live", "\"EditableFormField\".\"ParentID\" = $this->ID");
 		} else {
 			$live = Versioned::get_by_stage("EditableFormField", "Live", "`EditableFormField`.ParentID = $this->ID");
@@ -569,7 +569,7 @@ JS
 				if($recipient->SendEmailFromField()) {
 					$name = Convert::raw2sql($recipient->SendEmailFromField()->Name);
 					
-					if(defined('Database::USE_ANSI_SQL')) {
+					if(defined('DB::USE_ANSI_SQL')) {
 						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
 					} else {
 						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
@@ -584,7 +584,7 @@ JS
 				if($recipient->SendEmailToField()) {
 					$name = Convert::raw2sql($recipient->SendEmailToField()->Name);
 					
-					if(defined('Database::USE_ANSI_SQL')) {
+					if(defined('DB::USE_ANSI_SQL')) {
 						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
 					} else {
 						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");

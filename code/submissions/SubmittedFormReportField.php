@@ -82,7 +82,7 @@ class SubmittedFormReportField extends FormField {
 
 					// Get the CSV header rows from the database
 					
-					if(defined('Database::USE_ANSI_SQL')) {
+					if(defined('DB::USE_ANSI_SQL')) {
 						$tmp = DB::query("SELECT DISTINCT \"Name\", \"Title\" FROM \"SubmittedFormField\" LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\" WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ") ORDER BY \"SubmittedFormField\".\"ID\"");
 					} else {
 						$tmp = DB::query("SELECT DISTINCT `Name`, `Title` FROM `SubmittedFormField` LEFT JOIN `SubmittedForm` ON `SubmittedForm`.`ID` = `SubmittedFormField`.`ParentID` WHERE `SubmittedFormField`.`ParentID` IN (" . implode(',', $inClause) . ") ORDER BY `SubmittedFormField`.`ID`");
@@ -138,7 +138,8 @@ class SubmittedFormReportField extends FormField {
 					user_error("No submissions to export.", E_USER_ERROR);
 				}
 				
-				HTTPRequest::send_file($csvData, $fileName)->output();		
+				if(class_exists('SS_HTTPRequest')) SS_HTTPRequest::send_file($csvData, $fileName)->output();	
+				else HTTPRequest::send_file($csvData, $fileName)->output();
 			} else {
 				user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
 			}

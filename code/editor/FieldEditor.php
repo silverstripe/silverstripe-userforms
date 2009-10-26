@@ -180,7 +180,7 @@ class FieldEditor extends FormField {
 		if($parentID) {
 			$parentID = Convert::raw2sql($parentID); // who knows what could happen
 			
-			if(defined('Database::USE_ANSI_SQL')) {
+			if(defined('DB::USE_ANSI_SQL')) {
 				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
 			} else {
 				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableFormField WHERE ParentID = '$parentID'");
@@ -218,7 +218,7 @@ class FieldEditor extends FormField {
 		if($parent) {
 			$sql_parent = Convert::raw2sql($parent);
 			
-			if(defined('Database::USE_ANSI_SQL')) {
+			if(defined('DB::USE_ANSI_SQL')) {
 				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
 			} else {
 				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableOption WHERE ParentID = '$sql_parent'");
