@@ -277,7 +277,6 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$CustomDisplayRules = "";
 		$defaults = "";
 		$this->SubmitButtonText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
-		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 			
@@ -413,8 +412,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->ShowClearButton) {
 			$actions->push(new ResetFormAction("clearForm"));
 		}
+		
 		// return the form
-		$form = new Form( $this, "Form", $fields, $actions, new RequiredFields(array_keys($fieldValidation)));
+		$form = new Form($this, "Form", $fields, $actions, new RequiredFields(array_keys($fieldValidation)));
 		$form->loadDataFrom($this->failover);
 		
 		$FormName = $form->FormName();
@@ -475,7 +475,7 @@ JS
 	function process($data, $form) {
 		// submitted form object
 		$submittedForm = new SubmittedForm();
-		$submittedForm->SubmittedBy = Member::currentUser();
+		$submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
 		$submittedForm->ParentID = $this->ID;
 		$submittedForm->Recipient = $this->EmailTo;
 		if(!$this->DisableSaveSubmissions) $submittedForm->write();
@@ -564,31 +564,16 @@ JS
 				$email->setSubject($recipient->EmailSubject);
 				$email->setTo($recipient->EmailAddress);
 				
-				// check to see if they are a dynamic sender. eg based on a email field
-				// a user selected
+				// check to see if they are a dynamic sender. eg based on a email field a user selected
 				if($recipient->SendEmailFromField()) {
-					$name = Convert::raw2sql($recipient->SendEmailFromField()->Name);
-					
-					if(defined('DB::USE_ANSI_SQL')) {
-						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
-					} else {
-						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
-					}
-					
+					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 					if($submittedFormField) {
 						$email->setFrom($submittedFormField->Value);	
 					}
 				}
-				// check to see if they are a dynamic reciever eg based on a dropdown field
-				// a user selected
+				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
 				if($recipient->SendEmailToField()) {
-					$name = Convert::raw2sql($recipient->SendEmailToField()->Name);
-					
-					if(defined('DB::USE_ANSI_SQL')) {
-						$submittedFormField = DataObject::get_one("SubmittedFormField", "\"Name\" = '$name' AND \"ParentID\" = '$submittedForm->ID'");
-					} else {
-						$submittedFormField = DataObject::get_one("SubmittedFormField", "Name = '$name' AND ParentID = '$submittedForm->ID'");
-					}
+					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 					
 					if($submittedFormField) {
 						$email->setTo($submittedFormField->Value);	
