@@ -113,26 +113,25 @@ class SubmittedFormReportField extends FormField {
 									foreach($index as $idx) {
 										$rows[$i][$idx] = $column->Value;
 									}
+									$rows[$i]['Submitted'] = $submission->Created;
 								}
 							}
 						}
 						
 						$i++;
 					}
-					
 					// CSV header row
-					$csvData = '"' . implode('","', $csvHeaderTitle) . '"' . "\n";
+					$csvData = '"' . implode('","', $csvHeaderTitle) . '"' . ',"Submitted"'."\n";
 
 					// For every row of data (one form submission = one row)
 					foreach($rows as $row) {
-						
 						// Loop over all the names we can use
 						for($i=0;$i<count($csvHeaderNames);$i++) {
 							if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
                             else $csvData .= '"'.str_replace('"', '\"', $row[$i]).'",';
 						}
 						// Start a new row for each submission
-						$csvData .= "\n";
+						$csvData .= '"'.$row['Submitted'].'"'."\n";
 					}
 				} else {
 					user_error("No submissions to export.", E_USER_ERROR);
