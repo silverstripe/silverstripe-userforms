@@ -46,6 +46,7 @@ class EditableMultipleOptionField extends EditableFormField {
 				$option->publish($fromStage, $toStage, $createNewVersion);
 			}
 		}
+		
 		parent::publish($fromStage, $toStage, $createNewVersion);
 	}
 	

@@ -234,7 +234,7 @@
 		 */
 		$(".customRules .conditionOption").livequery('change', function(){
 			var valueInput = $(this).siblings(".ruleValue");
-			if($(this).val() == "ValueNot" || $(this).val() == "HasValue") {
+			if($(this).val() != "" && $(this).val() != "IsBlank" && $(this).val() != "IsNotBlank") {
 				valueInput.removeClass("hidden");
 			}
 			else {

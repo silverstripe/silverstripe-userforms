@@ -106,6 +106,10 @@
 							<option value="IsNotBlank"><% _t('NOTBLANK', 'Not Blank') %></option>
 							<option value="HasValue"><% _t('VALUE', 'Value') %></option>
 							<option value="ValueNot"><% _t('NOTVALUE', 'Not Value') %></option>
+							<option value="ValueLessThan"><% _t('LESSTHAN', 'Value Less Than') %></option>
+							<option value="ValueLessThanEqual"><% _t('LESSTHANEQUAL', 'Value Less Than Or Equal') %></option>
+							<option value="ValueGreaterThan"><% _t('GREATERTHAN', 'Value Greater Than') %></option>
+							<option value="ValueGreaterThanEqual"><% _t('GREATERTHANEQUAL', 'Value Greater Than Or Equal') %></option>
 						</select>
 
 						<input type="text" class="ruleValue hidden customRuleField" name="{$FieldName}[CustomRules][Value]" />

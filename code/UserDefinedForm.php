@@ -379,9 +379,25 @@ class UserDefinedForm_Controller extends Page_Controller {
 									$expression = ($checkboxField) ? '$(this).attr("checked")' : '$(this).val() == "'. $dependency['Value'] .'"';
 
 									break;
+								case 'ValueLessThan':
+									$expression = '$(this).val() < parseFloat("'. $dependency['Value'] .'")';
+									
+									break;
+								case 'ValueLessThanEqual':
+									$expression = '$(this).val() <= parseFloat("'. $dependency['Value'] .'")';
+									
+									break;
+								case 'ValueGreaterThan':
+									$expression = '$(this).val() > parseFloat("'. $dependency['Value'] .'")';
+
+									break;
+								case 'ValueGreaterThanEqual':
+									$expression = '$(this).val() >= parseFloat("'. $dependency['Value'] .'")';
+
+									break;	
 								default:
 									$expression = ($checkboxField) ? '!($(this).attr("checked"))' : '$(this).val() != "'. $dependency['Value'] .'"';
-
+								
 									break;
 							}
 							// put it all together
