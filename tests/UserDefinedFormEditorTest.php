@@ -19,6 +19,8 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 	}
 	
 	function testPublishing() {
+		$this->logInWithPermssion('ADMIN');
+		
 		$id = $this->form->ID;
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doPublish();
