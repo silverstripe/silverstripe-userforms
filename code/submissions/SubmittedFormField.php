@@ -9,7 +9,7 @@ class SubmittedFormField extends DataObject {
 	static $db = array(
 		"Name" => "Varchar",
 		"Value" => "Text",
-		"Title" => "Varchar"
+		"Title" => "Varchar(255)"
 	);
 	
 	static $has_one = array(
