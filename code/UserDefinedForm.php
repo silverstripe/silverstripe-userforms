@@ -699,6 +699,14 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 
 		return $fields;
 	}
+	
+	function canEdit() {
+		return $this->Form()->canEdit();
+	}
+	
+	function canDelete() {
+		return $this->Form()->canDelete();
+	}
 }
 /**
  * Email that gets sent to the people listed in the Email Recipients 
