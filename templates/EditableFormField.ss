@@ -73,7 +73,7 @@
 					<li>
 						<a href="#" class="addCondition" title="<% _t('ADD', 'Add') %>"><% _t('ADDRULE', 'Add Rule') %></a>
 					</li>
-					<li class="addCustomRule">
+					<li class="addCustomRule">					
 						<select name="{$FieldName}[CustomSettings][ShowOnLoad]">
 							<option value="Show" <% if ShowOnLoad %>selected="selected"<% end_if %>><% _t('SHOW', 'Show') %></option>
 							<option value="Hide" <% if ShowOnLoad %><% else %>selected="selected"<% end_if %>><% _t('HIDE', 'Hide') %></option>

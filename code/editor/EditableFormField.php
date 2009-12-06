@@ -18,8 +18,7 @@ class EditableFormField extends DataObject {
 		"CanDelete" => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
-		"CustomSettings" => "Text",
-		"ShowOnLoad" => "Boolean"
+		"CustomSettings" => "Text"
 	);
     
 	static $defaults = array(
@@ -86,7 +85,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	function ShowOnLoad() {
+	function getShowOnLoad() {
 		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
 	}
 	
