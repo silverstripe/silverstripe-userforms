@@ -319,7 +319,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				}
 				
 				// Is this Field Show by Default
-				if(!$field->ShowOnLoad()) {
+				if(!$field->ShowOnLoad) {
 					$defaults .= "$(\"#" . $fieldId . "\").hide();\n";
 				}
 
