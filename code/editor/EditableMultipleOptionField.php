@@ -31,11 +31,8 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @return void
 	 */
 	public function publish($fromStage, $toStage, $createNewVersion = false) {
-		if(defined('DB::USE_ANSI_SQL')) {
-			$live = Versioned::get_by_stage("EditableOption", "Live", "\"EditableOption\".\"ParentID\" = $this->ID");
-		} else {
-			$live = Versioned::get_by_stage("EditableOption", "Live", "`EditableOption`.ParentID = $this->ID");
-		}
+		$live = Versioned::get_by_stage("EditableOption", "Live", "\"EditableOption\".\"ParentID\" = $this->ID");
+
 		if($live) {
 			foreach($live as $option) {
 				$option->delete();

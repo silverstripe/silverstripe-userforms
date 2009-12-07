@@ -48,8 +48,8 @@ class FieldEditor extends FormField {
 	 */
 	function Fields() {
 		Requirements::css("userforms/css/FieldEditor.css");
-		Requirements::javascript("jsparty/jquery/ui/ui.core.js");
-		Requirements::javascript("jsparty/jquery/ui/ui.sortable.js");
+		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/ui.core.js");
+		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/ui.sortable.js");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 
 		// Don't return any fields unless we actually have the dependent parameters set on the form field
@@ -178,14 +178,10 @@ class FieldEditor extends FormField {
 		$parentID = $this->form->getRecord()->ID;
 		
 		if($parentID) {
-			$parentID = Convert::raw2sql($parentID); // who knows what could happen
+			$parentID = Convert::raw2sql($parentID);
 			
-			if(defined('DB::USE_ANSI_SQL')) {
-				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
-			} else {
-				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableFormField WHERE ParentID = '$parentID'");
-			}
-			
+			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
+				
 			$sort = $highestSort->value() + 1;
 
 			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
@@ -218,12 +214,8 @@ class FieldEditor extends FormField {
 		if($parent) {
 			$sql_parent = Convert::raw2sql($parent);
 			
-			if(defined('DB::USE_ANSI_SQL')) {
-				$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
-			} else {
-				$highestSort = DB::query("SELECT MAX(Sort) FROM EditableOption WHERE ParentID = '$sql_parent'");
-			}
-			
+			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
+
 			$sort = $highestSort->value() + 1;
 			
 			if($parent) {
