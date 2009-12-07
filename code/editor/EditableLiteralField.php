@@ -24,4 +24,3 @@ class EditableLiteralField extends EditableFormField {
 			"<div id='$this->Name' class='field text'><label class='left'>$this->Title</label><div class='middleColumn literalFieldArea'>". $this->getSetting('Content') ."</div></div>");
 	}
 }
-?>

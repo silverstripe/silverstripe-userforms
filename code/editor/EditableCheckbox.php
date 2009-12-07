@@ -5,12 +5,12 @@
  * 
  * @package userforms
  */
+
 class EditableCheckbox extends EditableFormField {
 	
 	static $singular_name = 'Checkbox Field';
 	
 	static $plural_name = 'Checkboxes';
-	
 	
 	public function getFieldConfiguration() {
 		$options = parent::getFieldConfiguration();
@@ -27,4 +27,3 @@ class EditableCheckbox extends EditableFormField {
 		return ($value) ? _t('EditableFormField.YES', 'Yes') : _t('EditableFormField.NO', 'No');
 	}
 }
-?>

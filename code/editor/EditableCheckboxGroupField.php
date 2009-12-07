@@ -6,6 +6,7 @@
  * 
  * @package userforms
  */
+
 class EditableCheckboxGroupField extends EditableMultipleOptionField {
 
 	static $singular_name = "Checkbox Group";
@@ -40,5 +41,3 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 		return $result;
 	}
 }
-
-?>

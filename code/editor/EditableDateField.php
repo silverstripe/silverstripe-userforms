@@ -6,6 +6,7 @@
  *
  * @package userforms
  */
+
 class EditableDateField extends EditableFormField {
 	
 	static $singular_name = 'Date Field';
@@ -46,4 +47,3 @@ class EditableDateField extends EditableFormField {
 		);
 	}
 }
-?>

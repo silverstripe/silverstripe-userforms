@@ -6,6 +6,7 @@
  *
  * @package userforms
  */
+
 class EditableEmailField extends EditableFormField {
 	
 	static $singular_name = 'Email Field';
@@ -30,4 +31,3 @@ class EditableEmailField extends EditableFormField {
 		);
 	}
 }
-?>

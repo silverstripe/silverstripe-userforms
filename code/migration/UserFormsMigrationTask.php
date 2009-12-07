@@ -16,6 +16,7 @@
  * 
  * @package userforms
  */
+
 class UserFormsMigrationTask extends MigrationTask {
 
 	protected $title = "UserForms Database Migration";
@@ -211,4 +212,3 @@ class UserFormsMigrationTask extends MigrationTask {
 		echo " -- -- Created new option $editableOption->Title<br />";
 	}
 }
-?>

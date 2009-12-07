@@ -4,6 +4,7 @@
  *
  * @package userforms
  */
+
 class SubmittedFormField extends DataObject {
 	
 	static $db = array(
@@ -17,4 +18,3 @@ class SubmittedFormField extends DataObject {
 	);
 
 }
-?>

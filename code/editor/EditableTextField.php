@@ -6,6 +6,7 @@
  *
  * @package userforms
  */
+
 class EditableTextField extends EditableFormField {
 
 	static $singular_name = 'Text field';
@@ -59,4 +60,3 @@ class EditableTextField extends EditableFormField {
 		return $options;
 	}
 }
-?>

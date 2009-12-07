@@ -5,6 +5,7 @@
  *
  * @package userforms
  */
+
 class EditableFormField extends DataObject {
 	
 	static $default_sort = "Sort";
@@ -365,4 +366,3 @@ class EditableFormField extends DataObject {
 		return array();
 	}
 }
-?>

@@ -4,6 +4,7 @@
  *
  * @package userforms
  */
+
 class FieldEditor extends FormField {
 	
 	protected $hasFormOptions = true;
@@ -255,4 +256,3 @@ class FieldEditor extends FormField {
     	}
 	}
 }
-?>

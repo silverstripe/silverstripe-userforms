@@ -4,6 +4,7 @@
  *
  * @package userforms
  */
+
 class EditableFileField extends EditableFormField {
 	
 	// this needs to be moved.
@@ -39,4 +40,3 @@ class EditableFileField extends EditableFormField {
 	}
 	
 }
-?>

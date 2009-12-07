@@ -4,6 +4,7 @@
  *
  * @package userforms
  */
+
 class SubmittedFormReportField extends FormField {
 	
 	function Field() {
@@ -182,4 +183,3 @@ class SubmittedFormReportField extends FormField {
 		return (Director::is_ajax()) ? false : Director::redirectBack();
 	}
 }
-?>

@@ -71,4 +71,3 @@ class EditableOption extends DataObject {
 		return $this->EditSegment();
 	}
 }
-?>

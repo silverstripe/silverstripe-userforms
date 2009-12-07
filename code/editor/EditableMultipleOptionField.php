@@ -4,10 +4,7 @@
  * Base class for multiple option fields such as dropdowns and 
  * radio sets. Implemented as a class but you would not create 
  * one of these directly, rather you would instantiate a subclass
- * such as EditableDropdownField
- *
- * @todo Maybe it would make more sense to have dropdownfield and
- * 			checkboxset just transformations on this class
+ * such as {@link EditableDropdownField}
  *
  * @package userforms
  */
@@ -144,4 +141,3 @@ class EditableMultipleOptionField extends EditableFormField {
 		return user_error('Please implement getFormField() on '. $this->class, E_USER_ERROR);
 	}
 }
-?>

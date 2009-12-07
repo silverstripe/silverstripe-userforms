@@ -4,6 +4,7 @@
  *
  * @subpackage userforms
  */
+
 class EditableFormHeading extends EditableFormField {
 
 	static $singular_name = 'Heading';
@@ -38,4 +39,3 @@ class EditableFormHeading extends EditableFormField {
 		return false;
 	}
 }
-?>

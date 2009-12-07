@@ -6,6 +6,7 @@
  *
  * @package userforms
  */
+
 class EditableRadioField extends EditableMultipleOptionField {
 	
 	static $singular_name = 'Radio field';
@@ -26,4 +27,3 @@ class EditableRadioField extends EditableMultipleOptionField {
 		return new OptionsetField($this->Name, $this->Title, $options);
 	}
 }
-?>

@@ -1,8 +1,10 @@
 <?php
 /**
  * Contents of an UserDefinedForm submission
- * @package cms
+ *
+ * @package userforms
  */
+
 class SubmittedForm extends DataObject {
 	static $has_one = array(
 		"SubmittedBy" => "Member",
@@ -27,4 +29,3 @@ class SubmittedForm extends DataObject {
 		parent::onBeforeDelete();
 	}
 }
-?>

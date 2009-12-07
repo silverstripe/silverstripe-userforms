@@ -4,6 +4,7 @@
  *
  * @package userforms
  */
+
 class EditableMemberListField extends EditableFormField {
 	
 	static $singular_name = 'Member List Field';
@@ -32,4 +33,3 @@ class EditableMemberListField extends EditableFormField {
 		return ($member) ? $member->getName() : "";
 	}
 }
-?>

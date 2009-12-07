@@ -6,6 +6,7 @@
  *
  * @package userforms
  */
+
 class EditableDropdown extends EditableMultipleOptionField {
 	
 	static $singular_name = 'Dropdown Field';
@@ -25,4 +26,3 @@ class EditableDropdown extends EditableMultipleOptionField {
 	}
 
 }
-?>

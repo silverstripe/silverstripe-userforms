@@ -1,8 +1,10 @@
 <?php
 /**
  * A file uploaded on a UserDefinedForm field
- * @package cms
+ *
+ * @package userforms
  */
+
 class SubmittedFileField extends SubmittedFormField {
 	
 	static $has_one = array(
@@ -25,7 +27,5 @@ class SubmittedFileField extends SubmittedFormField {
 	 */
 	function getLink() {
 		return ($this->UploadedFile()) ? $this->UploadedFile()->URL : "";
-	}
-	
+	}	
 }
-?>

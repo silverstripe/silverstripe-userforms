@@ -705,12 +705,14 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		return $this->Form()->canDelete();
 	}
 }
+
 /**
  * Email that gets sent to the people listed in the Email Recipients 
  * when a submission is made
  *
  * @package userforms
  */
+
 class UserDefinedForm_SubmittedFormEmail extends Email {
 	protected $ss_template = "SubmittedFormEmail";
 	protected $data;
@@ -719,5 +721,3 @@ class UserDefinedForm_SubmittedFormEmail extends Email {
 		parent::__construct();
 	}
 }
-
-?>
