@@ -119,14 +119,14 @@ class UserDefinedForm extends Page {
 
 		if($live) {
 			foreach($live as $field) {
-				$field->deleteFromStage('Live');
+				$field->doDeleteFromStage('Live');
 			}
 		}
 		
 		// publish the draft pages
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$field->publish('Stage', 'Live');
+				$field->doPublish('Stage', 'Live');
 			}
 		}
 
@@ -144,7 +144,7 @@ class UserDefinedForm extends Page {
 	public function doUnpublish() {
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$field->deleteFromStage('Live');
+				$field->doDeleteFromStage('Live');
 			}
 		}
 		

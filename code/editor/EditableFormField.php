@@ -82,6 +82,25 @@ class EditableFormField extends DataObject {
 	}
 	
 	/**
+	 * Publish this Form Field to the live site
+	 * 
+	 * Wrapper for the {@link Versioned} publish function
+	 */
+	public function doPublish($fromStage, $toStage, $createNewVersion = false) {
+		$this->publish($fromStage, $toStage, $createNewVersion);
+	}
+	
+	/**
+	 * Delete this form from a given stage
+	 *
+	 * Wrapper for the {@link Versioned} deleteFromStage function
+	 */
+	public function doDeleteFromStage($stage) {
+		$this->deleteFromStage($stage);
+	}
+	
+	
+	/**
 	 * Show this form on load or not
 	 *
 	 * @return bool
