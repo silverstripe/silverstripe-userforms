@@ -122,7 +122,7 @@ class UserDefinedForm extends Page {
 		}
 		if($live) {
 			foreach($live as $field) {
-				$field->deleteFromStage('Live');
+				$field->doDeleteFromStage('Live');
 			}
 		}
 		

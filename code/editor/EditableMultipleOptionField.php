@@ -36,12 +36,14 @@ class EditableMultipleOptionField extends EditableFormField {
 		} else {
 			$live = Versioned::get_by_stage("EditableOption", "Live", "`EditableOption`.ParentID = $this->ID");
 		}
+
 		if($live) {
 			foreach($live as $option) {
 				$option->delete();
 			}
 		}
-		if($this->Options()) {
+
+		if($this->Options() && $this->Options()->exists()) {
 			foreach($this->Options() as $option) {
 				$option->publish($fromStage, $toStage, $createNewVersion);
 			}
