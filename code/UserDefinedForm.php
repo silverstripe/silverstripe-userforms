@@ -129,7 +129,7 @@ class UserDefinedForm extends Page {
 		// publish the draft pages
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$field->publish('Stage', 'Live');
+				$field->doPublish('Stage', 'Live');
 			}
 		}
 
@@ -147,7 +147,7 @@ class UserDefinedForm extends Page {
 	public function doUnpublish() {
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$field->deleteFromStage('Live');
+				$field->doDeleteFromStage('Live');
 			}
 		}
 		
@@ -156,7 +156,8 @@ class UserDefinedForm extends Page {
 	
 	/**
 	 * Roll back a form to a previous version
-	 *
+	 * 
+	 * @todo - This isn't working
 	 * @param String|int Version to roll back to
 	 */
 	public function doRollbackTo($version) {

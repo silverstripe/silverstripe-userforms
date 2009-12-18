@@ -30,7 +30,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * 
 	 * @return void
 	 */
-	public function publish($fromStage, $toStage, $createNewVersion = false) {
+	public function doPublish($fromStage, $toStage, $createNewVersion = false) {
 		if(defined('DB::USE_ANSI_SQL')) {
 			$live = Versioned::get_by_stage("EditableOption", "Live", "\"EditableOption\".\"ParentID\" = $this->ID");
 		} else {
@@ -47,7 +47,7 @@ class EditableMultipleOptionField extends EditableFormField {
 			}
 		}
 		
-		parent::publish($fromStage, $toStage, $createNewVersion);
+		$this->publish($fromStage, $toStage, $createNewVersion);
 	}
 	
 	/**
@@ -57,14 +57,14 @@ class EditableMultipleOptionField extends EditableFormField {
 	 *
 	 * @return void
 	 */
-	public function deleteFromStage($stage) {
+	public function doDeleteFromStage($stage) {
 		if($this->Options()) {
 			foreach($this->Options() as $option) {
 				$option->deleteFromStage($stage);
 			}
 		}
 		
-		parent::deleteFromStage($stage);
+		$this->deleteFromStage($stage);
 	}
 	
 	/**

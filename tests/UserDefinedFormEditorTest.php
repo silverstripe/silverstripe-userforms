@@ -22,11 +22,30 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 		$this->logInWithPermssion('ADMIN');
 		
 		$id = $this->form->ID;
+		
+		// test a simple field
 		$this->form->Fields()->add(new EditableFormField());
 		$this->form->doPublish();
 		$whereClause = defined('DB::USE_ANSI_SQL') ? "\"UserDefinedForm_Live\".\"ID\" = $id" : "UserDefinedForm_Live.ID = $id";
 		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", $whereClause);
 		$this->assertEquals($live->Fields()->Count(), 1);
+		
+		// test a editable option field
+		$dropdown = new EditableDropdown();
+		$dropdown->Options()->add(new EditableOption());
+		$this->form->Fields()->add($dropdown);
+		$this->form->doPublish();
+		
+		// check it was added
+		$live = Versioned::get_one_by_stage("UserDefinedF3orm", "Live", $whereClause);
+		$this->assertEquals($live->Fields()->Count(), 2);
+		
+		foreach($live->Fields() as $field) {
+			if(is_a($field, 'EditableMultipleOptionField')) {
+				$this->assertEquals($field->Options()->Count(), 1);
+			}
+		}
+		
 	}
 	
 	function testUnpublishing() {
