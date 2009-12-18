@@ -15,7 +15,7 @@
 					<% control FieldValues %>
 						<tr>
 							<td class="field">$Title</td>
-							<td class="value">$Value.RAW</td>
+							<td class="value">$Value</td>
 						</tr>
 					<% end_control %>	
 				</table>
