@@ -15,3 +15,7 @@ Userforms ChangeLog
 	- Added Pagination to the Submissions
 	- Added Ability to delete submissions
 	- Added Ability to disable submissions
+	
+0.2.1
+	- Added Staging / Live Support for Form Fields
+	- Misc Bug Fixes
