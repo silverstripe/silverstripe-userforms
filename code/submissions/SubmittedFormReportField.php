@@ -138,7 +138,11 @@ class SubmittedFormReportField extends FormField {
 					user_error("No submissions to export.", E_USER_ERROR);
 				}
 				
-				SS_HTTPRequest::send_file($csvData, $fileName)->output();	
+				if(class_exists('SS_HTTPRequest')) {
+					SS_HTTPRequest::send_file($csvData, $fileName)->output();	
+				} else {
+					HTTPRequest::send_file($csvData, $fileName)->output();	
+				}
 				
 			} else {
 				user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
