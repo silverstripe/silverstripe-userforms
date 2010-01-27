@@ -191,14 +191,16 @@ class UserFormsMigrationTask extends MigrationTask {
 	 *
 	 */
 	function findDatabaseTableName($tableName) {
-		$table = DB::query("SHOW TABLES LIKE '$tableName'")->value();
-		if(!$table) {
-			$table = DB::query("SHOW TABLES LIKE '_obsolete_$tableName'")->value();
-			
-			if(!$table) echo '<strong>!! Could Not Find '.$tableName;
+		$exist = DB::tableList();
+ 		if(!empty($exist)) {
+			if(array_search($tableName, $exist) !== false) return $tableName;
+			$tableName = "_obsolete_$tableName";
+ 			if(array_search($tableName, $exist) !== false) return $tableName;
 		}
-		return $table;
+		echo '<strong>!! Could Not Find '.$tableName;
+		return;
 	}
+
 	/**
 	 * Create a EditableOption from a whatever type of multi
 	 * form field it is coming from
