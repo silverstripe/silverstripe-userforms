@@ -17,7 +17,7 @@ class SubmittedFileField extends SubmittedFormField {
 	 * @return String
 	 */
 	function getValue() {
-		return ($this->UploadedFile()) ? $this->UploadedFile()->Title : "";
+		return '<a href="'.$this->getLink().'">'. _t('SubmittedFileField.DOWNLOADFILE', 'Download File') .'</a>';
 	}
 	
 	/**

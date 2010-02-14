@@ -505,7 +505,7 @@ JS
 			// don't show fields that shouldn't be shown
 			if(!$field->showInReports()) continue;
 			
-			$submittedField = new SubmittedFormField();
+			$submittedField = $field->getSubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->Title;
@@ -518,11 +518,7 @@ JS
 			}
 
 			if(!empty($data[$field->Name])){
-				/**
-				 * @todo this should be on the EditableFile class. Just need to sort out
-				 * 		attachments array
-				 */
-				if($field->ClassName == "EditableFileField"){	
+				if(in_array("EditableFileField", $field->getClassAncestry())) {
 					if(isset($_FILES[$field->Name])) {
 						
 						// create the file from post data
@@ -536,13 +532,6 @@ JS
 						// Attach the file if its less than 1MB, provide a link if its over.
 						if($file->getAbsoluteSize() < 1024*1024*1){
 							$attachments[] = $file;
-						}
-
-						// Always provide the link if present.
-						if($file->ID) {
-							$submittedField->Value = "<a href=\"". $file->getFilename() ."\" title=\"". $file->getFilename() . "\">". $file->Title . "</a>";
-						} else {
-							$submittedField->Value = "";
 						}
 					}									
 				}

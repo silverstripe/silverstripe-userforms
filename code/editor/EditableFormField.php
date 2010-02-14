@@ -333,6 +333,15 @@ class EditableFormField extends DataObject {
 		user_error("Please implement a getFormField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
 	}
 	
+	/**
+	 * Return the instance of the submission field class
+	 *
+	 * @return SubmittedFormField
+	 */
+	public function getSubmittedFormField() {
+		return new SubmittedFormField();
+	}
+
 	function showInReports() {
 		return true;
 	}

@@ -7,11 +7,6 @@
 
 class EditableFileField extends EditableFormField {
 	
-	// this needs to be moved.
-	static $has_one = array(
-		"UploadedFile" => "File"
-	);
-	
 	/**
 	 * @see Upload->allowedMaxFileSize
 	 * @var int
@@ -32,11 +27,7 @@ class EditableFileField extends EditableFormField {
 		return new FileField($this->Name, $this->Title);
 	}
 	
-	/**
-	 * Workaround to handle uploads on the UserFormPage
-	 */
-	public function getValueFromData($data) {
-		return "";
-	}
-	
+	public function getSubmittedFormField() {
+		return new SubmittedFileField();
+  	}
 }
