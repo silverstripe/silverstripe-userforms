@@ -13,7 +13,7 @@ class UserDefinedFormEditorTest extends FunctionalTest {
 	
 	function setUp() {
 		parent::setUp();
-		$this->logInWithPermssion('ADMIN');
+		$this->logInWithPermission('ADMIN');
 		
 		$this->form = new UserDefinedForm();
 		$this->form->write();
