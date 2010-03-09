@@ -47,7 +47,7 @@ class UserFormsMigrationTask extends MigrationTask {
 		// if they want to import just 1 form - eg for testing
 		if(isset($_GET['formID'])) {
 			$id = Convert::raw2sql($_GET['formID']);
-			$forms = DataObject::get("UserDefinedForm", "`UserDefinedForm`.ID = '$id'");
+			$forms = DataObject::get("UserDefinedForm", "UserDefinedForm.ID = '$id'");
 		}
 		
 		if(!$forms) {
