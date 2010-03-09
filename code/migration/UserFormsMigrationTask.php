@@ -35,7 +35,8 @@ class UserFormsMigrationTask extends MigrationTask {
 	 */
 	function run($request) {
 		// load the forms
-		$forms = DataObject::get("UserDefinedForm");
+		$forms = DataObject::get('UserDefinedForm');
+		if(!$forms) $forms = new DataObjectSet();
 		
 		// set debugging / useful test
 		$this->dryRun = (isset($_GET['dryRun'])) ? true : false;
@@ -47,7 +48,7 @@ class UserFormsMigrationTask extends MigrationTask {
 		// if they want to import just 1 form - eg for testing
 		if(isset($_GET['formID'])) {
 			$id = Convert::raw2sql($_GET['formID']);
-			$forms = DataObject::get("UserDefinedForm", "UserDefinedForm.ID = '$id'");
+			$forms->push(DataObject::get_by_id('UserDefinedForm', $id));
 		}
 		
 		if(!$forms) {
