@@ -49,8 +49,9 @@ class FieldEditor extends FormField {
 	 */
 	function Fields() {
 		Requirements::css("userforms/css/FieldEditor.css");
-		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/ui.core.js");
-		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/ui.sortable.js");
+		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/jquery.ui.core.js");
+		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/jquery.ui.widget.js");
+		Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/jquery.ui.sortable.js");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 
 		// Don't return any fields unless we actually have the dependent parameters set on the form field
