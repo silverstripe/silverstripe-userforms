@@ -28,7 +28,7 @@ class EditableFormField extends DataObject {
 	);
     
 	static $has_one = array(
-		"Parent" => "SiteTree",
+		"Parent" => "UserDefinedForm",
 	);
 	
 	static $extensions = array(
