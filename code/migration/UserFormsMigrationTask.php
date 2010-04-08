@@ -90,7 +90,7 @@ class UserFormsMigrationTask extends MigrationTask {
 							else if($field->ClassName == "EditableCheckboxGroupField") {
 								$optionClass = "EditableCheckboxOption";
 							}
-							$query = DB::query("SELECT * FROM $optionClass WHERE ParentID = '$field->ID'");
+							$query = DB::query("SELECT * FROM \"$optionClass\" WHERE \"ParentID\" = '$field->ID'");
 							$result = $query->first();
 							if($result) {
 								do {
@@ -104,7 +104,7 @@ class UserFormsMigrationTask extends MigrationTask {
 							$database = $this->findDatabaseTableName('EditableTextField');
 							
 							// get the data from the table
-							$result = DB::query("SELECT * FROM $database WHERE ID = $field->ID")->first();
+							$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 							
 							if($result) {
 								$field->setFieldSettings(array(
@@ -123,7 +123,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$database = $this->findDatabaseTableName('EditableLiteralField');
 
 								// get the data from the table
-								$result = DB::query("SELECT * FROM $database WHERE ID = $field->ID")->first();
+								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
 									$field->setFieldSettings(array(
@@ -139,7 +139,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$database = $this->findDatabaseTableName('EditableMemberListField');
 
 								// get the data from the table
-								$result = DB::query("SELECT * FROM $database WHERE ID = $field->ID")->first();
+								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
 									$field->setFieldSettings(array(
@@ -155,7 +155,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$database = $this->findDatabaseTableName('EditableCheckbox');
 
 								// get the data from the table
-								$result = DB::query("SELECT * FROM $database WHERE ID = $field->ID")->first();
+								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
 									$field->setFieldSettings(array(
@@ -167,7 +167,7 @@ class UserFormsMigrationTask extends MigrationTask {
 							
 						case 'EditableEmailField': 
 							$database = $this->findDatabaseTableName('EditableEmailField');
-							$result = DB::query("SELECT * FROM $database WHERE ID = $field->ID")->first();
+							$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 							if($result && isset($result['SendCopy']) && $result['SendCopy'] == true) {
 								// we do not store send copy on email field anymore. This has been wrapped into
 								// the email recipients

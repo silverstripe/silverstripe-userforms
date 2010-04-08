@@ -87,7 +87,7 @@ class UserDefinedForm extends Page {
 				'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
 	    	),
 	    	'getCMSFields_forPopup',
-			"FormID = '$this->ID'"
+			"\"FormID\" = '$this->ID'"
 		);
 		$emailRecipients->setAddTitle(_t('UserDefinedForm.AEMAILRECIPIENT', 'A Email Recipient'));
 		
@@ -326,7 +326,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 						if(is_array($dependency) && isset($dependency['ConditionField']) && $dependency['ConditionField'] != "") {
 							// get the field which is effected
 							$formName = Convert::raw2sql($dependency['ConditionField']);
-							$formFieldWatch = DataObject::get_one("EditableFormField", "Name = '$formName'");
+							$formFieldWatch = DataObject::get_one("EditableFormField", "\"Name\" = '$formName'");
 							
 							if(!$formFieldWatch) break;
 							
@@ -660,8 +660,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		);
 		
 		if($this->Form()) {
-			$validEmailFields = DataObject::get("EditableEmailField", "ParentID = '$this->FormID'");
-			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "ParentID = '$this->FormID'");
+			$validEmailFields = DataObject::get("EditableEmailField", "\"ParentID\" = '$this->FormID'");
+			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "\"ParentID\" = '$this->FormID'");
 			
 			// if they have email fields then we could send from it
 			if($validEmailFields) {
