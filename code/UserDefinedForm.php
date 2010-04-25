@@ -584,7 +584,7 @@ JS
 				
 				if($recipient->SendPlain) {
 					$body = strip_tags($recipient->EmailBody) . "\n ";
-					if(isset($emailData['Fields'])) {
+					if(isset($emailData['Fields']) && !$recipient->HideFormData) {
 						foreach($emailData['Fields'] as $Field) {
 							$body .= $Field->Title .' - '. $Field->Value .' \n';
 						}
