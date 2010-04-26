@@ -93,8 +93,13 @@ class SubmittedFormReportField extends FormField {
 					foreach($tmp as $array) {
 						$csvHeaderNames[] = $array['Name'];
 						$csvHeaderTitle[] = $array['Title'];
+						
 					}
-
+					// We need Headers to be unique, query is returning headers multiple times (number of submissions).
+					// TODO: Fix query 
+					$csvHeaderNames = array_unique($csvHeaderNames);
+					$csvHeaderTitle = array_unique($csvHeaderTitle);
+					
 					// For every submission...
 					$i = 0;
 					foreach($submissions as $submission) {
