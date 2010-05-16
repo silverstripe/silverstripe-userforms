@@ -122,7 +122,7 @@ class UserDefinedForm extends Page {
 				$field->doDeleteFromStage('Live');
 			}
 		}
-		
+
 		// publish the draft pages
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
@@ -209,6 +209,18 @@ class UserDefinedForm extends Page {
 			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $this->SubmitButtonText),
 			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton)
 		);
+	}
+	
+	/**
+	 * Return if this form has been modified on the stage site and not published.
+	 * this is used on the workflow module and for a couple highlighting things
+	 *
+	 * @todo make this a bit smarter - the issue with userforms is that it uses several
+	 * 		relationships to form fields which has a undefined amount of options so 
+	 * 		for now just say its always modified
+	 */
+	public function getIsModifiedOnStage() {
+		return true;
 	}
 }
 
