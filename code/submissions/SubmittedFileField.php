@@ -16,10 +16,10 @@ class SubmittedFileField extends SubmittedFormField {
 	 * 
 	 * @return String
 	 */
-	function getValue() {
+	function getFormattedValue() {
 		return '<a href="'.$this->getLink().'">'. _t('SubmittedFileField.DOWNLOADFILE', 'Download File') .'</a>';
 	}
-	
+
 	/**
 	 * Return the Link object for this field
 	 * 
