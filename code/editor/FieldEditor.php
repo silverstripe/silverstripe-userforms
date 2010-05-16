@@ -128,7 +128,7 @@ class FieldEditor extends FormField {
 				
 				// get it from the db
 			  	$editable = DataObject::get_by_id('EditableFormField', $newEditableID); 
-	
+
 		  		// if it exists in the db update it
 		  		if($editable) {
 			
