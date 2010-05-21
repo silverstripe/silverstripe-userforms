@@ -4,7 +4,7 @@
  * Rewritten and refactored from the prototype version FieldEditor. 
  *
  * @todo Upgrade to jQuery 1.3 so we can use live rather
- * 			then livequery
+ * 			then live
  */
 (function($) {
 	$(document).ready(function() {
@@ -31,7 +31,7 @@
 		 * area. the type information should all be on this object
 		 */
 		
-		$("div.FieldEditor .MenuHolder .action").livequery('click',function() {
+		$("div.FieldEditor .MenuHolder .action").live('click',function() {
 
 			// if this form is readonly...
 			if($("#Fields").hasClass('readonly')) return false;
@@ -74,7 +74,7 @@
 		 * fields in the select fields to use this new field title. We can
 		 * just worry about the title text - don't mess around with the keys
 		 */
-		$('.EditableFormField .fieldInfo .text').livequery('change', function() {
+		$('.EditableFormField .fieldInfo .text').live('change', function() {
 			var value = $(this).val();
 			var name = $(this).parents("li").attr("id").split(' ');
 			$("#Fields_fields select.fieldOption option").each(function(i, domElement) {
@@ -87,7 +87,7 @@
 		 * Show the more options popdown. Or hide it if we 
 		 * currently have it open
 		 */
-		$(".EditableFormField .moreOptions").livequery('click',function() {
+		$(".EditableFormField .moreOptions").live('click',function() {
 			
 			var parentID = $(this).parents(".EditableFormField");
 			if(parentID) {
@@ -111,7 +111,7 @@
 		/**
 		 * Delete a field from the user defined form
 		 */
-		$(".EditableFormField .delete").livequery('click', function() {
+		$(".EditableFormField .delete").live('click', function() {
 			// remove all the rules with relate to this field
 			var text = $(this).parents("li").find(".fieldInfo .text").val();
 			$("#Fields_fields .customRules select.fieldOption option").each(function(i, domElement) {
@@ -135,7 +135,7 @@
 		 * Add a suboption to a radio field or to a dropdown box 
 		 * for example
 		 */
-		$(".EditableFormField .addableOption").livequery('click', function() {
+		$(".EditableFormField .addableOption").live('click', function() {
 			
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWFIELD', 'Adding New Option'));
@@ -169,7 +169,7 @@
 		 * Delete a suboption such as an dropdown option or a 
 		 * checkbox field
 		 */
-		$(".EditableFormField .deleteOption").livequery('click', function() {
+		$(".EditableFormField .deleteOption").live('click', function() {
 			// pass the deleted status onto the element
 			$(this).parent("li").children("[type=text]").attr("value", "field-node-deleted");
 			$(this).parent("li").hide();
@@ -183,7 +183,7 @@
 		/**
 		 * Sort Fields in the Field List
 		 */
-		$("#Fields_fields").livequery(function() {
+		$("#Fields_fields").live(function() {
 			$(this).sortable({ 
 	  	 		handle : '.fieldHandler',
 				cursor: 'pointer',
@@ -208,7 +208,7 @@
 		 * Sort Options in a Field List - Such as options in a 
 		 * dropdown field.
 		 */
-		$(".editableOptions").livequery(function() {
+		$(".editableOptions").live(function() {
 			$(this).sortable({
 				handle : '.handle',
 				cursor: 'pointer',
@@ -232,7 +232,7 @@
 		/**
 		 * Custom Rules Interface
 		 */
-		$(".customRules .conditionOption").livequery('change', function(){
+		$(".customRules .conditionOption").live('change', function(){
 			var valueInput = $(this).siblings(".ruleValue");
 			if($(this).val() != "" && $(this).val() != "IsBlank" && $(this).val() != "IsNotBlank") {
 				valueInput.removeClass("hidden");
@@ -244,7 +244,7 @@
 		/**
 		 * Delete a custom rule
 		 */
-		$(".customRules .deleteCondition").livequery('click', function() {
+		$(".customRules .deleteCondition").live('click', function() {
 			$(this).parent("li").fadeOut().remove();
 			
 			return false;
@@ -252,7 +252,7 @@
 		/**
 		 * Adding a custom rule to a given form
 		 */
-		$(".customRules .addCondition").livequery('click', function() {
+		$(".customRules .addCondition").live('click', function() {
 
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
