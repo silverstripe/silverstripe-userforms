@@ -183,25 +183,23 @@
 		/**
 		 * Sort Fields in the Field List
 		 */
-		$("#Fields_fields").live(function() {
-			$(this).sortable({ 
-	  	 		handle : '.fieldHandler',
-				cursor: 'pointer',
-				items: 'li.EditableFormField',
-				placeholder: 'removed-form-field',
-				opacity: 0.6,
-				revert: true,
-				change : function (event, ui) {
-					$("#Fields_fields").sortable('refreshPositions');
-				},
-		    	update : function (event, ui) {
-		      		// get all the fields
-					var sort = 1;
-					$("li.EditableFormField").each(function() {
-						$(this).find(".sortHidden").val(sort++);
-					});
-		    	}
-			});
+		$("#Fields_fields").sortable({ 
+  	 		handle : '.fieldHandler',
+			cursor: 'pointer',
+			items: 'li.EditableFormField',
+			placeholder: 'removed-form-field',
+			opacity: 0.6,
+			revert: true,
+			change : function (event, ui) {
+				$("#Fields_fields").sortable('refreshPositions');
+			},
+	    	update : function (event, ui) {
+	      		// get all the fields
+				var sort = 1;
+				$("li.EditableFormField").each(function() {
+					$(this).find(".sortHidden").val(sort++);
+				});
+	    	}
 		});
 		
 		/**
