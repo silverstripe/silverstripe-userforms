@@ -15,3 +15,7 @@ Userforms ChangeLog
 	- Added Pagination to the Submissions
 	- Added Ability to delete submissions
 	- Added Ability to disable submissions
+	
+0.3.0
+	- SilverStripe 2.4 Compatibility Changes
+	- Minor Bugfixes

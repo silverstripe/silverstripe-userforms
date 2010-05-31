@@ -1,17 +1,13 @@
-###############################################
 User Defined Forms ("UserForms") Module
-###############################################
+===============
 
 Maintainer Contact
------------------------------------------------
+------------------
 Will Rossiter (Nickname: wrossiter, willr)
 <will (at) silverstripe (dot) com>
 
-Sean Harvey (Nickname: sharvey, halkyon)
-<sean (at) silverstripe (dot) com>
-
 Requirements
------------------------------------------------
+---------------------
 SilverStripe 2.4.0+
 
 Documentation
