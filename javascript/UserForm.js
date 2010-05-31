@@ -64,6 +64,9 @@
 					statusMessage(ss.i18n._t('UserForms.ERRORCREATINGFIELD', 'Error Creating Field'));
 				} 
 			});
+			
+			$("#Fields_fields").sortable("refresh");
+	
 			return false;
 		});
 		
@@ -86,7 +89,6 @@
 		 * currently have it open
 		 */
 		$(".EditableFormField .moreOptions").live('click',function() {
-			
 			var parentID = $(this).parents(".EditableFormField");
 			if(parentID) {
 				var extraOptions = parentID.children(".extraOptions");
@@ -125,7 +127,9 @@
 					}
 				}
 			});
+			
 			$(this).parents(".EditableFormField").remove();
+			
 			return false;
 		});
 		
@@ -204,25 +208,23 @@
 		 * Sort Options in a Field List - Such as options in a 
 		 * dropdown field.
 		 */
-		$(".editableOptions").live(function() {
-			$(this).sortable({
-				handle : '.handle',
-				cursor: 'pointer',
-				items: 'li',
-				placeholder: 'removed-form-field',
-				opacity: 0.6,
-				revert: true,
-				change : function (event, ui) {
-					$(this).sortable('refreshPositions');
-				},
-		    	update : function (event, ui) {
-		      		// get all the fields
-					var sort = 1;
-					$(".editableOptions li").each(function() {
-						$(this).find(".sortOptionHidden").val(sort++);
-					});
-		    	}
-			});
+		$(".editableOptions").sortable({
+			handle : '.handle',
+			cursor: 'pointer',
+			items: 'li',
+			placeholder: 'removed-form-field',
+			opacity: 0.6,
+			revert: true,
+			change : function (event, ui) {
+				$(this).sortable('refreshPositions');
+			},
+	    	update : function (event, ui) {
+	      		// get all the fields
+				var sort = 1;
+				$(".editableOptions li").each(function() {
+					$(this).find(".sortOptionHidden").val(sort++);
+				});
+	    	}
 		});
 		
 		/**
@@ -250,8 +252,7 @@
 		/**
 		 * Adding a custom rule to a given form
 		 */
-		$(".customRules .addCondition").live('click', function() {
-
+		$(".customRules .addCondition").click(function() {
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
 			
@@ -280,6 +281,8 @@
 			
 			// append to the list
 			currentRules.append(newRule);
+			
+			$(".editableOptions").sortable("refresh");
 			
 			return false;
 		});
