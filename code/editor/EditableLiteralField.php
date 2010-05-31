@@ -15,7 +15,7 @@ class EditableLiteralField extends EditableFormField {
 	
 	function getFieldConfiguration() {
 		return new FieldSet(
-			new TextareaField("Fields[$this->ID]" . "[CustomSettings][Content]", "HTML", 4, 20, $this->getSetting('Content'))
+			new TextareaField("Fields[$this->ID][CustomSettings][Content]", "HTML", 4, 20, $this->getSetting('Content'))
 		);
 	}
 

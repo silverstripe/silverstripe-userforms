@@ -16,6 +16,14 @@ class EditableDateField extends EditableFormField {
 	
 	static $plural_name = 'Date Fields';
 	
+	function getFieldConfiguration() {
+		$defaultToToday = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
+		
+		return new FieldSet(
+			new CheckboxField("Fields[$this->ID][CustomSettings][DefaultToToday]", _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?'), $defaultToToday)
+		);
+	}
+	
 	function populateFromPostData($data) {
 		$fieldPrefix = 'Default-';
 		
@@ -49,7 +57,9 @@ JS
 		// css for jquery date picker
 		Requirements::css(THIRDPARTY_DIR .'/jquery-ui-themes/smoothness/jquery-ui-1.8rc3.custom.css');
 		
-		return new DateField( $this->Name, $this->Title, $this->Default);
+		$default = ($this->getSetting('DefaultToToday')) ? date('d/m/Y') : $this->Default;
+		
+		return new DateField( $this->Name, $this->Title, $default);
 	}
 	
 	/**
