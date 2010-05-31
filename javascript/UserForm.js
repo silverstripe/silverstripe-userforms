@@ -2,9 +2,6 @@
  * Javascript required to power the user defined forms.
  * 
  * Rewritten and refactored from the prototype version FieldEditor. 
- *
- * @todo Upgrade to jQuery 1.3 so we can use live rather
- * 			then live
  */
 (function($) {
 	$(document).ready(function() {
@@ -69,6 +66,7 @@
 			});
 			return false;
 		});
+		
 		/** 
 		 * Upon renaming a field we should go through and rename all the
 		 * fields in the select fields to use this new field title. We can
@@ -239,6 +237,7 @@
 				valueInput.addClass("hidden");
 			}
 		});
+		
 		/**
 		 * Delete a custom rule
 		 */
@@ -247,6 +246,7 @@
 			
 			return false;
 		});
+		
 		/**
 		 * Adding a custom rule to a given form
 		 */
