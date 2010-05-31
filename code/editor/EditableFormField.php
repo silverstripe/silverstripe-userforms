@@ -19,7 +19,8 @@ class EditableFormField extends DataObject {
 		"CanDelete" => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
-		"CustomSettings" => "Text"
+		"CustomSettings" => "Text",
+		"CustomParameter" => "Varchar(200)"
 	);
     
 	static $defaults = array(
@@ -36,6 +37,7 @@ class EditableFormField extends DataObject {
 	);
 
 	protected $readonly;
+	
 
 	/**
 	 * Set this formfield to readonly
