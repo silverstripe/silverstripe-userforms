@@ -190,11 +190,25 @@ class UserDefinedForm extends Page {
 	 */
 	public function duplicate() {
 		$page = parent::duplicate();
-		foreach($this->Fields() as $field) {
-			$newField = $field->duplicate();
-			$newField->ParentID = $page->ID;
-			$newField->write();
+		
+		// the form fields
+		if($this->Fields()) {
+			foreach($this->Fields() as $field) {
+				$newField = $field->duplicate();
+				$newField->ParentID = $page->ID;
+				$newField->write();
+			}
 		}
+		
+		// the emails
+		if($this->EmailRecipients()) {
+			foreach($this->EmailRecipients() as $email) {
+				$newEmail = $email->duplicate();
+				$newEmail->FormID = $page->ID;
+				$newEmail->write();
+			}
+		}
+		
 		return $page;
 	}
 	

@@ -40,7 +40,7 @@ class EditableDateField extends EditableFormField {
 		Requirements::customScript(<<<JS
 			(function(jQuery) {
 				$(document).ready(function() {
-					$('input[name^=EditableDateField]').datepicker();	
+					$('input[name^=EditableDateField]').attr('autocomplete', 'off').datepicker();	
 				});
 			})(jQuery);
 JS
