@@ -281,7 +281,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 		}
 		return array(
-			'Content' => $this->Content,
+			'Content' => DBField::create('HTMLText', $this->Content),
 			'Form' => $this->Form
 		);
 	}
