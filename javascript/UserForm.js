@@ -252,7 +252,7 @@
 		/**
 		 * Adding a custom rule to a given form
 		 */
-		$(".customRules .addCondition").click(function() {
+		$(".customRules .addCondition").live('click', function() {
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWRULE', 'Adding New Rule'));
 			
