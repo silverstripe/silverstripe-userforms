@@ -16,15 +16,10 @@ class EditableFormField extends DataObject {
 		"Default" => "Varchar",
 		"Sort" => "Int",
 		"Required" => "Boolean",
-		"CanDelete" => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
 		"CustomRules" => "Text",
 		"CustomSettings" => "Text",
 		"CustomParameter" => "Varchar(200)"
-	);
-    
-	static $defaults = array(
-		"CanDelete" => "1"
 	);
     
 	static $has_one = array(
@@ -46,7 +41,7 @@ class EditableFormField extends DataObject {
 	}
 
 	/**
-	 * Is this multipleoption field readonly to the user
+	 * Is this field readonly to the user
 	 *
 	 * @return bool
 	 */
@@ -185,6 +180,7 @@ class EditableFormField extends DataObject {
 	public function Dependencies() {
 		return ($this->CustomRules) ? unserialize($this->CustomRules) : array();
 	}
+	
 	/**
 	 * Return the custom validation fields for the field
 	 * 
@@ -208,7 +204,7 @@ class EditableFormField extends DataObject {
 						$outputFields->push($new);
 					}
 					$output->push(new ArrayData(array(
-						'FieldName' => $this->FieldName(),
+						'FieldName' => $this->getFieldName(),
 						'Display' => $data['Display'],
 						'Fields' => $outputFields,
 						'ConditionField' => $data['ConditionField'],
@@ -230,19 +226,26 @@ class EditableFormField extends DataObject {
 
 	/**
 	 * Return the base name for this form field in the 
-	 * form builder
+	 * form builder. Optionally returns the name with the given field
+	 *
+	 * @param String Field Name
 	 *
 	 * @return String
 	 */
-	public function FieldName() {
-		return "Fields[".$this->ID."]";
+	public function getFieldName($field = false) {
+		return ($field) ? "Fields[".$this->ID."][".$field."]" : "Fields[".$this->ID."]";
 	}
 	
 	/**
-	 * @todo Fix this - shouldn't name be returning name?!?
+	 * Generate a name for the Setting field
+	 *
+	 * @param String name of the setting
+	 * @return String
 	 */
-	public function BaseName() {
-		return $this->Name;
+	public function getSettingFieldName($field) {
+		$name = $this->getFieldName('CustomSettings');
+		
+		return $name . '[' . $field .']';
 	}
 	
 	/**
@@ -256,16 +259,16 @@ class EditableFormField extends DataObject {
 	 * @access public
 	 */
 	public function populateFromPostData($data) {
-		$this->Title = (isset($data['Title'])) ? $data['Title']: "";
-		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
-		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : null;
-		$this->Required = !empty($data['Required']) ? 1 : 0;
-  		$this->CanDelete = (isset($data['CanDelete']) && !$data['CanDelete']) ? 0 : 1;
-		$this->Name = $this->class.$this->ID;
-		$this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
-		$this->CustomRules = "";
-		$this->CustomSettings = "";
-		$this->ShowOnLoad = (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
+		$this->Title 		= (isset($data['Title'])) ? $data['Title']: "";
+		$this->Default 		= (isset($data['Default'])) ? $data['Default'] : "";
+		$this->Sort 		= (isset($data['Sort'])) ? $data['Sort'] : null;
+		$this->Required 	= !empty($data['Required']) ? 1 : 0;
+		$this->Name 		= $this->class.$this->ID;
+		$this->ShowOnLoad	= (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
+		$this->CustomRules	= "";
+		$this->CustomErrorMessage 	= (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
+		$this->CustomSettings 		= "";
+		
 		// custom settings
 		if(isset($data['CustomSettings'])) {
 			$this->setFieldSettings($data['CustomSettings']);
@@ -301,7 +304,13 @@ class EditableFormField extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getFieldConfiguration() {
-		return new FieldSet();
+		return new FieldSet(
+			new TextField(
+				$this->getSettingFieldName('RightTitle'), 
+				_t('EditableFormField.RIGHTTITLE', 'Right Title'), 
+				$this->getSetting('RightTitle')
+			)
+		);
 	}
 	
 	/**
@@ -312,8 +321,8 @@ class EditableFormField extends DataObject {
 	 */
 	public function getFieldValidationOptions() {
 		$fields = new FieldSet(
-			new CheckboxField("Fields[$this->ID][Required]", _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
-			new TextField("Fields[$this->ID][CustomErrorMessage]", _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
+			new CheckboxField($this->getFieldName('Required'), _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
+			new TextField($this->getFieldName('CustomErrorMessage'), _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
 		);
 		
 		if(!$this->canEdit()) {
@@ -321,6 +330,7 @@ class EditableFormField extends DataObject {
 				$fields->performReadonlyTransformation();
 			}
 		}
+		
 		return $fields;
 	}
 	
@@ -342,46 +352,16 @@ class EditableFormField extends DataObject {
 	public function getSubmittedFormField() {
 		return new SubmittedFormField();
 	}
-
+	
+	
+	/**
+	 * Show this form field (and its related value) in the reports and in emails.
+	 *
+	 * @return bool
+	 */
 	function showInReports() {
 		return true;
 	}
-    
-    function prepopulate($value) {
-        $this->prepopulateFromMap($this->parsePrepopulateValue($value));
-    }
-    
-    protected function parsePrepopulateValue($value) {
-        $paramList = explode(',', $value);
-        $paramMap = array();
-        
-        foreach($paramList as $param) {
-    
-            if(preg_match( '/([^=]+)=(.+)/', $param, $match)) {
-                if(isset($paramMap[$match[1]]) && is_array($paramMap[$match[1]])) {
-                    $paramMap[$match[1]][] = $match[2];
-                } else if(isset( $paramMap[$match[1]])) {
-                    $paramMap[$match[1]] = array($paramMap[$match[1]]);
-                    $paramMap[$match[1]][] = $match[2];
-                } else {
-                    $paramMap[$match[1]] = $match[2];
-                }
-            }
-        }
-        return $paramMap;   
-    }
-    
-    protected function prepopulateFromMap($paramMap) {
-        foreach($paramMap as $field => $fieldValue) {
-            if(!is_array($fieldValue)) {
-                $this->$field = $fieldValue;
-            }   
-        }
-    }
-
-    function Type() {
-        return $this->class;   
-    }
    
 	/**
 	 * Return the validation information related to this field. This is 

@@ -24,6 +24,11 @@
 		/*-------------------- FIELD EDITOR ----------------------- */
 		
 		/**
+		 * Update the Field sortable
+		 */
+		update_sortable();
+		
+		/**
 		 * Create a new instance of a field in the current form 
 		 * area. the type information should all be on this object
 		 */
@@ -42,7 +47,7 @@
 			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
 			var type = $(this).siblings("select").val();
 	
-			//send ajax request to the page
+			// send ajax request to the page
 			$.ajax({
 				type: "GET",
 				url: action,
@@ -65,7 +70,7 @@
 				} 
 			});
 			
-			$("#Fields_fields").sortable("refresh");
+			update_sortable();
 	
 			return false;
 		});
@@ -83,7 +88,8 @@
 					$(domElement).text(value);	
 				}
 			});
-		})
+		});
+		
 		/**
 		 * Show the more options popdown. Or hide it if we 
 		 * currently have it open
@@ -147,7 +153,7 @@
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
 			var parent = $(this).attr("rel");
 			
-			//send ajax request to the page
+			// send ajax request to the page
 			$.ajax({
 				type: "GET",
 				url: action,
@@ -164,6 +170,9 @@
 					statusMessage(ss.i18n._t('UserForms.ERRORCREATINGFIELD', 'Error Creating Field'));
 				} 
 			});
+			
+			update_sortable();
+			
 			return false;
 		});
 		
@@ -179,52 +188,6 @@
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.REMOVINGOPTION', 'Removed Option'));
 			return false;
-		});
-		
-		
-		/**
-		 * Sort Fields in the Field List
-		 */
-		$("#Fields_fields").sortable({ 
-  	 		handle : '.fieldHandler',
-			cursor: 'pointer',
-			items: 'li.EditableFormField',
-			placeholder: 'removed-form-field',
-			opacity: 0.6,
-			revert: true,
-			change : function (event, ui) {
-				$("#Fields_fields").sortable('refreshPositions');
-			},
-	    	update : function (event, ui) {
-	      		// get all the fields
-				var sort = 1;
-				$("li.EditableFormField").each(function() {
-					$(this).find(".sortHidden").val(sort++);
-				});
-	    	}
-		});
-		
-		/**
-		 * Sort Options in a Field List - Such as options in a 
-		 * dropdown field.
-		 */
-		$(".editableOptions").sortable({
-			handle : '.handle',
-			cursor: 'pointer',
-			items: 'li',
-			placeholder: 'removed-form-field',
-			opacity: 0.6,
-			revert: true,
-			change : function (event, ui) {
-				$(this).sortable('refreshPositions');
-			},
-	    	update : function (event, ui) {
-	      		// get all the fields
-				var sort = 1;
-				$(".editableOptions li").each(function() {
-					$(this).find(".sortOptionHidden").val(sort++);
-				});
-	    	}
 		});
 		
 		/**
@@ -282,10 +245,60 @@
 			// append to the list
 			currentRules.append(newRule);
 			
-			$(".editableOptions").sortable("refresh");
+			update_sortable();
 			
 			return false;
 		});
+		
+		/**
+		 * Store the sortable as a function which we can call
+		 */
+		function update_sortable() {
+			/**
+			 * Sort Fields in the Field List
+			 */
+			$("#Fields_fields").sortable({ 
+	  	 		handle : '.fieldHandler',
+				cursor: 'pointer',
+				items: 'li.EditableFormField',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$("#Fields_fields").sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$("li.EditableFormField").each(function() {
+						$(this).find(".sortHidden").val(sort++);
+					});
+		    	}
+			});
+
+			/**
+			 * Sort Options in a Field List - Such as options in a 
+			 * dropdown field.
+			 */
+			$(".editableOptions").sortable({
+				handle : '.handle',
+				cursor: 'pointer',
+				items: 'li',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$(this).sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$(".editableOptions li").each(function() {
+						$(this).find(".sortOptionHidden").val(sort++);
+					});
+		    	}
+			});
+		}
 	});
 })
 (jQuery);

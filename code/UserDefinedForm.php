@@ -1,8 +1,11 @@
 <?php
+
 /**
  * User Defined Form Page type that lets users build a form in the CMS 
  * using the FieldEditor Field. 
  * 
+ * @todo Allow UserDefinedForm instances on Page subclasses (eg via decorator)
+ *
  * @package userforms
  */
 
@@ -280,6 +283,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				);
 			}
 		}
+		
 		return array(
 			'Content' => DBField::create('HTMLText', $this->Content),
 			'Form' => $this->Form
@@ -291,15 +295,20 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * form to appear in a custom location on the page you can use $UserDefinedForm 
 	 * in the content area to describe where you want the form
 	 *
+	 * @todo Abstract the Conditional Logic from the Form. This should be tied
+	 *			to the EditableFormField class so that fields (eg checkboxes)
+	 * 			can define their own logic
+	 * 
 	 * @return Form
 	 */
 	public function Form() {
 		$fields = new FieldSet();
 		$fieldValidation = array();
 		$fieldValidationRules = array();
-		$CustomDisplayRules = "";
+		$customDisplayRules = "";
 		$defaults = "";
 		$this->SubmitButtonText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
+		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 			
@@ -312,7 +321,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 				// Set the Error Messages
 				$errorMessage = sprintf(_t('Form.FIELDISREQUIRED').'.', strip_tags("'". ($field->Title ? $field->Title : $field->Name) . "'"));
 				$errorMessage = ($field->CustomErrorMessage) ? $field->CustomErrorMessage : $errorMessage;
+
 				$fieldToAdd->setCustomValidationMessage($errorMessage);
+				
+				// Set the right title on this field
+				if($right = $field->getSetting('RightTitle')) {
+					$fieldToAdd->setRightTitle($right);
+				}
 				
 				// Is this field required
 				if($field->Required) {
@@ -424,7 +439,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 									break;
 							}
 							// put it all together
-							$CustomDisplayRules .= $fieldToWatch.".$action(function() {
+							$customDisplayRules .= $fieldToWatch.".$action(function() {
 								if(". $expression ." ) {
 									$(\"#". $fieldId ."\").".$view."();
 								}
@@ -477,7 +492,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 						rules: 
 						 	$rules
 					});
-					$CustomDisplayRules
+					$customDisplayRules
 				});
 			})(jQuery);
 JS

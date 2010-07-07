@@ -7,7 +7,7 @@
 <select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][$Pos][ConditionField]">
 	<option value="" selected="selected"></option>
 	<% control Fields %>
-		<option value="$BaseName" <% if isSelected %>selected="selected"<% end_if %>>$Title</option>
+		<option value="$Name" <% if isSelected %>selected="selected"<% end_if %>>$Title</option>
 	<% end_control %>
 </select>
 
