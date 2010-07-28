@@ -136,8 +136,9 @@ class SubmittedFormReportField extends FormField {
 								$csvData .= '"' . $tmp . '",';
 							}
 						}
-						// Start a new row for each submission
-						$csvData .= '"'.$row['Submitted'].'"'."\n";
+						// Start a new row for each submission (re-check we have 'Submitted' in this entry)
+						if(isset($row['Submitted'])) $csvData .= '"'.$row['Submitted'].'"'."\n";
+						else $csvData .= '\n';
 					}
 				} else {
 					user_error("No submissions to export.", E_USER_ERROR);
