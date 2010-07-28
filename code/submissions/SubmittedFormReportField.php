@@ -87,6 +87,7 @@ class SubmittedFormReportField extends FormField {
 						FROM \"SubmittedFormField\"
 						LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
 						WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")
+						GROUP BY \"Name\"
 						ORDER BY \"SubmittedFormField\".\"ID\"");
 					
 					// Sort the Names and Titles from the database query into separate keyed arrays
@@ -95,10 +96,6 @@ class SubmittedFormReportField extends FormField {
 						$csvHeaderTitle[] = $array['Title'];
 						
 					}
-					// We need Headers to be unique, query is returning headers multiple times (number of submissions).
-					// TODO: Fix query 
-					$csvHeaderNames = array_unique($csvHeaderNames);
-					$csvHeaderTitle = array_unique($csvHeaderTitle);
 					
 					// For every submission...
 					$i = 0;
@@ -134,7 +131,10 @@ class SubmittedFormReportField extends FormField {
 						// Loop over all the names we can use
 						for($i=0;$i<count($csvHeaderNames);$i++) {
 							if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
-                            else $csvData .= '"'.str_replace('"', '\"', $row[$i]).'",';
+							else {
+								$tmp = str_replace('"', '""', $row[$i]); 
+								$csvData .= '"' . $tmp . '",';
+							}
 						}
 						// Start a new row for each submission
 						$csvData .= '"'.$row['Submitted'].'"'."\n";
