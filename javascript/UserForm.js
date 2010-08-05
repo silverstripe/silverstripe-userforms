@@ -6,6 +6,58 @@
 (function($) {
 	$(document).ready(function() {
 		
+
+		/**
+		 * Update the sortable properties of the form as a function
+		 * since the application will need to refresh the UI dynamically
+		 */
+		function update_sortable() {
+			/**
+			 * Sort Fields in the Field List
+			 */
+			$("#Fields_fields").sortable({ 
+	  	 		handle: '.fieldHandler',
+				cursor: 'pointer',
+				items: 'li.EditableFormField',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$("#Fields_fields").sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$("li.EditableFormField").each(function() {
+						$(this).find(".sortHidden").val(sort++);
+					});
+		    	}
+			});
+
+			/**
+			 * Sort Options in a Field List - Such as options in a 
+			 * dropdown field.
+			 */
+			$(".editableOptions").sortable({
+				handle: '.handle',
+				cursor:'pointer',
+				items: 'li',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$(this).sortable('refreshPositions');
+				},
+		    	update : function (event, ui) {
+		      		// get all the fields
+					var sort = 1;
+					$(".editableOptions li").each(function() {
+						$(this).find(".sortOptionHidden").val(sort++);
+					});
+		    	}
+			});
+		}
+		
 		/*--------------------- SUBMISSIONS ------------------------ */
 		
 		/**
@@ -36,7 +88,9 @@
 		$("div.FieldEditor .MenuHolder .action").live('click',function() {
 
 			// if this form is readonly...
-			if($("#Fields").hasClass('readonly')) return false;
+			if($("#Fields").hasClass('readonly')) {
+				return false;
+			}
 			
 			// Give the user some feedback
 			statusMessage(ss.i18n._t('UserForms.ADDINGNEWFIELD', 'Adding New Field'));
@@ -58,7 +112,7 @@
 					$('#Fields_fields').append(msg);
 					statusMessage(ss.i18n._t('UserForms.ADDEDNEWFIELD', 'Added New Field'));
 					
-					//update the internal lists
+					// update the internal lists
 					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
 
 					$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
@@ -249,56 +303,6 @@
 			
 			return false;
 		});
-		
-		/**
-		 * Store the sortable as a function which we can call
-		 */
-		function update_sortable() {
-			/**
-			 * Sort Fields in the Field List
-			 */
-			$("#Fields_fields").sortable({ 
-	  	 		handle : '.fieldHandler',
-				cursor: 'pointer',
-				items: 'li.EditableFormField',
-				placeholder: 'removed-form-field',
-				opacity: 0.6,
-				revert: true,
-				change : function (event, ui) {
-					$("#Fields_fields").sortable('refreshPositions');
-				},
-		    	update : function (event, ui) {
-		      		// get all the fields
-					var sort = 1;
-					$("li.EditableFormField").each(function() {
-						$(this).find(".sortHidden").val(sort++);
-					});
-		    	}
-			});
-
-			/**
-			 * Sort Options in a Field List - Such as options in a 
-			 * dropdown field.
-			 */
-			$(".editableOptions").sortable({
-				handle : '.handle',
-				cursor: 'pointer',
-				items: 'li',
-				placeholder: 'removed-form-field',
-				opacity: 0.6,
-				revert: true,
-				change : function (event, ui) {
-					$(this).sortable('refreshPositions');
-				},
-		    	update : function (event, ui) {
-		      		// get all the fields
-					var sort = 1;
-					$(".editableOptions li").each(function() {
-						$(this).find(".sortOptionHidden").val(sort++);
-					});
-		    	}
-			});
-		}
 	});
 })
 (jQuery);
