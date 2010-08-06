@@ -319,9 +319,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 				$fieldValidationOptions = array();
 				
 				// Set the Error Messages
-				$errorMessage = sprintf(_t('Form.FIELDISREQUIRED').'.', strip_tags("'". ($field->Title ? $field->Title : $field->Name) . "'"));
+				$errorMessage = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', strip_tags("'". ($field->Title ? $field->Title : $field->Name) . "'"));
 				$errorMessage = ($field->CustomErrorMessage) ? $field->CustomErrorMessage : $errorMessage;
-
 				$fieldToAdd->setCustomValidationMessage($errorMessage);
 				
 				// Set the right title on this field
