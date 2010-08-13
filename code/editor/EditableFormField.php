@@ -264,7 +264,6 @@ class EditableFormField extends DataObject {
 		$this->Sort 		= (isset($data['Sort'])) ? $data['Sort'] : null;
 		$this->Required 	= !empty($data['Required']) ? 1 : 0;
 		$this->Name 		= $this->class.$this->ID;
-		$this->ShowOnLoad	= (isset($data['ShowOnLoad']) && $data['ShowOnLoad'] == "Show") ? 1 : 0;
 		$this->CustomRules	= "";
 		$this->CustomErrorMessage 	= (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
 		$this->CustomSettings 		= "";
