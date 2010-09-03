@@ -1,0 +1,87 @@
+EditableOption:
+    option-1:
+        Name: Option1
+        Title: Option 1
+        Sort: 1
+    
+    option-2:
+        Name: Option2
+        Title: Option 2
+        Sort: 2
+    department-1:
+        Name: dept1
+        Title: sales@example.com
+    
+    department-2:
+        Name: dept2
+        Title: accounts@example.com
+        
+UserDefinedForm_EmailRecipient:
+    recipient-1:
+        EmailAddress: test@example.com
+        EmailSubject: Email Subject
+        EmailFrom: no-reply@example.com
+        
+    no-html:
+        EmailAddress: nohtml@example.com
+        EmailSubject: Email Subject
+        EmailFrom: no-reply@example.com
+        SendPlain: true
+        
+    no-data:
+        EmailAddress: nodata@example.com
+        EmailSubject: Email Subject
+        EmailFrom: no-reply@example.com  
+        HideFormData: true
+    
+EditableTextField:
+    basic-text:
+        Name: basic-text-name
+        Title: Basic Text Field
+        
+    required-text:
+        Name: required-text-field
+        Title: Required Text Field
+        CustomErrorMessage: Custom Error Message
+        RightTitle: Right Title
+        Required: true
+        
+EditableDropdown:
+    basic-dropdown:
+        Name: basic-dropdown
+        Title: Basic Dropdown Field
+        Options: =>EditableOption.option-1, =>EditableOption.option-2
+        
+    department-dropdown:
+        Name: department
+        Title: Department
+        Options: =>EditableOption.department-1, =>EditableOption.department-2
+        
+EditableCheckbox:
+    checkbox-1:
+        Name: checkbox-1
+        Title: Checkbox 1
+        
+EditableEmailField:
+    email-field:
+        Name: email-field
+        Title: Email
+
+UserDefinedForm:
+    basic-form-page:
+        Title: User Defined Form
+        Fields: =>EditableTextField.basic-text
+        EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
+        
+    form-with-reset-and-custom-action:
+        Title: Form with Reset Action
+        SubmitButtonText: Custom Button
+        ShowClearButton: true
+        
+    validation-form:
+        Title: Validation Form
+        Fields: =>EditableTextField.required-text
+        
+        
+        
+        

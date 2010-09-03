@@ -35,6 +35,9 @@ class EditableTextField extends EditableFormField {
 		return $fields;		
 	}
 
+	/**
+	 * @return TextareaField|TextField
+	 */
 	function getFormField() {
 		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
 			return new TextareaField($this->Name, $this->Title, $this->getSetting('Rows'));

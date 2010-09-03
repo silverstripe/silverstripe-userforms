@@ -6,6 +6,10 @@
 (function($) {
 	$(document).ready(function() {
 		
+		/**
+		 * Update the Field sortable
+		 */
+		update_sortable();
 
 		/**
 		 * Update the sortable properties of the form as a function
@@ -74,11 +78,6 @@
 		});
 		
 		/*-------------------- FIELD EDITOR ----------------------- */
-		
-		/**
-		 * Update the Field sortable
-		 */
-		update_sortable();
 		
 		/**
 		 * Create a new instance of a field in the current form 

@@ -29,32 +29,37 @@ class EditableFormField extends DataObject {
 	static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
-
+	
+	/**
+	 * @var bool
+	 */
 	protected $readonly;
 	
-
 	/**
-	 * Set this formfield to readonly
-	 */
-	public function setReadonly() {
-		$this->readonly = true;
+	 * Set the visibility of an individual form field
+	 *
+	 * @param bool
+	 */ 
+	public function setReadonly($readonly = true) {
+		$this->readonly = $readonly;
 	}
 
 	/**
-	 * Is this field readonly to the user
-	 *
+	 * Returns whether this field is readonly 
+	 * 
 	 * @return bool
 	 */
-	public function isReadonly() {
+	private function isReadonly() {
 		return $this->readonly;
 	}
 	
+	/**
+	 * Template to render the form field into
+	 *
+	 * @return String
+	 */
 	function EditSegment() {
 		return $this->renderWith('EditableFormField');
-	}
-	
-	function ClassName() {
-		return $this->class;
 	}
 	
 	/**
@@ -64,7 +69,7 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canDelete() {
-		return $this->Parent()->canEdit();
+		return ($this->Parent()->canEdit() && !$this->isReadonly());
 	}
 	
 	/**
@@ -74,7 +79,7 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canEdit() {
-		return $this->Parent()->canEdit();
+		return ($this->Parent()->canEdit() && !$this->isReadonly());
 	}
 	
 	/**
@@ -126,6 +131,20 @@ class EditableFormField extends DataObject {
 	}
 	
 	/**
+	 * Set a given field setting. Appends the option to the settings or overrides
+	 * the existing value
+	 *
+	 * @param String key 
+	 * @param String value
+	 */
+	public function setFieldSetting($key, $value) {
+		$settings = $this->getFieldSettings();
+		$settings[$key] = $value;
+		
+		$this->setFieldSettings($settings);
+	}
+	
+	/**
 	 * Return just one custom setting or empty string if it does
 	 * not exist
 	 *
@@ -147,7 +166,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return string
 	 */
-	public function Icon() {
+	public function getIcon() {
 		return 'userforms/images/' . strtolower($this->class) . '.png';
 	}
 	
@@ -217,11 +236,21 @@ class EditableFormField extends DataObject {
 		return $output;
 	}
 
+	/**
+	 * Title field of the field in the backend of the page
+	 *
+	 * @return TextField
+	 */
 	function TitleField() {
 		$titleAttr = Convert::raw2att($this->Title);
 		$readOnlyAttr = (!$this->canEdit()) ? ' disabled="disabled"' : '';
 		
-		return "<input type=\"text\" class=\"text\" title=\"("._t('EditableFormField.ENTERQUESTION', 'Enter Question').")\" value=\"$titleAttr\" name=\"Fields[{$this->ID}][Title]\"$readOnlyAttr />";
+		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->Title);
+		$field->setName($this->getFieldName('Title'));
+		
+		if(!$this->canEdit()) $field->setReadonly(true);
+		
+		return $field;
 	}
 
 	/**

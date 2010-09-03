@@ -1,0 +1,43 @@
+UserDefinedForm:
+    form-page:
+        Title: Form
+        
+    form-page-2:
+        Title: Second Form
+        
+File:
+    uploaded-file:
+        Name: My File
+        Filename: my-file.jpg
+    
+SubmittedForm:
+    submitted-form-1:
+        Parent: =>UserDefinedForm.form-page
+        
+    submitted-form-2:
+        Parent: =>UserDefinedForm.form-page-2
+        
+SubmittedFormField:
+    submitted-form-field-1:
+        Parent: =>SubmittedForm.submitted-form-1
+        Name: field-1
+        Title: Field 1
+        Value: 1
+
+    submitted-textarea-1:
+        Parent: =>SubmittedForm.submitted-form-2
+        Name: field 2
+        Title: Field 2
+        Value: |
+            I am here testing
+            Testing until I cannot
+            I love my testing
+        
+SubmittedFileField:
+    submitted-file-1:
+        Name: File Field
+        Title: File
+        Parent: =>SubmittedForm.submitted-form-1
+        UploadedFile: =>File.uploaded-file
+        
+            

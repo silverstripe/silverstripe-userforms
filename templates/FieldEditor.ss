@@ -1,4 +1,8 @@
-<div class="FieldEditor <% if isReadonly %>readonly<% end_if %>" id="Fields">
+<% require css(userforms/css/FieldEditor.css) %>
+<% require javascript(sapphire/thirdparty/jquery-ui/jquery-ui-1.8rc3.custom.js) %>
+<% require javascript(userforms/javascript/UserForm.js) %>
+
+<div class="FieldEditor <% if canEdit %><% else %>readonly<% end_if %>" id="Fields">
 	
 	<div class="FieldListHold">
 		<ul class="FieldList" id="Fields_fields">
@@ -8,12 +12,19 @@
 		</ul>
 	</div>
 
-	<% include AddField %>
-	
-	<div class="FormOptions">
-		<h3>Form Options</h3>
-		<% control FormOptions %>
-			$FieldHolder
-		<% end_control %>
-	</div>
+	<% if canEdit %>
+		<div class="MenuHolder">
+			<h2><% _t('ADD', 'Add') %></h2>
+			
+			<select name="AddUserFormField" id="AddUserFormField">
+				<option value=""><% _t('SELECTAFIELD', 'Select a Field') %></option>
+
+				<% control CreatableFields %>
+					<option value="$ClassName">$Title</option>
+				<% end_control %>
+			</select>
+
+			<input type="submit" class="action" value="<% _t('ADD', 'Add') %>" /> 
+		</div>
+	<% end_if %>
 </div>

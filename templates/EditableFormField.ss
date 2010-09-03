@@ -1,10 +1,10 @@
 <!-- JS Relys on EditableFormField as a class - and the 3 ids in this order - do not change -->
 <li class="$ClassName EditableFormField" id="$Name.ATT EditableItem_$Pos $Name">
 	<div class="fieldInfo">
-		<% if isReadonly %>
-			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
-		<% else %>
+		<% if canEdit %>
 			<img class="fieldHandler" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
+		<% else %>
+			<img class="fieldHandler" src="sapphire/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
 		<% end_if %>
 	
 		<img class="icon" src="$Icon" alt="$ClassName" title="$singular_name" />
