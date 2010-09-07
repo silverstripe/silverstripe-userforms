@@ -817,7 +817,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
 			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide Form Data from Email')),
 			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
-			new TextareaField('EmailBody', 'Body')
+			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body'))
 		);
 		
 		if($this->Form()) {
