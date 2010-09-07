@@ -116,7 +116,7 @@ class EditableFormField extends DataObject {
 	 * 
 	 * @return Array Return all the Settings
 	 */
-	public function getFieldSettings() {
+	public function getSettings() {
 		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
 	}
 	
@@ -126,7 +126,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @param Array the custom settings
 	 */
-	public function setFieldSettings($settings = array()) {
+	public function setSettings($settings = array()) {
 		$this->CustomSettings = serialize($settings);
 	}
 	
@@ -137,11 +137,11 @@ class EditableFormField extends DataObject {
 	 * @param String key 
 	 * @param String value
 	 */
-	public function setFieldSetting($key, $value) {
-		$settings = $this->getFieldSettings();
+	public function setSetting($key, $value) {
+		$settings = $this->getSettings();
 		$settings[$key] = $value;
 		
-		$this->setFieldSettings($settings);
+		$this->setSettings($settings);
 	}
 	
 	/**
@@ -152,7 +152,7 @@ class EditableFormField extends DataObject {
 	 * @return String
 	 */
 	public function getSetting($setting) {
-		$settings = $this->getFieldSettings();
+		$settings = $this->getSettings();
 		if(isset($settings) && count($settings) > 0) {
 			if(isset($settings[$setting])) {
 				return $settings[$setting];
@@ -299,7 +299,7 @@ class EditableFormField extends DataObject {
 		
 		// custom settings
 		if(isset($data['CustomSettings'])) {
-			$this->setFieldSettings($data['CustomSettings']);
+			$this->setSettings($data['CustomSettings']);
 		}
 
 		// custom validation
@@ -309,9 +309,11 @@ class EditableFormField extends DataObject {
 
 				if(is_array($value)) {
 					$fieldValue = (isset($value['Value'])) ? $value['Value'] : '';
+					
 					if(isset($value['ConditionOption']) && $value['ConditionOption'] == "Blank" || $value['ConditionOption'] == "NotBlank") {
 						$fieldValue = "";
 					}
+					
 					$rules[] = array(
 						'Display' => (isset($value['Display'])) ? $value['Display'] : "",
 						'ConditionField' => (isset($value['ConditionField'])) ? $value['ConditionField'] : "",
@@ -320,6 +322,7 @@ class EditableFormField extends DataObject {
 					);
 				}
 			}
+			
 			$this->CustomRules = serialize($rules);
 		}
 		$this->write();

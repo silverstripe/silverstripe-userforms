@@ -64,12 +64,12 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->assertTrue($fields->dataFieldByName('HideFormData') !== null);
 		$this->assertTrue($fields->dataFieldByName('SendPlain') !== null);
 		$this->assertTrue($fields->dataFieldByName('EmailBody') !== null);
-	
+		
 		// add an email field, it should now add a or from X address picker
 		$email = $this->objFromFixture('EditableEmailField','email-field');
 		$form->Fields()->add($email);
-		
-		$popup->Form = $form;
+
+		$popup->FormID = $form->ID;
 		$popup->write();
 
 		$fields = $popup->getCMSFields_forPopup();
@@ -83,6 +83,25 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->assertTrue($fields->dataFieldByName('SendEmailToFieldID') !== null);
 		
 		$popup->delete();
+	}
+	
+	function testCanEditAndDeleteRecipient() {
+		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+
+		$this->logInWithPermission('ADMIN');
+		foreach($form->EmailRecipients() as $recipient) {
+			$this->assertTrue($recipient->canEdit());
+			$this->assertTrue($recipient->canDelete());
+		}
+		
+		$member = Member::currentUser();
+		$member->logOut();
+		
+		$this->logInWithPermission('SITETREE_VIEW_ALL');
+		foreach($form->EmailRecipients() as $recipient) {
+			$this->assertFalse($recipient->canEdit());
+			$this->assertFalse($recipient->canDelete());
+		}
 	}
 	
 	function testPublishing() {

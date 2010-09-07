@@ -43,7 +43,6 @@ EditableTextField:
         Name: required-text-field
         Title: Required Text Field
         CustomErrorMessage: Custom Error Message
-        RightTitle: Right Title
         Required: true
         
 EditableDropdown:

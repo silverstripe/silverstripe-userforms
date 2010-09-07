@@ -387,7 +387,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				$errorMessage = ($editableField->CustomErrorMessage) ? $editableField->CustomErrorMessage : $errorMessage;
 				
 				$field->setCustomValidationMessage($errorMessage);
-				
+
 				// set the right title on this field
 				if($right = $editableField->getSetting('RightTitle')) {
 					$field->setRightTitle($right);
@@ -831,6 +831,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			
 			// if they have multiple options
 			if($multiOptionFields || $validEmailFields) {
+
 				if($multiOptionFields && $validEmailFields) {
 					$multiOptionFields->merge($validEmailFields);
 					

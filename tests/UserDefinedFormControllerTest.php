@@ -84,7 +84,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 1);
 	}
 	
-	function testgetFormFields() {
+	function testGetFormFields() {
 		// generating the fieldset of fields
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		
@@ -103,6 +103,18 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$fields = $controller->getFormFields();
 		
 		$this->assertEquals($fields->First()->getCustomValidationMessage(), 'Custom Error Message');
+		$this->assertEquals($fields->First()->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
+		
+		// test custom right title
+		$field = $form->Fields()->First();
+		$field->setSetting('RightTitle', 'Right Title');
+		$field->write();
+		
+		$controller = new UserDefinedForm_Controller($form);
+		
+		$fields = $controller->getFormFields();
+
+		$this->assertEquals($fields->First()->RightTitle(), "Right Title");
 	}
 	
 	function testGetFormActions() {

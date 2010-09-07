@@ -107,7 +107,7 @@ class UserFormsMigrationTask extends MigrationTask {
 							$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 							
 							if($result) {
-								$field->setFieldSettings(array(
+								$field->setSettings(array(
 									'Size' => $result['Size'],
 									'MinLength' => $result['MinLength'],
 									'MaxLength' => $result['MaxLength'],
@@ -126,7 +126,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
-									$field->setFieldSettings(array(
+									$field->setSettings(array(
 										'Content' => $result['Content']
 									));
 								}
@@ -142,7 +142,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
-									$field->setFieldSettings(array(
+									$field->setSettings(array(
 										'GroupID' => $result['GroupID']
 									));
 								}
@@ -158,7 +158,7 @@ class UserFormsMigrationTask extends MigrationTask {
 								$result = DB::query("SELECT * FROM \"$database\" WHERE \"ID\" = $field->ID")->first();
 								
 								if($result) {
-									$field->setFieldSettings(array(
+									$field->setSettings(array(
 										'Default' => $result['Checked']
 									));
 								}
