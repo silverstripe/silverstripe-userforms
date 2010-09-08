@@ -24,6 +24,7 @@ class EditableCheckbox extends EditableFormField {
 	
 	public function getValueFromData($data) {
 		$value = (isset($data[$this->Name])) ? $data[$this->Name] : false;
+		
 		return ($value) ? _t('EditableFormField.YES', 'Yes') : _t('EditableFormField.NO', 'No');
 	}
 }

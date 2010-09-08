@@ -119,12 +119,7 @@ class FieldEditor extends FormField {
 	 */
 	function saveInto(DataObject $record) {
 		$name = $this->name;
-		$fieldSet = $record->$name();		        
-		
-		// @todo shouldn't we deal with customFormActions on that object?
-		$record->EmailOnSubmit = isset($_REQUEST[$name]['EmailOnSubmit']) ? "1" : "0";
-		$record->SubmitButtonText = isset($_REQUEST[$name]['SubmitButtonText']) ? $_REQUEST[$name]['SubmitButtonText'] : "";
-		$record->ShowClearButton = isset($_REQUEST[$name]['ShowClearButton']) ? "1" : "0";
+		$fieldSet = $record->$name();
 		
 		// store the field IDs and delete the missing fields
 		// alternatively, we could delete all the fields and re add them
@@ -169,10 +164,6 @@ class FieldEditor extends FormField {
 				}
 			}
     	}
-
-    	if($record->hasMethod('customFormSave')) {
-			$record->customFormSave($_REQUEST[$name], $record);
-		}
 	}
 	
 	/**
@@ -183,6 +174,7 @@ class FieldEditor extends FormField {
 	 */
 	public function addfield() {
 		// get the last field in this form editor
+		Debug::show($this->form->getRecord());
 		$parentID = $this->form->getRecord()->ID;
 		
 		if($parentID) {

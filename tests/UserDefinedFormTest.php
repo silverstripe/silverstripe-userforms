@@ -175,7 +175,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		$form->SubmitButtonText = 'Button Text';
 		$form->doPublish();
 		$text = $form->Fields()->First();
-		
+
 		$form->SubmitButtonText = 'Edited Button Text';
 		$form->write();
 		

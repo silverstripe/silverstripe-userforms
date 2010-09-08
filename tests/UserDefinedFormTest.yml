@@ -38,7 +38,11 @@ EditableTextField:
     basic-text:
         Name: basic-text-name
         Title: Basic Text Field
-        
+ 
+    basic-text-2:
+        Name: basic-text-name
+        Title: Basic Text Field
+                  
     required-text:
         Name: required-text-field
         Title: Required Text Field
@@ -61,10 +65,28 @@ EditableCheckbox:
         Name: checkbox-1
         Title: Checkbox 1
         
+    checkbox-2:
+        Name: checkbox-1
+        Title: Checkbox 1
+        
+EditableCheckboxGroupField:
+    checkbox-group:
+        Name: check-box-group
+        Title: Check box group
+        Options: =>EditableOption.option-1, =>EditableOption.option-2
+                
 EditableEmailField:
     email-field:
         Name: email-field
         Title: Email
+        
+
+EditableRadioField:
+    radio-field:
+        Name: radio-option
+        Title: Radio Option
+        Options: =>EditableOption.option-1, =>EditableOption.option-2
+
 
 UserDefinedForm:
     basic-form-page:
@@ -80,6 +102,10 @@ UserDefinedForm:
     validation-form:
         Title: Validation Form
         Fields: =>EditableTextField.required-text
+        
+    custom-rules-form:
+        Title: Custom Rules Form
+        Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
         
         
         

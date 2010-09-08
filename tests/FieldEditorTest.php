@@ -11,27 +11,36 @@ class FieldEditorTest extends FunctionalTest {
 	
 	static $fixture_file = 'userforms/tests/UserDefinedFormTest.yml';
 	
-	function testPerformReadonlyTransformation() {
+	protected $editor;
+	
+	function setUp() {
+		parent::setUp();
+		
+		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
+		$controller = new FieldEditorTest_Controller($form);
+		
+		$fields = $controller->Form()->Fields();
+		
+		$this->editor = $fields->fieldByName('Fields');	
 	}
 	
 	function testSaveInto() {
+		$this->logInWithPermission('ADMIN');
+		
 		
 	}
 	
 	function testAddField() {
+		$this->logInWithPermission('ADMIN');
 		
-	}
-	
-	function testAddOptionField() {
-		
-	}
-	
-	function testCreatableFields() {
-
+	//	Debug::show($this->editor->addfield());
 	}
 }
 
 class FieldEditorTest_Controller extends Controller {
 	
+	function Form() {
+		return new Form($this, 'Form', new FieldSet(new FieldEditor('Fields')), new FieldSet());
+	}
 }

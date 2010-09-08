@@ -210,29 +210,29 @@ class EditableFormField extends DataObject {
 		$fields = $this->Parent()->Fields();
 
 		// check for existing ones
-		if($this->CustomRules) {
-			$rules = unserialize($this->CustomRules);
+		if($rules = $this->Dependencies()) {
+			foreach($rules as $rule => $data) {
+				// recreate all the field object to prevent caching
+				$outputFields = new DataObjectSet();
+				
+				foreach($fields as $field) {
+					$new = clone $field;
 
-			if($rules) {
-				foreach($rules as $rule => $data) {
-					// recreate all the field object to prevent caching
-					$outputFields = new DataObjectSet();
-					foreach($fields as $field) {
-						$new = clone $field;
-						$new->isSelected = ($new->Name == $data['ConditionField']) ? true : false;
-						$outputFields->push($new);
-					}
-					$output->push(new ArrayData(array(
-						'FieldName' => $this->getFieldName(),
-						'Display' => $data['Display'],
-						'Fields' => $outputFields,
-						'ConditionField' => $data['ConditionField'],
-						'ConditionOption' => $data['ConditionOption'],
-						'Value' => $data['Value']
-					)));
+					$new->isSelected = ($new->Name == $data['ConditionField']) ? true : false;
+					$outputFields->push($new);
 				}
+				
+				$output->push(new ArrayData(array(
+					'FieldName' => $this->getFieldName(),
+					'Display' => $data['Display'],
+					'Fields' => $outputFields,
+					'ConditionField' => $data['ConditionField'],
+					'ConditionOption' => $data['ConditionOption'],
+					'Value' => $data['Value']
+				)));
 			}
 		}
+	
 		return $output;
 	}
 
@@ -242,13 +242,12 @@ class EditableFormField extends DataObject {
 	 * @return TextField
 	 */
 	function TitleField() {
-		$titleAttr = Convert::raw2att($this->Title);
-		$readOnlyAttr = (!$this->canEdit()) ? ' disabled="disabled"' : '';
-		
-		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->Title);
+		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), Convert::raw2att($this->Title));
 		$field->setName($this->getFieldName('Title'));
 		
-		if(!$this->canEdit()) $field->setReadonly(true);
+		if(!$this->canEdit()) {
+			return $field->performReadonlyTransformation();
+		}
 		
 		return $field;
 	}
@@ -294,8 +293,8 @@ class EditableFormField extends DataObject {
 		$this->Required 	= !empty($data['Required']) ? 1 : 0;
 		$this->Name 		= $this->class.$this->ID;
 		$this->CustomRules	= "";
-		$this->CustomErrorMessage 	= (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
-		$this->CustomSettings 		= "";
+		$this->CustomErrorMessage	= (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
+		$this->CustomSettings		= "";
 		
 		// custom settings
 		if(isset($data['CustomSettings'])) {
@@ -305,6 +304,7 @@ class EditableFormField extends DataObject {
 		// custom validation
 		if(isset($data['CustomRules'])) {
 			$rules = array();
+			
 			foreach($data['CustomRules'] as $key => $value) {
 
 				if(is_array($value)) {
@@ -325,9 +325,10 @@ class EditableFormField extends DataObject {
 			
 			$this->CustomRules = serialize($rules);
 		}
+		
 		$this->write();
 	}
-	
+	 
 	/**
 	 * Implement custom field Configuration on this field. Includes such things as
 	 * settings and options of a given editable form field
