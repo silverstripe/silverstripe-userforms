@@ -292,10 +292,9 @@ class EditableFormFieldTest extends FunctionalTest {
 	}
 	
 	function testEditableTextFieldConfiguration() {
-		$text = $this->objFromFixture('EditableTextField', 'basic-text');
+//		$text = $this->objFromFixture('EditableTextField', 'basic-text');
 		
-		$configuration = $text->getFieldConfiguration();
-		
-		Debug::show($configuration);
+//		$configuration = $text->getFieldConfiguration();
+
 	}
 }
