@@ -69,10 +69,11 @@
 		 * we let the href of the delete link to do all the work for us
 		 */
 		
-		$("#FormSubmissions .deleteSubmission").click(function() {
+		$("#userforms-submissions .deleteSubmission").click(function() {
 			var deletedSubmission = $(this);
+			
 			$.post($(this).attr('href'), function(data) {
-				deletedSubmission.parents('div.report').fadeOut();
+				deletedSubmission.parents('div.userform-submission').fadeOut();
 			});
 			return false;
 		});

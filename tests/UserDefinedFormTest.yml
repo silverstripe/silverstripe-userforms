@@ -2,19 +2,34 @@ EditableOption:
     option-1:
         Name: Option1
         Title: Option 1
-        Sort: 1
     
     option-2:
         Name: Option2
         Title: Option 2
-        Sort: 2
+
     department-1:
         Name: dept1
         Title: sales@example.com
-    
+
     department-2:
         Name: dept2
         Title: accounts@example.com
+
+    option-3:
+        Name: Option3
+        Title: Option 3
+
+    option-4:
+        Name: Option4
+        Title: Option 4
+
+    option-5:
+        Name: Option5
+        Title: Option 5
+
+    option-6:
+        Name: Option6
+        Title: Option 6
         
 UserDefinedForm_EmailRecipient:
     recipient-1:
@@ -73,7 +88,7 @@ EditableCheckboxGroupField:
     checkbox-group:
         Name: check-box-group
         Title: Check box group
-        Options: =>EditableOption.option-1, =>EditableOption.option-2
+        Options: =>EditableOption.option-3, =>EditableOption.option-4
                 
 EditableEmailField:
     email-field:
@@ -85,7 +100,7 @@ EditableRadioField:
     radio-field:
         Name: radio-option
         Title: Radio Option
-        Options: =>EditableOption.option-1, =>EditableOption.option-2
+        Options: =>EditableOption.option-5, =>EditableOption.option-6
 
 
 UserDefinedForm:

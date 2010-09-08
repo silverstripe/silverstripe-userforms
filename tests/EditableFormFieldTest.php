@@ -193,12 +193,6 @@ class EditableFormFieldTest extends FunctionalTest {
 	
 	function testEditableDropdownField() {
 		$dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
-
-		$option1 = $this->objFromFixture('EditableOption', 'option-1');
-		$option2 = $this->objFromFixture('EditableOption', 'option-2');
-		
-		$dropdown->Options()->add($option1);
-		$dropdown->Options()->add($option2);
 		
 		$field = $dropdown->getFormField();
 		
@@ -211,19 +205,13 @@ class EditableFormFieldTest extends FunctionalTest {
 	
 	function testEditableRadioField() {
 		$radio = $this->objFromFixture('EditableRadioField', 'radio-field');
-		
-		$option1 = $this->objFromFixture('EditableOption', 'option-1');
-		$option2 = $this->objFromFixture('EditableOption', 'option-2');
-		
-		$radio->Options()->add($option1);
-		$radio->Options()->add($option2);
-		
+	
 		$field = $radio->getFormField();
 		
 		$this->assertThat($field, $this->isInstanceOf('OptionsetField'));
 		$values = $field->getSource();
 		
-		$this->assertEquals(array('Option 1' => 'Option 1', 'Option 2' => 'Option 2'), $values);
+		$this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);
 	}
 	
 	function testTitleField() {
@@ -254,5 +242,60 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertEquals($text->getFieldName('Setting'), "Fields[". $text->ID ."][Setting]");
 		
 		$this->assertEquals($text->getSettingFieldName('Foo'), "Fields[". $text->ID ."][CustomSettings][Foo]");
+	}
+	
+	function testMultipleOptionDuplication() {
+		$dropdown = $this->objFromFixture('EditableDropdown','basic-dropdown');
+		
+		$clone = $dropdown->duplicate();
+
+		$this->assertEquals($clone->Options()->Count(), $dropdown->Options()->Count());
+		
+		foreach($clone->Options() as $option) {
+			$orginal = $dropdown->Options()->find('Title', $option->Title);
+			
+			$this->assertEquals($orginal->Sort, $option->Sort);
+		}
+	}
+	
+	function testMultipleOptionPopulateFromPostData() {
+		$dropdown = $this->objFromFixture('EditableDropdown','basic-dropdown');
+		
+		$data = array();
+		
+		foreach($dropdown->Options() as $option) {
+			$orginal[$option->ID] = array(
+				'Title' => $option->Title,
+				'Sort' => $option->Sort
+			);
+			
+			$data[$option->ID] = array(
+				'Title' => 'New - '. $option->Title,
+				'Sort' => $option->Sort + 1
+			);
+		}
+		
+		$dropdown->populateFromPostData($data);
+		
+		$count = $dropdown->Options()->Count();
+		
+		foreach($dropdown->Options() as $option) {
+			$this->assertEquals($option->Title, 'New - '. $orginal[$option->ID]['Title']);
+			$this->assertEquals($option->Sort, $orginal[$option->ID]['Sort'] + 1);
+		}
+		
+		unset($data[1]);
+		
+		$dropdown->populateFromPostData($data);
+		
+		$this->assertEquals($dropdown->Options()->Count(), $count-1);
+	}
+	
+	function testEditableTextFieldConfiguration() {
+		$text = $this->objFromFixture('EditableTextField', 'basic-text');
+		
+		$configuration = $text->getFieldConfiguration();
+		
+		Debug::show($configuration);
 	}
 }

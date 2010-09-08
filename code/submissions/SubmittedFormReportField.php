@@ -21,12 +21,12 @@ class SubmittedFormReportField extends FormField {
 	function Submissions() {
 		$pageStart = isset($_REQUEST['start']) && is_numeric($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 		$pageLength = 10;
-		
+
 		$items = $this->form->getRecord()->getComponents('Submissions', null, "\"Created\" DESC", null, "$pageStart,$pageLength");
 		$formId = $this->form->getRecord()->ID;
 
 		foreach(DB::query("SELECT COUNT(*) AS \"CountRows\" FROM \"SubmittedForm\" WHERE \"ParentID\" = $formId") as $r) $totalCount = $r['CountRows'];
-
+		
 		$items->setPageLimits($pageStart, $pageLength, $totalCount);
 		$items->NextStart = $pageStart + $pageLength;
 		$items->PrevStart = $pageStart - $pageLength;
@@ -61,100 +61,116 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return HTTPResponse / bool
 	 */
-	public function export() {
+	public function export($id = false) {
+		if($id && is_int($id)) {
+			$SQL_ID = $id;
+		}
+		else {
+			if(isset($_REQUEST['id'])) {
+				$SQL_ID = Convert::raw2sql($_REQUEST['id']);
+			}
+			else {
+				user_error("No UserDefinedForm Defined.", E_USER_ERROR);
+				
+				return false;
+			}
+		}
+
 		$now = Date("Y-m-d_h.i.s");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$fileName = "export-$now.csv";
 		$separator = ",";
+
+		$udf = DataObject::get_by_id("UserDefinedForm", $SQL_ID);
 		
-		// Get the UserDefinedForm to export data from the URL
-		$SQL_ID = (isset($_REQUEST['id'])) ? Convert::raw2sql($_REQUEST['id']) : false;
+		if($udf) {
+			$csvHeaderNames = array();
+			$csvHeaderTitle = array();
+			
+			$submissions = $udf->Submissions();
+			
+			if($submissions && $submissions->exists()) {
+				
+				// Get all the submission IDs (so we know what names/titles to get - helps for sites with many UDF's)
+				$inClause = array();
+				foreach($submissions as $submission) {
+					$inClause[] = $submission->ID;
+				}
 
-		if($SQL_ID) {
-			$udf = DataObject::get_by_id("UserDefinedForm", $SQL_ID);
-			if($udf) {
-				$submissions = $udf->Submissions();
-				if($submissions && $submissions->Count() > 0) {
-					
-					// Get all the submission IDs (so we know what names/titles to get - helps for sites with many UDF's)
-					$inClause = array();
-					foreach($submissions as $submission) {
-						$inClause[] = $submission->ID;
-					}
+				// Get the CSV header rows from the database
+				
+				$tmp = DB::query("
+					SELECT DISTINCT \"SubmittedFormField\".\"ID\", \"Name\", \"Title\"
+					FROM \"SubmittedFormField\"
+					LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
+					WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")
+					GROUP BY \"Name\"
+					ORDER BY \"SubmittedFormField\".\"ID\"
+				");
 
-					// Get the CSV header rows from the database
-					
-					$tmp = DB::query("SELECT DISTINCT \"SubmittedFormField\".\"ID\", \"Name\", \"Title\"
-						FROM \"SubmittedFormField\"
-						LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
-						WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")
-						GROUP BY \"Name\"
-						ORDER BY \"SubmittedFormField\".\"ID\"");
-					
-					// Sort the Names and Titles from the database query into separate keyed arrays
-					foreach($tmp as $array) {
-						$csvHeaderNames[] = $array['Name'];
-						$csvHeaderTitle[] = $array['Title'];
-						
-					}
-					
-					// For every submission...
-					$i = 0;
-					foreach($submissions as $submission) {
-						
-						// Get the rows for this submission (One row = one form field)
-						$dataRow = $submission->FieldValues();
-						$rows[$i] = array();
-						
-						// For every row/field, get all the columns
-						foreach($dataRow as $column) {
-							
-							// If the Name of this field is in the $csvHeaderNames array, get an array of all the places it exists
-							if($index = array_keys($csvHeaderNames, $column->Name)) {
-								if(is_array($index)) {
-									
-									// Set the final output array for each index that we want to insert this value into
-									foreach($index as $idx) {
-										$rows[$i][$idx] = $column->Value;
-									}
-									$rows[$i]['Submitted'] = $submission->Created;
-								}
-							}
-						}
-						
-						$i++;
-					}
-					// CSV header row
-					$csvData = '"' . implode('","', $csvHeaderTitle) . '"' . ',"Submitted"'."\n";
-
-					// For every row of data (one form submission = one row)
-					foreach($rows as $row) {
-						// Loop over all the names we can use
-						for($i=0;$i<count($csvHeaderNames);$i++) {
-							if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
-							else {
-								$tmp = str_replace('"', '""', $row[$i]); 
-								$csvData .= '"' . $tmp . '",';
-							}
-						}
-						// Start a new row for each submission (re-check we have 'Submitted' in this entry)
-						if(isset($row['Submitted'])) $csvData .= '"'.$row['Submitted'].'"'."\n";
-						else $csvData .= '\n';
-					}
-				} else {
-					user_error("No submissions to export.", E_USER_ERROR);
+				// Sort the Names and Titles from the database query into separate keyed arrays
+				foreach($tmp as $array) {
+					$csvHeaderNames[] = $array['Name'];
+					$csvHeaderTitle[] = $array['Title'];
 				}
 				
-				if(class_exists('SS_HTTPRequest')) {
-					SS_HTTPRequest::send_file($csvData, $fileName)->output();	
-				} else {
-					HTTPRequest::send_file($csvData, $fileName)->output();	
+				// For every submission...
+				$i = 0;
+				foreach($submissions as $submission) {
+					
+					// Get the rows for this submission (One row = one form field)
+					$dataRow = $submission->Values();
+					
+					$rows[$i] = array();
+					
+					// For every row/field, get all the columns
+					foreach($dataRow as $column) {
+						// If the Name of this field is in the $csvHeaderNames array, get an array of all the places it exists
+						if($index = array_keys($csvHeaderNames, $column->Name)) {
+							if(is_array($index)) {
+								// Set the final output array for each index that we want to insert this value into
+								foreach($index as $idx) {
+									$rows[$i][$idx] = $column->Value;
+								}						
+							}
+						}
+					}
+					
+					$rows[$i]['Submitted'] = $submission->Created;
+					
+					$i++;
 				}
 				
+				// CSV header row
+				$csvData = '"' . implode('","', $csvHeaderTitle) . '"' . ',"Submitted"'."\n";
+
+				// For every row of data (one form submission = one row)
+				foreach($rows as $row) {
+
+					for($i=0;$i<count($csvHeaderNames);$i++) {
+						
+						if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
+						else {
+							$tmp = str_replace('"', '""', $row[$i]); 
+							$csvData .= '"' . $tmp . '",';
+						}
+					}
+					
+					// Start a new row for each submission (re-check we have 'Submitted' in this entry)
+					if(isset($row['Submitted'])) $csvData .= '"'.$row['Submitted'].'"'."\n";
+					else $csvData .= "\n";
+				}
 			} else {
-				user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
+				user_error("No submissions to export.", E_USER_ERROR);
+			}
+
+			if(SapphireTest::is_running_test()) {
+				return $csvData;
+			}
+			else {
+				SS_HTTPRequest::send_file($csvData, $fileName)->output();	
 			}
 		} else {
-			user_error("'$SQL_ID' is not a valid UserDefinedForm ID.", E_USER_ERROR);
+			user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
 		}
 	}
 	
@@ -163,20 +179,28 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return Redirect|Boolean
 	 */
-	public function deletesubmissions() {
-		$SQL_ID = (isset($_REQUEST['id'])) ? Convert::raw2sql($_REQUEST['id']) : false;
-		if($SQL_ID) {
-			$udf = DataObject::get_by_id("UserDefinedForm", $SQL_ID);
-			$submissions = $udf->Submissions();
-			if($submissions) {
-				foreach($submissions as $submission) {
-					// delete the submission @see $submission->onBeforeDelete() for more info
-					$submission->delete();
-				}
-				return (Director::is_ajax()) ? true : Director::redirectBack();
+	public function deletesubmissions($id = false) {
+		if($id && is_int($id)) {
+			$SQL_ID = $id;
+		}
+		else {
+			if(isset($_REQUEST['id'])) {
+				$SQL_ID = Convert::raw2sql($_REQUEST['id']);
 			}
 		}
-		return (Director::is_ajax()) ? false : Director::redirectBack();
+		
+		if(isset($SQL_ID)) {
+			$udf = DataObject::get_by_id("UserDefinedForm", $SQL_ID);
+			$submissions = $udf->Submissions();
+			
+			if($submissions) {
+				foreach($submissions as $submission) {
+					$submission->delete();
+				}
+				return (Director::is_ajax() || SapphireTest::is_running_test()) ? true : Director::redirectBack();
+			}
+		}
+		return (Director::is_ajax() || SapphireTest::is_running_test()) ? false : Director::redirectBack();
 	}
 	
 	/**
@@ -184,16 +208,24 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return Redirect|Boolean
 	 */
-	public function deletesubmission() {
-		$SQL_ID = (isset($_REQUEST['id'])) ? Convert::raw2sql($_REQUEST['id']) : false;
-		if($SQL_ID) {
+	public function deletesubmission($id = false) {
+		if($id && is_int($id)) {
+			$SQL_ID = $id;
+		}
+		else {
+			if(isset($_REQUEST['id'])) {
+				$SQL_ID = Convert::raw2sql($_REQUEST['id']);
+			}
+		}
+		
+		if(isset($SQL_ID)) {
 			$submission = DataObject::get_by_id("SubmittedForm", $SQL_ID);
 			if($submission) {
 				$submission->delete();
 				
-				return (Director::is_ajax()) ? true : Director::redirectBack();
+				return (Director::is_ajax() || SapphireTest::is_running_test()) ? true : Director::redirectBack();
 			}
 		}
-		return (Director::is_ajax()) ? false : Director::redirectBack();
+		return (Director::is_ajax() || SapphireTest::is_running_test()) ? false : Director::redirectBack();
 	}
 }

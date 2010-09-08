@@ -1,18 +1,17 @@
-<div class="reports" id="FormSubmissions">
+<div id="userforms-submissions">
 
 	<% if Submissions %>
-	
-		<ul class="formSubmissionActions">
-			<!-- @todo work out why url_handlers dont like /export/2 -->
+		<ul class="userforms-submission-actions">
 			<li><a href="{$Top.Link}/export/?id={$RecordID}"><% _t('EXPORTSUBMISSIONS', 'Export submissions to CSV') %></a></li>
 			<li><a href="{$Top.Link}/deletesubmissions/?id={$RecordID}" class="deleteSubmission"><% _t('DELETEALLSUBMISSIONS', 'Delete All Submissions') %></a></li>
 		</ul>
 		
 		<% control Submissions %>
-			<div class="report">
-				<h4 class="submitted"><% _t('SUBMITTED', 'Submitted at') %> $Created.Nice. <a href="{$Top.Link}/deletesubmission/?id={$ID}" class="deleteSubmission"><% _t('DELETESUBMISSION', 'Delete Submission') %></a></h4>
+			<div class="userform-submission">
+				<h4><% _t('SUBMITTED', 'Submitted at') %> $Created.Nice. <a href="{$Top.Link}/deletesubmission/?id={$ID}" class="deleteSubmission"><% _t('DELETESUBMISSION', 'Delete Submission') %></a></h4>
+				
 				<table>
-					<% control FieldValues %>
+					<% control Values %>
 						<tr>
 							<td class="field">$Title</td>
 							<td class="value">$FormattedValue</td>
@@ -21,8 +20,10 @@
 				</table>
 			</div>
 		<% end_control %>
+		
 		<% if Submissions.MoreThanOnePage %>
-			<div class="pagination"> 
+			<div class="userforms-submissions-pagination"> 
+			
 				<% if Submissions.NotFirstPage %>
 					<a class="prev" href="javascript:void(0)" onclick="jQuery('.middleColumn').parent().load(jQuery('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.PrevStart}');" title="View the previous page">Previous page</a> 
 				<% end_if %>
@@ -35,5 +36,6 @@
 			</div>
 		<% end_if %>
 	<% end_if %>
-	<p class="noSubmissions" <% if Submissions %>style="display: none"<% end_if %>><% _t('NOSUBMISSIONS', 'No Submissions') %></p>
+	
+	<p class="userforms-nosubmissions" <% if Submissions %>style="display: none"<% end_if %>><% _t('NOSUBMISSIONS', 'No Submissions') %></p>
 </div>

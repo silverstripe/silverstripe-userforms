@@ -13,7 +13,7 @@ class SubmittedForm extends DataObject {
 	);
 	
 	static $has_many = array( 
-		"FieldValues" => "SubmittedFormField"
+		"Values" => "SubmittedFormField"
 	);
 
 	/**
@@ -22,11 +22,13 @@ class SubmittedForm extends DataObject {
 	 *
 	 */
 	protected function onBeforeDelete() {
-		if($this->FieldValues()) {
-			foreach($this->FieldValues() as $value) {
+		
+		if($this->Values()) {
+			foreach($this->Values() as $value) {
 				$value->delete();
 			}
 		}
+		
 		parent::onBeforeDelete();
 	}
 }
