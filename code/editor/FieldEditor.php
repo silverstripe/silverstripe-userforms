@@ -174,7 +174,6 @@ class FieldEditor extends FormField {
 	 */
 	public function addfield() {
 		// get the last field in this form editor
-		Debug::show($this->form->getRecord());
 		$parentID = $this->form->getRecord()->ID;
 		
 		if($parentID) {
