@@ -105,7 +105,7 @@ class SubmittedFormTest extends FunctionalTest {
 		$this->assertEquals($form->Values()->Count(), 2);
 		$form->delete();
 		
-		$fields = DataObject::get('SubmittedFormField', "ParentID = '$form->ID'");
+		$fields = DataObject::get('SubmittedFormField', "\"ParentID\" = '$form->ID'");
 		
 		$this->assertNull($fields);
 	}
