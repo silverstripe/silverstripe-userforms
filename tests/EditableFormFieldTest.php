@@ -283,9 +283,13 @@ class EditableFormFieldTest extends FunctionalTest {
 			$this->assertEquals($option->Title, 'New - '. $orginal[$option->ID]['Title']);
 			$this->assertEquals($option->Sort, $orginal[$option->ID]['Sort'] + 1);
 		}
-		
-		unset($data[1]);
-		
+
+		// remove the first one. can't assume by ID
+		foreach($data as $key => $value) {
+			unset($data[$key]);
+			break;
+		}
+
 		$dropdown->populateFromPostData($data);
 		
 		$this->assertEquals($dropdown->Options()->Count(), $count-1);
