@@ -86,7 +86,7 @@ class SubmittedFormReportField extends FormField {
 			$csvHeaderNames = array();
 			$csvHeaderTitle = array();
 			
-			$submissions = $udf->Submissions();
+			$submissions = $udf->Submissions("", "\"ID\"");
 			
 			if($submissions && $submissions->exists()) {
 				
@@ -103,7 +103,7 @@ class SubmittedFormReportField extends FormField {
 					FROM \"SubmittedFormField\"
 					LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
 					WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")
-					GROUP BY \"Name\"
+					GROUP BY \"SubmittedFormField\".\"ID\",\"Name\",\"Title\"
 					ORDER BY \"SubmittedFormField\".\"ID\"
 				");
 
