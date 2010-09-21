@@ -10,10 +10,12 @@
 	border: 1px solid #ddd;
 	background: #f4f4f4;
 	overflow: hidden;
-	padding: 4px 10px;
+	padding: 4px 0;
+	width: 100%;
 }
 	.MenuHolder h2 {
 		float: left;
+		margin-left: 10px;
 	}
 	
 	.MenuHolder select {
@@ -43,8 +45,9 @@
 
 	#Fields_fields .EditableFormField {
 		margin: 2px;
-		padding: 3px;
+		padding: 3px 0;
 		border-top: 1px dotted #ccc;
+		width: 100%;
 		overflow: hidden;
 	}
 		#Fields_fields .EditableFormField * {
@@ -106,6 +109,7 @@
 				}
 					#Fields_fields .EditableFormField .extraOptions li {
 						padding: 3px 0;
+						width: 100%;
 						overflow: hidden;
 					}
 				#Fields_fields .EditableFormField .extraOptions a {
