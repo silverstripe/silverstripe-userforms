@@ -17,7 +17,8 @@ class SubmittedFileField extends SubmittedFormField {
 	 * @return String
 	 */
 	function getFormattedValue() {
-		return '<a href="'.$this->getLink().'">'. _t('SubmittedFileField.DOWNLOADFILE', 'Download File') .'</a>';
+            $link = $this->getLink();
+            return (!empty($link)) ? '<a href="'.$link.'">'. _t('SubmittedFileField.DOWNLOADFILE', 'Download File') .'</a>' : '';
 	}
 
 	/**
@@ -26,6 +27,10 @@ class SubmittedFileField extends SubmittedFormField {
 	 * @return String
 	 */
 	function getLink() {
-		return ($this->UploadedFile()) ? $this->UploadedFile()->URL : "";
+            if ($this->UploadedFile()){
+                // Test if there is a filename, not only a filepath to the assets folder
+                return ($this->UploadedFile()->getFilename() != ASSETS_DIR.'/') ? $this->UploadedFile()->URL : '';
+            }
+            return '';
 	}	
 }
