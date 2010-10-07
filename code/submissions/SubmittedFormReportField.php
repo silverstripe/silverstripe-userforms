@@ -76,88 +76,56 @@ class SubmittedFormReportField extends FormField {
 			}
 		}
 
-		$now = Date("Y-m-d_h.i.s");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+		$now = Date("Y-m-d_h.i.s");
 		$fileName = "export-$now.csv";
 		$separator = ",";
 
 		$udf = DataObject::get_by_id("UserDefinedForm", $SQL_ID);
 		
 		if($udf) {
-			$csvHeaderNames = array();
-			$csvHeaderTitle = array();
-			
 			$submissions = $udf->Submissions("", "\"ID\"");
-			
 			if($submissions && $submissions->exists()) {
-				
-				// Get all the submission IDs (so we know what names/titles to get - helps for sites with many UDF's)
-				$inClause = array();
+				$data = array();
+				$csvHeaders = array();
+
+				// Create CSV rows out of submissions. Fields on those submissions will become columns.
 				foreach($submissions as $submission) {
-					$inClause[] = $submission->ID;
-				}
+					$fields = $submission->Values();
 
-				// Get the CSV header rows from the database
-				
-				$tmp = DB::query("
-					SELECT DISTINCT \"SubmittedFormField\".\"ID\", \"Name\", \"Title\"
-					FROM \"SubmittedFormField\"
-					LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
-					WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ")
-					GROUP BY \"SubmittedFormField\".\"ID\",\"Name\",\"Title\"
-					ORDER BY \"SubmittedFormField\".\"ID\"
-				");
-
-				// Sort the Names and Titles from the database query into separate keyed arrays
-				foreach($tmp as $array) {
-					$csvHeaderNames[] = $array['Name'];
-					$csvHeaderTitle[] = $array['Title'];
-				}
-				
-				// For every submission...
-				$i = 0;
-				foreach($submissions as $submission) {
-					
-					// Get the rows for this submission (One row = one form field)
-					$dataRow = $submission->Values();
-					
-					$rows[$i] = array();
-					
-					// For every row/field, get all the columns
-					foreach($dataRow as $column) {
-						// If the Name of this field is in the $csvHeaderNames array, get an array of all the places it exists
-						if($index = array_keys($csvHeaderNames, $column->Name)) {
-							if(is_array($index)) {
-								// Set the final output array for each index that we want to insert this value into
-								foreach($index as $idx) {
-									$rows[$i][$idx] = $column->Value;
-								}						
-							}
-						}
-					}
-					
-					$rows[$i]['Submitted'] = $submission->Created;
-					
-					$i++;
-				}
-				
-				// CSV header row
-				$csvData = '"' . implode('","', $csvHeaderTitle) . '"' . ',"Submitted"'."\n";
-
-				// For every row of data (one form submission = one row)
-				foreach($rows as $row) {
-
-					for($i=0;$i<count($csvHeaderNames);$i++) {
+					$row = array();
+					foreach($fields as $field) {
+						// Collect the data
+						$row[$field->Name] = $field->Value;
 						
-						if(!isset($row[$i]) || !$row[$i]) $csvData .= '"",';    // If there is no data for this column, output it as blank instead 
-						else {
-							$tmp = str_replace('"', '""', $row[$i]); 
-							$csvData .= '"' . $tmp . '",';
-						}
+						// Collect unique columns for use in the CSV - we must have a fixed number of columns, but we want to 
+						// include all fields that have ever existed in this form. 
+						// NOTE: even if the field was used long time ago and only once, it will be included, so expect to see 
+						// some empty columns, especially on heavily-edited UDFs.
+						$csvHeaders[$field->Name] = $field->Title;
 					}
-					
-					// Start a new row for each submission (re-check we have 'Submitted' in this entry)
-					if(isset($row['Submitted'])) $csvData .= '"'.$row['Submitted'].'"'."\n";
-					else $csvData .= "\n";
+
+					$row['Submitted'] = $submission->Created;
+					$data[] = $row;
+				}
+				
+				// Create the CSV header line first:
+				$csvData = '"' . implode('","', $csvHeaders) . '"' . ',"Submitted"'."\n";
+
+				// Now put the collected data under relevant columns
+				foreach($data as $row) {
+					$csvRowItems = array();
+					foreach ($csvHeaders as $columnName=>$columnTitle) {
+						if (!isset($row[$columnName])) $csvRowItems[] = ""; // This submission did not have that column, insert blank
+						else $csvRowItems[] = $row[$columnName];
+					}
+					$csvRowItems[] = $row['Submitted'];
+
+					// Encode the row
+					$fp = fopen('php://memory', 'r+');
+					fputcsv($fp, $csvRowItems, ',', '"');
+					rewind($fp);
+					$csvData .= fgets($fp);
+					fclose($fp);
 				}
 			} else {
 				user_error("No submissions to export.", E_USER_ERROR);

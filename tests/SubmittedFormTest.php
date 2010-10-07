@@ -50,28 +50,19 @@ class SubmittedFormTest extends FunctionalTest {
 		
 		// export it back to an array (rather than string)
 		$exportLines = explode("\n", $export);
+		array_pop($exportLines); // Remove trailing empty line
+
 		$data = array();
-		
-		array_pop($exportLines);
-		
 		foreach($exportLines as $line) {
-			$line = explode("\",\"", $line);
-			
-			$clean = array();
-			foreach($line as $part) {
-				$clean[] = trim($part, "\"");
-			}
-			
-			$data[] = $clean;
+			$data[] = str_getcsv($line);
 		}
 		
-		// check the headers are fine
+		// check the headers are fine and include legacy field
 		$this->assertEquals($data[0], array(
 			'Submitted Title','Submitted Title 2','Submitted'
 		));
 	
 		// check the number of records in the export
-		
 		$this->assertEquals(count($data), 12);
 		
 		$this->assertEquals($data[1][0], 'Value 1');
