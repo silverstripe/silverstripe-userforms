@@ -9,6 +9,7 @@ Will Rossiter (Nickname: wrossiter, willr)
 Requirements
 ---------------------
 SilverStripe 2.4.0+
+PHP 5 >= 5.1.0 (fputcsv)
 
 Documentation
 -----------------------------------------------

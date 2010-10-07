@@ -84,9 +84,25 @@ class SubmittedFormReportField extends FormField {
 		
 		if($udf) {
 			$submissions = $udf->Submissions("", "\"ID\"");
+
+			// Collect unique columns for use in the CSV.
+			// Do it separately as we need a fixed number of columns for the file.
+			// Include all fields that have ever existed in this form.
+			// Preserve the ordering: the most recent form setup should be dominant.
+			$inClause = array();
+			foreach($submissions as $submission) { 
+				$inClause[] = $submission->ID; 
+			}
+			$csvHeaders = DB::query("SELECT DISTINCT \"Name\" , \"Title\" FROM
+										((
+											SELECT \"Name\" , \"Title\" FROM \"SubmittedFormField\" 
+											LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ") 
+											ORDER BY \"SubmittedFormField\".\"ParentID\" DESC, \"SubmittedFormField\".\"ID\"
+										) AS \"tmp\")");
+			if ($csvHeaders) $csvHeaders = $csvHeaders->map();
+
 			if($submissions && $submissions->exists()) {
 				$data = array();
-				$csvHeaders = array();
 
 				// Create CSV rows out of submissions. Fields on those submissions will become columns.
 				foreach($submissions as $submission) {
@@ -94,14 +110,7 @@ class SubmittedFormReportField extends FormField {
 
 					$row = array();
 					foreach($fields as $field) {
-						// Collect the data
 						$row[$field->Name] = $field->Value;
-						
-						// Collect unique columns for use in the CSV - we must have a fixed number of columns, but we want to 
-						// include all fields that have ever existed in this form. 
-						// NOTE: even if the field was used long time ago and only once, it will be included, so expect to see 
-						// some empty columns, especially on heavily-edited UDFs.
-						$csvHeaders[$field->Name] = $field->Title;
 					}
 
 					$row['Submitted'] = $submission->Created;
@@ -122,7 +131,7 @@ class SubmittedFormReportField extends FormField {
 
 					// Encode the row
 					$fp = fopen('php://memory', 'r+');
-					fputcsv($fp, $csvRowItems, ',', '"');
+					fputcsv($fp, $csvRowItems);
 					rewind($fp);
 					$csvData .= fgets($fp);
 					fclose($fp);

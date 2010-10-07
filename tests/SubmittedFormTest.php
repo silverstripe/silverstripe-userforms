@@ -54,22 +54,27 @@ class SubmittedFormTest extends FunctionalTest {
 
 		$data = array();
 		foreach($exportLines as $line) {
-			$data[] = str_getcsv($line);
+			$fp = fopen('php://memory', 'w+');
+			fputs($fp, $line);
+			rewind($fp);
+			$data[] = fgetcsv($fp);
 		}
-		
-		// check the headers are fine and include legacy field
+
+		// check the headers are fine and include every legacy field. They should also be ordered
+		// according to the latest form layout.
 		$this->assertEquals($data[0], array(
-			'Submitted Title','Submitted Title 2','Submitted'
+			'First', 'Submitted Title 2', 'Submitted Title', 'Field 2', 'Field 1', 'File', 'Submitted'
 		));
-	
+
 		// check the number of records in the export
 		$this->assertEquals(count($data), 12);
 		
-		$this->assertEquals($data[1][0], 'Value 1');
-		$this->assertEquals($data[1][1], "");
-		
-		$this->assertEquals($data[2][0], "");
+		$this->assertEquals($data[1][1], 'quote " and comma , test');
+		$this->assertEquals($data[1][2], 'Value 1');
 		$this->assertEquals($data[2][1], 'Value 2');
+		
+		$this->assertEquals($data[11][0], 'First');
+		$this->assertEquals($data[11][1], 'Second');
 	}
 	
 	function testdeletesubmission() {

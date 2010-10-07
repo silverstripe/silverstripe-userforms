@@ -60,17 +60,35 @@ SubmittedFormField:
             Testing until I cannot
             I love my testing
             
-    long-submitted-1:
+    long-submitted-1a:
         Name: Submitted Name
         Title: Submitted Title
         Parent: =>SubmittedForm.long-1
         Value: Value 1
+
+    long-submitted-1b:
+        Name: Submitted Name 2
+        Title: Submitted Title 2
+        Parent: =>SubmittedForm.long-1
+        Value: 'quote " and comma , test'
         
     long-submitted-2:
         Parent: =>SubmittedForm.long-2
         Name: Submitted Name 2
         Title: Submitted Title 2
         Value: Value 2
+
+    long-submitted-11a:
+        Parent: =>SubmittedForm.long-11
+        Name: First
+        Title: First
+        Value: First
+
+    long-submitted-11b:
+        Parent: =>SubmittedForm.long-11
+        Name: Submitted Name 2
+        Title: Submitted Title 2
+        Value: Second
         
 SubmittedFileField:
     submitted-file-1:
