@@ -69,6 +69,10 @@ class SubmittedFormTest extends FunctionalTest {
 		// check the number of records in the export
 		$this->assertEquals(count($data), 12);
 		
+		$this->assertEquals(count($data[1]), 4);
+		$this->assertEquals(count($data[2]), 4);
+		$this->assertEquals(count($data[11]), 4);
+
 		$this->assertEquals($data[1][1], 'quote " and comma , test');
 		$this->assertEquals($data[1][2], 'Value 1');
 		$this->assertEquals($data[2][1], 'Value 2');
