@@ -63,7 +63,7 @@ class SubmittedFormTest extends FunctionalTest {
 		// check the headers are fine and include every legacy field. They should also be ordered
 		// according to the latest form layout.
 		$this->assertEquals($data[0], array(
-			'First', 'Submitted Title 2', 'Submitted Title', 'Field 2', 'Field 1', 'File', 'Submitted'
+			'First', 'Submitted Title 2', 'Submitted Title', 'Submitted'
 		));
 
 		// check the number of records in the export

@@ -96,7 +96,8 @@ class SubmittedFormReportField extends FormField {
 			$csvHeaders = DB::query("SELECT DISTINCT \"Name\" , \"Title\" FROM
 										((
 											SELECT \"Name\" , \"Title\" FROM \"SubmittedFormField\" 
-											LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ") 
+											LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
+											WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ") 
 											ORDER BY \"SubmittedFormField\".\"ParentID\" DESC, \"SubmittedFormField\".\"ID\"
 										) AS \"tmp\")");
 			if ($csvHeaders) $csvHeaders = $csvHeaders->map();
