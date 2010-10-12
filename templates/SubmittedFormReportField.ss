@@ -3,7 +3,7 @@
 	<% if Submissions %>
 		<ul class="userforms-submission-actions">
 			<li><a href="{$Top.Link}/export/?id={$RecordID}"><% _t('EXPORTSUBMISSIONS', 'Export submissions to CSV') %></a></li>
-			<li><a href="{$Top.Link}/deletesubmissions/?id={$RecordID}" class="deleteSubmission"><% _t('DELETEALLSUBMISSIONS', 'Delete All Submissions') %></a></li>
+			<li><a href="{$Top.Link}/deletesubmissions/?id={$RecordID}" class="deleteAllSubmissions"><% _t('DELETEALLSUBMISSIONS', 'Delete All Submissions') %></a></li>
 		</ul>
 		
 		<% control Submissions %>

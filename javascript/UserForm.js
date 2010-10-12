@@ -74,16 +74,32 @@
 		/*--------------------- SUBMISSIONS ------------------------ */
 		
 		/**
-		 * Delete a given Submission from the form, or all submissions
-		 * we let the href of the delete link to do all the work for us
+		 * Delete a given Submission from the form
 		 */
-		
-		$("#userforms-submissions .deleteSubmission").click(function() {
-			var deletedSubmission = $(this);
+		$("#userforms-submissions .deleteSubmission").click(function(event) {
+			event.preventDefault();
 			
+			var deletedSubmission = $(this);
 			$.post($(this).attr('href'), function(data) {
 				deletedSubmission.parents('div.userform-submission').fadeOut();
 			});
+
+			return false;
+		});
+
+		/**
+		 * Delete all submissions and fade them out if successful
+		 */
+		$("#userforms-submissions .deleteAllSubmissions").click(function(event) {
+			event.preventDefault();
+
+			if (!confirm(ss.i18n._t('UserForms.CONFIRMDELETEALLSUBMISSIONS', 'All submissions will be permanently removed. Continue?'))) return false;
+
+			var that = this;
+			$.post($(this).attr('href'), function(data) {
+				$(that).parents('#userforms-submissions').children().fadeOut();
+			});
+
 			return false;
 		});
 		
