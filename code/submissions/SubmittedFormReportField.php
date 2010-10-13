@@ -143,7 +143,8 @@ class SubmittedFormReportField extends FormField {
 				return $csvData;
 			}
 			else {
-				SS_HTTPRequest::send_file($csvData, $fileName)->output();	
+				SS_HTTPRequest::send_file($csvData, $fileName, 'text/csv')->output();	
+				exit;
 			}
 		} else {
 			user_error("'$SQL_ID' is a valid type, but we can't find a UserDefinedForm in the database that matches the ID.", E_USER_ERROR);
