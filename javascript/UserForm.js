@@ -5,71 +5,57 @@
  */
 (function($) {
 	$(document).ready(function() {
-		
-		/**
-		 * Update the Field sortable
-		 */
-		set_sortable();
-
 		/**
 		 * Update the sortable properties of the form as a function
 		 * since the application will need to refresh the UI dynamically
 		 */
-		function set_sortable() {
-			/**
-			 * Sort Fields in the Field List
-			 */
-			
+ 		function update_sortable() {
+			$("#Fields_fields").sortable({
+				handle: '.fieldHandler',
+				cursor: 'pointer',
+				items: 'li.EditableFormField',
+				placeholder: 'removed-form-field',
+				opacity: 0.6,
+				revert: 'true',
+				change : function (event, ui) {
+					$("#Fields_fields").sortable('refreshPositions');
+				},
+				update : function (event, ui) {
+					var sort = 1;
 
-                        $("#Fields_fields").sortable({
-                            handle: '.fieldHandler',
-                            cursor: 'pointer',
-                            items: 'li.EditableFormField',
-                            placeholder: 'removed-form-field',
-                            opacity: 0.6,
-                            revert: 'true',
-                            change : function (event, ui) {
-                                    $("#Fields_fields").sortable('refreshPositions');
-                            },
-                            update : function (event, ui) {
-                                update_fieldsSortingOrder();
-                            }
+					$("li.EditableFormField").each(function() {
+						$(this).find(".sortHidden").val(sort++);
+					});
+				}
 			});
 
-			/**
-			 * Sort Options in a Field List - Such as options in a 
-			 * dropdown field.
-                         *
-                         */
-                        $(".editableOptions").sortable({
-                            handle: '.handle',
-                            cursor:'pointer',
-                            items: 'li',
-                            placeholder: 'removed-form-field',
-                            opacity: 0.6,
-                            revert: true,
-                            change : function (event, ui) {
-                                    $(this).sortable('refreshPositions');
-                            },
-                            update : function (event, ui) {
-                                update_editableOptionsSortingOrder();
-                            }
+			$(".editableOptions").sortable({
+				handle: '.handle',
+				cursor:'pointer',
+				items: 'li',
+				placeholder: 'removed-form-field',
+					opacity: 0.6,
+				revert: true,
+				change : function (event, ui) {
+					$(this).sortable('refreshPositions');
+				},
+				update : function (event, ui) {
+					var sort = 1;
+					$(".editableOptions li").each(function() {
+		 				$(this).find(".sortOptionHidden").val(sort++);
+					});
+				}
 			});
 		}
-
-                function update_fieldsSortingOrder(){
-                    var sort = 1;
-                    $("li.EditableFormField").each(function() {
-                            $(this).find(".sortHidden").val(sort++);
-                    });
-                }
-
-                function update_editableOptionsSortingOrder(){
-                    var sort = 1;
-                    $(".editableOptions li").each(function() {
-                            $(this).find(".sortOptionHidden").val(sort++);
-                    });
-                }
+		
+		update_sortable();
+		
+		/**
+		 * Workaround for not refreshing the sort
+		 */
+		$(".fieldHandler").live('hover', function() {
+			update_sortable();
+		})
 		
 		/*--------------------- SUBMISSIONS ------------------------ */
 		
@@ -149,8 +135,7 @@
 				} 
 			});
 			
-			//update_sortable();
-                        update_fieldsSortingOrder();
+			$("#Fields_fields").sortable('refresh');
 	
 			return false;
 		});
@@ -251,9 +236,6 @@
 				} 
 			});
 			
-			//update_sortable();
-                        update_editableOptionsSortingOrder();
-			
 			return false;
 		});
 		
@@ -274,7 +256,7 @@
 		/**
 		 * Custom Rules Interface
 		 */
-		$(".customRules .conditionOption").livequery('change',function(){
+		$(".customRules .conditionOption").live('change',function(){
 			var valueInput = $(this).siblings(".ruleValue");
 			if($(this).val() != "" && $(this).val() != "IsBlank" && $(this).val() != "IsNotBlank") {
 				valueInput.removeClass("hidden");
@@ -325,8 +307,6 @@
 			
 			// append to the list
 			currentRules.append(newRule);
-			
-			//update_sortable();
 			
 			return false;
 		});
