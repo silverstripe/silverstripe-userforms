@@ -47,35 +47,38 @@ class SubmittedFormTest extends FunctionalTest {
 
 	function testCSVExport() {
 		$export = $this->field->export($this->page->ID);
-		
-		// export it back to an array (rather than string)
-		$exportLines = explode("\n", $export);
-		array_pop($exportLines); // Remove trailing empty line
+
+		// Pretend we are opening via file
+		$fp = fopen('php://memory', 'w+');
+		fwrite($fp, $export);
+		rewind($fp);
 
 		$data = array();
-		foreach($exportLines as $line) {
-			$fp = fopen('php://memory', 'w+');
-			fputs($fp, $line);
-			rewind($fp);
-			$data[] = fgetcsv($fp);
-		}
+		while($data[] = fgetcsv($fp));
+		array_pop($data);
+		fclose($fp);
 
-		// check the headers are fine and include every legacy field. They should also be ordered
+		// Check the headers are fine and include every legacy field. They should also be ordered
 		// according to the latest form layout.
 		$this->assertEquals($data[0], array(
 			'First', 'Submitted Title 2', 'Submitted Title', 'Submitted'
 		));
 
-		// check the number of records in the export
+		// Check the number of records in the export
 		$this->assertEquals(count($data), 12);
 		
+		// Make sure the number of columns matches
 		$this->assertEquals(count($data[1]), 4);
 		$this->assertEquals(count($data[2]), 4);
+		$this->assertEquals(count($data[3]), 4);
 		$this->assertEquals(count($data[11]), 4);
 
+		// Specific value tests
 		$this->assertEquals($data[1][1], 'quote " and comma , test');
 		$this->assertEquals($data[1][2], 'Value 1');
 		$this->assertEquals($data[2][1], 'Value 2');
+
+		$this->assertEquals($data[3][1], "multi\nline\ntest");
 		
 		$this->assertEquals($data[11][0], 'First');
 		$this->assertEquals($data[11][1], 'Second');

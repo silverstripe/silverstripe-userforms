@@ -124,16 +124,12 @@ class SubmittedFormReportField extends FormField {
 					$csvRowItems = array();
 					foreach ($csvHeaders as $columnName=>$columnTitle) {
 						if (!isset($row[$columnName])) $csvRowItems[] = ""; // This submission did not have that column, insert blank
-						else $csvRowItems[] = $row[$columnName];
+						else $csvRowItems[] = str_replace('"', '""', $row[$columnName]);
 					}
 					$csvRowItems[] = $row['Submitted'];
 
-					// Encode the row
-					$fp = fopen('php://memory', 'r+');
-					fputcsv($fp, $csvRowItems);
-					rewind($fp);
-					$csvData .= fgets($fp);
-					fclose($fp);
+					// Encode the row by hand (fputcsv fails to encode newlines properly)
+					if (count($csvRowItems)) $csvData .= "\"".implode($csvRowItems, "\", \"")."\"\n";
 				}
 			} else {
 				user_error("No submissions to export.", E_USER_ERROR);

@@ -24,6 +24,8 @@ SubmittedForm:
     long-10:
         
     long-11:
+
+	long-12:
     
 
 UserDefinedForm:
@@ -71,12 +73,21 @@ SubmittedFormField:
         Title: Submitted Title 2
         Parent: =>SubmittedForm.long-1
         Value: 'quote " and comma , test'
-        
+
     long-submitted-2:
         Parent: =>SubmittedForm.long-2
         Name: Submitted Name 2
         Title: Submitted Title 2
         Value: Value 2
+
+    long-submitted-3:
+        Name: Submitted Name 2
+        Title: Submitted Title 2
+        Parent: =>SubmittedForm.long-3
+        Value: |
+            multi
+            line
+            test
 
     long-submitted-11a:
         Parent: =>SubmittedForm.long-11
