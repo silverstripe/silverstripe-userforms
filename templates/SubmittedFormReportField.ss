@@ -31,7 +31,7 @@
 				<span>Viewing rows $Submissions.Start - $Submissions.StartPlusOffset of $Submissions.TotalCount rows</span>
 				
 				<% if Submissions.NotLastPage %>
-					<a class="next" href="javascript:void(0)" onclick="jQuery('#FormSubmissions').parent().load(jQuery('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.NextStart}');" title="View the next page">Next page</a> 
+					<a class="next" href="javascript:void(0)" onclick="jQuery('#userforms-submissions').parent().load(jQuery('base').get(0).href+'/{$Top.Link}/getSubmissions/?start={$Submissions.NextStart}');" title="View the next page">Next page</a> 
 				<% end_if %>
 			</div>
 		<% end_if %>
