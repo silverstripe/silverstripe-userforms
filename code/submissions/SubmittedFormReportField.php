@@ -129,7 +129,7 @@ class SubmittedFormReportField extends FormField {
 					$csvRowItems[] = $row['Submitted'];
 
 					// Encode the row by hand (fputcsv fails to encode newlines properly)
-					if (count($csvRowItems)) $csvData .= "\"".implode($csvRowItems, "\", \"")."\"\n";
+					if (count($csvRowItems)) $csvData .= "\"".implode($csvRowItems, "\",\"")."\"\n";
 				}
 			} else {
 				user_error("No submissions to export.", E_USER_ERROR);
