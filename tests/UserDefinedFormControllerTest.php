@@ -11,7 +11,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	function testProcess() {
 		$form = $this->setupFormFrontend();
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		$this->autoFollowRedirection = false;
 		$this->clearEmails();
@@ -67,19 +67,18 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	function testForm() {
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		// test form 
 		$this->assertEquals($controller->Form()->Name(), 'Form', 'The form is referenced as Form');
-		
-		$this->assertEquals($controller->Form()->Fields()->Count(), 2);		
+		$this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
 		$this->assertEquals($controller->Form()->Actions()->Count(), 1);
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);
 
 		$requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
-		$controller = new UserDefinedForm_Controller($requiredForm);
+		$controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 
-		$this->assertEquals($controller->Form()->Fields()->Count(), 2);		
+		$this->assertEquals($controller->Form()->Fields()->Count(), 1);  // disabled SecurityID token fields
 		$this->assertEquals($controller->Form()->Actions()->Count(), 1);
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 1);
 	}
@@ -88,7 +87,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		// generating the fieldset of fields
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		$fields = $controller->getFormFields();
 		
@@ -96,7 +95,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		// custom error message on a form field
 		$requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
-		$controller = new UserDefinedForm_Controller($requiredForm);
+		$controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 		
 		UserDefinedForm::$required_identifier = "*";
 		
@@ -110,7 +109,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$field->setSetting('RightTitle', 'Right Title');
 		$field->write();
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		$fields = $controller->getFormFields();
 
@@ -121,7 +120,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		// generating the fieldset of actions
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		$actions = $controller->getFormActions();
 		
 		// by default will have 1 submit button which links to process
@@ -131,7 +130,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		// the custom popup should have a reset button and a custom text
 		$custom = $this->objFromFixture('UserDefinedForm', 'form-with-reset-and-custom-action');
-		$controller = new UserDefinedForm_Controller($custom);
+		$controller = new UserDefinedFormControllerTest_Controller($custom);
 		
 		$actions = $controller->getFormActions();
 
@@ -144,7 +143,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	function testArrayToJson() {
 		$array = array('1' => 'one', '2' => 'two');
 		$string = "{\n1:\"one\", 2:\"two\"\n}\n";
-		$this->assertEquals(UserDefinedForm_Controller::array2json($array), $string);
+		$this->assertEquals(UserDefinedFormControllerTest_Controller::array2json($array), $string);
 	}
 	
 	
@@ -154,7 +153,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$form->Content = 'This is some content without a form nested between it';
 		$form->doPublish();
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		// check to see if $Form is replaced to inside the content
 		$index = new ArrayData($controller->index());
@@ -166,7 +165,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	function testRenderingIntoTemplateWithSubstringReplacement() {
 		$form = $this->setupFormFrontend();
 		
-		$controller = new UserDefinedForm_Controller($form);
+		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		// check to see if $Form is replaced to inside the content
 		$index = new ArrayData($controller->index());
@@ -205,4 +204,18 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$this->assertEquals((string) $action[0]['value'], "Submit", "Submit button has default text");
 	}
+}
+
+class UserDefinedFormControllerTest_Controller extends UserDefinedForM_Controller implements TestOnly {
+	
+	/**
+	 * Overloaded to avoid inconsistencies between 2.4.2 and 2.4.3 (disables all security tokens in unit tests by default)
+	 */
+	function Form() {
+		$form = parent::Form();
+		$form->disableSecurityToken();
+		
+		return $form;
+	}
+	
 }
