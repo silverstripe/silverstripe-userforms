@@ -359,7 +359,7 @@ class EditableFormField extends DataObject {
 		
 		if(!$this->canEdit()) {
 			foreach($fields as $field) {
-				$fields->performReadonlyTransformation();
+				$field->performReadonlyTransformation();
 			}
 		}
 		
