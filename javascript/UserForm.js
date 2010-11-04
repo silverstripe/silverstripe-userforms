@@ -62,7 +62,7 @@
 		/**
 		 * Delete a given Submission from the form
 		 */
-		$("#userforms-submissions .deleteSubmission").click(function(event) {
+		$("#userforms-submissions .deleteSubmission").live('click',function(event) {
 			event.preventDefault();
 			
 			var deletedSubmission = $(this);
@@ -76,7 +76,7 @@
 		/**
 		 * Delete all submissions and fade them out if successful
 		 */
-		$("#userforms-submissions .deleteAllSubmissions").click(function(event) {
+		$("#userforms-submissions .deleteAllSubmissions").live('click',function(event) {
 			event.preventDefault();
 
 			if (!confirm(ss.i18n._t('UserForms.CONFIRMDELETEALLSUBMISSIONS', 'All submissions will be permanently removed. Continue?'))) return false;
