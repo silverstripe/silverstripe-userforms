@@ -16,11 +16,21 @@ class EditableDateField extends EditableFormField {
 	
 	static $plural_name = 'Date Fields';
 	
+	protected $dateFormats = array(
+		'dd/mm/yy' => 'dd/mm/yy',
+		'dd-mm-yy' => 'dd-mm-yy',
+		'mm/dd/yy' => 'mm/dd/yy',
+		'mm-dd-yy' => 'mm-dd-yy',
+		'MM d, yy' => 'MM d, yy'
+	);
+	
 	function getFieldConfiguration() {
 		$defaultToToday = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
-		
+		$defaultDateFormat = ($this->getSetting('DateFormat')) ? $this->getSetting('DateFormat') : 'dd/mm/yy';
+		$dateFormatConf = new DropdownField("Fields[$this->ID][CustomSettings][DateFormat]", 'Date format', $this->dateFormats, $defaultDateFormat);
 		return new FieldSet(
-			new CheckboxField("Fields[$this->ID][CustomSettings][DefaultToToday]", _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?'), $defaultToToday)
+			new CheckboxField("Fields[$this->ID][CustomSettings][DefaultToToday]", _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?'), $defaultToToday),
+			$dateFormatConf
 		);
 	}
 	
@@ -44,11 +54,12 @@ class EditableDateField extends EditableFormField {
 		// scripts for jquery date picker
 		Requirements::javascript(THIRDPARTY_DIR .'/jquery-ui/jquery.ui.core.js');
 		Requirements::javascript(THIRDPARTY_DIR .'/jquery-ui/jquery.ui.datepicker.js');
-
+		
+		$dateFormat = $this->getSetting('DateFormat');
 		Requirements::customScript(<<<JS
 			(function(jQuery) {
 				$(document).ready(function() {
-					$('input[name^=EditableDateField]').attr('autocomplete', 'off').datepicker();	
+					$('input[name^=EditableDateField]').attr('autocomplete', 'off').datepicker({dateFormat:'$dateFormat'});	
 				});
 			})(jQuery);
 JS
