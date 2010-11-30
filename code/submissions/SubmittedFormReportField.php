@@ -135,7 +135,7 @@ class SubmittedFormReportField extends FormField {
 				user_error("No submissions to export.", E_USER_ERROR);
 			}
 
-			if(SapphireTest::is_running_test()) {
+			if(class_exists('SapphireTest', false) && SapphireTest::is_running_test()) {
 				return $csvData;
 			}
 			else {
@@ -153,6 +153,8 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmissions($id = false) {
+		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
+		
 		if($id && is_int($id)) {
 			$SQL_ID = $id;
 		}
@@ -170,10 +172,10 @@ class SubmittedFormReportField extends FormField {
 				foreach($submissions as $submission) {
 					$submission->delete();
 				}
-				return (Director::is_ajax() || SapphireTest::is_running_test()) ? true : Director::redirectBack();
+				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
 			}
 		}
-		return (Director::is_ajax() || SapphireTest::is_running_test()) ? false : Director::redirectBack();
+		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
 	}
 	
 	/**
@@ -182,6 +184,8 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmission($id = false) {
+		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
+		
 		if($id && is_int($id)) {
 			$SQL_ID = $id;
 		}
@@ -196,9 +200,9 @@ class SubmittedFormReportField extends FormField {
 			if($submission) {
 				$submission->delete();
 				
-				return (Director::is_ajax() || SapphireTest::is_running_test()) ? true : Director::redirectBack();
+				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
 			}
 		}
-		return (Director::is_ajax() || SapphireTest::is_running_test()) ? false : Director::redirectBack();
+		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
 	}
 }
