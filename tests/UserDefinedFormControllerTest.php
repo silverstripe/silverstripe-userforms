@@ -101,7 +101,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$fields = $controller->getFormFields();
 		
-		$this->assertEquals($fields->First()->getCustomValidationMessage(), 'Custom Error Message');
+		$this->assertEquals($fields->First()->getCustomValidationMessage()->getValue(), 'Custom Error Message');
 		$this->assertEquals($fields->First()->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
 		
 		// test custom right title

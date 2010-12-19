@@ -406,4 +406,19 @@ class EditableFormField extends DataObject {
 	public function getValidation() {
 		return array();
 	}
+	
+	/**
+	 * Return the error message for this field. Either uses the custom
+	 * one (if provided) or the default SilverStripe message
+	 *
+	 * @return Varchar
+	 */
+	public function getErrorMessage() {
+		$title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
+		$standard = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
+		
+		$errorMessage = ($this->CustomErrorMessage) ? $this->CustomErrorMessage : $standard;
+		
+		return DBField::create('Varchar', $errorMessage);
+	}
 }

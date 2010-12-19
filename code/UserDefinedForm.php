@@ -383,12 +383,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				if(!$field) break;
 				
 				// set the error / formatting messages
-				$title = strip_tags("'". ($editableField->Title ? $editableField->Title : $editableField->Name) . "'");
-				
-				$errorMessage = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
-				$errorMessage = ($editableField->CustomErrorMessage) ? $editableField->CustomErrorMessage : $errorMessage;
-				
-				$field->setCustomValidationMessage($errorMessage);
+				$field->setCustomValidationMessage($editableField->getErrorMessage());
 
 				// set the right title on this field
 				if($right = $editableField->getSetting('RightTitle')) {
@@ -454,11 +449,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
+				$messages[$field->Name] = $field->getErrorMessage()->HTML();
+				
 				if($field->Required) {
-										
-					$validation[$field->Name] = $field->getFormField()->getCustomValidationMessage();
-					$rules[$field->Name] = array_merge(array('required'), $field->getValidation());
-					
+					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
 					$required->addRequiredField($field->Name);
 				}
 			}
@@ -466,8 +460,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		// Set the Form Name
 		$rules = $this->array2json($rules);
-		$messages = $this->array2json($validation);
-
+		$messages = $this->array2json($messages);
+		
 		// set the custom script for this form
 		Requirements::customScript(<<<JS
 			(function($) {
