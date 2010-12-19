@@ -345,10 +345,12 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * Get the form for the page. Form can be modified by calling {@link updateForm()}
 	 * on a UserDefinedForm extension
 	 *
-	 * @return Form
+	 * @return Form|false
 	 */
 	function Form() {
 		$fields = $this->getFormFields();
+		if(!$fields) return false;
+		
 		$actions = $this->getFormActions();
 		
 		// get the required fields including the validation
