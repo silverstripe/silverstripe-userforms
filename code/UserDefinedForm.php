@@ -446,6 +446,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		$rules = array();
 		$validation = array();
+		$messages = array();
 		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
