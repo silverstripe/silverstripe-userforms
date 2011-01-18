@@ -27,9 +27,13 @@ class EditableMemberListField extends EditableFormField {
 	}
 	
 	function getValueFromData($data) {
-		$value = Convert::raw2sql($data[$this->Name]);
+		if(isset($data[$this->Name])) {
+			$value = Convert::raw2sql($data[$this->Name]);
 		
-		$member = DataObject::get_one('Member', "Member.ID = {$value}");
-		return ($member) ? $member->getName() : "";
+			$member = DataObject::get_one('Member', "Member.ID = {$value}");
+			return ($member) ? $member->getName() : "";
+		}
+		
+		return false;
 	}
 }
