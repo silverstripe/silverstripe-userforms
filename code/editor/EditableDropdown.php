@@ -17,16 +17,11 @@ class EditableDropdown extends EditableMultipleOptionField {
 	 * @return DropdownField
 	 */
 	function getFormField() {
-		
 		$optionSet = $this->Options();
 		$options = array();
-
-		if($optionSet) {
-			foreach($optionSet as $option) {
-				$options[$option->Value] = $option->Title;
-			}
-		}
-		
+		if($optionSet) 
+			foreach($optionSet as $option)
+				$options["EditableOption-{$option->ID}-{$option->Value}"] = $option->Title;
 		return new DropdownField($this->Name, $this->Title, $options);	
 	}
 }

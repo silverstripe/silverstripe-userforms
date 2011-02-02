@@ -661,6 +661,12 @@ JS
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->Title;
 			
+			if ($field->hasMethod('getEmailAddressesFromData'))
+				$submittedField->EmailAddresses = $field->getEmailAddressesFromData($data);
+			else 
+				$submittedField->EmailAddresses = false;
+	
+			
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
 				$submittedField->Value = $field->getValueFromData($data);
@@ -732,9 +738,12 @@ JS
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
 				if($recipient->SendEmailToField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
-					
+					//print_r($submittedFormField); die();
 					if($submittedFormField) {
-						$email->setTo($submittedFormField->Value);	
+						if ($submittedFormField->EmailAddresses && is_array($submittedFormField->EmailAddresses))
+							$email->setTo(implode(', ', $submittedFormField->EmailAddresses));	
+						else
+							$email->setTo($submittedFormField->Value);	
 					}
 				}
 				

@@ -16,28 +16,11 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	function getFormField() {
 		$optionSet = $this->Options();
 		$options = array();
-		
-		$optionMap = ($optionSet) ? $optionSet->map('Value', 'Title') : array();
-		
-		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
+		if($optionSet)
+			foreach($optionSet as $option)
+				$options["EditableOption-{$option->ID}-{$option->Value}"] = $option->Title;
+		return new CheckboxSetField($this->Name, $this->Title, $options);
 	}
 	
-	function getValueFromData($data) {
-		$result = '';
-		$entries = (isset($data[$this->Name])) ? $data[$this->Name] : false;
-		
-		if($entries) {
-			if(!is_array($data[$this->Name])) {
-				$entries = array($data[$this->Name]);
-			}
-			foreach($entries as $selected => $value) {
-				if(!$result) {
-					$result = $value;
-				} else {
-					$result .= ", " . $value;
-				}
-			}
-		}
-		return $result;
-	}
+
 }
