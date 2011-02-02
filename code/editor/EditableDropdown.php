@@ -23,7 +23,7 @@ class EditableDropdown extends EditableMultipleOptionField {
 
 		if($optionSet) {
 			foreach($optionSet as $option) {
-				$options[$option->Title] = $option->Title;
+				$options[$option->Value] = $option->Title;
 			}
 		}
 		

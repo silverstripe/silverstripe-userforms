@@ -2,6 +2,8 @@
 
 global $lang;
 
+$lang['en_GB']['EditableOption']['Title'] = 'Title';
+$lang['en_GB']['EditableOption']['Value'] = 'Value';
 $lang['en_US']['CustomRule.ss']['BLANK'] = 'Blank';
 $lang['en_US']['CustomRule.ss']['DELETE'] = 'Delete';
 $lang['en_US']['CustomRule.ss']['GREATERTHAN'] = 'Value Greater Than';

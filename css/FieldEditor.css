@@ -115,7 +115,14 @@
 				#Fields_fields .EditableFormField .extraOptions a {
 					background: none;
 				}
+				#Fields_fields .EditableFormField .extraOptions label {
+					font-size: 11px;
+					line-height: 14px;
+					padding: 5px 5px 3px 10px;
+					float: left;
+				}
 				#Fields_fields .EditableFormField .extraOptions input {
+					margin-top: 2px;
 					font-size: 11px;
 					padding: 2px;
 					float: left;
