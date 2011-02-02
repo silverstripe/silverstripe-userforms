@@ -738,7 +738,6 @@ JS
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
 				if($recipient->SendEmailToField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
-					//print_r($submittedFormField); die();
 					if($submittedFormField) {
 						if ($submittedFormField->EmailAddresses && is_array($submittedFormField->EmailAddresses))
 							$email->setTo(implode(', ', $submittedFormField->EmailAddresses));	
