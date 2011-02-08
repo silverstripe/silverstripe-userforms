@@ -242,7 +242,7 @@ class EditableFormField extends DataObject {
 	 * @return TextField
 	 */
 	function TitleField() {
-		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), Convert::raw2att($this->Title));
+		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->Title);
 		$field->setName($this->getFieldName('Title'));
 		
 		if(!$this->canEdit()) {
