@@ -242,14 +242,20 @@ class EditableFormField extends DataObject {
 	 * @return TextField
 	 */
 	function TitleField() {
-		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->Title);
+		//do not XML escape the title field here, because that would result in a recursive escaping of the escaped text on every save
+		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->getField('Title'));
 		$field->setName($this->getFieldName('Title'));
-		
+
 		if(!$this->canEdit()) {
 			return $field->performReadonlyTransformation();
 		}
-		
+
 		return $field;
+	}
+
+	/** Returns the Title for rendering in the front-end (with XML values escaped) */
+	function getTitle() {
+		return Convert::raw2att($this->getField('Title'));
 	}
 
 	/**
