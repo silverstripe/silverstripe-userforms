@@ -116,11 +116,13 @@
 
 						<a href="#" class="deleteCondition" title="<% _t('DELETE', 'Delete') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete') %>" /></a>
 					</li>
-					<% control CustomRules %>
-						<li>
-							<% include CustomRule %>
-						</li>
-					<% end_control %>
+					<% if CustomRules %>
+						<% control CustomRules %>
+							<li>
+								<% include CustomRule %>
+							</li>
+						<% end_control %>
+					<% end_if %>
 				</ul>
 			</fieldset>
 		</div>

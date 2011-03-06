@@ -23,6 +23,6 @@
 	<option value="ValueGreaterThanEqual" <% if ConditionOption = ValueGreaterThanEqual %>selected="selected"<% end_if %>><% _t('GREATERTHANEQUAL', 'Value Greater Than Or Equal') %></option>
 </select>
 
-<input type="text" class="ruleValue <% if Value %><% else %>hidden<% end_if %> customRuleField" name="{$FieldName}[CustomRules][$Pos][Value]" value="$Value" />
+<input type="text" class="ruleValue <% if ConditionOption %><% if ConditionOption = IsBlank %>hidden<% else_if ConditionOption = IsNotBlank %>hidden<% end_if %><% else %>hidden<% end_if %> customRuleField" name="{$FieldName}[CustomRules][$Pos][Value]" value="$Value" />
 
 <a href="#" class="deleteCondition" title="<% _t('DELETE', 'Delete') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete') %>" /></a>

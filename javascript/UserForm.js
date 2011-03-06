@@ -296,11 +296,11 @@
 			statusMessage(userforms.message('REMOVED_OPTION'));
 			return false;
 		});
-		
+
 		/**
 		 * Custom Rules Interface
 		 */
-		$(".customRules .conditionOption").live('change',function(){
+		$("body").delegate("select.conditionOption", 'change', function() {
 			var valueInput = $(this).siblings(".ruleValue");
 			
 			if($(this).val() && $(this).val() !== "IsBlank" && $(this).val() !== "IsNotBlank") {
