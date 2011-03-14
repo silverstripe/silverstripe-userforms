@@ -1,7 +1,7 @@
 <h1>$Subject</h1>
 $Body
 
-<% if HideFormData = 1 %>
+<% if HideFormData %>
 <% else %>
 	<dl>
 		<% control Fields %>
