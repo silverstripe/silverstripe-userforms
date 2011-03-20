@@ -121,7 +121,8 @@ UserDefinedForm:
     custom-rules-form:
         Title: Custom Rules Form
         Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
-        
+    empty-form:
+        Title: Empty Form
         
         
         

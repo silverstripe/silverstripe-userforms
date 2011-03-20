@@ -110,10 +110,15 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$field->write();
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
-		
 		$fields = $controller->getFormFields();
 
 		$this->assertEquals($fields->First()->RightTitle(), "Right Title");
+		
+		// test empty form
+		$emptyForm = $this->objFromFixture('UserDefinedForm', 'empty-form');
+		$controller = new UserDefinedFormControllerTest_Controller($emptyForm);
+		
+		$this->assertFalse($controller->Form());
 	}
 	
 	function testGetFormActions() {
@@ -213,7 +218,8 @@ class UserDefinedFormControllerTest_Controller extends UserDefinedForM_Controlle
 	 */
 	function Form() {
 		$form = parent::Form();
-		$form->disableSecurityToken();
+		
+		if($form) $form->disableSecurityToken();
 		
 		return $form;
 	}
