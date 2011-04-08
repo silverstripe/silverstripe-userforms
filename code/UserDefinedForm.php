@@ -324,14 +324,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * @return Array
 	 */
 	public function index() {
-		if($content = $this->Content) {
-			$hasLocation = stristr($content, '$UserDefinedForm');
-			
+		if($this->Content && $form = $this->Form()) {
+			$hasLocation = stristr($this->Content, '$UserDefinedForm');
 			if($hasLocation) {
-				$replace = ($form = $this->Form()) ? $form->forTemplate() : "";
-				
-				$content = str_ireplace('$UserDefinedForm', $replace, $content);
-				
+				$content = str_ireplace('$UserDefinedForm', $form->forTemplate(), $this->Content);
 				return array(
 					'Content' => DBField::create('HTMLText', $content),
 					'Form' => ""
@@ -353,7 +349,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	function Form() {
 		$fields = $this->getFormFields();
-		if(!$fields || !$fields->exists()) return false;
+		if(!$fields) return false;
 		
 		$actions = $this->getFormActions();
 		
@@ -364,6 +360,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$this->generateConditionalJavascript();
 		
 		$form = new Form($this, "Form", $fields, $actions, $required);
+		
+		$data = Session::get("FormInfo.{$form->FormName()}.data");
+		
+		if(is_array($data)) $form->loadDataFrom($data);
 		
 		$this->extend('updateForm', $form);
 		
@@ -642,6 +642,29 @@ JS
 	 * @return Redirection
 	 */
 	function process($data, $form) {
+	
+		if($this->Fields()) {
+			Session::set("FormInfo.{$form->FormName()}.data",$data);	
+			Session::clear("FormInfo.{$form->FormName()}.errors");
+			foreach($this->Fields() as $field) {
+				$messages[$field->Name] = $field->getErrorMessage()->HTML();
+				
+				if($field->Required){
+					if( !isset($data[$field->Name]) ||
+						!$data[$field->Name] ||
+						!$field->getFormField()->validate($this->validator)
+					){
+						$form->addErrorMessage($field->Name,$field->getErrorMessage()->HTML(),'bad');
+					}
+		
+				}				
+			}
+			
+			if(Session::get("FormInfo.{$form->FormName()}.errors")){
+				Director::redirectBack();
+  				return;
+			}
+		}
 		
 		$submittedForm = Object::create('SubmittedForm');
 		$submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
@@ -757,6 +780,9 @@ JS
 				}
 			}
 		}
+		
+		Session::clear("FormInfo.{$form->FormName()}.errors");
+		Session::clear("FormInfo.{$form->FormName()}.data");
 		
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 		
