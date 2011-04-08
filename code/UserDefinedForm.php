@@ -643,27 +643,24 @@ JS
 	 */
 	function process($data, $form) {
 	
-		if($this->Fields()) {
-			Session::set("FormInfo.{$form->FormName()}.data",$data);	
-			Session::clear("FormInfo.{$form->FormName()}.errors");
-			foreach($this->Fields() as $field) {
-				$messages[$field->Name] = $field->getErrorMessage()->HTML();
+		Session::set("FormInfo.{$form->FormName()}.data",$data);	
+		Session::clear("FormInfo.{$form->FormName()}.errors");
+		foreach($this->Fields() as $field) {
+			$messages[$field->Name] = $field->getErrorMessage()->HTML();
 				
-				if($field->Required){
-					if( !isset($data[$field->Name]) ||
-						!$data[$field->Name] ||
-						!$field->getFormField()->validate($this->validator)
-					){
-						$form->addErrorMessage($field->Name,$field->getErrorMessage()->HTML(),'bad');
-					}
+			if($field->Required){
+				if(	!isset($data[$field->Name]) ||
+					!$data[$field->Name] ||
+					!$field->getFormField()->validate($this->validator)
+				){
+					$form->addErrorMessage($field->Name,$field->getErrorMessage()->HTML(),'bad');
+				}
+			}
+		}
 		
-				}				
-			}
-			
-			if(Session::get("FormInfo.{$form->FormName()}.errors")){
-				Director::redirectBack();
-  				return;
-			}
+		if(Session::get("FormInfo.{$form->FormName()}.errors")){
+			Director::redirectBack();
+			return;
 		}
 		
 		$submittedForm = Object::create('SubmittedForm');
