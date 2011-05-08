@@ -38,3 +38,9 @@ Will Rossiter (Nickname: wrossiter, willr) `<will (at) silverstripe (dot) com>`
 We undertook some major API changes. To help you migrate from 0.1 to 0.2 we have included a build task which you can run which will go through your installed forms and rebuilt them with the new 0.2 datamodel.
 
 To run this build task you visit the url `/dev/tasks/UserFormsMigrationTask`
+
+## Thanks
+
+I would like to thank everyone who has contributed to the module, bug fixers, testers and everyone that submits new features.
+
+A big thanks goes out to [Jan Düsedau](http://eformation.de) for drawing the custom icon set for the form fields.
