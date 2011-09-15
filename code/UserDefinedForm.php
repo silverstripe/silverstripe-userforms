@@ -680,6 +680,7 @@ JS
 						// create the file from post data
 						$upload = new Upload();
 						$file = new File();
+						$file->ShowInSearch = 0;
 						
 						$upload->loadIntoFile($_FILES[$field->Name], $file);
 
