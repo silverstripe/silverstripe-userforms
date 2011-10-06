@@ -455,14 +455,75 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 				$messages[$field->Name] = $field->getErrorMessage()->HTML();
-				
+				/**
+                                 * Dependency defaults to a:0:{}
+                                 * So, escape it temporary solution, to have the custom rule not fubar the validation.
+                                 * 
+                                 * @todo implement that will more gracefully drive the user nuts.
+                                 */
 				if($field->Required) {
+                                    if($field->CustomRules != 'a:0:{}'){
+                                        $Rules = unserialize($field->CustomRules);
+                                        foreach($Rules as $rule){
+                                            // is this field a special option field
+                                            $formFieldWatch = DataObject::get_one("EditableFormField", "\"Name\" = '".$rule['ConditionField']."'");
+                                            $checkboxField = false;
+                                            if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
+                                                    $action = "click";
+                                                    $checkboxField = true;
+                                            }
+                                                switch($rule['ConditionOption']) {
+                                                        case 'IsNotBlank':
+                                                                $expression = ($checkboxField) ? '$("#Form_Form_'.$rule['ConditionField'].'").attr("checked")' : '$("#Form_Form_'.$rule['ConditionField'].'").val() != ""';
+
+                                                                break;
+                                                        case 'IsBlank':
+                                                                $expression = ($checkboxField) ? '!($("#Form_Form_'.$rule['ConditionField'].'").attr("checked"))' : '$("#Form_Form_'.$rule['ConditionField'].'").val() == ""';
+
+                                                                break;
+                                                        case 'HasValue':
+                                                                $expression = ($checkboxField) ? '$("#Form_Form_'.$rule['ConditionField'].'").attr("checked")' : '$("#Form_Form_'.$rule['ConditionField'].'").val() == "'. $dependency['Value'] .'"';
+
+                                                                break;
+                                                        case 'ValueLessThan':
+                                                                $expression = '$("#Form_Form_'.$rule['ConditionField'].'").val() < parseFloat("'. $dependency['Value'] .'")';
+
+                                                                break;
+                                                        case 'ValueLessThanEqual':
+                                                                $expression = '$("#Form_Form_'.$rule['ConditionField'].'").val() <= parseFloat("'. $dependency['Value'] .'")';
+
+                                                                break;
+                                                        case 'ValueGreaterThan':
+                                                                $expression = '$("#Form_Form_'.$rule['ConditionField'].'").val() > parseFloat("'. $dependency['Value'] .'")';
+
+                                                                break;
+                                                        case 'ValueGreaterThanEqual':
+                                                                $expression = '$("#Form_Form_'.$rule['ConditionField'].'").val() >= parseFloat("'. $dependency['Value'] .'")';
+
+                                                                break;	
+                                                        default:
+                                                                $expression = ($checkboxField) ? '!($("#Form_Form_'.$rule['ConditionField'].'").attr("checked"))' : '$("#Form_Form_'.$rule['ConditionField'].'").val() != "'. $dependency['Value'] .'"';
+
+                                                                break;
+                                                }
+                                                $rules[$field->Name] = array_merge(
+                                                        array(
+                                                            'required' => 'function(element){ return ('. $expression .');}',
+                                                        ),
+                                                        $field->getValidation()
+                                                    );
+                                        }
+                                    }
+                                    else {
 					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
 					$required->addRequiredField($field->Name);
+                                    }
 				}
+                                else{
+                                    $field->Required = 0;
+                                }
 			}
-		}
-		
+		}		
 		// Set the Form Name
 		$rules = $this->array2json($rules);
 		$messages = $this->array2json($messages);
@@ -628,8 +689,13 @@ JS
 			if(is_array( $value )) {
 				$result[] = "$key:" . $this->array2json($value);
 			} else {
+				/**
+				 * Little 'ugly' fix to skip functions to be quoted
+				 */
+                            if(!(substr($value, 0, 8) == 'function')){
 				$value = (is_bool($value)) ? $value : "\"$value\"";
-				$result[] = "$key:$value";
+                            }
+                            $result[] = "$key:$value";
 			}
 		return (isset($result)) ? "{\n".implode( ', ', $result ) ."\n}\n": '{}';
 	}
