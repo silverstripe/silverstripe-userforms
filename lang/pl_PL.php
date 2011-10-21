@@ -124,5 +124,110 @@ $lang['pl_PL']['UserDefinedForm']['SUBMISSIONS'] = 'Zgłoszenia';
 $lang['pl_PL']['UserDefinedForm']['SUBMIT'] = 'Wyślij';
 $lang['pl_PL']['UserDefinedForm']['TEXTONSUBMIT'] = 'Napis na przycisku \'submit\':';
 $lang['pl_PL']['UserDefinedForm_SubmittedFormEmail']['EMAILSUBJECT'] = 'Wysyłanie formularza';
-
+$lang['pl_PL']['EditableFormField.ss']['SHOWOPTIONS'] = 'Pokaż opcje';
+$lang['pl_PL']['EditableFormField.ss']['OPTIONS'] = 'Opcje';
+$lang['pl_PL']['UserDefinedForm']['EMAILRECIPIENTS'] = 'Odbiorcy Email';
+$lang['pl_PL']['EditableFormField.ss']['FIELDCONFIGURATION'] = 'Konfiguracja pola';
+$lang['pl_PL']['EditableFormField']['DEFAULTTOTODAY'] = 'Ustawić na dzisiaj?';
+$lang['pl_PL']['EditableFormField.ss']['VALIDATION'] = 'Sprawdzanie poprawności';
+$lang['pl_PL']['EditableFormField']['CUSTOMERROR'] = 'Własna wiadomość błędu';
+$lang['pl_PL']['EditableFormField.ss']['CUSTOMRULES'] = 'Własne warunki';
+$lang['pl_PL']['EditableFormField.ss']['ADDRULE'] = 'Dodaj warunek';
+$lang['pl_PL']['EditableFormField.ss']['FIELDONDEFAULT'] = 'pole domyślnie';
+$lang['pl_PL']['EditableFormField.ss']['HIDE'] = 'Ukryj';
+$lang['pl_PL']['EditableOption']['Title'] = 'Tytuł';
+$lang['pl_PL']['EditableOption']['Value'] = 'Wartość';
+$lang['pl_PL']['CustomRule.ss']['SHOWTHISFIELD'] = 'Pokaż to pole';
+$lang['pl_PL']['CustomRule.ss']['WHEN'] = 'kiedy';
+$lang['pl_PL']['CustomRule.ss']['IS'] = 'jest';
+$lang['pl_PL']['CustomRule.ss']['BLANK'] = 'Blank';
+$lang['pl_PL']['CustomRule.ss']['NOTBLANK'] = 'Not Blank';
+$lang['pl_PL']['CustomRule.ss']['GREATERTHAN'] = 'wartość większa niż';
+$lang['pl_PL']['CustomRule.ss']['GREATERTHANEQUAL'] = 'wartość większa lub równa';
+$lang['pl_PL']['CustomRule.ss']['LESSTHAN'] = 'wartość mniejsza niż';
+$lang['pl_PL']['CustomRule.ss']['LESSTHANEQUAL'] = 'wartość mniejsza lub równa';
+$lang['pl_PL']['CustomRule.ss']['NOTVALUE'] = 'nie wartością';
+$lang['pl_PL']['CustomRule.ss']['VALUE'] = 'wartością';
+$lang['pl_PL']['FieldEditor.ss']['SELECTAFIELD'] = 'Wybierz pole';
+$lang['pl_PL']['EditableCheckbox']['PLURALNAME'] = array(
+	'Pola wyboru',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableCheckbox']['SINGULARNAME'] = array(
+	'Pole wyboru',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableCheckboxGroupField']['PLURALNAME'] = array(
+	'Grupa pól wyboru',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableCheckboxGroupField']['SINGULARNAME'] = array(
+	'Grupa pola wyboru',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableDateField']['PLURALNAME'] = array(
+	'Pola daty',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableDateField']['SINGULARNAME'] = array(
+	'Pole daty',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableDropdown']['PLURALNAME'] = array(
+	'Listy rozwijane',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableDropdown']['SINGULARNAME'] = array(
+	'Lista rozwijana',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableEmailField']['PLURALNAME'] = array(
+	'Pola Email',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableEmailField']['SINGULARNAME'] = array(
+	'Pole Email',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableFileField']['PLURALNAME'] = array(
+	'Pola uploadu pliku',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableFileField']['SINGULARNAME'] = array(
+	'Pole uploadu pliku',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableRadioField']['PLURALNAME'] = array(
+	'Pola przełączania opcji',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableRadioField']['SINGULARNAME'] = array(
+	'Pole przełączania opcji',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
+$lang['pl_PL']['EditableTextField']['NUMBERROWS'] = 'Number of rows';
+$lang['pl_PL']['EditableTextField']['PLURALNAME'] = array(
+	'Pola tekstu',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['pl_PL']['EditableTextField']['SINGULARNAME'] = array(
+	'Pole tekstu',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
 ?>
