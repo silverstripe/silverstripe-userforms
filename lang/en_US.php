@@ -35,6 +35,16 @@ $lang['en_US']['EditableCheckboxGroupField']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
+$lang['en_US']['EditableCountryDropdownField']['PLURALNAME'] = array(
+	'Country Dropdowns',
+	50,
+	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
+);
+$lang['en_US']['EditableCountryDropdownField']['SINGULARNAME'] = array(
+	'Country Dropdown',
+	50,
+	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
+);
 $lang['en_US']['EditableDateField']['PLURALNAME'] = array(
 	'Date Fields',
 	50,
