@@ -1,8 +1,8 @@
 <select class="displayOption customRuleField" name="{$FieldName}[CustomRules][$Pos][Display]">
 	<option value="Show" <% if Display = Show %>selected="selected"<% end_if %>><% _t('SHOWTHISFIELD', 'Show This Field') %></option>
-	<option value="Hide" <% if Display = Hide %><% if First %><% else %>selected="selected"<% end_if %><% end_if %>><% _t('HIDETHISFIELD', 'Hide This Field') %></option>
+	<option value="Hide" <% if Display = Hide %>selected="selected"<% end_if %>><% _t('HIDETHISFIELD', 'Hide This Field') %></option>
 </select>
-
+	
 <label><% _t('WHEN', 'When') %></label>
 <select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][$Pos][ConditionField]">
 	<option value="" selected="selected"></option>
