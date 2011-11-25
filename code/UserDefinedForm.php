@@ -714,7 +714,7 @@ JS
 			if($attachments){
 				foreach($attachments as $file){
 					if($file->ID != 0) {
-						$email->attachFile($file->Filename,$file->Filename, $file->getFileType());
+						$email->attachFile($file->Filename,$file->Filename, HTTP::getMimeType($file->Filename));
 					}
 				}
 			}
