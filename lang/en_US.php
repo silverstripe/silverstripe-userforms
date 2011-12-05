@@ -140,6 +140,7 @@ $lang['en_US']['EditableFormHeading']['SINGULARNAME'] = array(
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
+$lang['en_US']['EditableLiteralField']['HIDEFROMREPORT'] = 'Hide from reports?';
 $lang['en_US']['EditableLiteralField']['PLURALNAME'] = array(
 	'HTML Blocks',
 	50,
@@ -195,12 +196,12 @@ $lang['en_US']['EditableRadioField']['SINGULARNAME'] = array(
 );
 $lang['en_US']['EditableTextField']['NUMBERROWS'] = 'Number of rows';
 $lang['en_US']['EditableTextField']['PLURALNAME'] = array(
-	'Text fields',
+	'Text Fields',
 	50,
 	'Pural name of the object, used in dropdowns and to generally identify a collection of this object in the interface'
 );
 $lang['en_US']['EditableTextField']['SINGULARNAME'] = array(
-	'Text field',
+	'Text Field',
 	50,
 	'Singular name of the object, used in dropdowns and to generally identify a single object in the interface'
 );
