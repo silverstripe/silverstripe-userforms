@@ -85,9 +85,12 @@
 		};
 		
 		/**
-		 * Workaround for not refreshing the sort
+		 * Workaround for not refreshing the sort.
+		 * 
+		 * TODO: better solution would to not fire this on every hover but needs to
+		 *		ensure it doesn't have edge cases. The sledge hammer approach.
 		 */
-		$(".fieldHandler").live('hover', function() {
+		$(".fieldHandler, .handle").live('hover', function() {
 			userforms.update();
 		});
 		
