@@ -9,9 +9,9 @@
 
 class EditableTextField extends EditableFormField {
 
-	static $singular_name = 'Text field';
+	static $singular_name = 'Text Field';
 	
-	static $plural_name = 'Text fields';
+	static $plural_name = 'Text Fields';
 	
 	function getFieldConfiguration() {
 		$fields = parent::getFieldConfiguration();
