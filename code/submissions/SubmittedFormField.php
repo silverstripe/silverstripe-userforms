@@ -25,6 +25,6 @@ class SubmittedFormField extends DataObject {
 	 * @return String
 	 */
 	function getFormattedValue() {
-		return nl2br($this->dbObject('Value')->RAW());
+		return nl2br($this->dbObject('Value')->ATT());
 	}
 }

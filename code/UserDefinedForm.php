@@ -659,11 +659,10 @@ JS
 			
 			if(!$field->showInReports()) continue;
 			
-			// create a new submitted form field.
 			$submittedField = $field->getSubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
 			$submittedField->Name = $field->Name;
-			$submittedField->Title = $field->Title;
+			$submittedField->Title = $field->getField('Title');
 			
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
@@ -696,7 +695,7 @@ JS
 			}
 			
 			if(!$this->DisableSaveSubmissions) $submittedField->write();
-			
+	
 			$submittedFields->push($submittedField);
 		}
 		
