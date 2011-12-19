@@ -405,6 +405,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 					}
 				}
 				
+				// set the values passed by the url to the field
+				$request = $this->getRequest();
+				$value = $request->getVar( $field->name );
+				if( isset( $value ) ) $field->value = $value;
+				
 				$fields->push($field);
 			}
 		}
