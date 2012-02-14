@@ -1,4 +1,5 @@
 <% require css(userforms/css/FieldEditor.css) %>
+<% require javascript(sapphire/thirdparty/jquery-ui/jquery-ui.custom.js) %> 
 <% require javascript(sapphire/thirdparty/jquery-ui/jquery-ui-1.8rc3.custom.js) %>
 <% require javascript(userforms/javascript/UserForm.js) %>
 
