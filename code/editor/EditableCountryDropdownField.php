@@ -12,7 +12,7 @@ class EditableCountryDropdownField extends EditableFormField {
 	static $plural_name = 'Country Dropdowns';
 	
 	public function getFormField() {
-		return new DropdownField($this->Name, $this->Title, Geoip::getCountryDropDown());
+		return new CountryDropdownField($this->Name, $this->Title);
 	}
 	
 	public function getValueFromData($data) {
