@@ -110,9 +110,9 @@ class EditableMultipleOptionField extends EditableFormField {
 		// get the current options
 		$fieldSet = $this->Options();
 
-		// go over all the current options and check if ID and Title still exists
+		// go over all the current options and check if ID, Value and Title still exists
 		foreach($fieldSet as $option) {
-			if(isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
+			if(isset($data[$option->ID]) && isset($data[$option->ID]['Value']) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
 				$option->populateFromPostData($data[$option->ID]);
 			}
 			else {
@@ -139,5 +139,78 @@ class EditableMultipleOptionField extends EditableFormField {
 	 */
 	public function getFormField() {
 		return user_error('Please implement getFormField() on '. $this->class, E_USER_ERROR);
+	}
+	
+	/**
+	 * returns a Set of EditableOption Objects for the given entries
+	 * 
+	 * @param array|string $entries
+	 * @uses getOptionFromValueString($value)
+	 * @return DataObjectSet
+	 */
+	function getOptionsFromDataEntries($entries) {
+		$entries = (is_array($entries)) ? $entries : array($entries);
+		$Options = new DataObjectSet();
+		if ($entries) foreach($entries as $value) {
+			$Option = $this->getOptionFromValueString($value);
+			if ($Option) $Options->push($Option);
+		}
+		return $Options;
+	}
+	
+	/**
+	 * returns a EditableOption Object for the given String
+	 * 
+	 * @param string $value (when calling from getValueFromData() it will mostlikely be $data[$this->Name])
+	 * @return EditableOption|boolean
+	 */
+	function getOptionFromValueString($value) {
+		$parts = explode('-', $value, 3);
+		$classString = Convert::raw2sql($parts[0]);
+		$id = (int)$parts[1];
+		if ($classString == 'EditableOption' || (ClassInfo::exists($classString) && ClassInfo::is_subclass_of($classString, 'EditableOption'))) {
+			$Option = DataObject::get_by_id($classString, $id);
+			if ($Option) return $Option;	
+		}	
+		return false;
+	}
+	
+	/**
+	 * Loops thorugh all EditableOptions and returns a array of all valid Email Adresses that could be found in EditableOption->Value
+	 * @param string|array $data
+	 * @return array
+	 */
+	function getEmailAddressesFromData($data) {
+		$EmailAddresses = array();
+		$pcrePattern = '^[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$';
+		if (isset($data[$this->Name])) {
+			$Options = $this->getOptionsFromDataEntries($data[$this->Name]);
+			if ($Options) foreach($Options as $Option) {
+					$adress = trim($Option->Value);
+					// PHP uses forward slash (/) to delimit start/end of pattern, so it must be escaped
+					$pregSafePattern = str_replace('/', '\\/', $pcrePattern);
+					if($adress && preg_match('/' . $pregSafePattern . '/i', $adress))
+						$EmailAddresses[] = $adress;
+			}
+		}
+		return $EmailAddresses;
+	}
+	
+	/**
+	 * Will return all Options as string like this: <code>Option1 (Option1 Value), Option2 (Option2 Value)</code>
+	 * @param array $data
+	 * @return string|boolean
+	 */
+	function getValueFromData($data) {
+		if (isset($data[$this->Name])) {
+			$Options = $this->getOptionsFromDataEntries($data[$this->Name]);
+			$Result = '';
+			if ($Options) foreach($Options as $Option) {
+				if ($Result) $Result .= ", ";
+				$Result .= "{$Option->Title} ({$Option->Value})";
+			}
+			return $Result;
+		}
+		return false;
 	}
 }

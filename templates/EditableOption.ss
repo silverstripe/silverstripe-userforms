@@ -1,6 +1,8 @@
 <li>
 	<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of options') %>" />
-	<input type="text" name="{$FieldName}[Title]" value="$Title" />
+	
+	<label for="{$FieldName}[Title]"><% _t('EditableOption.Title', 'Title') %></label> $TitleField
+	<label for="{$FieldName}[Value]"><% _t('EditableOption.Value', 'Value') %></label> $ValueField
 	<input type="hidden" class="sortOptionHidden hidden" name="{$FieldName}[Sort]" value="$Sort" />
 	
 	<% if canEdit %>

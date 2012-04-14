@@ -16,6 +16,8 @@ if(array_key_exists('en_GB', $lang) && is_array($lang['en_GB'])) {
 	$lang['en_GB'] = $lang['en_US'];
 }
 
+$lang['en_GB']['EditableOption']['Title'] = 'Title';
+$lang['en_GB']['EditableOption']['Value'] = 'Value';
 $lang['en_GB']['EditableCheckbox']['ANY'] = 'Any';
 $lang['en_GB']['EditableCheckbox']['NOTSELECTED'] = 'Not selected';
 $lang['en_GB']['EditableCheckbox']['SELECTED'] = 'Selected';

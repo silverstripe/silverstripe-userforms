@@ -52,7 +52,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var Array
 	 */
-	static $has_many = array( 
+	static $has_many = array(
 		"Fields" => "EditableFormField",
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
@@ -689,6 +689,12 @@ JS
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->getField('Title');
 			
+			if ($field->hasMethod('getEmailAddressesFromData'))
+				$submittedField->EmailAddresses = $field->getEmailAddressesFromData($data);
+			else 
+				$submittedField->EmailAddresses = false;
+	
+			
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
 				$submittedField->Value = $field->getValueFromData($data);
@@ -761,9 +767,11 @@ JS
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
 				if($recipient->SendEmailToField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
-					
 					if($submittedFormField) {
-						$email->setTo($submittedFormField->Value);	
+						if ($submittedFormField->EmailAddresses && is_array($submittedFormField->EmailAddresses))
+							$email->setTo(implode(', ', $submittedFormField->EmailAddresses));	
+						else
+							$email->setTo($submittedFormField->Value);	
 					}
 				}
 				
@@ -839,40 +847,85 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getCMSFields_forPopup() {
+		$validEmailFields = false;
+		$multiOptionFields = false;
+		if($this->Form()) {
+			$validEmailFields = DataObject::get("EditableEmailField", "\"ParentID\" = '" . (int)$this->FormID . "'");
+			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "\"ParentID\" = '" . (int)$this->FormID . "'");
+		}
 		
 		$fields = new FieldSet(
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
-			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send Email From')),
-			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
 			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide Form Data from Email')),
 			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
 			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body'))
 		);
 		
-		if($this->Form()) {
-			$validEmailFields = DataObject::get("EditableEmailField", "\"ParentID\" = '" . (int)$this->FormID . "'");
-			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "\"ParentID\" = '" . (int)$this->FormID . "'");
-			
-			// if they have email fields then we could send from it
-			if($validEmailFields) {
-				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'), $validEmailFields->toDropdownMap('ID', 'Title'), '', null,""), 'EmailFrom');
+		/**
+		 * @todo <admin@zauberfisch.at> i failed at using customCSS and anything else, whoever knows how to, i would love to hear how to 
+		 */
+		$customCSS = '<style>	
+			form #EmailAddressContainer,
+			form #EmailFromContainer {
+				margin-left: 0;
 			}
-			
-			// if they have multiple options
-			if($multiOptionFields || $validEmailFields) {
+				form #EmailAddressContainer > div,
+				form #EmailFromContainer > div {
+					width: 240px;
+					float: left;
+					clear: none;
+				}
+					form #EmailAddressContainer > div#SendEmailToFieldID,
+					form #EmailFromContainer > div#SendEmailFromFieldID {
+						width: 275px;
+					}
+					form #EmailAddressContainer label.left,
+					form #EmailFromContainer label.left {
+						float: none;
+						margin-left: 0;
+						width: 100%;
+					}
+					form #EmailAddressContainer input,
+					form #EmailFromContainer input,
+					form #EmailAddressContainer select,
+					form #EmailFromContainer select {
+						width: 97%;
+					}
+		</style>';
+		$fields->push(new LiteralField('customCSS', $customCSS));
 
-				if($multiOptionFields && $validEmailFields) {
-					$multiOptionFields->merge($validEmailFields);
-					
-				}
-				elseif(!$multiOptionFields) {
-					$multiOptionFields = $validEmailFields;	
-				}
-				
-				$multiOptionFields = $multiOptionFields->toDropdownMap('ID', 'Title');
-				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""), 'EmailAddress');
-			}
+		$TextField = new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send Email From'));
+		if($validEmailFields) {
+			// if they have email fields then we could send from it
+			$Field = new CompositeField(
+				$TextField,
+				new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'), $validEmailFields->toDropdownMap('ID', 'Title'), '', null,""),
+				new LiteralField('EmailFromContainerClear', '<div style="clear: both;"><!-- --></div>')
+			);
+			$Field->setID('EmailFromContainer');
+		} else {
+			$Field = $TextField;
 		}
+		$fields->insertAfter($Field, 'EmailSubject');
+		
+		$TextField = new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To'));
+		if($multiOptionFields || $validEmailFields) {
+			// if they have multiple options
+			if($multiOptionFields && $validEmailFields)
+				$multiOptionFields->merge($validEmailFields);
+			elseif(!$multiOptionFields)
+				$multiOptionFields = $validEmailFields;	
+			$multiOptionFields = $multiOptionFields->toDropdownMap('ID', 'Title');
+			$Field = new CompositeField(
+				$TextField,
+				new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""),
+				new LiteralField('EmailAddressContainerClear', '<div style="clear: both;"><!-- --></div>')
+			);
+			$Field->setID('EmailAddressContainer');
+		} else {
+			$Field = $TextField;
+		}
+		$fields->insertAfter($Field, 'EmailSubject');
 
 		return $fields;
 	}

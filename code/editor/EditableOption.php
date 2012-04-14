@@ -14,6 +14,7 @@ class EditableOption extends DataObject {
 	static $db = array(
 		"Name" => "Varchar(255)",
 		"Title" => "Varchar(255)",
+		"Value" => "Varchar(255)",
 		"Default" => "Boolean",
 		"Sort" => "Int"
 	);
@@ -39,8 +40,18 @@ class EditableOption extends DataObject {
 	 * @return FormField
 	 */
 	public function TitleField() {
-		return new TextField("Fields[{$this->ParentID}][{$this->ID}][Title]", null, $this->Title );
+		return new TextField($this->FieldName()."[Title]", null, $this->Title );
 	}
+
+	/**
+	 * The Value Field for this object
+	 * 
+	 * @return FormField
+	 */
+	public function ValueField() {
+		return new TextField($this->FieldName()."[Value]", null, $this->Value );
+	}
+	
 
 	/**
 	 * Name of this field in the form
@@ -58,6 +69,7 @@ class EditableOption extends DataObject {
 	 */
 	public function populateFromPostData($data) {
 		$this->Title = (isset($data['Title'])) ? $data['Title'] : "";
+		$this->Value = (isset($data['Value'])) ? $data['Value'] : "";
 		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
 		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : 0;
 		$this->write();
