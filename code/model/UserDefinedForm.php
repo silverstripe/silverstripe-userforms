@@ -469,6 +469,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 					$("#Form_Form").validate({
 						ignore: [':hidden'],
 						errorClass: "required",	
+						errorPlacement: function(error, element) {
+							if(element.is(":radio")) {
+								error.insertAfter(element.closest("ul"));
+							} else {
+								error.insertAfter(element);
+							}
+						},
 						messages:
 							$messages
 						,
