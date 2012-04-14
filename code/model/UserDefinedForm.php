@@ -395,6 +395,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 					}
 				}
 				
+				// if this field has an extra class
+				if($editableField->getSetting('ExtraClass')) {
+					$field->addExtraClass(Convert::raw2att(
+						$editableField->getSetting('ExtraClass')
+					));
+				}
+				
 				// set the values passed by the url to the field
 				$request = $this->getRequest();
 				$value = Convert::raw2att($request->getVar($field->name));
