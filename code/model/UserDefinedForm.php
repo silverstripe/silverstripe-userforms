@@ -345,7 +345,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		// get the required fields including the validation
 		$required = $this->getRequiredFields();
-		
+
 		// generate the conditional logic 
 		$this->generateConditionalJavascript();
 		
@@ -445,8 +445,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 				$messages[$field->Name] = $field->getErrorMessage()->HTML();
-				
-				if($field->Required) {
+	
+				if($field->Required && $field->CustomRules()->Count() == 0) {
 					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
 					$required->addRequiredField($field->Name);
 				}
@@ -462,6 +462,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			(function($) {
 				$(document).ready(function() {
 					$("#Form_Form").validate({
+						ignore: [':hidden'],
 						errorClass: "required",	
 						messages:
 							$messages
@@ -632,13 +633,13 @@ JS
 	 * @return Redirection
 	 */
 	function process($data, $form) {
-	
 		Session::set("FormInfo.{$form->FormName()}.data",$data);	
 		Session::clear("FormInfo.{$form->FormName()}.errors");
+		
 		foreach($this->Fields() as $field) {
 			$messages[$field->Name] = $field->getErrorMessage()->HTML();
 				
-			if($field->Required){
+			if($field->Required && $field->CustomRules()->Count() == 0) {
 				if(	!isset($data[$field->Name]) ||
 					!$data[$field->Name] ||
 					!$field->getFormField()->validate($this->validator)
