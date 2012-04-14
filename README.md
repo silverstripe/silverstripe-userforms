@@ -22,6 +22,7 @@ and without getting involved in any PHP code.
 *  View submitted submissions and export them to CSV
 *  Define custom error messages and validation settings
 *  Optionally display and hide fields using javascript based on users input
+*  Pre fill your form fields, by passing your values by url (http://yoursite.com/formpage?EditableField1=MyValue)
 
 ## Installation
 
