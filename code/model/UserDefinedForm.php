@@ -12,16 +12,6 @@
 class UserDefinedForm extends Page {
 	
 	/**
-	 * @var String Icon for the User Defined Form in the CMS. Without the extension
-	 */
-	static $icon = "cms/images/treeicons/task";
-	
-	/**
-	 * @var String What level permission is needed to edit / add 
-	 */
-	static $need_permission = array('ADMIN');
-
-	/**
 	 * @var String Required Identifier
 	 */
 	static $required_identifier = null;

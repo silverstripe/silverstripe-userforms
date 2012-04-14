@@ -241,7 +241,7 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertEquals($text->getFieldName(), "Fields[". $text->ID ."]");
 		$this->assertEquals($text->getFieldName('Setting'), "Fields[". $text->ID ."][Setting]");
 		
-		$this->assertEquals($text->getSettingFieldName('Foo'), "Fields[". $text->ID ."][CustomSettings][Foo]");
+		$this->assertEquals($text->getSettingName('Foo'), "Fields[". $text->ID ."][CustomSettings][Foo]");
 	}
 	
 	function testMultipleOptionDuplication() {

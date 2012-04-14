@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Base class for multiple option fields such as dropdowns and 
- * radio sets. Implemented as a class but you would not create 
- * one of these directly, rather you would instantiate a subclass
- * such as {@link EditableDropdownField}
+ * Base class for multiple option fields such as {@link EditableDropdownField} 
+ * and radio sets. 
+ * 
+ * Implemented as a class but should be viewed as abstract, you should 
+ * instantiate a subclass such as {@link EditableDropdownField}
+ *
+ * @see EditableCheckboxGroupField
+ * @see EditableDropdownField
  *
  * @package userforms
  */
 
 class EditableMultipleOptionField extends EditableFormField {
-	
-	static $db = array();
-	
-	static $has_one = array();
 	
 	static $has_many = array(
 		"Options" => "EditableOption"
@@ -35,6 +35,7 @@ class EditableMultipleOptionField extends EditableFormField {
 				$option->delete();
 			}
 		}
+		
 		if($this->Options()) {
 			foreach($this->Options() as $option) {
 				$option->publish($fromStage, $toStage, $createNewVersion);
@@ -62,27 +63,28 @@ class EditableMultipleOptionField extends EditableFormField {
 	}
 	
 	/**
-	 * Deletes all the options attached to this field before
-	 * deleting the field. Keeps stray options from floating 
-	 * around
+	 * Deletes all the options attached to this field before deleting the 
+	 * field. Keeps stray options from floating around
 	 *
 	 * @return void
 	 */
 	public function delete() {
   		$options = $this->Options();
+
 		if($options) {
 			foreach($options as $option) {
 				$option->delete();
 			}
 		}
+		
 		parent::delete();   
 	}
 	
 	/**
-	 * Duplicate a pages content. We need to make sure all
-	 * the fields attached to that page go with it
+	 * Duplicate a pages content. We need to make sure all the fields attached 
+	 * to that page go with it
 	 * 
-	 * @return DataObject a Clone of this node
+	 * @return DataObject
 	 */
 	public function duplicate() {
 		$clonedNode = parent::duplicate();
@@ -94,15 +96,15 @@ class EditableMultipleOptionField extends EditableFormField {
 				$newField->write();
 			}
 		}
+		
 		return $clonedNode;
 	}
 	
 	/**
-	 * On before saving this object we need to go through and keep
-	 * an eye on all our option fields that are related to this
-	 * field in the form 
+	 * On before saving this object we need to go through and keep an eye on 
+	 * all our option fields that are related to this field in the form 
 	 * 
-	 * @param Array Data
+	 * @param ArrayData
 	 */
 	public function populateFromPostData($data) {
 		parent::populateFromPostData($data);
@@ -122,8 +124,8 @@ class EditableMultipleOptionField extends EditableFormField {
 	}
 	
 	/**
-	 * Return whether or not this field has addable options
-	 * such as a dropdown field or radio set
+	 * Return whether or not this field has addable options such as a 
+	 * {@link EditableDropdownField} or {@link EditableRadioField}
 	 *
 	 * @return bool
 	 */
@@ -132,8 +134,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	}
 
 	/**
-	 * Return the form field for this object in the front 
-	 * end form view
+	 * Return the form field for this object in the front end form view
 	 *
 	 * @return FormField
 	 */

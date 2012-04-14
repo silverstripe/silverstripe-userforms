@@ -2,7 +2,7 @@
 /**
  * Allows an editor to insert a generic heading into a field
  *
- * @subpackage userforms
+ * @package userforms
  */
 
 class EditableFormHeading extends EditableFormField {
@@ -12,15 +12,28 @@ class EditableFormHeading extends EditableFormField {
 	static $plural_name = 'Headings';
 	
 	function getFieldConfiguration() {
-		$levels = array('1' => '1','2' => '2','3' => '3','4' => '4','5' => '5','6' => '6');
+		$levels = array(
+			'1' => '1',
+			'2' => '2',
+			'3' => '3',
+			'4' => '4',
+			'5' => '5',
+			'6' => '6'
+		);
+		
 		$level = ($this->getSetting('Level')) ? $this->getSetting('Level') : 3;
+		$label = _t('EditableFormHeading.LEVEL', 'Select Heading Level');
 		
 		$options = parent::getFieldConfiguration();
-		$options->push(new DropdownField("Fields[$this->ID][CustomSettings][Level]", _t('EditableFormHeading.LEVEL', 'Select Heading Level'), $levels, $level));
+		
+		$options->push(
+			new DropdownField($this->getSettingName("Level"), $label, $levels, $level)
+		);
 
 		if($this->readonly) {
 			$extraFields = $options->makeReadonly();		
 		}
+		
 		return $options;
 	}
 	

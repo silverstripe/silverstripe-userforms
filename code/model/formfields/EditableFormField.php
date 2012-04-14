@@ -191,8 +191,7 @@ class EditableFormField extends DataObject {
 	}
 	
 	/**
-	 * Return the Custom Validation fields for this
-	 * field for the CMS
+	 * Return the custom validation fields for this field for the CMS
 	 *
 	 * @return array
 	 */
@@ -242,8 +241,9 @@ class EditableFormField extends DataObject {
 	 * @return TextField
 	 */
 	function TitleField() {
-		//do not XML escape the title field here, because that would result in a recursive escaping of the escaped text on every save
-		$field = new TextField('Title', _t('EditableFormField.ENTERQUESTION', 'Enter Question'), $this->getField('Title'));
+		$label = _t('EditableFormField.ENTERQUESTION', 'Enter Question');
+		
+		$field = new TextField('Title', $label, $this->getField('Title'));
 		$field->setName($this->getFieldName('Title'));
 
 		if(!$this->canEdit()) {
@@ -276,7 +276,7 @@ class EditableFormField extends DataObject {
 	 * @param String name of the setting
 	 * @return String
 	 */
-	public function getSettingFieldName($field) {
+	public function getSettingName($field) {
 		$name = $this->getFieldName('CustomSettings');
 		
 		return $name . '[' . $field .']';
@@ -344,7 +344,7 @@ class EditableFormField extends DataObject {
 	public function getFieldConfiguration() {
 		return new FieldSet(
 			new TextField(
-				$this->getSettingFieldName('RightTitle'), 
+				$this->getSettingName('RightTitle'), 
 				_t('EditableFormField.RIGHTTITLE', 'Right Title'), 
 				$this->getSetting('RightTitle')
 			)

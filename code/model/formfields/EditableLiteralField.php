@@ -16,11 +16,11 @@ class EditableLiteralField extends EditableFormField {
 	function getFieldConfiguration() {
 		return new FieldSet(
 			new TextareaField(
-				"Fields[$this->ID][CustomSettings][Content]", 
+				$this->getSettingName('Content'),
 				"HTML", 4, 20, $this->getSetting('Content')
 			),
 			new CheckboxField(
-				"Fields[$this->ID][CustomSettings][HideFromReports]", 
+				$this->getSettingName('HideFromReports'),
 				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?'), 
 				$this->getSetting('HideFromReports')
 			)
@@ -37,10 +37,6 @@ class EditableLiteralField extends EditableFormField {
 	}
 	
 	function showInReports() {
-		if($this->getSetting('HideFromReports')) {
-			return false;
-		}
-		
-		return true;
+		return (!$this->getSetting('HideFromReports'));
 	}
 }

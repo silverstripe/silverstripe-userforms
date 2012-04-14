@@ -2,10 +2,7 @@
 /**
  * EditableDateField
  *
- * Allows a user to add a date field to the Field Editor
- *
- * @todo Localization, Time Field / Date time field combinations. Set ranges of dates,
- * 		set default date
+ * Allows a user to add a date field.
  *
  * @package userforms
  */
@@ -17,10 +14,11 @@ class EditableDateField extends EditableFormField {
 	static $plural_name = 'Date Fields';
 	
 	function getFieldConfiguration() {
-		$defaultToToday = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
+		$default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
+		$label = _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?');
 		
 		return new FieldSet(
-			new CheckboxField("Fields[$this->ID][CustomSettings][DefaultToToday]", _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?'), $defaultToToday)
+			new CheckboxField($this->getSettingName("DefaultToToday"), $label, $default)
 		);
 	}
 	

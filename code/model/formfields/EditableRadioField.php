@@ -13,7 +13,6 @@ class EditableRadioField extends EditableMultipleOptionField {
 	
 	static $plural_name = 'Radio fields';
 	
-
 	function getFormField() {
 		$optionSet = $this->Options();
 		$options = array();

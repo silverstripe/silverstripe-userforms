@@ -1,6 +1,7 @@
 <?php
 /**
  * EditableCheckbox
+ *
  * A user modifiable checkbox on a UserDefinedForm
  * 
  * @package userforms
@@ -15,6 +16,7 @@ class EditableCheckbox extends EditableFormField {
 	public function getFieldConfiguration() {
 		$options = parent::getFieldConfiguration();
 		$options->push(new CheckboxField("Fields[$this->ID][CustomSettings][Default]", _t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?'), $this->getSetting('Default')));
+		
 		return $options;
 	}
 	

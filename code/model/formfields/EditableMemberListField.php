@@ -14,7 +14,9 @@ class EditableMemberListField extends EditableFormField {
 	function getFieldConfiguration() {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
 		$groups = DataObject::get("Group");
+		
 		if($groups) $groups = $groups->toDropdownMap('ID', 'Title');
+		
 		$fields = new FieldSet(
 			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
 		);
@@ -23,7 +25,13 @@ class EditableMemberListField extends EditableFormField {
 	}
 	
 	function getFormField() {
-		return ($this->getSetting('GroupID')) ? new DropdownField( $this->Name, $this->Title, Member::mapInGroups($this->getSetting('GroupID'))) : false;
+		if ($this->getSetting('GroupID')) {
+			$members = Member::mapInGroups($this->getSetting('GroupID'));
+			
+			return new DropdownField($this->Name, $this->Title, $members);
+		}
+		
+		return false;
 	}
 	
 	function getValueFromData($data) {
@@ -31,6 +39,7 @@ class EditableMemberListField extends EditableFormField {
 			$value = Convert::raw2sql($data[$this->Name]);
 		
 			$member = DataObject::get_one('Member', "Member.ID = {$value}");
+			
 			return ($member) ? $member->getName() : "";
 		}
 		

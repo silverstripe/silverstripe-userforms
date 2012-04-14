@@ -16,22 +16,21 @@ class EditableTextField extends EditableFormField {
 	function getFieldConfiguration() {
 		$fields = parent::getFieldConfiguration();
 		
-		// eventually replace hard-coded "Fields"?
-		$baseName = "Fields[$this->ID]";
+		$min = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
+		$max = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
 		
-		$minLength = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
-		$maxLength = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
 		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
 		
 		$extraFields = new FieldSet(
 			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
-				new TextField($baseName . "[CustomSettings][MinLength]", "", $minLength),
-				new TextField($baseName . "[CustomSettings][MaxLength]", " - ", $maxLength)
+				new TextField($this->getSettingName('MinLength'), "", $min),
+				new TextField($this->getSettingName('MaxLength'), " - ", $max)
 			),
-			new TextField($baseName . "[CustomSettings][Rows]", _t('EditableTextField.NUMBERROWS', 'Number of rows'), $rows)
+			new TextField($this->getSettingName('Rows'), _t('EditableTextField.NUMBERROWS', 'Number of rows'), $rows)
 		);
 		
 		$fields->merge($extraFields);
+		
 		return $fields;		
 	}
 
@@ -53,12 +52,16 @@ class EditableTextField extends EditableFormField {
 	 * PHP. 
 	 *
 	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return Array
+	 * @return array
 	 */
 	public function getValidation() {
 		$options = array();
-		if($this->getSetting('MinLength')) $options['minlength'] = $this->getSetting('MinLength');
-		if($this->getSetting('MaxLength')) $options['maxlength'] = $this->getSetting('MaxLength');
+		
+		if($this->getSetting('MinLength')) 
+			$options['minlength'] = $this->getSetting('MinLength');
+			
+		if($this->getSetting('MaxLength')) 
+			$options['maxlength'] = $this->getSetting('MaxLength');
 		
 		return $options;
 	}
