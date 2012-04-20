@@ -22,7 +22,7 @@ class SubmittedFileField extends SubmittedFormField {
 		$link = $this->getLink();
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
 		
-		if(!$link) {
+		if($link) {
 			return sprintf('<a href="%s">%s</a>', $link, $title);
 		}
 		
