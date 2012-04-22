@@ -293,9 +293,6 @@ class UserDefinedForm_Controller extends Page_Controller {
 	public function init() {
 		parent::init();
 		
-		// block prototype validation
-		Validator::set_javascript_validation_handler('none');
-		
 		// load the jquery
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.min.js');
@@ -314,14 +311,14 @@ class UserDefinedForm_Controller extends Page_Controller {
 			if($hasLocation) {
 				$content = str_ireplace('$UserDefinedForm', $form->forTemplate(), $this->Content);
 				return array(
-					'Content' => DBField::create('HTMLText', $content),
+					'Content' => DBField::create_field('HTMLText', $content),
 					'Form' => ""
 				);
 			}
 		}
 
 		return array(
-			'Content' => DBField::create('HTMLText', $this->Content),
+			'Content' => DBField::create_field('HTMLText', $this->Content),
 			'Form' => $this->Form()
 		);
 	}
@@ -678,7 +675,7 @@ JS
 		$values = array();
         $attachments = array();
 
-		$submittedFields = new DataObjectSet();
+		$submittedFields = new ArrayList();
 		
 		foreach($this->Fields() as $field) {
 			

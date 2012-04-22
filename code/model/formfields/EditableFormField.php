@@ -225,14 +225,14 @@ class EditableFormField extends DataObject {
 	 * @return DataObjectSet
 	 */
 	public function CustomRules() {
-		$output = new DataObjectSet();
+		$output = new ArrayList();
 		$fields = $this->Parent()->Fields();
 
 		// check for existing ones
 		if($rules = $this->Dependencies()) {
 			foreach($rules as $rule => $data) {
 				// recreate all the field object to prevent caching
-				$outputFields = new DataObjectSet();
+				$outputFields = new ArrayList();
 				
 				foreach($fields as $field) {
 					$new = clone $field;
@@ -471,6 +471,6 @@ class EditableFormField extends DataObject {
 		
 		$errorMessage = ($this->CustomErrorMessage) ? $this->CustomErrorMessage : $standard;
 		
-		return DBField::create('Varchar', $errorMessage);
+		return DBField::create_field('Varchar', $errorMessage);
 	}
 }
