@@ -95,7 +95,7 @@ class FieldEditor extends FormField {
 		if($fields) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
-			$output = new DataObjectSet();
+			$output = new ArrayList();
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = trim(eval("return $title::\$singular_name;")); 

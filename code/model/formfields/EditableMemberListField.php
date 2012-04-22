@@ -17,7 +17,7 @@ class EditableMemberListField extends EditableFormField {
 		
 		if($groups) $groups = $groups->toDropdownMap('ID', 'Title');
 		
-		$fields = new FieldSet(
+		$fields = new FieldList(
 			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
 		);
 		

@@ -17,7 +17,7 @@ class EditableDateField extends EditableFormField {
 		$default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
 		$label = _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?');
 		
-		return new FieldSet(
+		return new FieldList(
 			new CheckboxField($this->getSettingName("DefaultToToday"), $label, $default)
 		);
 	}
