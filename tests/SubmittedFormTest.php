@@ -144,7 +144,7 @@ class SubmittedFormTest extends FunctionalTest {
 class SubmittedFormTest_Controller extends ContentController {
 	
 	function Form() {
-		$form = new Form($this, 'Form', new FieldSet(new SubmittedFormReportField('Report')), new FieldSet(new FormAction('Submit')));
+		$form = new Form($this, 'Form', new FieldList(new SubmittedFormReportField('Report')), new FieldList(new FormAction('Submit')));
 
 		$form->loadDataFrom($this->data());
 		

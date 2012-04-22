@@ -41,6 +41,6 @@ class FieldEditorTest extends FunctionalTest {
 class FieldEditorTest_Controller extends Controller {
 	
 	function Form() {
-		return new Form($this, 'Form', new FieldSet(new FieldEditor('Fields')), new FieldSet());
+		return new Form($this, 'Form', new FieldList(new FieldEditor('Fields')), new FieldList());
 	}
 }

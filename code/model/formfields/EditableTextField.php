@@ -21,7 +21,7 @@ class EditableTextField extends EditableFormField {
 		
 		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
 		
-		$extraFields = new FieldSet(
+		$extraFields = new FieldList(
 			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
 				new TextField($this->getSettingName('MinLength'), "", $min),
 				new TextField($this->getSettingName('MaxLength'), " - ", $max)

@@ -391,7 +391,7 @@ class EditableFormField extends DataObject {
 			$this->getSetting('RightTitle')
 		);
 			
-		return new FieldSet(
+		return new FieldList(
 			$ec,
 			$right
 		);
@@ -404,7 +404,7 @@ class EditableFormField extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getFieldValidationOptions() {
-		$fields = new FieldSet(
+		$fields = new FieldList(
 			new CheckboxField($this->getFieldName('Required'), _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
 			new TextField($this->getFieldName('CustomErrorMessage'), _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
 		);
