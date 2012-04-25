@@ -129,7 +129,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$actions = $controller->getFormActions();
 		
 		// by default will have 1 submit button which links to process
-		$expected = new FieldSet(new FormAction('process', 'Submit'));
+		$expected = new FieldList(new FormAction('process', 'Submit'));
 		
 		$this->assertEquals($actions, $expected);
 		
@@ -139,7 +139,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$actions = $controller->getFormActions();
 
-		$expected = new FieldSet(new FormAction('process', 'Custom Button'));
+		$expected = new FieldList(new FormAction('process', 'Custom Button'));
 		$expected->push(new ResetFormAction("clearForm"));
 		
 		$this->assertEquals($actions, $expected);

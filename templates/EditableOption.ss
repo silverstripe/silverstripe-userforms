@@ -1,5 +1,5 @@
 <li>
-	<img class="handle" src="sapphire/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of options') %>" />
+	<img class="handle" src="framework/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of options') %>" />
 	<input type="text" name="{$FieldName}[Title]" value="$Title" />
 	<input type="hidden" class="sortOptionHidden hidden" name="{$FieldName}[Sort]" value="$Sort" />
 	
