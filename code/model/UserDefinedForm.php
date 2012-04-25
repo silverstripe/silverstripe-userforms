@@ -764,6 +764,8 @@ JS
 					}
 				}
 				
+                $this->extend('updateEmail', $email, $recipient, $emailData);
+                
 				if($recipient->SendPlain) {
 					$body = strip_tags($recipient->EmailBody) . "\n ";
 					if(isset($emailData['Fields']) && !$recipient->HideFormData) {
@@ -871,6 +873,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""), 'EmailAddress');
 			}
 		}
+        
+        $this->extend('updateCMSFields', $fields);
 
 		return $fields;
 	}
