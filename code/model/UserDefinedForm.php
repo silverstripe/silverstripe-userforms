@@ -304,6 +304,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		// load the jquery
 		Requirements::javascript(SAPPHIRE_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.min.js');
+		Requirements::javascript('userforms/javascript/UserForm_frontend.js');
 	}
 	
 	/**
@@ -329,6 +330,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 			'Content' => DBField::create('HTMLText', $this->Content),
 			'Form' => $this->Form()
 		);
+	}
+
+	/**
+	 * Keep the session alive for the user.
+	 */
+	function ping() {
+		return 1;
 	}
 
 	/**
