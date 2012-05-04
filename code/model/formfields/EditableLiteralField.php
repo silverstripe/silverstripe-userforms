@@ -13,7 +13,7 @@ class EditableLiteralField extends EditableFormField {
 	
 	static $plural_name = 'HTML Blocks';
 	
-	function getFieldConfiguration() {
+	public function getFieldConfiguration() {
 		return new FieldList(
 			new TextareaField(
 				$this->getSettingName('Content'),
@@ -27,7 +27,7 @@ class EditableLiteralField extends EditableFormField {
 		);
 	}
 
-	function getFormField() {
+	public function getFormField() {
 		return new LiteralField("LiteralField[$this->ID]", 
 			"<div id='$this->Name' class='field text'>
 				<label class='left'>$this->Title</label>
@@ -36,7 +36,7 @@ class EditableLiteralField extends EditableFormField {
 		);
 	}
 	
-	function showInReports() {
+	public function showInReports() {
 		return (!$this->getSetting('HideFromReports'));
 	}
 }

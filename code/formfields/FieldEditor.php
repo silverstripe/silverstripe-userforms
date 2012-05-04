@@ -13,7 +13,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return String
 	 */
-	function FieldHolder() {
+	public function FieldHolder() {
 		return $this->renderWith("FieldEditor");
 	}
 	
@@ -46,7 +46,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return ViewableData_Customised
 	 */
-	function performReadonlyTransformation() {
+	public function performReadonlyTransformation() {
 		$clone = clone $this;
 		$clone->readonly = true;
 		$fields = $clone->Fields();
@@ -62,7 +62,7 @@ class FieldEditor extends FormField {
 	 * 
 	 * @return DataObjectSet
 	 */
-	function Fields() {
+	public function Fields() {
 		// Don't return any fields unless we actually have the dependent parameters set on the form field
 		if($this->form && $this->form->getRecord() && $this->name) {
 			$relationName = $this->name;
@@ -89,7 +89,7 @@ class FieldEditor extends FormField {
 	 * 
 	 * @return DataObjectSet
 	 */
-	function CreatableFields() {
+	public function CreatableFields() {
 		$fields = ClassInfo::subclassesFor('EditableFormField');
 
 		if($fields) {
@@ -117,7 +117,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @param DataObject Record to Save it In
 	 */
-	function saveInto(DataObject $record) {
+	public function saveInto(DataObject $record) {
 		$name = $this->name;
 		$fieldSet = $record->$name();
 		

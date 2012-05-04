@@ -221,8 +221,8 @@ class UserDefinedForm extends Page {
 	 *
 	 * @return Page
 	 */
-	public function duplicate() {
-		$page = parent::duplicate();
+	 public function duplicate($doWrite = true) {
+		$page = parent::duplicate($doWrite);
 		
 		// the form fields
 		if($this->Fields()) {
@@ -329,7 +329,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return Form|false
 	 */
-	function Form() {
+	public function Form() {
 		$fields = $this->getFormFields();
 		if(!$fields) return false;
 		
@@ -359,7 +359,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return FieldSet
 	 */
-	function getFormFields() {
+	public function getFormFields() {
 		$fields = new FieldList();
 				
 		if($this->Fields()) {
@@ -417,7 +417,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return FieldSet
 	 */
-	function getFormActions() {
+	public function getFormActions() {
 		$submitText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		
 		$actions = new FieldList(
@@ -439,7 +439,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @return RequiredFields
 	 */
-	function getRequiredFields() {
+	public function getRequiredFields() {
 		$required = new RequiredFields();
 		
 		$rules = array();
@@ -496,7 +496,7 @@ JS
 	 * Allows complex rules to be created 
 	 * @return void
 	 */
-	function generateConditionalJavascript() {
+	public function generateConditionalJavascript() {
 		$default = "";
 		$rules = "";
 		
@@ -625,7 +625,7 @@ JS
 	 * @param Array array to convert
 	 * @return JSON 
 	 */
-	function array2json($array) {
+	public function array2json($array) {
 		foreach($array as $key => $value)
 			if(is_array( $value )) {
 				$result[] = "$key:" . $this->array2json($value);
@@ -643,7 +643,7 @@ JS
 	 * @param Form Form 
 	 * @return Redirection
 	 */
-	function process($data, $form) {
+	public function process($data, $form) {
 		Session::set("FormInfo.{$form->FormName()}.data",$data);	
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		
@@ -797,7 +797,7 @@ JS
 	 *
 	 * @return ViewableData
 	 */
-	function finished() {
+	public function finished() {
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
 		return $this->customise(array(
@@ -879,11 +879,11 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		return $fields;
 	}
 	
-	function canEdit() {
+	public function canEdit() {
 		return $this->Form()->canEdit();
 	}
 	
-	function canDelete() {
+	public function canDelete() {
 		return $this->Form()->canDelete();
 	}
 }
@@ -899,7 +899,7 @@ class UserDefinedForm_SubmittedFormEmail extends Email {
 	protected $ss_template = "SubmittedFormEmail";
 	protected $data;
 
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 	}
 }

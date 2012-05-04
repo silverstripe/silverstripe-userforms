@@ -11,7 +11,7 @@ class EditableMemberListField extends EditableFormField {
 	
 	static $plural_name = 'Member List Fields';
 	
-	function getFieldConfiguration() {
+	public function getFieldConfiguration() {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
 		$groups = DataObject::get("Group");
 		
@@ -24,7 +24,7 @@ class EditableMemberListField extends EditableFormField {
 		return $fields;
 	}
 	
-	function getFormField() {
+	public function getFormField() {
 		if ($this->getSetting('GroupID')) {
 			$members = Member::mapInGroups($this->getSetting('GroupID'));
 			
@@ -34,7 +34,7 @@ class EditableMemberListField extends EditableFormField {
 		return false;
 	}
 	
-	function getValueFromData($data) {
+	public function getValueFromData($data) {
 		if(isset($data[$this->Name])) {
 			$value = Convert::raw2sql($data[$this->Name]);
 		

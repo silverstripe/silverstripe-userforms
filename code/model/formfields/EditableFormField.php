@@ -65,7 +65,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return String
 	 */
-	function EditSegment() {
+	public function EditSegment() {
 		return $this->renderWith('EditableFormField');
 	}
 	
@@ -113,7 +113,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	function getShowOnLoad() {
+	public function getShowOnLoad() {
 		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
 	}
 	
@@ -260,7 +260,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return TextField
 	 */
-	function TitleField() {
+	public function TitleField() {
 		$label = _t('EditableFormField.ENTERQUESTION', 'Enter Question');
 		
 		$field = new TextField('Title', $label, $this->getField('Title'));
@@ -274,7 +274,7 @@ class EditableFormField extends DataObject {
 	}
 
 	/** Returns the Title for rendering in the front-end (with XML values escaped) */
-	function getTitle() {
+	public function getTitle() {
 		return Convert::raw2att($this->getField('Title'));
 	}
 
@@ -443,7 +443,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	function showInReports() {
+	public function showInReports() {
 		return true;
 	}
    

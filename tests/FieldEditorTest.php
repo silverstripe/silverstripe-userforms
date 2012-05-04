@@ -40,7 +40,7 @@ class FieldEditorTest extends FunctionalTest {
 
 class FieldEditorTest_Controller extends Controller {
 	
-	function Form() {
+	public function Form() {
 		return new Form($this, 'Form', new FieldList(new FieldEditor('Fields')), new FieldList());
 	}
 }

@@ -16,7 +16,7 @@ class EditableDropdown extends EditableMultipleOptionField {
 	/**
 	 * @return DropdownField
 	 */
-	function getFormField() {	
+	public function getFormField() {	
 		$optionSet = $this->Options();
 		$options = array();
 

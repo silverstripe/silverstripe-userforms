@@ -7,7 +7,7 @@
 
 class SubmittedFormReportField extends FormField {
 	
-	function Field() {
+	public function Field() {
 		Requirements::css(FRAMEWORK_DIR . "/css/SubmittedFormReportField.css");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		return $this->renderWith("SubmittedFormReportField");
@@ -18,7 +18,7 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return ComponentSet
 	 */ 
-	function Submissions() {
+	public function Submissions() {
 		$pageStart = isset($_REQUEST['start']) && is_numeric($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 		$pageLength = 10;
 
@@ -37,7 +37,7 @@ class SubmittedFormReportField extends FormField {
 		return $items;
 	}
 	
-	function getSubmissions() {
+	public function getSubmissions() {
 		return $this->customise(array(
 			'Submissions' => $this->Submissions()
 		))->renderWith(array('SubmittedFormReportField'));
@@ -48,7 +48,7 @@ class SubmittedFormReportField extends FormField {
 	 * 
 	 * @return int
 	 */
-	function RecordID() {
+	public function RecordID() {
 		return $this->form->getRecord()->ID;
 	}
 	
