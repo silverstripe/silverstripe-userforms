@@ -13,7 +13,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return String
 	 */
-	public function FieldHolder() {
+	public function FieldHolder($properties = array()) {
 		return $this->renderWith("FieldEditor");
 	}
 	
@@ -22,7 +22,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return boolean
 	 */
-	public function canEdit() {
+	public function canEdit($member = null) {
 		if($this->readonly) return false;
 		
 		return $this->form->getRecord()->canEdit();
@@ -35,7 +35,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return boolean
 	 */
-	public function canDelete() {
+	public function canDelete($member = null) {
 		if($this->readonly) return false;
 		
 		return $this->form->getRecord()->canEdit();
@@ -117,7 +117,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @param DataObject Record to Save it In
 	 */
-	public function saveInto(DataObject $record) {
+	public function saveInto(DataObjectInterface $record) {
 		$name = $this->name;
 		$fieldSet = $record->$name();
 		

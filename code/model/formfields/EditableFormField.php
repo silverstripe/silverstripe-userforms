@@ -75,8 +75,8 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function canDelete() {
-		return ($this->Parent()->canEdit() && !$this->isReadonly());
+	public function canDelete($member = null) {
+		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
 	}
 	
 	/**
@@ -85,8 +85,8 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function canEdit() {
-		return ($this->Parent()->canEdit() && !$this->isReadonly());
+	public function canEdit($member = null) {
+		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
 	}
 	
 	/**

@@ -879,11 +879,11 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		return $fields;
 	}
 	
-	public function canEdit() {
+	public function canEdit($member = null) {
 		return $this->Form()->canEdit();
 	}
 	
-	public function canDelete() {
+	public function canDelete($member = null) {
 		return $this->Form()->canDelete();
 	}
 }
