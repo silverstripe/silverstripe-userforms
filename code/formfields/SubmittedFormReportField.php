@@ -7,7 +7,7 @@
 
 class SubmittedFormReportField extends FormField {
 	
-	public function Field() {
+	public function Field($properties = array()) {
 		Requirements::css(FRAMEWORK_DIR . "/css/SubmittedFormReportField.css");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		return $this->renderWith("SubmittedFormReportField");
