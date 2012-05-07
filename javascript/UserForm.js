@@ -141,48 +141,43 @@
 		 * area. the type information should all be on this object
 		 */
 		
-		$("div.FieldEditor .MenuHolder .action").live('click',function() {
-
-			// if this form is readonly...
-			if($("#Fields").hasClass('readonly')) {
-				return false;
-			}
-			
-			// Give the user some feedback
-			statusMessage(userforms.message('ADDING_FIELD'));
-			
-			// variables
-			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addfield';
-			var length = $(".FieldInfo").length + 1;
-			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
-			var type = $(this).siblings("select").val();
-	
-			// send ajax request to the page
-			$.ajax({
-				type: "GET",
-				url: action,
-				data: 'NewID='+ length +"&Type="+ type + securityID,
-				
-				// create a new field
-				success: function(msg){
-					$('#Fields_fields').append(msg);
-					statusMessage(userforms.message('ADDED_FIELD'));
+		$.entwine('udf', function($){
+			$('div.FieldEditor .MenuHolder .action').entwine({
+				onclick: function(e) {
+					if($("#Fields").hasClass('readonly')) {
+						e.preventDefault();
+						return;
+					}
+					statusMessage(userforms.message('ADDING_FIELD'));
 					
-					// update the internal lists
-					var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
-
-					$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
-				},
-				
-				// error creating new field
-				error: function(request, text, error) {
-					statusMessage(userforms.message('ERROR_CREATING_FIELD'));
-				} 
+					// variables
+					var $form = $("#Form_EditForm");
+					var length = $(".FieldInfo").length + 1;
+					var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
+					var fieldType = $(this).siblings("select").val();
+					var formData = $form.serialize()+'NewID='+ length +"&Type="+ fieldType + securityID;
+					var $fieldEditor = $(this.closest('.FieldEditor'));
+					// Due to some very weird behaviout of jquery.metadata, the url have to be double quoted
+					var addURL = $fieldEditor.attr('data-add-url').substr(1,$fieldEditor.attr('data-add-url').length-2);
+					$.ajax({
+						headers: {"X-Pjax" : 'Partial'},
+						type: "POST",
+						url: addURL,
+						data: formData, 
+						success: function(data) {
+							$('#Fields_fields').append(data);
+							statusMessage(userforms.message('ADDED_FIELD'));
+							var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
+							$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
+						},
+						error: function(e) {
+							alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION', 'An error occured while fetching data from the server\n Please try again later.'));
+						}
+					});
+					e.preventDefault();
+					$("#Fields_fields").sortable('refresh');
+				}
 			});
-			
-			$("#Fields_fields").sortable('refresh');
-	
-			return false;
 		});
 		
 		/** 
