@@ -76,11 +76,9 @@ class FieldEditor extends FormField {
 		
 			if($fields) {
 				foreach($fields as $field) {
-					if(!$this->canEdit()) {
-						if(is_a($field, 'FormField')) {
-							$fields->remove($field);
-							$fields->push($field->performReadonlyTransformation());
-						}
+					if(!$this->canEdit() && is_a($field, 'FormField')) {
+						$fields->remove($field);
+						$fields->push($field->performReadonlyTransformation());
 					}
 				}
 			}
@@ -173,8 +171,7 @@ class FieldEditor extends FormField {
 	}
 	
 	/**
-	 * Add a field to the field editor. Called via a ajax get request
-	 * from the userdefinedform javascript
+	 * Add a field to the field editor. Called via a ajax get request from the userdefinedform javascript
 	 *
 	 * @return bool|html
 	 */
