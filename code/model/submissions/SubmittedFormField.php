@@ -22,9 +22,19 @@ class SubmittedFormField extends DataObject {
 	 * Converts new lines (which are stored in the database text field) as
 	 * <brs> so they will output as newlines in the reports
 	 *
-	 * @return String
+	 * @return string
 	 */
 	public function getFormattedValue() {
 		return nl2br($this->dbObject('Value')->ATT());
+	}
+	
+	/**
+	 * Return the value of this submitted form field suitable for inclusion
+	 * into the CSV
+	 *
+	 * @return Text
+	 */
+	public function getExportValue() {
+		return $this->Value;
 	}
 }

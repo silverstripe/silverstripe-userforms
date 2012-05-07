@@ -28,6 +28,15 @@ class SubmittedFileField extends SubmittedFormField {
 		
 		return false;
 	}
+	
+	/**
+	 * Return the value for this field in the CSV export
+	 *
+	 * @return String
+	 */
+	public function getExportValue() {
+		return ($link = $this->getLink()) ? $link : "";
+	}
 
 	/**
 	 * Return the link for the file attached to this submitted form field

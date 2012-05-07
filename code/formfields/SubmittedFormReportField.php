@@ -109,7 +109,7 @@ class SubmittedFormReportField extends FormField {
 
 					$row = array();
 					foreach($fields as $field) {
-						$row[$field->Name] = $field->Value;
+						$row[$field->Name] = $field->getExportValue();
 					}
 
 					$row['Submitted'] = $submission->Created;
