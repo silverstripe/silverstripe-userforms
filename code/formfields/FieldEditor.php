@@ -7,6 +7,11 @@
  */
 
 class FieldEditor extends FormField {
+
+	public static $allowed_actions = array(
+		'addfield',
+		'addoptionfield'
+	);
 	
 	/**
 	 * Field Editor Template
