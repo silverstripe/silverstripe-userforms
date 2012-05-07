@@ -11,7 +11,7 @@ class EditableFormHeading extends EditableFormField {
 	
 	static $plural_name = 'Headings';
 	
-	function getFieldConfiguration() {
+	public function getFieldConfiguration() {
 		$levels = array(
 			'1' => '1',
 			'2' => '2',
@@ -37,18 +37,18 @@ class EditableFormHeading extends EditableFormField {
 		return $options;
 	}
 	
-	function getFormField() {
+	public function getFormField() {
 		$labelField = new HeaderField($this->Name,$this->Title, $this->getSetting('Level'));
 		$labelField->addExtraClass('FormHeading');
 		
 		return $labelField;
 	}
 	
-	function showInReports() {
+	public function showInReports() {
 		return false;
 	}
 	
-	function getFieldValidationOptions() {
+	public function getFieldValidationOptions() {
 		return false;
 	}
 }

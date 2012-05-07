@@ -13,7 +13,7 @@ class EditableEmailField extends EditableFormField {
 	
 	static $plural_name = 'Email Fields';
 	
-	function getFormField() {
+	public function getFormField() {
 		return new EmailField($this->Name, $this->Title);
 	}
 	

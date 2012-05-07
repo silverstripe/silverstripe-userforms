@@ -20,7 +20,7 @@ class UserFormsVersionedTask extends MigrationTask {
 	 * Publish the existing forms.
 	 *
 	 */
-	function run($request) {
+	public function run($request) {
 		$forms = Versioned::get_by_stage('UserDefinedForm', 'Live');
 		
 		if($forms) {

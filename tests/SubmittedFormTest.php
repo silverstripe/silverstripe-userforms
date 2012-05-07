@@ -12,7 +12,7 @@ class SubmittedFormTest extends FunctionalTest {
 		
 		$this->controller = new SubmittedFormTest_Controller($this->page);
 		$this->form = $this->controller->Form();
-		$this->field = $this->form->dataFieldByName('Report');
+		$this->field = $this->form->Fields()->dataFieldByName('Report');
 	}
 	
 	function testSubmissions() {
@@ -110,7 +110,7 @@ class SubmittedFormTest extends FunctionalTest {
 		
 		$fields = DataObject::get('SubmittedFormField', "\"ParentID\" = '$form->ID'");
 		
-		$this->assertNull($fields);
+		$this->assertEquals(array(), $fields->toArray());
 	}
 	
 	function testGetFormattedValue() {
@@ -144,7 +144,7 @@ class SubmittedFormTest extends FunctionalTest {
 class SubmittedFormTest_Controller extends ContentController {
 	
 	function Form() {
-		$form = new Form($this, 'Form', new FieldSet(new SubmittedFormReportField('Report')), new FieldSet(new FormAction('Submit')));
+		$form = new Form($this, 'Form', new FieldList(new SubmittedFormReportField('Report')), new FieldList(new FormAction('Submit')));
 
 		$form->loadDataFrom($this->data());
 		

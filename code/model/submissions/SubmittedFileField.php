@@ -18,7 +18,7 @@ class SubmittedFileField extends SubmittedFormField {
 	 * 
 	 * @return string
 	 */
-	function getFormattedValue() {
+	public function getFormattedValue() {
 		$link = $this->getLink();
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
 		
@@ -34,7 +34,7 @@ class SubmittedFileField extends SubmittedFormField {
 	 * 
 	 * @return string
 	 */
-	function getLink() {
+	public function getLink() {
 		if($file = $this->UploadedFile()) {
 			if(trim($file->getFilename(), '/') != trim(ASSETS_DIR,'/'))  {
 				return $this->UploadedFile()->URL;
