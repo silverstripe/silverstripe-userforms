@@ -348,7 +348,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 		// generate the conditional logic 
 		$this->generateConditionalJavascript();
-		
+
 		$form = new Form($this, "Form", $fields, $actions, $required);
 		
 		$data = Session::get("FormInfo.{$form->FormName()}.data");
@@ -369,7 +369,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	function getFormFields() {
 		$fields = new FieldSet();
-				
+
 		if($this->Fields()) {
 			foreach($this->Fields() as $editableField) {
 				// get the raw form field from the editable version
@@ -394,7 +394,6 @@ class UserDefinedForm_Controller extends Page_Controller {
 						$field->setTitle($title);
 					}
 				}
-				
 				// if this field has an extra class
 				if($editableField->getSetting('ExtraClass')) {
 					$field->addExtraClass(Convert::raw2att(
@@ -404,15 +403,15 @@ class UserDefinedForm_Controller extends Page_Controller {
 				
 				// set the values passed by the url to the field
 				$request = $this->getRequest();
-				$value = Convert::raw2att($request->getVar($field->name));
-				if(isset($value)) $field->value = $value;
+				if($var = $request->getVar($field->name)) {
+					$field->value = Convert::raw2att($var);
+				}
 				
 				$fields->push($field);
 			}
 		}
-		
 		$this->extend('updateFormFields', $fields);
-		
+
 		return $fields;
 	}
 	
