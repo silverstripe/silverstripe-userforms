@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @package userforms
+ */	
 class SubmittedFormTest extends FunctionalTest {
 
 	static $fixture_file = 'userforms/tests/SubmittedFormTest.yml';
@@ -16,23 +19,18 @@ class SubmittedFormTest extends FunctionalTest {
 	}
 	
 	function testSubmissions() {
-		$submissions = $this->field->Submissions();
-		
-		// test with 11 submissions. Should be over 2 pages. 10 per page.
-		// @todo add tests to ensure the order
-		$this->assertEquals($submissions->Count(), 10);
+		$submissions = $this->field->getSubmissions();
+
 		$this->assertEquals($submissions->TotalPages(), 2);
-		$this->assertEquals($submissions->TotalItems(), 11);
+		$this->assertEquals($submissions->getTotalItems(), 11);
 	}
 	
-	function testGetSubmissionns() {
-		$template = $this->field->getSubmissions();
-		
+	function testGetMoreSubmissions() {
+		$template = $this->field->getMoreSubmissions();
 		$parser = new CSSContentParser($template);
-		
 		// check to ensure that the pagination exists
 		$pagination = $parser->getBySelector('.userforms-submissions-pagination');
-	
+
 		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->span), "Viewing rows 0 - 10 of 11 rows");
 		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->a), "Next page");
 

@@ -331,7 +331,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	public function Form() {
 		$fields = $this->getFormFields();
-		if(!$fields) return false;
+		if(!$fields || !$fields->exists()) return false;
 		
 		$actions = $this->getFormActions();
 		

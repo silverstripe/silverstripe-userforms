@@ -12,35 +12,41 @@ class SubmittedFormReportField extends FormField {
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		return $this->renderWith("SubmittedFormReportField");
 	}
-	
+		
 	/**
 	 * Return the submissions from the site
 	 *
-	 * @return ComponentSet
+	 * @return PaginatedList
 	 */ 
-	public function Submissions() {
-		$pageStart = isset($_REQUEST['start']) && is_numeric($_REQUEST['start']) ? $_REQUEST['start'] : 0;
-		$pageLength = 10;
-
-		$items = $this->form->getRecord()->getComponents('Submissions', null, "\"Created\" DESC")->limit($pageStart,$pageLength);
-		$formId = $this->form->getRecord()->ID;
-
-		foreach(DB::query("SELECT COUNT(*) AS \"CountRows\" FROM \"SubmittedForm\" WHERE \"ParentID\" = $formId") as $r) $totalCount = $r['CountRows'];
+	public function getSubmissions($start = 0) {
+		$record = $this->form->getRecord();
+		$submissions = $record->getComponents('Submissions', null, "\"Created\" DESC");
 		
-		//$items->setPageLimits($pageStart, $pageLength, $totalCount);
-		$items->NextStart = $pageStart + $pageLength;
-		$items->PrevStart = $pageStart - $pageLength;
-		$items->Start = $pageStart;
-		$items->StartPlusOffset = $pageStart+$pageLength;
-		$items->TotalCount = $totalCount;
-
-		return $items;
+		$query = DB::query(sprintf("
+			SELECT COUNT(*) AS \"CountRows\" 
+			FROM \"SubmittedForm\" 
+			WHERE \"ParentID\" = '%d'", $record->ID
+		));
+		
+		foreach($query as $r) $totalCount = $r['CountRows'];
+		
+		$list = new PaginatedList($submissions);
+		$list->setPageStart($start);
+		$list->setPageLength(10);
+		$list->setTotalItems($totalCount);
+		
+		return $list;
 	}
 	
-	public function getSubmissions() {
-		return $this->customise(array(
-			'Submissions' => $this->Submissions()
-		))->renderWith(array('SubmittedFormReportField'));
+	/**
+	 * @return string
+	 */
+	public function getMoreSubmissions() {
+		$start = ($start = $this->request->getVar('start')) ? (int) $start : 0;
+
+		return $this->customise(new ArrayData(array(
+			'Submissions' => $this->getSubmissions($start)
+		)))->renderWith(array('SubmittedFormReportField'));
 	}
 
 	/**
