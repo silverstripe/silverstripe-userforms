@@ -81,7 +81,7 @@ class EditableFormFieldTest extends FunctionalTest {
 	
 	function testPopulateFromPostData() {
 		$this->logInWithPermission('ADMIN');
-		$set = new DataObjectSet();
+		$set = new ArrayList();
 		
 		$field = new EditableFormField();
 		

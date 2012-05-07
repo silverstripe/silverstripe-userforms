@@ -65,7 +65,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return String
 	 */
-	function EditSegment() {
+	public function EditSegment() {
 		return $this->renderWith('EditableFormField');
 	}
 	
@@ -75,8 +75,8 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function canDelete() {
-		return ($this->Parent()->canEdit() && !$this->isReadonly());
+	public function canDelete($member = null) {
+		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
 	}
 	
 	/**
@@ -85,8 +85,8 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function canEdit() {
-		return ($this->Parent()->canEdit() && !$this->isReadonly());
+	public function canEdit($member = null) {
+		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
 	}
 	
 	/**
@@ -113,7 +113,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	function getShowOnLoad() {
+	public function getShowOnLoad() {
 		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
 	}
 	
@@ -225,14 +225,14 @@ class EditableFormField extends DataObject {
 	 * @return DataObjectSet
 	 */
 	public function CustomRules() {
-		$output = new DataObjectSet();
+		$output = new ArrayList();
 		$fields = $this->Parent()->Fields();
 
 		// check for existing ones
 		if($rules = $this->Dependencies()) {
 			foreach($rules as $rule => $data) {
 				// recreate all the field object to prevent caching
-				$outputFields = new DataObjectSet();
+				$outputFields = new ArrayList();
 				
 				foreach($fields as $field) {
 					$new = clone $field;
@@ -260,7 +260,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return TextField
 	 */
-	function TitleField() {
+	public function TitleField() {
 		$label = _t('EditableFormField.ENTERQUESTION', 'Enter Question');
 		
 		$field = new TextField('Title', $label, $this->getField('Title'));
@@ -274,7 +274,7 @@ class EditableFormField extends DataObject {
 	}
 
 	/** Returns the Title for rendering in the front-end (with XML values escaped) */
-	function getTitle() {
+	public function getTitle() {
 		return Convert::raw2att($this->getField('Title'));
 	}
 
@@ -391,7 +391,7 @@ class EditableFormField extends DataObject {
 			$this->getSetting('RightTitle')
 		);
 			
-		return new FieldSet(
+		return new FieldList(
 			$ec,
 			$right
 		);
@@ -404,7 +404,7 @@ class EditableFormField extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getFieldValidationOptions() {
-		$fields = new FieldSet(
+		$fields = new FieldList(
 			new CheckboxField($this->getFieldName('Required'), _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
 			new TextField($this->getFieldName('CustomErrorMessage'), _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
 		);
@@ -443,7 +443,7 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	function showInReports() {
+	public function showInReports() {
 		return true;
 	}
    
@@ -471,6 +471,6 @@ class EditableFormField extends DataObject {
 		
 		$errorMessage = ($this->CustomErrorMessage) ? $this->CustomErrorMessage : $standard;
 		
-		return DBField::create('Varchar', $errorMessage);
+		return DBField::create_field('Varchar', $errorMessage);
 	}
 }

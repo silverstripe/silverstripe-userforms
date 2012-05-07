@@ -7,13 +7,19 @@
  */
 
 class FieldEditor extends FormField {
+
+	public static $allowed_actions = array(
+		'addfield',
+		'addoptionfield'
+	);
 	
 	/**
 	 * Field Editor Template
 	 *
 	 * @return String
 	 */
-	function FieldHolder() {
+	public function FieldHolder($properties = array()) {
+		$this->setAttribute('data-add-url', '\''.Controller::join_links($this->Link('addfield').'\''));
 		return $this->renderWith("FieldEditor");
 	}
 	
@@ -22,7 +28,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return boolean
 	 */
-	public function canEdit() {
+	public function canEdit($member = null) {
 		if($this->readonly) return false;
 		
 		return $this->form->getRecord()->canEdit();
@@ -35,7 +41,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return boolean
 	 */
-	public function canDelete() {
+	public function canDelete($member = null) {
 		if($this->readonly) return false;
 		
 		return $this->form->getRecord()->canEdit();
@@ -46,7 +52,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @return ViewableData_Customised
 	 */
-	function performReadonlyTransformation() {
+	public function performReadonlyTransformation() {
 		$clone = clone $this;
 		$clone->readonly = true;
 		$fields = $clone->Fields();
@@ -62,7 +68,7 @@ class FieldEditor extends FormField {
 	 * 
 	 * @return DataObjectSet
 	 */
-	function Fields() {
+	public function Fields() {
 		// Don't return any fields unless we actually have the dependent parameters set on the form field
 		if($this->form && $this->form->getRecord() && $this->name) {
 			$relationName = $this->name;
@@ -70,11 +76,9 @@ class FieldEditor extends FormField {
 		
 			if($fields) {
 				foreach($fields as $field) {
-					if(!$this->canEdit()) {
-						if(is_a($field, 'FormField')) {
-							$fields->remove($field);
-							$fields->push($field->performReadonlyTransformation());
-						}
+					if(!$this->canEdit() && is_a($field, 'FormField')) {
+						$fields->remove($field);
+						$fields->push($field->performReadonlyTransformation());
 					}
 				}
 			}
@@ -89,13 +93,13 @@ class FieldEditor extends FormField {
 	 * 
 	 * @return DataObjectSet
 	 */
-	function CreatableFields() {
+	public function CreatableFields() {
 		$fields = ClassInfo::subclassesFor('EditableFormField');
 
 		if($fields) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
-			$output = new DataObjectSet();
+			$output = new ArrayList();
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = trim(eval("return $title::\$singular_name;")); 
@@ -117,7 +121,7 @@ class FieldEditor extends FormField {
 	 *
 	 * @param DataObject Record to Save it In
 	 */
-	function saveInto(DataObject $record) {
+	public function saveInto(DataObjectInterface $record) {
 		$name = $this->name;
 		$fieldSet = $record->$name();
 		
@@ -167,8 +171,7 @@ class FieldEditor extends FormField {
 	}
 	
 	/**
-	 * Add a field to the field editor. Called via a ajax get request
-	 * from the userdefinedform javascript
+	 * Add a field to the field editor. Called via a ajax get request from the userdefinedform javascript
 	 *
 	 * @return bool|html
 	 */

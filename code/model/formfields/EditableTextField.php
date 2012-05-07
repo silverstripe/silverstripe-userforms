@@ -13,7 +13,7 @@ class EditableTextField extends EditableFormField {
 	
 	static $plural_name = 'Text Fields';
 	
-	function getFieldConfiguration() {
+	public function getFieldConfiguration() {
 		$fields = parent::getFieldConfiguration();
 		
 		$min = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
@@ -21,7 +21,7 @@ class EditableTextField extends EditableFormField {
 		
 		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
 		
-		$extraFields = new FieldSet(
+		$extraFields = new FieldList(
 			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
 				new TextField($this->getSettingName('MinLength'), "", $min),
 				new TextField($this->getSettingName('MaxLength'), " - ", $max)
@@ -37,7 +37,7 @@ class EditableTextField extends EditableFormField {
 	/**
 	 * @return TextareaField|TextField
 	 */
-	function getFormField() {
+	public function getFormField() {
 		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
 			return new TextareaField($this->Name, $this->Title, $this->getSetting('Rows'));
 		}

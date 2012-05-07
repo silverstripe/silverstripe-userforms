@@ -7,8 +7,8 @@
 
 class SubmittedFormReportField extends FormField {
 	
-	function Field() {
-		Requirements::css(SAPPHIRE_DIR . "/css/SubmittedFormReportField.css");
+	public function Field($properties = array()) {
+		Requirements::css(FRAMEWORK_DIR . "/css/SubmittedFormReportField.css");
 		Requirements::javascript("userforms/javascript/UserForm.js");
 		return $this->renderWith("SubmittedFormReportField");
 	}
@@ -18,16 +18,16 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return ComponentSet
 	 */ 
-	function Submissions() {
+	public function Submissions() {
 		$pageStart = isset($_REQUEST['start']) && is_numeric($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 		$pageLength = 10;
 
-		$items = $this->form->getRecord()->getComponents('Submissions', null, "\"Created\" DESC", null, "$pageStart,$pageLength");
+		$items = $this->form->getRecord()->getComponents('Submissions', null, "\"Created\" DESC")->limit($pageStart,$pageLength);
 		$formId = $this->form->getRecord()->ID;
 
 		foreach(DB::query("SELECT COUNT(*) AS \"CountRows\" FROM \"SubmittedForm\" WHERE \"ParentID\" = $formId") as $r) $totalCount = $r['CountRows'];
 		
-		$items->setPageLimits($pageStart, $pageLength, $totalCount);
+		//$items->setPageLimits($pageStart, $pageLength, $totalCount);
 		$items->NextStart = $pageStart + $pageLength;
 		$items->PrevStart = $pageStart - $pageLength;
 		$items->Start = $pageStart;
@@ -37,7 +37,7 @@ class SubmittedFormReportField extends FormField {
 		return $items;
 	}
 	
-	function getSubmissions() {
+	public function getSubmissions() {
 		return $this->customise(array(
 			'Submissions' => $this->Submissions()
 		))->renderWith(array('SubmittedFormReportField'));
@@ -48,7 +48,7 @@ class SubmittedFormReportField extends FormField {
 	 * 
 	 * @return int
 	 */
-	function RecordID() {
+	public function RecordID() {
 		return $this->form->getRecord()->ID;
 	}
 	

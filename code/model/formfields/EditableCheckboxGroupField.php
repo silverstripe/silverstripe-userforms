@@ -13,7 +13,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	
 	static $plural_name = "Checkbox Groups";
 	
-	function getFormField() {
+	public function getFormField() {
 		$optionSet = $this->Options();
 		$options = array();
 		
@@ -22,7 +22,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
 	}
 	
-	function getValueFromData($data) {
+	public function getValueFromData($data) {
 		$result = '';
 		$entries = (isset($data[$this->Name])) ? $data[$this->Name] : false;
 		

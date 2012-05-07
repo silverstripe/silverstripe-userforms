@@ -13,16 +13,16 @@ class EditableDateField extends EditableFormField {
 	
 	static $plural_name = 'Date Fields';
 	
-	function getFieldConfiguration() {
+	public function getFieldConfiguration() {
 		$default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
 		$label = _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?');
 		
-		return new FieldSet(
+		return new FieldList(
 			new CheckboxField($this->getSettingName("DefaultToToday"), $label, $default)
 		);
 	}
 	
-	function populateFromPostData($data) {
+	public function populateFromPostData($data) {
 		$fieldPrefix = 'Default-';
 		
 		if(empty($data['Default']) && !empty($data[$fieldPrefix.'Year']) && !empty($data[$fieldPrefix.'Month']) && !empty($data[$fieldPrefix.'Day'])) {

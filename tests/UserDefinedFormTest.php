@@ -56,7 +56,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		
 		$popup = new UserDefinedForm_EmailRecipient();
 		
-		$fields = $popup->getCMSFields_forPopup();
+		$fields = $popup->getCMSFields();
 		
 		$this->assertTrue($fields->dataFieldByName('EmailSubject') !== null);
 		$this->assertTrue($fields->dataFieldByName('EmailFrom') !== null);
@@ -72,14 +72,14 @@ class UserDefinedFormTest extends FunctionalTest {
 		$popup->FormID = $form->ID;
 		$popup->write();
 
-		$fields = $popup->getCMSFields_forPopup();
+		$fields = $popup->getCMSFields();
 		$this->assertThat($fields->fieldByName('SendEmailToFieldID'), $this->isInstanceOf('DropdownField'));
 		
 		// if the front end has checkboxs or dropdown they can select from that can also be used to send things
 		$dropdown = $this->objFromFixture('EditableDropdown', 'department-dropdown');
 		$form->Fields()->add($dropdown);
 	
-		$fields = $popup->getCMSFields_forPopup();
+		$fields = $popup->getCMSFields();
 		$this->assertTrue($fields->dataFieldByName('SendEmailToFieldID') !== null);
 		
 		$popup->delete();
