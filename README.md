@@ -11,8 +11,7 @@ and without getting involved in any PHP code.
 
 ## Requirements
 
- * SilverStripe 2.4.6+
- * PHP 5 >= 5.1.0 (fputcsv)
+ * SilverStripe 3.0
 
 ## Features
 
@@ -32,16 +31,6 @@ and without getting involved in any PHP code.
  4.  Place this directory in your sites root directory. This is the one with sapphire and cms in it.
  5.  Run in your browser - `/dev/build` to rebuild the database. 
  6.  You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
-
-## Upgrading
-
-### 0.1 to 0.2
-
-We undertook some major API changes between 0.1 and 0.2. To help you migrate we 
-have included a build task which you can run which will go through your installed forms 
-and rebuild them with the new 0.2 data model.
-
-To run this build task you visit the url `/dev/tasks/UserFormsMigrationTask`
 
 ## Thanks
 
