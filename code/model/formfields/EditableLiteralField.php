@@ -14,11 +14,16 @@ class EditableLiteralField extends EditableFormField {
 	static $plural_name = 'HTML Blocks';
 	
 	public function getFieldConfiguration() {
+		
+		$textAreaField = new TextareaField(
+			$this->getSettingName('Content'),
+			"HTML"
+		);
+		$textAreaField->setRows(4);
+		$textAreaField->setColumns(20);
+				
 		return new FieldList(
-			new TextareaField(
-				$this->getSettingName('Content'),
-				"HTML", 4, 20, $this->getSetting('Content')
-			),
+			$textAreaField,
 			new CheckboxField(
 				$this->getSettingName('HideFromReports'),
 				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?'), 
