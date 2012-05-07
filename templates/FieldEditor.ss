@@ -1,8 +1,7 @@
 <% require css(userforms/css/FieldEditor.css) %>
-<% require javascript(framework/thirdparty/jquery-ui/jquery-ui.js) %> 
 <% require javascript(userforms/javascript/UserForm.js) %>
 
-<div class="FieldEditor <% if canEdit %><% else %>readonly<% end_if %>" id="Fields">
+<div class="FieldEditor <% if canEdit %><% else %>readonly<% end_if %>" id="Fields" $AttributesHTML>
 	
 	<div class="FieldListHold">
 		<ul class="FieldList" id="Fields_fields">

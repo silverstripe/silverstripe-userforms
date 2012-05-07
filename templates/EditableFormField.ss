@@ -2,9 +2,9 @@
 <li class="$ClassName EditableFormField" id="$Name.ATT EditableItem_$Pos $Name">
 	<div class="fieldInfo">
 		<% if canEdit %>
-			<img class="fieldHandler" src="framework/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
+			<img class="fieldHandler" src="$ModulePath(framework)/images/drag.gif" alt="<% _t('DRAG', 'Drag to rearrange order of fields') %>" />
 		<% else %>
-			<img class="fieldHandler" src="framework/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
+			<img class="fieldHandler" src="$ModulePath(framework)/images/drag_readonly.gif" alt="<% _t('LOCKED', 'These fields cannot be modified') %>" />
 		<% end_if %>
 	
 		<img class="icon" src="$Icon" alt="$ClassName" title="$singular_name" />
