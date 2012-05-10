@@ -33,33 +33,14 @@ class EditableDateField extends EditableFormField {
 	}
 	
 	/**
-	 * Return the form field.
+	 * Return the form field
 	 *
-	 * @todo Make a jQuery safe form field. The current CalendarDropDown
-	 * 			breaks on the front end.
 	 */
 	public function getFormField() {
-		// scripts for jquery date picker
-		Requirements::javascript(THIRDPARTY_DIR .'/jquery-ui/jquery.ui.core.js');
-		Requirements::javascript(THIRDPARTY_DIR .'/jquery-ui/jquery.ui.datepicker.js');
-		
-		$dateFormat = DateField_View_JQuery::convert_iso_to_jquery_format(i18n::get_date_format());
-
-		Requirements::customScript(<<<JS
-			(function(jQuery) {
-				$(document).ready(function() {
-					$('input[name^=EditableDateField]').attr('autocomplete', 'off').datepicker({ dateFormat: '$dateFormat' });
-				});
-			})(jQuery);
-JS
-, 'UserFormsDate');
-
-		// css for jquery date picker
-		Requirements::css(THIRDPARTY_DIR .'/jquery-ui-themes/smoothness/jquery-ui-1.8rc3.custom.css');
-		
-		$default = ($this->getSetting('DefaultToToday')) ? date('d/m/Y') : $this->Default;
-		
-		return new DateField( $this->Name, $this->Title, $default);
+		$defaultValue = ($this->getSetting('DefaultToToday')) ? date('Y-m-d') : $this->Default;
+		$field =  new DateField( $this->Name, $this->Title, $defaultValue);
+		$field->setConfig('showcalendar', true);
+		return $field;
 	}
 	
 	/**
