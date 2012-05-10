@@ -660,7 +660,7 @@ JS
 		}
 		
 		if(Session::get("FormInfo.{$form->FormName()}.errors")){
-			Director::redirectBack();
+			Controller::curr()->redirectBack();
 			return;
 		}
 		
@@ -701,8 +701,14 @@ JS
 						$upload = new Upload();
 						$file = new File();
 						$file->ShowInSearch = 0;
-						
-						$upload->loadIntoFile($_FILES[$field->Name], $file);
+						try {
+							$upload->loadIntoFile($_FILES[$field->Name], $file);
+						} catch( ValidationException $e ) {
+							$validationResult = $e->getResult();
+							$form->addErrorMessage($field->Name, $validationResult->message(), 'bad');
+							Controller::curr()->redirectBack();
+							return;
+						}
 
 						// write file to form field
 						$submittedField->UploadedFileID = $file->ID;
@@ -734,7 +740,7 @@ JS
 			if($attachments){
 				foreach($attachments as $file){
 					if($file->ID != 0) {
-						$email->attachFile($file->Filename,$file->Filename, HTTP::getMimeType($file->Filename));
+						$email->attachFile($file->Filename, $file->Filename, HTTP::get_mime_type($file->Filename));
 					}
 				}
 			}
