@@ -13,7 +13,7 @@
 						<div id="Text_readonly" class="field readonly text">
 							<label class="left" for="Form_EditForm_Text_readonly">$Title</label>
 							<div class="middleColumn">
-								<span id="Form_EditForm_Text_readonly" class="readonly text">$Value</span>
+								<span id="Form_EditForm_Text_readonly" class="readonly text">$FormattedValue</span>
 							</div>
 	
 						</div>

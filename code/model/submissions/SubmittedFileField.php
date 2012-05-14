@@ -19,11 +19,12 @@ class SubmittedFileField extends SubmittedFormField {
 	 * @return string
 	 */
 	public function getFormattedValue() {
+		$name = $this->getName();
 		$link = $this->getLink();
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
 		
 		if($link) {
-			return sprintf('<a href="%s">%s</a>', $link, $title);
+			return sprintf('%s - <a href="%s" target="_blank">%s</a>', $name, $link, $title);
 		}
 		
 		return false;
@@ -49,5 +50,16 @@ class SubmittedFileField extends SubmittedFormField {
 				return $this->UploadedFile()->URL;
 			}
 		}
-	}	
+	}
+	
+	/**
+	 * Return the name of the file, if present
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		if($this->UploadedFile()) {
+			return $this->UploadedFile()->Name;
+		}
+	}
 }
