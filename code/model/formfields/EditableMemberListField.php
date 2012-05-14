@@ -15,7 +15,7 @@ class EditableMemberListField extends EditableFormField {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
 		$groups = DataObject::get("Group");
 		
-		if($groups) $groups = $groups->toDropdownMap('ID', 'Title');
+		if($groups) $groups = $groups->map('ID', 'Title');
 		
 		$fields = new FieldList(
 			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
@@ -26,7 +26,7 @@ class EditableMemberListField extends EditableFormField {
 	
 	public function getFormField() {
 		if ($this->getSetting('GroupID')) {
-			$members = Member::mapInGroups($this->getSetting('GroupID'));
+			$members = Member::map_in_groups($this->getSetting('GroupID'));
 			
 			return new DropdownField($this->Name, $this->Title, $members);
 		}

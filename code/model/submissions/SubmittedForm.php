@@ -7,15 +7,15 @@
 
 class SubmittedForm extends DataObject {
 	
-	static $has_one = array(
+	public static $has_one = array(
 		"SubmittedBy" => "Member",
 		"Parent" => "UserDefinedForm",
 	);
 	
-	static $has_many = array( 
+	public static $has_many = array( 
 		"Values" => "SubmittedFormField"
 	);
-
+	
 	/**
 	 * Before we delete this form make sure we delete all the
 	 * field values so that we don't leave old data round

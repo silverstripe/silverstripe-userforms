@@ -100,62 +100,54 @@
 		userforms.update();
 		
 		
-		/*--------------------- SUBMISSIONS ------------------------ */
-		
-		/**
-		 * Delete a given Submission from the form
-		 */
-		$("#userforms-submissions .deleteSubmission").live('click', function(event) {
-			event.preventDefault();
-			
-			var deletedSubmission = $(this);
-			$.post($(this).attr('href'), function(data) {
-				deletedSubmission.parents('div.userform-submission').fadeOut();
-			});
-
-			return false;
-		});
-
-		/**
-		 * Delete all submissions and fade them out if successful
-		 */
-		$("#userforms-submissions .deleteAllSubmissions").live('click', function(event) {
-			event.preventDefault();
-
-			if(!confirm(userforms.message('CONFIRM_DELETE_ALL_SUBMISSIONS'))) {
-				return false;
-			}
-
-			var self = this;
-			$.post($(this).attr('href'), function(data) {
-				$(self).parents('#userforms-submissions').children().fadeOut();
-			});
-
-			return false;
-		});
-		
-		/*-------------------- FIELD EDITOR ----------------------- */
-		
-		/**
-		 * Create a new instance of a field in the current form 
-		 * area. the type information should all be on this object
-		 */
-		
 		$.entwine('udf', function($){
+			
+			/*--------------------- SUBMISSIONS ------------------------ */
+			
+			/**
+			 * Delete a given Submission from the form
+			 */
+			$("#userforms-submissions .deleteSubmission").live('click', function(event) {
+				event.preventDefault();
+				var deletedSubmission = $(this);
+				$.post($(this).attr('href'), function(data) {
+					deletedSubmission.parents('div.userform-submission').slideUp(function(){$(this).remove()});
+				});
+			});
+
+			/**
+			 * Delete all submissions and fade them out if successful
+			 */
+			$("#userforms-submissions .deleteAllSubmissions").live('click', function(event) {
+				event.preventDefault();
+				if(!confirm(userforms.message('CONFIRM_DELETE_ALL_SUBMISSIONS'))) {
+					return;
+				}
+				var self = this;
+				$.post($(this).attr('href'), function(data) {
+					$(self).parents('#userforms-submissions').children().slideUp(function(){$(this).remove()})
+				});
+
+			});
+			
+			/*-------------------- FIELD EDITOR ----------------------- */
+			
+			/**
+			 * Create a new instance of a field in the current form 
+			 * area. the type information should all be on this object
+			 */
 			$('div.FieldEditor .MenuHolder .action').entwine({
 				onclick: function(e) {
+					e.preventDefault();
 					if($("#Fields").hasClass('readonly')) {
-						e.preventDefault();
 						return;
 					}
-					statusMessage(userforms.message('ADDING_FIELD'));
 					
 					// variables
 					var $form = $("#Form_EditForm");
 					var length = $(".FieldInfo").length + 1;
-					var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
 					var fieldType = $(this).siblings("select").val();
-					var formData = $form.serialize()+'NewID='+ length +"&Type="+ fieldType + securityID;
+					var formData = $form.serialize()+'NewID='+ length +"&Type="+ fieldType;
 					var $fieldEditor = $(this.closest('.FieldEditor'));
 					// Due to some very weird behaviout of jquery.metadata, the url have to be double quoted
 					var addURL = $fieldEditor.attr('data-add-url').substr(1,$fieldEditor.attr('data-add-url').length-2);
@@ -174,184 +166,207 @@
 							alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION', 'An error occured while fetching data from the server\n Please try again later.'));
 						}
 					});
-					e.preventDefault();
 					$("#Fields_fields").sortable('refresh');
 				}
 			});
-		});
-		
-		/** 
-		 * Upon renaming a field we should go through and rename all the
-		 * fields in the select fields to use this new field title. We can
-		 * just worry about the title text - don't mess around with the keys
-		 */
-		$('.EditableFormField .fieldInfo .text').live('change', function() {
-			var value = $(this).val();
-			var name = $(this).parents("li").attr("id").split(' ');
 			
-			$("#Fields_fields select.fieldOption option").each(function(i, domElement) {
-				if($(domElement).val() === name[2]) {
-					$(domElement).text(value);	
-				}
-			});
-		});
-		
-		/**
-		 * Show the more options popdown. Or hide it if we 
-		 * currently have it open
-		 */
-		$(".EditableFormField .moreOptions").live('click',function() {
-			var parentID = $(this).parents(".EditableFormField");
-			if(parentID) {
-				var extraOptions = parentID.children(".extraOptions");
-				if(extraOptions) {
-					if(extraOptions.hasClass('hidden')) {
-						$(this).html(userforms.message('HIDE_OPTIONS'));
-						$(this).addClass("showing");
-						extraOptions.removeClass('hidden').show();
-					}
-					else {
-						$(this).html(userforms.message('SHOW_OPTIONS'));
-						$(this).removeClass("showing");
-						extraOptions.addClass('hidden').hide();	
-					}
-				}
-			}
-			return false;
-		});
-		
-		/**
-		 * Delete a field from the user defined form
-		 */
-		$(".EditableFormField .delete").live('click', function() {
-			// remove all the rules with relate to this field
-			var text = $(this).parents("li").find(".fieldInfo .text").val();
-			
-			$("#Fields_fields .customRules select.fieldOption option").each(function(i, ele) {
-				if($(ele).text() === text) {
+			/**
+			 * Delete a field from the user defined form
+			 */
+			$(".EditableFormField .delete").entwine({
+				onclick: function(e) {
+					e.preventDefault();
 					
-					// check to see if this is selected. If it is then just remove the whole rule
-					if($(ele).parent('select.customRuleField').val() === $(ele).val()) {
-						$(ele).parents('li.customRule').remove();
+					var text = $(this).parents("li").find(".fieldInfo .text").val();
+					
+					// Remove all the rules with relate to this field
+					$("#Fields_fields .customRules select.fieldOption option").each(function(i, element) {
+						if($(element).text() === text) {
+							// check to see if this is selected. If it is then just remove the whole rule
+							if($(element).parent('select.customRuleField').val() === $(element).val()) {
+								$(element).parents('li.customRule').remove();
+							} else {
+								// otherwise remove the option
+								$(element).remove();	
+							}
+						}
+					});
+					$(this).parents(".EditableFormField").slideUp(function(){$(this).remove()})
+				}
+			});
+			
+			/** 
+			 * Upon renaming a field we should go through and rename all the
+			 * fields in the select fields to use this new field title. We can
+			 * just worry about the title text - don't mess around with the keys
+			 */
+			$('.EditableFormField .fieldInfo .text').entwine({
+				onchange: function(e) {
+					var value = $(this).val();
+					var name = $(this).parents("li").attr("id").split(' ');
+					$("#Fields_fields select.fieldOption option").each(function(i, domElement) {
+						if($(domElement).val() === name[2]) {
+							$(domElement).text(value);	
+						}
+					});
+				}
+			});
+			
+			/**
+			 * Show the more options popdown. Or hide it if we currently have it open
+			 */
+			$(".EditableFormField .moreOptions").entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					
+					var parent = $(this).parents(".EditableFormField");
+					if(!parent) {
+						return;
 					}
-					else {
-						// otherwise remove the option
-						$(ele).remove();	
+					
+					var extraOptions = parent.children(".extraOptions");
+					if(!extraOptions) {
+						return;
+					}
+					
+					if(extraOptions.hasClass('hidden')) {
+						$(this).addClass("showing");
+						$(this).html('Hide options');
+						extraOptions.removeClass('hidden');
+					} else {
+						$(this).removeClass("showing");
+						$(this).html('Show options');
+						extraOptions.addClass('hidden');	
 					}
 				}
 			});
 			
-			$(this).parents(".EditableFormField").remove();
-			
-			return false;
-		});
-		
-		/**
-		 * Add a suboption to a radio field or to a dropdown box 
-		 * for example
-		 */
-		$(".EditableFormField .addableOption").live('click', function() {
-			
-			// Give the user some feedback
-			statusMessage(userforms.message('ADDING_OPTION'));
-			
-			// variables
-			var options = $(this).parent("li");
-			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
-			var parent = $(this).attr("rel");
-			
-			// send ajax request to the page
-			$.ajax({
-				type: "GET",
-				url: action,
-				data: 'Parent='+ parent,
-				
-				// create a new field
-				success: function(msg){
-					options.before(msg);
-					statusMessage(userforms.message('ADDED_OPTION'));
-				},
-				
-				// error creating new field
-				error: function(request, text, error) {
-					statusMessage(userforms.message('ERROR_CREATING_OPTION'));
-				} 
+			/**
+			 * Add a suboption to a radio field or to a dropdown box for example
+			 */
+			$(".EditableFormField .addableOption").entwine({
+				onclick: function(e) {
+					e.preventDefault();
+
+					// Give the user some feedback
+					statusMessage(userforms.message('ADDING_OPTION'));
+
+					// variables
+					var options = $(this).parent("li");
+					var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
+					var parent = $(this).attr("rel");
+
+					// send ajax request to the page
+					$.ajax({
+						type: "GET",
+						url: action,
+						data: 'Parent='+ parent,
+
+						// create a new field
+						success: function(msg){
+							options.before(msg);
+							statusMessage(userforms.message('ADDED_OPTION'));
+						},
+
+						// error creating new field
+						error: function(request, text, error) {
+							statusMessage(userforms.message('ERROR_CREATING_OPTION'));
+						} 
+					});
+
+				}
 			});
 			
-			return false;
-		});
-		
-		/**
-		 * Delete a suboption such as an dropdown option or a 
-		 * checkbox field
-		 */
-		$(".EditableFormField .deleteOption").live('click', function() {
-			// pass the deleted status onto the element
-			$(this).parent("li").children("[type=text]").attr("value", "field-node-deleted");
-			$(this).parent("li").hide();
-			
-			// Give the user some feedback
-			statusMessage(userforms.message('REMOVED_OPTION'));
-			return false;
-		});
+			/**
+			 * Delete a suboption such as an dropdown option or a 
+			 * checkbox field
+			 */
+			$(".EditableFormField .deleteOption").entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					
+					// pass the deleted status onto the element
+					$(this).parent("li").children("[type=text]").attr("value", "field-node-deleted");
+					$(this).parent("li").hide();
 
-		/**
-		 * Custom Rules Interface
-		 */
-		$("body").delegate("select.conditionOption", 'change', function() {
-			var valueInput = $(this).siblings(".ruleValue");
-			
-			if($(this).val() && $(this).val() !== "IsBlank" && $(this).val() !== "IsNotBlank") {
-				valueInput.removeClass("hidden");
-			}
-			else {
-				valueInput.addClass("hidden");
-			}
-		});
-		
-		/**
-		 * Delete a custom rule
-		 */
-		$(".customRules .deleteCondition").live('click', function() {
-			$(this).parent("li").fadeOut().remove();
-			
-			return false;
-		});
-		
-		/**
-		 * Adding a custom rule to a given form
-		 */
-		$(".customRules .addCondition").live('click', function() {
-			// Give the user some feedback
-			statusMessage(userforms.message('ADDING_RULE'));
-			
-			// get the fields li which to duplicate
-			var currentRules = $(this).parent("li").parent("ul");
-			var defaultRule = currentRules.children("li.hidden:first");
-			var newRule = defaultRule.clone();
-
-			newRule.children(".customRuleField").each(function(i, domElement) {
-				var currentName = domElement.name.split("][");
-				currentName[3] = currentName[2];
-				currentName[2] = currentRules.children().size() + 1;
-				domElement.name = currentName.join("][");
-			});
-
-			// remove hidden tag
-			newRule.removeClass("hidden");
-			
-			// update the fields dropdown
-			newRule.children("select.fieldOption").empty();
-
-			$("#Fields_fields li.EditableFormField").each(function (i, domElement) {
-				var name = $(domElement).attr("id").split(' ');
-				newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).find(".text").val() + "</option>");
+					// Give the user some feedback
+					statusMessage(userforms.message('REMOVED_OPTION'));
+				}
 			});
 			
-			// append to the list
-			currentRules.append(newRule);
+			/**
+			 * Custom Rules Interface
+			 * 
+			 * Hides the input text field if the conditionOption is 'IsBlank' or 'IsNotBlank'
+			 */
+			$("select.conditionOption").entwine({
+				onchange: function() {
+					var valueInput = $(this).siblings(".ruleValue");
+					if($(this).val() && $(this).val() !== "IsBlank" && $(this).val() !== "IsNotBlank") {
+						valueInput.removeClass("hidden");
+					} else {
+						valueInput.addClass("hidden");
+					}
+				}
+			});
+
+			/**
+			 * Delete a custom rule
+			 */
+			$(".customRules .deleteCondition").entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					$(this).parent("li").fadeOut().remove();
+				}
+			});
+
+			/**
+			 * Adding a custom rule to a given form
+			 */
+			$(".customRules .addCondition").entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					
+					// Give the user some feedback
+					statusMessage(userforms.message('ADDING_RULE'));
+
+					// get the fields li which to duplicate
+					var currentRules = $(this).parent("li").parent("ul");
+					var defaultRule = currentRules.children("li.hidden:first");
+					var newRule = defaultRule.clone();
+
+					newRule.children(".customRuleField").each(function(i, domElement) {
+						var currentName = domElement.name.split("][");
+						currentName[3] = currentName[2];
+						currentName[2] = currentRules.children().size() + 1;
+						domElement.name = currentName.join("][");
+					});
+
+					// remove hidden tag
+					newRule.removeClass("hidden");
+
+					// update the fields dropdown
+					newRule.children("select.fieldOption").empty();
+
+					$("#Fields_fields li.EditableFormField").each(function (i, domElement) {
+						var name = $(domElement).attr("id").split(' ');
+						newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).find(".text").val() + "</option>");
+					});
+
+					// append to the list
+					currentRules.append(newRule);
+				}
+			});
 			
-			return false;
+			$('.userforms-submissions-pagination a').entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					$.get($(this).attr('href'), function(data) {
+						$('#userforms-submissions').replaceWith(data);
+					});
+					this._super();
+				}
+			})
 		});
 	});
 })(jQuery);

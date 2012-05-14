@@ -10,7 +10,6 @@
 	border: 1px solid #ddd;
 	background: #f4f4f4;
 	overflow: hidden;
-	padding: 4px 0;
 	width: 100%;
 }
 	.MenuHolder h2 {
@@ -21,13 +20,13 @@
 	.MenuHolder select {
 		float: left;
 		width: 240px;
-		margin: 7px 0 0 8px;
+		margin: 18px 0 0 8px;
 		font-size: 11px;
 	}
 	
 	.MenuHolder .action {
 		float: left;
-		margin: 7px 0 0 4px;
+		margin: 14px 0 0 4px;
 		font-size: 11px;
 	}
 	
