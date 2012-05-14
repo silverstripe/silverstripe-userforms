@@ -18,23 +18,20 @@ class SubmittedFormReportField extends FormField {
 	 *
 	 * @return PaginatedList
 	 */ 
-	public function getSubmissions($start = 0) {
+	public function getSubmissions($page = 1) {
 		$record = $this->form->getRecord();
 		$submissions = $record->getComponents('Submissions', null, "\"Created\" DESC");
 		
-		$query = DB::query(sprintf("
-			SELECT COUNT(*) AS \"CountRows\" 
-			FROM \"SubmittedForm\" 
-			WHERE \"ParentID\" = '%d'", $record->ID
-		));
-		
-		foreach($query as $r) $totalCount = $r['CountRows'];
+		$query = DB::query(sprintf("SELECT COUNT(*) AS \"CountRows\" FROM \"SubmittedForm\" WHERE \"ParentID\" = '%d'", $record->ID));
+		$totalCount = 0;
+		foreach($query as $r) {
+			$totalCount = $r['CountRows'];
+		}
 		
 		$list = new PaginatedList($submissions);
-		$list->setPageStart($start);
+		$list->setCurrentPage($page);
 		$list->setPageLength(10);
 		$list->setTotalItems($totalCount);
-		
 		return $list;
 	}
 	
@@ -42,10 +39,9 @@ class SubmittedFormReportField extends FormField {
 	 * @return string
 	 */
 	public function getMoreSubmissions() {
-		$start = ($start = $this->request->getVar('start')) ? (int) $start : 0;
-
+		$page = ($page = $this->request->getVar('page')) ? (int)$page : 1;
 		return $this->customise(new ArrayData(array(
-			'Submissions' => $this->getSubmissions($start)
+			'Submissions' => $this->getSubmissions($page)
 		)))->renderWith(array('SubmittedFormReportField'));
 	}
 

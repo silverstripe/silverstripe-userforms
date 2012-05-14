@@ -357,6 +357,16 @@
 					currentRules.append(newRule);
 				}
 			});
+			
+			$('.userforms-submissions-pagination a').entwine({
+				onclick: function(e) {
+					e.preventDefault();
+					$.get($(this).attr('href'), function(data) {
+						$('#userforms-submissions').replaceWith(data);
+					});
+					this._super();
+				}
+			})
 		});
 	});
 })(jQuery);
