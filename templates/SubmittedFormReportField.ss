@@ -23,7 +23,8 @@
 		
 	 	<% if Submissions.MoreThanOnePage %>
 		<div class="userforms-submissions-pagination">
-			<span>Pages: </span>
+			<span><% _t('PAGES', 'Pages') %>:</span>
+			
 	  		<% loop Submissions.Pages() %>
 	  			<% if CurrentBool %>
 	  				$PageNum

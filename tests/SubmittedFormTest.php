@@ -31,8 +31,8 @@ class SubmittedFormTest extends FunctionalTest {
 		// check to ensure that the pagination exists
 		$pagination = $parser->getBySelector('.userforms-submissions-pagination');
 
-		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->span), "Viewing rows 0 - 10 of 11 rows");
-		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->a), "Next page");
+		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->span), "Pages:");
+		$this->assertEquals(str_replace("\n", ' ',(string) $pagination[0]->a), "2");
 
 		// ensure the actions exist
 		$actions = $parser->getBySelector('.userforms-submission-actions');
