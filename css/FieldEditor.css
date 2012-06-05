@@ -127,6 +127,14 @@
 					float: left;
 					display: block;
 				}
+				#Fields_fields .EditableFormField .extraOptions select {
+					width: 221px;
+				}
+				#Fields_fields .EditableFormField .extraOptions .chzn-drop input {
+					font-size: 12px;
+					padding: 4px 20px 4px 5px;
+					float: none;
+				}
 				#Fields_fields .EditableFormField a.addableOption,
 				#Fields_fields .EditableFormField a.addCondition {
 					background: url(../../cms/images/add.gif) no-repeat top left;

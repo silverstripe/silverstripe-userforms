@@ -792,7 +792,7 @@ JS
 		
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 		
-		return Director::redirect($this->Link() . 'finished' . $referrer);
+		return $this->redirect($this->Link() . 'finished' . $referrer);
 	}
 
 	/**
