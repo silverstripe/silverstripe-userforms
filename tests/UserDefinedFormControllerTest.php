@@ -70,7 +70,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		// test form 
-		$this->assertEquals($controller->Form()->Name(), 'Form', 'The form is referenced as Form');
+		$this->assertEquals($controller->Form()->getName(), 'Form', 'The form is referenced as Form');
 		$this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
 		$this->assertEquals($controller->Form()->Actions()->Count(), 1);
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);
@@ -148,7 +148,8 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	function testArrayToJson() {
 		$array = array('1' => 'one', '2' => 'two');
 		$string = "{\n1:\"one\", 2:\"two\"\n}\n";
-		$this->assertEquals(UserDefinedFormControllerTest_Controller::array2json($array), $string);
+		$form = new UserDefinedFormControllerTest_Controller();
+		$this->assertEquals($form->array2json($array), $string);
 	}
 	
 	
