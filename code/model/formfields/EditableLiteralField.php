@@ -14,10 +14,12 @@ class EditableLiteralField extends EditableFormField {
 	static $plural_name = 'HTML Blocks';
 	
 	public function getFieldConfiguration() {
-		
+		$customSettings = unserialize($this->CustomSettings);	
+		$content = (isset($customSettings['Content'])) ? $customSettings['Content'] : '';
 		$textAreaField = new TextareaField(
 			$this->getSettingName('Content'),
-			"HTML"
+			"HTML",
+			$content
 		);
 		$textAreaField->setRows(4);
 		$textAreaField->setColumns(20);
