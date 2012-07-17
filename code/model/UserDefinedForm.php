@@ -69,13 +69,13 @@ class UserDefinedForm extends Page {
 		// view the submissions
 		$fields->addFieldToTab("Root.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
 		$fields->addFieldToTab("Root.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
-        
+
 		UserDefinedForm_EmailRecipient::$summary_fields=array(
 			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
 			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
 			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
 		);
-        
+
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", "EmailRecipients", $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
 		
@@ -251,7 +251,7 @@ class UserDefinedForm extends Page {
 	 *
 	 * @return FieldSet
 	 */
-  	public function getFormOptions() {
+	public function getFormOptions() {
 		$submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		
 		$options = new FieldList(
@@ -734,7 +734,7 @@ JS
 		// email users on submit.
 		if($this->EmailRecipients()) {
 			
-			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);                     
+			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			$email->populateTemplate($emailData);
 			
 			if($attachments){
@@ -770,7 +770,7 @@ JS
 				}
 				
 				$this->extend('updateEmail', $email, $recipient, $emailData);
-                
+
 				if($recipient->SendPlain) {
 					$body = strip_tags($recipient->EmailBody) . "\n ";
 					if(isset($emailData['Fields']) && !$recipient->HideFormData) {
@@ -867,7 +867,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			if($multiOptionFields || $validEmailFields) {
 
 				if($multiOptionFields && $validEmailFields) {
-                    $multiOptionFields=$multiOptionFields->toArray();
+					$multiOptionFields=$multiOptionFields->toArray();
 					$multiOptionFields=array_merge($multiOptionFields, $validEmailFields->toArray());
 					$multiOptionFields=ArrayList::create($multiOptionFields);
 				}
@@ -880,8 +880,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 					 $multiOptionFields, '', null, ""), 'EmailAddress');
 			}
 		}
-        
-        $this->extend('updateCMSFields', $fields);
+
+		$this->extend('updateCMSFields', $fields);
 
 		return $fields;
 	}

@@ -153,7 +153,7 @@ class EditableFormFieldTest extends FunctionalTest {
 		$rules = $field->CustomRules();
 		
 		// form has 2 fields - a checkbox and a text field
-		// it has 1 rule -  when ticked the checkbox hides the text field
+		// it has 1 rule - when ticked the checkbox hides the text field
 		$this->assertEquals($rules->Count(), 1);
 
 		// rules are ArrayDatas not dataobjects
