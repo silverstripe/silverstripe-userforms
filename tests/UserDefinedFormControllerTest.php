@@ -78,7 +78,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
 		$controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 
-		$this->assertEquals($controller->Form()->Fields()->Count(), 1);  // disabled SecurityID token fields
+		$this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
 		$this->assertEquals($controller->Form()->Actions()->Count(), 1);
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 1);
 	}

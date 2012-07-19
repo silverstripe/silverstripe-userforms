@@ -38,7 +38,7 @@ class EditableDateField extends EditableFormField {
 	 */
 	public function getFormField() {
 		$defaultValue = ($this->getSetting('DefaultToToday')) ? date('Y-m-d') : $this->Default;
-		$field =  new DateField( $this->Name, $this->Title, $defaultValue);
+		$field = new DateField( $this->Name, $this->Title, $defaultValue);
 		$field->setConfig('showcalendar', true);
 		return $field;
 	}
