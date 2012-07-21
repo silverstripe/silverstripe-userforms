@@ -25,19 +25,19 @@
 		<div class="userforms-submissions-pagination">
 			<span><% _t('PAGES', 'Pages') %>:</span>
 			
-	  		<% loop Submissions.Pages() %>
-	  			<% if CurrentBool %>
-	  				$PageNum
-	  			<% else %>
-	  				<% if Link %>
-	  					<a href="{$Top.Link(getMoreSubmissions)}?page=$PageNum">$PageNum</a>
-	  				<% else %>
-	  					...
-	  				<% end_if %>
-	  			<% end_if %>
-	  		<% end_loop %>
+			<% loop Submissions.Pages() %>
+				<% if CurrentBool %>
+					$PageNum
+				<% else %>
+					<% if Link %>
+						<a href="{$Top.Link(getMoreSubmissions)}?page=$PageNum">$PageNum</a>
+					<% else %>
+						...
+					<% end_if %>
+				<% end_if %>
+			<% end_loop %>
 		</div>
-	  	<% end_if %>
+		<% end_if %>
 	 	
 	<% else %>
 		<p class="userforms-nosubmissions" <% if Submissions %>style="display: none"<% end_if %>><% _t('NOSUBMISSIONS', 'No Submissions') %></p>

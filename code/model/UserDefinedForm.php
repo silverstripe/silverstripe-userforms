@@ -69,13 +69,13 @@ class UserDefinedForm extends Page {
 		// view the submissions
 		$fields->addFieldToTab("Root.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
 		$fields->addFieldToTab("Root.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
-        
-        UserDefinedForm_EmailRecipient::$summary_fields=array(
-                                    'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
-                                    'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
-                                    'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
-                                );
-        
+
+		UserDefinedForm_EmailRecipient::$summary_fields=array(
+			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
+			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
+			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
+		);
+
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", "EmailRecipients", $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
 		
@@ -85,7 +85,7 @@ class UserDefinedForm extends Page {
 		$onCompleteFieldSet = new FieldList(
 			$editor=new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'), _t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage))
 		);
-        $editor->setRows(3);
+		$editor->setRows(3);
 		
 		$fields->addFieldsToTab("Root.OnComplete", $onCompleteFieldSet);
 		$fields->addFieldsToTab("Root.Options", $this->getFormOptions());
@@ -251,7 +251,7 @@ class UserDefinedForm extends Page {
 	 *
 	 * @return FieldSet
 	 */
-  	public function getFormOptions() {
+	public function getFormOptions() {
 		$submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		
 		$options = new FieldList(
@@ -672,7 +672,7 @@ JS
 		if(!$this->DisableSaveSubmissions) $submittedForm->write();
 		
 		$values = array();
-        $attachments = array();
+		$attachments = array();
 
 		$submittedFields = new ArrayList();
 		
@@ -734,7 +734,7 @@ JS
 		// email users on submit.
 		if($this->EmailRecipients()) {
 			
-			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields);                     
+			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			$email->populateTemplate($emailData);
 			
 			if($attachments){
@@ -756,7 +756,7 @@ JS
 				// check to see if they are a dynamic sender. eg based on a email field a user selected
 				if($recipient->SendEmailFromField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
-					if($submittedFormField) {
+					if($submittedFormField && is_string($submittedFormField->Value)) {
 						$email->setFrom($submittedFormField->Value);	
 					}
 				}
@@ -764,13 +764,13 @@ JS
 				if($recipient->SendEmailToField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 					
-					if($submittedFormField) {
+					if($submittedFormField && is_string($submittedFormField->Value)) {
 						$email->setTo($submittedFormField->Value);	
 					}
 				}
 				
-                $this->extend('updateEmail', $email, $recipient, $emailData);
-                
+				$this->extend('updateEmail', $email, $recipient, $emailData);
+
 				if($recipient->SendPlain) {
 					$body = strip_tags($recipient->EmailBody) . "\n ";
 					if(isset($emailData['Fields']) && !$recipient->HideFormData) {
@@ -859,14 +859,15 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			
 			// if they have email fields then we could send from it
 			if($validEmailFields) {
-				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'), $validEmailFields->map('ID', 'Title'), '', null,""), 'EmailFrom');
+				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'),
+					$validEmailFields->map('ID', 'Title'), '', null,""), 'EmailFrom');
 			}
 			
 			// if they have multiple options
 			if($multiOptionFields || $validEmailFields) {
 
 				if($multiOptionFields && $validEmailFields) {
-                    $multiOptionFields=$multiOptionFields->toArray();
+					$multiOptionFields=$multiOptionFields->toArray();
 					$multiOptionFields=array_merge($multiOptionFields, $validEmailFields->toArray());
 					$multiOptionFields=ArrayList::create($multiOptionFields);
 				}
@@ -875,11 +876,12 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				}
 				
 				$multiOptionFields = $multiOptionFields->map('ID', 'Title');
-				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'), $multiOptionFields, '', null, ""), 'EmailAddress');
+				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'),
+					 $multiOptionFields, '', null, ""), 'EmailAddress');
 			}
 		}
-        
-        $this->extend('updateCMSFields', $fields);
+
+		$this->extend('updateCMSFields', $fields);
 
 		return $fields;
 	}
@@ -904,7 +906,7 @@ class UserDefinedForm_SubmittedFormEmail extends Email {
 	protected $ss_template = "SubmittedFormEmail";
 	protected $data;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct($submittedFields = null) {
+		parent::__construct($submittedFields = null);
 	}
 }

@@ -129,6 +129,6 @@
 	<% end_if %>
 	
 	<!-- Hidden option Fields -->
-  	<input type="hidden" class="typeHidden" name="{$FieldName}[Type]" value="$ClassName" />   
+	<input type="hidden" class="typeHidden" name="{$FieldName}[Type]" value="$ClassName" /> 
 	<input type="hidden" class="sortHidden" name="{$FieldName}[Sort]" value="$Sort" />
 </li>

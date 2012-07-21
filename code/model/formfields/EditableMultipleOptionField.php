@@ -69,7 +69,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @return void
 	 */
 	public function delete() {
-  		$options = $this->Options();
+		$options = $this->Options();
 
 		if($options) {
 			foreach($options as $option) {
@@ -77,7 +77,7 @@ class EditableMultipleOptionField extends EditableFormField {
 			}
 		}
 		
-		parent::delete();   
+		parent::delete(); 
 	}
 	
 	/**

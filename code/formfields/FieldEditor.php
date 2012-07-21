@@ -138,10 +138,10 @@ class FieldEditor extends FormField {
 				if(!is_numeric($newEditableID)) continue;
 				
 				// get it from the db
-			  	$editable = DataObject::get_by_id('EditableFormField', $newEditableID); 
+				$editable = DataObject::get_by_id('EditableFormField', $newEditableID); 
 
-		  		// if it exists in the db update it
-		  		if($editable) {
+				// if it exists in the db update it
+				if($editable) {
 			
 					// remove it from the removed fields list
 					if(isset($missingFields[$editable->ID]) && isset($newEditableData) && is_array($newEditableData)) {
@@ -156,18 +156,18 @@ class FieldEditor extends FormField {
 					// save data
 					$editable->populateFromPostData($newEditableData);
 				}
-		    }
+			}
 		}
 
-    	// remove the fields not saved
+		// remove the fields not saved
 		if($this->canEdit()) {
-    		foreach($missingFields as $removedField) {
-    			if(is_numeric($removedField->ID)) {
-					// check we can edit this
-					$removedField->delete();
-				}
+			foreach($missingFields as $removedField) {
+				if(is_numeric($removedField->ID)) {
+						// check we can edit this
+						$removedField->delete();
+					}
 			}
-    	}
+		}
 	}
 	
 	/**

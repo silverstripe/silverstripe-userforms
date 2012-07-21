@@ -28,7 +28,7 @@ class EditableFormField extends DataObject {
 		"CustomSettings" => "Text",
 		"CustomParameter" => "Varchar(200)"
 	);
-    
+
 	static $has_one = array(
 		"Parent" => "UserDefinedForm",
 	);
@@ -446,7 +446,7 @@ class EditableFormField extends DataObject {
 	public function showInReports() {
 		return true;
 	}
-   
+ 
 	/**
 	 * Return the validation information related to this field. This is 
 	 * interrupted as a JSON object for validate plugin and used in the 
