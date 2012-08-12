@@ -35,6 +35,16 @@
 .FormOptions {
 	padding: 10px 0 0 0;
 }
+#ShowClearButton, #DisableSaveSubmissions{
+	padding-left:0;
+}
+#ShowClearButton label, #DisableSaveSubmissions label{
+	float:left;
+	font-weight:bold;
+	margin-right:43px;
+}
+
+
 
 /* Field Listing
 ---------------------------------------- */	

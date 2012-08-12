@@ -57,18 +57,21 @@ class UserDefinedForm extends Page {
 		$fields = parent::getCMSFields();
 
 		// define tabs
-		$fields->findOrMakeTab('Root.Form', _t('UserDefinedForm.FORM', 'Form'));
-		$fields->findOrMakeTab('Root.Options', _t('UserDefinedForm.OPTIONS', 'Options'));
-		$fields->findOrMakeTab('Root.EmailRecipients', _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'));
-		$fields->findOrMakeTab('Root.OnComplete', _t('UserDefinedForm.ONCOMPLETE', 'On Complete'));
-		$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
+		$fields->findOrMakeTab('Root.FormContent', _t('UserDefinedForm.FORM', 'Form'));
+		$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.FORMOPTIONS', 'Form Options'));
+		$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.FORMSUBMISSIONS', 'Form Submissions'));
 
 		// field editor
-		$fields->addFieldToTab("Root.Form", new FieldEditor("Fields", 'Fields', "", $this ));
+		$fields->addFieldToTab("Root.FormContent", new FieldEditor("Fields", 'Fields', "", $this ));
 		
-		// view the submissions
-		$fields->addFieldToTab("Root.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
-		$fields->addFieldToTab("Root.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
+		// text to show on complete
+		$onCompleteFieldSet = new CompositeField(
+			$label=new LabelField('OnCompleteMessageLabel',_t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
+			$editor=new HtmlEditorField( "OnCompleteMessage", "", _t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage))
+		);
+		$onCompleteFieldSet->addExtraClass('field');
+		$editor->setRows(3);
+		$label->addExtraClass('left');		
 
 		UserDefinedForm_EmailRecipient::$summary_fields=array(
 			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
@@ -78,18 +81,17 @@ class UserDefinedForm extends Page {
 
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", "EmailRecipients", $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
-		
-		$fields->addFieldToTab("Root.EmailRecipients", $emailRecipients);
-	
-		// text to show on complete
-		$onCompleteFieldSet = new FieldList(
-			$editor=new HtmlEditorField( "OnCompleteMessage", _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion'), _t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage))
-		);
-		$editor->setRows(3);
-		
-		$fields->addFieldsToTab("Root.OnComplete", $onCompleteFieldSet);
-		$fields->addFieldsToTab("Root.Options", $this->getFormOptions());
-		
+		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName('Add Email Recipient');
+
+		$fields->addFieldsToTab("Root.FormOptions", $onCompleteFieldSet);		
+		$fields->addFieldToTab("Root.FormOptions", $emailRecipients);
+		$fields->addFieldsToTab("Root.FormOptions", $this->getFormOptions());
+
+
+		// view the submissions
+		$fields->addFieldToTab("Root.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
+		$fields->addFieldToTab("Root.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
+			
 		return $fields;
 	}
 	
