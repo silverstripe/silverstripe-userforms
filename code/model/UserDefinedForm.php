@@ -527,14 +527,21 @@ JS
 							// watch out for multiselect options - radios and check boxes
 							if(is_a($formFieldWatch, 'EditableDropdown')) {
 								$fieldToWatch = "$(\"select[name='".$dependency['ConditionField']."']\")";	
+								$fieldToWatchOnLoad = $fieldToWatch;
 							}
-							
 							// watch out for checkboxs as the inputs don't have values but are 'checked
 							else if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
 								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."[".$dependency['Value']."]']\")";
+								$fieldToWatchOnLoad = $fieldToWatch;
+							}
+							else if(is_a($formFieldWatch, 'EditableRadioField')) {
+								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";
+								// We only want to trigger on load once for the radio group - hence we focus on the first option only.
+								$fieldToWatchOnLoad = "$(\"input[name='".$dependency['ConditionField']."']:first\")";
 							}
 							else {
-								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";		
+								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";
+								$fieldToWatchOnLoad = $fieldToWatch;
 							}
 							
 							// show or hide?
@@ -551,23 +558,37 @@ JS
 							
 							// is this field a special option field
 							$checkboxField = false;
+							$radioField = false;
 							if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
 								$action = "click";
 								$checkboxField = true;
 							}
+							else if ($formFieldWatch->ClassName == "EditableRadioField") {
+								$radioField = true;
+							}
 							
+							// Escape the values.
+							$dependency['Value'] = str_replace('"', '\"', $dependency['Value']);
+
 							// and what should we evaluate
 							switch($dependency['ConditionOption']) {
 								case 'IsNotBlank':
-									$expression = ($checkboxField) ? '$(this).attr("checked")' :'$(this).val() != ""';
+									$expression = ($checkboxField || $radioField) ? '$(this).attr("checked")' :'$(this).val() != ""';
 
 									break;
 								case 'IsBlank':
-									$expression = ($checkboxField) ? '!($(this).attr("checked"))' : '$(this).val() == ""';
+									$expression = ($checkboxField || $radioField) ? '!($(this).attr("checked"))' : '$(this).val() == ""';
 									
 									break;
 								case 'HasValue':
-									$expression = ($checkboxField) ? '$(this).attr("checked")' : '$(this).val() == "'. $dependency['Value'] .'"';
+									if ($checkboxField) {
+										$expression = '$(this).attr("checked")';
+									} else if ($radioField) {
+										// We cannot simply get the value of the radio group, we need to find the checked option first.
+										$expression = '$(this).parents(".field").find("input:checked").val()=="'. $dependency['Value'] .'"';
+									} else {
+										$expression = '$(this).val() == "'. $dependency['Value'] .'"';
+									}
 
 									break;
 								case 'ValueLessThan':
@@ -586,20 +607,40 @@ JS
 									$expression = '$(this).val() >= parseFloat("'. $dependency['Value'] .'")';
 
 									break;	
-								default:
-									$expression = ($checkboxField) ? '!($(this).attr("checked"))' : '$(this).val() != "'. $dependency['Value'] .'"';
+								default: // ==HasNotValue
+									if ($checkboxField) {
+										$expression = '!$(this).attr("checked")';
+									} else if ($radioField) {
+										// We cannot simply get the value of the radio group, we need to find the checked option first.
+										$expression = '$(this).parents(".field").find("input:checked").val()!="'. $dependency['Value'] .'"';
+									} else {
+										$expression = '$(this).val() != "'. $dependency['Value'] .'"';
+									}
 								
 									break;
 							}
-							// put it all together
-							$rules .= $fieldToWatch.".$action(function() {
-								if(". $expression ." ) {
-									$(\"#". $fieldId ."\").".$view."();
-								}
-								else {
-									$(\"#". $fieldId ."\").".$opposite."();
-								}
+
+							// Register conditional behaviour with an element, so it can be triggered from many places.
+							$rules .= $fieldToWatch.".each(function() {
+								$(this).data('userformConditions', function() {
+									if(". $expression ." ) {
+										$(\"#". $fieldId ."\").".$view."();
+									}
+									else {
+										$(\"#". $fieldId ."\").".$opposite."();
+									}
+								});
 							});";
+
+							// Trigger update on element changes.
+							$rules .= $fieldToWatch.".$action(function() {
+								$(this).data('userformConditions').call(this);
+							});\n";
+
+							// Trigger update on load (if server-side validation fails some fields will have different values than defaults).
+							$rules .= $fieldToWatchOnLoad.".each(function() {
+								$(this).data('userformConditions').call(this);
+							});\n";
 						}
 					}
 				}
@@ -609,9 +650,9 @@ JS
 		Requirements::customScript(<<<JS
 			(function($) {
 				$(document).ready(function() {
-					$rules
-					
 					$default
+
+					$rules
 				})
 			})(jQuery);
 JS
