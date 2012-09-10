@@ -552,7 +552,7 @@ JS
 							// @todo encapulsation
 							$action = "change";
 							
-							if($formFieldWatch->ClassName == "EditableTextField" || $formFieldWatch->ClassName == "EditableDateField") {
+							if($formFieldWatch->ClassName == "EditableTextField") {
 								$action = "keyup";
 							}
 							
