@@ -25,7 +25,7 @@ class EditableFormHeading extends EditableFormField {
 		$label = _t('EditableFormHeading.LEVEL', 'Select Heading Level');
 		
 		$options = parent::getFieldConfiguration();
-		
+
 		$options->push(
 			new DropdownField($this->getSettingName("Level"), $label, $levels, $level)
 		);
@@ -33,6 +33,14 @@ class EditableFormHeading extends EditableFormField {
 		if($this->readonly) {
 			$extraFields = $options->makeReadonly();		
 		}
+
+		$options->push(
+			new CheckboxField(
+				$this->getSettingName('HideFromReports'),
+				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?'), 
+				$this->getSetting('HideFromReports')
+			)
+		);
 		
 		return $options;
 	}
@@ -45,7 +53,7 @@ class EditableFormHeading extends EditableFormField {
 	}
 	
 	function showInReports() {
-		return false;
+		return (!$this->getSetting('HideFromReports'));
 	}
 	
 	function getFieldValidationOptions() {
