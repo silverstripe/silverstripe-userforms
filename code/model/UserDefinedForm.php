@@ -905,30 +905,49 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		);
 		
 		if($this->Form()) {
+			$dropdowns = array();
+
 			$validEmailFields = DataObject::get("EditableEmailField", "\"ParentID\" = '" . (int)$this->FormID . "'");
 			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "\"ParentID\" = '" . (int)$this->FormID . "'");
 			
 			// if they have email fields then we could send from it
 			if($validEmailFields) {
-				$fields->insertAfter(new DropdownField('SendEmailFromFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'),
-					$validEmailFields->map('ID', 'Title'), '', null,""), 'EmailFrom');
+				$fields->insertAfter($dropdowns[] = new DropdownField(
+					'SendEmailFromFieldID',
+					_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'),
+					$validEmailFields->map('ID', 'Title')
+				), 'EmailFrom');
 			}
 			
 			// if they have multiple options
 			if($multiOptionFields || $validEmailFields) {
 
 				if($multiOptionFields && $validEmailFields) {
-					$multiOptionFields=$multiOptionFields->toArray();
-					$multiOptionFields=array_merge($multiOptionFields, $validEmailFields->toArray());
-					$multiOptionFields=ArrayList::create($multiOptionFields);
+					$multiOptionFields = $multiOptionFields->toArray();
+					$multiOptionFields = array_merge(
+						$multiOptionFields,
+						$validEmailFields->toArray()
+					);
+
+					$multiOptionFields = ArrayList::create($multiOptionFields);
 				}
-				elseif(!$multiOptionFields) {
+				else if(!$multiOptionFields) {
 					$multiOptionFields = $validEmailFields;	
 				}
 				
 				$multiOptionFields = $multiOptionFields->map('ID', 'Title');
-				$fields->insertAfter(new DropdownField('SendEmailToFieldID', _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'),
-					 $multiOptionFields, '', null, ""), 'EmailAddress');
+					$fields->insertAfter($dropdowns[] = new DropdownField(
+						'SendEmailToFieldID',
+						_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'),
+					 $multiOptionFields
+				), 'EmailAddress');
+			}
+
+			if($dropdowns) {
+				foreach($dropdowns as $dropdown) {
+					$dropdown->setHasEmptyDefault(true);
+					$dropdown->setEmptyString(" ");
+				}
 			}
 		}
 
