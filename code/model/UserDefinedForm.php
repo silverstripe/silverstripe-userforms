@@ -12,14 +12,19 @@
 class UserDefinedForm extends Page {
 	
 	/**
-	 * @var String Required Identifier
+	 * @var string
 	 */
-	static $required_identifier = null;
+	public static $description = 'Adds a customizable form.';
+
+	/**
+	 * @var string Required Identifier
+	 */
+	public static $required_identifier = null;
 	
 	/**
-	 * @var Array Fields on the user defined form page. 
+	 * @var array Fields on the user defined form page.
 	 */
-	static $db = array(
+	public static $db = array(
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean",
@@ -27,22 +32,22 @@ class UserDefinedForm extends Page {
 	);
 	
 	/**
-	 * @var Array Default values of variables when this page is created
+	 * @var array Default values of variables when this page is created
 	 */ 
-	static $defaults = array(
+	public static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
-	static $extensions = array(
+	public static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
 
 	/**
 	 * @var Array
 	 */
-	static $has_many = array( 
+	public static $has_many = array(
 		"Fields" => "EditableFormField",
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
