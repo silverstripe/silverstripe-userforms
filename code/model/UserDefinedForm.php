@@ -784,7 +784,6 @@ JS
 
 		// email users on submit.
 		if($this->EmailRecipients()) {
-			
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			$email->populateTemplate($emailData);
 			
@@ -804,11 +803,16 @@ JS
 				$email->setSubject($recipient->EmailSubject);
 				$email->setTo($recipient->EmailAddress);
 				
-				// check to see if they are a dynamic sender. eg based on a email field a user selected
+				if($recipient->EmailReplyTo) {
+					$email->replyTo($recipient->EmailReplyTo);
+				}
+
+				// check to see if they are a dynamic reply to. eg based on a email field a user selected
 				if($recipient->SendEmailFromField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
+
 					if($submittedFormField && is_string($submittedFormField->Value)) {
-						$email->setFrom($submittedFormField->Value);	
+						$email->replyTo($submittedFormField->Value);
 					}
 				}
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
@@ -829,6 +833,7 @@ JS
 							$body .= $Field->Title .' - '. $Field->Value .' \n';
 						}
 					}
+
 					$email->setBody($body);
 					$email->sendPlain();
 				}
@@ -878,6 +883,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
+		'EmailReplyTo' => 'Varchar(200)',
 		'EmailBody' => 'Text',
 		'SendPlain' => 'Boolean',
 		'HideFormData' => 'Boolean'
@@ -896,11 +902,19 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	public function getCMSFields() {
 		
 		$fields = new FieldList(
-			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email Subject')),
-			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send Email From')),
-			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send Email To')),
-			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide Form Data from Email')),
-			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send Email as Plain Text (HTML will be stripped)')),
+			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email subject')),
+			new LiteralField('EmailFromContent', '<p>'._t(
+				'UserDefinedForm.EmailFromContent',
+				"The from address allows you to set who the email comes from. On most servers this ".
+				"will need to be set to an email address on the same domain name as your site. ".
+				"For example on yoursite.com the from address may need to be something@yoursite.com. ".
+				"You can however, set any email address you wish as the reply to address."
+			) . "</p>"),
+			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send email from')),
+			new TextField('EmailReplyTo', _t('UserDefinedForm.REPLYADDRESS', 'Email for reply to')),
+			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send email to')),
+			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
+			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send email as plain text? (HTML will be stripped)')),
 			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body'))
 		);
 		
@@ -914,11 +928,11 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			if($validEmailFields) {
 				$fields->insertAfter($dropdowns[] = new DropdownField(
 					'SendEmailFromFieldID',
-					_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or Select a Form Field to use as the From Address'),
+					_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
 					$validEmailFields->map('ID', 'Title')
-				), 'EmailFrom');
+				), 'EmailReplyTo');
 			}
-			
+
 			// if they have multiple options
 			if($multiOptionFields || $validEmailFields) {
 
@@ -938,7 +952,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				$multiOptionFields = $multiOptionFields->map('ID', 'Title');
 					$fields->insertAfter($dropdowns[] = new DropdownField(
 						'SendEmailToFieldID',
-						_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or Select a Field to use as the To Address'),
+						_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
 					 $multiOptionFields
 				), 'EmailAddress');
 			}
