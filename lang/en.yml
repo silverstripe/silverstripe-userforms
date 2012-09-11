@@ -1,0 +1,155 @@
+en:
+  CustomRule.ss:
+    BLANK: Blank
+    DELETE: Delete
+    GREATERTHAN: 'Value Greater Than'
+    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
+    HIDETHISFIELD: 'Hide This Field'
+    IS: Is
+    LESSTHAN: 'Value Less Than'
+    LESSTHANEQUAL: 'Value Less Than Or Equal'
+    NOTBLANK: 'Not Blank'
+    NOTVALUE: 'Not Value'
+    SHOWTHISFIELD: 'Show This Field'
+    VALUE: Value
+    WHEN: When
+  EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  EditableEmailField:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  EditableFormField:
+    CHECKEDBYDEFAULT: 'Checked by Default?'
+    CUSTOMERROR: 'Custom Error Message'
+    DEFAULTTOTODAY: 'Default to Today?'
+    ENTERQUESTION: 'Enter Question'
+    EXTRACLASSA: 'Extra Styling/Layout'
+    EXTRACLASSB: 'Extra css Class - separate multiples with a space'
+    GROUP: Group
+    NO: No
+    PLURALNAME: 'Editable Form Fields'
+    REQUIRED: 'Is this field Required?'
+    RIGHTTITLE: 'Right Title'
+    SINGULARNAME: 'Editable Form Field'
+    YES: Yes
+  EditableFormField.ss:
+    ADD: Add
+    ADDRULE: 'Add Rule'
+    BLANK: Blank
+    CUSTOMRULES: 'Custom Rules'
+    DELETE: Delete
+    DRAG: 'Drag to rearrange order of fields'
+    FIELDCONFIGURATION: 'Field Configuration'
+    FIELDONDEFAULT: 'Field On Default'
+    GREATERTHAN: 'Value Greater Than'
+    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
+    HIDE: Hide
+    HIDETHISFIELD: 'Hide This Field'
+    IS: Is
+    LESSTHAN: 'Value Less Than'
+    LESSTHANEQUAL: 'Value Less Than Or Equal'
+    LOCKED: 'These fields cannot be modified'
+    NOTBLANK: 'Not Blank'
+    NOTVALUE: 'Not Value'
+    OPTIONS: Options
+    SHOW: Show
+    SHOWOPTIONS: 'Show Options'
+    SHOWTHISFIELD: 'Show This Field'
+    VALIDATION: Validation
+    VALUE: Value
+    WHEN: When
+  EditableFormHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Hide from reports?'
+    PLURALNAME: 'HTML Blocks'
+    SINGULARNAME: 'HTML Block'
+  EditableMemberListField:
+    PLURALNAME: 'Member List Fields'
+    SINGULARNAME: 'Member List Field'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Editable Multiple Option Fields'
+    SINGULARNAME: 'Editable Multiple Option Field'
+  EditableOption:
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+  EditableOption.ss:
+    DELETE: 'Remove this option'
+    DRAG: 'Drag to rearrange order of options'
+    LOCKED: 'These fields cannot be modified'
+  EditableRadioField:
+    PLURALNAME: 'Radio fields'
+    SINGULARNAME: 'Radio field'
+  EditableTextField:
+    NUMBERROWS: 'Number of rows'
+    PLURALNAME: 'Text Fields'
+    SINGULARNAME: 'Text Field'
+    TEXTLENGTH: 'Text length'
+  FieldEditor.ss:
+    ADD: Add
+    SELECTAFIELD: 'Select a Field'
+  Form:
+    FIELDISREQUIRED: '%s is required'
+  SiteTree:
+    PLURALNAME: Pages
+    SINGULARNAME: Page
+  SubmittedFileField:
+    DOWNLOADFILE: 'Download File'
+    PLURALNAME: 'Submitted File Fields'
+    SINGULARNAME: 'Submitted File Field'
+  SubmittedForm:
+    PLURALNAME: 'Submitted Forms'
+    SINGULARNAME: 'Submitted Form'
+  SubmittedFormField:
+    PLURALNAME: 'Submitted Form Fields'
+    SINGULARNAME: 'Submitted Form Field'
+  SubmittedFormReportField.ss:
+    DELETEALLSUBMISSIONS: 'Delete All Submissions'
+    DELETESUBMISSION: 'Delete Submission'
+    EXPORTSUBMISSIONS: 'Export submissions to CSV'
+    NOSUBMISSIONS: 'No Submissions'
+    PAGES: Pages
+    SUBMITTED: 'Submitted at'
+  UserDefinedForm:
+    DESCRIPTION: 'Generic content page'
+    EMAILADDRESS: Email
+    EMAILBODY: Body
+    EMAILFROM: From
+    EMAILSUBJECT: 'Email subject'
+    EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
+    FORM: Form
+    FORMOPTIONS: 'Form Options'
+    FORMSUBMISSIONS: 'Form Submissions'
+    FROMADDRESS: 'Send email from'
+    HIDEFORMDATA: 'Hide form data from email?'
+    ONCOMPLETELABEL: 'Show on completion'
+    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
+    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
+    PLURALNAME: 'User Defined Forms'
+    RECEIVED: 'Received Submissions'
+    REPLYADDRESS: 'Email for reply to'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SENDEMAILTO: 'Send email to'
+    SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Text on submit button:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
