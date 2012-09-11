@@ -144,13 +144,15 @@
 					}
 					
 					// variables
-					var $form = $("#Form_EditForm");
+					var form = $("#Form_EditForm");
 					var length = $(".FieldInfo").length + 1;
 					var fieldType = $(this).siblings("select").val();
-					var formData = $form.serialize()+'NewID='+ length +"&Type="+ fieldType;
-					var $fieldEditor = $(this.closest('.FieldEditor'));
+					var formData = form.serialize()+'NewID='+ length +"&Type="+ fieldType;
+					var fieldEditor = $(this).closest('.FieldEditor');
+
 					// Due to some very weird behaviout of jquery.metadata, the url have to be double quoted
-					var addURL = $fieldEditor.attr('data-add-url').substr(1,$fieldEditor.attr('data-add-url').length-2);
+					var addURL = fieldEditor.attr('data-add-url').substr(1, fieldEditor.attr('data-add-url').length-2);
+
 					$.ajax({
 						headers: {"X-Pjax" : 'Partial'},
 						type: "POST",
@@ -160,13 +162,14 @@
 							$('#Fields_fields').append(data);
 							statusMessage(userforms.message('ADDED_FIELD'));
 							var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
+
 							$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");
+							$("#Fields_fields").sortable('refresh');
 						},
 						error: function(e) {
 							alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION', 'An error occured while fetching data from the server\n Please try again later.'));
 						}
 					});
-					$("#Fields_fields").sortable('refresh');
 				}
 			});
 			
