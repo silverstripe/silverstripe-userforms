@@ -59,7 +59,9 @@ JS
 		
 		$default = ($this->getSetting('DefaultToToday')) ? date('d/m/Y') : $this->Default;
 		
-		return new DateField( $this->Name, $this->Title, $default);
+		$dateField = new DateField( $this->Name, $this->Title, $default);
+		$dateField->setConfig('showcalendar', true);
+		return $dateField;
 	}
 	
 	/**
