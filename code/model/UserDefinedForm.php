@@ -347,7 +347,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	function Form() {
 		$fields = $this->getFormFields();
-		if(!$fields) return false;
+		if(!$fields || !$fields->exists()) return false;
 		
 		$actions = $this->getFormActions();
 		
@@ -411,7 +411,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				
 				// set the values passed by the url to the field
 				$request = $this->getRequest();
-				if($var = $request->getVar($field->name)) {
+				if(isset($request) && $var = $request->getVar($field->name)) {
 					$field->value = Convert::raw2att($var);
 				}
 				
