@@ -975,6 +975,10 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		return $fields;
 	}
 	
+	public function canView($member = null) {
+		return $this->Form()->canView();
+	}
+	
 	public function canEdit($member = null) {
 		return $this->Form()->canEdit();
 	}
