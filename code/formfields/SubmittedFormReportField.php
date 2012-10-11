@@ -174,10 +174,10 @@ class SubmittedFormReportField extends FormField {
 				foreach($submissions as $submission) {
 					$submission->delete();
 				}
-				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
+				return (Director::is_ajax() || $isRunningTests) ? true : Controller::curr()->redirectBack();
 			}
 		}
-		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
+		return (Director::is_ajax() || $isRunningTests) ? false : Controller::curr()->redirectBack();
 	}
 	
 	/**
@@ -202,9 +202,9 @@ class SubmittedFormReportField extends FormField {
 			if($submission) {
 				$submission->delete();
 				
-				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
+				return (Director::is_ajax() || $isRunningTests) ? true : Controller::curr()->redirectBack();
 			}
 		}
-		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
+		return (Director::is_ajax() || $isRunningTests) ? false : Controller::curr()->redirectBack();
 	}
 }
