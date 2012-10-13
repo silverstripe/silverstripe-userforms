@@ -357,6 +357,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$this->generateConditionalJavascript();
 
 		$form = new Form($this, "Form", $fields, $actions, $required);
+		$form->setRedirectToFormOnValidationError(true);
 		
 		$data = Session::get("FormInfo.{$form->FormName()}.data");
 		
