@@ -107,6 +107,31 @@ class EditableFormField extends DataObject {
 		$this->deleteFromStage($stage);
 	}
 	
+	/**
+	 * checks wether record is new, copied from Sitetree 
+	 */
+	function isNew() {
+		if(empty($this->ID)) return true;
+
+		if(is_numeric($this->ID)) return false;
+
+		return stripos($this->ID, 'new') === 0;
+	}
+	
+	/**
+	 * checks if records is changed on stage
+	 * @return boolean 
+	 */
+	public function getIsModifiedOnStage() {
+		// new unsaved fields could be never be published
+		if($this->isNew()) return false;
+		
+		$stageVersion = Versioned::get_versionnumber_by_stage('EditableFormField', 'Stage', $this->ID);
+		$liveVersion =	Versioned::get_versionnumber_by_stage('EditableFormField', 'Live', $this->ID);
+
+		return ($stageVersion && $stageVersion != $liveVersion);
+	}
+	
 	
 	/**
 	 * Show this form on load or not

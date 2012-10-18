@@ -280,7 +280,24 @@ class UserDefinedForm extends Page {
 	 * 		for now just say its always modified
 	 */
 	public function getIsModifiedOnStage() {
-		return true;
+		// new unsaved pages could be never be published
+		if($this->isNew()) return false;
+		
+		$stageVersion = Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Stage', $this->ID);
+		$liveVersion =	Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Live', $this->ID);
+
+		$isModified = ($stageVersion && $stageVersion != $liveVersion);
+		if (!$isModified) {
+			if($this->Fields()) {
+				foreach($this->Fields() as $field) {
+					if ($field->getIsModifiedOnStage()) {
+					     $isModified = true;
+					     break;
+					}
+				}
+			}		
+		}
+		return $isModified;
 	}
 }
 
