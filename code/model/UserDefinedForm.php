@@ -1,11 +1,6 @@
 <?php
 
 /**
- * User Defined Form Page type that lets users build a form in the CMS 
- * using the FieldEditor Field. 
- * 
- * @todo Allow UserDefinedForm instances on Page subclasses (eg via decorator)
- *
  * @package userforms
  */
 
@@ -102,8 +97,6 @@ class UserDefinedForm extends Page {
 	
 	
 	/**
-	 * Publishing Versioning support.
-	 *
 	 * When publishing copy the editable form fields to the live database
 	 * Not going to version emails and submissions as they are likely to 
 	 * persist over multiple versions
@@ -131,10 +124,8 @@ class UserDefinedForm extends Page {
 	}
 	
 	/**
-	 * Unpublishing Versioning support
-	 * 
-	 * When unpublishing the page it has to remove all the fields from 
-	 * the live database table
+	 * When un-publishing the page it has to remove all the fields from the 
+	 * live database table.
 	 *
 	 * @return void
 	 */
@@ -151,7 +142,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * Roll back a form to a previous version.
 	 *
-	 * @param String|int Version to roll back to
+	 * @param string|int Version to roll back to
 	 */
 	public function doRollbackTo($version) {
 		parent::doRollbackTo($version);
@@ -256,7 +247,7 @@ class UserDefinedForm extends Page {
 	 * Custom options for the form. You can extend the built in options by 
 	 * using {@link updateFormOptions()}
 	 *
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getFormOptions() {
 		$submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
@@ -275,20 +266,34 @@ class UserDefinedForm extends Page {
 	 * Return if this form has been modified on the stage site and not published.
 	 * this is used on the workflow module and for a couple highlighting things
 	 *
-	 * @todo make this a bit smarter - the issue with userforms is that it uses several
-	 * 		relationships to form fields which has a undefined amount of options so 
-	 * 		for now just say its always modified
+	 * @return boolean
 	 */
 	public function getIsModifiedOnStage() {
-		return true;
+		// new unsaved pages could be never be published
+		if($this->isNew()) return false;
+
+		$stageVersion = Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Stage', $this->ID);
+		$liveVersion =	Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Live', $this->ID);
+
+		$isModified = ($stageVersion && $stageVersion != $liveVersion);
+		if (!$isModified) {
+			if($this->Fields()) {
+				foreach($this->Fields() as $field) {
+					if ($field->getIsModifiedOnStage()) {
+					     $isModified = true;
+					     break;
+					}
+				}
+			}
+		}
+		return $isModified;
 	}
 }
 
 /**
  * Controller for the {@link UserDefinedForm} page type.
  *
- * @package userform
- * @subpackage pagetypes
+ * @package userforms
  */
 
 class UserDefinedForm_Controller extends Page_Controller {

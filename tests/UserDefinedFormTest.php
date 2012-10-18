@@ -210,16 +210,6 @@ class UserDefinedFormTest extends FunctionalTest {
 		// can't compare object since the dates/ids change
 		$this->assertEquals($form->Fields()->First()->Title, $duplicate->Fields()->First()->Title);
 	}
-	
-	/**
-	 * @todo once getIsModifiedOnStage is implemented will need to implement this
-	 */
-	function testGetIsModifiedOnStage() {
-		$this->logInWithPermission('ADMIN');
-		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
-		
-		$this->assertTrue($form->getIsModifiedOnStage());
-	}
 
 	function testFormOptions() {
 		$this->logInWithPermission('ADMIN');
