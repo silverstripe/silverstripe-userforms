@@ -1,0 +1,3 @@
+[submodule "thirdparty/jquery-validate"]
+	path = thirdparty/jquery-validate
+	url = git://github.com/jzaefferer/jquery-validation.git
