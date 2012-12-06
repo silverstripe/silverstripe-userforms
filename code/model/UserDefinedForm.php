@@ -23,7 +23,9 @@ class UserDefinedForm extends Page {
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean",
-		'DisableSaveSubmissions' => 'Boolean'
+		'DisableSaveSubmissions' => 'Boolean',
+		'EnableLiveValidation' => 'Boolean',
+		'HideFieldLabels' => 'Boolean'
 	);
 	
 	/**
@@ -254,7 +256,9 @@ class UserDefinedForm extends Page {
 		
 		$options = new FieldList(
 			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $submit),
-			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton)
+			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
+			new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
+			new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels'))
 		);
 		
 		$this->extend('updateFormOptions', $options);
@@ -307,7 +311,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		// load the jquery
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.min.js');
+		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.js');
 		Requirements::javascript('userforms/javascript/UserForm_frontend.js');
 	}
 	
@@ -465,6 +469,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$rules = array();
 		$validation = array();
 		$messages = array();
+		$onfocusout = "";
+		$hidelabels = "";
 		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
@@ -477,6 +483,12 @@ class UserDefinedForm_Controller extends Page_Controller {
 			}
 		}
 		
+    // Enable live validation
+    if($this->EnableLiveValidation) $onfocusout = ", onfocusout : function(element) { this.element(element); }";
+
+    // Hide field labels (use HTML5 placeholder instead)
+    if($this->HideFieldLabels) $hidelabels = '$("#Form_Form label.left").each(function(){$("#"+$(this).attr("for")).attr("placeholder",$(this).text());$(this).remove();});';
+
 		// Set the Form Name
 		$rules = $this->array2json($rules);
 		$messages = $this->array2json($messages);
@@ -500,7 +512,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 						,
 						rules: 
 						 	$rules
+						$onfocusout
 					});
+					$hidelabels
 				});
 			})(jQuery);
 JS
@@ -666,17 +680,19 @@ JS
 			}
 		}
 		
-		Requirements::customScript(<<<JS
-			(function($) {
-				$(document).ready(function() {
-					$default
-
-					$rules
-				})
-			})(jQuery);
+		// Only add customScript if $default or $rules is defined
+    if($default  || $rules) {
+			Requirements::customScript(<<<JS
+				(function($) {
+					$(document).ready(function() {
+						$default
+	
+						$rules
+					})
+				})(jQuery);
 JS
 , 'UserFormsConditional');
-
+		}
 	}
 	
 	/**
