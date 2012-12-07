@@ -32,6 +32,8 @@ and without getting involved in any PHP code.
  5.  Run in your browser - `/dev/build` to rebuild the database. 
  6.  You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
 
+ * PLEASE NOTE! You need to run git submodule update --init --recursive when you git clone the module to fetch the jquery validation submodule.
+
 ## Thanks
 
 I would like to thank everyone who has contributed to the module, bugfixers, 
