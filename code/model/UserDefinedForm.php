@@ -212,7 +212,23 @@ class UserDefinedForm extends Page {
 		
 		parent::doRevertToLive();
 	}
-	
+
+	/**
+	 * Allow overriding the EmailRecipients on a {@link DataExtension}
+	 * so you can customise who receives an email.
+	 * Converts the RelationList to an ArrayList so that manipulation
+	 * of the original source data isn't possible.
+	 *
+	 * @return ArrayList
+	 */
+	public function FilteredEmailRecipients() {
+		$recipients = new ArrayList($this->getComponents('EmailRecipients')->toArray());
+
+		$this->extend('updateFilteredEmailRecipients', $recipients);
+
+		return $recipients;
+	}
+
 	/**
 	 * Duplicate this UserDefinedForm page, and its form fields.
 	 * Submissions, on the other hand, won't be duplicated.
@@ -242,7 +258,7 @@ class UserDefinedForm extends Page {
 		
 		return $page;
 	}
-	
+
 	/**
 	 * Custom options for the form. You can extend the built in options by 
 	 * using {@link updateFormOptions()}
@@ -794,7 +810,7 @@ JS
 		);
 
 		// email users on submit.
-		if($this->EmailRecipients()) {
+		if($this->FilteredEmailRecipients()) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			$email->populateTemplate($emailData);
 			
@@ -806,7 +822,7 @@ JS
 				}
 			}
 
-			foreach($this->EmailRecipients() as $recipient) {
+			foreach($this->FilteredEmailRecipients() as $recipient) {
 				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
