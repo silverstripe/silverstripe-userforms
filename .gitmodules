@@ -1,3 +1,6 @@
 [submodule "thirdparty/jquery-validate"]
 	path = thirdparty/jquery-validate
 	url = git://github.com/jzaefferer/jquery-validation.git
+[submodule "thirdparty/Placeholders.js"]
+	path = thirdparty/Placeholders.js
+	url = git://github.com/jamesallardice/Placeholders.js.git

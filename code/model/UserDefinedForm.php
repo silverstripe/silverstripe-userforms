@@ -313,6 +313,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.js');
 		Requirements::javascript('userforms/javascript/UserForm_frontend.js');
+		if($this->HideFieldLabels) Requirements::javascript('userforms/thirdparty/Placeholders.js/Placeholders.min.js');
 	}
 	
 	/**
@@ -487,7 +488,7 @@ class UserDefinedForm_Controller extends Page_Controller {
     if($this->EnableLiveValidation) $onfocusout = ", onfocusout : function(element) { this.element(element); }";
 
     // Hide field labels (use HTML5 placeholder instead)
-    if($this->HideFieldLabels) $hidelabels = '$("#Form_Form label.left").each(function(){$("#"+$(this).attr("for")).attr("placeholder",$(this).text());$(this).remove();});';
+    if($this->HideFieldLabels) $hidelabels = '$("#Form_Form label.left").each(function(){$("#"+$(this).attr("for")).attr("placeholder",$(this).text());$(this).remove();});Placeholders.init();';
 
 		// Set the Form Name
 		$rules = $this->array2json($rules);
