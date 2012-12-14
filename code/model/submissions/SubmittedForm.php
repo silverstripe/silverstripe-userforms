@@ -31,4 +31,9 @@ class SubmittedForm extends DataObject {
 		
 		parent::onBeforeDelete();
 	}
+
+	// Used in the CMS to join the links properly
+	public function DeleteLink($controllerLink) {
+		return Controller::join_links($controllerLink, 'deletesubmission?id=' . $this->ID);
+	}
 }
