@@ -27,11 +27,12 @@ class SubmittedFormReportField extends FormField {
 		foreach($query as $r) {
 			$totalCount = $r['CountRows'];
 		}
-		
+
 		$list = new PaginatedList($submissions);
 		$list->setCurrentPage($page);
 		$list->setPageLength(10);
 		$list->setTotalItems($totalCount);
+
 		return $list;
 	}
 	
@@ -43,6 +44,18 @@ class SubmittedFormReportField extends FormField {
 		return $this->customise(new ArrayData(array(
 			'Submissions' => $this->getSubmissions($page)
 		)))->renderWith(array('SubmittedFormReportField'));
+	}
+
+	public function getExportLink() {
+		return $this->Link('export?id=' . $this->RecordID());
+	}
+
+	public function getDeleteSubmissionsLink() {
+		return $this->Link('deletesubmissions?id=' . $this->RecordID());
+	}
+
+	public function LinkContainsParameter() {
+		return strpos($this->Link(), '?') !== FALSE;
 	}
 
 	/**
