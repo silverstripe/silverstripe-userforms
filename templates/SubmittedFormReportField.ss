@@ -1,8 +1,8 @@
 <div id="userforms-submissions">
 	<% if Submissions %>
 		<ul class="userforms-submission-actions">
-			<li><a href="$getExportLink"><% _t('EXPORTSUBMISSIONS', 'Export submissions to CSV') %></a></li>
-			<li><a href="$getDeleteSubmissionsLink" class="deleteAllSubmissions"><% _t('DELETEALLSUBMISSIONS', 'Delete All Submissions') %></a></li>
+			<li><a href="$ExportLink"><% _t('EXPORTSUBMISSIONS', 'Export submissions to CSV') %></a></li>
+			<li><a href="$DeleteSubmissionsLink" class="deleteAllSubmissions"><% _t('DELETEALLSUBMISSIONS', 'Delete All Submissions') %></a></li>
 		</ul>
 		<h5>Name: $Name</h5>
 		
