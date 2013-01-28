@@ -799,6 +799,11 @@ JS
 				}
 			}
 			
+			//$submittedField->Value is being saved into DB as a string so never try to save an array as the value. Fixes https://github.com/silverstripe/silverstripe-userforms/issues/86
+			if( is_array($submittedField->Value) ){
+				$submittedField->Value = null;
+			}
+			
 			if(!$this->DisableSaveSubmissions) $submittedField->write();
 	
 			$submittedFields->push($submittedField);
