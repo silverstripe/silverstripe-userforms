@@ -84,6 +84,12 @@
 			});
 		};
 		
+		userforms.appendToURL = function(url, pathsegmenttobeadded) {
+			var parts = url.match(/([^\?#]*)?(\?[^#]*)?(#.*)?/);
+			for(var i in parts) if(!parts[i]) parts[i] = '';
+			return parts[1] + pathsegmenttobeadded + parts[2] + parts[3];
+		}
+
 		/**
 		 * Workaround for not refreshing the sort.
 		 * 
@@ -256,7 +262,7 @@
 
 					// variables
 					var options = $(this).parent("li");
-					var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
+					var action = userforms.appendToURL($("#Form_EditForm").attr("action"), '/field/Fields/addoptionfield');
 					var parent = $(this).attr("rel");
 
 					// send ajax request to the page
