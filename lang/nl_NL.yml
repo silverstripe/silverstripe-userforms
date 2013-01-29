@@ -1,263 +1,159 @@
 nl_NL:
-    CustomRule.ss:
-        BLANK: "Leeg"
-        DELETE: "Verwijderen"
-        GREATERTHAN: "Waarde groter dan"
-        GREATERTHANEQUAL: "Waarde groter of gelijk aan"
-        HIDETHISFIELD: "Verberg dit veld"
-        IS: "Is"
-        LESSTHAN: "Waarde kleiner dan"
-        LESSTHANEQUAL: "Waarde kleiner of gelijk aan"
-        NOTBLANK: "Niet leeg"
-        NOTVALUE: "Geen waarde"
-        SHOWTHISFIELD: "Toon dit veld"
-        VALUE: "Waarde"
-        WHEN: "Wanneer"
-    EditableCheckbox:
-        PLURALNAME: "Selectievakjes"
-        SINGULARNAME: "Checkbox veld"
-        ANY: "Ieder"
-        NOTSELECTED: "Niet geselecteerd"
-        SELECTED: "Geselecteerd"
-    EditableCheckboxGroupField:
-        PLURALNAME: "Checkbox Groepen"
-        SINGULARNAME: "Checkbox Groep"
-    EditableCountryDropdownField:
-        PLURALNAME: "Landen Dropdowns"
-        SINGULARNAME: "Landen Dropdown"
-    EditableDateField:
-        PLURALNAME: "Datum velden"
-        SINGULARNAME: "Datum veld"
-    EditableDropdown:
-        PLURALNAME: "Dropdowns"
-        SINGULARNAME: "Dropdown veld"
-    EditableEmailField:
-        PLURALNAME: "Email veld"
-        SINGULARNAME: "Email veld"
-        SENDCOPY: "Stuur een kopie naar dit adres"
-    EditableFileField:
-        PLURALNAME: "Bestand Uploaden veld"
-        SINGULARNAME: "Bestand Upload veld"
-    EditableFormField:
-        CHECKEDBYDEFAULT: "Standaard aangevinkt?"
-        CUSTOMERROR: "Aangepaste foutbericht"
-        DEFAULTTOTODAY: "Standaard naar vandaag?"
-        ENTERQUESTION: "Vraag ingeven"
-        GROUP: "Groep"
-        NO: "Nee"
-        PLURALNAME: "Aanpasbare formvelden"
-        REQUIRED: "Verplicht?"
-        RIGHTTITLE: "Rechter titel"
-        SINGULARNAME: "Aanpasbaar formveld"
-        YES: "Ja"
-    EditableFormField.ss:
-        ADD: "Toevoegen"
-        ADDRULE: "Regel toevoegen"
-        BLANK: "Leeg"
-        CUSTOMRULES: "Aangepaste regels"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        FIELDCONFIGURATION: "Veld opties"
-        FIELDONDEFAULT: "Field On Default"
-        GREATERTHAN: "Waarde groter dan"
-        GREATERTHANEQUAL: "Waarde groter of gelijk aan"
-        HIDE: "Verberg"
-        HIDETHISFIELD: "Verberg dit veld"
-        IS: "Is"
-        LESSTHAN: "Waarde kleiner dan"
-        LESSTHANEQUAL: "Waarde kleiner of gelijk aan"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-        NOTBLANK: "Niet leeg"
-        NOTVALUE: "Geen waarde"
-        OPTIONS: "Opties"
-        SHOW: "Toon"
-        SHOWOPTIONS: "Toon opties"
-        SHOWTHISFIELD: "Toon dit veld"
-        VALIDATION: "Validatie"
-        VALUE: "Waarde"
-        WHEN: "Wanneer"
-        MORE: "Meer opties"
-        REQUIRED: "Dit veld is verplicht en kan niet gewijzigd worden"
-    EditableFormHeading:
-        LEVEL: "Kies kop grootte"
-        PLURALNAME: "Kopjes"
-        SINGULARNAME: "Kop"
-    EditableLiteralField:
-        HIDEFROMREPORT: "Verberg van rapporten?"
-        PLURALNAME: "HTML Blokken"
-        SINGULARNAME: "HTML Blok"
-    EditableMemberListField:
-        PLURALNAME: "Ledenlijst velden"
-        SINGULARNAME: "Ledenlijst veld"
-    EditableMultipleOptionField:
-        PLURALNAME: "Bewerkbare meerdere optie velden"
-        SINGULARNAME: "Bewerkbare meerdere optie velden"
-    EditableOption:
-        PLURALNAME: "Bewerkbare opties"
-        SINGULARNAME: "Bewerkbare optie"
-    EditableOption.ss:
-        DELETE: "Verwijder deze optie"
-        DRAG: "Sleep om volgorde van de opties te herschikken"
-        LOCKED: "Deze velden kunnen niet worden aangepast"
-    EditableRadioField:
-        PLURALNAME: "Keuzerondje velden"
-        SINGULARNAME: "Keuzerondje veld"
-    EditableTextField:
-        NUMBERROWS: "Aantal rijen"
-        PLURALNAME: "Tekst velden"
-        SINGULARNAME: "Tekst veld"
-        TEXTLENGTH: "Tekst lengte"
-        DEFAULTTEXT: "Standaard tekst"
-        TEXTBOXLENGTH: "Lengte van tekstveld"
-    FieldEditor.ss:
-        ADD: "Voeg toe"
-        SELECTAFIELD: "Kies een veld"
-        CHECKBOX: "Selectievakje"
-        CHECKBOXGROUP: "Selectievakjes"
-        CHECKBOXGROUPTITLE: "Selectievak toevoegen aan groep veld"
-        CHECKBOXTITLE: "Voeg een selectievakje toe"
-        DATE: "Datum"
-        DATETITLE: "Voeg toe datum kop"
-        DROPDOWN: "Dropdown"
-        DROPDOWNTITLE: "voeg toe dropdown"
-        EMAIL: "Email"
-        EMAILTITLE: "Voeg een email veld toe"
-        FILE: "Bestand"
-        FILETITLE: "Voeg bestand upload veld toe"
-        FORMHEADING: "Kop"
-        FORMHEADINGTITLE: "Voeg toe formulier kop"
-        MEMBER: "Leden lijst"
-        MEMBERTITLE: "Toevoegen van ledenlijst veld"
-        RADIOSET: "Radio"
-        RADIOSETTITLE: "Voeg toe radio button set"
-        TEXT: "Tekst"
-        TEXTTITLE: "Voeg een tekst veld toe"
-    Form:
-        FIELDISREQUIRED: "%s is verplicht"
-    SubmittedFileField:
-        DOWNLOADFILE: "Download veld"
-        PLURALNAME: "Submitted File Fields"
-        SINGULARNAME: "Submitted File Field"
-    SubmittedForm:
-        PLURALNAME: "Submitted Forms"
-        SINGULARNAME: "Submitted Form"
-    SubmittedFormField:
-        PLURALNAME: "Submitted Form Fields"
-        SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
-        DELETEALLSUBMISSIONS: "Verwijder alle inzendingen"
-        DELETESUBMISSION: "Verwijder inzending"
-        EXPORTSUBMISSIONS: "Exporteer inzendingen naar CSV"
-        NOSUBMISSIONS: "Geen inzendingen"
-        SUBMITTED: "Verstuurd op"
-    UserDefinedForm:
-        AEMAILRECIPIENT: "Een E-mail ontvanger"
-        EMAILADDRESS: "E-mail"
-        EMAILBODY: "Kern"
-        EMAILFROM: "Van"
-        EMAILRECIPIENTS: "E-mail ontvangers"
-        EMAILSUBJECT: "E-mail onderwerp"
-        FORM: "Formulier"
-        FROMADDRESS: "E-mail verzonden vanaf"
-        HIDEFORMDATA: "Verberg formulier gegevens uit e-mail"
-        ONCOMPLETE: "Als ingevuld"
-        ONCOMPLETELABEL: "Toon na invullen"
-        OPTIONS: "Options"
-        ORSELECTAFIELDTOUSEASFROM: ".. of selecteer een e-mail uit het formulier om te beantwoorden"
-        ORSELECTAFIELDTOUSEASTO: ".. of selecteer een e-amil uit het formulier om naar te versturen"
-        PLURALNAME: "User Defined Forms"
-        RECEIVED: "Ontvangen Inzendingen"
-        SAVESUBMISSIONS: "Schakel inzendingen opslaan uit"
-        SENDEMAILTO: "Stuur E-mail naar"
-        SENDPLAIN: "Stuur E-mail als platte tekst (HTML wordt verwijderd)"
-        SHOWCLEARFORM: "Toon reset knop"
-        SINGULARNAME: "User Defined Form"
-        SUBMISSIONS: "Inzendingen"
-        SUBMITBUTTON: "Submit"
-        TEXTONSUBMIT: "Tekst op de verzend-knop:"
-        NORESULTS: "Geen overeenkomstige resultaten gevonden"
-        SUBMIT: "Verzenden"
-    UserDefinedForm_EmailRecipient:
-        PLURALNAME: "User Defined Form E-mail ontvangers"
-        SINGULARNAME: "User Defined Form E-mail ontvanger"
-    UserFormsMigrationTask:
-        DEFAULTSUBMISSIONTITLE: "Inzendingen gegevens"
-    EditableCheckbox.ss:
-        CHECKBOX: "Checkbox veld"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        LOCKED: "Dit veld kan niet gewijzigd worden"
-        MORE: "Meer opties"
-    EditableCheckboxGroupField.ss:
-        ADD: "Voeg een nieuwe optie toe"
-        CHECKBOXGROUP: "Checkbox groep"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-        MORE: "Meer opties"
-        REQUIRED: "Dit veld is verplicht en kan niet verwijderd worden"
-    EditableCheckboxOption.ss:
-        DELETE: "Verwijder deze optie"
-        DRAG: "Versleep om de rangschikking van de opties te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-    EditableDateField.ss:
-        DATE: "Datum veld"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        MORE: "Meer opties"
-    EditableDropdown.ss:
-        ADD: "Voeg een nieuwe optie toe"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        DROPDOWN: "Dropdown lijst"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-        MORE: "Meer opties"
-        REQUIRED: "Dit veld is verplicht en kan niet verwijderd worden"
-    EditableDropdownOption.ss:
-        DELETE: "Verwijder deze optie"
-        DRAG: "Versleep om de rangschikking van de opties te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-    EditableEmailField.ss:
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        EMAIL: "Email adres veld"
-        MORE: "Meer opties"
-        REQUIRED: "Dit veld is verplicht en kan niet verwijderd worden"
-    EditableFileField.ss:
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        FILE: "Upload veld voor bestanden"
-        MORE: "Meer opties"
-    EditableFormFieldOption.ss:
-        DELETE: "Verwijder deze optie"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-    EditableFormHeading.ss:
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        HEADING: "Hoofding"
-        MORE: "Meer opties"
-    EditableRadioField.ss:
-        ADD: "Voed nieuwe optie toe"
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-        MORE: "Meer opties"
-        REQUIRED: "Dit veld is verplicht en kan niet verwijderd worden"
-        SET: "Radio knoppen set"
-    EditableRadioOption.ss:
-        DELETE: "Verwijder deze optie"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        LOCKED: "Deze velden kunnen niet gewijzigd worden"
-    EditableTextField.ss:
-        DELETE: "Verwijder dit veld"
-        DRAG: "Versleep om de rangschikking van de velden te wijzigen"
-        MORE: "Meer opties"
-        TEXTFIELD: "Tekst Veld"
-    FieldEditor:
-        EMAILONSUBMIT: "E-mail formulier na bevestiging"
-        EMAILSUBMISSION: "E-mail inzending naar:"
-    SubmittedFormEmail.ss:
-        SUBMITTED: "Onderstaande data is ingestuurd op de website:"
-    UserDefinedForm_SubmittedFormEmail:
-        EMAILSUBJECT: "Verwerken van formulier"
+  CustomRule.ss:
+    BLANK: "Blanco"
+    DELETE: "Verwijder"
+    GREATERTHAN: 'Waarde groter dan'
+    GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
+    HIDETHISFIELD: 'Verberg dit veld'
+    IS: Is
+    LESSTHAN: 'Waarde kleiner dan'
+    LESSTHANEQUAL: 'Waarde kleiner of gelijk aan'
+    NOTBLANK: 'Is Blanco'
+    NOTVALUE: 'Geen waarde'
+    SHOWTHISFIELD: 'Toon dit veld'
+    VALUE: Waarde
+    WHEN: Wanneer
+  EditableCheckbox:
+    PLURALNAME: Selectievakjes
+    SINGULARNAME: 'Selectievakje'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Selectievakje Groepen'
+    SINGULARNAME: 'Selectievakje Groep'
+  EditableDateField:
+    PLURALNAME: 'Datumvelden'
+    SINGULARNAME: 'Datumveld'
+  EditableDropdown:
+    PLURALNAME: 'Selectielijst veld'
+    SINGULARNAME: 'Selectielijst velden'
+  EditableEmailField:
+    PLURALNAME: 'Email veld'
+    SINGULARNAME: 'Email velden'
+  EditableFileField:
+    PLURALNAME: 'Bestandsupload velden'
+    SINGULARNAME: 'Bestandsupload veld'
+  EditableFormField:
+    CHECKEDBYDEFAULT: 'Standaard aangevinkt'
+    CUSTOMERROR: 'Aangepaste foutbericht'
+    DEFAULTTOTODAY: 'Standaard ingesteld op vandaag?'
+    ENTERQUESTION: 'Voer vraag in'
+    EXTRACLASSA: 'Extra Styling/Layout'
+    EXTRACLASSB: 'Extra css Class - meerdere classen aangeven met een spatie'
+    GROUP: Groep
+    NO: Nee
+    PLURALNAME: 'Bewerkbare formuliervelden'
+    REQUIRED: 'Is dit veld verplicht?'
+    RIGHTTITLE: 'Titel rechts'
+    SINGULARNAME: 'Bewerkbaar formulierveld'
+    YES: Ja
+  EditableFormField.ss:
+    ADD: Toevoegen
+    ADDRULE: 'Regel toevoegen'
+    BLANK: Blanco
+    CUSTOMRULES: 'Aanpasbare regels'
+    DELETE: Verwijder
+    DRAG: 'Versleep om de rangschikking van de velden te wijzigen'
+    FIELDCONFIGURATION: 'Veld opties'
+    FIELDONDEFAULT: 'Toon dit veld?'
+    GREATERTHAN: 'Waarde groter dan'
+    GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
+    HIDE: Verberg
+    HIDETHISFIELD: 'Verberg dit veld'
+    IS: Is
+    LESSTHAN: 'Waarde kleiner dan'
+    LESSTHANEQUAL: 'Waarde kleiner of gelijk aan'
+    LOCKED: 'Deze velden zijn niet aanpasbaar'
+    NOTBLANK: 'Niet blanco'
+    NOTVALUE: 'Geen waarde'
+    OPTIONS: 'Opties'
+    SHOW: Toon
+    SHOWOPTIONS: 'Toon opties'
+    SHOWTHISFIELD: 'Toon dit veld'
+    VALIDATION: 'Validatie'
+    VALUE: Waarde
+    WHEN: Wanneer
+  EditableFormHeading:
+    LEVEL: 'Kies grootte van kopje'
+    PLURALNAME: Kopjes
+    SINGULARNAME: Kopje
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Verberg van rapporten?'
+    PLURALNAME: 'HTML Blokken'
+    SINGULARNAME: 'HTML Blok'
+  EditableMemberListField:
+    PLURALNAME: 'Ledenlijst velden'
+    SINGULARNAME: 'Ledenlijst veld'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Bewerkbare meerdere optie velden'
+    SINGULARNAME: 'Bewerkbare meerdere optie veld'
+  EditableOption:
+    PLURALNAME: 'Bewerkbare opties'
+    SINGULARNAME: 'Bewerkbare optie'
+  EditableOption.ss:
+    DELETE: 'Verwijder optie'
+    DRAG: 'Sleep om volgorde van de opties te herschikken'
+    LOCKED: 'Deze velden zijn niet aanpasbaar'
+  EditableRadioField:
+    PLURALNAME: 'Keuzerondje velden'
+    SINGULARNAME: 'Keuzerondje veld'
+  EditableTextField:
+    NUMBERROWS: 'Aantal rijen'
+    PLURALNAME: 'Tekst velden'
+    SINGULARNAME: 'Tekst veld'
+    TEXTLENGTH: 'Tekst lengte'
+  FieldEditor.ss:
+    ADD: Toevoegen
+    SELECTAFIELD: 'Kies een veld'
+  Form:
+    FIELDISREQUIRED: '%s is verplicht'
+  SiteTree:
+    PLURALNAME: Paginas
+    SINGULARNAME: Pagina
+  SubmittedFileField:
+    DOWNLOADFILE: 'Download bestand'
+    PLURALNAME: 'Ingediende bestandsvelden'
+    SINGULARNAME: Ingediende bestandsveld'
+  SubmittedForm:
+    PLURALNAME: 'Ingediende formulieren'
+    SINGULARNAME: 'Ingediende formulier'
+  SubmittedFormField:
+    PLURALNAME: 'Ingediende formvelden'
+    SINGULARNAME: 'Ingediende formveld'
+  SubmittedFormReportField.ss:
+    DELETEALLSUBMISSIONS: 'Verwijder alle inzendingen'
+    DELETESUBMISSION: 'Verwijder inzending'
+    EXPORTSUBMISSIONS: 'Exporteer inzendingen naar CSV'
+    NOSUBMISSIONS: 'Geen inzendingen'
+    PAGES: 'Paginas'
+    SUBMITTED: 'Ingediend op'
+  UserDefinedForm:
+    DESCRIPTION: 'Generieke content pagina'
+    EMAILADDRESS: Email
+    EMAILBODY: Tekst
+    EMAILFROM: Van
+    EMAILSUBJECT: 'Email onderwerp'
+    EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
+    FORM: Form Indeling
+    FORMOPTIONS: 'Form Opties'
+    FORMSUBMISSIONS: 'Form Inzendingen'
+    FROMADDRESS: 'Email verzonden vanaf'
+    HIDEFORMDATA: 'Verberg formulier gegevens in email?'
+    HIDEFIELDLABELS: 'Verberg veld labels'
+    ENABLELIVEVALIDATION: 'Zet live validatie aan'
+    ONCOMPLETELABEL: 'Toon na voltooiing van het formulier'
+    ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'
+    ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
+    PLURALNAME: 'User Defined Forms'
+    RECEIVED: 'Ontvangen inzendingen'
+    REPLYADDRESS: 'E-mail voor antwoord op'
+    SAVESUBMISSIONS: 'Schakel opslaan van inzendingen uit'
+    SENDEMAILTO: 'Stuur email naar'
+    SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
+    SHOWCLEARFORM: 'Toon opnieuw instellen van form'
+    SINGULARNAME: 'User Defined Form'
+    SUBMITBUTTON: Indienen
+    TEXTONSUBMIT: 'Tekst voor indienen button:'
+    ADDRECIPIENT: 'Email ontvanger toevoegen'
+    EMAILRECIPIENTS: 'Email ontvangers'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Ontvangers'
+    SINGULARNAME: 'User Defined Form Email Ontvanger'
