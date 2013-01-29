@@ -825,7 +825,6 @@ JS
 		// email users on submit.
 		if($this->FilteredEmailRecipients()) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
-			$email->populateTemplate($emailData);
 			
 			if($attachments){
 				foreach($attachments as $file) {
@@ -848,7 +847,7 @@ JS
 				$email->setTo($recipient->EmailAddress);
 				
 				if($recipient->EmailReplyTo) {
-					$email->replyTo($recipient->EmailReplyTo);
+					$email->setReplyTo($recipient->EmailReplyTo);
 				}
 
 				// check to see if they are a dynamic reply to. eg based on a email field a user selected
@@ -856,7 +855,7 @@ JS
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
 					if($submittedFormField && is_string($submittedFormField->Value)) {
-						$email->replyTo($submittedFormField->Value);
+						$email->setReplyTo($submittedFormField->Value);
 					}
 				}
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
@@ -1056,4 +1055,14 @@ class UserDefinedForm_SubmittedFormEmail extends Email {
 	public function __construct($submittedFields = null) {
 		parent::__construct($submittedFields = null);
 	}
+	
+	/**	
+	 * Set the "Reply-To" header with an email address rather than append as
+	 * {@link Email::replyTo} does. 
+	 *
+	 * @param string $email The email address to set the "Reply-To" header to
+ 	 */
+	public function setReplyTo($email) {
+		$this->customHeaders['Reply-To'] = $email;
+	}  
 }
