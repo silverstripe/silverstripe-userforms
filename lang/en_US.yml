@@ -140,7 +140,7 @@ en_US:
         ORSELECTAFIELDTOUSEASTO: ".. or Select a Field to use as the To Address"
         PLURALNAME: "User Defined Forms"
         RECEIVED: "Received Submissions"
-	    REPLYADDRESS: 'Email for Reply To'        
+        REPLYADDRESS: 'Email for Reply To'        
         SAVESUBMISSIONS: "Disable Saving Submissions to Server"
         SENDEMAILTO: "Send Email To"
         SENDPLAIN: "Send Email as Plain Text (HTML will be stripped)"
