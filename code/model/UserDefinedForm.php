@@ -40,7 +40,7 @@ class UserDefinedForm extends Page {
 	);
 
 	/**
-	 * @var Array
+	 * @var array
 	 */
 	public static $has_many = array(
 		"Fields" => "EditableFormField",
@@ -49,9 +49,7 @@ class UserDefinedForm extends Page {
 	);
 	
 	/**
-	 * Setup the CMS Fields for the User Defined Form
-	 * 
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
@@ -99,7 +97,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * When publishing copy the editable form fields to the live database
 	 * Not going to version emails and submissions as they are likely to 
-	 * persist over multiple versions
+	 * persist over multiple versions.
 	 *
 	 * @return void
 	 */
@@ -235,7 +233,7 @@ class UserDefinedForm extends Page {
 	 *
 	 * @return Page
 	 */
-	 public function duplicate($doWrite = true) {
+	public function duplicate($doWrite = true) {
 		$page = parent::duplicate($doWrite);
 		
 		// the form fields
@@ -286,18 +284,21 @@ class UserDefinedForm extends Page {
 	 */
 	public function getIsModifiedOnStage() {
 		// new unsaved pages could be never be published
-		if($this->isNew()) return false;
+		if($this->isNew()) {
+			return false;
+		}
 
 		$stageVersion = Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Stage', $this->ID);
 		$liveVersion =	Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Live', $this->ID);
 
 		$isModified = ($stageVersion && $stageVersion != $liveVersion);
-		if (!$isModified) {
+
+		if(!$isModified) {
 			if($this->Fields()) {
 				foreach($this->Fields() as $field) {
-					if ($field->getIsModifiedOnStage()) {
-					     $isModified = true;
-					     break;
+					if($field->getIsModifiedOnStage()) {
+						$isModified = true;
+						break;
 					}
 				}
 			}
@@ -330,9 +331,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 	/**
 	 * Using $UserDefinedForm in the Content area of the page shows
 	 * where the form should be rendered into. If it does not exist
-	 * then default back to $Form
+	 * then default back to $Form.
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function index() {
 		if($this->Content && $form = $this->Form()) {
@@ -354,14 +355,16 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 	/**
 	 * Keep the session alive for the user.
+	 *
+	 * @return int
 	 */
-	function ping() {
+	public function ping() {
 		return 1;
 	}
 
 	/**
 	 * Get the form for the page. Form can be modified by calling {@link updateForm()}
-	 * on a UserDefinedForm extension
+	 * on a UserDefinedForm extension.
 	 *
 	 * @return Form|false
 	 */
@@ -392,9 +395,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 	/**
 	 * Get the form fields for the form on this page. Can modify this FieldSet
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
-	 * is applied to this controller
+	 * is applied to this controller.
 	 *
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getFormFields() {
 		$fields = new FieldList();
@@ -451,7 +454,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 *
 	 * @todo Make form actions editable via their own field editor.
 	 *
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getFormActions() {
 		$submitText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
@@ -529,7 +532,7 @@ JS
 	
 	/**
 	 * Generate the javascript for the conditional field show / hiding logic.
-	 * Allows complex rules to be created 
+	 *
 	 * @return void
 	 */
 	public function generateConditionalJavascript() {
@@ -703,21 +706,24 @@ JS
 	 * @return JSON 
 	 */
 	public function array2json($array) {
-		foreach($array as $key => $value)
+		foreach($array as $key => $value) {
 			if(is_array( $value )) {
 				$result[] = "$key:" . $this->array2json($value);
 			} else {
 				$value = (is_bool($value)) ? $value : "\"$value\"";
 				$result[] = "$key:$value";
 			}
+		}
+
 		return (isset($result)) ? "{\n".implode( ', ', $result ) ."\n}\n": '{}';
 	}
 	
 	/**
 	 * Process the form that is submitted through the site
 	 * 
-	 * @param Array Data
-	 * @param Form Form 
+	 * @param array $data
+	 * @param Form $form
+	 *
 	 * @return Redirection
 	 */
 	public function process($data, $form) {
@@ -739,6 +745,7 @@ JS
 		
 		if(Session::get("FormInfo.{$form->FormName()}.errors")){
 			Controller::curr()->redirectBack();
+
 			return;
 		}
 		
@@ -747,7 +754,9 @@ JS
 		$submittedForm->ParentID = $this->ID;
 
 		// if saving is not disabled save now to generate the ID
-		if(!$this->DisableSaveSubmissions) $submittedForm->write();
+		if(!$this->DisableSaveSubmissions) {
+			$submittedForm->write();
+		}
 		
 		$values = array();
 		$attachments = array();
@@ -755,8 +764,9 @@ JS
 		$submittedFields = new ArrayList();
 		
 		foreach($this->Fields() as $field) {
-			
-			if(!$field->showInReports()) continue;
+			if(!$field->showInReports()) {
+				continue;
+			}
 			
 			$submittedField = $field->getSubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
@@ -766,9 +776,10 @@ JS
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
 				$submittedField->Value = $field->getValueFromData($data);
-			}
-			else {
-				if(isset($data[$field->Name])) $submittedField->Value = $data[$field->Name];
+			} else {
+				if(isset($data[$field->Name])) {
+					$submittedField->Value = $data[$field->Name];
+				}
 			}
 
 			if(!empty($data[$field->Name])){
@@ -799,7 +810,9 @@ JS
 				}
 			}
 			
-			if(!$this->DisableSaveSubmissions) $submittedField->write();
+			if(!$this->DisableSaveSubmissions) {
+				$submittedField->write();
+			}
 	
 			$submittedFields->push($submittedField);
 		}
@@ -815,9 +828,13 @@ JS
 			$email->populateTemplate($emailData);
 			
 			if($attachments){
-				foreach($attachments as $file){
+				foreach($attachments as $file) {
 					if($file->ID != 0) {
-						$email->attachFile($file->Filename, $file->Filename, HTTP::get_mime_type($file->Filename));
+						$email->attachFile(
+							$file->Filename, 
+							$file->Filename, 
+							HTTP::get_mime_type($file->Filename)
+						);
 					}
 				}
 			}
@@ -879,9 +896,8 @@ JS
 	}
 
 	/**
-	 * This action handles rendering the "finished" message,
-	 * which is customisable by editing the ReceivedFormSubmission.ss
-	 * template.
+	 * This action handles rendering the "finished" message, which is 
+	 * customizable by editing the ReceivedFormSubmission template.
 	 *
 	 * @return ViewableData
 	 */
@@ -906,7 +922,7 @@ JS
  */
 class UserDefinedForm_EmailRecipient extends DataObject {
 	
-	static $db = array(
+	public static $db = array(
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
@@ -916,15 +932,14 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'HideFormData' => 'Boolean'
 	);
 	
-	static $has_one = array(
+	public static $has_one = array(
 		'Form' => 'UserDefinedForm',
 		'SendEmailFromField' => 'EditableFormField',
 		'SendEmailToField' => 'EditableFormField'
 	);
 	
 	/**
-	 * Return the fields to edit this email. 
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getCMSFields() {
 		
@@ -997,28 +1012,45 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		return $fields;
 	}
 	
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
 	public function canView($member = null) {
 		return $this->Form()->canView();
 	}
 	
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
 	public function canEdit($member = null) {
 		return $this->Form()->canEdit();
 	}
 	
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
 	public function canDelete($member = null) {
 		return $this->Form()->canDelete();
 	}
 }
 
 /**
- * Email that gets sent to the people listed in the Email Recipients 
- * when a submission is made
+ * Email that gets sent to the people listed in the Email Recipients when a 
+ * submission is made.
  *
  * @package userforms
  */
 
 class UserDefinedForm_SubmittedFormEmail extends Email {
+	
 	protected $ss_template = "SubmittedFormEmail";
+
 	protected $data;
 
 	public function __construct($submittedFields = null) {
