@@ -80,8 +80,8 @@ class UserDefinedForm extends Page {
 		);
 
 		// who do we email on submission
-		$emailRecipients = new GridField("EmailRecipients", "EmailRecipients", $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
-		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName('Add Email Recipient');
+		$emailRecipients = new GridField("EmailRecipients", _t('UserDefinedForm.EMAILRECIPIENTS', 'EmailRecipients'), $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
+		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName(_t('UserDefinedForm.ADDRECIPIENT', 'Add Email Recipient'));
 
 		$fields->addFieldsToTab("Root.FormOptions", $onCompleteFieldSet);		
 		$fields->addFieldToTab("Root.FormOptions", $emailRecipients);
