@@ -37,10 +37,6 @@ class UserDefinedForm extends Page {
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
-	public static $extensions = array(
-		"Versioned('Stage', 'Live')"
-	);
-
 	/**
 	 * @var array
 	 */
