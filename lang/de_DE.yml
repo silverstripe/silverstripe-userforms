@@ -152,6 +152,7 @@ de_DE:
         SUBMITTED: "Übermittelt an"
     UserDefinedForm:
         AEMAILRECIPIENT: "Ein Email Empfänger"
+        DESCRIPTION: "Fügt ein anpassbares Formular hinzu"
         EMAILADDRESS: "Email"
         EMAILBODY: "Body"
         EMAILFROM: "Von"
@@ -165,21 +166,21 @@ de_DE:
         OPTIONS: "Optionen"
         ORSELECTAFIELDTOUSEASFROM: ".. oder wähle ein form field als Gesendet-Von Adresse"
         ORSELECTAFIELDTOUSEASTO: ".. oder wähle ein form field als Sende-An Adresse"
-        PLURALNAME: "User Defined Forms"
+        PLURALNAME: "Anpassbares Formular"
         RECEIVED: "Erhaltene Einreichungen"
         SAVESUBMISSIONS: "Speichern von Einreichungen ausschalten"
         SENDEMAILTO: "Email senden an"
         SENDPLAIN: "Email als Text versenden (HTML wird entfernt)"
         SHOWCLEARFORM: "Form zurücksetzen Button anzeigen"
-        SINGULARNAME: "User Defined Form"
+        SINGULARNAME: "Anpassbares Formular"
         SUBMISSIONS: "Einreichungen"
         SUBMITBUTTON: "Senden"
         TEXTONSUBMIT: "Text auf der Einreich-Schaltfläche"
         NORESULTS: "Es wurde kein passendes Ergebnis gefunden"
         SUBMIT: "Einreichen"
     UserDefinedForm_EmailRecipient:
-        PLURALNAME: "User Defined Form Email Empfänger"
-        SINGULARNAME: "User Defined Form Email Empfänger"
+        PLURALNAME: "Anpassbares Formular Email Empfänger"
+        SINGULARNAME: "Anpassbares Formular Email Empfänger"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Einreichungs-Datensätze"
     EditableCheckbox.ss:
