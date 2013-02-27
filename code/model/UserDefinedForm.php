@@ -549,7 +549,10 @@ JS
 	public function generateConditionalJavascript() {
 		$default = "";
 		$rules = "";
-		
+
+		$watch = array();
+		$watchLoad = array();
+
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 				$fieldId = $field->Name;
@@ -668,36 +671,64 @@ JS
 								
 									break;
 							}
+	
+							if(!isset($watch[$fieldToWatch])) {
+								$watch[$fieldToWatch] = array();
+							}
+							
+							$watch[$fieldToWatch][] =  array(
+								'expression' => $expression,
+								'field_id' => $fieldId,
+								'view' => $view,
+								'opposite' => $opposite
+							);
 
-							// Register conditional behaviour with an element, so it can be triggered from many places.
-							$rules .= $fieldToWatch.".each(function() {
-								$(this).data('userformConditions', function() {
-									if(". $expression ." ) {
-										$(\"#". $fieldId ."\").".$view."();
-									}
-									else {
-										$(\"#". $fieldId ."\").".$opposite."();
-									}
-								});
-							});";
-
-							// Trigger update on element changes.
-							$rules .= $fieldToWatch.".$action(function() {
-								$(this).data('userformConditions').call(this);
-							});\n";
-
-							// Trigger update on load (if server-side validation fails some fields will have different values than defaults).
-							$rules .= $fieldToWatchOnLoad.".each(function() {
-								$(this).data('userformConditions').call(this);
-							});\n";
+							$watchLoad[$fieldToWatchOnLoad] = true;
+					
 						}
 					}
 				}
 			}
 		}
 		
+		if($watch) {
+			foreach($watch as $key => $values) {
+				$logic = array();
+
+				foreach($values as $rule) {
+					// Register conditional behaviour with an element, so it can be triggered from many places.
+					$logic[] = sprintf(
+						'if(%s) { $("#%s").%s(); } else { $("#%2$s").%s(); }', 
+						$rule['expression'], 
+						$rule['field_id'], 
+						$rule['view'], 
+						$rule['opposite']
+					);
+				}
+
+				$logic = implode("\n", $logic);
+				$rules .= $key.".each(function() {\n
+	$(this).data('userformConditions', function() {\n
+		$logic\n
+	}); \n
+});\n";
+
+				$rules .= $key.".$action(function() {
+	$(this).data('userformConditions').call(this);\n
+});\n";
+			}
+		}
+
+		if($watchLoad) {
+			foreach($watchLoad as $key => $value) {
+				$rules .= $key.".each(function() {
+	$(this).data('userformConditions').call(this);\n
+});\n";
+			}
+		}
+
 		// Only add customScript if $default or $rules is defined
-    if($default  || $rules) {
+    	if($default  || $rules) {
 			Requirements::customScript(<<<JS
 				(function($) {
 					$(document).ready(function() {
