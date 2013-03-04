@@ -17,7 +17,9 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		if($actionName === 'filter') {
 			$gridField->State->UserFormsGridField = array(
 				'filter' => isset($data['FieldNameFilter']) ? $data['FieldNameFilter'] : null,
-				'value' => isset($data['FieldValue']) ? $data['FieldValue'] : null
+				'value' => isset($data['FieldValue']) ? $data['FieldValue'] : null,
+				'start' => isset($data['StartFilter']) ? $data['StartFilter'] : null,
+				'end' => isset($data['EndFilter']) ? $data['EndFilter'] : null
 			);
 		}
 	}
@@ -29,8 +31,6 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 		$selectedField = $state->filter;
 		$selectedValue = $state->value;
-
-		// get the state of the grid field and populate the default values.
 
 		// retrieve a list of all the available form fields that have been 
 		// submitted in this form.
@@ -65,8 +65,26 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 			_t('UserFormsGridFieldFilterHeader.WHEREVALUEIS', 'where value is..'
 		));
 
-		$fields->push($columnField);
-		$fields->push($valueField);
+		$fields->push(new FieldGroup(new CompositeField(
+			$columnField,
+			$valueField
+		)));
+
+		$fields->push(new FieldGroup(new CompositeField(
+			$start = new DateField('StartFilter', 'From'),
+			$end = new DateField('EndFilter', 'Till')
+		)));
+
+		foreach(array($start, $end) as $date) {
+			$date->setConfig('showcalendar', true);
+			$date->setConfig('dateformat', 'y-mm-dd');
+			$date->setConfig('datavalueformat', 'y-mm-dd');
+			$date->addExtraClass('no-change-track');
+		}
+
+		$end->setValue($state->end);
+		$start->setValue($state->start);
+
 
 		$fields->push($actions = new FieldGroup(
 			GridField_FormAction::create($gridField, 'filter', false, 'filter', null)
@@ -97,7 +115,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		$state = $gridField->State;
 
 		if($filter = $state->UserFormsGridField->toArray()) {
-			if(isset($filter['filter']) && isset($filter['value'])) {
+			if(isset($filter['filter']) && $filter['filter'] && isset($filter['value']) && $filter['value']) {
 				$dataList = $dataList->where(sprintf("
 					SELECT COUNT(*) FROM SubmittedFormField 
 					WHERE ( 
@@ -108,6 +126,18 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 					Convert::raw2sql($filter['filter']),
 					Convert::raw2sql($filter['value'])
+				));
+			}
+
+			if(isset($filter['start']) && $filter['start']) {
+				$dataList = $dataList->filter(array(
+					'Created:GreaterThan' => $filter['start']
+				));
+			}
+
+			if(isset($filter['end']) && $filter['end']) {
+				$dataList = $dataList->filter(array(
+					'Created:LessThan' => $filter['end']
 				));
 			}
 		}
