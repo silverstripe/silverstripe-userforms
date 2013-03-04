@@ -182,23 +182,31 @@ class FieldEditor extends FormField {
 		if($parentID) {
 			$parentID = Convert::raw2sql($parentID);
 			
-			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
-				
-			$sort = $highestSort->value() + 1;
+			$sqlQuery = new SQLQuery();
+			$sqlQuery = $sqlQuery
+				->setSelect('MAX(Sort)')
+				->setFrom("EditableFormField")
+				->setWhere("ParentID = $parentID");
+
+			$sort = $sqlQuery->execute()->value() + 1;
 
 			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
-			if(!$className) user_error('Please select a field type to created', E_USER_WARNING);
+			
+			if(!$className) {
+				user_error('Please select a field type to created', E_USER_WARNING);
+			}
 
 			if(is_subclass_of($className, "EditableFormField")) {
 				$field = new $className();
-				$field->write();
 				$field->ParentID = $this->form->getRecord()->ID;
 				$field->Name = $field->class . $field->ID;
 				$field->Sort = $sort;
 				$field->write();
+			
 				return $field->EditSegment();
 			}
 		}
+
 		return false;
 	}
 	
@@ -215,10 +223,14 @@ class FieldEditor extends FormField {
 		// work out the sort by getting the sort of the last field in the form +1
 		if($parent) {
 			$sql_parent = Convert::raw2sql($parent);
-			
-			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
 
-			$sort = $highestSort->value() + 1;
+			$sqlQuery = new SQLQuery();
+			$sqlQuery = $sqlQuery
+				->setSelect('MAX(Sort)')
+				->setFrom("EditableOption")
+				->setWhere("ParentID = $sql_parent");
+
+			$sort = $sqlQuery->execute()->value() + 1;
 			
 			if($parent) {
 				$object = new EditableOption();
@@ -227,9 +239,11 @@ class FieldEditor extends FormField {
 				$object->Sort = $sort;
 				$object->Name = 'option' . $object->ID;
 				$object->write();
+		
 				return $object->EditSegment();
 			}
 		}
+
 		return false;
 	}
 }
