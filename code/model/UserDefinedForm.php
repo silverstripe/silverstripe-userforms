@@ -50,34 +50,41 @@ class UserDefinedForm extends Page {
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
+		// call updateCMSFields after userforms 
+		SiteTree::disableCMSFieldsExtensions();
 		$fields = parent::getCMSFields();
+		SiteTree::enableCMSFieldsExtensions();
 
 		// define tabs
 		$fields->findOrMakeTab('Root.FormContent', _t('UserDefinedForm.FORM', 'Form'));
-		$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.FORMOPTIONS', 'Form Options'));
-		$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.FORMSUBMISSIONS', 'Form Submissions'));
+		$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
+		$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
 
 		// field editor
 		$fields->addFieldToTab("Root.FormContent", new FieldEditor("Fields", 'Fields', "", $this ));
 		
 		// text to show on complete
 		$onCompleteFieldSet = new CompositeField(
-			$label=new LabelField('OnCompleteMessageLabel',_t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
-			$editor=new HtmlEditorField( "OnCompleteMessage", "", _t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage))
+			$label = new LabelField('OnCompleteMessageLabel',_t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
+			$editor = new HtmlEditorField( "OnCompleteMessage", "", _t('UserDefinedForm.ONCOMPLETEMESSAGE', $this->OnCompleteMessage))
 		);
+
 		$onCompleteFieldSet->addExtraClass('field');
+		
 		$editor->setRows(3);
 		$label->addExtraClass('left');		
 
-		UserDefinedForm_EmailRecipient::$summary_fields=array(
+		UserDefinedForm_EmailRecipient::$summary_fields = array(
 			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
 			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
 			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
 		);
 
 		// who do we email on submission
-		$emailRecipients = new GridField("EmailRecipients", "EmailRecipients", $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
-		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName('Add Email Recipient');
+		$emailRecipients = new GridField("EmailRecipients", _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
+		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName(
+			_t('UserDefinedform.ADDEMAILRECIPIENT', 'Add Email Recipient')
+		);
 
 		$fields->addFieldsToTab("Root.FormOptions", $onCompleteFieldSet);		
 		$fields->addFieldToTab("Root.FormOptions", $emailRecipients);
@@ -85,9 +92,55 @@ class UserDefinedForm extends Page {
 
 
 		// view the submissions
-		$fields->addFieldToTab("Root.Submissions", new SubmittedFormReportField( "Reports", _t('UserDefinedForm.RECEIVED', 'Received Submissions'), "", $this ) );
-		$fields->addFieldToTab("Root.Submissions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
+		$submissions = new GridField(
+			"Reports", 
+			_t('UserDefinedform.SUBMISSIONS', 'Submissions'),
+			 $this->Submissions()->sort('Created', 'DESC')
+		);
+
+		$config = new GridFieldConfig();
+		$config->addComponent(new GridFieldToolbarHeader());
+		$config->addComponent($sort = new GridFieldSortableHeader());
+		$config->addComponent($filter = new UserFormsGridFieldFilterHeader());
+		$config->addComponent(new GridFieldDataColumns());
+		$config->addComponent(new GridFieldEditButton());
+		$config->addComponent(new GridState_Component());
+		$config->addComponent(new GridFieldDeleteAction());
+		$config->addComponent(new GridFieldPageCount('toolbar-header-right'));
+		$config->addComponent($pagination = new GridFieldPaginator(25));
+		$config->addComponent(new GridFieldDetailForm());
+		$config->addComponent($export = new GridFieldExportButton());
+		$config->addComponent($print = new GridFieldPrintButton());
+
+		$sort->setThrowExceptionOnBadDataType(false);
+		$filter->setThrowExceptionOnBadDataType(false);
+		$pagination->setThrowExceptionOnBadDataType(false);
+
+		// attach every column to the print view from 
+		$columns = SubmittedFormField::get()
+			->filter(array(
+				"SubmittedForm.ParentID" => $this->ID
+			))
+			->leftJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
+			->map('Name', 'Title');
+
+		$columns = $columns->toArray();
+		$columns['Created'] = "Created";
 			
+		// print configuration
+		$print->setPrintHasHeader(true);
+		$print->setPrintColumns($columns);
+
+		// export configuration
+		$export->setCsvHasHeader(true);
+		$export->setExportColumns($columns);
+
+		$submissions->setConfig($config);
+		$fields->addFieldToTab("Root.Submissions", $submissions);
+		$fields->addFieldToTab("Root.FormOptions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
+
+		$this->extend('updateCMSFields', $fields);
+		
 		return $fields;
 	}
 	

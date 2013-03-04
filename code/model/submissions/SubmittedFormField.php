@@ -7,16 +7,21 @@
 
 class SubmittedFormField extends DataObject {
 	
-	static $db = array(
+	public static $db = array(
 		"Name" => "Varchar",
 		"Value" => "Text",
 		"Title" => "Varchar(255)"
 	);
 	
-	static $has_one = array(
+	public static $has_one = array(
 		"Parent" => "SubmittedForm"
 	);
-	
+
+	public static $summary_fields = array(
+		'Title',
+		'FormattedValue' => 'Value'
+	);
+
 	/**
 	 * Generate a formatted value for the reports and email notifications.
 	 * Converts new lines (which are stored in the database text field) as

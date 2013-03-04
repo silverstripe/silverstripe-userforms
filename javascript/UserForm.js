@@ -108,34 +108,6 @@
 		
 		$.entwine('udf', function($){
 			
-			/*--------------------- SUBMISSIONS ------------------------ */
-			
-			/**
-			 * Delete a given Submission from the form
-			 */
-			$("#userforms-submissions .deleteSubmission").live('click', function(event) {
-				event.preventDefault();
-				var deletedSubmission = $(this);
-				$.post($(this).attr('href'), function(data) {
-					deletedSubmission.parents('div.userform-submission').slideUp(function(){$(this).remove()});
-				});
-			});
-
-			/**
-			 * Delete all submissions and fade them out if successful
-			 */
-			$("#userforms-submissions .deleteAllSubmissions").live('click', function(event) {
-				event.preventDefault();
-				if(!confirm(userforms.message('CONFIRM_DELETE_ALL_SUBMISSIONS'))) {
-					return;
-				}
-				var self = this;
-				$.post($(this).attr('href'), function(data) {
-					$(self).parents('#userforms-submissions').children().slideUp(function(){$(this).remove()})
-				});
-
-			});
-			
 			/*-------------------- FIELD EDITOR ----------------------- */
 			
 			/**
@@ -366,16 +338,6 @@
 					currentRules.append(newRule);
 				}
 			});
-			
-			$('.userforms-submissions-pagination a').entwine({
-				onclick: function(e) {
-					e.preventDefault();
-					$.get($(this).attr('href'), function(data) {
-						$('#userforms-submissions').replaceWith(data);
-					});
-					this._super();
-				}
-			})
 		});
 	});
 })(jQuery);
