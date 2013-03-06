@@ -8,11 +8,6 @@
 		"email": "will@fullscreen.io"
 	}],
 	"require": {
-		"silverstripe/framework": "3.*"
-	},
-	"scripts": {
-		"post-update-cmd": [
-			"git submodule update --init --recursive"
-		]
+		"silverstripe/framework": "3.0.*"
 	}
 }
