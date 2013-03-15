@@ -2,5 +2,6 @@
 
 ## EditableCountryDropdownField
 
-EditableCountryDropdownField is gone since the CountryDropdownField and GeoIP code has been removed from the SS framework.
+EditableCountryDropdownField is gone since the CountryDropdownField and GeoIP
+code has been removed from the SS framework.
 
