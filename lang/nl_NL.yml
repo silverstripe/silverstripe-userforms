@@ -111,7 +111,7 @@ nl_NL:
   SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
     PLURALNAME: 'Ingediende bestandsvelden'
-    SINGULARNAME: Ingediende bestandsveld'
+    SINGULARNAME: 'Ingediende bestandsveld'
   SubmittedForm:
     PLURALNAME: 'Ingediende formulieren'
     SINGULARNAME: 'Ingediende formulier'
@@ -123,37 +123,39 @@ nl_NL:
     DELETESUBMISSION: 'Verwijder inzending'
     EXPORTSUBMISSIONS: 'Exporteer inzendingen naar CSV'
     NOSUBMISSIONS: 'Geen inzendingen'
-    PAGES: 'Paginas'
+    PAGES: "Pagina's"
     SUBMITTED: 'Ingediend op'
   UserDefinedForm:
-    DESCRIPTION: 'Generieke content pagina'
+    DESCRIPTION: 'Formulier pagina'
     EMAILADDRESS: Email
     EMAILBODY: Tekst
     EMAILFROM: Van
-    EMAILSUBJECT: 'Email onderwerp'
+    EMAILSUBJECT: 'Onderwerp'
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
-    FORM: Form Indeling
-    FORMOPTIONS: 'Form Opties'
-    FORMSUBMISSIONS: 'Form Inzendingen'
+    FORM: Formulier
+    FORMOPTIONS: 'Instellingen'
+    CONFIGURATION: 'Instellingen'
+    SUBMISSIONS: 'Inbox'
     FROMADDRESS: 'Email verzonden vanaf'
     HIDEFORMDATA: 'Verberg formulier gegevens in email?'
     HIDEFIELDLABELS: 'Verberg veld labels'
-    ENABLELIVEVALIDATION: 'Zet live validatie aan'
-    ONCOMPLETELABEL: 'Toon na voltooiing van het formulier'
+    ENABLELIVEVALIDATION: 'Zet real-time validatie aan'
+    ONCOMPLETELABEL: 'Bericht na succesvol verzonden'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'
     ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
-    PLURALNAME: 'User Defined Forms'
-    RECEIVED: 'Ontvangen inzendingen'
+    PLURALNAME: "Formulier pagina's"
+    RECEIVED: 'Ontvangen'
     REPLYADDRESS: 'E-mail voor antwoord op'
     SAVESUBMISSIONS: 'Schakel opslaan van inzendingen uit'
     SENDEMAILTO: 'Stuur email naar'
     SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
-    SHOWCLEARFORM: 'Toon opnieuw instellen van form'
-    SINGULARNAME: 'User Defined Form'
+    SHOWCLEARFORM: 'Toon Herstel-button'
+    SINGULARNAME: 'Formulier pagina'
     SUBMITBUTTON: Indienen
-    TEXTONSUBMIT: 'Tekst voor indienen button:'
+    TEXTONSUBMIT: 'Tekst op Verzend-button'
     ADDRECIPIENT: 'Email ontvanger toevoegen'
+    ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
     EMAILRECIPIENTS: 'Email ontvangers'
   UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'User Defined Form Email Ontvangers'
-    SINGULARNAME: 'User Defined Form Email Ontvanger'
+    PLURALNAME: 'Email Ontvangers'
+    SINGULARNAME: 'Email Ontvanger'
