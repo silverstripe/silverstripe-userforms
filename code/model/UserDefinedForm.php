@@ -83,7 +83,7 @@ class UserDefinedForm extends Page {
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
 		$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName(
-			_t('UserDefinedform.ADDEMAILRECIPIENT', 'Add Email Recipient')
+			_t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
 		);
 
 		$fields->addFieldsToTab("Root.FormOptions", $onCompleteFieldSet);		
@@ -94,7 +94,7 @@ class UserDefinedForm extends Page {
 		// view the submissions
 		$submissions = new GridField(
 			"Reports", 
-			_t('UserDefinedform.SUBMISSIONS', 'Submissions'),
+			_t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
 			 $this->Submissions()->sort('Created', 'DESC')
 		);
 
