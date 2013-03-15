@@ -34,14 +34,14 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 		// retrieve a list of all the available form fields that have been 
 		// submitted in this form.
+		$params = $gridField->getForm()->getController()->getURLParams();
+
 		$formFields = SubmittedFormField::get()
-			->filter(array(
-				"SubmittedForm.ParentID" => $gridField->getList()->column()
-			))
+			->where(sprintf("SubmittedForm.ParentID = '%s'", Convert::raw2sql($params['ID'])))
 			->leftJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
 			->sort('Title', 'ASC')
 			->map('Name', 'Title');
-		
+
 		// show dropdown of all the fields available from the submitted form fields
 		// that have been saved. Takes the titles from the currently live form.
 		$columnField = new DropdownField(
