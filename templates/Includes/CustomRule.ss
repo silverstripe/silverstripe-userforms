@@ -6,9 +6,9 @@
 <label><% _t('WHEN', 'When') %></label>
 <select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][$Pos][ConditionField]">
 	<option value="" selected="selected"></option>
-	<% control Fields %>
+	<% loop Fields %>
 		<option value="$Name" <% if isSelected %>selected="selected"<% end_if %>>$Title</option>
-	<% end_control %>
+	<% end_loop %>
 </select>
 
 <label><% _t('IS', 'Is') %></label>
