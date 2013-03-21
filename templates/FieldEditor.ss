@@ -5,9 +5,9 @@
 	
 	<div class="FieldListHold">
 		<ul class="FieldList" id="Fields_fields">
-			<% control Fields %>
+			<% loop Fields %>
 				$EditSegment
-			<% end_control %>
+			<% end_loop %>
 		</ul>
 	</div>
 	 
@@ -18,9 +18,9 @@
 		<select name="AddUserFormField" id="AddUserFormField">
 			<option value=""><% _t('SELECTAFIELD', 'Select a Field') %></option>
 
-			<% control CreatableFields %>
+			<% loop CreatableFields %>
 				<option value="$ClassName">$Title</option>
-			<% end_control %>
+			<% end_loop %>
 		</select>
 
 		<input type="submit" class="action" value="<% _t('ADD', 'Add') %>" /> 
