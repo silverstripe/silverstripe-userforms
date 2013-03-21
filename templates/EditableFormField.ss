@@ -30,9 +30,9 @@
 					<ul class="editableOptions" id="$FieldName.ATT-list">
 
 						<% if canEdit %>
-							<% control Options %>
+							<% loop Options %>
 								$EditSegment
-							<% end_control %>
+							<% end_loop %>
 							<% if HasAddableOptions %>
 								<li class="{$ClassName}Option">
 									<a href="#" rel="$ID" class="addableOption" title="<% _t('ADD', 'Add option to field') %>">
@@ -41,9 +41,9 @@
 								</li>
 							<% end_if %>
 						<% else %>
-							<% control Options %>
+							<% loop Options %>
 								$ReadonlyOption
-							<% end_control %>
+							<% end_loop %>
 						<% end_if %>
 					</ul>
 				</fieldset>
@@ -52,18 +52,18 @@
 			<% if FieldConfiguration %>
 				<fieldset class="fieldOptionsGroup">
 					<legend><% _t('FIELDCONFIGURATION', 'Field Configuration') %></legend>
-					<% control FieldConfiguration %>
+					<% loop FieldConfiguration %>
 						$FieldHolder
-					<% end_control %>
+					<% end_loop %>
 				</fieldset>
 			<% end_if %>
 			
 			<% if FieldValidationOptions %>
 				<fieldset class="fieldOptionsGroup">
 					<legend><% _t('VALIDATION', 'Validation') %></legend>
-					<% control FieldValidationOptions %>
+					<% loop FieldValidationOptions %>
 						$FieldHolder
-					<% end_control %>
+					<% end_loop %>
 				</fieldset>
 			<% end_if %>
 		
@@ -90,13 +90,13 @@
 						<label><% _t('WHEN', 'When') %></label>
 						<select class="fieldOption customRuleField" name="{$FieldName}[CustomRules][ConditionField]">
 							<option></option>
-							<% control Parent %>
+							<% loop Parent %>
 								<% if Fields %>
-									<% control Fields %>
+									<% loop Fields %>
 										<option value="$Name"><% if Title %>$Title<% else %>$Name<% end_if %></option>
-									<% end_control %>
+									<% end_loop %>
 								<% end_if %>
-							<% end_control %>
+							<% end_loop %>
 						</select>
 
 						<label><% _t('IS', 'Is') %></label>
@@ -117,11 +117,11 @@
 						<a href="#" class="deleteCondition" title="<% _t('DELETE', 'Delete') %>"><img src="cms/images/delete.gif" alt="<% _t('DELETE', 'Delete') %>" /></a>
 					</li>
 					<% if CustomRules %>
-						<% control CustomRules %>
+						<% loop CustomRules %>
 							<li>
 								<% include CustomRule %>
 							</li>
-						<% end_control %>
+						<% end_loop %>
 					<% end_if %>
 				</ul>
 			</fieldset>
