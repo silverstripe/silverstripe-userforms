@@ -116,18 +116,19 @@
 			 */
 			$('div.FieldEditor .MenuHolder .action').entwine({
 				onclick: function(e) {
+					var form = $("#Form_EditForm"),
+						length = $(".FieldInfo").length + 1, 
+						fieldType = $(this).siblings("select").val(),
+						formData = form.serialize()+'NewID='+ length +"&Type="+ fieldType, 
+						fieldEditor = $(this).closest('.FieldEditor');
+
 					e.preventDefault();
-					if($("#Fields").hasClass('readonly')) {
+
+					if($("#Fields").hasClass('readonly') || !fieldType) {
 						return;
 					}
 					
-					// variables
-					var form = $("#Form_EditForm");
-					var length = $(".FieldInfo").length + 1;
-					var fieldType = $(this).siblings("select").val();
-					var formData = form.serialize()+'NewID='+ length +"&Type="+ fieldType;
-					var fieldEditor = $(this).closest('.FieldEditor');
-
+					
 					// Due to some very weird behaviout of jquery.metadata, the url have to be double quoted
 					var addURL = fieldEditor.attr('data-add-url').substr(1, fieldEditor.attr('data-add-url').length-2);
 
@@ -138,7 +139,9 @@
 						data: formData, 
 						success: function(data) {
 							$('#Fields_fields').append(data);
+
 							statusMessage(userforms.message('ADDED_FIELD'));
+							
 							var name = $("#Fields_fields li.EditableFormField:last").attr("id").split(' ');
 
 							$("#Fields_fields select.fieldOption").append("<option value='"+ name[2] +"'>New "+ name[2] + "</option>");

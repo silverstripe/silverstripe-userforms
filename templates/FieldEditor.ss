@@ -12,7 +12,7 @@
 	</div>
 	 
 	<% if canEdit %>
-	<div class="MenuHolder">
+	<div class="MenuHolder no-change-track">
 		<h2><% _t('ADD', 'Add') %></h2>
 
 		<select name="AddUserFormField" id="AddUserFormField">
