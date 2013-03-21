@@ -44,14 +44,11 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 		// show dropdown of all the fields available from the submitted form fields
 		// that have been saved. Takes the titles from the currently live form.
-		$columnField = new DropdownField(
-			'FieldNameFilter', 
-			'', 
-			$formFields->toArray(), 
-			$selectedField, 
-			null, 
-			_t('UserFormsGridFieldFilterHeader.FILTERSUBMISSIONS', 'Filter Submissions..')
-		);
+		$columnField = new DropdownField('FieldNameFilter', '');
+		$columnField->setSource($formFields->toArray());
+		$columnField->setEmptyString(_t('UserFormsGridFieldFilterHeader.FILTERSUBMISSIONS', 'Filter Submissions..'));
+		$columnField->setHasEmptyDefault(true);
+		$columnField->setValue($selectedField);
 
 		$valueField = new TextField('FieldValue', '', $selectedValue);
 
