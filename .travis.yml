@@ -1,0 +1,22 @@
+# See https://github.com/silverstripe-labs/silverstripe-travis-support for setup details
+
+language: php 
+php: 
+ - 5.3
+
+env:
+ - DB=MYSQL CORE_RELEASE=3.1
+ - DB=PGSQL CORE_RELEASE=3.1
+
+matrix:
+  include:
+    - php: 5.4
+      env: DB=MYSQL CORE_RELEASE=master
+
+before_script:
+ - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+ - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+ - cd ~/builds/ss
+
+script: 
+ - phpunit userforms/tests/
