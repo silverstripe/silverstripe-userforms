@@ -9,9 +9,9 @@
 
 class EditableDateField extends EditableFormField {
 	
-	static $singular_name = 'Date Field';
+	private static $singular_name = 'Date Field';
 	
-	static $plural_name = 'Date Fields';
+	private static $plural_name = 'Date Fields';
 	
 	public function getFieldConfiguration() {
 		$default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;

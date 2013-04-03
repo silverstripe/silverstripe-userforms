@@ -8,7 +8,7 @@
 
 class FieldEditor extends FormField {
 
-	public static $allowed_actions = array(
+	private static $allowed_actions = array(
 		'addfield',
 		'addoptionfield'
 	);
@@ -102,7 +102,7 @@ class FieldEditor extends FormField {
 			$output = new ArrayList();
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
-				$niceTitle = trim(eval("return $title::\$singular_name;")); 
+				$niceTitle = Config::inst()->get($title, 'singular_name');
 				if($niceTitle) {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,

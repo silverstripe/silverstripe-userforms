@@ -9,9 +9,9 @@
 
 class EditableCheckbox extends EditableFormField {
 	
-	static $singular_name = 'Checkbox Field';
+	private static $singular_name = 'Checkbox Field';
 	
-	static $plural_name = 'Checkboxes';
+	private static $plural_name = 'Checkboxes';
 	
 	public function getFieldConfiguration() {
 		$options = parent::getFieldConfiguration();

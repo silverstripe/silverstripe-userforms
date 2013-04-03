@@ -9,7 +9,7 @@
 
 class SubmittedFileField extends SubmittedFormField {
 	
-	public static $has_one = array(
+	private static $has_one = array(
 		"UploadedFile" => "File"
 	);
 	

@@ -7,9 +7,9 @@
 
 class EditableMemberListField extends EditableFormField {
 	
-	static $singular_name = 'Member List Field';
+	private static $singular_name = 'Member List Field';
 	
-	static $plural_name = 'Member List Fields';
+	private static $plural_name = 'Member List Fields';
 	
 	public function getFieldConfiguration() {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
