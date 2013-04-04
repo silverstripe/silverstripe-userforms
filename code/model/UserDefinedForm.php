@@ -74,11 +74,16 @@ class UserDefinedForm extends Page {
 		$editor->setRows(3);
 		$label->addExtraClass('left');		
 
-		UserDefinedForm_EmailRecipient::set_summary_fields(array(
-			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
-			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
-			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
-		));
+		// Set the summary fields of UserDefinedForm_EmailRecipient dynamically via config system
+		Config::inst()->update(
+			'UserDefinedForm_EmailRecipient',
+			'summary_fields',
+			array(
+				'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
+				'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
+				'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From'),
+			)
+		);
 
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
@@ -1033,15 +1038,6 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	);
 	
 	private static $summary_fields = array();
-
-	/**
-	 * Expose the summary_fields static
-	 * 
-	 * @param array $fields
-	 */
-	public static function set_summary_fields($fields) {
-				self::$summary_fields = $fields;
-	}
 
 	/**
 	 * @return FieldList
