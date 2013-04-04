@@ -74,11 +74,11 @@ class UserDefinedForm extends Page {
 		$editor->setRows(3);
 		$label->addExtraClass('left');		
 
-		UserDefinedForm_EmailRecipient::$summary_fields = array(
+		UserDefinedForm_EmailRecipient::set_summary_fields(array(
 			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
 			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
 			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
-		);
+		));
 
 		// who do we email on submission
 		$emailRecipients = new GridField("EmailRecipients", _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'), $this->EmailRecipients(), GridFieldConfig_RecordEditor::create(10));
@@ -1016,7 +1016,7 @@ JS
  */
 class UserDefinedForm_EmailRecipient extends DataObject {
 	
-	public static $db = array(
+	private static $db = array(
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
@@ -1026,12 +1026,23 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'HideFormData' => 'Boolean'
 	);
 	
-	public static $has_one = array(
+	private static $has_one = array(
 		'Form' => 'UserDefinedForm',
 		'SendEmailFromField' => 'EditableFormField',
 		'SendEmailToField' => 'EditableFormField'
 	);
 	
+	private static $summary_fields = array();
+
+	/**
+	 * Expose the summary_fields static
+	 * 
+	 * @param array $fields
+	 */
+	public static function set_summary_fields($fields) {
+				self::$summary_fields = $fields;
+	}
+
 	/**
 	 * @return FieldList
 	 */

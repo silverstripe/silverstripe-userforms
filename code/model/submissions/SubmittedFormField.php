@@ -7,17 +7,17 @@
 
 class SubmittedFormField extends DataObject {
 	
-	public static $db = array(
+	private static $db = array(
 		"Name" => "Varchar",
 		"Value" => "Text",
 		"Title" => "Varchar(255)"
 	);
 	
-	public static $has_one = array(
+	private static $has_one = array(
 		"Parent" => "SubmittedForm"
 	);
 
-	public static $summary_fields = array(
+	private static $summary_fields = array(
 		'Title',
 		'FormattedValue' => 'Value'
 	);

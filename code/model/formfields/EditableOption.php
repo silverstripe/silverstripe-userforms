@@ -9,20 +9,20 @@
 
 class EditableOption extends DataObject {
 	
-	static $default_sort = "Sort";
+	private static $default_sort = "Sort";
 
-	static $db = array(
+	private static $db = array(
 		"Name" => "Varchar(255)",
 		"Title" => "Varchar(255)",
 		"Default" => "Boolean",
 		"Sort" => "Int"
 	);
 	
-	static $has_one = array(
+	private static $has_one = array(
 		"Parent" => "EditableMultipleOptionField",
 	);
 	
-	static $extensions = array(
+	private static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
 

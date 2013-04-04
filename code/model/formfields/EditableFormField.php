@@ -8,7 +8,7 @@
 
 class EditableFormField extends DataObject {
 	
-	static $default_sort = "Sort";
+	private static $default_sort = "Sort";
 	
 	/**
 	 * A list of CSS classes that can be added
@@ -17,7 +17,7 @@ class EditableFormField extends DataObject {
 	 */
 	public static $allowed_css = array();
 	
-	static $db = array(
+	private static $db = array(
 		"Name" => "Varchar",
 		"Title" => "Varchar(255)",
 		"Default" => "Varchar",
@@ -29,11 +29,11 @@ class EditableFormField extends DataObject {
 		"CustomParameter" => "Varchar(200)"
 	);
 
-	static $has_one = array(
+	private static $has_one = array(
 		"Parent" => "UserDefinedForm",
 	);
 	
-	static $extensions = array(
+	private static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
 	
