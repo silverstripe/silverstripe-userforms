@@ -9,17 +9,17 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var string
 	 */
-	public static $description = 'Adds a customizable form.';
+	private static $description = 'Adds a customizable form.';
 
 	/**
 	 * @var string Required Identifier
 	 */
-	public static $required_identifier = null;
+	private static $required_identifier = null;
 	
 	/**
 	 * @var array Fields on the user defined form page.
 	 */
-	public static $db = array(
+	private static $db = array(
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean",
@@ -31,7 +31,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var array Default values of variables when this page is created
 	 */ 
-	public static $defaults = array(
+	private static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
@@ -40,7 +40,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var array
 	 */
-	public static $has_many = array(
+	private static $has_many = array(
 		"Fields" => "EditableFormField",
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
@@ -477,7 +477,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				if($editableField->Required) {
 					$field->addExtraClass('requiredField');
 					
-					if($identifier = UserDefinedForm::$required_identifier) {
+					if($identifier = UserDefinedForm::config()->required_identifier) {
 						
 						$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
 						$field->setTitle($title);

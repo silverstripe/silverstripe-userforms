@@ -97,7 +97,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
 		$controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 		
-		UserDefinedForm::$required_identifier = "*";
+		UserDefinedForm::config()->required_identifier = "*";
 		
 		$fields = $controller->getFormFields();
 		
