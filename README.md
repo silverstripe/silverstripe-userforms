@@ -13,7 +13,7 @@ and without getting involved in any PHP code.
 
 ## Requirements
 
- * SilverStripe 3.0
+ * SilverStripe 3.1
 
 ## Features
 
