@@ -548,7 +548,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			foreach($this->Fields() as $field) {
 				$messages[$field->Name] = $field->getErrorMessage()->HTML();
 	
-				if($field->Required && $field->CustomRules()->Count() == 0) {
+				if($field->Required) {
 					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
 					$required->addRequiredField($field->Name);
 				}
@@ -570,7 +570,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			(function($) {
 				$(document).ready(function() {
 					$("#Form_Form").validate({
-						ignore: [':hidden'],
+						ignore: ':hidden'`,
 						errorClass: "required",	
 						errorPlacement: function(error, element) {
 							if(element.is(":radio")) {
