@@ -151,7 +151,7 @@ nl_NL:
     SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
     SHOWCLEARFORM: 'Toon Herstel-button'
     SINGULARNAME: 'Formulier pagina'
-    SUBMITBUTTON: Indienen
+    SUBMITBUTTON: 'Verzenden'
     TEXTONSUBMIT: 'Tekst op Verzend-button'
     ADDRECIPIENT: 'Email ontvanger toevoegen'
     ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
