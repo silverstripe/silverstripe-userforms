@@ -71,6 +71,33 @@ class SubmittedForm extends DataObject {
 	}
 
 	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canView($member = null) {
+		return $this->Parent()->canView();
+	}
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canEdit($member = null) {
+		return $this->Parent()->canEdit();
+	}
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canDelete($member = null) {
+		return $this->Parent()->canDelete();
+	}
+
+	/**
 	 * Before we delete this form make sure we delete all the
 	 * field values so that we don't leave old data round
 	 *
