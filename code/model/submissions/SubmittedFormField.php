@@ -23,6 +23,33 @@ class SubmittedFormField extends DataObject {
 	);
 
 	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canView($member = null) {
+		return $this->Parent()->canView();
+	}
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canEdit($member = null) {
+		return $this->Parent()->canEdit();
+	}
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canDelete($member = null) {
+		return $this->Parent()->canDelete();
+	}
+
+	/**
 	 * Generate a formatted value for the reports and email notifications.
 	 * Converts new lines (which are stored in the database text field) as
 	 * <brs> so they will output as newlines in the reports
