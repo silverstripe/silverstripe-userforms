@@ -1112,7 +1112,16 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 
 		return $fields;
 	}
-	
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
+	public function canCreate($member = null) {
+		return $this->Form()->canCreate();
+	}
+
 	/**
 	 * @param Member
 	 *
