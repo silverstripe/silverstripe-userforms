@@ -27,6 +27,15 @@ class SubmittedFormField extends DataObject {
 	 *
 	 * @return boolean
 	 */
+	public function canCreate($member = null) {
+		return $this->Parent()->canCreate();
+	}
+
+	/**
+	 * @param Member
+	 *
+	 * @return boolean
+	 */
 	public function canView($member = null) {
 		return $this->Parent()->canView();
 	}
