@@ -2,6 +2,7 @@
  * User Defined Form Builder CSS
  *
  */
+li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 
 /* Add a Field Menu 
 ---------------------------------------- */
