@@ -7,9 +7,9 @@
  */
 class EditableCountryDropdownField extends EditableFormField {
 
-	static $singular_name = 'Country Dropdown';
+	private static $singular_name = 'Country Dropdown';
 	
-	static $plural_name = 'Country Dropdowns';
+	private static $plural_name = 'Country Dropdowns';
 	
 	public function getFormField() {
 		return new CountryDropdownField($this->Name, $this->Title);
