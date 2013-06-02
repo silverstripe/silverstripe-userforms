@@ -4,6 +4,10 @@
  */
 li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 
+.page-icon.class-UserDefinedForm {
+	background-position: 0 -64px;
+}
+
 /* Add a Field Menu 
 ---------------------------------------- */
 .MenuHolder {
