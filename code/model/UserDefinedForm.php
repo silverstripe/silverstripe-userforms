@@ -45,7 +45,14 @@ class UserDefinedForm extends Page {
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
 	);
-	
+
+	/**
+	 * Temporary storage of field ids when the form is duplicated.
+	 * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
+	 * @var array
+	 */
+	protected $fieldsFromTo = array();
+
 	/**
 	 * @return FieldList
 	 */
@@ -281,6 +288,16 @@ class UserDefinedForm extends Page {
 		return $recipients;
 	}
 
+
+	/**
+	 * Store new and old ids of duplicated fields.
+	 * This method also serves as a hook for descendant classes.
+	 */
+	protected function afterDuplicateField($page, $fromField, $toField) {
+		$this->fieldsFromTo[$fromField->ClassName . $fromField->ID] = $toField->ClassName . $toField->ID;
+	}
+
+
 	/**
 	 * Duplicate this UserDefinedForm page, and its form fields.
 	 * Submissions, on the other hand, won't be duplicated.
@@ -296,6 +313,7 @@ class UserDefinedForm extends Page {
 				$newField = $field->duplicate();
 				$newField->ParentID = $page->ID;
 				$newField->write();
+				$this->afterDuplicateField($page, $field, $newField);
 			}
 		}
 		
@@ -308,6 +326,26 @@ class UserDefinedForm extends Page {
 			}
 		}
 		
+		// Rewrite CustomRules
+		if($page->Fields()) {
+			foreach($page->Fields() as $field) {
+				// Rewrite name to make the CustomRules-rewrite below work.
+				$field->Name = $field->ClassName . $field->ID;
+				$rules = unserialize($field->CustomRules);
+
+				if (count($rules) && isset($rules[0]['ConditionField'])) {
+					$from = $rules[0]['ConditionField'];
+
+					if (array_key_exists($from, $this->fieldsFromTo)) {
+						$rules[0]['ConditionField'] = $this->fieldsFromTo[$from];
+						$field->CustomRules = serialize($rules);
+					}
+				}
+
+				$field->Write();
+			}
+		}
+
 		return $page;
 	}
 
