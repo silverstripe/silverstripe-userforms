@@ -19,7 +19,7 @@ class EditableRadioField extends EditableMultipleOptionField {
 		
 		if($optionSet) {
 			foreach( $optionSet as $option ) {
-				$options[$option->Title] = $option->Title;
+				$options[$option->EscapedTitle] = $option->Title;
 			}	
 		}
 		

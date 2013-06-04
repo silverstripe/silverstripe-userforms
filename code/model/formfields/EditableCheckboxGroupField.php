@@ -16,9 +16,9 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	public function getFormField() {
 		$optionSet = $this->Options();
 		$options = array();
-		
-		$optionMap = ($optionSet) ? $optionSet->map('Title', 'Title') : array();
-		
+
+		$optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : array();
+
 		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
 	}
 	
