@@ -72,6 +72,6 @@ class EditableOption extends DataObject {
 	}
 
     public function getEscapedTitle() {
-        return Convert::raw2att(parent::getTitle());
+        return Convert::raw2att($this->Title);
     }
 }
