@@ -70,4 +70,8 @@ class EditableOption extends DataObject {
 		$this->readonly = true;
 		return $this->EditSegment();
 	}
+
+    public function getEscapedTitle() {
+        return Convert::raw2att($this->Title);
+    }
 }
