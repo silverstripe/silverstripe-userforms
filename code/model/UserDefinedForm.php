@@ -408,7 +408,13 @@ class UserDefinedForm extends Page {
  */
 
 class UserDefinedForm_Controller extends Page_Controller {
-	
+
+	private static $allowed_actions = array(
+		'Form',
+		'ping',
+		'finished',
+	);
+
 	/**
 	 * Load all the custom jquery needed to run the custom 
 	 * validation 
