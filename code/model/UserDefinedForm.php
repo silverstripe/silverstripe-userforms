@@ -409,17 +409,13 @@ class UserDefinedForm extends Page {
 
 class UserDefinedForm_Controller extends Page_Controller {
 	
-	public static $allowed_actions = array(
+	private static $allowed_actions = array(
 		'index',
 		'ping',
 		'Form',
 		'finished'
 	);
 
-	/**
-	 * Load all the custom jquery needed to run the custom 
-	 * validation 
-	 */
 	public function init() {
 		parent::init();
 		
