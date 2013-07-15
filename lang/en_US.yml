@@ -123,7 +123,6 @@ en_US:
         NOSUBMISSIONS: "No Submissions"
         SUBMITTED: "Submitted at"
     UserDefinedForm:
-        DESCRIPTION: 'Generic content page'
         EMAILADDRESS: Email
         EMAILBODY: Body
         EMAILFROM: From

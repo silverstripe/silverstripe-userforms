@@ -126,7 +126,6 @@ en:
     PAGES: Pages
     SUBMITTED: 'Submitted at'
   UserDefinedForm:
-    DESCRIPTION: 'Generic content page'
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
