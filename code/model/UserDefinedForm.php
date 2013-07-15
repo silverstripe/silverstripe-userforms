@@ -130,8 +130,8 @@ class UserDefinedForm extends Page {
 
 		// attach every column to the print view from 
 		$columns = SubmittedFormField::get()
-			->where("SubmittedForm.ParentID = '$this->ID'")
-			->leftJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
+			->where("\"SubmittedForm\".\"ParentID\" = '$this->ID'")
+			->leftJoin('SubmittedForm', '"SubmittedFormField"."ParentID" = "SubmittedForm"."ID"')
 			->map('Name', 'Title');
 
 		$columns = $columns->toArray();
