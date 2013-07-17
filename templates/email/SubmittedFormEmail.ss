@@ -1,4 +1,3 @@
-<h1>$Subject</h1>
 $Body
 
 <% if HideFormData %>
