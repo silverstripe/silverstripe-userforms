@@ -2,6 +2,7 @@
   "name": "silverstripe/userforms",
 	"description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
 	"type": "silverstripe-module",
+	"license": "BSD-3-Clause",
 	"keywords": ["silverstripe", "userforms"],
 	"authors": [
 	{
