@@ -180,7 +180,7 @@ class FieldEditor extends FormField {
 		$parentID = $this->form->getRecord()->ID;
 		
 		if($parentID) {
-			$parentID = Convert::raw2sql($parentID);
+			$parentID = (int) $parentID;
 			
 			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableFormField\" WHERE \"ParentID\" = '$parentID'");
 				
@@ -214,7 +214,7 @@ class FieldEditor extends FormField {
 
 		// work out the sort by getting the sort of the last field in the form +1
 		if($parent) {
-			$sql_parent = Convert::raw2sql($parent);
+			$sql_parent = (int) $parent;
 			
 			$highestSort = DB::query("SELECT MAX(\"Sort\") FROM \"EditableOption\" WHERE \"ParentID\" = '$sql_parent'");
 
