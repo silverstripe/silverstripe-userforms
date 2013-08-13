@@ -9,9 +9,9 @@
 
 class EditableLiteralField extends EditableFormField {
 	
-	private static $singular_name = 'HTML Block';
+	public static $singular_name = 'HTML Block';
 	
-	private static $plural_name = 'HTML Blocks';
+	public static $plural_name = 'HTML Blocks';
 	
 	public function getFieldConfiguration() {
 		$customSettings = unserialize($this->CustomSettings);	

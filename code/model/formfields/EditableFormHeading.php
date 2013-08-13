@@ -7,9 +7,9 @@
 
 class EditableFormHeading extends EditableFormField {
 
-	private static $singular_name = 'Heading';
+	public static $singular_name = 'Heading';
 	
-	private static $plural_name = 'Headings';
+	public static $plural_name = 'Headings';
 	
 	public function getFieldConfiguration() {
 		$levels = array(
