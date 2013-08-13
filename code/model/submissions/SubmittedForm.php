@@ -7,16 +7,16 @@
 
 class SubmittedForm extends DataObject {
 	
-	private static $has_one = array(
+	public static $has_one = array(
 		"SubmittedBy" => "Member",
 		"Parent" => "UserDefinedForm",
 	);
 	
-	private static $has_many = array( 
+	public static $has_many = array(
 		"Values" => "SubmittedFormField"
 	);
 
-	private static $summary_fields = array(
+	public static $summary_fields = array(
 		'ID',
 		'Created'
 	);

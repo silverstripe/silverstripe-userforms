@@ -8,7 +8,7 @@
 
 class FieldEditor extends FormField {
 
-	private static $allowed_actions = array(
+	public static $allowed_actions = array(
 		'addfield',
 		'addoptionfield'
 	);
