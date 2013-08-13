@@ -15,7 +15,7 @@
 
 class EditableMultipleOptionField extends EditableFormField {
 	
-	private static $has_many = array(
+	public static $has_many = array(
 		"Options" => "EditableOption"
 	);
 	

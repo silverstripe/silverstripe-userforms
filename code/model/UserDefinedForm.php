@@ -9,7 +9,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var string
 	 */
-	private static $description = 'Adds a customizable form.';
+	public static $description = 'Adds a customizable form.';
 
 	/**
 	 * @var string Required Identifier
@@ -19,7 +19,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var array Fields on the user defined form page.
 	 */
-	private static $db = array(
+	public static $db = array(
 		"SubmitButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean",
@@ -31,7 +31,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var array Default values of variables when this page is created
 	 */ 
-	private static $defaults = array(
+	public static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
@@ -40,7 +40,7 @@ class UserDefinedForm extends Page {
 	/**
 	 * @var array
 	 */
-	private static $has_many = array(
+	public static $has_many = array(
 		"Fields" => "EditableFormField",
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
@@ -409,7 +409,7 @@ class UserDefinedForm extends Page {
 
 class UserDefinedForm_Controller extends Page_Controller {
 	
-	private static $allowed_actions = array(
+	public static $allowed_actions = array(
 		'index',
 		'ping',
 		'Form',
@@ -1062,7 +1062,7 @@ JS
  */
 class UserDefinedForm_EmailRecipient extends DataObject {
 	
-	private static $db = array(
+	public static $db = array(
 		'EmailAddress' => 'Varchar(200)',
 		'EmailSubject' => 'Varchar(200)',
 		'EmailFrom' => 'Varchar(200)',
@@ -1072,13 +1072,13 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'HideFormData' => 'Boolean'
 	);
 	
-	private static $has_one = array(
+	public static $has_one = array(
 		'Form' => 'UserDefinedForm',
 		'SendEmailFromField' => 'EditableFormField',
 		'SendEmailToField' => 'EditableFormField'
 	);
 	
-	private static $summary_fields = array();
+	public static $summary_fields = array();
 
 	/**
 	 * @return FieldList
