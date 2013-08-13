@@ -77,6 +77,8 @@ class SubmittedFormReportField extends FormField {
 	 * @return HTTPResponse / bool
 	 */
 	public function export($id = false) {
+		// The default max execution time is sometimes not enough for large number of submissions
+		increase_time_limit_to(600);
 		if($id && is_int($id)) {
 			$SQL_ID = $id;
 		}
