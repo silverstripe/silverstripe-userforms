@@ -69,10 +69,15 @@ class UserDefinedForm extends Page {
 		$editor->setRows(3);
 		$label->addExtraClass('left');		
 
-		UserDefinedForm_EmailRecipient::$summary_fields=array(
-			'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
-			'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
-			'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From')
+		// Set the summary fields of UserDefinedForm_EmailRecipient dynamically via config system
+		Config::inst()->update(
+			'UserDefinedForm_EmailRecipient',
+			'summary_fields',
+			array(
+				'EmailAddress' => _t('UserDefinedForm.EMAILADDRESS', 'Email'),
+				'EmailSubject' => _t('UserDefinedForm.EMAILSUBJECT', 'Subject'),
+				'EmailFrom' => _t('UserDefinedForm.EMAILFROM', 'From'),
+			)
 		);
 
 		// who do we email on submission
