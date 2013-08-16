@@ -34,6 +34,20 @@ and without getting involved in any PHP code.
  5.  Run in your browser - `/dev/build` to rebuild the database. 
  6.  You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
 
+## Tasks
+
+### UserForms EditableFormField Column Clean task ###
+
+This task is used to clear unused columns from EditableFormField
+
+The reason to clear these columns is because having surplus forms can break form saving.
+
+Currently it only supports MySQL and when it is run it queries the EditableFormField class for the valid columns,
+it then grabs the columns for the live database it will create a backup of the table and then remove any columns that
+are surplus.
+
+To run the task login as Admin and go to to http://yoursite/dev/tasks/UserFormsColumnCleanTask
+
 ## Thanks
 
 I would like to thank everyone who has contributed to the module, bugfixers, 
