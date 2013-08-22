@@ -149,6 +149,22 @@ en:
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
+    ADDEMAILRECIPIENT: 'Add Email Recipient'
+    CONFIGURATION: Configuration
+    DESCRIPTION: 'Adds a customizable form.'
+    EMAILRECIPIENTS: 'Email Recipients'
+    ENABLELIVEVALIDATION: 'Enable live validation'
+    HIDEFIELDLABELS: 'Hide field labels'
+    SUBMISSIONS: Submissions
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Country Dropdowns'
+    SINGULARNAME: 'Country Dropdown'
+  GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filter Submissions..'
+    WHEREVALUEIS: 'where value is..'
