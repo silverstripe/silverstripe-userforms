@@ -55,56 +55,56 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 
 /* Field Listing
 ---------------------------------------- */	
-.FieldEditor {
+#Fields_fields {
 	padding: 10px 0;
 }
 
-	.FieldEditor .EditableFormField {
+	#Fields_fields .EditableFormField {
 		margin: 2px;
 		padding: 3px 0;
 		border-top: 1px dotted #ccc;
 		width: 100%;
 		overflow: hidden;
 	}
-		.FieldEditor .EditableFormField * {
+		#Fields_fields .EditableFormField * {
 			display: inline;
 			vertical-align: middle;
 		}
-		.FieldEditor .EditableFormField .fieldHandler,
-		.FieldEditor .EditableFormField .handle {
+		#Fields_fields .EditableFormField .fieldHandler,
+		#Fields_fields .EditableFormField .handle {
 			cursor: move;
 		}
-		.FieldEditor .EditableFormField .fieldInfo {
+		#Fields_fields .EditableFormField .fieldInfo {
 			float: left;
 			padding-right: 10px;
 		}
-		.FieldEditor .EditableFormField .fieldActions {
+		#Fields_fields .EditableFormField .fieldActions {
 			float: left;
 			margin-top: 10px;
 		}
-			.FieldEditor .EditableFormField .fieldActions a {
+			#Fields_fields .EditableFormField .fieldActions a {
 				padding: 0 5px 5px 20px;
 				font-size: 12px;
 			}
-				.FieldEditor .EditableFormField .moreOptions {
+				#Fields_fields .EditableFormField .moreOptions {
 					background: url(../../cms/images/edit.gif) no-repeat top left;
 				}
-					.FieldEditor .EditableFormField .moreOptions.showing {
+					#Fields_fields .EditableFormField .moreOptions.showing {
 						color: #666;
 						text-decoration: none;
 					}
-				.FieldEditor .EditableFormField .delete {
+				#Fields_fields .EditableFormField .delete {
 					background: url(../../cms/images/delete.gif) no-repeat top left;
 				}
 
-		.FieldEditor .EditableFormField input {
+		#Fields_fields .EditableFormField input {
 			width: 250px;
 			margin-left: 0px;
 		}
 	
 		/** Field Options **/
 		
-		.FieldEditor .EditableFormField div.extraOptions {
+		#Fields_fields .EditableFormField div.extraOptions {
 			display: block;
 			overflow:hidden;
 			margin: 3px 0px 3px 38px;
@@ -112,31 +112,31 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 			padding: 3px;
 			clear: both;			
 		}
-			.FieldEditor .EditableFormField .extraOptions * {
+			#Fields_fields .EditableFormField .extraOptions * {
 				display: block;
 			}
 			
-				.FieldEditor .EditableFormField .extraOptions .handle {
+				#Fields_fields .EditableFormField .extraOptions .handle {
 					float: left;
 					margin-right: 3px;
 				}
-				.FieldEditor .EditableFormField .extraOptions ul {
+				#Fields_fields .EditableFormField .extraOptions ul {
 					padding: 5px 0;
 				}
-					.FieldEditor .EditableFormField .extraOptions li {
+					#Fields_fields .EditableFormField .extraOptions li {
 						padding: 3px 0;
 						width: 100%;
 						overflow: hidden;
 					}
-				.FieldEditor .EditableFormField .extraOptions a {
+				#Fields_fields .EditableFormField .extraOptions a {
 					background: none;
 				}
-				.FieldEditor .EditableFormField .extraOptions input {
+				#Fields_fields .EditableFormField .extraOptions input {
 					font-size: 11px;
 					padding: 2px;
 					float: left;
 				}
-				.FieldEditor .EditableFormField .extraOptions .deleteOption {
+				#Fields_fields .EditableFormField .extraOptions .deleteOption {
 					width: 20px;
 					margin: 4px 0 0 4px;
 					background: none;
@@ -144,16 +144,16 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 					float: left;
 					display: block;
 				}
-				.FieldEditor .EditableFormField .extraOptions select {
+				#Fields_fields .EditableFormField .extraOptions select {
 					width: 221px;
 				}
-				.FieldEditor .EditableFormField .extraOptions .chzn-drop input {
+				#Fields_fields .EditableFormField .extraOptions .chzn-drop input {
 					font-size: 12px;
 					padding: 4px 20px 4px 5px;
 					float: none;
 				}
-				.FieldEditor .EditableFormField a.addableOption,
-				.FieldEditor .EditableFormField a.addCondition {
+				#Fields_fields .EditableFormField a.addableOption,
+				#Fields_fields .EditableFormField a.addCondition {
 					background: url(../../cms/images/add.gif) no-repeat top left;
 					padding: 1px 0 2px 20px;
 					font-size: 12px;
@@ -161,75 +161,75 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 					margin-left: 3px;
 				}
 				/* Field Options Group */
-				.FieldEditor .fieldOptionsGroup {
+				#Fields_fields .fieldOptionsGroup {
 					padding: 4px 8px 8px 8px;
 					margin: 5px;
 					border: 1px solid #bbb;
 				}
-					.FieldEditor .fieldOptionsGroup legend {
+					#Fields_fields .fieldOptionsGroup legend {
 						font-size: 15px;
 						padding: 0 4px;
 					}
 				/* Field Lengths */
-				.FieldEditor .EditableFormField .fieldgroupField {
+				#Fields_fields .EditableFormField .fieldgroupField {
 					float: left;
 				}
-					.FieldEditor .EditableFormField .fieldgroupField label {
+					#Fields_fields .EditableFormField .fieldgroupField label {
 						float: left;
 						padding: 0 4px;
 					}
-					.FieldEditor .EditableFormField .fieldgroupField input {
+					#Fields_fields .EditableFormField .fieldgroupField input {
 						width: 80px;
 					}
-			.FieldEditor .EditableFormField .middleColumn {
+			#Fields_fields .EditableFormField .middleColumn {
 				background: none;
 			}
 			/* CHECKBOX */
-			.FieldEditor .EditableFormField .checkbox { }
+			#Fields_fields .EditableFormField .checkbox { }
 			
-				.FieldEditor .EditableFormField .checkbox input {
+				#Fields_fields .EditableFormField .checkbox input {
 					float: left;
 					width:auto;
 					margin: 0 8px 0 0;
 				}
 			
 		/* CUSTOM RULES */
-		.FieldEditor .customRules {
+		#Fields_fields .customRules {
 			clear: both;
 		}
-			.FieldEditor .customRules li {
+			#Fields_fields .customRules li {
 				clear: both;
 			}
-				.FieldEditor .customRules li.firstField {
+				#Fields_fields .customRules li.firstField {
 					padding-bottom: 5px;
 					margin: 0 5px;
 					border-bottom: 1px solid #bbb;
 				}
-				.FieldEditor .customRules label {
+				#Fields_fields .customRules label {
 					float: left;
 					margin: 0;
 					padding: 2px 4px;
 					font-size: 11px;
 				}
-				.FieldEditor .customRules select {
+				#Fields_fields .customRules select {
 					float: left;
 					font-size: 11px;
 					width: 120px;
 					margin-right: 4px;
 				}
-				.FieldEditor .customRules a {
+				#Fields_fields .customRules a {
 					background: none;
 					width: 20px;
 					float: left;
 				}
 				
 		/* HIDE */
-		.FieldEditor li.EditableFormField .hidden {
+		#Fields_fields li.EditableFormField .hidden {
 			display: none !important;
 		}
 
 		/* Holder to prevent form from collapsing */
-		.FieldEditor .removed-form-field {
+		#Fields_fields .removed-form-field {
 			height: 40px;
 			display: block;
 			overflow: hidden;
