@@ -55,56 +55,56 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 
 /* Field Listing
 ---------------------------------------- */	
-.FieldList {
+.FieldEditor .FieldList {
 	padding: 10px 0;
 }
 
-	.FieldList .EditableFormField {
+	.FieldEditor .FieldList .EditableFormField {
 		margin: 2px;
 		padding: 3px 0;
 		border-top: 1px dotted #ccc;
 		width: 100%;
 		overflow: hidden;
 	}
-		.FieldList .EditableFormField * {
+		.FieldEditor .FieldList .EditableFormField * {
 			display: inline;
 			vertical-align: middle;
 		}
-		.FieldList .EditableFormField .fieldHandler,
-		.FieldList .EditableFormField .handle {
+		.FieldEditor .FieldList .EditableFormField .fieldHandler,
+		.FieldEditor .FieldList .EditableFormField .handle {
 			cursor: move;
 		}
-		.FieldList .EditableFormField .fieldInfo {
+		.FieldEditor .FieldList .EditableFormField .fieldInfo {
 			float: left;
 			padding-right: 10px;
 		}
-		.FieldList .EditableFormField .fieldActions {
+		.FieldEditor .FieldList .EditableFormField .fieldActions {
 			float: left;
 			margin-top: 10px;
 		}
-			.FieldList .EditableFormField .fieldActions a {
+			.FieldEditor .FieldList .EditableFormField .fieldActions a {
 				padding: 0 5px 5px 20px;
 				font-size: 12px;
 			}
-				.FieldList .EditableFormField .moreOptions {
+				.FieldEditor .FieldList .EditableFormField .moreOptions {
 					background: url(../../cms/images/edit.gif) no-repeat top left;
 				}
-					.FieldList .EditableFormField .moreOptions.showing {
+					.FieldEditor .FieldList .EditableFormField .moreOptions.showing {
 						color: #666;
 						text-decoration: none;
 					}
-				.FieldList .EditableFormField .delete {
+				.FieldEditor .FieldList .EditableFormField .delete {
 					background: url(../../cms/images/delete.gif) no-repeat top left;
 				}
 
-		.FieldList .EditableFormField input {
+		.FieldEditor .FieldList .EditableFormField input {
 			width: 250px;
 			margin-left: 0px;
 		}
 	
 		/** Field Options **/
 		
-		.FieldList .EditableFormField div.extraOptions {
+		.FieldEditor .FieldList .EditableFormField div.extraOptions {
 			display: block;
 			overflow:hidden;
 			margin: 3px 0px 3px 38px;
@@ -112,31 +112,31 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 			padding: 3px;
 			clear: both;			
 		}
-			.FieldList .EditableFormField .extraOptions * {
+			.FieldEditor .FieldList .EditableFormField .extraOptions * {
 				display: block;
 			}
 			
-				.FieldList .EditableFormField .extraOptions .handle {
+				.FieldEditor .FieldList .EditableFormField .extraOptions .handle {
 					float: left;
 					margin-right: 3px;
 				}
-				.FieldList .EditableFormField .extraOptions ul {
+				.FieldEditor .FieldList .EditableFormField .extraOptions ul {
 					padding: 5px 0;
 				}
-					.FieldList .EditableFormField .extraOptions li {
+					.FieldEditor .FieldList .EditableFormField .extraOptions li {
 						padding: 3px 0;
 						width: 100%;
 						overflow: hidden;
 					}
-				.FieldList .EditableFormField .extraOptions a {
+				.FieldEditor .FieldList .EditableFormField .extraOptions a {
 					background: none;
 				}
-				.FieldList .EditableFormField .extraOptions input {
+				.FieldEditor .FieldList .EditableFormField .extraOptions input {
 					font-size: 11px;
 					padding: 2px;
 					float: left;
 				}
-				.FieldList .EditableFormField .extraOptions .deleteOption {
+				.FieldEditor .FieldList .EditableFormField .extraOptions .deleteOption {
 					width: 20px;
 					margin: 4px 0 0 4px;
 					background: none;
@@ -144,16 +144,16 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 					float: left;
 					display: block;
 				}
-				.FieldList .EditableFormField .extraOptions select {
+				.FieldEditor .FieldList .EditableFormField .extraOptions select {
 					width: 221px;
 				}
-				.FieldList .EditableFormField .extraOptions .chzn-drop input {
+				.FieldEditor .FieldList .EditableFormField .extraOptions .chzn-drop input {
 					font-size: 12px;
 					padding: 4px 20px 4px 5px;
 					float: none;
 				}
-				.FieldList .EditableFormField a.addableOption,
-				.FieldList .EditableFormField a.addCondition {
+				.FieldEditor .FieldList .EditableFormField a.addableOption,
+				.FieldEditor .FieldList .EditableFormField a.addCondition {
 					background: url(../../cms/images/add.gif) no-repeat top left;
 					padding: 1px 0 2px 20px;
 					font-size: 12px;
@@ -161,75 +161,75 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 					margin-left: 3px;
 				}
 				/* Field Options Group */
-				.FieldList .fieldOptionsGroup {
+				.FieldEditor .FieldList .fieldOptionsGroup {
 					padding: 4px 8px 8px 8px;
 					margin: 5px;
 					border: 1px solid #bbb;
 				}
-					.FieldList .fieldOptionsGroup legend {
+					.FieldEditor .FieldList .fieldOptionsGroup legend {
 						font-size: 15px;
 						padding: 0 4px;
 					}
 				/* Field Lengths */
-				.FieldList .EditableFormField .fieldgroupField {
+				.FieldEditor .FieldList .EditableFormField .fieldgroupField {
 					float: left;
 				}
-					.FieldList .EditableFormField .fieldgroupField label {
+					.FieldEditor .FieldList .EditableFormField .fieldgroupField label {
 						float: left;
 						padding: 0 4px;
 					}
-					.FieldList .EditableFormField .fieldgroupField input {
+					.FieldEditor .FieldList .EditableFormField .fieldgroupField input {
 						width: 80px;
 					}
-			.FieldList .EditableFormField .middleColumn {
+			.FieldEditor .FieldList .EditableFormField .middleColumn {
 				background: none;
 			}
 			/* CHECKBOX */
-			.FieldList .EditableFormField .checkbox { }
+			.FieldEditor .FieldList .EditableFormField .checkbox { }
 			
-				.FieldList .EditableFormField .checkbox input {
+				.FieldEditor .FieldList .EditableFormField .checkbox input {
 					float: left;
 					width:auto;
 					margin: 0 8px 0 0;
 				}
 			
 		/* CUSTOM RULES */
-		.FieldList .customRules {
+		.FieldEditor .FieldList .customRules {
 			clear: both;
 		}
-			.FieldList .customRules li {
+			.FieldEditor .FieldList .customRules li {
 				clear: both;
 			}
-				.FieldList .customRules li.firstField {
+				.FieldEditor .FieldList .customRules li.firstField {
 					padding-bottom: 5px;
 					margin: 0 5px;
 					border-bottom: 1px solid #bbb;
 				}
-				.FieldList .customRules label {
+				.FieldEditor .FieldList .customRules label {
 					float: left;
 					margin: 0;
 					padding: 2px 4px;
 					font-size: 11px;
 				}
-				.FieldList .customRules select {
+				.FieldEditor .FieldList .customRules select {
 					float: left;
 					font-size: 11px;
 					width: 120px;
 					margin-right: 4px;
 				}
-				.FieldList .customRules a {
+				.FieldEditor .FieldList .customRules a {
 					background: none;
 					width: 20px;
 					float: left;
 				}
 				
 		/* HIDE */
-		.FieldList li.EditableFormField .hidden {
+		.FieldEditor .FieldList li.EditableFormField .hidden {
 			display: none !important;
 		}
 
 		/* Holder to prevent form from collapsing */
-		.FieldList .removed-form-field {
+		.FieldEditor .FieldList .removed-form-field {
 			height: 40px;
 			display: block;
 			overflow: hidden;
