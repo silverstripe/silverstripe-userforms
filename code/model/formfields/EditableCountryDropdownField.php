@@ -17,8 +17,8 @@ class EditableCountryDropdownField extends EditableFormField {
 	
 	public function getValueFromData($data) {
 		if(isset($data[$this->Name])) {
-			
-			return Geoip::countryCode2name($data[$this->Name]);
+			$source = $this->getFormField()->getSource();
+			return $source[$data[$this->Name]];
 		}
 	}
 	
