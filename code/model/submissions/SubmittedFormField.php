@@ -18,7 +18,7 @@ class SubmittedFormField extends DataObject {
 	);
 
 	private static $summary_fields = array(
-		'Title',
+		'Title' => 'Title',
 		'FormattedValue' => 'Value'
 	);
 
