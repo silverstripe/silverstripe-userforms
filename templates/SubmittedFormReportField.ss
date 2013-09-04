@@ -29,7 +29,7 @@
 					$PageNum
 				<% else %>
 					<% if Link %>
-						<a href="{$Top.Link(getMoreSubmissions)}<% if $Top.LinkContainsParameter %>&<% else %>?<% end_if %>page=$PageNum">$PageNum</a>
+						<a href="{$Top.Link(getMoreSubmissions)}<% if $Top.LinkContainsParameter %>&<% else %>?<% end_if %>page=$PageNum&amp;SecurityID=$Top.Form.SecurityID">$PageNum</a>
 					<% else %>
 						...
 					<% end_if %>

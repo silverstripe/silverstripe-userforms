@@ -34,6 +34,8 @@ class SubmittedForm extends DataObject {
 
 	// Used in the CMS to join the links properly
 	public function DeleteLink($controllerLink) {
-		return Controller::join_links($controllerLink, 'deletesubmission?id=' . $this->ID);
+		return Controller::join_links(
+			$controllerLink, 'deletesubmission?id=' . $this->ID .'&amp;SecurityID='. SecurityToken::getSecurityID()
+		);
 	}
 }

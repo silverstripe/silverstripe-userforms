@@ -40,6 +40,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return string
 	 */
 	public function getMoreSubmissions() {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		$page = ($page = $this->request->getVar('page')) ? (int)$page : 1;
 		return $this->customise(new ArrayData(array(
 			'Submissions' => $this->getSubmissions($page)
@@ -47,11 +51,11 @@ class SubmittedFormReportField extends FormField {
 	}
 
 	public function getExportLink() {
-		return $this->Link('export?id=' . $this->RecordID());
+		return $this->Link('export?id=' . $this->RecordID() . '&amp;SecurityID='. SecurityToken::getSecurityID());
 	}
 
 	public function getDeleteSubmissionsLink() {
-		return $this->Link('deletesubmissions?id=' . $this->RecordID());
+		return $this->Link('deletesubmissions?id=' . $this->RecordID() . '&amp;SecurityID='. SecurityToken::getSecurityID());
 	}
 
 	public function LinkContainsParameter() {
@@ -77,6 +81,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return HTTPResponse / bool
 	 */
 	public function export($id = false) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		// The default max execution time is sometimes not enough for large number of submissions
 		increase_time_limit_to(600);
 		if($id && is_int($id)) {
@@ -170,6 +178,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmissions($id = false) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
 		
 		if($id && is_int($id)) {
@@ -201,6 +213,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmission($id = false) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+		
 		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
 		
 		if($id && is_int($id)) {
