@@ -23,6 +23,7 @@
 			<% end_loop %>
 		</select>
 
+		<input type="hidden" name="SecurityID" value="$SecurityID" />
 		<input type="submit" class="action" value="<% _t('ADD', 'Add') %>" /> 
 	</div>
 	<% end_if %>

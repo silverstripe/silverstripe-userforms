@@ -176,6 +176,10 @@ class FieldEditor extends FormField {
 	 * @return bool|html
 	 */
 	public function addfield() {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		// get the last field in this form editor
 		$parentID = $this->form->getRecord()->ID;
 		
@@ -217,6 +221,10 @@ class FieldEditor extends FormField {
 	 * @return bool|html
 	 */
 	public function addoptionfield() {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		// passed via the ajax
 		$parent = (isset($_REQUEST['Parent'])) ? $_REQUEST['Parent'] : false;
 

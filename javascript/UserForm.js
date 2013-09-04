@@ -239,13 +239,13 @@
 					var options = $(this).parent("li");
 					var action = userforms.appendToURL($("#Form_EditForm").attr("action"), '/field/Fields/addoptionfield');
 					var parent = $(this).attr("rel");
+					var securityID = ($("input[name=SecurityID]").length > 0) ? $("input[name=SecurityID]").first().attr("value") : '';
 
 					// send ajax request to the page
 					$.ajax({
 						type: "GET",
 						url: action,
-						data: 'Parent='+ parent,
-
+						data: 'Parent='+ parent +'&SecurityID='+securityID,
 						// create a new field
 						success: function(msg){
 							options.before(msg);
