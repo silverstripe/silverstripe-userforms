@@ -154,9 +154,9 @@
 			// variables
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addfield';
 			var length = $(".FieldInfo").length + 1;
-			var securityID = ($("#SecurityID").length > 0) ? '&SecurityID='+$("#SecurityID").attr("value") : '';
+			var securityID = ($("input[name=SecurityID]").length > 0) ? '&SecurityID='+$("input[name=SecurityID]").first().attr("value") : '';
 			var type = $(this).siblings("select").val();
-	
+			
 			// send ajax request to the page
 			$.ajax({
 				type: "GET",
@@ -264,13 +264,16 @@
 			var options = $(this).parent("li");
 			var action = $("#Form_EditForm").attr("action") + '/field/Fields/addoptionfield';
 			var parent = $(this).attr("rel");
+			var securityID = ($("input[name=SecurityID]").length > 0) ? $("input[name=SecurityID]").first().attr("value") : '';
 			
 			// send ajax request to the page
 			$.ajax({
 				type: "GET",
 				url: action,
-				data: 'Parent='+ parent,
-				
+				data: {
+					'Parent': parent,
+					'SecurityID': securityID
+				},
 				// create a new field
 				success: function(msg){
 					options.before(msg);

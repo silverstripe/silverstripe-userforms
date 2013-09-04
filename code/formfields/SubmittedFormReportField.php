@@ -38,6 +38,10 @@ class SubmittedFormReportField extends FormField {
 	}
 	
 	function getSubmissions() {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		return $this->customise(array(
 			'Submissions' => $this->Submissions()
 		))->renderWith(array('SubmittedFormReportField'));
@@ -62,6 +66,11 @@ class SubmittedFormReportField extends FormField {
 	 * @return HTTPResponse / bool
 	 */
 	public function export($id = false) {
+		// check the security ID
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		if($id && is_int($id)) {
 			$SQL_ID = $id;
 		}
@@ -93,6 +102,7 @@ class SubmittedFormReportField extends FormField {
 			foreach($submissions as $submission) { 
 				$inClause[] = $submission->ID; 
 			}
+
 			$csvHeaders = DB::query("SELECT \"Name\" , \"Title\" FROM \"SubmittedFormField\" 
 									 LEFT JOIN \"SubmittedForm\" ON \"SubmittedForm\".\"ID\" = \"SubmittedFormField\".\"ParentID\"
 									 WHERE \"SubmittedFormField\".\"ParentID\" IN (" . implode(',', $inClause) . ") 
@@ -153,6 +163,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmissions($id = false) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
 		
 		if($id && is_int($id)) {
@@ -175,6 +189,7 @@ class SubmittedFormReportField extends FormField {
 				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
 			}
 		}
+
 		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
 	}
 	
@@ -184,6 +199,10 @@ class SubmittedFormReportField extends FormField {
 	 * @return Redirect|Boolean
 	 */
 	public function deletesubmission($id = false) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
 		$isRunningTests = (class_exists('SapphireTest', false) && SapphireTest::is_running_test());
 		
 		if($id && is_int($id)) {
@@ -203,6 +222,7 @@ class SubmittedFormReportField extends FormField {
 				return (Director::is_ajax() || $isRunningTests) ? true : Director::redirectBack();
 			}
 		}
+
 		return (Director::is_ajax() || $isRunningTests) ? false : Director::redirectBack();
 	}
 }
