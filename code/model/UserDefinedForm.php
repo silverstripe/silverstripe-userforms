@@ -280,10 +280,10 @@ class UserDefinedForm extends Page {
 	 *
 	 * @return ArrayList
 	 */
-	public function FilteredEmailRecipients() {
+	public function FilteredEmailRecipients($data = null, $form = null) {
 		$recipients = new ArrayList($this->getComponents('EmailRecipients')->toArray());
 
-		$this->extend('updateFilteredEmailRecipients', $recipients);
+		$this->extend('updateFilteredEmailRecipients', $recipients, $data, $form);
 
 		return $recipients;
 	}
@@ -964,7 +964,7 @@ JS
 		);
 
 		// email users on submit.
-		if($this->FilteredEmailRecipients()) {
+		if($recipients = $this->FilteredEmailRecipients($data, $form)) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			
 			if($attachments){
@@ -979,7 +979,7 @@ JS
 				}
 			}
 
-			foreach($this->FilteredEmailRecipients() as $recipient) {
+			foreach($recipients as $recipient) {
 				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
