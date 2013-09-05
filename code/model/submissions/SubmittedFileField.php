@@ -25,10 +25,10 @@ class SubmittedFileField extends SubmittedFormField {
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
 		
 		if($link) {
-			return sprintf(
+			return DBField::create_field('HTMLText', sprintf(
 				'%s - <a href="%s" target="_blank">%s</a>', 
 				$name, $link, $title
-			);
+			));
 		}
 		
 		return false;
