@@ -1030,6 +1030,8 @@ JS
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
 		
+		$this->extend('onAfterProcess');
+		
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 		
 		return $this->redirect($this->Link() . 'finished' . $referrer);
