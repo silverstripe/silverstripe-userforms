@@ -128,9 +128,11 @@ class UserDefinedForm extends Page {
 		$filter->setThrowExceptionOnBadDataType(false);
 		$pagination->setThrowExceptionOnBadDataType(false);
 
+		// make sure a numeric not a empty string is checked against this int column for SQL server
+		$parentID = (!empty($this->ID)) ? $this->ID : 0;
 		// attach every column to the print view from 
 		$columns = SubmittedFormField::get()
-			->where("\"SubmittedForm\".\"ParentID\" = '$this->ID'")
+			->where("\"SubmittedForm\".\"ParentID\" = '$parentID'")
 			->leftJoin('SubmittedForm', '"SubmittedFormField"."ParentID" = "SubmittedForm"."ID"')
 			->map('Name', 'Title');
 
@@ -163,8 +165,9 @@ class UserDefinedForm extends Page {
 	 * @return void
 	 */
 	public function doPublish() {
+		$parentID = (!empty($this->ID)) ? $this->ID : 0;
 		// remove fields on the live table which could have been orphaned.
-		$live = Versioned::get_by_stage("EditableFormField", "Live", "\"EditableFormField\".\"ParentID\" = $this->ID");
+		$live = Versioned::get_by_stage("EditableFormField", "Live", "\"EditableFormField\".\"ParentID\" = $parentID");
 
 		if($live) {
 			foreach($live as $field) {
