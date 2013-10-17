@@ -36,8 +36,10 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		// submitted in this form.
 		$params = $gridField->getForm()->getController()->getURLParams();
 
+		// this is for you SQL server I know you don't see '' as a number
+		$parentID = (!empty($params['ID'])) ? Convert::raw2sql($params['ID']) : 0;
 		$formFields = SubmittedFormField::get()
-			->where(sprintf("SubmittedForm.ParentID = '%s'", Convert::raw2sql($params['ID'])))
+			->where(sprintf("SubmittedForm.ParentID = '%s'", $parentID))
 			->leftJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
 			->sort('Title', 'ASC')
 			->map('Name', 'Title');
