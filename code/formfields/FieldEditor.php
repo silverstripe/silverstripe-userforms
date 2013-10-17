@@ -19,7 +19,7 @@ class FieldEditor extends FormField {
 	 * @return String
 	 */
 	public function FieldHolder($properties = array()) {
-		$this->setAttribute('data-add-url', '\''.Controller::join_links($this->Link('addfield').'\''));
+		$this->setAttribute('data-add-url', '\''.Controller::join_links($this->Link('addfield')).'\'');
 		return $this->renderWith("FieldEditor");
 	}
 	
