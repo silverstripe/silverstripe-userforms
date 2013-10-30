@@ -148,7 +148,7 @@
 							$("#Fields_fields").sortable('refresh');
 						},
 						error: function(e) {
-							alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION', 'An error occured while fetching data from the server\n Please try again later.'));
+							alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION'));
 						}
 					});
 				}

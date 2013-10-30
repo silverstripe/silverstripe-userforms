@@ -425,6 +425,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		// load the jquery
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.js');
+		Requirements::add_i18n_javascript('userforms/javascript/lang');
 		Requirements::javascript('userforms/javascript/UserForm_frontend.js');
 		if($this->HideFieldLabels) Requirements::javascript('userforms/thirdparty/Placeholders.js/Placeholders.min.js');
 	}

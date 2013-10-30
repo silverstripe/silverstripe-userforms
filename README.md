@@ -55,3 +55,11 @@ testers, clients who use the module and everyone that submits new features.
 
 A big thanks goes out to [Jan Düsedau](http://eformation.de) for drawing 
 the custom icon set for the form fields.
+
+## Contributing
+
+### Translations
+
+Translations of the natural language strings are managed through a third party translation interface, transifex.com. Newly added strings will be periodically uploaded there for translation, and any new translations will be merged back to the project source code.
+
+Please use [https://www.transifex.com/projects/p/silverstripe-userforms](https://www.transifex.com/projects/p/silverstripe-userforms) to contribute translations, rather than sending pull requests with YAML files.
