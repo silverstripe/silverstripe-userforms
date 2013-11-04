@@ -234,9 +234,9 @@ class FieldEditor extends FormField {
 
 			$sqlQuery = new SQLQuery();
 			$sqlQuery = $sqlQuery
-				->setSelect('MAX(Sort)')
-				->setFrom("EditableOption")
-				->setWhere("ParentID = $sql_parent");
+				->setSelect("MAX(\"Sort\")")
+				->setFrom("\"EditableOption\"")
+				->setWhere("\"ParentID\" = $sql_parent");
 
 			$sort = $sqlQuery->execute()->value() + 1;
 			
