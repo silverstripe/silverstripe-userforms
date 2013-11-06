@@ -1,5 +1,5 @@
 pt_PT:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -49,7 +49,7 @@ pt_PT:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -94,7 +94,7 @@ pt_PT:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -108,7 +108,7 @@ pt_PT:
         TEXTLENGTH: "Comprimento do texto"
         DEFAULTTEXT: "Texto por defeito"
         TEXTBOXLENGTH: "Tamanho da text box"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Adicionar"
         SELECTAFIELD: "Select a Field"
         CHECKBOXGROUP: "Checkboxes"
@@ -138,7 +138,7 @@ pt_PT:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -176,13 +176,13 @@ pt_PT:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Campo Checkbox"
         DELETE: "Apagar o campo"
         DRAG: "Arraste para reordenar os campos"
         LOCKED: "Este campo não pode ser modificado"
         MORE: "Mais opções"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Adicionar nova opção"
         CHECKBOXGROUP: "Grupo de Checkbox"
         DELETE: "Apagar este campo"
@@ -190,61 +190,61 @@ pt_PT:
         LOCKED: "Estes campos não podem ser modificados"
         MORE: "Mais opções"
         REQUIRED: "Este campo é obrigatório para este formulário e não pode ser apagado"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Remover esta opção"
         DRAG: "Arraste para reordenar as opções"
         LOCKED: "Estes campos não podem ser modificados"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Campo Data"
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         MORE: "Mais opções"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Adicionar nova opção"
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         LOCKED: "Estes campos não podem ser modificados"
         MORE: "Mais opções"
         REQUIRED: "Este campo é obrigatório para este formulário e não pode ser apagado"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Remover esta opção"
         DRAG: "Arraste para reordenar as opções"
         LOCKED: "Estes campos não podem ser modificados"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         EMAIL: "Campo de Endereço de Email"
         MORE: "Mais opções"
         REQUIRED: "Este campo é obrigatório para este formulário e não pode ser apagado."
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         FILE: "Campo para envio de ficheiros"
         MORE: "Mais opções"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Remover esta opção"
         DRAG: "Arraste para reordenar os campos"
         LOCKED: "Estes campos não podem ser modificados"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         HEADING: "Campo de cabeçalho"
         MORE: "Mais opções"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Adicionar nova opção"
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         LOCKED: "Estes campos não podem ser modificados"
         MORE: "Mais opções"
         REQUIRED: "Este campo é obrigatório para este formulário e não pode ser apagado."
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Remover esta opção"
         DRAG: "Arraste para reordenar os campos"
         LOCKED: "Estes campos não podem ser modificados"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Apagar este campo"
         DRAG: "Arraste para reordenar os campos"
         MORE: "Mais opções"
         TEXTFIELD: "Campo de texto"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Os seguintes dados foram inseridos no seu site:"

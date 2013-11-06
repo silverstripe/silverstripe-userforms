@@ -1,5 +1,5 @@
 tr_TR:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ tr_TR:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ tr_TR:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ tr_TR:
         TEXTLENGTH: "Text uzunluğu"
         DEFAULTTEXT: "Varsayılan Text"
         TEXTBOXLENGTH: "Text kutusunun uzunluğu"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Ekle"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Checkbox"
@@ -144,7 +144,7 @@ tr_TR:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ tr_TR:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Seçim kutusu alani"
         DELETE: "Bu alanı sil"
         DRAG: "Alanları yeniden sıralamak için sürükleyiniz"
         LOCKED: "Bu alan degiştirilemez"
         MORE: "Diğer seçenekler"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Yeni seçenek ekle"
         CHECKBOXGROUP: "Seçim kutusu gurubu"
         DELETE: "Bu alanı sil"
@@ -196,16 +196,16 @@ tr_TR:
         LOCKED: "Bu alanlar değiştirilemez"
         MORE: "Diğer seçenekler"
         REQUIRED: "Bu alan bu form için gereklidir, silinemez"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Bu opsiyon kutusunu sil"
         DRAG: "Opsiyon kutularını yeniden sıralamak için sürükleyin"
         LOCKED: "Bu alanlar değiştirilemez"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Tarih Alanı"
         DELETE: "Bu alanı sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         MORE: "Diğer seçenekler"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Yeni seçenek ekle"
         DELETE: "Bu alanı sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
@@ -213,31 +213,31 @@ tr_TR:
         LOCKED: "Bu alanlar değiştirilemez"
         MORE: "Diğer seçenekler"
         REQUIRED: "Bu alan bu form için gereklidir, silinemez"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Bu seçeneği sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         LOCKED: "Bu alanlar değiştirilemez"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Bu alanı sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         EMAIL: "E-posta adresi alanı"
         MORE: "Diğer seçenekler"
         REQUIRED: "Bu alan bu form için gereklidir, silinemez"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Bu alanı sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         FILE: "Dosya yükleme(upload) alanı"
         MORE: "Diğer seçenekler"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Bu seçeneği sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         LOCKED: "Bu alanlar değiştirilemez"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Bu alanı sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
         HEADING: "Başlık alanı"
         MORE: "Diğer seçenekler"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Yeni seçenek ekle"
         DELETE: "Bu alani sil"
         DRAG: "Alanlari yeniden sıralamak için sürükleyin"
@@ -245,11 +245,11 @@ tr_TR:
         MORE: "Diger seçenekler"
         REQUIRED: "Bu alan bu form için gereklidir, silinemez"
         SET: "Radyo kutusu seti"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Bu seçenegi sil"
         DRAG: "Seçenekleri yeniden sıralamak için sürükleyiniz"
         LOCKED: "Bu alanlar degiştirilemez"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Bu alanı sil"
         DRAG: "Alanları yeniden sıralamak için sürükleyiniz"
         MORE: "Diğer seçenekler"
@@ -257,7 +257,7 @@ tr_TR:
     FieldEditor:
         EMAILONSUBMIT: "Form gönderiminde E-posta at"
         EMAILSUBMISSION: "Gönderi nin bir kopyasini postala:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Bu içerik, websitesine yollanmıştır:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Form gönderimi"

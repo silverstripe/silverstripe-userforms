@@ -1,5 +1,5 @@
 nl_NL:
-  CustomRule.ss:
+  CustomRule:
     BLANK: "Blanco"
     DELETE: "Verwijder"
     GREATERTHAN: 'Waarde groter dan'
@@ -45,7 +45,7 @@ nl_NL:
     RIGHTTITLE: 'Titel rechts'
     SINGULARNAME: 'Bewerkbaar formulierveld'
     YES: Ja
-  EditableFormField.ss:
+  EditableFormField:
     ADD: Toevoegen
     ADDRULE: 'Regel toevoegen'
     BLANK: Blanco
@@ -88,7 +88,7 @@ nl_NL:
   EditableOption:
     PLURALNAME: 'Bewerkbare opties'
     SINGULARNAME: 'Bewerkbare optie'
-  EditableOption.ss:
+  EditableOption:
     DELETE: 'Verwijder optie'
     DRAG: 'Sleep om volgorde van de opties te herschikken'
     LOCKED: 'Deze velden zijn niet aanpasbaar'
@@ -100,7 +100,7 @@ nl_NL:
     PLURALNAME: 'Tekst velden'
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
-  FieldEditor.ss:
+  FieldEditor:
     ADD: Toevoegen
     SELECTAFIELD: 'Kies een veld'
   Form:
@@ -118,7 +118,7 @@ nl_NL:
   SubmittedFormField:
     PLURALNAME: 'Ingediende formvelden'
     SINGULARNAME: 'Ingediende formveld'
-  SubmittedFormReportField.ss:
+  SubmittedFormReportField:
     DELETEALLSUBMISSIONS: 'Verwijder alle inzendingen'
     DELETESUBMISSION: 'Verwijder inzending'
     EXPORTSUBMISSIONS: 'Exporteer inzendingen naar CSV'

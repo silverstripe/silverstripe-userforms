@@ -1,5 +1,5 @@
 pl_PL:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ pl_PL:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ pl_PL:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ pl_PL:
         TEXTLENGTH: "Długość tekstu"
         DEFAULTTEXT: "Domyślny tekst"
         TEXTBOXLENGTH: "Długość pola tekstowego"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Dodaj"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Pole wielokrotnego wyboru"
@@ -144,7 +144,7 @@ pl_PL:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ pl_PL:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Pole wielokrotnego wyboru"
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         LOCKED: "To pole nie może być zmodyfikowane"
         MORE: "Więcej opcji"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Dodaj nową opcję"
         CHECKBOXGROUP: "Grupa pól wielokrotnego wyboru"
         DELETE: "Usuń to pole"
@@ -196,16 +196,16 @@ pl_PL:
         LOCKED: "Te pola nie mogą być modyfikowane"
         MORE: "Więcej opcji"
         REQUIRED: "To pole jest wymagane w tym formularzu i nie może być usunięte"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Usuń tę opcję"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         LOCKED: "Te pola nie mogą być modyfikowane"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Pole daty"
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         MORE: "Więcej opcji"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Dodaj nową opcję"
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
@@ -213,31 +213,31 @@ pl_PL:
         LOCKED: "Te pola nie mogą być modyfikowane"
         MORE: "Więcej opcji"
         REQUIRED: "To pole jest wymagane w tym formularzu i nie może zostać usunięte"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Usuń tą opcję"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         LOCKED: "Te pola nie mogą być modyfikowane"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         EMAIL: "Pole adresu e-mail"
         MORE: "Więcej opcji"
         REQUIRED: "To pole jest wymagane w tym formularzu i nie może być usunięte"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         FILE: "Pole wysyłania plików"
         MORE: "Więcej opcji"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Usuń tą opcję"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         LOCKED: "Te pola nie mogą zostać zmodyfikowane"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         HEADING: "Pole nagłówka"
         MORE: "Więcej opcji"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Dodaj nową opcję"
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
@@ -245,11 +245,11 @@ pl_PL:
         MORE: "Więcej opcji"
         REQUIRED: "To pole jest wymagane w tym formularzu i nie może zostać usunięte"
         SET: "Zestaw pól jednokrotnego wyboru."
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Usuń tę opcję"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         LOCKED: "Te pola nie mogą być modyfikowane"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Usuń to pole"
         DRAG: "Przeciągnij aby zmienić kolejność pól"
         MORE: "Więcej opcji"
@@ -257,7 +257,7 @@ pl_PL:
     FieldEditor:
         EMAILONSUBMIT: "Po wysłaniu formularza email:"
         EMAILSUBMISSION: "Wyślij kopię na adres e-mail:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Następujące dane zostały przesłane do Twojej strony:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Wysyłanie formularza"

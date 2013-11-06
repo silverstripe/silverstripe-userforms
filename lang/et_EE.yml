@@ -1,5 +1,5 @@
 et_EE:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ et_EE:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ et_EE:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ et_EE:
         TEXTLENGTH: "Tektsi pikkus"
         DEFAULTTEXT: "Vaikimisi tekst"
         TEXTBOXLENGTH: "Teksti kasti pikkus"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Lisa"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Märkeruut"
@@ -144,7 +144,7 @@ et_EE:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ et_EE:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Märkeruudu väli"
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         LOCKED: "Seda välja ei saa muuta"
         MORE: "Rohkem valikuid"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Lisa uus valik"
         CHECKBOXGROUP: "Märkeruudu rühm"
         DELETE: "Kustuta see väli"
@@ -196,16 +196,16 @@ et_EE:
         LOCKED: "Neid välju ei saa muuta"
         MORE: "Rohkem valikuid"
         REQUIRED: "See väli on selle vormi jaoks nõutav ja seda ei saa kustutada"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Eemalda see valik"
         DRAG: "Valikute ümber paigutamiseks lohistage neid"
         LOCKED: "Neid välju ei saa muuta"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Kuupäeva väli"
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         MORE: "Rohkem valikuid"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Lisa uus valik"
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
@@ -213,31 +213,31 @@ et_EE:
         LOCKED: "Neid välju ei saa muuta"
         MORE: "Rohkem valikuid"
         REQUIRED: "See väli on vormis vajalik ja seda ei saa kustutada"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Eemalda see valik"
         DRAG: "Valikute ümber paigutamiseks lohistage neid"
         LOCKED: "Neid välju ei saa muuta"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         EMAIL: "E-maili aadressi väli"
         MORE: "Rohkem valikuid"
         REQUIRED: "See väli on vormis vajalik ja seda ei saa kustutada"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         FILE: "Faili üleslaadimise väli"
         MORE: "Rohkem valikuid"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Eemdala see valik"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         LOCKED: "Seda välja ei saa muuta"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         HEADING: "Päise väli"
         MORE: "Rohkem valikuid"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Lisa uus valik"
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
@@ -245,11 +245,11 @@ et_EE:
         MORE: "Rohkem valikuid"
         REQUIRED: "See väli on vormis vajalik ja seda ei saa kustutada"
         SET: "Raadionupud"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Eemalda see valik"
         DRAG: "Valikute ümber paigutamiseks lohistage neid"
         LOCKED: "Neid välju ei saa muuta"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Kustuta see väli"
         DRAG: "Väljade ümber paigutamiseks lohistage neid"
         MORE: "Rohkem valikuid"
@@ -257,7 +257,7 @@ et_EE:
     FieldEditor:
         EMAILONSUBMIT: "E-posti vorm saatmisel:"
         EMAILSUBMISSION: "E-maili kaaskiri: "
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Sinu veebilehele saadeti järgnevad andmed:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Vormi kaastööd"

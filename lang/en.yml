@@ -1,5 +1,5 @@
 en:
-  CustomRule.ss:
+  CustomRule:
     BLANK: Blank
     DELETE: Delete
     GREATERTHAN: 'Value Greater Than'
@@ -35,45 +35,45 @@ en:
     PLURALNAME: 'File Upload Fields'
     SINGULARNAME: 'File Upload Field'
   EditableFormField:
+    ADD: Add
+    ADDLabel: 'Add option'
+    ADDRULE: 'Add Rule'
+    BLANK: Blank
     CHECKEDBYDEFAULT: 'Checked by Default?'
     CUSTOMERROR: 'Custom Error Message'
+    CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Default to Today?'
+    DELETE: Delete
+    DRAG: 'Drag to rearrange order of fields'
     ENTERQUESTION: 'Enter Question'
     EXTRACLASSA: 'Extra Styling/Layout'
     EXTRACLASSB: 'Extra css Class - separate multiples with a space'
-    GROUP: Group
-    NO: No
-    PLURALNAME: 'Editable Form Fields'
-    REQUIRED: 'Is this field Required?'
-    RIGHTTITLE: 'Right Title'
-    SINGULARNAME: 'Editable Form Field'
-    YES: Yes
-  EditableFormField.ss:
-    ADD: Add
-    ADDRULE: 'Add Rule'
-    BLANK: Blank
-    CUSTOMRULES: 'Custom Rules'
-    DELETE: Delete
-    DRAG: 'Drag to rearrange order of fields'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
     GREATERTHAN: 'Value Greater Than'
     GREATERTHANEQUAL: 'Value Greater Than Or Equal'
+    GROUP: Group
     HIDE: Hide
     HIDETHISFIELD: 'Hide This Field'
     IS: Is
     LESSTHAN: 'Value Less Than'
     LESSTHANEQUAL: 'Value Less Than Or Equal'
     LOCKED: 'These fields cannot be modified'
+    NO: No
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
+    PLURALNAME: 'Editable Form Fields'
+    REQUIRED: 'Is this field Required?'
+    RIGHTTITLE: 'Right Title'
     SHOW: Show
     SHOWOPTIONS: 'Show Options'
     SHOWTHISFIELD: 'Show This Field'
+    SINGULARNAME: 'Editable Form Field'
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
+    YES: Yes
   EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
@@ -89,12 +89,11 @@ en:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
   EditableOption:
-    PLURALNAME: 'Editable Options'
-    SINGULARNAME: 'Editable Option'
-  EditableOption.ss:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
   EditableRadioField:
     PLURALNAME: 'Radio fields'
     SINGULARNAME: 'Radio field'
@@ -103,7 +102,7 @@ en:
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Text length'
-  FieldEditor.ss:
+  FieldEditor:
     ADD: Add
     SELECTAFIELD: 'Select a Field'
   Form:

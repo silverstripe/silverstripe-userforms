@@ -1,5 +1,5 @@
 en_GB:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ en_GB:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ en_GB:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ en_GB:
         TEXTLENGTH: "Text length"
         DEFAULTTEXT: "Default Text"
         TEXTBOXLENGTH: "Length of text box"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Add"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Checkbox"
@@ -144,7 +144,7 @@ en_GB:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ en_GB:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Checkbox field"
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         LOCKED: "This field cannot be modified"
         MORE: "More options"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Add new option"
         CHECKBOXGROUP: "Checkbox group"
         DELETE: "Delete this field"
@@ -196,16 +196,16 @@ en_GB:
         LOCKED: "These fields cannot be modified"
         MORE: "More options"
         REQUIRED: "This field is required for this form and cannot be deleted"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Date Field"
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         MORE: "More options"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Add new option"
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
@@ -213,31 +213,31 @@ en_GB:
         LOCKED: "These fields cannot be modified"
         MORE: "More options"
         REQUIRED: "This field is required for this form and cannot be deleted"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         EMAIL: "Email address field"
         MORE: "More options"
         REQUIRED: "This field is required for this form and cannot be deleted"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         FILE: "File upload field"
         MORE: "More options"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of fields"
         LOCKED: "These fields cannot be modified"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         HEADING: "Heading field"
         MORE: "More options"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Add new option"
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
@@ -245,11 +245,11 @@ en_GB:
         MORE: "More options"
         REQUIRED: "This field is required for this form and cannot be deleted"
         SET: "Radio button set"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Delete this field"
         DRAG: "Drag to rearrange order of fields"
         MORE: "More options"
@@ -257,7 +257,7 @@ en_GB:
     FieldEditor:
         EMAILONSUBMIT: "Email form on submit:"
         EMAILSUBMISSION: "Email submission to:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "The following data was submitted to your website:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Submission of form"

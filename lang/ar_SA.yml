@@ -1,5 +1,5 @@
 ar_SA:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ ar_SA:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ ar_SA:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ ar_SA:
         TEXTLENGTH: "طول النص"
         DEFAULTTEXT: "النص الافتراضي"
         TEXTBOXLENGTH: "طول حقل النص"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "إضافة"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Checkbox"
@@ -144,7 +144,7 @@ ar_SA:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ ar_SA:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "حقل Checkbox"
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول عن طريق خاصية السحب و الإفلات"
         LOCKED: "هذا الحقل لايمكن تعديله"
         MORE: "خيارات إضافية"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "إضافة خيار جديد"
         CHECKBOXGROUP: "مجموعة Checkbox"
         DELETE: "حذف هذا الحقل"
@@ -196,16 +196,16 @@ ar_SA:
         LOCKED: "هذه الحقول لا يمكن تعديلها"
         MORE: "خيارات إضافية"
         REQUIRED: "هذا الحقل ضروري لهذا النموذج و لا يمكن حذفه"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "إزالة هذا الخيار"
         DRAG: "أعد ترتيب خيارات الطلب بواسطة خاصية السحب و الإفلات"
         LOCKED: "هذه الحقول لايمكن تعديلها"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "حقل التاريخ"
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسة خاصية السحب و الإفلات"
         MORE: "خيارات إضافية"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "إضافة خيار جديد"
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسة خاضصية السحب و الإفلات"
@@ -213,31 +213,31 @@ ar_SA:
         LOCKED: "هذه الحقول لا يمكن تعديلها"
         MORE: "خيارات إضافية"
         REQUIRED: "هذا الحقل مطلوب لهذا النموذج و لا يمكن حذفه"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "حذف هذا الخيار"
         DRAG: "أعد ترتيب الخيارات بواسطة خاصية السحب و الإفلات"
         LOCKED: "هذه الحقول لايمكن تعديلها"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
         EMAIL: "حقل عنوان البريد الإلكتروني"
         MORE: "خيارات إضافية"
         REQUIRED: "هذا الحقل مطلوب لهذا النموذج و لا يمكن حذفه"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
         FILE: "حقل رفع الملفات"
         MORE: "خيارات إضافية"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "حذف هذا الخيار"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
         LOCKED: "هذه الحقول لايمكن تعديلها"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
         HEADING: "حقل العنوان"
         MORE: "خيارات إضافية"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "إضافة خيار جديد"
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
@@ -245,11 +245,11 @@ ar_SA:
         MORE: "خيارات إضافية"
         REQUIRED: "هذا الحقل مطلوب لهذا النموذج و لا يمكن حذفه"
         SET: "مجموعة أزرار الاختيار Radio"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "إلغاء هذا الخيار"
         DRAG: "أعد ترتيب الخيارات بواسطة خاصية السحب و الإفلات"
         LOCKED: "هذه الحقول لا يمكن تعديلها"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "حذف هذا الحقل"
         DRAG: "أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات"
         MORE: "خيارات إضافية"
@@ -257,7 +257,7 @@ ar_SA:
     FieldEditor:
         EMAILONSUBMIT: "أرسل النموذج إلى البريد التالي"
         EMAILSUBMISSION: "أرسل الملف إلى البريد التالي :"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "البيانات تم إرسالها إلى موقعك"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "الطلبات المرسلة للنماذج"

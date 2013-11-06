@@ -1,5 +1,5 @@
 ru_RU:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ ru_RU:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ ru_RU:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ ru_RU:
         TEXTLENGTH: "Длина текста"
         DEFAULTTEXT: "Текст по умолчанию"
         TEXTBOXLENGTH: "Длина текстового поля"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Добавить"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Флаг (checkbox)"
@@ -144,7 +144,7 @@ ru_RU:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ ru_RU:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Флаг множественного выбора"
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         LOCKED: "Это поле не может быть изменено"
         MORE: "Другие настройки"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Добавить новый элемент"
         CHECKBOXGROUP: "Группа флагов выбора (checkbox)"
         DELETE: "Удалить это поле"
@@ -196,16 +196,16 @@ ru_RU:
         LOCKED: "Эти поля не могут быть изменены"
         MORE: "Другие настройки"
         REQUIRED: "Это поле обязательно для этой формы и не может быть удалено"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Удалить этот элемент"
         DRAG: "Перетащите для изменения порядка элементов"
         LOCKED: "Эти поля не могут быть изменены"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Поле даты"
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         MORE: "Другие настройки"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Добавить элемент списка"
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
@@ -213,31 +213,31 @@ ru_RU:
         LOCKED: "Эти поля не могут быть изменены"
         MORE: "Другие настройки"
         REQUIRED: "Это поле обязательно для этой формы и не может быть удалено"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Удалить этот элемент"
         DRAG: "Перетащите для изменения порядка элементов"
         LOCKED: "Эти поля не могут быть изменены"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         EMAIL: "Поле адреса email"
         MORE: "Другие настройки"
         REQUIRED: "Это поле обязательно для этой формы и не может быть удалено"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         FILE: "Поле загрузки файла"
         MORE: "Другие настройки"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Удалить этот элемент"
         DRAG: "Перетащите для изменения порядка полей"
         LOCKED: "Эти поля не могут быть изменены"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         HEADING: "Поле заголовка"
         MORE: "Другие настройки"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Добавить элемент"
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
@@ -245,11 +245,11 @@ ru_RU:
         MORE: "Другие настройки"
         REQUIRED: "Это поле обязательно для этой формы и не может быть удалено"
         SET: "Набор radio-кнопок"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Удалить этот элемент"
         DRAG: "Перетащите для изменения порядка элементов"
         LOCKED: "Эти поля не могут быть удалены"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Удалить это поле"
         DRAG: "Перетащите для изменения порядка полей"
         MORE: "Другие настройки"
@@ -257,7 +257,7 @@ ru_RU:
     FieldEditor:
         EMAILONSUBMIT: "Отправлять заполненную форму на email:"
         EMAILSUBMISSION: "Отправить полученную форму на email:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "На Ваш сайт были отправлены следующие данные: "
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Получено из формы"

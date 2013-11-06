@@ -1,5 +1,5 @@
 ms_MY:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -46,7 +46,7 @@ ms_MY:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -91,7 +91,7 @@ ms_MY:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -103,7 +103,7 @@ ms_MY:
         PLURALNAME: "Text Fields"
         SINGULARNAME: "Text Field"
         TEXTLENGTH: "Text length"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Tambah"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Kotak tanda semak"
@@ -135,7 +135,7 @@ ms_MY:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -173,13 +173,13 @@ ms_MY:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Medan kotak pilihan"
         DELETE: "Hapuskan medan ini"
         DRAG: "Seret untuk mengubah susunan medan"
         LOCKED: "Medan ini tidak boleh diubah"
         MORE: "Pilihan-pilihan lanjut"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Tambah pilihan baru"
         CHECKBOXGROUP: "Kumpulan kotak pilihan"
         DELETE: "Hapuskan medan ini"
@@ -187,16 +187,16 @@ ms_MY:
         LOCKED: "Medan-medan ini tidak boleh dipinda"
         MORE: "Pilihan-pilihan lanjut"
         REQUIRED: "Medan ini diperlukan untuk borang ini dan tidak boleh dihapuskan"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Hapuskan pilihan ini"
         DRAG: "Seret untuk mengubah susunan pilihan"
         LOCKED: "Medan ini tidak bole diubah"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Medan Tarikh"
         DELETE: "Hapuskan medan ini"
         DRAG: "Seret untuk mengubah susunan medan-medan"
         MORE: "Pilihan-pilihan lanjut"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Tambah pilihan baru"
         DELETE: "Hapuskan medan ini"
         DRAG: "Seret untuk mengubah susunan medan"
@@ -204,39 +204,39 @@ ms_MY:
         LOCKED: "Medan ini tidak bole diubah"
         MORE: "Pilihan-pilihan lanjut"
         REQUIRED: "Medan ini diperlukan untuk borang ini dan tidak boleh dihapuskan"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Hapuskan pilihan ini"
         DRAG: "Seret untuk mengubah susunan pilihan"
         LOCKED: "Medan-medan ini tidak boleh diubah"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Hapuskan medan ini"
         DRAG: "Seret untuk mengubah susunan medan"
         EMAIL: "Medan alamat emel"
         MORE: "Pilihan-pilihan lanjut"
         REQUIRED: "Medan ini diperlukan untuk borang ini dan tidak boleh dihapuskan"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Hapuskan medan ini"
         DRAG: "Seret untuk mengubah susunan medan-medan"
         FILE: "Medan muat naik fail"
         MORE: "Pilihan-pilihan lanjut"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Hapuskan pilihan ini"
         DRAG: "Seret untuk mengubah tatatertib medan-medan"
         LOCKED: "Medan-medan ini tidak boleh dipinda"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Hapuskan medan ini"
         HEADING: "Medan tajuk"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Tambahkan pilihan baru"
         DELETE: "Hapuskan medan ini"
         DRAG: "Heret untuk mengatur semula tatatertib medan-medan"
         LOCKED: "Medan-medan ini tidak boleh dipinda"
         REQUIRED: "Medan ini dikehendaki untuk borang ini dan tidak boleh dihapuskan"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Hapuskan pilihan ini"
         DRAG: "Heret untuk mengatur semula tatatertib pilihan-pilihan"
         LOCKED: "Medan-medan ini tidak boleh dipinda"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Hapuskan medan ini"
         DRAG: "Heret untuk mengatur semula tatatertib medan-medan"
         MORE: "Pilihan-pilihan lanjut"
@@ -244,7 +244,7 @@ ms_MY:
     FieldEditor:
         EMAILONSUBMIT: "Emel borang apabila diserahkan:"
         EMAILSUBMISSION: "Pengajuan emel kepada:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Data berikut telah dihantar ke laman web anda:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Penghantaran borang"

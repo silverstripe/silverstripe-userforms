@@ -1,5 +1,5 @@
 bg_BG:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ bg_BG:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ bg_BG:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ bg_BG:
         TEXTLENGTH: "Дължина на Текст"
         DEFAULTTEXT: "Текст по подразбиране"
         TEXTBOXLENGTH: "Дължина на текстовото поле"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Добави"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Отметка"
@@ -144,7 +144,7 @@ bg_BG:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ bg_BG:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Поле за отметка"
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         LOCKED: "Това поле неможе да бъде променено"
         MORE: "Повече Опций"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Добави нова опция"
         CHECKBOXGROUP: "Група отметки"
         DELETE: "Изтрий това поле"
@@ -196,16 +196,16 @@ bg_BG:
         LOCKED: "Това поле неможе да бъде променено"
         MORE: "Повече опций "
         REQUIRED: "Това поле е задължително за този формуляр и неможе да бъде изтрито"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Премахни тази опция"
         DRAG: "Плъзнете, за да подредите реда на опцийте"
         LOCKED: "Тези полета немогат да бъдат променени"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Дата поле"
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         MORE: "Повече опций"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Добави нова опция"
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
@@ -213,31 +213,31 @@ bg_BG:
         LOCKED: "Тези полета неможе да бъдат променени"
         MORE: "Повече опций"
         REQUIRED: "Това поле е задължително за този формуляр и неможе да бъде изтрито"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Премахни тази опция"
         DRAG: "Плъзнете, за да подредите реда на опцийте"
         LOCKED: "Тези полета неможе да бъдат променени"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         EMAIL: "Мейл адрес поле"
         MORE: "Повече опций"
         REQUIRED: "Това поле е задължително за този формуляр и неможе да бъде изтрито"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         FILE: "Поле за качване на файлове"
         MORE: "Повече опций"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Премахни тази опция"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         LOCKED: "Тези полета неможе да бъдат променени"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         HEADING: "Рубрика поле"
         MORE: "Повече опций"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Добави нова опция"
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
@@ -245,11 +245,11 @@ bg_BG:
         MORE: "Повече опций"
         REQUIRED: "Това поле е задължително за този формуляр и неможе да бъде изтрито"
         SET: "Нагласа за Радио бутон"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Премахни тази опция"
         DRAG: "Пъзнете, за да подредите реда на опцийте"
         LOCKED: "Тези полета неможе да бъдат променени"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Изтрий това поле"
         DRAG: "Плъзнете, за да подредите реда на полетата"
         MORE: "Повече опций"
@@ -257,7 +257,7 @@ bg_BG:
     FieldEditor:
         EMAILONSUBMIT: "Мейл формуляр за пращане:"
         EMAILSUBMISSION: "Мейл изпращане към:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Следващите данни бяха пратени на вашият сайт:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Подаване на формуляра"

@@ -1,0 +1,156 @@
+ar:
+  CustomRule:
+    BLANK: فراغ
+    DELETE: حذف
+    GREATERTHAN: 'القيمة أكبر من'
+    GREATERTHANEQUAL: 'القيمة أكبر من أو تساوي'
+    HIDETHISFIELD: 'إخفاء هذا الحقل'
+    IS: إنه
+    LESSTHAN: 'قيمة أقل من'
+    LESSTHANEQUAL: 'قيمة أقل من أو تساوي'
+    NOTBLANK: 'ليس بفراغ'
+    NOTVALUE: 'ليست قيمة'
+    SHOWTHISFIELD: 'إظهار هذا الحقل'
+    VALUE: القيمة
+    WHEN: عندما
+  EditableCheckbox:
+    PLURALNAME: مربعات لوضع إشارة
+    SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
+  EditableCountryDropdownField:
+    PLURALNAME: 'القائمة المنسدلة للروابط البلاد'
+    SINGULARNAME: 'القائمة المنسدلة للروابط البلاد'
+  EditableDateField:
+    PLURALNAME: 'حقول التاريخ'
+    SINGULARNAME: 'حقل التاريخ'
+  EditableDropdown:
+    PLURALNAME: القائمات المنسدلة للروابط
+    SINGULARNAME: 'حقل القائمة المنسدلة'
+  EditableFileField:
+    PLURALNAME: 'حقول تحميل الملف'
+    SINGULARNAME: 'حقل تحميل الملف'
+  EditableFormField:
+    CHECKEDBYDEFAULT: 'افتراضيا مُعَلّم'
+    CUSTOMERROR: 'نص خطأ مخصص'
+    DEFAULTTOTODAY: 'الفرضي لهذا اليوم؟'
+    ENTERQUESTION: 'إدخال السؤال'
+    EXTRACLASSA: 'تصميم/تخطيط إضافي'
+    EXTRACLASSB: 'فئة إضافية من صفحات الأنماط التعاقبية CSS - افصل بين المتعددة بفضاء'
+    GROUP: مجموعة
+    PLURALNAME: 'حقول استمارة قابلة للتحرير'
+    REQUIRED: 'هل هذا الحقل ضروري؟'
+    RIGHTTITLE: 'عنوان اليمين'
+    SINGULARNAME: 'حقل استمارة قابل للتحرير'
+    ADD: إضافة
+    ADDRULE: 'إضافة قاعدة'
+    BLANK: فراغ
+    CUSTOMRULES: 'القواعد المخصصة'
+    DELETE: احذف
+    DRAG: 'اسحب لإعادة ترتيب الحقول'
+    FIELDCONFIGURATION: 'مواصفات الحقل'
+    FIELDONDEFAULT: 'القيمة المبدئية للحقل'
+    GREATERTHAN: 'القيمة أكبر من'
+    GREATERTHANEQUAL: 'القيمة أكبر من أو تساوي'
+    HIDE: إخفاء
+    HIDETHISFIELD: 'إخفاء هذا الحقل'
+    IS: إنه
+    LESSTHAN: 'قيمة أقل من'
+    LESSTHANEQUAL: 'القيمة أقل من أو تساوي'
+    LOCKED: 'لا يمكن تعديل هذه الحقول'
+    NOTBLANK: 'غير فراغ'
+    NOTVALUE: 'ليست قيمة'
+    OPTIONS: الخيارات
+    SHOW: إظهار
+    SHOWOPTIONS: 'إظهار الخيارات'
+    SHOWTHISFIELD: 'أعرض هذه الحقل'
+    VALIDATION: المصادقة
+    VALUE: القيمة
+    WHEN: عندما
+  EditableMemberListField:
+    PLURALNAME: 'حقول قائمة الأعضاء'
+    SINGULARNAME: 'حقل قائمة الأعضاء'
+  EditableOption:
+    PLURALNAME: 'الخيارات القابلة للتحرير'
+    SINGULARNAME: 'خيار قابل للتحرير'
+    DELETE: 'احذف هذا الخيار'
+    DRAG: 'اسحب لإعادة ترتيب الخيارات'
+    LOCKED: 'لا يمكن تعديل هذه الحقول'
+  EditableTextField:
+    NUMBERROWS: 'عدد الصفوف'
+    PLURALNAME: 'حقول نصية'
+    SINGULARNAME: 'حقل نصي'
+    TEXTLENGTH: 'طول النص'
+  SubmittedFileField:
+    DOWNLOADFILE: 'تحميل الملف'
+    PLURALNAME: 'حقول الملف التي قدمت'
+    SINGULARNAME: 'حقل الملف الذي قدّم'
+  SubmittedFormField:
+    PLURALNAME: 'حقول الاستمارة التي تمّ تقديمها'
+    SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'تصفية التقديمات..'
+    WHEREVALUEIS: 'حيث القيمة هي..'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
+    SINGULARNAME: 'مجموعة مربعات لوضع إشارة'
+  GridField:
+    Filter: تصفية
+    ResetFilter: إعادة تعيين
+  SubmittedForm:
+    PLURALNAME: 'الاستمارات التي قدّمت'
+    SINGULARNAME: 'الاستمارة التي قدّمت'
+  FieldEditor:
+    ADD: أضف
+    SELECTAFIELD: 'اختر حقل'
+  Form:
+    FIELDISREQUIRED: '%s ضروري'
+  SiteTree:
+    PLURALNAME: صفحات
+    SINGULARNAME: صفحة
+  EditableFormHeading:
+    LEVEL: 'حدد مستوى العنوان'
+    PLURALNAME: عناوين
+    SINGULARNAME: عنوان
+  EditableRadioField:
+    PLURALNAME: 'حقول حلقية radio'
+    SINGULARNAME: 'حقل حلقي Radio'
+  EditableEmailField:
+    PLURALNAME: 'حقول البريد الإلكتروني'
+    SINGULARNAME: 'خانة البريد الإلكتروني'
+  EditableLiteralField:
+    HIDEFROMREPORT: 'إخقاء تقارير النموذج؟'
+    PLURALNAME: 'بلوكات HTML'
+    SINGULARNAME: 'بلوك HTML'
+  EditableMultipleOptionField:
+    PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
+    SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
+    CONFIGURATION: مواصفات
+    DESCRIPTION: 'يضيف استمارة مخصصة.'
+    EMAILADDRESS: البريد الإلكتروني
+    EMAILBODY: هيئة
+    EMAILFROM: من
+    EMAILRECIPIENTS: 'متلقي البريد الإلكتروني'
+    EMAILSUBJECT: 'موضوع البريد الإلكتروني'
+    ENABLELIVEVALIDATION: 'تفعيل المصادقة الآنية'
+    EmailFromContent: 'عنوان خانة المرسل يسمح لك بتعيين من الذي يأتي منه البريد الالكتروني. في معظم الخوادم هذا سوف يحتاج إلى أن يعين إلى عنوان بريد إلكتروني على نفس اسم مجال موقع الويب الخاص بك. على سبيل المثال على yoursite.com عنوان خانة المرسل قد يحتاج إلى أن يكون something@yoursite.com. يمكنك مع ذلك، تعيين أي عنوان بريد إلكتروني ترغب كعنوان للرد.'
+    FORM: نموذج
+    FROMADDRESS: 'ارسل بريد إلكتروني من'
+    HIDEFIELDLABELS: 'إخفاء تسميات الحقول'
+    HIDEFORMDATA: 'إخفاء بيانات النموذج من البريد الإلكتروني؟'
+    ONCOMPLETELABEL: 'اعرض عند الاكتمال'
+    ORSELECTAFIELDTOUSEASFROM: '.. أو تحديد حقل لاستخدامه كعنوان للرد'
+    ORSELECTAFIELDTOUSEASTO: '.. أو تحديد حقل لاستخدامه على أنه عنوان المرسل إليه'
+    PLURALNAME: 'الصفحات الأساسية'
+    REPLYADDRESS: 'بريد إلكتروني للرد علي'
+    SAVESUBMISSIONS: 'قم بتعطيل حفظ التقديمات إلى الخادم'
+    SENDEMAILTO: 'ارسل بريد إلكتروني إلى'
+    SENDPLAIN: 'إرسال البريد الإلكتروني كنص عادي؟ (سيتم تجريد كود الHTML)'
+    SHOWCLEARFORM: 'زر عرض النموذج ممسوحاً'
+    SINGULARNAME: 'نموذج يحدده المستخدم'
+    SUBMISSIONS: التقديمات
+    SUBMITBUTTON: تقديم
+    TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
+    SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'

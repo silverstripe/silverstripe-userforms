@@ -1,5 +1,5 @@
 fi_FI:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Tyhjä"
         DELETE: "Poista"
         GREATERTHAN: "Arvo on suurempi kuin"
@@ -50,7 +50,7 @@ fi_FI:
         RIGHTTITLE: "Otsikko oikealla"
         SINGULARNAME: "Muokattava lomakekenttä"
         YES: "Kyllä"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Lisää"
         ADDRULE: "Lisää sääntö"
         BLANK: "Tyhjä"
@@ -93,7 +93,7 @@ fi_FI:
     EditableOption:
         PLURALNAME: "Muokattavat valinnat"
         SINGULARNAME: "Muokattava valinta"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Poista tämä valinta"
         DRAG: "Raahaa muuttaaksesi valintojen järjestystä"
         LOCKED: "Näitä kenttiä ei voi muokata"
@@ -107,7 +107,7 @@ fi_FI:
         TEXTLENGTH: "Tekstin pituus"
         DEFAULTTEXT: "Oletusteksti"
         TEXTBOXLENGTH: "Tekstikentän pituus"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Lisää"
         SELECTAFIELD: "Valitse kenttä"
     Form:
@@ -122,7 +122,7 @@ fi_FI:
     SubmittedFormField:
         PLURALNAME: "Lähetetyt lomakekentät"
         SINGULARNAME: "Lähetetty lomakekenttä"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Poista kaikki lähetykset"
         DELETESUBMISSION: "Poista lähetys"
         EXPORTSUBMISSIONS: "Vie lähetykset CSV-tiedostona"
@@ -160,28 +160,28 @@ fi_FI:
         SINGULARNAME: "Lomakkeen vastaanottosähköposti"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Lähetystiedot"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         DELETE: "Poista tämä kenttä"
         DRAG: "Vedä järjestääksesi kentät uudelleen"
         LOCKED: "Tätä kenttää ei voi muokata"
         MORE: "Lisää valintoja"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Lisää uusi valinta"
         DELETE: "Poista tämä kenttä"
         DRAG: "Vedä järjestääksesi kentät uudelleen"
         LOCKED: "Näitä kenttiä ei voi muokata"
         MORE: "Lisää valintoja"
         REQUIRED: "Tätä kenttää tarvitaan tässä lomakkeessa eikä sitä voi poistaa"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Poista tämä valinta"
         DRAG: "Vedä järjestääksesi valinnat uudelleen"
         LOCKED: "Näitä kenttiä ei voi muokata"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Päivämääräkenttä"
         DELETE: "Poista tämä kenttä"
         DRAG: "Vedä järjestääksesi kentät uudelleen"
         MORE: "Lisää valintoja"
-    EditableDropdown.ss:
+    EditableDropdown:
         DELETE: "Poista tämä kenttä"
         DRAG: "Vedä järjestääksesi kentät uudelleen"
         DROPDOWN: "Pudotusvalikko"
@@ -190,7 +190,7 @@ fi_FI:
         REQUIRED: "Tätä kenttää tarvitaan tässä lomakkeessa eikä sitä voi poistaa"
     FieldEditor:
         EMAILSUBMISSION: "Lähetä lähetys kohteeseen: "
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Seuraava tiedot lähetettiin verkkosivustollesi:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Lomakkeen lähetys"

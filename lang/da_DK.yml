@@ -1,5 +1,5 @@
 da_DK:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ da_DK:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ da_DK:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ da_DK:
         TEXTLENGTH: "Tekstlængde"
         DEFAULTTEXT: "Standard tekst"
         TEXTBOXLENGTH: "Længde af tekstboks"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Tilføj"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Checkbox"
@@ -141,7 +141,7 @@ da_DK:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -179,13 +179,13 @@ da_DK:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Checkbox felt"
         DELETE: "Slet dette felt"
         DRAG: "Træk for at ændre felternes rækkefølge"
         LOCKED: "Dette felt kan ikke modificeres"
         MORE: "Flere valgmuligheder"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Tilføj mulighed"
         CHECKBOXGROUP: "Checkbox gruppe"
         DELETE: "Slet dette felt"
@@ -193,31 +193,31 @@ da_DK:
         LOCKED: "Disse felter kan ikke modificeres"
         MORE: "Flere valgmuligheder"
         REQUIRED: "Dette felt er påkrævet i denne formular og kan ikke slettes"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Slet denne mulighed"
         DRAG: "Træk for at ændre mulighedernes rækkefølge"
         LOCKED: "Disse felter kan ikke modificeres"
-    EditableDateField.ss:
+    EditableDateField:
         DRAG: "Træk for at ændre felternes rækkefølge"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Slet dette felt"
         MORE: "Flere indstillinger"
         REQUIRED: "Dette felt er påkrævet i denne formular og kan derfor ikke slettet"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Slet dette felt"
         DRAG: "Træk for at ændre felternes rækkefølge"
         FILE: "Fil-upload felt"
         MORE: "Flere indstillinger"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Slet denne valgmulighed"
         DRAG: "Træk for at ændre felternes rækkefølge"
         LOCKED: "Dette felt kan ikke ændres"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Slet dette felt"
         DRAG: "Træk for at ændre felternes rækkefølge"
         HEADING: "Overskriftsfelt"
         MORE: "Flere indstillinger"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Tilføj ny valgmulighed"
         DELETE: "Slet dette felt"
         DRAG: "Træk for at ændre felternes rækkefølge"
@@ -225,11 +225,11 @@ da_DK:
         MORE: "Flere indstillinger"
         REQUIRED: "Dette felt er påkrævet i denne formular og kan derfor ikke slettet"
         SET: "Sæt radioknap"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Slet denne valgmulighed"
         DRAG: "Træk for at ændre mulighedernes rækkefølge"
         LOCKED: "Disse felter kan ikke ændres"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Slet dette felt"
         DRAG: "Træk for at ændre felternes rækkefølge"
         MORE: "Flere indstillinger"
@@ -237,7 +237,7 @@ da_DK:
     FieldEditor:
         EMAILONSUBMIT: "Send formular som e-mail efter indsendelse:"
         EMAILSUBMISSION: "Send indsendelse via email til:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Følgende data er indsendt til din hjemmeside:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Indsendelse af formular"

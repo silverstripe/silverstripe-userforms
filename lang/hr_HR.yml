@@ -1,5 +1,5 @@
 hr_HR:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -46,7 +46,7 @@ hr_HR:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -91,7 +91,7 @@ hr_HR:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -103,7 +103,7 @@ hr_HR:
         PLURALNAME: "Text Fields"
         SINGULARNAME: "Text Field"
         TEXTLENGTH: "Text length"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Dodaj"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Checkbox"
@@ -135,7 +135,7 @@ hr_HR:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -171,26 +171,26 @@ hr_HR:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Obriši ovo polje"
         EMAIL: "Polje za e-mail adresu"
         MORE: "Više opcija"
         REQUIRED: "Ovo je polje obavezno u ovoj formi i ne može biti obrisano."
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Obriši ovo polje"
         DRAG: "Povuci za promjenu redoslijeda polja"
         FILE: "Polje za upload datoteka"
         MORE: "Više opcija"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Odstrani ovu opciju"
         DRAG: "Povuci za promjenu redoslijeda polja"
         LOCKED: "Ova polja ne mogu biti promijenjena"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Obriši ovo polje"
         DRAG: "Povuci za promjenu redoslijeda polja"
         HEADING: "Polje za naslov"
         MORE: "Više opcija"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Nova opcija"
         DELETE: "Obriši ovo polje"
         DRAG: "Povuci za promjenu redoslijeda polja"
@@ -198,14 +198,14 @@ hr_HR:
         MORE: "Više opcija"
         REQUIRED: "Ovo polje je obavezno u ovoj formi i ne može biti obrisano."
         SET: "Set radio kontrola"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Odstrani ovu opciju"
         DRAG: "Povuci za promjenu redoslijeda opcija"
         LOCKED: "Ova polja ne mogu biti promijenjena"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Obriši ovo polje"
         DRAG: "Povuci za promjenu redoslijeda polja"
         MORE: "Više opcija"
         TEXTFIELD: "Polje za unos teksta"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Slijedeći podaci pridodani su Vašoj stranici:"

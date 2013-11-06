@@ -1,5 +1,5 @@
 fr_FR:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -50,7 +50,7 @@ fr_FR:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -95,7 +95,7 @@ fr_FR:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -109,7 +109,7 @@ fr_FR:
         TEXTLENGTH: "Longueur du texte"
         DEFAULTTEXT: "Texte par défaut"
         TEXTBOXLENGTH: "Longueur de la zone de texte"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Ajouter"
         SELECTAFIELD: "Select a Field"
         CHECKBOX: "Bouton à cocher"
@@ -144,7 +144,7 @@ fr_FR:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -182,13 +182,13 @@ fr_FR:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Champ case à cocher"
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         LOCKED: "Ce champ ne peut pas être modifié"
         MORE: "Plus d\'options"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Ajouter une nouvelle option"
         CHECKBOXGROUP: "Goupe de cases à cocher"
         DELETE: "Supprimer ce champ"
@@ -196,16 +196,16 @@ fr_FR:
         LOCKED: "Ces champs ne peuvent pas être modifiés"
         MORE: "Plus d\'options"
         REQUIRED: "Ce champ est requis pour ce formulaire et ne peut pas être supprimé"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Enlever cette option"
         DRAG: "Glisser pour arranger l\'ordre des options"
         LOCKED: "Ces champs ne peuvent pas être modifiés"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Champ date"
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         MORE: "Plus d\'options"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Ajouter une nouvelle option"
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
@@ -213,31 +213,31 @@ fr_FR:
         LOCKED: "Ces champs ne peuvent pas être modifiés"
         MORE: "Plus d\'options"
         REQUIRED: "Ce champ est requis pour ce formulaire et ne peut pas être supprimé"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Enlever cette option"
         DRAG: "Glisser pour arranger l\'ordre des options"
         LOCKED: "Ces champs ne peuvent pas être modifié"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         EMAIL: "Champ de l\'adresse email"
         MORE: "Plus d\'options"
         REQUIRED: "Ce champ est requis pour ce formulaire et ne peut pas être supprimé"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         FILE: "Champ d\'envoi de fichier"
         MORE: "Plus d\'options"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Enlever cette option"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         LOCKED: "Ces champs ne peuvent pas être modifiés"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         HEADING: "Champ entête"
         MORE: "Plus d\'options"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Ajouter une nouvelle option"
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
@@ -245,11 +245,11 @@ fr_FR:
         MORE: "Plus d\'options"
         REQUIRED: "Ce champ est requis pour ce formulaire et ne peut pas être supprimé"
         SET: "Ensemble de bouton par radio"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Supprimer cette option"
         DRAG: "Glisser pour arranger l\'ordre des options"
         LOCKED: "Ces champs ne peuvent pas être modifiés"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Supprimer ce champ"
         DRAG: "Glisser pour arranger l\'ordre des champs"
         MORE: "Plus d\'options"
@@ -257,7 +257,7 @@ fr_FR:
     FieldEditor:
         EMAILONSUBMIT: "Envoyer le formulaire par email à la soumission"
         EMAILSUBMISSION: "Envoyer la soumission à:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Les données suivantes ont été envoyées à votre site web :"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Envoi de formulaire"

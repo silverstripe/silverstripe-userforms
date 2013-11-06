@@ -1,5 +1,5 @@
 sr_RS:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blank"
         DELETE: "Delete"
         GREATERTHAN: "Value Greater Than"
@@ -48,7 +48,7 @@ sr_RS:
         RIGHTTITLE: "Right Title"
         SINGULARNAME: "Editable Form Field"
         YES: "Yes"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Add"
         ADDRULE: "Add Rule"
         BLANK: "Blank"
@@ -92,7 +92,7 @@ sr_RS:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remove this option"
         DRAG: "Drag to rearrange order of options"
         LOCKED: "These fields cannot be modified"
@@ -106,7 +106,7 @@ sr_RS:
         TEXTLENGTH: "Дужина текста"
         DEFAULTTEXT: "Подразумевани текст"
         TEXTBOXLENGTH: "Дужина текстуалног поља"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Додај"
         SELECTAFIELD: "Select a Field"
         DATE: "Датум"
@@ -130,7 +130,7 @@ sr_RS:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Delete All Submissions"
         DELETESUBMISSION: "Delete Submission"
         EXPORTSUBMISSIONS: "Export submissions to CSV"
@@ -168,56 +168,56 @@ sr_RS:
         SINGULARNAME: "User Defined Form Email Recipient"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Submission Data"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         DELETE: "Обриши ово поље"
         LOCKED: "Ово поље не може да буде измењено"
         MORE: "Више опција"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Додај нову опцију"
         DELETE: "Обриши ово поље"
         LOCKED: "Ова поља не могу да буду измењена"
         MORE: "Више опција"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Уклони ову опцију"
         DRAG: "Превуците да бисте распоредили опције"
         LOCKED: "Ова поља не могу да буду измењена"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Поље за датум"
         DELETE: "Обриши ово поље"
         DRAG: "Превуците да бисте распоредили поља"
         MORE: "Више опција"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Додај нову опцију"
         DELETE: "Обриши ово поље"
         DRAG: "Превуците да бисте распоредили поља"
         LOCKED: "Ова поља не могу да буду измењена"
         MORE: "Више опција"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Уклони ову опцију"
         LOCKED: "Ова поље не могу да буду измењена"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Обриши ово поље"
         EMAIL: "Поље за имејл адресу"
         MORE: "Више опција"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Обриши ово поље"
         FILE: "Поље за достављање датотека"
         MORE: "Више опција"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Уклони ову опцију"
         LOCKED: "Ова поља не могу да буду измењена"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Обриши ово поље"
         MORE: "Више опција"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Додај нову опцију"
         DELETE: "Обриши ово поље"
         MORE: "Више опција"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Уклони ову опцију"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Обриши ово поље"
         MORE: "Више опција"
         TEXTFIELD: "Текстуално поље"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Следећи подацу су послати на ваш сајт:"

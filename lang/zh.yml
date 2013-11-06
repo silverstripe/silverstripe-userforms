@@ -1,0 +1,156 @@
+zh:
+  CustomRule:
+    BLANK: 空白
+    DELETE: 删除
+    GREATERTHAN: '值大于'
+    GREATERTHANEQUAL: '值大于或等于'
+    HIDETHISFIELD: '隐藏这个字段'
+    IS: 是
+    LESSTHAN: '值小于'
+    LESSTHANEQUAL: '值小于或等于'
+    NOTBLANK: '不是空白'
+    NOTVALUE: '没有值'
+    SHOWTHISFIELD: '显示这个字段'
+    VALUE: 值
+    WHEN: 当
+  EditableCheckbox:
+    PLURALNAME: 复选框
+    SINGULARNAME: '复选框字段'
+  EditableCountryDropdownField:
+    PLURALNAME: '国家下拉列表'
+    SINGULARNAME: '国家下拉列表'
+  EditableDateField:
+    PLURALNAME: '日期字段'
+    SINGULARNAME: '日期字段'
+  EditableDropdown:
+    PLURALNAME: 下拉列表
+    SINGULARNAME: '下拉列表字段'
+  EditableFileField:
+    PLURALNAME: '文件上传字段'
+    SINGULARNAME: '文件上传字段'
+  EditableFormField:
+    CHECKEDBYDEFAULT: '默认选中？'
+    CUSTOMERROR: '自定义错误消息'
+    DEFAULTTOTODAY: '默认为今天？'
+    ENTERQUESTION: '键入问题'
+    EXTRACLASSA: '额外的造型/布局'
+    EXTRACLASSB: '额外的 css 类别 - 用空格来分开多项'
+    GROUP: 小组
+    PLURALNAME: '可编辑的表格字段'
+    REQUIRED: '这个字段是必须的吗？'
+    RIGHTTITLE: '右标题'
+    SINGULARNAME: '可编辑的表格字段'
+    ADD: 添加
+    ADDRULE: '添加规则'
+    BLANK: 空白
+    CUSTOMRULES: '自定义规则'
+    DELETE: 删除
+    DRAG: '拖放来对字段进行重新排序'
+    FIELDCONFIGURATION: '字段配置'
+    FIELDONDEFAULT: '默认字段'
+    GREATERTHAN: '值大于'
+    GREATERTHANEQUAL: '值大于或等于'
+    HIDE: 隐藏
+    HIDETHISFIELD: '隐藏这个字段'
+    IS: 是
+    LESSTHAN: '值小于'
+    LESSTHANEQUAL: '值小于或等于'
+    LOCKED: '这些字段不能被修改'
+    NOTBLANK: '不是空白'
+    NOTVALUE: '没有值'
+    OPTIONS: 选项
+    SHOW: 显示
+    SHOWOPTIONS: '显示选项'
+    SHOWTHISFIELD: '显示该字段'
+    VALIDATION: 验证
+    VALUE: 值
+    WHEN: 当
+  EditableMemberListField:
+    PLURALNAME: '成员列表字段'
+    SINGULARNAME: '成员列表字段'
+  EditableOption:
+    PLURALNAME: '可编辑的选项'
+    SINGULARNAME: '可编辑的选项'
+    DELETE: '删除这个选项'
+    DRAG: '拖放来对选项进行重新排序'
+    LOCKED: '这些字段不能被修改'
+  EditableTextField:
+    NUMBERROWS: '行数'
+    PLURALNAME: '文本字段'
+    SINGULARNAME: '文本字段'
+    TEXTLENGTH: '文本长度'
+  SubmittedFileField:
+    DOWNLOADFILE: '下载文件'
+    PLURALNAME: '已提交的文件字段'
+    SINGULARNAME: '已提交的文件字段'
+  SubmittedFormField:
+    PLURALNAME: '已提交的表格字段'
+    SINGULARNAME: '已提交的表格字段'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: '筛选器提交……'
+    WHEREVALUEIS: '当值为……'
+  EditableCheckboxGroupField:
+    PLURALNAME: '复选框组'
+    SINGULARNAME: '复选框组'
+  GridField:
+    Filter: 筛选器
+    ResetFilter: 重设
+  SubmittedForm:
+    PLURALNAME: '已提交的表格'
+    SINGULARNAME: '已提交的表格'
+  FieldEditor:
+    ADD: 添加
+    SELECTAFIELD: '选择一个字段'
+  Form:
+    FIELDISREQUIRED: '%s 是必须的'
+  SiteTree:
+    PLURALNAME: 页面
+    SINGULARNAME: 页面
+  EditableFormHeading:
+    LEVEL: '选择标题级别'
+    PLURALNAME: 标题
+    SINGULARNAME: 标题
+  EditableRadioField:
+    PLURALNAME: '广播字段'
+    SINGULARNAME: '广播字段'
+  EditableEmailField:
+    PLURALNAME: '电子邮件字段'
+    SINGULARNAME: '电子邮件字段'
+  EditableLiteralField:
+    HIDEFROMREPORT: '从报告中隐藏？'
+    PLURALNAME: 'HTML 模块'
+    SINGULARNAME: 'HTML 模块'
+  EditableMultipleOptionField:
+    PLURALNAME: '可编辑的多个选项字段'
+    SINGULARNAME: '可编辑的多个选项字段'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: '添加电子邮件收件人'
+    CONFIGURATION: 配置
+    DESCRIPTION: '添加一个可定制的表格。'
+    EMAILADDRESS: 电子邮件
+    EMAILBODY: 正文
+    EMAILFROM: 表格
+    EMAILRECIPIENTS: '电子邮件收件人'
+    EMAILSUBJECT: '电子邮件主题'
+    ENABLELIVEVALIDATION: '启用现场验证'
+    EmailFromContent: '表格地址允许您设置电子邮件的发送人。在大多数服务器上这必须要设置成域名与您的站点域名一致的电子邮件地址。例如在 yoursite.com 上，发送人的电子邮件地址必须为 something@yoursite.com。但是您可以随意设置回复的电子邮件地址。'
+    FORM: 表格
+    FROMADDRESS: '发送人电子邮件'
+    HIDEFIELDLABELS: '隐藏字段标签'
+    HIDEFORMDATA: '从电子邮件中隐藏表格数据？'
+    ONCOMPLETELABEL: '完成时显示'
+    ORSELECTAFIELDTOUSEASFROM: '.. 或选择某字段作为回复地址'
+    ORSELECTAFIELDTOUSEASTO: '.. 或选择某字段作为地址使用'
+    PLURALNAME: '基本页面'
+    REPLYADDRESS: '用于回复的电子邮件'
+    SAVESUBMISSIONS: '禁用保存提交内容到服务器'
+    SENDEMAILTO: '发送电子邮件到'
+    SENDPLAIN: '以纯文本形式发送电子邮件？（HTML 将会被去除）'
+    SHOWCLEARFORM: '显示清除表格按钮'
+    SINGULARNAME: '用户定义表格'
+    SUBMISSIONS: 提交
+    SUBMITBUTTON: 提交
+    TEXTONSUBMIT: '提交按钮上的文本'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: '用户定义的表格电子邮件接受者'
+    SINGULARNAME: '用户定义的表格电子邮件接受者'

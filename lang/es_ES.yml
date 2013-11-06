@@ -1,5 +1,5 @@
 es_ES:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Blanco"
         DELETE: "Borrar"
         GREATERTHAN: "Valor mayor que"
@@ -50,7 +50,7 @@ es_ES:
         RIGHTTITLE: "Título a la derecha"
         SINGULARNAME: "Campo editable"
         YES: "Si"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Agregar"
         ADDRULE: "Agregar regla"
         BLANK: "blanco"
@@ -95,7 +95,7 @@ es_ES:
     EditableOption:
         PLURALNAME: "Opciones editables"
         SINGULARNAME: "Opción editable"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Remover esta opción"
         DRAG: "Arrastrar para reorganizar el orden de las opciones"
         LOCKED: "Estos campos no pueden ser modificados"
@@ -109,7 +109,7 @@ es_ES:
         TEXTLENGTH: "Longitud del texto"
         DEFAULTTEXT: "Texto por defecto"
         TEXTBOXLENGTH: "Longitud de la caja de texto"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Añadir"
         SELECTAFIELD: "Selecciona un campo"
         DATE: "Fecha"
@@ -130,7 +130,7 @@ es_ES:
     SubmittedFormField:
         PLURALNAME: "Campos enviados en formulario"
         SINGULARNAME: "Campo enviado en formulario"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Eliminar todos los envíos"
         DELETESUBMISSION: "Eliminar envío"
         EXPORTSUBMISSIONS: "Exportar envíos a CSV"
@@ -168,62 +168,62 @@ es_ES:
         SINGULARNAME: "Destinatario definido por el usuario"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Envío de datos"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         DELETE: "Borrar este campo"
         LOCKED: "Este campo no puede ser modificado"
         MORE: "Más opciones"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Añadir opción nueva"
         DELETE: "Borrar este campo"
         LOCKED: "Estos campos no pueden ser modificados"
         MORE: "Más opciones"
         REQUIRED: "Este campo es requerido para este formulario y no puede ser borrado"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Eliminar esta opción"
         LOCKED: "Estos campos no pueden ser modificados"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Campo Fecha"
         DELETE: "Borrar este campo"
         MORE: "Más opciones"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Añadir nueva opción"
         DELETE: "Borrar este campo"
         LOCKED: "Estos campos no pueden ser modificados"
         MORE: "Más opciones"
         REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Quitar esta opción"
         LOCKED: "Estos campos no pueden ser modificados"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Borrar este campo"
         MORE: "Más opciones"
         REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Borrar este campo"
         MORE: "Más opciones"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Quitar esta opción"
         LOCKED: "Estos campos no pueden ser modificados"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Borrar este campo"
         MORE: "Más opciones"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Añadir nueva opción"
         DELETE: "Borrar este campo"
         LOCKED: "Estos campos no pueden ser modificados"
         MORE: "Más opciones"
         REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Quitar esta opción"
         LOCKED: "Estos campos no pueden ser modificados"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Borrar este campo"
         MORE: "Más opciones"
         TEXTFIELD: "Campo de Texto"
     FieldEditor:
         EMAILONSUBMIT: "Enviar formulario por email :"
         EMAILSUBMISSION: "Enviar por email a:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Los siguientes datos fueron enviados a su sitio web:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Propuesta de formulario"

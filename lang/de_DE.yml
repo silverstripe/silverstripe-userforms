@@ -1,5 +1,5 @@
 de_DE:
-    CustomRule.ss:
+    CustomRule:
         BLANK: "Leer"
         DELETE: "Löschen"
         GREATERTHAN: "Wert größer als"
@@ -50,7 +50,7 @@ de_DE:
         RIGHTTITLE: "Title rechts"
         SINGULARNAME: "Editable Form Field"
         YES: "Ja"
-    EditableFormField.ss:
+    EditableFormField:
         ADD: "Hinzufügen"
         ADDRULE: "Regel hinzufügen"
         BLANK: "Leer"
@@ -95,7 +95,7 @@ de_DE:
     EditableOption:
         PLURALNAME: "Editable Options"
         SINGULARNAME: "Editable Option"
-    EditableOption.ss:
+    EditableOption:
         DELETE: "Option entfernen"
         DRAG: "Ziehen um Optionen neu zu ordnen"
         LOCKED: "Diese Felder können nicht verändert werden"
@@ -109,7 +109,7 @@ de_DE:
         TEXTLENGTH: "Textlänge"
         DEFAULTTEXT: "Standardtext"
         TEXTBOXLENGTH: "Länger der Textbox"
-    FieldEditor.ss:
+    FieldEditor:
         ADD: "Hinzufügen"
         SELECTAFIELD: "Feld auswählen"
         CHECKBOX: "Checkbox"
@@ -144,7 +144,7 @@ de_DE:
     SubmittedFormField:
         PLURALNAME: "Submitted Form Fields"
         SINGULARNAME: "Submitted Form Field"
-    SubmittedFormReportField.ss:
+    SubmittedFormReportField:
         DELETEALLSUBMISSIONS: "Alle Einreichungen löschen"
         DELETESUBMISSION: "Einreichung löschen"
         EXPORTSUBMISSIONS: "Einreichungen als CSV exportieren"
@@ -183,13 +183,13 @@ de_DE:
         SINGULARNAME: "Anpassbares Formular Email Empfänger"
     UserFormsMigrationTask:
         DEFAULTSUBMISSIONTITLE: "Einreichungs-Datensätze"
-    EditableCheckbox.ss:
+    EditableCheckbox:
         CHECKBOX: "Auswahl Feld"
         DELETE: "Lösche dieses Feld"
         DRAG: "Ziehen und halten um die Anordnung der Felder zu verändern"
         LOCKED: "Dieses Feld kann nicht verändert werden"
         MORE: "Mehr Möglichkeiten"
-    EditableCheckboxGroupField.ss:
+    EditableCheckboxGroupField:
         ADD: "Neue Option hinzufügen"
         CHECKBOXGROUP: "Checkbox Gruppe"
         DELETE: "Dieses Feld löschen"
@@ -197,16 +197,16 @@ de_DE:
         LOCKED: "Diese Felder können nicht verändert werden"
         MORE: "Mehr Optionen"
         REQUIRED: "Dieses Feld ist für dieses Formular erforderlich und kann nicht gelöscht werden"
-    EditableCheckboxOption.ss:
+    EditableCheckboxOption:
         DELETE: "Diese Option entfernen"
         DRAG: "Klicken und Festhalten um die Anordnung der Auswahl zu verändern"
         LOCKED: "Diese Felder können nicht angepasst werden"
-    EditableDateField.ss:
+    EditableDateField:
         DATE: "Datumsfeld"
         DELETE: "Diese Feld löschen"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
         MORE: "Mehr Optionen"
-    EditableDropdown.ss:
+    EditableDropdown:
         ADD: "Neue Auswahl hinzufügen"
         DELETE: "Dieses Feld löschen"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
@@ -214,31 +214,31 @@ de_DE:
         LOCKED: "Diese Felder können nicht angepasst werden"
         MORE: "Mehr Optionen"
         REQUIRED: "Dieses Feld wird für dieses Formular benötigt und kann nicht gelöscht werden."
-    EditableDropdownOption.ss:
+    EditableDropdownOption:
         DELETE: "Diese Auswahl löschen"
         DRAG: "Klicken und Festhalten um die Anordnung der Auswahl zu verändern"
         LOCKED: "Diese Felder können nicht verändert werden"
-    EditableEmailField.ss:
+    EditableEmailField:
         DELETE: "Lösche dieses Feld"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
         EMAIL: "E-Mail Adress Feld"
         MORE: "Mehr Möglichkeiten"
         REQUIRED: "Dieses Feld wird für dieses Formular benötigt und kann nicht gelöscht werden."
-    EditableFileField.ss:
+    EditableFileField:
         DELETE: "Lösche dieses Feld"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
         FILE: "Dateiuplad Feld"
         MORE: "Mehr Möglichkeiten"
-    EditableFormFieldOption.ss:
+    EditableFormFieldOption:
         DELETE: "Diese Auswahl entfernen"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
         LOCKED: "Diese Felder können nicht verändert werden"
-    EditableFormHeading.ss:
+    EditableFormHeading:
         DELETE: "Löschen Sie dieses Feld"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
         HEADING: "Überschriftsfeld"
         MORE: "Mehr Optionen"
-    EditableRadioField.ss:
+    EditableRadioField:
         ADD: "Auswahloption hinzufügen"
         DELETE: "Dieses Feld löschen"
         DRAG: "Klicken und Festhalten um die Anordnung der Felder zu verändern"
@@ -246,11 +246,11 @@ de_DE:
         MORE: "Mehr Optionen"
         REQUIRED: "Dieses Feld wird für dieses Formular benötigt, und kann deswegen nicht gelöscht werden"
         SET: "Radiobutton"
-    EditableRadioOption.ss:
+    EditableRadioOption:
         DELETE: "Diese Auswahloption entfernen"
         DRAG: "Ziehen neu anordnen, von Optionen"
         LOCKED: "Diese Felder können nicht modifiziert werden"
-    EditableTextField.ss:
+    EditableTextField:
         DELETE: "Diese Feld löschen"
         DRAG: "Ziehen neu ordnen Reihenfolge der Felder"
         MORE: "Mehr Optionen"
@@ -258,7 +258,7 @@ de_DE:
     FieldEditor:
         EMAILONSUBMIT: "Eingaben nach Absenden per E-Mail verschicken:"
         EMAILSUBMISSION: "Anfrage absenden an:"
-    SubmittedFormEmail.ss:
+    SubmittedFormEmail:
         SUBMITTED: "Die folgenden Daten wurden an Ihre Website übermittelt:"
     UserDefinedForm_SubmittedFormEmail:
         EMAILSUBJECT: "Eingereichtes Formular"
