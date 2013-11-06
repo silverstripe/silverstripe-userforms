@@ -102,7 +102,10 @@ class FieldEditor extends FormField {
 			$output = new ArrayList();
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
-				$niceTitle = Config::inst()->get($title, 'singular_name');
+				$niceTitle = _t(
+					$field.'.SINGULARNAME', 
+					$title
+				);
 				if($niceTitle) {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,

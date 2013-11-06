@@ -174,7 +174,7 @@ pl_PL:
         SINGULARNAME: "User Defined Form"
         SUBMISSIONS: "Zgłoszenia"
         SUBMITBUTTON: "Submit"
-        TEXTONSUBMIT: "Napis na przycisku \'submit\':"
+        TEXTONSUBMIT: "Napis na przycisku 'submit':"
         NORESULTS: "Nie znaleziono pasujących wyników"
         SUBMIT: "Wyślij"
     UserDefinedForm_EmailRecipient:
