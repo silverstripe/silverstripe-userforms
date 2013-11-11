@@ -21,6 +21,7 @@ class UserDefinedForm extends Page {
 	 */
 	private static $db = array(
 		"SubmitButtonText" => "Varchar",
+		"ClearButtonText" => "Varchar",
 		"OnCompleteMessage" => "HTMLText",
 		"ShowClearButton" => "Boolean",
 		'DisableSaveSubmissions' => 'Boolean',
@@ -360,9 +361,11 @@ class UserDefinedForm extends Page {
 	 */
 	public function getFormOptions() {
 		$submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
+		$clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
 		
 		$options = new FieldList(
 			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $submit),
+			new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
 			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
 			new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
 			new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels'))
@@ -560,13 +563,14 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	public function getFormActions() {
 		$submitText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
+		$clearText = ($this->ClearButtonText) ? $this->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
 		
 		$actions = new FieldList(
 			new FormAction("process", $submitText)
 		);
 
 		if($this->ShowClearButton) {
-			$actions->push(new ResetFormAction("clearForm"));
+			$actions->push(new ResetFormAction("clearForm", $clearText));
 		}
 		
 		$this->extend('updateFormActions', $actions);
