@@ -62,7 +62,6 @@ class UserDefinedForm extends Page {
 		SiteTree::disableCMSFieldsExtensions();
 		$fields = parent::getCMSFields();
 		SiteTree::enableCMSFieldsExtensions();
-
 		// define tabs
 		$fields->findOrMakeTab('Root.FormContent', _t('UserDefinedForm.FORM', 'Form'));
 		$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
@@ -111,6 +110,19 @@ class UserDefinedForm extends Page {
 			 $this->Submissions()->sort('Created', 'DESC')
 		);
 
+		// make sure a numeric not a empty string is checked against this int column for SQL server
+		$parentID = (!empty($this->ID)) ? $this->ID : 0;
+
+		// get a list of all field names and values used for print and export CSV views of the GridField below.
+		$columnSQL = <<<SQL
+SELECT "Name", "Title"
+FROM "SubmittedFormField"
+LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
+WHERE "SubmittedForm"."ParentID" = '$parentID'
+ORDER BY "Title" ASC
+SQL;
+		$columns = DB::query($columnSQL)->map();
+
 		$config = new GridFieldConfig();
 		$config->addComponent(new GridFieldToolbarHeader());
 		$config->addComponent($sort = new GridFieldSortableHeader());
@@ -129,16 +141,9 @@ class UserDefinedForm extends Page {
 		$filter->setThrowExceptionOnBadDataType(false);
 		$pagination->setThrowExceptionOnBadDataType(false);
 
-		// make sure a numeric not a empty string is checked against this int column for SQL server
-		$parentID = (!empty($this->ID)) ? $this->ID : 0;
-		// attach every column to the print view from 
-		$columns = SubmittedFormField::get()
-			->where("\"SubmittedForm\".\"ParentID\" = '$parentID'")
-			->leftJoin('SubmittedForm', '"SubmittedFormField"."ParentID" = "SubmittedForm"."ID"')
-			->map('Name', 'Title');
-
-		$columns = $columns->toArray();
-		$columns['Created'] = "Created";
+		// attach every column to the print view form 
+		$columns['Created'] = 'Created';
+		$filter->setColumns($columns);
 			
 		// print configuration
 		$print->setPrintHasHeader(true);
