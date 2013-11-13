@@ -8,7 +8,17 @@
  * @package userforms
  */
 class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
-	
+
+	/**
+	 * A map of name => value of columns from all submissions
+	 * @var array
+	 */
+	protected $columns;
+
+	public function setColumns($columns) {
+		$this->columns = $columns;
+	}
+
 	public function handleAction(GridField $gridField, $actionName, $arguments, $data) {
 		if(!$this->checkDataType($gridField->getList())) {
 			return;
@@ -36,18 +46,10 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		// submitted in this form.
 		$params = $gridField->getForm()->getController()->getURLParams();
 
-		// this is for you SQL server I know you don't see '' as a number
-		$parentID = (!empty($params['ID'])) ? Convert::raw2sql($params['ID']) : 0;
-		$formFields = SubmittedFormField::get()
-			->where(sprintf("SubmittedForm.ParentID = '%s'", $parentID))
-			->leftJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
-			->sort('Title', 'ASC')
-			->map('Name', 'Title');
-
 		// show dropdown of all the fields available from the submitted form fields
 		// that have been saved. Takes the titles from the currently live form.
 		$columnField = new DropdownField('FieldNameFilter', '');
-		$columnField->setSource($formFields->toArray());
+		$columnField->setSource($this->columns);
 		$columnField->setEmptyString(_t('UserFormsGridFieldFilterHeader.FILTERSUBMISSIONS', 'Filter Submissions..'));
 		$columnField->setHasEmptyDefault(true);
 		$columnField->setValue($selectedField);
