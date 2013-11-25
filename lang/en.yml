@@ -151,6 +151,8 @@ en:
     SUBMISSIONS: Submissions
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
+    CLEARBUTTON: Clear
+    TEXTONCLEAR: 'Text on clear button:'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
