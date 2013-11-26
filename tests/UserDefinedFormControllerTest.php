@@ -140,7 +140,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$actions = $controller->getFormActions();
 
 		$expected = new FieldList(new FormAction('process', 'Custom Button'));
-		$expected->push(new ResetFormAction("clearForm"));
+		$expected->push(new ResetFormAction("clearForm", "Clear"));
 		
 		$this->assertEquals($actions, $expected);
 	}
