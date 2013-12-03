@@ -747,7 +747,7 @@ JS
 										$expression = '$(this).attr("checked")';
 									} else if ($radioField) {
 										// We cannot simply get the value of the radio group, we need to find the checked option first.
-										$expression = '$(this).parents(".field").find("input:checked").val()=="'. $dependency['Value'] .'"';
+										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $dependency['Value'] .'"';
 									} else {
 										$expression = '$(this).val() == "'. $dependency['Value'] .'"';
 									}
@@ -774,7 +774,7 @@ JS
 										$expression = '!$(this).attr("checked")';
 									} else if ($radioField) {
 										// We cannot simply get the value of the radio group, we need to find the checked option first.
-										$expression = '$(this).parents(".field").find("input:checked").val()!="'. $dependency['Value'] .'"';
+										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()!="'. $dependency['Value'] .'"';
 									} else {
 										$expression = '$(this).val() != "'. $dependency['Value'] .'"';
 									}
