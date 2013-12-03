@@ -939,13 +939,14 @@ JS
 			if(!empty($data[$field->Name])){
 				if(in_array("EditableFileField", $field->getClassAncestry())) {
 					if(isset($_FILES[$field->Name])) {
+						$foldername = $field->getFormField()->getFolderName();
 						
 						// create the file from post data
 						$upload = new Upload();
 						$file = new File();
 						$file->ShowInSearch = 0;
 						try {
-							$upload->loadIntoFile($_FILES[$field->Name], $file);
+							$upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
 						} catch( ValidationException $e ) {
 							$validationResult = $e->getResult();
 							$form->addErrorMessage($field->Name, $validationResult->message(), 'bad');
