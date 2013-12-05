@@ -415,11 +415,14 @@ class EditableFormField extends DataObject {
 			_t('EditableFormField.RIGHTTITLE', 'Right Title'), 
 			$this->getSetting('RightTitle')
 		);
-			
-		return new FieldList(
-			$ec,
-			$right
-		);
+
+        $fields = FieldList::create(
+            $ec,
+            $right
+        );
+        $this->extend('updateFieldConfiguration', $fields);
+        
+        return $fields;
 	}
 	
 	/**
@@ -439,6 +442,8 @@ class EditableFormField extends DataObject {
 				$field->performReadonlyTransformation();
 			}
 		}
+
+        $this->extend('updateFieldValidationOptions', $fields);
 		
 		return $fields;
 	}
