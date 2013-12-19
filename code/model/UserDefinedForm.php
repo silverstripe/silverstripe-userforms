@@ -1044,6 +1044,9 @@ JS
 		Session::clear("FormInfo.{$form->FormName()}.data");
 		
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
+
+		// set a session variable from the security ID to stop people accessing the finished method directly
+		Session::set('FormProcessed',$data['SecurityID']);
 		
 		return $this->redirect($this->Link() . 'finished' . $referrer);
 	}
@@ -1055,6 +1058,23 @@ JS
 	 * @return ViewableData
 	 */
 	public function finished() {
+		$formProcessed = Session::get('FormProcessed');
+		if (!isset($formProcessed)) {
+				$referrer = (isset($data['Referrer'])) ? '?referrer=' .
+					urlencode($data['Referrer']) : "";
+				return $this->redirect($this->Link() . $referrer);
+		} else {
+			$securityID = Session::get('SecurityID');
+			// make sure the session matches the SecurityID and is not left over from another form
+			if ($formProcessed != $securityID) {
+				$referrer = (isset($data['Referrer'])) ? '?referrer=' .
+					urlencode($data['Referrer']) : "";
+				return $this->redirect($this->Link() . $referrer);
+			}
+		}
+		// remove the session variable as we do not want it to be re-used
+		Session::clear('FormProcessed');
+
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
 		return $this->customise(array(
