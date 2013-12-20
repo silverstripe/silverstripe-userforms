@@ -6,12 +6,12 @@
 
 class EditableFormFieldTest extends FunctionalTest {
 	
-	static $fixture_file = 'userforms/tests/UserDefinedFormTest.yml';
+	static $fixture_file = 'userforms/tests/EditableFormFieldTest.yml';
 
-    protected $extraDataObjects = array(
-        'ExtendedEditableFormField',
-        'EditableFormFieldExtension'
-    );
+	protected $extraDataObjects = array(
+		'ExtendedEditableFormField',
+		'EditableFormFieldExtension'
+	);
 	
 	function testFormFieldPermissions() {
 		$text = $this->objFromFixture('EditableTextField', 'basic-text');
