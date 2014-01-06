@@ -103,6 +103,14 @@ EditableRadioField:
         Options: =>EditableOption.option-5, =>EditableOption.option-6
 
 
+ExtendedEditableFormField:
+    extended-field:
+        Name: extended-field
+        Title: Extended Field
+        TestExtraField: Extra Field
+        TestValidationField: Extra Validation Field
+
+
 UserDefinedForm:
     basic-form-page:
         Title: User Defined Form

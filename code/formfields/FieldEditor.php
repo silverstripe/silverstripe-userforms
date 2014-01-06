@@ -8,37 +8,51 @@
 
 class FieldEditor extends FormField {
 
+	private static $url_handlers = array(
+		'$Action!/$ID' => '$Action'
+	);
+
 	private static $allowed_actions = array(
 		'addfield',
-		'addoptionfield'
+		'addoptionfield',
+		'handleField'
 	);
 	
 	/**
-	 * Field Editor Template
+	 * @param array $properties
 	 *
-	 * @return String
+	 * @return HTML
 	 */
 	public function FieldHolder($properties = array()) {
-		$this->setAttribute('data-add-url', '\''.Controller::join_links($this->Link('addfield')).'\'');
+		$add = Controller::join_links($this->Link('addfield'));
+
+		$this->setAttribute('data-add-url', '\''. $add.'\'');
+
 		return $this->renderWith("FieldEditor");
 	}
 	
 	/**
-	 * Returns whether a user can edit the form
+	 * Returns whether a user can edit the form.
+	 *
+	 * @param Member $member
 	 *
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
-		if($this->readonly) return false;
+		if($this->readonly) {
+			return false;
+		}
 		
 		return $this->form->getRecord()->canEdit();
 	}
 	
 	/**
-	 * Returns whether a user delete a field in the form. The {@link EditableFormField}s
-	 * check if they can delete themselves but this counts as an {@link self::canEdit()}
-	 * function rather than a delete
+	 * Returns whether a user delete a field in the form. The
+	 * {@link EditableFormField} instances check if they can delete themselves
+	 * but this counts as an {@link self::canEdit()} function rather than a
+	 * delete.
 	 *
+	 * @param Member $member
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
@@ -56,20 +70,24 @@ class FieldEditor extends FormField {
 		$clone = clone $this;
 		$clone->readonly = true;
 		$fields = $clone->Fields();
-		if($fields) foreach($fields as $field) {
-			$field->setReadonly();
+
+		if($fields) {
+			foreach($fields as $field) {
+				$field->setReadonly();
+			}
 		}
 		
-		return $clone->customise(array('Fields' => $fields));
+		return $clone->customise(array(
+			'Fields' => $fields
+		));
 	}
 	
 	/**
-	 * Return the fields for the user forms
+	 * Return the fields.
 	 * 
-	 * @return DataObjectSet
+	 * @return RelationList
 	 */
 	public function Fields() {
-		// Don't return any fields unless we actually have the dependent parameters set on the form field
 		if($this->form && $this->form->getRecord() && $this->name) {
 			$relationName = $this->name;
 			$fields = $this->form->getRecord()->getComponents($relationName);
@@ -88,10 +106,10 @@ class FieldEditor extends FormField {
 	}
 	
 	/**
-	 * Return a DataObjectSet of all the addable fields to populate 
-	 * the add field menu
+	 * Return a {@link ArrayList} of all the addable fields to populate the add
+	 * field menu.
 	 * 
-	 * @return DataObjectSet
+	 * @return ArrayList
 	 */
 	public function CreatableFields() {
 		$fields = ClassInfo::subclassesFor('EditableFormField');
@@ -99,13 +117,16 @@ class FieldEditor extends FormField {
 		if($fields) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
+
 			$output = new ArrayList();
+
 			foreach($fields as $field => $title) {
 				// get the nice title and strip out field
 				$niceTitle = _t(
 					$field.'.SINGULARNAME', 
 					$title
 				);
+
 				if($niceTitle) {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,
@@ -113,16 +134,18 @@ class FieldEditor extends FormField {
 					)));
 				}
 			}
+
 			return $output;
 		}
+
 		return false;
 	}
 
 	/**
-	 * Handles saving the page. Needs to keep an eye on fields
-	 * and options which have been removed / added 
+	 * Handles saving the page. Needs to keep an eye on fields and options which
+	 * have been removed / added
 	 *
-	 * @param DataObject Record to Save it In
+	 * @param DataObject $record
 	 */
 	public function saveInto(DataObjectInterface $record) {
 		$name = $this->name;
@@ -166,15 +189,15 @@ class FieldEditor extends FormField {
 		if($this->canEdit()) {
 			foreach($missingFields as $removedField) {
 				if(is_numeric($removedField->ID)) {
-						// check we can edit this
-						$removedField->delete();
-					}
+					// check we can edit this
+					$removedField->delete();
+				}
 			}
 		}
 	}
 	
 	/**
-	 * Add a field to the field editor. Called via a ajax get request from the userdefinedform javascript
+	 * Add a field to the field editor. Called via a ajax get.
 	 *
 	 * @return bool|html
 	 */
@@ -256,5 +279,47 @@ class FieldEditor extends FormField {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Pass sub {@link FormField} requests through the editor. For example,
+	 * option fields need to be able to call themselves.
+	 *
+	 * @param SS_HTTPRequest
+	 */
+	public function handleField(SS_HTTPRequest $request) {
+		if(!SecurityToken::inst()->checkRequest($this->request)) {
+			return $this->httpError(400);
+		}
+
+		$fields = $this->Fields();
+
+		// extract the ID and option field name
+		preg_match(
+			'/Fields\[(?P<ID>\d+)\]\[CustomSettings\]\[(?P<Option>\w+)\]/',
+			$request->param('ID'), $matches
+		);
+
+		if(isset($matches['ID']) && isset($matches['Option'])) {
+			foreach($fields as $field) {
+				$formField = $field->getFormField();
+
+				if($matches['ID'] == $field->ID) {
+					if($field->canEdit()) {
+						// find the option to handle
+						$options = $field->getFieldConfiguration();
+						$optionField = $options->fieldByName($request->param('ID'));
+
+						if($optionField) {
+							return $optionField->handleRequest($request, $optionField);
+						} else {
+							return $this->httpError(404);
+						}
+					}
+				}
+			}
+		}
+
+		return $this->httpError(403);
 	}
 }
