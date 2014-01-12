@@ -8,24 +8,9 @@
  */
 
 class EditableDropdown extends EditableMultipleOptionField {
-	
 	private static $singular_name = 'Dropdown Field';
 	
 	private static $plural_name = 'Dropdowns';
-	
-	/**
-	 * @return DropdownField
-	 */
-	public function getFormField() {	
-		$optionSet = $this->Options();
-		$options = array();
 
-		if($optionSet) {
-			foreach($optionSet as $option) {
-				$options[$option->Title] = $option->Title;
-			}
-		}
-		
-		return new DropdownField($this->Name, $this->Title, $options);	
-	}
+	private static $form_field_class = 'DropdownField';
 }

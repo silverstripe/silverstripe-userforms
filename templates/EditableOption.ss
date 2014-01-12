@@ -1,6 +1,10 @@
 <li>
 	<img class="handle" src="$ModulePath(framework)/images/drag.gif" alt="<% _t('EditableOption.DRAG', 'Drag to rearrange order of options') %>" />
-	<input type="text" name="{$FieldName}[Title]" value="$Title" />
+	<label class="option-label" for="$FieldName-Title"><% _t('EditableOption.Title', 'Label') %></label>
+	<input type="text" id="$FieldName-Title" name="{$FieldName}[Title]" value="$Title" />
+	<label class="option-label" for="$FieldName-Value"><% _t('EditableOption.Value', 'Value') %></label>
+	<input type="text" id="$FieldName-Value" name="{$FieldName}[Value]" value="$Value"
+	       placeholder="(<% _t('EditableOption.optional', 'optional') %>)" />
 	<input type="hidden" class="sortOptionHidden hidden" name="{$FieldName}[Sort]" value="$Sort" />
 	
 	<% if canEdit %>
