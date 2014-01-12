@@ -1171,6 +1171,15 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 					)->setHasEmptyDefault(true)->setEmptyString(" ")
 				);
 			}
+		} else {
+			$replyTo->push(ReadonlyField::create('SendEmailFromFieldID', '&nbsp;', _t(
+				'UserDefinedForm.ORSELECTAFIELDTOUSEASFROMSAVEHINT',
+				'Alternatively, you will be able to select a field as reply to address after saving'
+			)));
+			$emailTo->push(ReadonlyField::create('SendEmailToFieldID', '&nbsp;', _t(
+				'UserDefinedForm.ORSELECTAFIELDTOUSEASTOSAVEHINT',
+				'Alternatively, you will be able to select a field as the to address after saving'
+			)));
 		}
 		$this->extend('updateCMSFields', $fields);
 		return $fields;
