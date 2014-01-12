@@ -1120,14 +1120,14 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		
 		$fields = new FieldList(
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email subject')),
-			new LiteralField('EmailFromContent', '<p>'._t(
+			TextField::create('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send email from'))
+			->setRightTitle(sprintf('<p>%s</p>', _t(
 				'UserDefinedForm.EmailFromContent',
-				"The from address allows you to set who the email comes from. On most servers this ".
-				"will need to be set to an email address on the same domain name as your site. ".
-				"For example on yoursite.com the from address may need to be something@yoursite.com. ".
-				"You can however, set any email address you wish as the reply to address."
-			) . "</p>"),
-			new TextField('EmailFrom', _t('UserDefinedForm.FROMADDRESS','Send email from')),
+				'The from address allows you to set who the email comes from. On most servers this ' .
+				'will need to be set to an email address on the same domain name as your site. ' .
+				'For example on yoursite.com the from address may need to be something@yoursite.com. ' .
+				'You can however, set any email address you wish as the reply to address.'
+			))),
 			new TextField('EmailReplyTo', _t('UserDefinedForm.REPLYADDRESS', 'Email for reply to')),
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send email to')),
 			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
