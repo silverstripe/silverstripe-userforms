@@ -139,6 +139,40 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		return user_error('Please implement getFormField() on '. $this->class, E_USER_ERROR);
+		$optionSet = $this->Options();
+		$options = array();
+		$class = Config::inst()->get($this->class, 'form_field_class');
+
+		if($optionSet) {
+			foreach($optionSet as $option) {
+				$options["{$option->class}-{$option->ID}"] = $option->Title;
+			}
+		}
+
+		return $class::create($this->Name, $this->Title, $options);
+	}
+
+	/**
+	 * @param string $rawValue
+	 * @return string
+	 */
+	protected function processValueFromData($rawValue) {
+		list($class, $id) = explode('-', $rawValue);
+		$obj = $this->Options()->byID((int)$id);
+		if ($obj && $obj->exists()) {
+			return $obj->Value;
+		}
+		return '';
+	}
+
+	/**
+	 * @param array $data
+	 * @return string
+	 */
+	public function getValueFromData($data) {
+		if (isset($data[$this->Name])) {
+			return $this->processValueFromData($data[$this->Name]);
+		}
+		return '';
 	}
 }

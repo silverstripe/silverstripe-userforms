@@ -8,36 +8,22 @@
  */
 
 class EditableCheckboxGroupField extends EditableMultipleOptionField {
-
 	private static $singular_name = "Checkbox Group";
 	
 	private static $plural_name = "Checkbox Groups";
-	
-	public function getFormField() {
-		$optionSet = $this->Options();
-		$options = array();
 
-		$optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : array();
+	private static $form_field_class = 'CheckboxSetField';
 
-		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
-	}
-	
+
 	public function getValueFromData($data) {
-		$result = '';
-		$entries = (isset($data[$this->Name])) ? $data[$this->Name] : false;
-		
-		if($entries) {
-			if(!is_array($data[$this->Name])) {
-				$entries = array($data[$this->Name]);
+		$values = array();
+		if (isset($data[$this->Name])) {
+			$items = is_array($data[$this->Name]) ? $data[$this->Name] : array($data[$this->Name]);
+			foreach($items as $item) {
+				$values[] = $this->processValueFromData($item);
 			}
-			foreach($entries as $selected => $value) {
-				if(!$result) {
-					$result = $value;
-				} else {
-					$result .= ", " . $value;
-				}
-			}
+			$values = array_filter($values);
 		}
-		return $result;
+		return implode(', ', $values);
 	}
 }

@@ -73,7 +73,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		$popup->write();
 
 		$fields = $popup->getCMSFields();
-		$this->assertThat($fields->fieldByName('SendEmailToFieldID'), $this->isInstanceOf('DropdownField'));
+		$this->assertThat($fields->dataFieldByName('SendEmailToFieldID'), $this->isInstanceOf('DropdownField'));
 		
 		// if the front end has checkboxs or dropdown they can select from that can also be used to send things
 		$dropdown = $this->objFromFixture('EditableDropdown', 'department-dropdown');

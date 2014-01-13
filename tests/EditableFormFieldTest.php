@@ -198,14 +198,16 @@ class EditableFormFieldTest extends FunctionalTest {
 	
 	function testEditableDropdownField() {
 		$dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
-		
+
 		$field = $dropdown->getFormField();
 		
 		
 		$this->assertThat($field, $this->isInstanceOf('DropdownField'));
 		$values = $field->getSource();
-		
-		$this->assertEquals(array('Option 1' => 'Option 1', 'Option 2' => 'Option 2'), $values);
+		$this->assertEquals(array(
+			'EditableOption-' . $this->idFromFixture('EditableOption', 'option-1') => 'Option 1',
+			'EditableOption-' . $this->idFromFixture('EditableOption', 'option-2') => 'Option 2',
+		), $values);
 	}
 	
 	function testEditableRadioField() {
@@ -216,7 +218,10 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertThat($field, $this->isInstanceOf('OptionsetField'));
 		$values = $field->getSource();
 		
-		$this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);
+		$this->assertEquals(array(
+			'EditableOption-' . $this->idFromFixture('EditableOption', 'option-5') => 'Option 5',
+			'EditableOption-' . $this->idFromFixture('EditableOption', 'option-6') => 'Option 6'
+		), $values);
 	}
 	
 	function testTitleField() {

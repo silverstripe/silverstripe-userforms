@@ -131,6 +131,12 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 				.FieldEditor .FieldList .EditableFormField .extraOptions a {
 					background: none;
 				}
+				.FieldEditor .FieldList .EditableFormField .extraOptions label.option-label {
+                    float: left;
+                    line-height: 23px;
+                    height: 23px;
+                    padding: 0 3px 0 5px;
+                }
 				.FieldEditor .FieldList .EditableFormField .extraOptions input {
 					font-size: 11px;
 					padding: 2px;

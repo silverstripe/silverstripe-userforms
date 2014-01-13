@@ -14,6 +14,7 @@ class EditableOption extends DataObject {
 	private static $db = array(
 		"Name" => "Varchar(255)",
 		"Title" => "Varchar(255)",
+		"Value" => "Varchar(255)",
 		"Default" => "Boolean",
 		"Sort" => "Int"
 	);
@@ -26,20 +27,18 @@ class EditableOption extends DataObject {
 		"Versioned('Stage', 'Live')"
 	);
 
+	public function getValue() {
+		if ($this->getField('Value')) {
+			return $this->getField('Value');
+		}
+		return $this->Title;
+	}
+
 	/**
 	 * Template for the editing view of this option field
 	 */
 	public function EditSegment() {
 		return $this->renderWith('EditableOption');
-	}
-
-	/**
-	 * The Title Field for this object
-	 * 
-	 * @return FormField
-	 */
-	public function TitleField() {
-		return new TextField("Fields[{$this->ParentID}][{$this->ID}][Title]", null, $this->Title );
 	}
 
 	/**
@@ -58,6 +57,7 @@ class EditableOption extends DataObject {
 	 */
 	public function populateFromPostData($data) {
 		$this->Title = (isset($data['Title'])) ? $data['Title'] : "";
+		$this->Value = (isset($data['Value'])) ? $data['Value'] : "";
 		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
 		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : 0;
 		$this->write();
