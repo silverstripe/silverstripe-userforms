@@ -102,6 +102,8 @@ en:
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Text length'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:
     ADD: Add
     SELECTAFIELD: 'Select a Field'
@@ -125,6 +127,7 @@ en:
     SINGULARNAME: 'Submitted Form Field'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
+    CLEARBUTTON: Clear
     CONFIGURATION: Configuration
     DESCRIPTION: 'Adds a customizable form.'
     EMAILADDRESS: Email
@@ -150,9 +153,8 @@ en:
     SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Submissions
     SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Text on submit button:'
-    CLEARBUTTON: Clear
     TEXTONCLEAR: 'Text on clear button:'
+    TEXTONSUBMIT: 'Text on submit button:'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
