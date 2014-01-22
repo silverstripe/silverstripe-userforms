@@ -19,6 +19,9 @@ nl_NL:
   EditableCheckboxGroupField:
     PLURALNAME: 'Selectievakje Groepen'
     SINGULARNAME: 'Selectievakje Groep'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Land selectielijsten'
+    SINGULARNAME: 'Land selectielijst'
   EditableDateField:
     PLURALNAME: 'Datumvelden'
     SINGULARNAME: 'Datumveld'
@@ -33,15 +36,23 @@ nl_NL:
     SINGULARNAME: 'Bestandsupload veld'
   EditableFormField:
     ADD: Toevoegen
+    ADDLabel: 'Optie toevoegen'
     ADDRULE: 'Regel toevoegen'
     BLANK: Blanco
+    CHECKEDBYDEFAULT: 'Standaard aangevinkt'
+    CUSTOMERROR: 'Aangepaste foutbericht'
     CUSTOMRULES: 'Aanpasbare regels'
+    DEFAULTTOTODAY: 'Standaard ingesteld op vandaag?'
     DELETE: Verwijder
     DRAG: 'Versleep om de rangschikking van de velden te wijzigen'
+    ENTERQUESTION: 'Voer vraag in'
+    EXTRACLASSA: 'Extra Styling/Layout'
+    EXTRACLASSB: 'Extra css Class - meerdere classen aangeven met een spatie'
     FIELDCONFIGURATION: 'Veld opties'
     FIELDONDEFAULT: 'Toon dit veld?'
     GREATERTHAN: 'Waarde groter dan'
     GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
+    GROUP: Groep
     HIDE: Verberg
     HIDETHISFIELD: 'Verberg dit veld'
     IS: Is
@@ -51,9 +62,13 @@ nl_NL:
     NOTBLANK: 'Niet blanco'
     NOTVALUE: 'Geen waarde'
     OPTIONS: Opties
+    PLURALNAME: 'Bewerkbare formuliervelden'
+    REQUIRED: 'Is dit veld verplicht?'
+    RIGHTTITLE: 'Titel rechts'
     SHOW: Toon
     SHOWOPTIONS: 'Toon opties'
     SHOWTHISFIELD: 'Toon dit veld'
+    SINGULARNAME: 'Bewerkbaar formulierveld'
     VALIDATION: Validatie
     VALUE: Waarde
     WHEN: Wanneer
@@ -75,6 +90,8 @@ nl_NL:
     DELETE: 'Verwijder optie'
     DRAG: 'Sleep om volgorde van de opties te herschikken'
     LOCKED: 'Deze velden zijn niet aanpasbaar'
+    PLURALNAME: 'Bewerkbare opties'
+    SINGULARNAME: 'Bewerkbare optie'
   EditableRadioField:
     PLURALNAME: 'Keuzerondje velden'
     SINGULARNAME: 'Keuzerondje veld'
@@ -83,11 +100,16 @@ nl_NL:
     PLURALNAME: 'Tekst velden'
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   FieldEditor:
     ADD: Toevoegen
     SELECTAFIELD: 'Kies een veld'
   Form:
     FIELDISREQUIRED: '%s is verplicht'
+  GridField:
+    Filter: Filter
+    ResetFilter: Herstel
   SiteTree:
     PLURALNAME: Paginas
     SINGULARNAME: Pagina
@@ -103,6 +125,7 @@ nl_NL:
     SINGULARNAME: 'Ingediende formveld'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
+    CLEARBUTTON: Herstellen
     CONFIGURATION: Instellingen
     DESCRIPTION: 'Formulier pagina'
     EMAILADDRESS: Email
@@ -128,7 +151,11 @@ nl_NL:
     SINGULARNAME: 'Formulier pagina'
     SUBMISSIONS: Inbox
     SUBMITBUTTON: Verzenden
+    TEXTONCLEAR: 'Tekst op herstel button:'
     TEXTONSUBMIT: 'Tekst op Verzend-button'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Email Ontvangers'
     SINGULARNAME: 'Email Ontvanger'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Inzendingen filteren'
+    WHEREVALUEIS: 'waar waarde is...'
