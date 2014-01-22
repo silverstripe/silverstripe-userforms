@@ -1,229 +1,98 @@
 es_ES:
-    CustomRule:
-        BLANK: "Blanco"
-        DELETE: "Borrar"
-        GREATERTHAN: "Valor mayor que"
-        GREATERTHANEQUAL: "Valor mayor o igual"
-        HIDETHISFIELD: "Esconder este campo"
-        IS: "Es"
-        LESSTHAN: "Valor menor que"
-        LESSTHANEQUAL: "Valor menos o igual"
-        NOTBLANK: "No en blanco"
-        NOTVALUE: "No valor"
-        SHOWTHISFIELD: "Mostrar este campo"
-        VALUE: "Valor"
-        WHEN: "Cuando"
-    EditableCheckbox:
-        PLURALNAME: "Checkboxes"
-        SINGULARNAME: "Checkbox"
-        ANY: "Cualquiera"
-        NOTSELECTED: "No selecionado"
-        SELECTED: "Seleccionado"
-    EditableCheckboxGroupField:
-        PLURALNAME: "Checkbox Groups"
-        SINGULARNAME: "Checkbox Group"
-    EditableCountryDropdownField:
-        PLURALNAME: "Selector de países"
-        SINGULARNAME: "Selector de país"
-    EditableDateField:
-        PLURALNAME: "Fechas"
-        SINGULARNAME: "Campo de fechas"
-    EditableDropdown:
-        PLURALNAME: "Selectores"
-        SINGULARNAME: "Campo de selección"
-    EditableEmailField:
-        PLURALNAME: "Correos electrónicos"
-        SINGULARNAME: "Campo de correo electrónico"
-        SENDCOPY: "Enviar una copia de este envío a esta dirección"
-    EditableFileField:
-        PLURALNAME: "File Upload Fields"
-        SINGULARNAME: "Subir archivo"
-    EditableFormField:
-        CHECKEDBYDEFAULT: "¿Checkeado por defecto?"
-        CUSTOMERROR: "Error personalizado"
-        DEFAULTTOTODAY: "Por defecto seteado al día de hoy?"
-        ENTERQUESTION: "Introducir Pregunta"
-        GROUP: "Grupo"
-        NO: "No"
-        PLURALNAME: "Campos de formulrio editables"
-        REQUIRED: "Obligatorio?"
-        RIGHTTITLE: "Título a la derecha"
-        SINGULARNAME: "Campo editable"
-        YES: "Si"
-    EditableFormField:
-        ADD: "Agregar"
-        ADDRULE: "Agregar regla"
-        BLANK: "blanco"
-        CUSTOMRULES: "Reglas especiales"
-        DELETE: "Borrar este campo"
-        DRAG: "Arrastre para reajustar el orden de los campos"
-        FIELDCONFIGURATION: "Configuración del campo"
-        FIELDONDEFAULT: "Campo por defecto"
-        GREATERTHAN: "Valor más grande que"
-        GREATERTHANEQUAL: "Valor más grande o igual que"
-        HIDE: "Esconder"
-        HIDETHISFIELD: "Esconder este campo"
-        IS: "Es"
-        LESSTHAN: "Valor menor que"
-        LESSTHANEQUAL: "Valor menor o igual que"
-        LOCKED: "Estos campos no pueden ser modificados"
-        NOTBLANK: "No puede ser en blanco"
-        NOTVALUE: "Sin valor"
-        OPTIONS: "Opciones"
-        SHOW: "Mostrar"
-        SHOWOPTIONS: "Mostrar opciones"
-        SHOWTHISFIELD: "Mostrar este campo"
-        VALIDATION: "Validación"
-        VALUE: "Valor"
-        WHEN: "Cuando"
-        MORE: "Más opciones"
-        REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableFormHeading:
-        LEVEL: "Seleccionar el nivel de título"
-        PLURALNAME: "Títulos"
-        SINGULARNAME: "Título"
-    EditableLiteralField:
-        HIDEFROMREPORT: "¿Ocultar de los informes?"
-        PLURALNAME: "Bloques HTML"
-        SINGULARNAME: "Bloque HTML"
-    EditableMemberListField:
-        PLURALNAME: "Listado de miembros"
-        SINGULARNAME: "Listado de miembro"
-    EditableMultipleOptionField:
-        PLURALNAME: "Campos de opción múltiple"
-        SINGULARNAME: "Campo de opción múltiple"
-    EditableOption:
-        PLURALNAME: "Opciones editables"
-        SINGULARNAME: "Opción editable"
-    EditableOption:
-        DELETE: "Remover esta opción"
-        DRAG: "Arrastrar para reorganizar el orden de las opciones"
-        LOCKED: "Estos campos no pueden ser modificados"
-    EditableRadioField:
-        PLURALNAME: "Campos de radio"
-        SINGULARNAME: "Campo radio"
-    EditableTextField:
-        NUMBERROWS: "Número de filas"
-        PLURALNAME: "Text Fields"
-        SINGULARNAME: "Text Field"
-        TEXTLENGTH: "Longitud del texto"
-        DEFAULTTEXT: "Texto por defecto"
-        TEXTBOXLENGTH: "Longitud de la caja de texto"
-    FieldEditor:
-        ADD: "Añadir"
-        SELECTAFIELD: "Selecciona un campo"
-        DATE: "Fecha"
-        FILE: "Archivo"
-        MEMBER: "Lista de usuarios"
-        RADIOSET: "Radio"
-        TEXT: "Texto"
-        TEXTTITLE: "Añadir campo de texto"
-    Form:
-        FIELDISREQUIRED: "%s es requerido"
-    SubmittedFileField:
-        DOWNLOADFILE: "Descargar archivo"
-        PLURALNAME: "Archivos enviados"
-        SINGULARNAME: "Archivo enviado"
-    SubmittedForm:
-        PLURALNAME: "Formularios enviados"
-        SINGULARNAME: "Formulario enviado"
-    SubmittedFormField:
-        PLURALNAME: "Campos enviados en formulario"
-        SINGULARNAME: "Campo enviado en formulario"
-    SubmittedFormReportField:
-        DELETEALLSUBMISSIONS: "Eliminar todos los envíos"
-        DELETESUBMISSION: "Eliminar envío"
-        EXPORTSUBMISSIONS: "Exportar envíos a CSV"
-        NOSUBMISSIONS: "Sin envíos"
-        SUBMITTED: "Enviado en"
-    UserDefinedForm:
-        AEMAILRECIPIENT: "Un destinatario de correo"
-        EMAILADDRESS: "Email"
-        EMAILBODY: "Cuerpo"
-        EMAILFROM: "De"
-        EMAILRECIPIENTS: "Destinatarios"
-        EMAILSUBJECT: "Asunto del correo"
-        FORM: "Formulario"
-        FROMADDRESS: "Enviar este mail desde"
-        HIDEFORMDATA: "Esconder los datos enviados en el mail"
-        ONCOMPLETE: "Completado"
-        ONCOMPLETELABEL: "Mostrar al terminar"
-        OPTIONS: "Opciones"
-        ORSELECTAFIELDTOUSEASFROM: ".. o seleccione un campo del formulario para utilizar como dirección del remitente"
-        ORSELECTAFIELDTOUSEASTO: ".. o seleccione un campo que se utiliza como la dirección"
-        PLURALNAME: "User Defined Forms"
-        RECEIVED: "Propuestas recibidas"
-        SAVESUBMISSIONS: "Deshabilitar el guardado de emails en el servidor"
-        SENDEMAILTO: "Enviar mail a"
-        SENDPLAIN: "Enviar el correo como texto plano"
-        SHOWCLEARFORM: "Mostrar el botón borrar"
-        SINGULARNAME: "Formulario definido por el usuario"
-        SUBMISSIONS: "Propuestas"
-        SUBMITBUTTON: "Enviar"
-        TEXTONSUBMIT: "Texto en el botón aceptar/submit:"
-        NORESULTS: "No se han encontrado coincidencias"
-        SUBMIT: "Aceptar"
-    UserDefinedForm_EmailRecipient:
-        PLURALNAME: "Destinatarios definidos por el usuario"
-        SINGULARNAME: "Destinatario definido por el usuario"
-    UserFormsMigrationTask:
-        DEFAULTSUBMISSIONTITLE: "Envío de datos"
-    EditableCheckbox:
-        DELETE: "Borrar este campo"
-        LOCKED: "Este campo no puede ser modificado"
-        MORE: "Más opciones"
-    EditableCheckboxGroupField:
-        ADD: "Añadir opción nueva"
-        DELETE: "Borrar este campo"
-        LOCKED: "Estos campos no pueden ser modificados"
-        MORE: "Más opciones"
-        REQUIRED: "Este campo es requerido para este formulario y no puede ser borrado"
-    EditableCheckboxOption:
-        DELETE: "Eliminar esta opción"
-        LOCKED: "Estos campos no pueden ser modificados"
-    EditableDateField:
-        DATE: "Campo Fecha"
-        DELETE: "Borrar este campo"
-        MORE: "Más opciones"
-    EditableDropdown:
-        ADD: "Añadir nueva opción"
-        DELETE: "Borrar este campo"
-        LOCKED: "Estos campos no pueden ser modificados"
-        MORE: "Más opciones"
-        REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableDropdownOption:
-        DELETE: "Quitar esta opción"
-        LOCKED: "Estos campos no pueden ser modificados"
-    EditableEmailField:
-        DELETE: "Borrar este campo"
-        MORE: "Más opciones"
-        REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableFileField:
-        DELETE: "Borrar este campo"
-        MORE: "Más opciones"
-    EditableFormFieldOption:
-        DELETE: "Quitar esta opción"
-        LOCKED: "Estos campos no pueden ser modificados"
-    EditableFormHeading:
-        DELETE: "Borrar este campo"
-        MORE: "Más opciones"
-    EditableRadioField:
-        ADD: "Añadir nueva opción"
-        DELETE: "Borrar este campo"
-        LOCKED: "Estos campos no pueden ser modificados"
-        MORE: "Más opciones"
-        REQUIRED: "Este campo es necesario para este formulario y no puede ser borrado"
-    EditableRadioOption:
-        DELETE: "Quitar esta opción"
-        LOCKED: "Estos campos no pueden ser modificados"
-    EditableTextField:
-        DELETE: "Borrar este campo"
-        MORE: "Más opciones"
-        TEXTFIELD: "Campo de Texto"
-    FieldEditor:
-        EMAILONSUBMIT: "Enviar formulario por email :"
-        EMAILSUBMISSION: "Enviar por email a:"
-    SubmittedFormEmail:
-        SUBMITTED: "Los siguientes datos fueron enviados a su sitio web:"
-    UserDefinedForm_SubmittedFormEmail:
-        EMAILSUBJECT: "Propuesta de formulario"
+  CustomRule:
+    BLANK: Blanco
+    DELETE: Borrar
+    GREATERTHAN: 'Valor mayor que'
+    GREATERTHANEQUAL: 'Valor mayor o igual'
+    HIDETHISFIELD: 'Esconder este campo'
+    IS: Es
+    LESSTHAN: 'Valor menor que'
+    LESSTHANEQUAL: 'Valor menos o igual'
+    NOTBLANK: 'No en blanco'
+    NOTVALUE: 'No valor'
+    SHOWTHISFIELD: 'Mostrar este campo'
+    VALUE: Valor
+    WHEN: Cuando
+  EditableCountryDropdownField:
+    PLURALNAME: 'Selector de países'
+    SINGULARNAME: 'Selector de país'
+  EditableEmailField:
+    PLURALNAME: 'Correos electrónicos'
+    SINGULARNAME: 'Campo de correo electrónico'
+  EditableFormField:
+    ADD: Agregar
+    ADDRULE: 'Agregar regla'
+    BLANK: blanco
+    CUSTOMRULES: 'Reglas especiales'
+    DELETE: Borrar este campo
+    DRAG: 'Arrastre para reajustar el orden de los campos'
+    FIELDCONFIGURATION: 'Configuración del campo'
+    FIELDONDEFAULT: 'Campo por defecto'
+    GREATERTHAN: 'Valor más grande que'
+    GREATERTHANEQUAL: 'Valor más grande o igual que'
+    HIDE: Esconder
+    HIDETHISFIELD: 'Esconder este campo'
+    IS: Es
+    LESSTHAN: 'Valor menor que'
+    LESSTHANEQUAL: 'Valor menor o igual que'
+    LOCKED: 'Estos campos no pueden ser modificados'
+    NOTBLANK: 'No puede ser en blanco'
+    NOTVALUE: 'Sin valor'
+    OPTIONS: Opciones
+    REQUIRED: 'Este campo es necesario para este formulario y no puede ser borrado'
+    SHOW: Mostrar
+    SHOWOPTIONS: 'Mostrar opciones'
+    SHOWTHISFIELD: 'Mostrar este campo'
+    VALIDATION: Validación
+    VALUE: Valor
+    WHEN: Cuando
+  EditableLiteralField:
+    HIDEFROMREPORT: '¿Ocultar de los informes?'
+    PLURALNAME: 'Bloques HTML'
+    SINGULARNAME: 'Bloque HTML'
+  EditableMemberListField:
+    PLURALNAME: 'Listado de miembros'
+    SINGULARNAME: 'Listado de miembro'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Campos de opción múltiple'
+    SINGULARNAME: 'Campo de opción múltiple'
+  EditableOption:
+    DELETE: 'Remover esta opción'
+    DRAG: 'Arrastrar para reorganizar el orden de las opciones'
+    LOCKED: 'Estos campos no pueden ser modificados'
+  Form:
+    FIELDISREQUIRED: '%s es requerido'
+  SubmittedFileField:
+    DOWNLOADFILE: 'Descargar archivo'
+    PLURALNAME: 'Archivos enviados'
+    SINGULARNAME: 'Archivo enviado'
+  SubmittedForm:
+    PLURALNAME: 'Formularios enviados'
+    SINGULARNAME: 'Formulario enviado'
+  SubmittedFormField:
+    PLURALNAME: 'Campos enviados en formulario'
+    SINGULARNAME: 'Campo enviado en formulario'
+  UserDefinedForm:
+    EMAILADDRESS: Email
+    EMAILBODY: Cuerpo
+    EMAILFROM: De
+    EMAILRECIPIENTS: 'Destinatarios'
+    EMAILSUBJECT: 'Asunto del correo'
+    FORM: Formulario
+    FROMADDRESS: 'Enviar este mail desde'
+    HIDEFORMDATA: 'Esconder los datos enviados en el mail'
+    ONCOMPLETELABEL: 'Mostrar al terminar'
+    ORSELECTAFIELDTOUSEASFROM: '.. o seleccione un campo del formulario para utilizar como dirección del remitente'
+    ORSELECTAFIELDTOUSEASTO: '.. o seleccione un campo que se utiliza como la dirección'
+    PLURALNAME: 'User Defined Forms'
+    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
+    SENDEMAILTO: 'Enviar mail a'
+    SENDPLAIN: 'Enviar el correo como texto plano'
+    SHOWCLEARFORM: 'Mostrar el botón borrar'
+    SINGULARNAME: 'Formulario definido por el usuario'
+    SUBMISSIONS: Propuestas
+    SUBMITBUTTON: Enviar
+    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Destinatarios definidos por el usuario'
+    SINGULARNAME: 'Destinatario definido por el usuario'

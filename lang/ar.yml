@@ -16,6 +16,9 @@ ar:
   EditableCheckbox:
     PLURALNAME: مربعات لوضع إشارة
     SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
+    SINGULARNAME: 'مجموعة مربعات لوضع إشارة'
   EditableCountryDropdownField:
     PLURALNAME: 'القائمة المنسدلة للروابط البلاد'
     SINGULARNAME: 'القائمة المنسدلة للروابط البلاد'
@@ -25,31 +28,30 @@ ar:
   EditableDropdown:
     PLURALNAME: القائمات المنسدلة للروابط
     SINGULARNAME: 'حقل القائمة المنسدلة'
+  EditableEmailField:
+    PLURALNAME: 'حقول البريد الإلكتروني'
+    SINGULARNAME: 'خانة البريد الإلكتروني'
   EditableFileField:
     PLURALNAME: 'حقول تحميل الملف'
     SINGULARNAME: 'حقل تحميل الملف'
   EditableFormField:
-    CHECKEDBYDEFAULT: 'افتراضيا مُعَلّم'
-    CUSTOMERROR: 'نص خطأ مخصص'
-    DEFAULTTOTODAY: 'الفرضي لهذا اليوم؟'
-    ENTERQUESTION: 'إدخال السؤال'
-    EXTRACLASSA: 'تصميم/تخطيط إضافي'
-    EXTRACLASSB: 'فئة إضافية من صفحات الأنماط التعاقبية CSS - افصل بين المتعددة بفضاء'
-    GROUP: مجموعة
-    PLURALNAME: 'حقول استمارة قابلة للتحرير'
-    REQUIRED: 'هل هذا الحقل ضروري؟'
-    RIGHTTITLE: 'عنوان اليمين'
-    SINGULARNAME: 'حقل استمارة قابل للتحرير'
     ADD: إضافة
     ADDRULE: 'إضافة قاعدة'
     BLANK: فراغ
+    CHECKEDBYDEFAULT: 'افتراضيا مُعَلّم'
+    CUSTOMERROR: 'نص خطأ مخصص'
     CUSTOMRULES: 'القواعد المخصصة'
+    DEFAULTTOTODAY: 'الفرضي لهذا اليوم؟'
     DELETE: احذف
     DRAG: 'اسحب لإعادة ترتيب الحقول'
+    ENTERQUESTION: 'إدخال السؤال'
+    EXTRACLASSA: 'تصميم/تخطيط إضافي'
+    EXTRACLASSB: 'فئة إضافية من صفحات الأنماط التعاقبية CSS - افصل بين المتعددة بفضاء'
     FIELDCONFIGURATION: 'مواصفات الحقل'
     FIELDONDEFAULT: 'القيمة المبدئية للحقل'
     GREATERTHAN: 'القيمة أكبر من'
     GREATERTHANEQUAL: 'القيمة أكبر من أو تساوي'
+    GROUP: مجموعة
     HIDE: إخفاء
     HIDETHISFIELD: 'إخفاء هذا الحقل'
     IS: إنه
@@ -59,70 +61,65 @@ ar:
     NOTBLANK: 'غير فراغ'
     NOTVALUE: 'ليست قيمة'
     OPTIONS: الخيارات
+    PLURALNAME: 'حقول استمارة قابلة للتحرير'
+    REQUIRED: 'هل هذا الحقل ضروري؟'
+    RIGHTTITLE: 'عنوان اليمين'
     SHOW: إظهار
     SHOWOPTIONS: 'إظهار الخيارات'
     SHOWTHISFIELD: 'أعرض هذه الحقل'
+    SINGULARNAME: 'حقل استمارة قابل للتحرير'
     VALIDATION: المصادقة
     VALUE: القيمة
     WHEN: عندما
+  EditableFormHeading:
+    LEVEL: 'حدد مستوى العنوان'
+    PLURALNAME: عناوين
+    SINGULARNAME: عنوان
+  EditableLiteralField:
+    HIDEFROMREPORT: 'إخقاء تقارير النموذج؟'
+    PLURALNAME: 'بلوكات HTML'
+    SINGULARNAME: 'بلوك HTML'
   EditableMemberListField:
     PLURALNAME: 'حقول قائمة الأعضاء'
     SINGULARNAME: 'حقل قائمة الأعضاء'
+  EditableMultipleOptionField:
+    PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
+    SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
   EditableOption:
-    PLURALNAME: 'الخيارات القابلة للتحرير'
-    SINGULARNAME: 'خيار قابل للتحرير'
     DELETE: 'احذف هذا الخيار'
     DRAG: 'اسحب لإعادة ترتيب الخيارات'
     LOCKED: 'لا يمكن تعديل هذه الحقول'
+    PLURALNAME: 'الخيارات القابلة للتحرير'
+    SINGULARNAME: 'خيار قابل للتحرير'
+  EditableRadioField:
+    PLURALNAME: 'حقول حلقية radio'
+    SINGULARNAME: 'حقل حلقي Radio'
   EditableTextField:
     NUMBERROWS: 'عدد الصفوف'
     PLURALNAME: 'حقول نصية'
     SINGULARNAME: 'حقل نصي'
     TEXTLENGTH: 'طول النص'
-  SubmittedFileField:
-    DOWNLOADFILE: 'تحميل الملف'
-    PLURALNAME: 'حقول الملف التي قدمت'
-    SINGULARNAME: 'حقل الملف الذي قدّم'
-  SubmittedFormField:
-    PLURALNAME: 'حقول الاستمارة التي تمّ تقديمها'
-    SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'تصفية التقديمات..'
-    WHEREVALUEIS: 'حيث القيمة هي..'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
-    SINGULARNAME: 'مجموعة مربعات لوضع إشارة'
-  GridField:
-    Filter: تصفية
-    ResetFilter: إعادة تعيين
-  SubmittedForm:
-    PLURALNAME: 'الاستمارات التي قدّمت'
-    SINGULARNAME: 'الاستمارة التي قدّمت'
   FieldEditor:
     ADD: أضف
     SELECTAFIELD: 'اختر حقل'
   Form:
     FIELDISREQUIRED: '%s ضروري'
+  GridField:
+    Filter: تصفية
+    ResetFilter: إعادة تعيين
   SiteTree:
     PLURALNAME: صفحات
     SINGULARNAME: صفحة
-  EditableFormHeading:
-    LEVEL: 'حدد مستوى العنوان'
-    PLURALNAME: عناوين
-    SINGULARNAME: عنوان
-  EditableRadioField:
-    PLURALNAME: 'حقول حلقية radio'
-    SINGULARNAME: 'حقل حلقي Radio'
-  EditableEmailField:
-    PLURALNAME: 'حقول البريد الإلكتروني'
-    SINGULARNAME: 'خانة البريد الإلكتروني'
-  EditableLiteralField:
-    HIDEFROMREPORT: 'إخقاء تقارير النموذج؟'
-    PLURALNAME: 'بلوكات HTML'
-    SINGULARNAME: 'بلوك HTML'
-  EditableMultipleOptionField:
-    PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
-    SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
+  SubmittedFileField:
+    DOWNLOADFILE: 'تحميل الملف'
+    PLURALNAME: 'حقول الملف التي قدمت'
+    SINGULARNAME: 'حقل الملف الذي قدّم'
+  SubmittedForm:
+    PLURALNAME: 'الاستمارات التي قدّمت'
+    SINGULARNAME: 'الاستمارة التي قدّمت'
+  SubmittedFormField:
+    PLURALNAME: 'حقول الاستمارة التي تمّ تقديمها'
+    SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
     CONFIGURATION: مواصفات
@@ -154,3 +151,6 @@ ar:
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
     SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'تصفية التقديمات..'
+    WHEREVALUEIS: 'حيث القيمة هي..'

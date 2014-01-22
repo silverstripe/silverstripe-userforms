@@ -16,6 +16,9 @@ mi:
   EditableCheckbox:
     PLURALNAME: Ngā Pouakataki
     SINGULARNAME: 'Āpure Pouakataki'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Ngā Rōpū Pouakataki'
+    SINGULARNAME: 'Rōpū Pouakataki'
   EditableCountryDropdownField:
     PLURALNAME: 'Ngā Takaiho Whenua'
     SINGULARNAME: 'Takaiho Whenua'
@@ -25,31 +28,30 @@ mi:
   EditableDropdown:
     PLURALNAME: Ngā Takaiho
     SINGULARNAME: 'Āpure Takaiho'
+  EditableEmailField:
+    PLURALNAME: 'Ngā Āpure Īmēra'
+    SINGULARNAME: 'Āpure Īmēra'
   EditableFileField:
     PLURALNAME: 'Ngā Āpure Tukuatu Kōnae'
     SINGULARNAME: 'Āpure Tukuatu Kōnae'
   EditableFormField:
-    CHECKEDBYDEFAULT: 'Kua tākina aunoatia?'
-    CUSTOMERROR: 'Karere Hapa Ritenga Ake'
-    DEFAULTTOTODAY: 'Me Tēnei Rā te Taunoa?'
-    ENTERQUESTION: 'Tāuru Pātai'
-    EXTRACLASSA: 'Kāhua Tāpiri/Tahora'
-    EXTRACLASSB: 'Tauaha css Anō - whakawehea ngā taurea ki te mokowā'
-    GROUP: Rōpū
-    PLURALNAME: 'Ngā Āpure Puka Ka Taea Te Whakatika'
-    REQUIRED: 'He Whakaritenga tēnei āpure'
-    RIGHTTITLE: 'Taitara Tika'
-    SINGULARNAME: 'Āpure Puka Ka Taea Te Whakatika'
     ADD: Tāpiri
     ADDRULE: 'Tāpiri Ture'
     BLANK: Pātea
+    CHECKEDBYDEFAULT: 'Kua tākina aunoatia?'
+    CUSTOMERROR: 'Karere Hapa Ritenga Ake'
     CUSTOMRULES: 'Ngā Ture Ritenga Ake'
+    DEFAULTTOTODAY: 'Me Tēnei Rā te Taunoa?'
     DELETE: Muku
     DRAG: 'Tōia hei hurinaha i te raupapa āpure'
+    ENTERQUESTION: 'Tāuru Pātai'
+    EXTRACLASSA: 'Kāhua Tāpiri/Tahora'
+    EXTRACLASSB: 'Tauaha css Anō - whakawehea ngā taurea ki te mokowā'
     FIELDCONFIGURATION: 'Whirihoranga Āpure'
     FIELDONDEFAULT: 'Āpure Taunoa'
     GREATERTHAN: 'Uara Nui Ake I'
     GREATERTHANEQUAL: 'Uara Nui Ake Ōrite Rānei '
+    GROUP: Rōpū
     HIDE: Huna
     HIDETHISFIELD: 'Hunaia Tēnei Āpure'
     IS: Ko te
@@ -59,70 +61,65 @@ mi:
     NOTBLANK: 'Pātea Kore'
     NOTVALUE: 'Uara Kore'
     OPTIONS: Ngā Kōwhiringa
+    PLURALNAME: 'Ngā Āpure Puka Ka Taea Te Whakatika'
+    REQUIRED: 'He Whakaritenga tēnei āpure'
+    RIGHTTITLE: 'Taitara Tika'
     SHOW: Whakaatu
     SHOWOPTIONS: 'Whakaatu Kōwhiringa'
     SHOWTHISFIELD: 'Whakaaturia Tēnei Āpure'
+    SINGULARNAME: 'Āpure Puka Ka Taea Te Whakatika'
     VALIDATION: Manatokonga
     VALUE: Uara
     WHEN: Ina
+  EditableFormHeading:
+    LEVEL: 'Kōwhiri Taumata Pane'
+    PLURALNAME: Ngā Pane
+    SINGULARNAME: Pane
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
+    PLURALNAME: 'Ngā Poraka HTML'
+    SINGULARNAME: 'Poraka HTML'
   EditableMemberListField:
     PLURALNAME: 'Ngā Āpure Rārangi Mema'
     SINGULARNAME: 'Āpure Rārangi Mema'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Ngā Āpure Kōwhiringa Maha Whakatika'
+    SINGULARNAME: 'Āpure Kōwhiringa Maha Whakatika'
   EditableOption:
-    PLURALNAME: 'Ngā Kōwhiringa Whakatika'
-    SINGULARNAME: 'Kōwhiringa Whakatika'
     DELETE: 'Tangohia tēnei kōwhiringa'
     DRAG: 'Tōia hei hurinaha i te raupapa kōwhiringa'
     LOCKED: 'Kāore e taea te whakakē ēnei āpure'
+    PLURALNAME: 'Ngā Kōwhiringa Whakatika'
+    SINGULARNAME: 'Kōwhiringa Whakatika'
+  EditableRadioField:
+    PLURALNAME: 'Ngā āpure irirangi'
+    SINGULARNAME: 'Āpure irirangi'
   EditableTextField:
     NUMBERROWS: 'Maha kapa'
     PLURALNAME: 'Ngā Āpure Tuhinga'
     SINGULARNAME: 'Āpure Tuhinga'
     TEXTLENGTH: 'Roa tuhinga'
-  SubmittedFileField:
-    DOWNLOADFILE: 'Tikiake Kōnae'
-    PLURALNAME: 'Ngā Āpure Kōnae Kua Tukuna'
-    SINGULARNAME: 'Āpure Kōnae Kua Tukuna'
-  SubmittedFormField:
-    PLURALNAME: 'Ngā Āpure Puka Kua Tukuna'
-    SINGULARNAME: 'Āpure Puka Kua Tukuna'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
-    WHEREVALUEIS: 'ko te uara ko...'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Ngā Rōpū Pouakataki'
-    SINGULARNAME: 'Rōpū Pouakataki'
-  GridField:
-    Filter: Tātari
-    ResetFilter: Tautuhi Anō
-  SubmittedForm:
-    PLURALNAME: 'Ngā Puka Kua Tukuna'
-    SINGULARNAME: 'Puka Kua Tukuna'
   FieldEditor:
     ADD: Tāpiri
     SELECTAFIELD: 'Tīpakohia tētahi Āpure'
   Form:
     FIELDISREQUIRED: 'Kei te hiahiatia te %s'
+  GridField:
+    Filter: Tātari
+    ResetFilter: Tautuhi Anō
   SiteTree:
     PLURALNAME: Ngā Whārangi
     SINGULARNAME: Whārangi
-  EditableFormHeading:
-    LEVEL: 'Kōwhiri Taumata Pane'
-    PLURALNAME: Ngā Pane
-    SINGULARNAME: Pane
-  EditableRadioField:
-    PLURALNAME: 'Ngā āpure irirangi'
-    SINGULARNAME: 'Āpure irirangi'
-  EditableEmailField:
-    PLURALNAME: 'Ngā Āpure Īmēra'
-    SINGULARNAME: 'Āpure Īmēra'
-  EditableLiteralField:
-    HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
-    PLURALNAME: 'Ngā Poraka HTML'
-    SINGULARNAME: 'Poraka HTML'
-  EditableMultipleOptionField:
-    PLURALNAME: 'Ngā Āpure Kōwhiringa Maha Whakatika'
-    SINGULARNAME: 'Āpure Kōwhiringa Maha Whakatika'
+  SubmittedFileField:
+    DOWNLOADFILE: 'Tikiake Kōnae'
+    PLURALNAME: 'Ngā Āpure Kōnae Kua Tukuna'
+    SINGULARNAME: 'Āpure Kōnae Kua Tukuna'
+  SubmittedForm:
+    PLURALNAME: 'Ngā Puka Kua Tukuna'
+    SINGULARNAME: 'Puka Kua Tukuna'
+  SubmittedFormField:
+    PLURALNAME: 'Ngā Āpure Puka Kua Tukuna'
+    SINGULARNAME: 'Āpure Puka Kua Tukuna'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
     CONFIGURATION: Whirihoranga
@@ -154,3 +151,6 @@ mi:
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Ngā Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
     SINGULARNAME: 'Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
+    WHEREVALUEIS: 'ko te uara ko...'

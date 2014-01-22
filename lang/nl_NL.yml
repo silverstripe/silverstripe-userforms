@@ -1,7 +1,7 @@
 nl_NL:
   CustomRule:
-    BLANK: "Blanco"
-    DELETE: "Verwijder"
+    BLANK: Blanco
+    DELETE: Verwijder
     GREATERTHAN: 'Waarde groter dan'
     GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
     HIDETHISFIELD: 'Verberg dit veld'
@@ -23,7 +23,7 @@ nl_NL:
     PLURALNAME: 'Datumvelden'
     SINGULARNAME: 'Datumveld'
   EditableDropdown:
-    PLURALNAME: 'Selectielijst veld'
+    PLURALNAME: Selectielijst veld
     SINGULARNAME: 'Selectielijst velden'
   EditableEmailField:
     PLURALNAME: 'Email veld'
@@ -31,20 +31,6 @@ nl_NL:
   EditableFileField:
     PLURALNAME: 'Bestandsupload velden'
     SINGULARNAME: 'Bestandsupload veld'
-  EditableFormField:
-    CHECKEDBYDEFAULT: 'Standaard aangevinkt'
-    CUSTOMERROR: 'Aangepaste foutbericht'
-    DEFAULTTOTODAY: 'Standaard ingesteld op vandaag?'
-    ENTERQUESTION: 'Voer vraag in'
-    EXTRACLASSA: 'Extra Styling/Layout'
-    EXTRACLASSB: 'Extra css Class - meerdere classen aangeven met een spatie'
-    GROUP: Groep
-    NO: Nee
-    PLURALNAME: 'Bewerkbare formuliervelden'
-    REQUIRED: 'Is dit veld verplicht?'
-    RIGHTTITLE: 'Titel rechts'
-    SINGULARNAME: 'Bewerkbaar formulierveld'
-    YES: Ja
   EditableFormField:
     ADD: Toevoegen
     ADDRULE: 'Regel toevoegen'
@@ -64,11 +50,11 @@ nl_NL:
     LOCKED: 'Deze velden zijn niet aanpasbaar'
     NOTBLANK: 'Niet blanco'
     NOTVALUE: 'Geen waarde'
-    OPTIONS: 'Opties'
+    OPTIONS: Opties
     SHOW: Toon
     SHOWOPTIONS: 'Toon opties'
     SHOWTHISFIELD: 'Toon dit veld'
-    VALIDATION: 'Validatie'
+    VALIDATION: Validatie
     VALUE: Waarde
     WHEN: Wanneer
   EditableFormHeading:
@@ -85,9 +71,6 @@ nl_NL:
   EditableMultipleOptionField:
     PLURALNAME: 'Bewerkbare meerdere optie velden'
     SINGULARNAME: 'Bewerkbare meerdere optie veld'
-  EditableOption:
-    PLURALNAME: 'Bewerkbare opties'
-    SINGULARNAME: 'Bewerkbare optie'
   EditableOption:
     DELETE: 'Verwijder optie'
     DRAG: 'Sleep om volgorde van de opties te herschikken'
@@ -118,44 +101,34 @@ nl_NL:
   SubmittedFormField:
     PLURALNAME: 'Ingediende formvelden'
     SINGULARNAME: 'Ingediende formveld'
-  SubmittedFormReportField:
-    DELETEALLSUBMISSIONS: 'Verwijder alle inzendingen'
-    DELETESUBMISSION: 'Verwijder inzending'
-    EXPORTSUBMISSIONS: 'Exporteer inzendingen naar CSV'
-    NOSUBMISSIONS: 'Geen inzendingen'
-    PAGES: "Pagina's"
-    SUBMITTED: 'Ingediend op'
   UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
+    CONFIGURATION: Instellingen
     DESCRIPTION: 'Formulier pagina'
     EMAILADDRESS: Email
     EMAILBODY: Tekst
     EMAILFROM: Van
+    EMAILRECIPIENTS: 'Email ontvangers'
     EMAILSUBJECT: 'Onderwerp'
+    ENABLELIVEVALIDATION: 'Zet real-time validatie aan'
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
     FORM: Formulier
-    FORMOPTIONS: 'Instellingen'
-    CONFIGURATION: 'Instellingen'
-    SUBMISSIONS: 'Inbox'
     FROMADDRESS: 'Email verzonden vanaf'
-    HIDEFORMDATA: 'Verberg formulier gegevens in email?'
     HIDEFIELDLABELS: 'Verberg veld labels'
-    ENABLELIVEVALIDATION: 'Zet real-time validatie aan'
+    HIDEFORMDATA: 'Verberg formulier gegevens in email?'
     ONCOMPLETELABEL: 'Bericht na succesvol verzonden'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'
     ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
-    PLURALNAME: "Formulier pagina's"
-    RECEIVED: 'Ontvangen'
+    PLURALNAME: 'Formulier pagina''s'
     REPLYADDRESS: 'E-mail voor antwoord op'
     SAVESUBMISSIONS: 'Schakel opslaan van inzendingen uit'
     SENDEMAILTO: 'Stuur email naar'
     SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
     SHOWCLEARFORM: 'Toon Herstel-button'
     SINGULARNAME: 'Formulier pagina'
-    SUBMITBUTTON: 'Verzenden'
+    SUBMISSIONS: Inbox
+    SUBMITBUTTON: Verzenden
     TEXTONSUBMIT: 'Tekst op Verzend-button'
-    ADDRECIPIENT: 'Email ontvanger toevoegen'
-    ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
-    EMAILRECIPIENTS: 'Email ontvangers'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Email Ontvangers'
     SINGULARNAME: 'Email Ontvanger'

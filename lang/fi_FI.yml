@@ -1,196 +1,157 @@
 fi_FI:
-    CustomRule:
-        BLANK: "Tyhjä"
-        DELETE: "Poista"
-        GREATERTHAN: "Arvo on suurempi kuin"
-        GREATERTHANEQUAL: "Arvo on suurempi tai yhtä suuri kuin"
-        HIDETHISFIELD: "Piilota tämä kenttä"
-        IS: "On"
-        LESSTHAN: "Arvo on pienempi kuin"
-        LESSTHANEQUAL: "Arvo on pienempi tai yhtä suuri kuin"
-        NOTBLANK: "Ei ole tyhjä"
-        NOTVALUE: "Ei ole sama kuin"
-        SHOWTHISFIELD: "Näytä tämä kenttä"
-        VALUE: "On sama kuin"
-        WHEN: "Kun"
-    EditableCheckbox:
-        PLURALNAME: "Valintaruudut"
-        SINGULARNAME: "Valintaruutu"
-        ANY: "Mikä tahansa"
-        NOTSELECTED: "Ei valittu"
-        SELECTED: "Valittu"
-    EditableCheckboxGroupField:
-        PLURALNAME: "Valintaruuturyhmät"
-        SINGULARNAME: "Valintaruuturyhmä"
-    EditableCountryDropdownField:
-        PLURALNAME: "Maavalikot"
-        SINGULARNAME: "Maavalikko"
-    EditableDateField:
-        PLURALNAME: "Päivämääräkentät"
-        SINGULARNAME: "Päivämääräkenttä"
-    EditableDropdown:
-        PLURALNAME: "Pudotusvalikot"
-        SINGULARNAME: "Pudotusvalikko"
-    EditableEmailField:
-        PLURALNAME: "Sähköpostikentät"
-        SINGULARNAME: "Sähköpostikenttä"
-        SENDCOPY: "Lähetä kopio lomakkeesta tähän osoitteeseen"
-    EditableFileField:
-        PLURALNAME: "Tiedostonlähettämiskentät"
-        SINGULARNAME: "Tiedostonlähettämiskenttä"
-    EditableFormField:
-        CHECKEDBYDEFAULT: "Valittu oletuksena?"
-        CUSTOMERROR: "Mukautettu virheilmoitus"
-        DEFAULTTOTODAY: "Oletuksena nykyinen päivä?"
-        ENTERQUESTION: "Syötä kysymys"
-        GROUP: "Ryhmä"
-        NO: "Ei"
-        PLURALNAME: "Muokattavat lomakekentät"
-        REQUIRED: "Kenttä on pakollinen"
-        RIGHTTITLE: "Otsikko oikealla"
-        SINGULARNAME: "Muokattava lomakekenttä"
-        YES: "Kyllä"
-    EditableFormField:
-        ADD: "Lisää"
-        ADDRULE: "Lisää sääntö"
-        BLANK: "Tyhjä"
-        CUSTOMRULES: "Mukautetut säännöt"
-        DELETE: "Poista"
-        DRAG: "Raahaa muuttaaksesi kenttien järjestystä"
-        FIELDCONFIGURATION: "Kentän asetukset"
-        FIELDONDEFAULT: "kenttä oletuksena"
-        GREATERTHAN: "Arvo on suurempi kuin"
-        GREATERTHANEQUAL: "Arvo on suurempi tai yhtä suuri kuin"
-        HIDE: "Piilota"
-        HIDETHISFIELD: "Piilota tämä kenttä"
-        IS: "On"
-        LESSTHAN: "Arvo on pienempi kuin"
-        LESSTHANEQUAL: "Arvo on pienempi tai yhtä suuri kuin"
-        LOCKED: "Näitä kenttiä ei voida muokata"
-        NOTBLANK: "Ei ole tyhjä"
-        NOTVALUE: "Ei ole sama kuin"
-        OPTIONS: "Valinnat"
-        SHOW: "Näytä"
-        SHOWOPTIONS: "Näytä asetukset"
-        SHOWTHISFIELD: "Näytä tämä kenttä"
-        VALIDATION: "Vahvistaminen"
-        VALUE: "On sama kuin"
-        WHEN: "Kun"
-    EditableFormHeading:
-        LEVEL: "Valitse otsikkotaso"
-        PLURALNAME: "Otsikot"
-        SINGULARNAME: "Otsikko"
-    EditableLiteralField:
-        HIDEFROMREPORT: "Piilota raporteista?"
-        PLURALNAME: "HTML-alueet"
-        SINGULARNAME: "HTML-alue"
-    EditableMemberListField:
-        PLURALNAME: "Jäsenlistakentät"
-        SINGULARNAME: "Jäsenlistakenttä"
-    EditableMultipleOptionField:
-        PLURALNAME: "Muokattavat monivalintakentät"
-        SINGULARNAME: "Muokattava monivalintakenttä"
-    EditableOption:
-        PLURALNAME: "Muokattavat valinnat"
-        SINGULARNAME: "Muokattava valinta"
-    EditableOption:
-        DELETE: "Poista tämä valinta"
-        DRAG: "Raahaa muuttaaksesi valintojen järjestystä"
-        LOCKED: "Näitä kenttiä ei voi muokata"
-    EditableRadioField:
-        PLURALNAME: "Radiopainikkeet"
-        SINGULARNAME: "Radiopainike"
-    EditableTextField:
-        NUMBERROWS: "Rivien määrä"
-        PLURALNAME: "Tekstikentät"
-        SINGULARNAME: "Tekstikenttä"
-        TEXTLENGTH: "Tekstin pituus"
-        DEFAULTTEXT: "Oletusteksti"
-        TEXTBOXLENGTH: "Tekstikentän pituus"
-    FieldEditor:
-        ADD: "Lisää"
-        SELECTAFIELD: "Valitse kenttä"
-    Form:
-        FIELDISREQUIRED: "%s vaaditaan"
-    SubmittedFileField:
-        DOWNLOADFILE: "Lataa tiedosto"
-        PLURALNAME: "Lähetetyt tiedostokentät"
-        SINGULARNAME: "Lähetetty tiedostokenttä"
-    SubmittedForm:
-        PLURALNAME: "Lähetetyt lomakkeet"
-        SINGULARNAME: "Lähetetty lomake"
-    SubmittedFormField:
-        PLURALNAME: "Lähetetyt lomakekentät"
-        SINGULARNAME: "Lähetetty lomakekenttä"
-    SubmittedFormReportField:
-        DELETEALLSUBMISSIONS: "Poista kaikki lähetykset"
-        DELETESUBMISSION: "Poista lähetys"
-        EXPORTSUBMISSIONS: "Vie lähetykset CSV-tiedostona"
-        NOSUBMISSIONS: "Ei lähetyksiä"
-        SUBMITTED: "Lähetetty"
-    UserDefinedForm:
-        AEMAILRECIPIENT: "Sähköpostin vastaanottaja"
-        EMAILADDRESS: "Sähköpostiosoite"
-        EMAILBODY: "Viesti"
-        EMAILFROM: "Lähettäjä"
-        EMAILRECIPIENTS: "Vastaanottajat"
-        EMAILSUBJECT: "Otsikko"
-        FORM: "Lomake"
-        FROMADDRESS: "Lähetä sähköposti osoitteesta"
-        HIDEFORMDATA: "Piilota lomakedata sähköpostista"
-        ONCOMPLETE: "Valmistuessa"
-        ONCOMPLETELABEL: "Näytä valmistuessa"
-        OPTIONS: "Valinnat"
-        ORSELECTAFIELDTOUSEASFROM: ".. tai valitse kenttä, jota käytetään Reply To -osoitteena"
-        ORSELECTAFIELDTOUSEASTO: ".. tai valitse kenttä, jota käytetään vastaanottajan osoitteena"
-        PLURALNAME: "Lomakkeet"
-        RECEIVED: "Vastaanotetut lähetykset"
-        SAVESUBMISSIONS: "Älä tallenna lähetyksiä palvelimelle (ne vain lähetetään sähköpostilla)"
-        SENDEMAILTO: "Lähetä sähköposti osoitteeseen"
-        SENDPLAIN: "Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)"
-        SHOWCLEARFORM: "Näytä lomakkeentyhjennysnappi"
-        SINGULARNAME: "Lomake"
-        SUBMISSIONS: "Lähetykset"
-        SUBMITBUTTON: "Lähetä"
-        TEXTONSUBMIT: "Lähetä-painikkeen teksti: "
-        NORESULTS: "Vastaavia tuloksia ei löytynyt."
-        SUBMIT: "Lähetä"
-    UserDefinedForm_EmailRecipient:
-        PLURALNAME: "Lomakkeen vastaanottosähköpostit"
-        SINGULARNAME: "Lomakkeen vastaanottosähköposti"
-    UserFormsMigrationTask:
-        DEFAULTSUBMISSIONTITLE: "Lähetystiedot"
-    EditableCheckbox:
-        DELETE: "Poista tämä kenttä"
-        DRAG: "Vedä järjestääksesi kentät uudelleen"
-        LOCKED: "Tätä kenttää ei voi muokata"
-        MORE: "Lisää valintoja"
-    EditableCheckboxGroupField:
-        ADD: "Lisää uusi valinta"
-        DELETE: "Poista tämä kenttä"
-        DRAG: "Vedä järjestääksesi kentät uudelleen"
-        LOCKED: "Näitä kenttiä ei voi muokata"
-        MORE: "Lisää valintoja"
-        REQUIRED: "Tätä kenttää tarvitaan tässä lomakkeessa eikä sitä voi poistaa"
-    EditableCheckboxOption:
-        DELETE: "Poista tämä valinta"
-        DRAG: "Vedä järjestääksesi valinnat uudelleen"
-        LOCKED: "Näitä kenttiä ei voi muokata"
-    EditableDateField:
-        DATE: "Päivämääräkenttä"
-        DELETE: "Poista tämä kenttä"
-        DRAG: "Vedä järjestääksesi kentät uudelleen"
-        MORE: "Lisää valintoja"
-    EditableDropdown:
-        DELETE: "Poista tämä kenttä"
-        DRAG: "Vedä järjestääksesi kentät uudelleen"
-        DROPDOWN: "Pudotusvalikko"
-        LOCKED: "Näitä kenttiä ei voi muokata"
-        MORE: "Lisää valintoja"
-        REQUIRED: "Tätä kenttää tarvitaan tässä lomakkeessa eikä sitä voi poistaa"
-    FieldEditor:
-        EMAILSUBMISSION: "Lähetä lähetys kohteeseen: "
-    SubmittedFormEmail:
-        SUBMITTED: "Seuraava tiedot lähetettiin verkkosivustollesi:"
-    UserDefinedForm_SubmittedFormEmail:
-        EMAILSUBJECT: "Lomakkeen lähetys"
+  CustomRule:
+    BLANK: Tyhjä
+    DELETE: Poista
+    GREATERTHAN: 'Arvo on suurempi kuin'
+    GREATERTHANEQUAL: 'Arvo on suurempi tai yhtä suuri kuin'
+    HIDETHISFIELD: 'Piilota tämä kenttä'
+    IS: 'On'
+    LESSTHAN: 'Arvo on pienempi kuin'
+    LESSTHANEQUAL: 'Arvo on pienempi tai yhtä suuri kuin'
+    NOTBLANK: 'Ei ole tyhjä'
+    NOTVALUE: 'Ei ole sama kuin'
+    SHOWTHISFIELD: 'Näytä tämä kenttä'
+    VALUE: On sama kuin
+    WHEN: Kun
+  EditableCheckbox:
+    PLURALNAME: Valintaruudut
+    SINGULARNAME: 'Valintaruutukenttä'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Valintaruutu-ryhmät'
+    SINGULARNAME: 'Valintaruutu-ryhmä'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Maavalikot'
+    SINGULARNAME: 'Maavalikko'
+  EditableDateField:
+    PLURALNAME: 'Päivämääräkentät'
+    SINGULARNAME: 'Päivämääräkenttä'
+  EditableDropdown:
+    PLURALNAME: Pudotusvalikot
+    SINGULARNAME: 'Pudotusvalikko'
+  EditableEmailField:
+    PLURALNAME: 'Sähköpostikentät'
+    SINGULARNAME: 'Sähköpostikenttä'
+  EditableFileField:
+    PLURALNAME: 'Tiedostonlähettämiskentät'
+    SINGULARNAME: 'Tiedostonlähettämiskenttä'
+  EditableFormField:
+    ADD: Lisää
+    ADDLabel: 'Lisää valinta'
+    ADDRULE: 'Lisää sääntö'
+    BLANK: Tyhjä
+    CHECKEDBYDEFAULT: 'Valittu oletuksena?'
+    CUSTOMERROR: 'Oma virheviesti'
+    CUSTOMRULES: 'Mukautetut säännöt'
+    DEFAULTTOTODAY: 'Oletus ''Tänään''?'
+    DELETE: Poista
+    DRAG: 'Raahaa muuttaaksesi kenttien järjestystä'
+    ENTERQUESTION: 'Lisää kysymys'
+    EXTRACLASSA: 'Ylimääräinen stailaus/leiska'
+    EXTRACLASSB: 'Ylimääräinen CSS-luokka - erota useampi välilyönnillä'
+    FIELDCONFIGURATION: 'Kentän asetukset'
+    FIELDONDEFAULT: 'kenttä oletuksena'
+    GREATERTHAN: 'Arvo on suurempi kuin'
+    GREATERTHANEQUAL: 'Arvo on suurempi tai yhtä suuri kuin'
+    GROUP: Ryhmä
+    HIDE: Piilota
+    HIDETHISFIELD: 'Piilota tämä kenttä'
+    IS: 'On'
+    LESSTHAN: 'Arvo on pienempi kuin'
+    LESSTHANEQUAL: 'Arvo on pienempi tai yhtä suuri kuin'
+    LOCKED: 'Näitä kenttiä ei voida muokata'
+    NOTBLANK: 'Ei ole tyhjä'
+    NOTVALUE: 'Ei ole sama kuin'
+    OPTIONS: Valinnat
+    PLURALNAME: 'Muokattavat lomakekentät'
+    REQUIRED: 'Onko tämä kenttä pakollinen?'
+    RIGHTTITLE: 'Oikea otsikko'
+    SHOW: Näytä
+    SHOWOPTIONS: 'Näytä asetukset'
+    SHOWTHISFIELD: 'Näytä tämä kenttä'
+    SINGULARNAME: 'Muokattava lomakekenttä'
+    VALIDATION: Vahvistaminen
+    VALUE: On sama kuin
+    WHEN: Kun
+  EditableFormHeading:
+    LEVEL: 'Valitse otsikkotaso'
+    PLURALNAME: Otsikot
+    SINGULARNAME: Otsikko
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Piilota raporteista?'
+    PLURALNAME: 'HTML-alueet'
+    SINGULARNAME: 'HTML-alue'
+  EditableMemberListField:
+    PLURALNAME: 'Jäsenlistakentät'
+    SINGULARNAME: 'Jäsenlistakenttä'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Muokattavat monivalintakentät'
+    SINGULARNAME: 'Muokattava monivalintakenttä'
+  EditableOption:
+    DELETE: 'Poista tämä valinta'
+    DRAG: 'Raahaa muuttaaksesi valintojen järjestystä'
+    LOCKED: 'Näitä kenttiä ei voi muokata'
+    PLURALNAME: 'Muokattavat vaihtoehdot'
+    SINGULARNAME: 'Muokattava vaihtoehto'
+  EditableRadioField:
+    PLURALNAME: 'Radiopainikkeet'
+    SINGULARNAME: 'Radiopainike'
+  EditableTextField:
+    NUMBERROWS: 'Rivien määrä'
+    PLURALNAME: 'Tekstikentät'
+    SINGULARNAME: 'Tekstikenttä'
+    TEXTLENGTH: 'Tekstin pituus'
+  FieldEditor:
+    ADD: Lisää
+    SELECTAFIELD: 'Valitse kenttä'
+  Form:
+    FIELDISREQUIRED: '%s vaaditaan'
+  GridField:
+    Filter: Suodin
+    ResetFilter: Nollaa
+  SiteTree:
+    PLURALNAME: Sivut
+    SINGULARNAME: Sivu
+  SubmittedFileField:
+    DOWNLOADFILE: 'Lataa tiedosto'
+    PLURALNAME: 'Lähetetyt tiedostokentät'
+    SINGULARNAME: 'Lähetetty tiedostokenttä'
+  SubmittedForm:
+    PLURALNAME: 'Lähetetyt lomakkeet'
+    SINGULARNAME: 'Lähetetty lomake'
+  SubmittedFormField:
+    PLURALNAME: 'Lähetetyt lomakekentät'
+    SINGULARNAME: 'Lähetetty lomakekenttä'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CONFIGURATION: Asetukset
+    DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
+    EMAILADDRESS: Sähköpostiosoite
+    EMAILBODY: Viesti
+    EMAILFROM: Lähettäjä
+    EMAILRECIPIENTS: 'Vastaanottajat'
+    EMAILSUBJECT: 'Otsikko'
+    ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
+    EmailFromContent: 'Lähettäjän sähköpostiosoite kenttään voit laittaa osoitteen, josta lomake näkyy lähetetyn. Jotkut palvelimet vaativat, että osoitteen on oltava samalla domain päätteellä kuin sivustosi. Esimerkiksi omasivusto.fi domainilla osoitteen tulisi olla osoitteesi@omasivusto.fi. Voit käyttää kuitenkin haluamaasi osoitetta, jos sille ei ole teknistä estettä.'
+    FORM: Lomake
+    FROMADDRESS: 'Lähetä sähköposti osoitteesta'
+    HIDEFIELDLABELS: 'Piilota kenttien nimikkeet'
+    HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
+    ONCOMPLETELABEL: 'Näytä valmistuessa'
+    ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
+    ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
+    PLURALNAME: 'Lomakkeet'
+    REPLYADDRESS: 'Vastaussähköposti'
+    SAVESUBMISSIONS: 'Älä tallenna lähetyksiä palvelimelle (ne vain lähetetään sähköpostilla)'
+    SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
+    SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
+    SHOWCLEARFORM: 'Näytä lomakkeentyhjennysnappi'
+    SINGULARNAME: 'Lomake'
+    SUBMISSIONS: Lähetykset
+    SUBMITBUTTON: Lähetä
+    TEXTONSUBMIT: 'Lähetä-painikkeen teksti: '
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Lomakkeen vastaanottosähköpostit'
+    SINGULARNAME: 'Lomakkeen vastaanottosähköposti'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Suodata lomakkeella lähetettyjä...'
+    WHEREVALUEIS: 'jonka arvo on...'

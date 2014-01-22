@@ -16,6 +16,9 @@ zh:
   EditableCheckbox:
     PLURALNAME: 复选框
     SINGULARNAME: '复选框字段'
+  EditableCheckboxGroupField:
+    PLURALNAME: '复选框组'
+    SINGULARNAME: '复选框组'
   EditableCountryDropdownField:
     PLURALNAME: '国家下拉列表'
     SINGULARNAME: '国家下拉列表'
@@ -25,31 +28,30 @@ zh:
   EditableDropdown:
     PLURALNAME: 下拉列表
     SINGULARNAME: '下拉列表字段'
+  EditableEmailField:
+    PLURALNAME: '电子邮件字段'
+    SINGULARNAME: '电子邮件字段'
   EditableFileField:
     PLURALNAME: '文件上传字段'
     SINGULARNAME: '文件上传字段'
   EditableFormField:
-    CHECKEDBYDEFAULT: '默认选中？'
-    CUSTOMERROR: '自定义错误消息'
-    DEFAULTTOTODAY: '默认为今天？'
-    ENTERQUESTION: '键入问题'
-    EXTRACLASSA: '额外的造型/布局'
-    EXTRACLASSB: '额外的 css 类别 - 用空格来分开多项'
-    GROUP: 小组
-    PLURALNAME: '可编辑的表格字段'
-    REQUIRED: '这个字段是必须的吗？'
-    RIGHTTITLE: '右标题'
-    SINGULARNAME: '可编辑的表格字段'
     ADD: 添加
     ADDRULE: '添加规则'
     BLANK: 空白
+    CHECKEDBYDEFAULT: '默认选中？'
+    CUSTOMERROR: '自定义错误消息'
     CUSTOMRULES: '自定义规则'
+    DEFAULTTOTODAY: '默认为今天？'
     DELETE: 删除
     DRAG: '拖放来对字段进行重新排序'
+    ENTERQUESTION: '键入问题'
+    EXTRACLASSA: '额外的造型/布局'
+    EXTRACLASSB: '额外的 css 类别 - 用空格来分开多项'
     FIELDCONFIGURATION: '字段配置'
     FIELDONDEFAULT: '默认字段'
     GREATERTHAN: '值大于'
     GREATERTHANEQUAL: '值大于或等于'
+    GROUP: 小组
     HIDE: 隐藏
     HIDETHISFIELD: '隐藏这个字段'
     IS: 是
@@ -59,70 +61,65 @@ zh:
     NOTBLANK: '不是空白'
     NOTVALUE: '没有值'
     OPTIONS: 选项
+    PLURALNAME: '可编辑的表格字段'
+    REQUIRED: '这个字段是必须的吗？'
+    RIGHTTITLE: '右标题'
     SHOW: 显示
     SHOWOPTIONS: '显示选项'
     SHOWTHISFIELD: '显示该字段'
+    SINGULARNAME: '可编辑的表格字段'
     VALIDATION: 验证
     VALUE: 值
     WHEN: 当
+  EditableFormHeading:
+    LEVEL: '选择标题级别'
+    PLURALNAME: 标题
+    SINGULARNAME: 标题
+  EditableLiteralField:
+    HIDEFROMREPORT: '从报告中隐藏？'
+    PLURALNAME: 'HTML 模块'
+    SINGULARNAME: 'HTML 模块'
   EditableMemberListField:
     PLURALNAME: '成员列表字段'
     SINGULARNAME: '成员列表字段'
+  EditableMultipleOptionField:
+    PLURALNAME: '可编辑的多个选项字段'
+    SINGULARNAME: '可编辑的多个选项字段'
   EditableOption:
-    PLURALNAME: '可编辑的选项'
-    SINGULARNAME: '可编辑的选项'
     DELETE: '删除这个选项'
     DRAG: '拖放来对选项进行重新排序'
     LOCKED: '这些字段不能被修改'
+    PLURALNAME: '可编辑的选项'
+    SINGULARNAME: '可编辑的选项'
+  EditableRadioField:
+    PLURALNAME: '广播字段'
+    SINGULARNAME: '广播字段'
   EditableTextField:
     NUMBERROWS: '行数'
     PLURALNAME: '文本字段'
     SINGULARNAME: '文本字段'
     TEXTLENGTH: '文本长度'
-  SubmittedFileField:
-    DOWNLOADFILE: '下载文件'
-    PLURALNAME: '已提交的文件字段'
-    SINGULARNAME: '已提交的文件字段'
-  SubmittedFormField:
-    PLURALNAME: '已提交的表格字段'
-    SINGULARNAME: '已提交的表格字段'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: '筛选器提交……'
-    WHEREVALUEIS: '当值为……'
-  EditableCheckboxGroupField:
-    PLURALNAME: '复选框组'
-    SINGULARNAME: '复选框组'
-  GridField:
-    Filter: 筛选器
-    ResetFilter: 重设
-  SubmittedForm:
-    PLURALNAME: '已提交的表格'
-    SINGULARNAME: '已提交的表格'
   FieldEditor:
     ADD: 添加
     SELECTAFIELD: '选择一个字段'
   Form:
     FIELDISREQUIRED: '%s 是必须的'
+  GridField:
+    Filter: 筛选器
+    ResetFilter: 重设
   SiteTree:
     PLURALNAME: 页面
     SINGULARNAME: 页面
-  EditableFormHeading:
-    LEVEL: '选择标题级别'
-    PLURALNAME: 标题
-    SINGULARNAME: 标题
-  EditableRadioField:
-    PLURALNAME: '广播字段'
-    SINGULARNAME: '广播字段'
-  EditableEmailField:
-    PLURALNAME: '电子邮件字段'
-    SINGULARNAME: '电子邮件字段'
-  EditableLiteralField:
-    HIDEFROMREPORT: '从报告中隐藏？'
-    PLURALNAME: 'HTML 模块'
-    SINGULARNAME: 'HTML 模块'
-  EditableMultipleOptionField:
-    PLURALNAME: '可编辑的多个选项字段'
-    SINGULARNAME: '可编辑的多个选项字段'
+  SubmittedFileField:
+    DOWNLOADFILE: '下载文件'
+    PLURALNAME: '已提交的文件字段'
+    SINGULARNAME: '已提交的文件字段'
+  SubmittedForm:
+    PLURALNAME: '已提交的表格'
+    SINGULARNAME: '已提交的表格'
+  SubmittedFormField:
+    PLURALNAME: '已提交的表格字段'
+    SINGULARNAME: '已提交的表格字段'
   UserDefinedForm:
     ADDEMAILRECIPIENT: '添加电子邮件收件人'
     CONFIGURATION: 配置
@@ -154,3 +151,6 @@ zh:
   UserDefinedForm_EmailRecipient:
     PLURALNAME: '用户定义的表格电子邮件接受者'
     SINGULARNAME: '用户定义的表格电子邮件接受者'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: '筛选器提交……'
+    WHEREVALUEIS: '当值为……'
