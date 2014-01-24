@@ -1,0 +1,157 @@
+nb_NO:
+  CustomRule:
+    BLANK: Blank
+    DELETE: Slett
+    GREATERTHAN: 'Verdi større enn'
+    GREATERTHANEQUAL: 'Verdi større enn eller lik'
+    HIDETHISFIELD: 'Skjul dette feltet'
+    IS: Er
+    LESSTHAN: 'Verdi lavere enn'
+    LESSTHANEQUAL: 'Verdi lavere enn eller lik'
+    NOTBLANK: 'Ikke tom'
+    NOTVALUE: 'Ikke verdi'
+    SHOWTHISFIELD: 'Vis dette feltet'
+    VALUE: Verdi
+    WHEN: Når
+  EditableCheckbox:
+    PLURALNAME: Avkrysningsbokser
+    SINGULARNAME: 'Avkrysningsboks felt'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Avkrysningsboks grupper'
+    SINGULARNAME: 'Avkrysningsboks gruppe'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Land nedfellsmenyer'
+    SINGULARNAME: 'Land nedfellsmeny'
+  EditableDateField:
+    PLURALNAME: 'Datofelter'
+    SINGULARNAME: 'Datofelt'
+  EditableDropdown:
+    PLURALNAME: Nedfellsmeny
+    SINGULARNAME: 'Nedfellsmeny felt'
+  EditableEmailField:
+    PLURALNAME: 'Epost felt'
+    SINGULARNAME: 'Epost felt'
+  EditableFileField:
+    PLURALNAME: 'Filopplastingsfelter'
+    SINGULARNAME: 'Filopplastingsfelt'
+  EditableFormField:
+    ADD: Legg til
+    ADDLabel: 'Legt til alternativ'
+    ADDRULE: 'Legg til regel'
+    BLANK: Blank
+    CHECKEDBYDEFAULT: 'Valgt som standard?'
+    CUSTOMERROR: 'Tilpasset error melding'
+    CUSTOMRULES: 'Tilpasset regler'
+    DEFAULTTOTODAY: 'Standard for i dag?'
+    DELETE: Slett
+    DRAG: 'Dra for å omorganiser feltene'
+    ENTERQUESTION: 'Skriv inn spørsmål'
+    EXTRACLASSA: 'Ekstra stil/utsende?'
+    EXTRACLASSB: 'Ekstra CSS klasse - separate multipler med et mellomrom'
+    FIELDCONFIGURATION: 'Felt konfigurering'
+    FIELDONDEFAULT: 'Valgt som standard?'
+    GREATERTHAN: 'Verdi større enn'
+    GREATERTHANEQUAL: 'Verdi større enn eller lik'
+    GROUP: Gruppe
+    HIDE: Skjul
+    HIDETHISFIELD: 'Skjul dette feltet'
+    IS: Er
+    LESSTHAN: 'Verdi lavere enn'
+    LESSTHANEQUAL: 'Verdi lavere enn eller lik'
+    LOCKED: 'Disse feltene kan ikke bli endret'
+    NOTBLANK: 'Ikke tom'
+    NOTVALUE: 'Ikke verdi'
+    OPTIONS: Alternativer
+    PLURALNAME: 'Redigerbare skjemafelt'
+    REQUIRED: 'Er dette feltet påkrevd?'
+    RIGHTTITLE: 'Høyre tittel'
+    SHOW: Vis
+    SHOWOPTIONS: 'Vis alternativer'
+    SHOWTHISFIELD: 'Vis dette feltet'
+    SINGULARNAME: 'Redigerbar skjemafelt'
+    VALIDATION: Validering
+    VALUE: Verdi
+    WHEN: Når
+  EditableFormHeading:
+    LEVEL: 'Velg overskrift nivå'
+    PLURALNAME: Overskrifter
+    SINGULARNAME: Overskrift
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Skjul fra rapporter?'
+    PLURALNAME: 'HTML blokker'
+    SINGULARNAME: 'HTML blokk'
+  EditableMemberListField:
+    PLURALNAME: 'Medlemliste felt'
+    SINGULARNAME: 'Medlemliste felt'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Redigerbare flervalgfelt'
+    SINGULARNAME: 'Redigerbare flervalgfelt'
+  EditableOption:
+    DELETE: 'Fjern alternativ'
+    DRAG: 'Dra for endre rekkefølge på alternativene'
+    LOCKED: 'Disse feltene kan ikke endres'
+    PLURALNAME: 'Redigerbart alternativer'
+    SINGULARNAME: 'Redigerbart alternativ'
+  EditableRadioField:
+    PLURALNAME: 'Radiofelt'
+    SINGULARNAME: 'Radiofelt'
+  EditableTextField:
+    NUMBERROWS: 'Antall rader'
+    PLURALNAME: 'Tekstfelt'
+    SINGULARNAME: 'Tekstfelt'
+    TEXTLENGTH: 'Tekst lengde'
+  FieldEditor:
+    ADD: Legg til
+    SELECTAFIELD: 'Velg et felt'
+  Form:
+    FIELDISREQUIRED: '%er er påkrevd'
+  GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SiteTree:
+    PLURALNAME: Sider
+    SINGULARNAME: Side
+  SubmittedFileField:
+    DOWNLOADFILE: 'Last ned fil'
+    PLURALNAME: 'Sendte fil felter'
+    SINGULARNAME: 'Sendte fil felt'
+  SubmittedForm:
+    PLURALNAME: 'Sendte skjema'
+    SINGULARNAME: 'Sendte skjema'
+  SubmittedFormField:
+    PLURALNAME: 'Sendt skjema felter'
+    SINGULARNAME: 'Sendt skjema felt'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
+    CONFIGURATION: Konfigurasjon
+    DESCRIPTION: 'Legg til konfigurerbart skjema'
+    EMAILADDRESS: Epost
+    EMAILBODY: Body
+    EMAILFROM: Fra
+    EMAILRECIPIENTS: 'Epost mottakere'
+    EMAILSUBJECT: 'Epost emne'
+    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
+    EmailFromContent: 'Skjemaadressen tillater deg å vis hvem melding kommer fra. På de fleste servere må denne e-post adressen være den samme som doment for din side. For eksempel om du har domene din-side.no, må e-post adressen være noen@din-side.no.'
+    FORM: Skjema
+    FROMADDRESS: 'Sendt e-post fra'
+    HIDEFIELDLABELS: 'Skjul overskrifter'
+    HIDEFORMDATA: 'Skjul skjemadata fra e-post'
+    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
+    ORSELECTAFIELDTOUSEASFROM: '...eller velg et felt til å bruke som "svar til"-adresse'
+    ORSELECTAFIELDTOUSEASTO: '...eller velg et felt til å bruke som adresse'
+    PLURALNAME: 'Base sider'
+    REPLYADDRESS: 'E-post som "reply to"'
+    SAVESUBMISSIONS: 'Slå av auto lagring'
+    SENDEMAILTO: 'Send e-post til'
+    SENDPLAIN: 'Send e-post som tekst? (HTML vil bli strippet)'
+    SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
+    SINGULARNAME: 'Bruker definert skjema'
+    SUBMISSIONS: Innsendte
+    SUBMITBUTTON: Send
+    TEXTONSUBMIT: 'Tekst på "send" knapp'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Bruker definert e-post mottakere'
+    SINGULARNAME: 'Bruker definert e-post mottaker'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrer innsendte...'
+    WHEREVALUEIS: 'hvor verdi er...'

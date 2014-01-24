@@ -1,0 +1,34 @@
+en_US:
+  EditableEmailField:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Hide from reports?'
+    PLURALNAME: 'HTML Blocks'
+    SINGULARNAME: 'HTML Block'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Editable Multiple Option Fields'
+    SINGULARNAME: 'Editable Multiple Option Field'
+  UserDefinedForm:
+    EMAILADDRESS: Email
+    EMAILBODY: Body
+    EMAILFROM: From
+    EMAILSUBJECT: 'Email subject'
+    EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
+    FORM: Form
+    FROMADDRESS: 'Send email from'
+    HIDEFORMDATA: 'Hide form data from email?'
+    ONCOMPLETELABEL: 'Show on completion'
+    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
+    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
+    REPLYADDRESS: 'Email for reply to'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SENDEMAILTO: 'Send email to'
+    SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Text on submit button:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'

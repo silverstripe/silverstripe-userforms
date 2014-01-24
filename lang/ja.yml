@@ -1,0 +1,34 @@
+ja:
+  EditableEmailField:
+    PLURALNAME: 'メールフィールド'
+    SINGULARNAME: 'メールフィールド'
+  EditableLiteralField:
+    HIDEFROMREPORT: 'レポートから隠しますか?'
+    PLURALNAME: 'HTMLブロック'
+    SINGULARNAME: 'HTMLブロック'
+  EditableMultipleOptionField:
+    PLURALNAME: '編集可能なマルチオプションフィールド'
+    SINGULARNAME: '編集可能なマルチオプションフィールド'
+  UserDefinedForm:
+    EMAILADDRESS: メール
+    EMAILBODY: ボディ
+    EMAILFROM: 送信者
+    EMAILSUBJECT: 'メールの件名'
+    EmailFromContent: '送信元アドレスでどこからメールを送信するのか設定することができます。多くのサーバーではこれはあなたのサイトのドメイン名と同じメールアドレスに設定する必要があります。たとえば yoursite.com では送信元アドレスは something@yoursite.com としなければいけません。ただし、返信先アドレスは好きなメールアドレスを設定することができます。'
+    FORM: フォーム
+    FROMADDRESS: 'メールの送信元'
+    HIDEFORMDATA: 'メールからフォームデータを見えないようにしますか?'
+    ONCOMPLETELABEL: '完成時に表示'
+    ORSELECTAFIELDTOUSEASFROM: '..またはフィールドを選択して返信先アドレスとして使用'
+    ORSELECTAFIELDTOUSEASTO: '..またはフィールドを選択して宛先アドレスとして使用'
+    REPLYADDRESS: '以下への返信メール'
+    SAVESUBMISSIONS: '提出物をサーバーに保存するのを無効化'
+    SENDEMAILTO: 'メールを送信'
+    SENDPLAIN: 'プレーンテキストとしてメールを送信しますか? (HTMLは取り除かれます)'
+    SHOWCLEARFORM: 'フォームをクリアーボタンを表示する'
+    SINGULARNAME: 'ユーザー定義フォーム'
+    SUBMITBUTTON: 送信
+    TEXTONSUBMIT: '送信ボタンのテキスト:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'ユーザー定義フォームのメール受信者'
+    SINGULARNAME: 'ユーザー定義フォームのメール受信者'
