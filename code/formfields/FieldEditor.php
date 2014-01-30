@@ -127,7 +127,7 @@ class FieldEditor extends FormField {
 					$title
 				);
 
-				if($niceTitle) {
+				if($niceTitle && $field != "EditableMultipleOptionField") {
 					$output->push(new ArrayData(array(
 						'ClassName' => $field,
 						'Title' => "$niceTitle"
