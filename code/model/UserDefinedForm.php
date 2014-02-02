@@ -976,12 +976,14 @@ JS
 			"Sender" => Member::currentUser(),
 			"Fields" => $submittedFields
 		);
-
+		
+		$this->extend('updateEmailData', $emailData, $attachments);
+		
 		// email users on submit.
 		if($recipients = $this->FilteredEmailRecipients($data, $form)) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
 			
-			if($attachments){
+			if($attachments) {
 				foreach($attachments as $file) {
 					if($file->ID != 0) {
 						$email->attachFile(
