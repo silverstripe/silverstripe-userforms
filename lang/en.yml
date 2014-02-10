@@ -102,6 +102,11 @@ en:
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Text length'
+  EditableNumericField:
+    NUMBERROWS: 'Number of rows'
+    PLURALNAME: 'Number Fields'
+    SINGULARNAME: 'Number Field'
+    TEXTLENGTH: 'Number length'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:
