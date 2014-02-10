@@ -27,8 +27,7 @@ class EditableNumericField extends EditableTextField {
 		else {
 			$taf = new NumericField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
 			$taf->addExtraClass('number');
-                        return $taf;
-
+			return $taf;
 		}
 	}
 }

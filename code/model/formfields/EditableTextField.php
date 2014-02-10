@@ -23,10 +23,11 @@ class EditableTextField extends EditableFormField {
 		
 		$extraFields = new FieldList(
 			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
-				new TextField($this->getSettingName('MinLength'), "", $min),
-				new TextField($this->getSettingName('MaxLength'), " - ", $max)
+				new NumericField($this->getSettingName('MinLength'), "", $min),
+				new NumericField($this->getSettingName('MaxLength'), " - ", $max)
 			),
-			new TextField($this->getSettingName('Rows'), _t('EditableTextField.NUMBERROWS', 'Number of rows'), $rows)
+			new NumericField($this->getSettingName('Rows'), _t('EditableTextField.NUMBERROWS',
+				'Number of rows'), $rows)
 		);
 		
 		$fields->merge($extraFields);
