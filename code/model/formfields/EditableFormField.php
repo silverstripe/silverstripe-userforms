@@ -499,7 +499,8 @@ class EditableFormField extends DataObject {
 		$title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
 		$standard = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
 		
-		$errorMessage = ($this->CustomErrorMessage) ? $this->CustomErrorMessage : $standard;
+		// only use CustomErrorMessage if it has a non empty value
+		$errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
 		
 		return DBField::create_field('Varchar', $errorMessage);
 	}

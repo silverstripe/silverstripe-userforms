@@ -22,12 +22,18 @@ class EditableNumericField extends EditableTextField {
 			$taf = new NumericField($this->Name, $this->Title);
 			$taf->setRows($this->getSetting('Rows'));
 			$taf->addExtraClass('number');
-			return $taf;
 		}
 		else {
 			$taf = new NumericField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
 			$taf->addExtraClass('number');
-			return $taf;
 		}
+		if ($this->Required) {
+			//  Required and numeric validation can conflict so add the Required validation messages
+			// as input attributes
+			$errorMessage = $this->getErrorMessage()->HTML();
+			$taf->setAttribute('data-rule-required','true');
+			$taf->setAttribute('data-msg-required',$errorMessage);
+		}
+		return $taf;
 	}
 }
