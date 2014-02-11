@@ -600,6 +600,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
+				if (!in_array($field->ClassName, array('EditableEmailField', 'EditableNumericField'))) {
+					$messages[$field->Name] = $field->getErrorMessage()->HTML();
+				}
+
 				if($field->Required) {
 					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
 					$required->addRequiredField($field->Name);
