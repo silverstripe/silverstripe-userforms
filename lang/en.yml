@@ -104,8 +104,8 @@ en:
     TEXTLENGTH: 'Text length'
   EditableNumericField:
     NUMBERROWS: 'Number of rows'
-    PLURALNAME: 'Number Fields'
-    SINGULARNAME: 'Number Field'
+    PLURALNAME: 'Numeric Fields'
+    SINGULARNAME: 'Numeric Field'
     TEXTLENGTH: 'Number length'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
