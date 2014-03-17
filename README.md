@@ -27,12 +27,25 @@ and without getting involved in any PHP code.
 
 ## Installation
 
+### Via composer
+
+```
+composer require "silverstripe/silverstripe-userforms:dev-master"
+```
+
+### Manually
+
  1.  Download the module from the link above. 
  2.  Extract the file (if you are on windows try 7-zip for extracting tar.gz files
  3.  Make sure the folder after being extracted is named 'userforms' 
  4.  Place this directory in your sites root directory. This is the one with framework and cms in it.
- 5.  Run in your browser - `/dev/build` to rebuild the database. 
- 6.  You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
+
+
+After installation, make sure you rebuild your database through `dev/build`. You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
+
+## Troubleshooting
+
+After installation make sure you have done a `dev/build` you may also need to flush the admin view by appending `?flush=1` to the URL like `http://yoursite.com/admin?flush=1`
 
 ## Tasks
 
