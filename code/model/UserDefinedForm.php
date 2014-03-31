@@ -118,9 +118,8 @@ class UserDefinedForm extends Page {
 SELECT "SubmittedFormField"."Name", "SubmittedFormField"."Title"
 FROM "SubmittedFormField"
 LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
-LEFT JOIN "EditableFormField_Live" ON "EditableFormField_Live"."ParentID" = "SubmittedForm"."ParentID"
 WHERE "SubmittedForm"."ParentID" = '$parentID'
-ORDER BY "EditableFormField_Live"."Sort" ASC
+ORDER BY "SubmittedFormField"."ID" ASC
 SQL;
 		$columns = DB::query($columnSQL)->map();
 
