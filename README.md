@@ -30,7 +30,7 @@ and without getting involved in any PHP code.
 ### Via composer
 
 ```
-composer require "silverstripe/silverstripe-userforms:dev-master"
+composer require "silverstripe/userforms:dev-master"
 ```
 
 ### Manually
