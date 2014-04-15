@@ -1065,7 +1065,7 @@ JS
 			}
 		}
 		
-		return $this->redirect($this->Link() . 'finished' . $referrer);
+		return $this->redirect($this->Link('finished') . $referrer);
 	}
 
 	/**
