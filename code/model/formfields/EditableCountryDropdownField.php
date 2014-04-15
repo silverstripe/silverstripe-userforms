@@ -23,6 +23,6 @@ class EditableCountryDropdownField extends EditableFormField {
 	}
 	
 	public function getIcon() {
-		return 'userforms/images/editabledropdown.png';
+		return  USERFORMS_DIR . '/images/editabledropdown.png';
 	}
 }

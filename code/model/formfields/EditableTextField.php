@@ -58,13 +58,15 @@ class EditableTextField extends EditableFormField {
 	 * @return array
 	 */
 	public function getValidation() {
-		$options = array();
+		$options = parent::getValidation();
 		
-		if($this->getSetting('MinLength')) 
+		if($this->getSetting('MinLength')) {
 			$options['minlength'] = $this->getSetting('MinLength');
+		}
 			
-		if($this->getSetting('MaxLength')) 
+		if($this->getSetting('MaxLength')) {
 			$options['maxlength'] = $this->getSetting('MaxLength');
+		}
 		
 		return $options;
 	}

@@ -13,6 +13,10 @@ class EditableEmailField extends EditableFormField {
 	
 	private static $plural_name = 'Email Fields';
 	
+	public function getSetsOwnError() {
+		return true;
+	}
+	
 	public function getFormField() {
 		if ($this->Required) {
 			//  Required and Email validation can conflict so add the Required validation messages
@@ -35,8 +39,8 @@ class EditableEmailField extends EditableFormField {
 	 * @return Array
 	 */
 	public function getValidation() {
-		return array(
+		return array_merge(parent::getValidation(), array(
 			'email' => true
-		);
+		));
 	}
 }
