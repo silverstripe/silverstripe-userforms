@@ -888,13 +888,19 @@ JS
 		
 		foreach($this->Fields() as $field) {
 			$messages[$field->Name] = $field->getErrorMessage()->HTML();
-				
+			$formField = $field->getFormField();
+
 			if($field->Required && $field->CustomRules()->Count() == 0) {
-				if(	!isset($data[$field->Name]) ||
+				if(isset($data[$field->Name])) {
+					$formField->setValue($data[$field->Name]);
+				}
+
+				if(
+					!isset($data[$field->Name]) || 
 					!$data[$field->Name] ||
-					!$field->getFormField()->validate($this->validator)
-				){
-					$form->addErrorMessage($field->Name,$field->getErrorMessage()->HTML(),'bad');
+					!$formField->validate($form->getValidator())
+				) {
+					$form->addErrorMessage($field->Name, $field->getErrorMessage(), 'bad');
 				}
 			}
 		}
