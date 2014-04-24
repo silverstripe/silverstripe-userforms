@@ -1,39 +1,39 @@
 <?php
 
 /**
- * A file uploaded on a {@link UserDefinedForm} and attached to a single 
+ * A file uploaded on a {@link UserDefinedForm} and attached to a single
  * {@link SubmittedForm}.
  *
  * @package userforms
  */
 
 class SubmittedFileField extends SubmittedFormField {
-	
+
 	private static $has_one = array(
 		"UploadedFile" => "File"
 	);
-	
+
 	/**
-	 * Return the value of this field for inclusion into things such as 
+	 * Return the value of this field for inclusion into things such as
 	 * reports.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getFormattedValue() {
 		$name = $this->getName();
 		$link = $this->getLink();
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
-		
+
 		if($link) {
 			return DBField::create_field('HTMLText', sprintf(
-				'%s - <a href="%s" target="_blank">%s</a>', 
+				'%s - <a href="%s" target="_blank">%s</a>',
 				$name, $link, $title
 			));
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Return the value for this field in the CSV export.
 	 *
@@ -44,18 +44,8 @@ class SubmittedFileField extends SubmittedFormField {
 	}
 
 	/**
-	 * Return the value for the database, link to the file is stored as a
-	 * relation so value for the field can be null.
-	 *
-	 * @return string
-	 */
-	public function getValueFromData() {
-		return null;
-	}
-
-	/**
 	 * Return the link for the file attached to this submitted form field.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getLink() {
@@ -65,7 +55,7 @@ class SubmittedFileField extends SubmittedFormField {
 			}
 		}
 	}
-	
+
 	/**
 	 * Return the name of the file, if present
 	 *

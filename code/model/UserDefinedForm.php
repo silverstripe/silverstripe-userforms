@@ -1003,6 +1003,8 @@ JS
 				}
 			}
 
+			$this->extend('updateEmailRecipients', $emailData, $recipients);
+
 			foreach($recipients as $recipient) {
 				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
