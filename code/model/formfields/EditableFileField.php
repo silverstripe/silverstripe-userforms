@@ -46,6 +46,16 @@ class EditableFileField extends EditableFormField {
 	}
 	
 	
+	/**
+	 * Return the value for the database, link to the file is stored as a
+	 * relation so value for the field can be null.
+	 *
+	 * @return string
+	 */
+	public function getValueFromData() {
+		return null;
+	}
+	
 	public function getSubmittedFormField() {
 		return new SubmittedFileField();
 	}

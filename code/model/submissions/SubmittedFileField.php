@@ -44,16 +44,6 @@ class SubmittedFileField extends SubmittedFormField {
 	}
 
 	/**
-	 * Return the value for the database, link to the file is stored as a
-	 * relation so value for the field can be null.
-	 *
-	 * @return string
-	 */
-	public function getValueFromData() {
-		return null;
-	}
-
-	/**
 	 * Return the link for the file attached to this submitted form field.
 	 * 
 	 * @return string
