@@ -44,7 +44,8 @@ class EditableFileField extends EditableFormField {
 
 		return $field;
 	}
-
+	
+	
 	/**
 	 * Return the value for the database, link to the file is stored as a
 	 * relation so value for the field can be null.
@@ -54,7 +55,7 @@ class EditableFileField extends EditableFormField {
 	public function getValueFromData() {
 		return null;
 	}
-
+	
 	public function getSubmittedFormField() {
 		return new SubmittedFileField();
 	}
