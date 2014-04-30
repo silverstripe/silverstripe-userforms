@@ -1044,6 +1044,8 @@ JS
 				}
 			}
 		}
+
+		$this->extend('updateOnCompleteMessage', $submittedFields);
 		
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
