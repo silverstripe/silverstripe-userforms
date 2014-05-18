@@ -100,6 +100,13 @@ fi_FI:
     PLURALNAME: 'Tekstikentät'
     SINGULARNAME: 'Tekstikenttä'
     TEXTLENGTH: 'Tekstin pituus'
+  EditableNumericField:
+    NUMBERROWS: 'Rivejen määrä'
+    PLURALNAME: 'Numeeriset kentät'
+    SINGULARNAME: 'Numeerinen kenttä'
+    TEXTLENGTH: 'Numeroiden määrä'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
   FieldEditor:
     ADD: Lisää
     SELECTAFIELD: 'Valitse kenttä'
@@ -123,6 +130,7 @@ fi_FI:
     SINGULARNAME: 'Lähetetty lomakekenttä'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CLEARBUTTON: Tyhjennä
     CONFIGURATION: Asetukset
     DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
     EMAILADDRESS: Sähköpostiosoite
@@ -139,7 +147,7 @@ fi_FI:
     ONCOMPLETELABEL: 'Näytä valmistuessa'
     ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
-    PLURALNAME: 'Lomakkeet'
+    PLURALNAME: 'Käyttäjän määrittelemät lomakkeet'
     REPLYADDRESS: 'Vastaussähköposti'
     SAVESUBMISSIONS: 'Älä tallenna lähetyksiä palvelimelle (ne vain lähetetään sähköpostilla)'
     SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
@@ -148,6 +156,7 @@ fi_FI:
     SINGULARNAME: 'Lomake'
     SUBMISSIONS: Lähetykset
     SUBMITBUTTON: Lähetä
+    TEXTONCLEAR: 'Tyhjennä-nappulan teksti:'
     TEXTONSUBMIT: 'Lähetä-painikkeen teksti: '
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Lomakkeen vastaanottosähköpostit'

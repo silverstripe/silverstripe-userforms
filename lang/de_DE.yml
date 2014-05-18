@@ -5,7 +5,7 @@ de_DE:
     GREATERTHAN: 'Wert größer als'
     GREATERTHANEQUAL: 'Wert größer oder gleich'
     HIDETHISFIELD: 'Feld verstecken'
-    IS: Ist
+    IS: Ist gleich
     LESSTHAN: 'Wert kleiner als'
     LESSTHANEQUAL: 'Wert kleiner oder gleich'
     NOTBLANK: 'Nicht leer'
@@ -13,23 +13,46 @@ de_DE:
     SHOWTHISFIELD: 'Feld anzeigen'
     VALUE: Wert
     WHEN: Wann
+  EditableCheckbox:
+    PLURALNAME: Checkboxen
+    SINGULARNAME: 'Checkbox Feld'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Gruppen'
+    SINGULARNAME: 'Checkbox Gruppe'
   EditableCountryDropdownField:
     PLURALNAME: 'Länder Dropdowns'
     SINGULARNAME: 'Länder Dropdown'
+  EditableDateField:
+    PLURALNAME: 'Datumsfelder'
+    SINGULARNAME: 'Datumsfeld'
+  EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Feld'
   EditableEmailField:
-    PLURALNAME: 'Email Felder'
-    SINGULARNAME: 'Email Feld'
+    PLURALNAME: 'E-Mail Felder'
+    SINGULARNAME: 'E-Mail Feld'
+  EditableFileField:
+    PLURALNAME: 'Dateiupload Felder'
+    SINGULARNAME: 'Dateiupload Feld'
   EditableFormField:
     ADD: Hinzufügen
+    ADDLabel: 'Option hinzufügen'
     ADDRULE: 'Regel hinzufügen'
     BLANK: Leer
+    CHECKEDBYDEFAULT: 'Standardmäßig ist dieses Feld markiert'
+    CUSTOMERROR: 'Eigene Fehlermeldung'
     CUSTOMRULES: 'Eigene Regeln'
+    DEFAULTTOTODAY: 'Standardmäßig auf heute'
     DELETE: Lösche dieses Feld
     DRAG: 'Klicken und Festhalten um die Anordnung der Felder zu verändern'
+    ENTERQUESTION: 'Tragen Sie die Frage hier ein'
+    EXTRACLASSA: 'Extra Styling/Layout'
+    EXTRACLASSB: 'Extra CSS Klasse - mehrere mit Leerzeichen trennen'
     FIELDCONFIGURATION: 'Feld Konfiguration'
     FIELDONDEFAULT: 'Standard Feld'
     GREATERTHAN: 'Wert größer als'
     GREATERTHANEQUAL: 'Wert größer oder gleich'
+    GROUP: Gruppe
     HIDE: Verstecken
     HIDETHISFIELD: 'Feld verstecken'
     IS: Ist
@@ -39,63 +62,105 @@ de_DE:
     NOTBLANK: 'Nicht leer'
     NOTVALUE: 'Kein Wert'
     OPTIONS: Optionen
-    REQUIRED: 'Dieses Feld wird für dieses Formular benötigt und kann nicht gelöscht werden.'
+    PLURALNAME: 'Editierbare Formularfelder'
+    REQUIRED: 'Pflichtfeld?'
+    RIGHTTITLE: 'Titel rechts'
     SHOW: Zeigen
     SHOWOPTIONS: 'Optionen anzeigen'
     SHOWTHISFIELD: 'Feld anzeigen'
+    SINGULARNAME: 'Editierbares Formularfeld'
     VALIDATION: Validierung
     VALUE: Wert
     WHEN: Wann
+  EditableFormHeading:
+    LEVEL: 'Überschriftsebene auswählen'
+    PLURALNAME: Überschriften
+    SINGULARNAME: Überschrift
   EditableLiteralField:
-    HIDEFROMREPORT: 'Nich auf Reports anzeigen?'
-    PLURALNAME: 'HTML Blocks'
+    HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
+    PLURALNAME: 'HTML Blöcke'
     SINGULARNAME: 'HTML Block'
   EditableMemberListField:
-    PLURALNAME: 'Member List Fields'
-    SINGULARNAME: 'Member List Field'
+    PLURALNAME: 'Member List Felder'
+    SINGULARNAME: 'Member List Feld'
   EditableMultipleOptionField:
-    PLURALNAME: 'Editable Multiple Option Fields'
-    SINGULARNAME: 'Editable Multiple Option Field'
+    PLURALNAME: 'Editierbare Multi-Option Felder'
+    SINGULARNAME: 'Editierbares Multi-Option Feld'
   EditableOption:
     DELETE: 'Option entfernen'
     DRAG: 'Ziehen um Optionen neu zu ordnen'
     LOCKED: 'Diese Felder können nicht verändert werden'
+    PLURALNAME: 'Editierbare Optionen'
+    SINGULARNAME: 'Editierbare Option'
+  EditableRadioField:
+    PLURALNAME: 'Radio-Buttons'
+    SINGULARNAME: 'Radio-Button'
+  EditableTextField:
+    NUMBERROWS: 'Anzahl der Zeilen'
+    PLURALNAME: 'Textfelder'
+    SINGULARNAME: 'Textfeld'
+    TEXTLENGTH: 'Textlänge'
+  EditableNumericField:
+    NUMBERROWS: 'Anzahl der Zeilen'
+    PLURALNAME: 'Zahlenfelder'
+    SINGULARNAME: 'Zahlenfeld'
+    TEXTLENGTH: 'Anzahl der Ziffern'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
+  FieldEditor:
+    ADD: Hinzufügen
+    SELECTAFIELD: 'Feld auswählen'
   Form:
     FIELDISREQUIRED: '%s ist ein Pflichtfeld'
+  GridField:
+    Filter: Filter
+    ResetFilter: Zurücksetzen
+  SiteTree:
+    PLURALNAME: Seiten
+    SINGULARNAME: Seite
   SubmittedFileField:
-    DOWNLOADFILE: 'Datei runterladen'
-    PLURALNAME: 'Submitted File Fields'
-    SINGULARNAME: 'Submitted File Field'
+    DOWNLOADFILE: 'Datei herunterladen'
+    PLURALNAME: 'Abgesendete Dateifelder'
+    SINGULARNAME: 'Abgesendetes Dateifeld'
   SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
-    SINGULARNAME: 'Submitted Form'
+    PLURALNAME: 'Abgesendete Formulare'
+    SINGULARNAME: 'Abgesendetes Formular'
   SubmittedFormField:
-    PLURALNAME: 'Submitted Form Fields'
-    SINGULARNAME: 'Submitted Form Field'
+    PLURALNAME: 'Abgesendete Formularfelder'
+    SINGULARNAME: 'Abgesendetes Formularfeld'
   UserDefinedForm:
-    DESCRIPTION: 'Fügt ein anpassbares Formular hinzu'
-    EMAILADDRESS: Email
-    EMAILBODY: Body
+    ADDEMAILRECIPIENT: 'E-Mail Empfänger hinzufügen'
+    CLEARBUTTON: Löschen
+    CONFIGURATION: Konfiguration
+    DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
+    EMAILADDRESS: E-Mail
+    EMAILBODY: Inhalt
     EMAILFROM: Von
-    EMAILRECIPIENTS: 'Email Empfänger'
-    EMAILSUBJECT: 'Email Subject'
+    EMAILRECIPIENTS: 'E-Mail Empfänger'
+    EMAILSUBJECT: 'Betreff'
+    ENABLELIVEVALIDATION: 'Live Validierung einschalten'
     EmailFromContent: 'Mit der Absenderadresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
     FORM: Formular
-    FROMADDRESS: 'Email versendet von'
-    HIDEFORMDATA: 'Form Data in Email nicht anzeigen'
+    FROMADDRESS: 'E-Mail versendet von'
+    HIDEFIELDLABELS: 'Feldbezeichnungen verbergen'
+    HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
-    ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein form field als Gesendet-Von Adresse'
-    ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein form field als Sende-An Adresse'
-    PLURALNAME: 'Anpassbares Formular'
-    REPLYADDRESS: 'E-Mail für "Antworten an"'
-    SAVESUBMISSIONS: 'Speichern von Einreichungen ausschalten'
-    SENDEMAILTO: 'Email senden an'
-    SENDPLAIN: 'Email als Text versenden (HTML wird entfernt)'
-    SHOWCLEARFORM: 'Form zurücksetzen Button anzeigen'
+    ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
+    ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Formularfeld als Empfängeradresse'
+    PLURALNAME: 'Anpassbare Formulare'
+    REPLYADDRESS: 'E-Mail Adresse für "Antworten an"'
+    SAVESUBMISSIONS: 'Speichern von Einreichungen deaktivieren'
+    SENDEMAILTO: 'E-Mail senden an'
+    SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
+    SHOWCLEARFORM: '"Formular zurücksetzen" Button anzeigen'
     SINGULARNAME: 'Anpassbares Formular'
     SUBMISSIONS: Einreichungen
     SUBMITBUTTON: Senden
-    TEXTONSUBMIT: 'Text auf der Einreich-Schaltfläche'
+    TEXTONCLEAR: 'Text auf der Löschen-Schaltfläche:'
+    TEXTONSUBMIT: 'Text auf der Einreich-Schaltfläche:'
   UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Anpassbares Formular Email Empfänger'
-    SINGULARNAME: 'Anpassbares Formular Email Empfänger'
+    PLURALNAME: 'Anpassbares Formular E-Mail Empfänger'
+    SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Einreichungen filtern...'
+    WHEREVALUEIS: 'nach Wert...'

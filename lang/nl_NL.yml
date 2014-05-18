@@ -17,23 +17,23 @@ nl_NL:
     PLURALNAME: Selectievakjes
     SINGULARNAME: 'Selectievakje'
   EditableCheckboxGroupField:
-    PLURALNAME: 'Selectievakje Groepen'
-    SINGULARNAME: 'Selectievakje Groep'
+    PLURALNAME: 'Groepen van selectievakjes'
+    SINGULARNAME: 'Groep van selectievakje'
   EditableCountryDropdownField:
-    PLURALNAME: 'Land selectielijsten'
-    SINGULARNAME: 'Land selectielijst'
+    PLURALNAME: 'Vervolgkeuzelijsten van landen'
+    SINGULARNAME: 'Vervolgkeuzelijst van landen'
   EditableDateField:
     PLURALNAME: 'Datumvelden'
     SINGULARNAME: 'Datumveld'
   EditableDropdown:
-    PLURALNAME: Selectielijst veld
-    SINGULARNAME: 'Selectielijst velden'
+    PLURALNAME: Vervolgkeuzelijsten
+    SINGULARNAME: 'Vervolgkeuzelijst veld'
   EditableEmailField:
-    PLURALNAME: 'Email veld'
-    SINGULARNAME: 'Email velden'
+    PLURALNAME: 'Email velden'
+    SINGULARNAME: 'Email veld'
   EditableFileField:
-    PLURALNAME: 'Bestandsupload velden'
-    SINGULARNAME: 'Bestandsupload veld'
+    PLURALNAME: 'Velden voor bestand uploaden'
+    SINGULARNAME: 'Veld voor bestand uploaden'
   EditableFormField:
     ADD: Toevoegen
     ADDLabel: 'Optie toevoegen'
@@ -100,6 +100,11 @@ nl_NL:
     PLURALNAME: 'Tekst velden'
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
+  EditableNumericField:
+    NUMBERROWS: 'Aantal rijen'
+    PLURALNAME: 'Numerieke velden'
+    SINGULARNAME: 'Numerieke veld'
+    TEXTLENGTH: 'Numerieke lengte'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   FieldEditor:
@@ -149,7 +154,7 @@ nl_NL:
     SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
     SHOWCLEARFORM: 'Toon Herstel-button'
     SINGULARNAME: 'Formulier pagina'
-    SUBMISSIONS: Inbox
+    SUBMISSIONS: Inzendingen
     SUBMITBUTTON: Verzenden
     TEXTONCLEAR: 'Tekst op herstel button:'
     TEXTONSUBMIT: 'Tekst op Verzend-button'
