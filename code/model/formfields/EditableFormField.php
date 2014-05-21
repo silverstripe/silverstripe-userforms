@@ -70,6 +70,15 @@ class EditableFormField extends DataObject {
 	}
 	
 	/**
+	 * Flag indicating that this field will set its own error message via data-msg='' attributes
+	 * 
+	 * @return bool
+	 */
+	public function getSetsOwnError() {
+		return false;
+	}
+	
+	/**
 	 * Return whether a user can delete this form field
 	 * based on whether they can edit the page
 	 *
@@ -212,7 +221,7 @@ class EditableFormField extends DataObject {
 	 * @return string
 	 */
 	public function getIcon() {
-		return 'userforms/images/' . strtolower($this->class) . '.png';
+		return USERFORMS_DIR . '/images/' . strtolower($this->class) . '.png';
 	}
 	
 	/**
@@ -486,7 +495,13 @@ class EditableFormField extends DataObject {
 	 * @return Array
 	 */
 	public function getValidation() {
-		return array();
+		return $this->Required
+			? array('required' => true)
+			: array();
+	}
+	
+	public function getValidationJSON() {
+		return Convert::raw2json($this->getValidation());
 	}
 	
 	/**
