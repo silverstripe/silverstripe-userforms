@@ -147,7 +147,7 @@ en:
     ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'Base Pages'
+    PLURALNAME: 'User Defined Forms'
     REPLYADDRESS: 'Email for reply to'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send email to'
