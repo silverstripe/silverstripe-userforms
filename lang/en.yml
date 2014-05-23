@@ -88,6 +88,9 @@ en:
   EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
+  EditableNumericField:
+    PLURALNAME: 'Numeric Fields'
+    SINGULARNAME: 'Numeric Field'
   EditableOption:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
@@ -102,11 +105,6 @@ en:
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Text length'
-  EditableNumericField:
-    NUMBERROWS: 'Number of rows'
-    PLURALNAME: 'Numeric Fields'
-    SINGULARNAME: 'Numeric Field'
-    TEXTLENGTH: 'Number length'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:

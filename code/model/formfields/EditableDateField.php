@@ -52,8 +52,8 @@ class EditableDateField extends EditableFormField {
 	 * @return Array
 	 */
 	public function getValidation() {
-		return array(
+		return array_merge(parent::getValidation(), array(
 			'date' => true
-		);
+		));
 	}
 }

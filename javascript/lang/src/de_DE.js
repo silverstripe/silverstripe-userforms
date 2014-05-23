@@ -1,14 +1,14 @@
 {
-    "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "All submissions will be permanently removed. Continue?",
-    "UserForms.ERROR_CREATING_FIELD": "Error creating field",
-    "UserForms.ADDING_FIELD": "Adding new field",
-    "UserForms.ADDED_FIELD": "Added new field",
-    "UserForms.HIDE_OPTIONS": "Hide options",
-    "UserForms.SHOW_OPTIONS": "Show options",
-    "UserForms.ADDING_OPTION": "Adding option",
-    "UserForms.ADDED_OPTION": "Added option",
-    "UserForms.ERROR_CREATING_OPTION": "Error creating option",
-    "UserForms.REMOVED_OPTION": "Removed option",
-    "UserForms.ADDING_RULE": "Adding rule",
-    "GRIDFIELD.ERRORINTRANSACTION": "An error occured while fetching data from the server\n Please try again later."
+    "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Alle Einsendungen werden dauerhaft gelöscht. Wirklich fortfahren?",
+    "UserForms.ERROR_CREATING_FIELD": "Fehler beim erstellen des Feldes",
+    "UserForms.ADDING_FIELD": "Neues Feld hinzugefügt",
+    "UserForms.ADDED_FIELD": "Neues Feld hinzugefügt",
+    "UserForms.HIDE_OPTIONS": "Optionen verbergen",
+    "UserForms.SHOW_OPTIONS": "Optionen anzeigen",
+    "UserForms.ADDING_OPTION": "Füge Option hinzu",
+    "UserForms.ADDED_OPTION": "Option hinzugefügt",
+    "UserForms.ERROR_CREATING_OPTION": "Fehler beim erstellen der Option",
+    "UserForms.REMOVED_OPTION": "Option entfernt",
+    "UserForms.ADDING_RULE": "Füge Regel hinzu",
+    "GRIDFIELD.ERRORINTRANSACTION": "Ein Fehler ist beim Laden der Daten aufgetreten.\nBitte versuchen Sie es später nochmal."
 }

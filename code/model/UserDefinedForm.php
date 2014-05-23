@@ -431,11 +431,20 @@ class UserDefinedForm_Controller extends Page_Controller {
 		parent::init();
 		
 		// load the jquery
+		$lang = i18n::get_lang_from_locale(i18n::get_locale());
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-		Requirements::javascript('userforms/thirdparty/jquery-validate/jquery.validate.js');
-		Requirements::add_i18n_javascript('userforms/javascript/lang');
-		Requirements::javascript('userforms/javascript/UserForm_frontend.js');
-		if($this->HideFieldLabels) Requirements::javascript('userforms/thirdparty/Placeholders.js/Placeholders.min.js');
+		Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+		Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
+		Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm_frontend.js');
+		Requirements::javascript(
+			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+		);
+		Requirements::javascript(
+			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+		);
+		if($this->HideFieldLabels) {
+			Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
+		}
 	}
 	
 	/**
@@ -590,63 +599,16 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * @return RequiredFields
 	 */
 	public function getRequiredFields() {
-		$required = new RequiredFields();
-		
-		$rules = array();
-		$validation = array();
-		$messages = array();
-		$onfocusout = "";
-		$hidelabels = "";
-		
-		if($this->Fields()) {
-			foreach($this->Fields() as $field) {
-				if (!in_array($field->ClassName, array('EditableEmailField', 'EditableNumericField'))) {
-					$messages[$field->Name] = $field->getErrorMessage()->HTML();
-				}
-
-				if($field->Required) {
-					$rules[$field->Name] = array_merge(array('required' => true), $field->getValidation());
-					$required->addRequiredField($field->Name);
-				}
-			}
-		}
-		
-    // Enable live validation
-    if($this->EnableLiveValidation) $onfocusout = ", onfocusout : function(element) { this.element(element); }";
-
-    // Hide field labels (use HTML5 placeholder instead)
-    if($this->HideFieldLabels) $hidelabels = '$("#Form_Form label.left").each(function(){$("#"+$(this).attr("for")).attr("placeholder",$(this).text());$(this).remove();});Placeholders.init();';
-
-		// Set the Form Name
-		$rules = $this->array2json($rules);
-		$messages = $this->array2json($messages);
 		
 		// set the custom script for this form
-		Requirements::customScript(<<<JS
-			(function($) {
-				$(document).ready(function() {
-					$("#Form_Form").validate({
-						ignore: ':hidden',
-						errorClass: "required",	
-						errorPlacement: function(error, element) {
-							if(element.is(":radio")) {
-								error.insertAfter(element.closest("ul"));
-							} else {
-								error.insertAfter(element);
-							}
-						},
-						messages:
-							$messages
-						,
-						rules: 
-						 	$rules
-						$onfocusout
-					});
-					$hidelabels
-				});
-			})(jQuery);
-JS
-, 'UserFormsValidation');
+		Requirements::customScript($this->renderWith('ValidationScript'), 'UserFormsValidation');
+		
+		// Generate required field validator
+		$requiredNames = $this
+			->Fields()
+			->filter('Required', true)
+			->column('Name');
+		$required = new RequiredFields($requiredNames);
 		
 		$this->extend('updateRequiredFields', $required);
 		

@@ -13,6 +13,10 @@ class EditableNumericField extends EditableTextField {
 	
 	private static $plural_name = 'Numeric Fields';
 	
+	public function getSetsOwnError() {
+		return true;
+	}
+	
 
 	/**
 	 * @return TextareaField|TextField
