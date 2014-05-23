@@ -78,4 +78,9 @@ class SubmittedFormField extends DataObject {
 	public function getExportValue() {
 		return $this->Value;
 	}
+	public function getEditableField() {
+		return $this->Parent()->Parent()->Fields()->filter(array(
+			'Name' => $this->Name
+		))->First();
+	}
 }
