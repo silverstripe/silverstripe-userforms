@@ -136,6 +136,13 @@ SQL;
 		$config->addComponent(new GridFieldDetailForm());
 		$config->addComponent($export = new GridFieldExportButton());
 		$config->addComponent($print = new GridFieldPrintButton());
+		
+		/**
+		 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
+		 */
+		if(class_exists('GridFieldBulkManager')) {
+			$config->addComponent(new GridFieldBulkManager());
+		}
 
 		$sort->setThrowExceptionOnBadDataType(false);
 		$filter->setThrowExceptionOnBadDataType(false);
