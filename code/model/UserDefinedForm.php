@@ -977,8 +977,8 @@ JS
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
 				$email->setBody($recipient->EmailBody);
-				$email->setSubject($recipient->EmailSubject);
 				$email->setTo($recipient->EmailAddress);
+				$email->setSubject($recipient->EmailSubject)
 				
 				if($recipient->EmailReplyTo) {
 					$email->setReplyTo($recipient->EmailReplyTo);
@@ -999,6 +999,26 @@ JS
 					if($submittedFormField && is_string($submittedFormField->Value)) {
 						$email->setTo($submittedFormField->Value);	
 					}
+				}
+				
+				// check to see if there is a dynamic subject
+<<<<<<< HEAD
+				if($recipient->DynamicSubjectField()) {
+				    $submittedFormField = $submittedFields->find('Name', $recipient->DynamicSubjectField()->Name);
+=======
+				if($recipient->SendEmailSubjectField()) {
+<<<<<<< HEAD
+				    $submittedFormField = $submittedFields->find('Name', $recipient->DynamicSubject()->Name();
+>>>>>>> b9324dc... Replaced DynamicSubjectField with SendEmailSubjectField
+				    $email->setSubject($submittedFormField->Value);
+=======
+					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
+<<<<<<< HEAD
+				    	$email->setSubject($submittedFormField->Value);
+>>>>>>> 65d2829... A little update in indentation
+=======
+					$email->setSubject($submittedFormField->Value);
+>>>>>>> fa04a0a... Re-adding Default Subject setting
 				}
 				
 				$this->extend('updateEmail', $email, $recipient, $emailData);
@@ -1100,7 +1120,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	private static $has_one = array(
 		'Form' => 'UserDefinedForm',
 		'SendEmailFromField' => 'EditableFormField',
-		'SendEmailToField' => 'EditableFormField'
+		'SendEmailToField' => 'EditableFormField',
+		'SendEmailSubjectField' => 'EditableFormField'
 	);
 	
 	private static $summary_fields = array();
@@ -1129,41 +1150,34 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		
 		if($this->Form()) {
 			$dropdowns = array();
-
 			$validEmailFields = DataObject::get("EditableEmailField", "\"ParentID\" = '" . (int)$this->FormID . "'");
 			$multiOptionFields = DataObject::get("EditableMultipleOptionField", "\"ParentID\" = '" . (int)$this->FormID . "'");
+			$validSubjectFields = EditableTextField::get()->filter('ParentID', $this->FormID)->filterByCallback(function($item, $list) { return $item->getSetting('Rows') === 1; });
 			
-			// if they have email fields then we could send from it
+			$fields->insertAfter($dropdowns[] = new DropdownField(
+                'SendEmailFromFieldID',
+                _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
+                $validEmailFields->map('ID', 'Title')
+			), 'EmailReplyTo');
+	
+			if($multiOptionFields) {
+                $validEmailFields = $validEmailFields->toArrayList();
+                $validEmailFields->merge($multiOptionFields);
+                $validSubjectFields->merge($multiOptionFields);
+			}
 			if($validEmailFields) {
 				$fields->insertAfter($dropdowns[] = new DropdownField(
-					'SendEmailFromFieldID',
-					_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
-					$validEmailFields->map('ID', 'Title')
-				), 'EmailReplyTo');
-			}
-
-			// if they have multiple options
-			if($multiOptionFields || $validEmailFields) {
-
-				if($multiOptionFields && $validEmailFields) {
-					$multiOptionFields = $multiOptionFields->toArray();
-					$multiOptionFields = array_merge(
-						$multiOptionFields,
-						$validEmailFields->toArray()
-					);
-
-					$multiOptionFields = ArrayList::create($multiOptionFields);
-				}
-				else if(!$multiOptionFields) {
-					$multiOptionFields = $validEmailFields;	
-				}
-				
-				$multiOptionFields = $multiOptionFields->map('ID', 'Title');
-					$fields->insertAfter($dropdowns[] = new DropdownField(
-						'SendEmailToFieldID',
-						_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
-					 $multiOptionFields
+					'SendEmailToFieldID',
+					_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
+					$validEmailFields = $validEmailFields->map('ID', 'Title');
 				), 'EmailAddress');
+			}	
+			if($validSubjectFields) {
+	        	$fields->insertAfter($dropdowns[] = new DropdownField(
+                    'SendEmailSubjectFieldID', 
+                    _t('UserDefinedForm.SELECTAFIELDTOSETSUBJECT', '... or select a field to use as the subject'),
+                     $validSubjectFields->map('ID', 'Title')
+				), 'SendEmailSubjectField');
 			}
 
 			if($dropdowns) {
