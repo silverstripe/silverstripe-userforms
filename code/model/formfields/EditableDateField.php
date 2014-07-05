@@ -46,7 +46,7 @@ class EditableDateField extends EditableFormField {
 		$dateFormat = DateField_View_JQuery::convert_iso_to_jquery_format(i18n::get_date_format());
 
 		Requirements::customScript(<<<JS
-			(function(jQuery) {
+			(function($) {
 				$(document).ready(function() {
 					$('input[name^=EditableDateField]').attr('autocomplete', 'off').datepicker({ dateFormat: '$dateFormat' });
 				});
