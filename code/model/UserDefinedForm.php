@@ -942,6 +942,8 @@ JS
 				}
 			}
 			
+			$submittedField->extend('onPopulationFromField', $field);
+			
 			if(!$this->DisableSaveSubmissions) {
 				$submittedField->write();
 			}
