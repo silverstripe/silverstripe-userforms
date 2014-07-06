@@ -191,8 +191,8 @@ class EditableFormField extends DataObject {
 	 * @param array The permissible CSS classes to add
 	 */
 	public function setAllowedCss(array $allowed) {
-		if (is_array($allowed_css)){
-			foreach ($allowed_css as $k => $v){
+		if (is_array($allowed)) {
+			foreach ($allowed as $k => $v) {
 				self::$allowed_css[$k] = (!is_null($v)) ? $v : $k;
 			}
 		}
