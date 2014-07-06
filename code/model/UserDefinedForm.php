@@ -115,11 +115,11 @@ class UserDefinedForm extends Page {
 
 		// get a list of all field names and values used for print and export CSV views of the GridField below.
 		$columnSQL = <<<SQL
-SELECT "Name", "Title"
+SELECT "SubmittedFormField"."Name", "SubmittedFormField"."Title"
 FROM "SubmittedFormField"
 LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
 WHERE "SubmittedForm"."ParentID" = '$parentID'
-ORDER BY "Title" ASC
+ORDER BY "SubmittedFormField"."ID" ASC
 SQL;
 		$columns = DB::query($columnSQL)->map();
 
