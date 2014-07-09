@@ -1031,6 +1031,8 @@ JS
 			}
 		}
 		
+		$submittedForm->extend('updateAfterProcess');
+		
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
 		
