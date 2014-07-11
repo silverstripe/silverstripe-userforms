@@ -1032,7 +1032,7 @@ JS
 		}
 		
 		$submittedForm->extend('updateAfterProcess');
-		
+
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
 		
@@ -1052,6 +1052,10 @@ JS
 				Session::set('FormProcessedNum',$randNum);
 			}
 		}
+
+		if(!$this->DisableSaveSubmissions) {
+			Session::set('userformssubmission'. $this->ID, $submittedForm->ID);
+		}
 		
 		return $this->redirect($this->Link('finished') . $referrer);
 	}
@@ -1063,6 +1067,12 @@ JS
 	 * @return ViewableData
 	 */
 	public function finished() {
+		$submission = Session::get('userformssubmission'. $this->ID);
+
+		if($submission) {
+			$submission = SubmittedForm::get()->byId($submission);
+		}
+
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
 		$formProcessed = Session::get('FormProcessed');
@@ -1083,10 +1093,10 @@ JS
 		Session::clear('FormProcessed');
 
 		return $this->customise(array(
-			'Content' => $this->customise(
-				array(
-					'Link' => $referrer
-				))->renderWith('ReceivedFormSubmission'),
+			'Content' => $this->customise(array(
+				'Submission' => $submission,
+				'Link' => $referrer
+			))->renderWith('ReceivedFormSubmission'),
 			'Form' => '',
 		));
 	}
