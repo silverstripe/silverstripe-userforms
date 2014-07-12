@@ -223,6 +223,16 @@ class FieldEditor extends FormField {
 			$className = (isset($_REQUEST['Type'])) ? $_REQUEST['Type'] : '';
 			
 			if(!$className) {
+				// A possible reason for the classname being blank is because we have execeded
+				// the number of input requests
+				// http://www.php.net/manual/en/info.configuration.php#ini.max-input-vars
+				$maxRequests = ini_get('max_input_vars');
+				$numRequests = count($_REQUEST, COUNT_RECURSIVE);
+				if ($numRequests > $maxRequests) {
+					$error = sprintf('You have exceded the maximum number %s of input requests',
+						"[$maxRequests]");
+					user_error($error, E_USER_WARNING);
+				}
 				user_error('Please select a field type to created', E_USER_WARNING);
 			}
 

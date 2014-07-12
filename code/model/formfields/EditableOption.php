@@ -26,6 +26,24 @@ class EditableOption extends DataObject {
 		"Versioned('Stage', 'Live')"
 	);
 
+    /**
+     * @param Member $member
+     *
+     * @return boolean
+     */
+    public function canEdit($member = null) {
+    	return ($this->Parent()->canEdit($member));
+    }
+
+    /**
+     * @param Member $member
+     *
+     * @return boolean
+     */
+    public function canDelete($member = null) {
+    	return ($this->Parent()->canDelete($member));
+    }
+
 	/**
 	 * Template for the editing view of this option field
 	 */
