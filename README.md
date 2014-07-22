@@ -9,7 +9,7 @@ and without getting involved in any PHP code.
 
 ## Maintainer Contact
 
-	* Will Rossiter (Nickname: wrossiter, willr) `<will (at) fullscreen (dot) io>`
+ * Will Rossiter (Nickname: wrossiter, willr) `<will (at) fullscreen (dot) io>`
 
 ## Requirements
 
@@ -27,39 +27,31 @@ and without getting involved in any PHP code.
 
 ## Installation
 
+Installation can be done either by composer or by manually downloading a release.
+
 ### Via composer
 
-```
-composer require "silverstripe/userforms:dev-master"
-```
+`composer require "silverstripe/userforms:*"`
 
 ### Manually
 
- 1.  Download the module from the link above. 
+ 1.  Download the module from [the releases page](https://github.com/silverstripe/silverstripe-userforms/releases).
  2.  Extract the file (if you are on windows try 7-zip for extracting tar.gz files
  3.  Make sure the folder after being extracted is named 'userforms' 
  4.  Place this directory in your sites root directory. This is the one with framework and cms in it.
 
+### Configuration
 
-After installation, make sure you rebuild your database through `dev/build`. You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
+After installation, make sure you rebuild your database through `dev/build`.
 
-## Troubleshooting
+You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
 
-After installation make sure you have done a `dev/build` you may also need to flush the admin view by appending `?flush=1` to the URL like `http://yoursite.com/admin?flush=1`
+## Documentation
 
-## Tasks
-
-### UserForms EditableFormField Column Clean task ###
-
-This task is used to clear unused columns from EditableFormField
-
-The reason to clear these columns is because having surplus forms can break form saving.
-
-Currently it only supports MySQL and when it is run it queries the EditableFormField class for the valid columns,
-it then grabs the columns for the live database it will create a backup of the table and then remove any columns that
-are surplus.
-
-To run the task login as Admin and go to to http://yoursite/dev/tasks/UserFormsColumnCleanTask
+ * [Index](docs/en/index.md)
+ * [Installation instructions](docs/en/installation.md)
+ * [Troubleshooting](docs/en/troubleshooting.md)
+ * [User Documentation](docs/en/user-documentation.md)
 
 ## Thanks
 
