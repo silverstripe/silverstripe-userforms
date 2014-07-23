@@ -14,4 +14,4 @@ before_script:
  - cd ~/builds/ss
 
 script: 
- - phpunit userforms/tests/
+ - vendor/bin/phpunit userforms/tests/
