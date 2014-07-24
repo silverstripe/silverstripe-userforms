@@ -7,7 +7,7 @@
  * @package userforms
  */
 
-class EditableNumericField extends EditableTextField {
+class EditableNumericField extends EditableFormField {
 
 	private static $singular_name = 'Numeric Field';
 	
@@ -22,15 +22,8 @@ class EditableNumericField extends EditableTextField {
 	 * @return TextareaField|TextField
 	 */
 	public function getFormField() {
-		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
-			$taf = new NumericField($this->Name, $this->Title);
-			$taf->setRows($this->getSetting('Rows'));
-			$taf->addExtraClass('number');
-		}
-		else {
-			$taf = new NumericField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
-			$taf->addExtraClass('number');
-		}
+		$taf = new NumericField($this->Name, $this->Title);
+		$taf->addExtraClass('number');
 		if ($this->Required) {
 			//  Required and numeric validation can conflict so add the Required validation messages
 			// as input attributes
@@ -39,5 +32,35 @@ class EditableNumericField extends EditableTextField {
 			$taf->setAttribute('data-msg-required',$errorMessage);
 		}
 		return $taf;
+	}
+	
+	public function getFieldValidationOptions() {
+		$fields = parent::getFieldValidationOptions();
+	
+		$min = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
+		$max = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
+	
+		$extraFields = new FieldList(
+				new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
+						new NumericField($this->getSettingName('MinLength'), "Minimum Value", $min),
+						new NumericField($this->getSettingName('MaxLength'), "Maximum Value", $max)
+				)
+		);
+	
+		$fields->merge($extraFields);
+	
+		return $fields;
+	}
+	
+	public function getValidation() {
+		$options = array();
+	
+		if($this->getSetting('MinLength'))
+			$options['min'] = 0 + (int)$this->getSetting('MinLength');
+			
+		if($this->getSetting('MaxLength'))
+			$options['max'] = 0 + (int)$this->getSetting('MaxLength');
+	
+		return $options;
 	}
 }
