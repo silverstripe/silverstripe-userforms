@@ -835,7 +835,7 @@ JS
 			if(is_array( $value )) {
 				$result[] = "$key:" . $this->array2json($value);
 			} else {
-				$value = (is_bool($value)) ? $value : "\"$value\"";
+				$value = ( is_bool($value) || is_numeric($value) ) ? $value : "\"$value\"";
 				$result[] = "$key:$value";
 			}
 		}
