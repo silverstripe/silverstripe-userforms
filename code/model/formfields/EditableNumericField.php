@@ -7,7 +7,7 @@
  * @package userforms
  */
 
-class EditableNumericField extends EditableTextField {
+class EditableNumericField extends EditableFormField {
 
 	private static $singular_name = 'Numeric Field';
 	
@@ -17,27 +17,52 @@ class EditableNumericField extends EditableTextField {
 		return true;
 	}
 	
-
 	/**
-	 * @return TextareaField|TextField
+	 * @return NumericField
 	 */
 	public function getFormField() {
-		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
-			$taf = new NumericField($this->Name, $this->Title);
-			$taf->setRows($this->getSetting('Rows'));
-			$taf->addExtraClass('number');
-		}
-		else {
-			$taf = new NumericField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
-			$taf->addExtraClass('number');
-		}
-		if ($this->Required) {
-			//  Required and numeric validation can conflict so add the Required validation messages
-			// as input attributes
+		$field = new NumericField($this->Name, $this->Title);
+		$field->addExtraClass('number');
+
+		if ($field->Required) {
+			// Required and numeric validation can conflict so add the
+			// required validation messages as input attributes
 			$errorMessage = $this->getErrorMessage()->HTML();
-			$taf->setAttribute('data-rule-required','true');
-			$taf->setAttribute('data-msg-required',$errorMessage);
+
+			$field->setAttribute('data-rule-required','true');
+			$field->setAttribute('data-msg-required',$errorMessage);
 		}
-		return $taf;
+
+		return $field;
+	}
+
+	public function getFieldValidationOptions() {
+		$fields = parent::getFieldValidationOptions();
+
+		$min = ($this->getSetting('MinValue')) ? $this->getSetting('MinValue') : '';
+		$max = ($this->getSetting('MaxValue')) ? $this->getSetting('MaxValue') : '';
+
+		$extraFields = new FieldList(
+			new NumericField($this->getSettingName('MinValue'), _t('EditableFormField.MINVALUE', 'Min Value'), $min),
+			new NumericField($this->getSettingName('MaxValue'), _t('EditableFormField.MAXVALUE', 'Max Value'), $max)
+		);
+
+		$fields->merge($extraFields);
+
+		return $fields;
+	}
+
+	public function getValidation() {
+		$options = array();
+
+		if($this->getSetting('MinValue')) {
+			$options['min'] = 0 + (int) $this->getSetting('MinValue');
+		}
+
+		if($this->getSetting('MaxValue')) {
+			$options['max'] = 0 + (int)$this->getSetting('MaxValue');
+		}
+
+		return $options;
 	}
 }
