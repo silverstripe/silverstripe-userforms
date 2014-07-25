@@ -19,7 +19,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 
 		$optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : array();
 
-		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
+		return new UserFormsCheckboxSetField($this->Name, $this->Title, $optionMap);
 	}
 	
 	public function getValueFromData($data) {

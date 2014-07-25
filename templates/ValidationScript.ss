@@ -1,29 +1,31 @@
 (function($) {
 	$(document).ready(function() {
+		var messages = {<% loop $Fields %><% if $ErrorMessage && not $SetsOwnError %><% if ClassName == EditableCheckboxGroupField %>
+			'{$Name.JS}[]': '{$ErrorMessage.JS}'<% else %>
+			'{$Name.JS}': '{$ErrorMessage.JS}',<% end_if %><% end_if %><% end_loop %>
+		};
+
 		$("#Form_Form").validate({
 			ignore: ':hidden',
 			errorClass: "required",
 			errorElement: "span",
 			errorPlacement: function(error, element) {
-				error.addClass('message')
-				if(element.is(":radio")) {
+				error.addClass('message');
+
+				if(element.is(":radio") || element.parents(".checkboxset").length > 0) {
 					error.insertAfter(element.closest("ul"));
 				} else {
 					error.insertAfter(element);
 				}
 			},
-			messages: {
-				<% loop $Fields %>
-					<% if $ErrorMessage && not $SetsOwnError %>
-						'{$Name.JS}': '{$ErrorMessage.JS}',
-					<% end_if %>
-				<% end_loop %>
-			},
+			messages: messages,
 			rules: {
 				<% loop $Fields %>
-					<% if $Validation %>
+					<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
+						'{$Name.JS}[]': {$ValidationJSON.RAW}
+					<% else %>
 						'{$Name.JS}': {$ValidationJSON.RAW},
-					<% end_if %>
+					<% end_if %><% end_if %>
 				<% end_loop %>
 			},
 			<% if $EnableLiveValidation %>
