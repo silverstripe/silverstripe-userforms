@@ -974,6 +974,8 @@ JS
 				}
 			}
 
+			$this->extend('updateEmailRecipients', $emailData, $recipients);
+
 			foreach($recipients as $recipient) {
 				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
@@ -1030,6 +1032,8 @@ JS
 				}
 			}
 		}
+
+		$this->extend('updateOnCompleteMessage', $submittedFields);
 		
 		$submittedForm->extend('updateAfterProcess');
 

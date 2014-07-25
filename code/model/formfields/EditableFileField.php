@@ -7,9 +7,9 @@
  */
 
 class EditableFileField extends EditableFormField {
-	
+
 	private static $singular_name = 'File Upload Field';
-	
+
 	private static $plural_names = 'File Fields';
 
 	public function getFieldConfiguration() {
