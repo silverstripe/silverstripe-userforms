@@ -26,7 +26,9 @@ class UserDefinedForm extends Page {
 		"ShowClearButton" => "Boolean",
 		'DisableSaveSubmissions' => 'Boolean',
 		'EnableLiveValidation' => 'Boolean',
-		'HideFieldLabels' => 'Boolean'
+		'HideFieldLabels' => 'Boolean',
+		'DisableAuthenicatedFinishAction' => 'Boolean',
+		'DisableCsrfSecurityToken' => 'Boolean'
 	);
 	
 	/**
@@ -380,7 +382,9 @@ SQL;
 			new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
 			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
 			new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
-			new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels'))
+			new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels')),
+			new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
+			new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authenication on finish action'))
 		);
 		
 		$this->extend('updateFormOptions', $options);
@@ -514,6 +518,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if(is_array($data)) $form->loadDataFrom($data);
 		
 		$this->extend('updateForm', $form);
+
+		if($this->DisableCsrfSecurityToken) {
+			$form->disableSecurityToken();
+		}
 		
 		return $form;
 	}
@@ -1039,20 +1047,23 @@ JS
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 
 
-		// set a session variable from the security ID to stop people accessing the finished method directly
-		if (isset($data['SecurityID'])) {
-			Session::set('FormProcessed',$data['SecurityID']);
-		} else {
-			// if the form has had tokens disabled we still need to set FormProcessed
-			// to allow us to get through the finshed method
-			if (!$this->Form()->getSecurityToken()->isEnabled()) {
-				$randNum = rand(1, 1000);
-				$randHash = md5($randNum);
-				Session::set('FormProcessed',$randHash);
-				Session::set('FormProcessedNum',$randNum);
+		// set a session variable from the security ID to stop people accessing 
+		// the finished method directly.
+		if(!$this->DisableAuthenicatedFinishAction) {
+			if (isset($data['SecurityID'])) {
+				Session::set('FormProcessed',$data['SecurityID']);
+			} else {
+				// if the form has had tokens disabled we still need to set FormProcessed
+				// to allow us to get through the finshed method
+				if (!$this->Form()->getSecurityToken()->isEnabled()) {
+					$randNum = rand(1, 1000);
+					$randHash = md5($randNum);
+					Session::set('FormProcessed',$randHash);
+					Session::set('FormProcessedNum',$randNum);
+				}
 			}
 		}
-
+		
 		if(!$this->DisableSaveSubmissions) {
 			Session::set('userformssubmission'. $this->ID, $submittedForm->ID);
 		}
@@ -1075,22 +1086,25 @@ JS
 
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 		
-		$formProcessed = Session::get('FormProcessed');
-		if (!isset($formProcessed)) {
-			return $this->redirect($this->Link() . $referrer);
-		} else {
-			$securityID = Session::get('SecurityID');
-			// make sure the session matches the SecurityID and is not left over from another form
-			if ($formProcessed != $securityID) {
-				// they may have disabled tokens on the form
-				$securityID = md5(Session::get('FormProcessedNum'));
+		if(!$this->DisableAuthenicatedFinishAction) {
+			$formProcessed = Session::get('FormProcessed');
+
+			if (!isset($formProcessed)) {
+				return $this->redirect($this->Link() . $referrer);
+			} else {
+				$securityID = Session::get('SecurityID');
+				// make sure the session matches the SecurityID and is not left over from another form
 				if ($formProcessed != $securityID) {
-					return $this->redirect($this->Link() . $referrer);
+					// they may have disabled tokens on the form
+					$securityID = md5(Session::get('FormProcessedNum'));
+					if ($formProcessed != $securityID) {
+						return $this->redirect($this->Link() . $referrer);
+					}
 				}
 			}
+
+			Session::clear('FormProcessed');
 		}
-		// remove the session variable as we do not want it to be re-used
-		Session::clear('FormProcessed');
 
 		return $this->customise(array(
 			'Content' => $this->customise(array(
