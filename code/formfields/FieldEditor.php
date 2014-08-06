@@ -268,6 +268,9 @@ class FieldEditor extends FormField {
 		if($parent) {
 			$sql_parent = (int)$parent;
 
+			$parentObj = EditableFormField::get()->byID($parent);
+			$optionClass = ($parentObj && $parentObj->exists()) ? $parentObj->getRelationClass('Options') : 'EditableOption';
+
 			$sqlQuery = new SQLQuery();
 			$sqlQuery = $sqlQuery
 				->setSelect("MAX(\"Sort\")")
@@ -277,7 +280,7 @@ class FieldEditor extends FormField {
 			$sort = $sqlQuery->execute()->value() + 1;
 			
 			if($parent) {
-				$object = new EditableOption();
+				$object = Injector::inst()->create($optionClass);
 				$object->write();
 				$object->ParentID = $parent;
 				$object->Sort = $sort;

@@ -270,8 +270,8 @@
 					e.preventDefault();
 					
 					// pass the deleted status onto the element
-					$(this).parent("li").children("[type=text]").attr("value", "field-node-deleted");
-					$(this).parent("li").hide();
+					$(this).parents("li:first").find("[type=text]:first").attr("value", "field-node-deleted");
+					$(this).parents("li:first").hide();
 
 					// Give the user some feedback
 					statusMessage(userforms.message('REMOVED_OPTION'));
