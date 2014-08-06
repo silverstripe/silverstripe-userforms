@@ -1,8 +1,8 @@
 (function($) {
 	$(document).ready(function() {
 		var messages = {<% loop $Fields %><% if $ErrorMessage && not $SetsOwnError %><% if ClassName == EditableCheckboxGroupField %>
-			'{$Name.JS}[]': '{$ErrorMessage.JS}'<% else %>
-			'{$Name.JS}': '{$ErrorMessage.JS}',<% end_if %><% end_if %><% end_loop %>
+			'{$Name.JS}[]': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% else %>
+			'{$Name.JS}': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% end_if %><% end_if %><% end_loop %>
 		};
 
 		$("#Form_Form").validate({
