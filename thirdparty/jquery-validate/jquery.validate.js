@@ -743,7 +743,7 @@ $.extend( $.validator, {
 			} else {
 				// create error element
 				error = $( "<" + this.settings.errorElement + ">" )
-					.attr( "id", elementID + "-error" )
+					.attr( "id", elementID.replace(/\[\]/g, '') + "-error" )
 					.addClass( this.settings.errorClass )
 					.html( message || "" );
 			
@@ -795,7 +795,8 @@ $.extend( $.validator, {
 		},
 
 		errorsFor: function( element ) {
-			var name = this.idOrName( element ),
+			var name = this.sanatizeName(this.idOrName( element )),
+
 				describer = $( element ).attr( "aria-describedby" );
 			if ( describer ) {
 				// aria-describedby should directly reference the error element
@@ -824,7 +825,13 @@ $.extend( $.validator, {
 			return ( /radio|checkbox/i ).test( element.type );
 		},
 
+		sanatizeName: function( name ) {
+			return name.replace('[', '\\[').replace(']', '\\]');
+		},
+
 		findByName: function( name ) {
+			name = this.sanatizeName(name);
+
 			return $( this.currentForm ).find( "[name='" + name + "']" );
 		},
 
