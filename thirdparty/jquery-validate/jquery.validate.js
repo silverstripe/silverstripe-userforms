@@ -1,5 +1,5 @@
 /*!
- * jQuery Validation Plugin v1.12.1pre
+ * jQuery Validation Plugin v1.13.1-pre
  *
  * http://jqueryvalidation.org/
  *
@@ -193,11 +193,17 @@ $.extend($.fn, {
 // Custom selectors
 $.extend( $.expr[ ":" ], {
 	// http://jqueryvalidation.org/blank-selector/
-	blank: function( a ) { return !$.trim( "" + $( a ).val() ); },
+	blank: function( a ) {
+		return !$.trim( "" + $( a ).val() );
+	},
 	// http://jqueryvalidation.org/filled-selector/
-	filled: function( a ) { return !!$.trim( "" + $( a ).val() ); },
+	filled: function( a ) {
+		return !!$.trim( "" + $( a ).val() );
+	},
 	// http://jqueryvalidation.org/unchecked-selector/
-	unchecked: function( a ) { return !$( a ).prop( "checked" ); }
+	unchecked: function( a ) {
+		return !$( a ).prop( "checked" );
+	}
 });
 
 // constructor for validator
@@ -253,7 +259,7 @@ $.extend( $.validator, {
 				if ( this.settings.unhighlight ) {
 					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
 				}
-				this.addWrapper( this.errorsFor( element ) ).hide();
+				this.hideThese( this.errorsFor( element ) );
 			}
 		},
 		onfocusout: function( element ) {
@@ -365,7 +371,7 @@ $.extend( $.validator, {
 					"focusin focusout keyup", delegate)
 				// Support: Chrome, oldIE
 				// "select" is provided as event.target when clicking a option
-				.validateDelegate("select, option", "click", delegate);
+				.validateDelegate("select, option, [type='radio'], [type='checkbox']", "click", delegate);
 
 			if ( this.settings.invalidHandler ) {
 				$( this.currentForm ).bind( "invalid-form.validate", this.settings.invalidHandler );
@@ -482,7 +488,12 @@ $.extend( $.validator, {
 		},
 
 		hideErrors: function() {
-			this.addWrapper( this.toHide ).hide();
+			this.hideThese( this.toHide );
+		},
+
+		hideThese: function( errors ) {
+			errors.not( this.containers ).text( "" );
+			this.addWrapper( errors ).hide();
 		},
 
 		valid: function() {
@@ -501,7 +512,7 @@ $.extend( $.validator, {
 					.focus()
 					// manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
 					.trigger( "focusin" );
-				} catch( e ) {
+				} catch ( e ) {
 					// ignore IE throwing errors when focusing hidden elements
 				}
 			}
@@ -618,7 +629,7 @@ $.extend( $.validator, {
 						this.formatAndAdd( element, rule );
 						return false;
 					}
-				} catch( e ) {
+				} catch ( e ) {
 					if ( this.settings.debug && window.console ) {
 						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
 					}
@@ -732,9 +743,13 @@ $.extend( $.validator, {
 		},
 
 		showLabel: function( element, message ) {
-			var place, group,
+			var place, group, errorID,
 				error = this.errorsFor( element ),
-				elementID = this.idOrName( element );
+				elementID = this.idOrName( element ),
+				describedBy = $( element ).attr( "aria-describedby" );
+
+			elementID = elementID.replace(/\[\]/, '');
+
 			if ( error.length ) {
 				// refresh error/success class
 				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
@@ -743,10 +758,10 @@ $.extend( $.validator, {
 			} else {
 				// create error element
 				error = $( "<" + this.settings.errorElement + ">" )
-					.attr( "id", elementID.replace(/\[\]/g, '') + "-error" )
+					.attr( "id", elementID + "-error" )
 					.addClass( this.settings.errorClass )
 					.html( message || "" );
-			
+
 				// Maintain reference to the element to be placed into the DOM
 				place = error;
 				if ( this.settings.wrapper ) {
@@ -761,7 +776,7 @@ $.extend( $.validator, {
 				} else {
 					place.insertAfter( element );
 				}
-				
+
 				// Link error back to the element
 				if ( error.is( "label" ) ) {
 					// If the error is a label, then associate using 'for'
@@ -769,8 +784,17 @@ $.extend( $.validator, {
 				} else if ( error.parents( "label[for='" + elementID + "']" ).length === 0 ) {
 					// If the element is not a child of an associated label, then it's necessary
 					// to explicitly apply aria-describedby
-					$( element ).attr( "aria-describedby", error.attr( "id" ) );
-				
+
+					errorID = error.attr( "id" );
+					// Respect existing non-error aria-describedby
+					if ( !describedBy ) {
+						describedBy = errorID;
+					} else if ( !describedBy.match( new RegExp( "\b" + errorID + "\b" ) ) ) {
+						// Add to end of list if not already present
+						describedBy += " " + errorID;
+					}
+					$( element ).attr( "aria-describedby", describedBy );
+
 					// If this element is grouped, then assign to all elements in the same group
 					group = this.groups[ element.name ];
 					if ( group ) {
@@ -795,18 +819,16 @@ $.extend( $.validator, {
 		},
 
 		errorsFor: function( element ) {
-			var name = this.sanatizeName(this.idOrName( element )),
-
-				describer = $( element ).attr( "aria-describedby" );
+			var name = this.idOrName( element ),
+				describer = $( element ).attr( "aria-describedby" ),
+				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+			// aria-describedby should directly reference the error element
 			if ( describer ) {
-				// aria-describedby should directly reference the error element
-				return $( "#" + describer, this.errorContext );
-			} else {
-				// If no describer is used then errors are either associated labels, or children of non-error labels
-				return this
-					.errors()
-					.filter( "label[for='" + name + "'], label[for='" + name + "'] *" );
+				selector = selector + ", #" + describer.replace( /\s+/g, ", #" );
 			}
+			return this
+				.errors()
+				.filter( selector );
 		},
 
 		idOrName: function( element ) {
@@ -825,13 +847,7 @@ $.extend( $.validator, {
 			return ( /radio|checkbox/i ).test( element.type );
 		},
 
-		sanatizeName: function( name ) {
-			return name.replace('[', '\\[').replace(']', '\\]');
-		},
-
 		findByName: function( name ) {
-			name = this.sanatizeName(name);
-
 			return $( this.currentForm ).find( "[name='" + name + "']" );
 		},
 
@@ -1129,7 +1145,7 @@ $.extend( $.validator, {
 
 		// http://jqueryvalidation.org/dateISO-method/
 		dateISO: function( value, element ) {
-			return this.optional( element ) || /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/.test( value );
+			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
 		},
 
 		// http://jqueryvalidation.org/number-method/
