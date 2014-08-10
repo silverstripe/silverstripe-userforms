@@ -78,4 +78,20 @@ class SubmittedFormField extends DataObject {
 	public function getExportValue() {
 		return $this->Value;
 	}
+
+	/**
+	 * Find equivalent editable field for this submission.
+	 *
+	 * Note the field may have been modified or deleted from the original form
+	 * so this may not always return the data you expect. If you need to save
+	 * a particular state of editable form field at time of submission, copy 
+	 * that value to the submission.
+	 *
+	 * @return EditableFormField
+	 */
+	public function getEditableField() {
+		return $this->Parent()->Parent()->Fields()->filter(array(
+			'Name' => $this->Name
+		))->First();
+	}
 }
