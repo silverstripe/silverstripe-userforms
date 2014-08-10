@@ -5,6 +5,14 @@
 			'{$Name.JS}': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% end_if %><% end_if %><% end_loop %>
 		};
 
+		$(document).on("click", "input.text[data-showcalendar]", function() {
+			$(this).ssDatepicker();
+
+			if($(this).data('datepicker')) {
+				$(this).datepicker('show');
+			}
+		});
+
 		$("#Form_Form").validate({
 			ignore: ':hidden',
 			errorClass: "required",
