@@ -747,9 +747,8 @@ $.extend( $.validator, {
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
 				describedBy = $( element ).attr( "aria-describedby" );
-
 			elementID = elementID.replace(/\[\]/, '');
-
+			
 			if ( error.length ) {
 				// refresh error/success class
 				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
@@ -789,7 +788,7 @@ $.extend( $.validator, {
 					// Respect existing non-error aria-describedby
 					if ( !describedBy ) {
 						describedBy = errorID;
-					} else if ( !describedBy.match( new RegExp( "\b" + errorID + "\b" ) ) ) {
+					} else if ( !describedBy.match( new RegExp( "\\b" + errorID + "\\b" ) ) ) {
 						// Add to end of list if not already present
 						describedBy += " " + errorID;
 					}
