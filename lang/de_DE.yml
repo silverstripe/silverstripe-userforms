@@ -86,6 +86,9 @@ de_DE:
   EditableMultipleOptionField:
     PLURALNAME: 'Editierbare Multi-Option Felder'
     SINGULARNAME: 'Editierbares Multi-Option Feld'
+  EditableNumericField:
+    PLURALNAME: 'Zahlenfelder'
+    SINGULARNAME: 'Zahlenfeld'
   EditableOption:
     DELETE: 'Option entfernen'
     DRAG: 'Ziehen um Optionen neu zu ordnen'
@@ -100,11 +103,6 @@ de_DE:
     PLURALNAME: 'Textfelder'
     SINGULARNAME: 'Textfeld'
     TEXTLENGTH: 'Textlänge'
-  EditableNumericField:
-    NUMBERROWS: 'Anzahl der Zeilen'
-    PLURALNAME: 'Zahlenfelder'
-    SINGULARNAME: 'Zahlenfeld'
-    TEXTLENGTH: 'Anzahl der Ziffern'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   FieldEditor:

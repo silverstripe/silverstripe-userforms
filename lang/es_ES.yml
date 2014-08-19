@@ -84,7 +84,6 @@ es_ES:
     ONCOMPLETELABEL: 'Mostrar al terminar'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleccione un campo del formulario para utilizar como dirección del remitente'
     ORSELECTAFIELDTOUSEASTO: '.. o seleccione un campo que se utiliza como la dirección'
-    PLURALNAME: 'User Defined Forms'
     SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
     SENDEMAILTO: 'Enviar mail a'
     SENDPLAIN: 'Enviar el correo como texto plano'

@@ -59,6 +59,8 @@ en:
     LESSTHAN: 'Value Less Than'
     LESSTHANEQUAL: 'Value Less Than Or Equal'
     LOCKED: 'These fields cannot be modified'
+    MAXVALUE: 'Max Value'
+    MINVALUE: 'Min Value'
     NO: No
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
@@ -133,6 +135,8 @@ en:
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
     DESCRIPTION: 'Adds a customizable form.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authenication on finish action'
+    DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
@@ -150,6 +154,7 @@ en:
     PLURALNAME: 'User Defined Forms'
     REPLYADDRESS: 'Email for reply to'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'
     SENDEMAILTO: 'Send email to'
     SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'

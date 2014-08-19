@@ -85,7 +85,6 @@ fr_FR:
     ONCOMPLETELABEL: 'Utiliser la complétion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'User Defined Forms'
     REPLYADDRESS: 'Email pour répondre à'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'

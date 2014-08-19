@@ -86,6 +86,9 @@ fi_FI:
   EditableMultipleOptionField:
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
+  EditableNumericField:
+    PLURALNAME: 'Numeeriset kentät'
+    SINGULARNAME: 'Numeerinen kenttä'
   EditableOption:
     DELETE: 'Poista tämä valinta'
     DRAG: 'Raahaa muuttaaksesi valintojen järjestystä'
@@ -100,11 +103,6 @@ fi_FI:
     PLURALNAME: 'Tekstikentät'
     SINGULARNAME: 'Tekstikenttä'
     TEXTLENGTH: 'Tekstin pituus'
-  EditableNumericField:
-    NUMBERROWS: 'Rivejen määrä'
-    PLURALNAME: 'Numeeriset kentät'
-    SINGULARNAME: 'Numeerinen kenttä'
-    TEXTLENGTH: 'Numeroiden määrä'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
   FieldEditor:
@@ -149,7 +147,7 @@ fi_FI:
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
     PLURALNAME: 'Käyttäjän määrittelemät lomakkeet'
     REPLYADDRESS: 'Vastaussähköposti'
-    SAVESUBMISSIONS: 'Älä tallenna lähetyksiä palvelimelle (ne vain lähetetään sähköpostilla)'
+    SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
     SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
     SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
     SHOWCLEARFORM: 'Näytä lomakkeentyhjennysnappi'

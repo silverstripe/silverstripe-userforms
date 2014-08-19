@@ -86,6 +86,9 @@ nl_NL:
   EditableMultipleOptionField:
     PLURALNAME: 'Bewerkbare meerdere optie velden'
     SINGULARNAME: 'Bewerkbare meerdere optie veld'
+  EditableNumericField:
+    PLURALNAME: 'Numerieke velden'
+    SINGULARNAME: 'Numerieke veld'
   EditableOption:
     DELETE: 'Verwijder optie'
     DRAG: 'Sleep om volgorde van de opties te herschikken'
@@ -100,11 +103,6 @@ nl_NL:
     PLURALNAME: 'Tekst velden'
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
-  EditableNumericField:
-    NUMBERROWS: 'Aantal rijen'
-    PLURALNAME: 'Numerieke velden'
-    SINGULARNAME: 'Numerieke veld'
-    TEXTLENGTH: 'Numerieke lengte'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   FieldEditor:
