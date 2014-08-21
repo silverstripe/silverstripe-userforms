@@ -104,6 +104,7 @@ class UserDefinedForm extends Page {
 		$fields->addFieldToTab("Root.FormOptions", $emailRecipients);
 		$fields->addFieldsToTab("Root.FormOptions", $this->getFormOptions());
 
+		$this->extend('updateCMSFields', $fields);
 
 		// view the submissions
 		$submissions = new GridField(
@@ -165,8 +166,6 @@ SQL;
 		$submissions->setConfig($config);
 		$fields->addFieldToTab("Root.Submissions", $submissions);
 		$fields->addFieldToTab("Root.FormOptions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
-
-		$this->extend('updateCMSFields', $fields);
 		
 		return $fields;
 	}
