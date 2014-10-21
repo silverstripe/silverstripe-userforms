@@ -107,7 +107,7 @@ class UserDefinedForm extends Page {
 
 		// view the submissions
 		$submissions = new GridField(
-			"Reports", 
+			"Submissions", 
 			_t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
 			 $this->Submissions()->sort('Created', 'DESC')
 		);
