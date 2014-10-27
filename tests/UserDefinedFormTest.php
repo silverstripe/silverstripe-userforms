@@ -45,7 +45,7 @@ class UserDefinedFormTest extends FunctionalTest {
 
 		$this->assertTrue($fields->dataFieldByName('Fields') !== null);
 		$this->assertTrue($fields->dataFieldByName('EmailRecipients') != null);
-		$this->assertTrue($fields->dataFieldByName('Reports') != null);
+		$this->assertTrue($fields->dataFieldByName('Submissions') != null);
 		$this->assertTrue($fields->dataFieldByName('OnCompleteMessage') != null);
 	}
 
