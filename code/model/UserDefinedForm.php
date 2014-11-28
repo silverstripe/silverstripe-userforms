@@ -431,6 +431,8 @@ SQL;
 
 class UserDefinedForm_Controller extends Page_Controller {
 	
+	private static $finished_anchor = '#uff';
+
 	private static $allowed_actions = array(
 		'index',
 		'ping',
@@ -1067,8 +1069,8 @@ JS
 		if(!$this->DisableSaveSubmissions) {
 			Session::set('userformssubmission'. $this->ID, $submittedForm->ID);
 		}
-		
-		return $this->redirect($this->Link('finished') . $referrer);
+
+		return $this->redirect($this->Link('finished') . $referrer . $this->config()->finished_anchor);
 	}
 
 	/**
