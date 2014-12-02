@@ -702,6 +702,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							// is this field a special option field
 							$checkboxField = false;
 							$radioField = false;
+
 							if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
 								$action = "click";
 								$checkboxField = true;
@@ -709,7 +710,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							else if ($formFieldWatch->ClassName == "EditableRadioField") {
 								$radioField = true;
 							}
-							
+
 							// Escape the values.
 							$dependency['Value'] = str_replace('"', '\"', $dependency['Value']);
 
@@ -766,12 +767,13 @@ class UserDefinedForm_Controller extends Page_Controller {
 							if(!isset($watch[$fieldToWatch])) {
 								$watch[$fieldToWatch] = array();
 							}
-							
+
 							$watch[$fieldToWatch][] =  array(
 								'expression' => $expression,
 								'field_id' => $fieldId,
 								'view' => $view,
-								'opposite' => $opposite
+								'opposite' => $opposite,
+								'action' => $action
 							);
 
 							$watchLoad[$fieldToWatchOnLoad] = true;
@@ -785,6 +787,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($watch) {
 			foreach($watch as $key => $values) {
 				$logic = array();
+				$actions = array();
 
 				foreach($values as $rule) {
 					// Register conditional behaviour with an element, so it can be triggered from many places.
@@ -795,6 +798,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 						$rule['view'], 
 						$rule['opposite']
 					);
+
+					$actions[$rule['action']] = $rule['action'];
 				}
 
 				$logic = implode("\n", $logic);
@@ -803,10 +808,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$logic\n
 	}); \n
 });\n";
-
-				$rules .= $key.".$action(function() {
+				foreach($actions as $action) {
+					$rules .= $key.".$action(function() {
 	$(this).data('userformConditions').call(this);\n
 });\n";
+				}
 			}
 		}
 
