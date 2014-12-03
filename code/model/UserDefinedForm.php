@@ -717,16 +717,16 @@ class UserDefinedForm_Controller extends Page_Controller {
 							// and what should we evaluate
 							switch($dependency['ConditionOption']) {
 								case 'IsNotBlank':
-									$expression = ($checkboxField || $radioField) ? '$(this).attr("checked")' :'$(this).val() != ""';
+									$expression = ($checkboxField || $radioField) ? '$(this).prop("checked")' :'$(this).val() != ""';
 
 									break;
 								case 'IsBlank':
-									$expression = ($checkboxField || $radioField) ? '!($(this).attr("checked"))' : '$(this).val() == ""';
+									$expression = ($checkboxField || $radioField) ? '!($(this).prop("checked"))' : '$(this).val() == ""';
 									
 									break;
 								case 'HasValue':
 									if ($checkboxField) {
-										$expression = '$(this).attr("checked")';
+										$expression = '$(this).prop("checked")';
 									} else if ($radioField) {
 										// We cannot simply get the value of the radio group, we need to find the checked option first.
 										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $dependency['Value'] .'"';
@@ -753,7 +753,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 									break;	
 								default: // ==HasNotValue
 									if ($checkboxField) {
-										$expression = '!$(this).attr("checked")';
+										$expression = '!$(this).prop("checked")';
 									} else if ($radioField) {
 										// We cannot simply get the value of the radio group, we need to find the checked option first.
 										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()!="'. $dependency['Value'] .'"';
