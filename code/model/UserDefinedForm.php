@@ -1173,40 +1173,39 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body'))
 		);
 		
-		if($this->Form()) {
-			$dropdowns = array();
-			// if they have email fields then we could send from it
-			$validEmailFields = EditableEmailField::get()->filter('ParentID', (int)$this->FormID);
-			// for the subject, only one-line entry boxes make sense
-			$validSubjectFields = EditableTextField::get()->filter('ParentID', (int)$this->FormID)->filterByCallback(function($item, $list) { return (int)$item->getSetting('Rows') === 1; });
-			// predefined choices are also candidates
-			$multiOptionFields = EditableMultipleOptionField::get()->filter('ParentID', (int)$this->FormID);
+		$formID = ($this->FormID != 0) ? $this->FormID : Session::get('CMSMain.currentPage');
+		$dropdowns = array();
+		// if they have email fields then we could send from it
+		$validEmailFields = EditableEmailField::get()->filter('ParentID', (int)$formID);
+		// for the subject, only one-line entry boxes make sense
+		$validSubjectFields = EditableTextField::get()->filter('ParentID', (int)$formID)->filterByCallback(function($item, $list) { return (int)$item->getSetting('Rows') === 1; });
+		// predefined choices are also candidates
+		$multiOptionFields = EditableMultipleOptionField::get()->filter('ParentID', (int)$formID);
 
-			$fields->insertAfter($dropdowns[] = new DropdownField(
-				'SendEmailFromFieldID',
-				_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
-				$validEmailFields->map('ID', 'Title')
-			), 'EmailReplyTo');
+		$fields->insertAfter($dropdowns[] = new DropdownField(
+			'SendEmailFromFieldID',
+			_t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
+			$validEmailFields->map('ID', 'Title')
+		), 'EmailReplyTo');
 
-			$validEmailFields = new ArrayList($validEmailFields->toArray());
-			$validEmailFields->merge($multiOptionFields);
-			$validSubjectFields->merge($multiOptionFields);
+		$validEmailFields = new ArrayList($validEmailFields->toArray());
+		$validEmailFields->merge($multiOptionFields);
+		$validSubjectFields->merge($multiOptionFields);
 
-			$fields->insertAfter($dropdowns[] = new DropdownField(
-				'SendEmailToFieldID',
-				_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
-				$validEmailFields->map('ID', 'Title')
-			), 'EmailAddress');
-			$fields->insertAfter($dropdowns[] = new DropdownField(
-				'SendEmailSubjectFieldID',
-				_t('UserDefinedForm.SELECTAFIELDTOSETSUBJECT', '.. or select a field to use as the subject'),
-				$validSubjectFields->map('ID', 'Title')
-			), 'EmailSubject');
+		$fields->insertAfter($dropdowns[] = new DropdownField(
+			'SendEmailToFieldID',
+			_t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
+			$validEmailFields->map('ID', 'Title')
+		), 'EmailAddress');
+		$fields->insertAfter($dropdowns[] = new DropdownField(
+			'SendEmailSubjectFieldID',
+			_t('UserDefinedForm.SELECTAFIELDTOSETSUBJECT', '.. or select a field to use as the subject'),
+			$validSubjectFields->map('ID', 'Title')
+		), 'EmailSubject');
 
-			foreach($dropdowns as $dropdown) {
-				$dropdown->setHasEmptyDefault(true);
-				$dropdown->setEmptyString(" ");
-			}
+		foreach($dropdowns as $dropdown) {
+			$dropdown->setHasEmptyDefault(true);
+			$dropdown->setEmptyString(" ");
 		}
 
 		$this->extend('updateCMSFields', $fields);
