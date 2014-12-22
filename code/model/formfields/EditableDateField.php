@@ -38,9 +38,17 @@ class EditableDateField extends EditableFormField {
 	 */
 	public function getFormField() {
 		$defaultValue = ($this->getSetting('DefaultToToday')) ? date('Y-m-d') : $this->Default;
-		$field = new EditableDateField_FormField( $this->Name, $this->Title, $defaultValue);
+		$field = EditableDateField_FormField::create( $this->Name, $this->Title, $defaultValue);
 		$field->setConfig('showcalendar', true);
 
+		if ($this->Required) {
+			// Required validation can conflict so add the Required validation messages
+			// as input attributes
+			$errorMessage = $this->getErrorMessage()->HTML();
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
+		}
+		
 		return $field;
 	}
 }

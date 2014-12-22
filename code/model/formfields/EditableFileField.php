@@ -30,7 +30,7 @@ class EditableFileField extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = new FileField($this->Name, $this->Title);
+		$field = FileField::create($this->Name, $this->Title);
 
 		if($this->getSetting('Folder')) {
 			$folder = Folder::get()->byId($this->getSetting('Folder'));
@@ -40,6 +40,14 @@ class EditableFileField extends EditableFormField {
 					preg_replace("/^assets\//","", $folder->Filename)
 				);
 			}
+		}
+
+		if ($this->Required) {
+			// Required validation can conflict so add the Required validation messages
+			// as input attributes
+			$errorMessage = $this->getErrorMessage()->HTML();
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
 		}
 
 		return $field;
