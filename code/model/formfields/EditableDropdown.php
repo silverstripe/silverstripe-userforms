@@ -26,6 +26,16 @@ class EditableDropdown extends EditableMultipleOptionField {
 			}
 		}
 		
-		return new DropdownField($this->Name, $this->Title, $options);	
+		$field = DropdownField::create($this->Name, $this->Title, $options);
+
+		if ($this->Required) {
+			// Required validation can conflict so add the Required validation messages
+			// as input attributes
+			$errorMessage = $this->getErrorMessage()->HTML();
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
+		}
+		
+		return $field;
 	}
 }

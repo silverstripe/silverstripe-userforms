@@ -24,13 +24,12 @@ class EditableNumericField extends EditableFormField {
 		$field = new NumericField($this->Name, $this->Title);
 		$field->addExtraClass('number');
 
-		if ($field->Required) {
+		if ($this->Required) {
 			// Required and numeric validation can conflict so add the
 			// required validation messages as input attributes
 			$errorMessage = $this->getErrorMessage()->HTML();
-
-			$field->setAttribute('data-rule-required','true');
-			$field->setAttribute('data-msg-required',$errorMessage);
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
 		}
 
 		return $field;

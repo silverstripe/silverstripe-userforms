@@ -18,16 +18,18 @@ class EditableEmailField extends EditableFormField {
 	}
 	
 	public function getFormField() {
+		
+		$field = EmailField::create($this->Name, $this->Title);
+		
 		if ($this->Required) {
-			//  Required and Email validation can conflict so add the Required validation messages
+			// Required and Email validation can conflict so add the Required validation messages
 			// as input attributes
 			$errorMessage = $this->getErrorMessage()->HTML();
-			$field =  new EmailField($this->Name, $this->Title);
-			$field->setAttribute('data-rule-required','true');
-			$field->setAttribute('data-msg-required',$errorMessage);
-			return $field;
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
 		}
-		return new EmailField($this->Name, $this->Title);
+		
+		return $field;
 	}
 	
 	/**
