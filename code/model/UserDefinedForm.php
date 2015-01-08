@@ -37,6 +37,7 @@ class UserDefinedForm extends Page {
 	private static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
+		'EnableLiveValidation' => 1,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
@@ -446,15 +447,21 @@ class UserDefinedForm_Controller extends Page_Controller {
 		// load the jquery
 		$lang = i18n::get_lang_from_locale(i18n::get_locale());
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-		Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+		if($this->EnableLiveValidation){
+			Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+		}
 		Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
 		Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm_frontend.js');
-		Requirements::javascript(
-			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
-		);
-		Requirements::javascript(
-			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-		);
+		if($this->EnableLiveValidation){
+			Requirements::javascript(
+				USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+			);
+		}
+		if($this->EnableLiveValidation){
+			Requirements::javascript(
+				USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+			);
+		}
 		if($this->HideFieldLabels) {
 			Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
 		}
@@ -618,7 +625,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 	public function getRequiredFields() {
 		
 		// set the custom script for this form
-		Requirements::customScript($this->renderWith('ValidationScript'), 'UserFormsValidation');
+		if($this->EnableLiveValidation){
+			Requirements::customScript($this->renderWith('ValidationScript'), 'UserFormsValidation');
+		}
 		
 		// Generate required field validator
 		$requiredNames = $this
