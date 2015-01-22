@@ -216,13 +216,13 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertArrayHasKey(0, $parser->getBySelector('input.text'));
 		
 		// check for the label and the text
-		$label = $parser->getBySelector('label.left');
+		$label = $parser->getBySelector('label.field__label');
 		$this->assertArrayHasKey(0, $label);
 		
 		$this->assertEquals((string) $label[0][0], "Basic Text Field", "Label contains correct field name");
 		
 		// check for the action
-		$action = $parser->getBySelector('input.action');
+		$action = $parser->getBySelector('input.btn--submit');
 		$this->assertArrayHasKey(0, $action);
 		
 		$this->assertEquals((string) $action[0]['value'], "Submit", "Submit button has default text");
