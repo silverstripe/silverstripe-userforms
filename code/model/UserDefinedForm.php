@@ -646,12 +646,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$fieldId = $field->Name;
-				
-				if($field->ClassName == 'EditableFormHeading') { 
-					$fieldId = 'Form_Form_'.$field->Name;
-				}
-				
+				$fieldId = 'Form_Form_'.$field->Name.'_Holder';
+								
 				// Is this Field Show by Default
 				if(!$field->getShowOnLoad()) {
 					$default .= "$(\"#" . $fieldId . "\").hide();\n";
