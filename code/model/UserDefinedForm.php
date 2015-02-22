@@ -527,7 +527,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		return $form;
 	}
-	
+
 	/**
 	 * Get the form fields for the form on this page. Can modify this FieldSet
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
@@ -537,46 +537,44 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	public function getFormFields() {
 		$fields = new FieldList();
-				
-		if($this->Fields()) {
-			foreach($this->Fields() as $editableField) {
-				// get the raw form field from the editable version
-				$field = $editableField->getFormField();
-				if(!$field) break;
-				
-				// set the error / formatting messages
-				$field->setCustomValidationMessage($editableField->getErrorMessage());
 
-				// set the right title on this field
-				if($right = $editableField->getSetting('RightTitle')) {
-					$field->setRightTitle($right);
-				}
-				
-				// if this field is required add some
-				if($editableField->Required) {
-					$field->addExtraClass('requiredField');
-					
-					if($identifier = UserDefinedForm::config()->required_identifier) {
-						
-						$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
-						$field->setTitle($title);
-					}
-				}
-				// if this field has an extra class
-				if($editableField->getSetting('ExtraClass')) {
-					$field->addExtraClass(Convert::raw2att(
-						$editableField->getSetting('ExtraClass')
-					));
-				}
-				
-				// set the values passed by the url to the field
-				$request = $this->getRequest();
-				if($var = $request->getVar($field->name)) {
-					$field->value = Convert::raw2att($var);
-				}
-				
-				$fields->push($field);
+		$editableFields = $this->Fields();
+		if($editableFields) foreach($editableFields as $editableField) {
+			// get the raw form field from the editable version
+			$field = $editableField->getFormField();
+			if(!$field) break;
+
+			// set the error / formatting messages
+			$field->setCustomValidationMessage($editableField->getErrorMessage());
+
+			// set the right title on this field
+			if($right = $editableField->getSetting('RightTitle')) {
+				// Since this field expects raw html, safely escape the user data prior
+				$field->setRightTitle(Convert::raw2xml($right));
 			}
+
+			// if this field is required add some
+			if($editableField->Required) {
+				$field->addExtraClass('requiredField');
+
+				if($identifier = UserDefinedForm::config()->required_identifier) {
+
+					$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
+					$field->setTitle($title);
+				}
+			}
+			// if this field has an extra class
+			if($extraClass = $editableField->getSetting('ExtraClass')) {
+				$field->addExtraClass(Convert::raw2att($extraClass));
+			}
+
+			// set the values passed by the url to the field
+			$request = $this->getRequest();
+			if($value = $request->getVar($field->getName())) {
+				$field->setValue($value);
+			}
+
+			$fields->push($field);
 		}
 		$this->extend('updateFormFields', $fields);
 
