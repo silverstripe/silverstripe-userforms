@@ -1,6 +1,9 @@
 # UserForms
 
-[![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-userforms.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-userforms)
+## Changes from silverstripe
+* On successful form submit `$Form` now contains the success message
+* On successful form submit `$Content` is no longer replaced with the success message
+* Default template for success message is now a Bootstrap Navigation
 
 ## Introduction
 
@@ -9,7 +12,7 @@ and without getting involved in any PHP code.
 
 ## Maintainer Contact
 
- * Will Rossiter (Nickname: wrossiter, willr) `<will (at) fullscreen (dot) io>`
+ * Webfox Developers `<developers@webfox.co.nz>`
 
 ## Requirements
 

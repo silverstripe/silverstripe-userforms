@@ -1,23 +1,34 @@
 {
-	"name": "silverstripe/userforms",
-	"description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "userforms"],
-	"license": "BSD-3-Clause",
-	"authors": [{
-		"name": "Will Rossiter",
-		"email": "will@fullscreen.io"
-	}],
-	"require": {
-		"silverstripe/framework": ">=3.1.0",
-		"silverstripe/cms": ">=3.1.0"
-	},
-	"suggest": {
-		"colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions"
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "2.0.x-dev"
-		}
-	}
+  "name": "webfox/userforms",
+  "description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
+  "type": "silverstripe-module",
+  "keywords": [
+    "silverstripe",
+    "userforms"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Will Rossiter",
+      "email": "will@fullscreen.io",
+      "role": "Initial Developer"
+    },
+    {
+      "name": "Webfox Developers",
+      "email": "developers@webfox.co.nz",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": ">=3.1.0",
+    "silverstripe/cms": ">=3.1.0"
+  },
+  "suggest": {
+    "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0.x-dev"
+    }
+  }
 }
