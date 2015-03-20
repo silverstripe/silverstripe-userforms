@@ -25,10 +25,5 @@
   },
   "suggest": {
     "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.0.x-dev"
-    }
   }
 }
