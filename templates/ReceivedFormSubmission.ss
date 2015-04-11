@@ -1,1 +1,3 @@
-$OnCompleteMessage
+<div id="uff">
+	$OnCompleteMessage
+</div>

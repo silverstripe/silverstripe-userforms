@@ -1,0 +1,169 @@
+eo:
+  CustomRule:
+    BLANK: Vaka
+    DELETE: Forigi
+    GREATERTHAN: 'Valoro pli ol'
+    GREATERTHANEQUAL: 'Valoro pli ol aŭ egala al'
+    HIDETHISFIELD: 'Kaŝi ĉi tiun kampon'
+    IS: Estas
+    LESSTHAN: 'Valoro malpli ol'
+    LESSTHANEQUAL: 'Valoro malpli ol aŭ egala al'
+    NOTBLANK: 'Ne vaka'
+    NOTVALUE: 'Ne valoro'
+    SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
+    VALUE: Valoro
+    WHEN: Kiam
+  EditableCheckbox:
+    PLURALNAME: Markobutonoj
+    SINGULARNAME: 'Markobutona kampo'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Markobutonaj grupoj'
+    SINGULARNAME: 'Markobutona grupo'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Landaj fallistoj'
+    SINGULARNAME: 'Landa fallisto'
+  EditableDateField:
+    PLURALNAME: 'Kampoj por dato'
+    SINGULARNAME: 'Kampo por dato'
+  EditableDropdown:
+    PLURALNAME: Fallistoj
+    SINGULARNAME: 'Fallista kampo'
+  EditableEmailField:
+    PLURALNAME: 'Kampoj por retpoŝto'
+    SINGULARNAME: 'Kampo por retpoŝto'
+  EditableFileField:
+    PLURALNAME: 'Kampoj por dosiera alŝuto'
+    SINGULARNAME: 'Kampo por dosiera alŝuto'
+  EditableFormField:
+    ADD: Aldoni
+    ADDLabel: 'Aldoni agordon'
+    ADDRULE: 'Aldoni regulon'
+    BLANK: Vaka
+    CHECKEDBYDEFAULT: 'Ĉu kontrolita apriore?'
+    CUSTOMERROR: 'Propra mesaĝo pri eraro'
+    CUSTOMRULES: 'Propraj reguloj'
+    DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
+    DELETE: Forigi
+    DRAG: 'Ŝovi por rearanĝi kampojn'
+    ENTERQUESTION: 'Enigi demandon'
+    EXTRACLASSA: 'Ekstra stilado/aranĝado'
+    EXTRACLASSB: 'Ekstra css-klaso - apartigi opojn per spaceto'
+    FIELDCONFIGURATION: 'Agordi kampon'
+    FIELDONDEFAULT: 'Kampo al apriora'
+    GREATERTHAN: 'Valoro pli ol'
+    GREATERTHANEQUAL: 'Valoro pli ol aŭ egala al'
+    GROUP: Grupo
+    HIDE: Kaŝi
+    HIDETHISFIELD: 'Kaŝi ĉi tiun kampon'
+    IS: Estas
+    LESSTHAN: 'Valoro malpli ol'
+    LESSTHANEQUAL: 'Valoro malpli ol aŭ egala al'
+    LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
+    MAXVALUE: 'Maks valoro'
+    MINVALUE: 'Min valoro'
+    NOTBLANK: 'Ne vaka'
+    NOTVALUE: 'Ne valoro'
+    OPTIONS: Agordoj
+    PLURALNAME: 'Redakteblaj formularaj kampoj'
+    REQUIRED: 'Ĉu ĉi tiu kampo estas nepra?'
+    RIGHTTITLE: 'Dekstra titolo'
+    SHOW: Vidigi
+    SHOWOPTIONS: 'Vidigi agordojn'
+    SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
+    SINGULARNAME: 'Redaktebla formulara kampo'
+    VALIDATION: Validigo
+    VALUE: Valoro
+    WHEN: Kiam
+  EditableFormHeading:
+    LEVEL: 'Elekti titolan nivelon'
+    PLURALNAME: Titoloj
+    SINGULARNAME: Titolo
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
+    PLURALNAME: 'HTML-blokoj'
+    SINGULARNAME: 'HTML-bloko'
+  EditableMemberListField:
+    PLURALNAME: 'Kampoj por membrolisto'
+    SINGULARNAME: 'Kampo por membrolisto'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Redakteblaj plureblaj kampoj'
+    SINGULARNAME: 'Redaktebla plurebla kampo'
+  EditableNumericField:
+    PLURALNAME: 'Numeraj kampoj'
+    SINGULARNAME: 'Numera kampo'
+  EditableOption:
+    DELETE: 'Forigi ĉi tiun agordon'
+    DRAG: 'Ŝovi por rearanĝi ordon de agordoj'
+    LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
+    PLURALNAME: 'Redakteblaj agordoj'
+    SINGULARNAME: 'Redaktebla agordo'
+  EditableRadioField:
+    PLURALNAME: 'Radiobutonaj kampoj'
+    SINGULARNAME: 'Radiobutona kampo'
+  EditableTextField:
+    NUMBERROWS: 'Nombro da vicoj'
+    PLURALNAME: 'Tekstaj kampoj'
+    SINGULARNAME: 'Teksta kampo'
+    TEXTLENGTH: 'Longo de teksto'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
+  FieldEditor:
+    ADD: Aldoni
+    SELECTAFIELD: 'Elekti kampon'
+  Form:
+    FIELDISREQUIRED: '%s estas nepra'
+  GridField:
+    Filter: Filtri
+    ResetFilter: Restartigi
+  SiteTree:
+    PLURALNAME: Paĝoj
+    SINGULARNAME: Paĝo
+  SubmittedFileField:
+    DOWNLOADFILE: 'Elŝuti dosieron'
+    PLURALNAME: 'Senditaj dosieraj kampoj'
+    SINGULARNAME: 'Sendita dosiera kampo'
+  SubmittedForm:
+    PLURALNAME: 'Senditaj formularoj'
+    SINGULARNAME: 'Sendita formularo'
+  SubmittedFormField:
+    PLURALNAME: 'Senditaj formularaj kampoj'
+    SINGULARNAME: 'Sendita formulara kampo'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
+    CLEARBUTTON: Vakigi
+    CONFIGURATION: Agordaro
+    DESCRIPTION: 'Aldonas adapteblan formularon'
+    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtenigi finan agon'
+    DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
+    EMAILADDRESS: Retpoŝto
+    EMAILBODY: Korpo
+    EMAILFROM: De
+    EMAILRECIPIENTS: 'Retpoŝtaj ricevontoj'
+    EMAILSUBJECT: 'Temo de retpoŝto'
+    ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
+    EmailFromContent: 'La de-adreso ebligas agordi de kiu la retpoŝto iros. Ĉe plejmultaj serviloj tio devas agordiĝi al retadreso de la sama domajna nomo kiel via retejo. Ekzemple, ĉe viaretejo.com la de-adreso eble devas esti en la formo io@viaretejo.com. Tamen, iu ajn adreso validos kiel la respondu-al-adreso.'
+    FORM: Formularo
+    FROMADDRESS: 'Sendi retpoŝton de'
+    HIDEFIELDLABELS: 'Kaŝi kampajn etikedojn'
+    HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
+    ONCOMPLETELABEL: 'Vidigi je kompletigo'
+    ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
+    ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
+    PLURALNAME: 'Propre difinitaj formularoj'
+    REPLYADDRESS: 'Retpoŝto al kiu respondi'
+    SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
+    SELECTAFIELDTOSETSUBJECT: '.. aŭ elekti kampon uzotan kiel la temon'
+    SENDEMAILTO: 'Sendi retpoŝton al'
+    SENDPLAIN: 'Ĉu sendi retpoŝton kiel simplan tekston? (HTML foriĝos) '
+    SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
+    SINGULARNAME: 'Propre difinita formularo'
+    SUBMISSIONS: Sendaĵoj
+    SUBMITBUTTON: Sendi
+    TEXTONCLEAR: 'Teksto sur vakiga butono:'
+    TEXTONSUBMIT: 'Teksto sur senda butono:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
+    SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
+    WHEREVALUEIS: 'kie valoro estas..'

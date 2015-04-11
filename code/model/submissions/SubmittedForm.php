@@ -52,6 +52,7 @@ class SubmittedForm extends DataObject {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		$fields->removeByName('Values');
+		$fields->dataFieldByName('SubmittedByID')->setDisabled(true);
 
 		$values = new GridField(
 			"Values", 

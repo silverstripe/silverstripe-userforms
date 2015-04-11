@@ -41,11 +41,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 		$selectedField = $state->filter;
 		$selectedValue = $state->value;
-
-		// retrieve a list of all the available form fields that have been 
-		// submitted in this form.
-		$params = $gridField->getForm()->getController()->getURLParams();
-
+		
 		// show dropdown of all the fields available from the submitted form fields
 		// that have been saved. Takes the titles from the currently live form.
 		$columnField = new DropdownField('FieldNameFilter', '');

@@ -30,7 +30,7 @@
 			rules: {
 				<% loop $Fields %>
 					<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
-						'{$Name.JS}[]': {$ValidationJSON.RAW}
+						'{$Name.JS}[]': {$ValidationJSON.RAW},
 					<% else %>
 						'{$Name.JS}': {$ValidationJSON.RAW},
 					<% end_if %><% end_if %>

@@ -330,11 +330,16 @@
 					newRule.removeClass("hidden");
 
 					// update the fields dropdown
-					newRule.children("select.fieldOption").empty();
+					var optionChildren = newRule.children("select.fieldOption");
+					optionChildren.empty();
 
-					$("#Fields_fields li.EditableFormField").each(function (i, domElement) {
-						var name = $(domElement).attr("id").split(' ');
-						newRule.children("select.fieldOption").append("<option value='"+ name[2] + "'>"+ $(domElement).find(".text").val() + "</option>");
+					$("#Fields_fields li.EditableFormField").each(function () {
+						var name = $(this).attr("id").split(' ');
+						var option = $("<option></option>")
+							.attr('value', name[2])
+							.text($(this).find(".text").val());
+						optionChildren
+							.append(option);
 					});
 
 					// append to the list

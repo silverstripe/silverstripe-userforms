@@ -54,7 +54,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		// check to see if the user was redirected (301)
 		$this->assertEquals($response->getStatusCode(), 302);
-		$this->assertStringEndsWith('finished', $response->getHeader('Location'));
+		$this->assertStringEndsWith('finished#uff', $response->getHeader('Location'));
 	}
 	
 	function testFinished() {
