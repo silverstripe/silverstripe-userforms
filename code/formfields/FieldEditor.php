@@ -90,18 +90,24 @@ class FieldEditor extends FormField {
 	public function Fields() {
 		if($this->form && $this->form->getRecord() && $this->name) {
 			$relationName = $this->name;
-			$fields = $this->form->getRecord()->getComponents($relationName);
-		
-			if($fields) {
-				foreach($fields as $field) {
-					if(!$this->canEdit() && is_a($field, 'FormField')) {
-						$fields->remove($field);
-						$fields->push($field->performReadonlyTransformation());
+			$record = $this->form->getRecord();
+			
+			if($record->has_many($relationName)) {
+				
+				$fields = $record->getComponents($relationName);
+			
+				if($fields) {
+					foreach($fields as $field) {
+						if(!$this->canEdit() && is_a($field, 'FormField')) {
+							$fields->remove($field);
+							$fields->push($field->performReadonlyTransformation());
+						}
 					}
 				}
+				
+				return $fields;
+				
 			}
-			
-			return $fields;
 		}
 	}
 	
