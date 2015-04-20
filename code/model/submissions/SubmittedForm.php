@@ -50,23 +50,29 @@ class SubmittedForm extends DataObject {
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
+		
+		$self = $this;
+		
+		$this->beforeUpdateCMSFields(function($fields) use ($self) {
+			$fields->removeByName('Values');
+			$fields->dataFieldByName('SubmittedByID')->setDisabled(true);
+			
+			$values = new GridField(
+				'Values', 
+				'SubmittedFormField',
+				$self->Values()->sort('Created', 'ASC')
+			);
+			
+			$config = new GridFieldConfig();
+			$config->addComponent(new GridFieldDataColumns());
+			$config->addComponent(new GridFieldExportButton());
+			$config->addComponent(new GridFieldPrintButton());
+			$values->setConfig($config);
+			
+			$fields->addFieldToTab('Root.Main', $values);
+		});
+		
 		$fields = parent::getCMSFields();
-		$fields->removeByName('Values');
-		$fields->dataFieldByName('SubmittedByID')->setDisabled(true);
-
-		$values = new GridField(
-			"Values", 
-			"SubmittedFormField",
-			 $this->Values()->sort('Created', 'ASC')
-		);
-
-		$config = new GridFieldConfig();
-		$config->addComponent(new GridFieldDataColumns());
-		$config->addComponent(new GridFieldExportButton());
-		$config->addComponent(new GridFieldPrintButton());
-		$values->setConfig($config);
-
-		$fields->addFieldToTab('Root.Main', $values);
 		
 		return $fields;
 	}
