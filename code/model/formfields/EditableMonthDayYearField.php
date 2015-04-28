@@ -65,19 +65,4 @@ class EditableMonthDayYearField extends EditableDateField {
 	}
 	
 	
-	/**
-	 * Return the validation information related to this field. This is
-	 * interrupted as a JSON object for validate plugin and used in the
-	 * PHP.
-	 *
-	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return Array
-	 */
-// 	public function getValidation() {
-// 	    return array_merge(parent::getValidation(), array(
-// 	        'number' => true
-// 	    ));
-// 	}
-	
-	
 }
