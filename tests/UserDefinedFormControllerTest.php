@@ -41,7 +41,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');	
 		$nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
-		$this->assertContains('Basic Text Field - Basic Value', $nohtml['content'], 'Email contains no html');
+		$this->assertContains('Basic Text Field: Basic Value', $nohtml['content'], 'Email contains no html');
 	
 		// no data
 		$this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');	
