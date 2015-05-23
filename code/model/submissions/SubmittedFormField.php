@@ -102,7 +102,7 @@ class SubmittedFormField extends DataObject {
 	 * Return the value of this submitted form field suitable for inclusion
 	 * into the CSV
 	 *
-	 * @return Text
+	 * @return Text 
 	 */
 	public function getExportValue() {
 		return $this->Value;
