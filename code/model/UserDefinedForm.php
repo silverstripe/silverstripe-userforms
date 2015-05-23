@@ -28,7 +28,8 @@ class UserDefinedForm extends Page {
 		'EnableLiveValidation' => 'Boolean',
 		'HideFieldLabels' => 'Boolean',
 		'DisableAuthenicatedFinishAction' => 'Boolean',
-		'DisableCsrfSecurityToken' => 'Boolean'
+		'DisableCsrfSecurityToken' => 'Boolean',
+		'EnableFieldEncryption' => 'Boolean'
 	);
 	
 	/**
@@ -37,7 +38,8 @@ class UserDefinedForm extends Page {
 	private static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
-		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
+		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>',
+		'EnableFieldEncryption' => 0
 	);
 
 	/**
@@ -55,6 +57,11 @@ class UserDefinedForm extends Page {
 	 * @var array
 	 */
 	protected $fieldsFromTo = array();
+	
+	/**
+	 * Encryption key to use during encryption and decryption
+	*/
+	protected $key = "d0a7e7997b6d5fcd55f4b5c32611b87cd923e88837b63bf2941ef819dc8ca282";
 
 	/**
 	 * @return FieldList
@@ -165,6 +172,7 @@ SQL;
 		$submissions->setConfig($config);
 		$fields->addFieldToTab("Root.Submissions", $submissions);
 		$fields->addFieldToTab("Root.FormOptions", new CheckboxField('DisableSaveSubmissions',_t('UserDefinedForm.SAVESUBMISSIONS',"Disable Saving Submissions to Server")));
+		$fields->addFieldToTab("Root.FormOptions", new CheckboxField('EnableFieldEncryption',_t('UserDefinedForm.ENCRYPTION',"Enable form field encryption")));
 
 		$this->extend('updateCMSFields', $fields);
 		
@@ -920,11 +928,24 @@ JS
 			
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
-				$submittedField->Value = $field->getValueFromData($data);
-			} else {
-				if(isset($data[$field->Name])) {
-					$submittedField->Value = $data[$field->Name];
+				
+				if( $this->EnableFieldEncryption && $this->key ) { 
+					$submittedField->Value = $this->mc_encrypt( $field->getValueFromData($data) ); 
+				} else {
+					$submittedField->Value = $field->getValueFromData($data); 
 				}
+					
+			} else {
+				
+				if(isset($data[$field->Name])) {
+					
+					if( $this->EnableFieldEncryption && $this->key ) { 
+						$submittedField->Value = $this->mc_encrypt( $data[$field->Name] );
+					} else {
+						$submittedField->Value = $data[$field->Name];
+					}
+				}
+				
 			}
 
 			if(!empty($data[$field->Name])){
@@ -1120,6 +1141,18 @@ JS
 			'Form' => '',
 		));
 	}
+	
+	// Encrypt Function
+	public function mc_encrypt($encrypt){
+	    $encrypt = serialize($encrypt);
+	    $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
+	    $key = pack('H*', $this->key);
+	    $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
+	    $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt.$mac, MCRYPT_MODE_CBC, $iv);
+	    $encoded = base64_encode($passcrypt).'|'.base64_encode($iv);
+	    return $encoded;
+	}
+	
 }
 
 /**
