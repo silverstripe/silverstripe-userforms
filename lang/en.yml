@@ -61,7 +61,7 @@ en:
     LOCKED: 'These fields cannot be modified'
     MAXVALUE: 'Max Value'
     MINVALUE: 'Min Value'
-    NO: No
+    'NO': 'No'
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -75,7 +75,7 @@ en:
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
-    YES: Yes
+    'YES': 'Yes'
   EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
@@ -151,7 +151,7 @@ en:
     ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'User Defined Forms'
+    PLURALNAME: 'Base Pages'
     REPLYADDRESS: 'Email for reply to'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'

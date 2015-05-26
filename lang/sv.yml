@@ -1,0 +1,169 @@
+sv:
+  CustomRule:
+    BLANK: Tom
+    DELETE: Radera
+    GREATERTHAN: 'Värde större än'
+    GREATERTHANEQUAL: 'Värde större än eller lika med'
+    HIDETHISFIELD: 'Göm detta fält'
+    IS: Är
+    LESSTHAN: 'Värde mindre än'
+    LESSTHANEQUAL: 'Värde mindre än eller lika med'
+    NOTBLANK: 'Inte tomt'
+    NOTVALUE: 'Inte värde'
+    SHOWTHISFIELD: 'Visa detta fält'
+    VALUE: Värde
+    WHEN: När
+  EditableCheckbox:
+    PLURALNAME: Kryssrutor
+    SINGULARNAME: 'Kryssrutefält'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Kryssrutegrupper'
+    SINGULARNAME: 'Kryssrutegrupp'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Rullgardinsmenyer för länder'
+    SINGULARNAME: 'Rullgardinsmeny för länder'
+  EditableDateField:
+    PLURALNAME: 'Datumfält'
+    SINGULARNAME: 'Datumfält'
+  EditableDropdown:
+    PLURALNAME: Rullgardinsmenyer
+    SINGULARNAME: 'Rullgardinsmenyfält'
+  EditableEmailField:
+    PLURALNAME: 'E-postfält'
+    SINGULARNAME: 'E-postfält'
+  EditableFileField:
+    PLURALNAME: 'Filuppladdningsfält'
+    SINGULARNAME: 'Filuppladdningsfält'
+  EditableFormField:
+    ADD: Lägg till
+    ADDLabel: 'Lägg till alternativ'
+    ADDRULE: 'Lägg till regel'
+    BLANK: Tom
+    CHECKEDBYDEFAULT: 'Ifylld som standard?'
+    CUSTOMERROR: 'Speciellt felmeddelande'
+    CUSTOMRULES: 'Anpassade regler'
+    DEFAULTTOTODAY: 'Dagens datum som standard?'
+    DELETE: Radera
+    DRAG: 'Dra och släpp för att ordna om fälten'
+    ENTERQUESTION: 'Skriv fråga'
+    EXTRACLASSA: 'Extra stilar/layout'
+    EXTRACLASSB: 'Extra CSS-klasser - separera med mellanrum'
+    FIELDCONFIGURATION: 'Fältkonfiguration'
+    FIELDONDEFAULT: 'Fält som standard'
+    GREATERTHAN: 'Värde större än'
+    GREATERTHANEQUAL: 'Värde större än eller lika med'
+    GROUP: Grupp
+    HIDE: Göm
+    HIDETHISFIELD: 'Göm detta fält'
+    IS: Är
+    LESSTHAN: 'Värde mindre än'
+    LESSTHANEQUAL: 'Värde mindre än eller lika med'
+    LOCKED: 'Dessa fält kan inte modifieras'
+    MAXVALUE: 'Maxvärde'
+    MINVALUE: 'Minimivärde'
+    NOTBLANK: 'Inte tomt'
+    NOTVALUE: 'Inte värde'
+    OPTIONS: Alternativ
+    PLURALNAME: 'Redigeringsbara formulärfält'
+    REQUIRED: 'Är detta fält obligatoriskt?'
+    RIGHTTITLE: 'Högertitel'
+    SHOW: Visa
+    SHOWOPTIONS: 'Visa alternativ'
+    SHOWTHISFIELD: 'Visa detta fält'
+    SINGULARNAME: 'Redigeringsbart formulärfält'
+    VALIDATION: Validering
+    VALUE: Värde
+    WHEN: När
+  EditableFormHeading:
+    LEVEL: 'Välj rubrikstorlek'
+    PLURALNAME: Rubriker
+    SINGULARNAME: Rubrik
+  EditableLiteralField:
+    HIDEFROMREPORT: 'Göm från rapport?'
+    PLURALNAME: 'HTML-block'
+    SINGULARNAME: 'HTML-block'
+  EditableMemberListField:
+    PLURALNAME: 'Medlemsfält'
+    SINGULARNAME: 'Medlemsfält'
+  EditableMultipleOptionField:
+    PLURALNAME: 'Redigeringsbart multialternativfält'
+    SINGULARNAME: 'Redigeringsbart multialternativfält'
+  EditableNumericField:
+    PLURALNAME: 'Numeriska fält'
+    SINGULARNAME: 'Numeriskt fält'
+  EditableOption:
+    DELETE: 'Radera alternativ'
+    DRAG: 'Dra och släpp för att ordna om alternativ'
+    LOCKED: 'Dessa fält kan inte modifieras'
+    PLURALNAME: 'Redigeringsbara alternativ'
+    SINGULARNAME: 'Redigeringsbart alternativ'
+  EditableRadioField:
+    PLURALNAME: 'Radiofält'
+    SINGULARNAME: 'Radiofält'
+  EditableTextField:
+    NUMBERROWS: 'Antal rader'
+    PLURALNAME: 'Textfält'
+    SINGULARNAME: 'Textfält'
+    TEXTLENGTH: 'Textlängd'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
+  FieldEditor:
+    ADD: Lägg till
+    SELECTAFIELD: 'Välj ett fält'
+  Form:
+    FIELDISREQUIRED: '%s är obligatoriskt'
+  GridField:
+    Filter: Filter
+    ResetFilter: Rensa
+  SiteTree:
+    PLURALNAME: Sidor
+    SINGULARNAME: Sida
+  SubmittedFileField:
+    DOWNLOADFILE: 'Ladda ner fil'
+    PLURALNAME: 'Inskickade filfält'
+    SINGULARNAME: 'Inskickat filfält'
+  SubmittedForm:
+    PLURALNAME: 'Inskickade formulär'
+    SINGULARNAME: 'Inskickat formulär'
+  SubmittedFormField:
+    PLURALNAME: 'Inskickade formulärfält'
+    SINGULARNAME: 'Inskickat formulärfält'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
+    CLEARBUTTON: Rensa
+    CONFIGURATION: Konfiguration
+    DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
+    DISABLEAUTHENICATEDFINISHACTION: 'Inaktivera autentisering när åtgärden är genomförd'
+    DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
+    EMAILADDRESS: E-post
+    EMAILBODY: Innehåll
+    EMAILFROM: Från
+    EMAILRECIPIENTS: 'E-postmottagare'
+    EMAILSUBJECT: 'E-postämne'
+    ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
+    EmailFromContent: 'Från-adressen låter dig ställa in varifrån e-postmeddelandet skickas. På de flesta servrar måste adressen ha samma domännamn som din sajt. Till exempel på yoursite.com så måste adressen vara something@yoursite.com. Det är däremot möjligt att lägga valfri e-postadress under "E-postadress att svara till". '
+    FORM: Formulär
+    FROMADDRESS: 'E-postadress att skicka formulär från'
+    HIDEFIELDLABELS: 'Göm fältetiketter'
+    HIDEFORMDATA: 'Göm formulärdata från e-post?'
+    ONCOMPLETELABEL: 'Visa vid slutförande'
+    ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'
+    ORSELECTAFIELDTOUSEASTO: '.. eller välj ett fält att använda som mottagare'
+    PLURALNAME: 'Användardefinierade formulär'
+    REPLYADDRESS: 'E-postadress att svara till'
+    SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
+    SELECTAFIELDTOSETSUBJECT: '.. eller välj ett fält att använda som ämne'
+    SENDEMAILTO: 'E-postadress att skicka formulär till'
+    SENDPLAIN: 'Skicka e-post som vanlig text? (All HTML kommer tas bort)'
+    SHOWCLEARFORM: 'Visa Rensa-knapp'
+    SINGULARNAME: 'Användardefinierat formulär'
+    SUBMISSIONS: Inskickade svar
+    SUBMITBUTTON: Skicka
+    TEXTONCLEAR: 'Text på Rensa-knapp:'
+    TEXTONSUBMIT: 'Text på Skicka-knapp:'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Mottagare av formulär'
+    SINGULARNAME: 'Mottagare av formulär'
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrera inskickade svar'
+    WHEREVALUEIS: 'när värdet är..'
