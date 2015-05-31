@@ -15,6 +15,16 @@ class UserDefinedForm extends Page {
 	 * @var string Required Identifier
 	 */
 	private static $required_identifier = null;
+
+	/**
+	 * Prevent translatable module from attepmting to translate FieldEditor
+	 *
+	 * @var array
+	 * @config
+	 */
+	private static $translate_excluded_fields = array(
+		'Fields'
+	);
 	
 	/**
 	 * @var array Fields on the user defined form page.
