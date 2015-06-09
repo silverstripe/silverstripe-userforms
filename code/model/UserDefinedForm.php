@@ -34,7 +34,7 @@ class UserDefinedForm extends Page {
 	 * @var array Default values of variables when this page is created
 	 */
 	private static $defaults = array(
-		'Content'                => '$UserDefinedForm',
+		'Content'                => '',
 		'DisableSaveSubmissions' => 0,
 		'OnCompleteMessage'      => '<p>Thanks, we\'ve received your submission.</p>'
 	);
