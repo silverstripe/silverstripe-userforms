@@ -72,7 +72,7 @@ class EditableLiteralField extends EditableFormField {
 	}
 	
 	public function getFieldConfiguration() {
-		$textAreaField = new TextareaField(
+		$textAreaField = new HTMLEditorField(
 			$this->getSettingName('Content'),
 			"HTML",
 			$this->getContent()

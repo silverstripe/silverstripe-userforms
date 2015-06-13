@@ -67,9 +67,9 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 		overflow: hidden;
 	}
 		.FieldEditor .FieldList .EditableFormField * {
-			display: inline;
 			vertical-align: middle;
 		}
+
 		.FieldEditor .FieldList .EditableFormField .fieldHandler,
 		.FieldEditor .FieldList .EditableFormField .handle {
 			cursor: move;
@@ -112,10 +112,6 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 			padding: 3px;
 			clear: both;			
 		}
-			.FieldEditor .FieldList .EditableFormField .extraOptions * {
-				display: block;
-			}
-			
 				.FieldEditor .FieldList .EditableFormField .extraOptions .handle {
 					float: left;
 					margin-right: 3px;
