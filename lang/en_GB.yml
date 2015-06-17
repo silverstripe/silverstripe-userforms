@@ -27,6 +27,7 @@ en_GB:
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
+    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
