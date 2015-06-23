@@ -60,6 +60,18 @@ class UserDefinedForm extends Page {
 	);
 
 	/**
+	 * @var Boolean
+	 */
+	private static $recipients_warning_enabled = false;
+
+	/**
+	 * @return Boolean
+	 */
+	public static function set_recipients_warning_enabled($bool = true) {
+		self::$recipients_warning_enabled = $bool;
+	}
+
+	/**
 	 * Temporary storage of field ids when the form is duplicated.
 	 * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
 	 * @var array
@@ -182,7 +194,7 @@ SQL;
 
 		$fields = parent::getCMSFields();
 
-		if($this->EmailRecipients()->Count() == 0) {
+		if($this->EmailRecipients()->Count() == 0 && UserDefinedForm::config()->recipients_warning_enabled) {
 			$fields->addFieldToTab("Root.Main", new LiteralField("EmailRecipientsWarning",
 				"<p class=\"message warning\">" . _t("UserDefinedForm.NORECIPIENTS",
 				"Warning: You have not configured any recipients. Form submissions may be missed.")
