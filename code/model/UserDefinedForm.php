@@ -65,13 +65,6 @@ class UserDefinedForm extends Page {
 	private static $recipients_warning_enabled = false;
 
 	/**
-	 * @return Boolean
-	 */
-	public static function set_recipients_warning_enabled($bool = true) {
-		self::$recipients_warning_enabled = $bool;
-	}
-
-	/**
 	 * Temporary storage of field ids when the form is duplicated.
 	 * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
 	 * @var array
