@@ -1190,7 +1190,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		// if they have email fields then we could send from it
 		$validEmailFields = EditableEmailField::get()->filter('ParentID', (int)$formID);
 		// for the subject, only one-line entry boxes make sense
-		$validSubjectFields = EditableTextField::get()->filter('ParentID', (int)$formID)->filterByCallback(function($item, $list) { return (int)$item->getSetting('Rows') === 1; });
+		$validSubjectFields = EditableTextField::get()->filter('ParentID', (int)$formID)->filterByCallback(function($item, $list = null) { return (int)$item->getSetting('Rows') === 1; });
 		// predefined choices are also candidates
 		$multiOptionFields = EditableMultipleOptionField::get()->filter('ParentID', (int)$formID);
 
