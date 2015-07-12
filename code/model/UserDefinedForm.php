@@ -42,6 +42,7 @@ class UserDefinedForm extends Page {
 		'DisableSaveSubmissions' => 'Boolean',
 		'EnableLiveValidation' => 'Boolean',
 		'HideFieldLabels' => 'Boolean',
+		'DisplayErrorMessagesAtTop' => 'Boolean',
 		'DisableAuthenicatedFinishAction' => 'Boolean',
 		'DisableCsrfSecurityToken' => 'Boolean'
 	);
@@ -63,6 +64,22 @@ class UserDefinedForm extends Page {
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
 	);
+
+	/**
+	 * @var array
+	 * @config
+	 */
+	private static $casting = array(
+		'ErrorContainerID' => 'Text'
+	);
+
+	/**
+	 * Error container selector which matches the element for grouped messages
+	 *
+	 * @var string
+	 * @config
+	 */
+	private static $error_container_id = 'error-container';
 
 	/**
 	 * Temporary storage of field ids when the form is duplicated.
@@ -410,6 +427,7 @@ SQL;
 			new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
 			new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
 			new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels')),
+			new CheckboxField("DisplayErrorMessagesAtTop", _t('UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
 			new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
 			new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authenication on finish action'))
 		);
@@ -447,6 +465,15 @@ SQL;
 			}
 		}
 		return $isModified;
+	}
+
+	/**
+	 * Get the HTML id of the error container displayed above the form.
+	 *
+	 * @return string
+	 */
+	public function getErrorContainerID() {
+		return $this->config()->error_container_id;
 	}
 }
 
@@ -551,6 +578,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->DisableCsrfSecurityToken) {
 			$form->disableSecurityToken();
 		}
+
+		$this->generateValidationJavascript($form);
 		
 		return $form;
 	}
@@ -635,16 +664,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 	}
 	
 	/**
-	 * Get the required form fields for this form. Includes building the jQuery
-	 * validate structure
+	 * Get the required form fields for this form.
 	 *
 	 * @return RequiredFields
 	 */
 	public function getRequiredFields() {
-		
-		// set the custom script for this form
-		Requirements::customScript($this->renderWith('ValidationScript'), 'UserFormsValidation');
-		
 		// Generate required field validator
 		$requiredNames = $this
 			->Fields()
@@ -655,6 +679,21 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$this->extend('updateRequiredFields', $required);
 		
 		return $required;
+	}
+
+	/**
+	 * Build jQuery validation script and require as a custom script
+	 * 
+	 * @param Form $form
+	 */
+	public function generateValidationJavascript($form) {
+		// set the custom script for this form
+		Requirements::customScript(
+			$this
+				->customise(array('Form' => $form))
+				->renderWith('ValidationScript'),
+			'UserFormsValidation'
+		);
 	}
 	
 	/**
