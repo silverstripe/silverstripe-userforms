@@ -1,127 +1,212 @@
 EditableOption:
-    option-1:
-        Name: Option1
-        Title: Option 1
-    
-    option-2:
-        Name: Option2
-        Title: Option 2
+  option-1:
+    Name: Option1
+    Title: Option 1
+  
+  option-2:
+    Name: Option2
+    Title: Option 2
 
-    department-1:
-        Name: dept1
-        Title: sales@example.com
+  department-1:
+    Name: dept1
+    Title: sales@example.com
 
-    department-2:
-        Name: dept2
-        Title: accounts@example.com
+  department-2:
+    Name: dept2
+    Title: accounts@example.com
 
-    option-3:
-        Name: Option3
-        Title: Option 3
+  option-3:
+    Name: Option3
+    Title: Option 3
 
-    option-4:
-        Name: Option4
-        Title: Option 4
+  option-4:
+    Name: Option4
+    Title: Option 4
 
-    option-5:
-        Name: Option5
-        Title: Option 5
+  option-5:
+    Name: Option5
+    Title: Option 5
 
-    option-6:
-        Name: Option6
-        Title: Option 6
-        
-UserDefinedForm_EmailRecipient:
-    recipient-1:
-        EmailAddress: test@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com
-        
-    no-html:
-        EmailAddress: nohtml@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com
-        SendPlain: true
-        
-    no-data:
-        EmailAddress: nodata@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com  
-        HideFormData: true
-    
+  option-6:
+    Name: Option6
+    Title: Option 6
+
+  option-7:
+    Name: Option7
+    Title: Red
+
+  option-8:
+    Name: Option8
+    Title: Blue
+
+  option-9:
+    Name: Option9
+    Title: Green
+  
 EditableTextField:
-    basic-text:
-        Name: basic-text-name
-        Title: Basic Text Field
+  basic-text:
+    Name: basic-text-name
+    Title: Basic Text Field
  
-    basic-text-2:
-        Name: basic-text-name
-        Title: Basic Text Field
-                  
-    required-text:
-        Name: required-text-field
-        Title: Required Text Field
-        CustomErrorMessage: Custom Error Message
-        Required: true
-        
+  basic-text-2:
+    Name: basic-text-name
+    Title: Basic Text Field
+ 
+  your-name-field:
+    Name: your-name
+    Title: Name
+ 
+  address-field:
+    Name: address
+    Title: Address
+    
+  street-field:
+    Name: street
+    Title: Street
+    
+  city-field:
+    Name: city
+    Title: City
+          
+  required-text:
+    Name: required-text-field
+    Title: Required Text Field
+    CustomErrorMessage: Custom Error Message
+    Required: true
+    
 EditableDropdown:
-    basic-dropdown:
-        Name: basic-dropdown
-        Title: Basic Dropdown Field
-        Options: =>EditableOption.option-1, =>EditableOption.option-2
-        
-    department-dropdown:
-        Name: department
-        Title: Department
-        Options: =>EditableOption.department-1, =>EditableOption.department-2
-        
+  basic-dropdown:
+    Name: basic-dropdown
+    Title: Basic Dropdown Field
+    Options: =>EditableOption.option-1, =>EditableOption.option-2
+    
+  department-dropdown:
+    Name: department
+    Title: Department
+    Options: =>EditableOption.department-1, =>EditableOption.department-2
+    
 EditableCheckbox:
-    checkbox-1:
-        Name: checkbox-1
-        Title: Checkbox 1
-        
-    checkbox-2:
-        Name: checkbox-1
-        Title: Checkbox 1
-        
+  checkbox-1:
+    Name: checkbox-1
+    Title: Checkbox 1
+    
+  checkbox-2:
+    Name: checkbox-1
+    Title: Checkbox 1
+    
 EditableCheckboxGroupField:
-    checkbox-group:
-        Name: check-box-group
-        Title: Check box group
-        Options: =>EditableOption.option-3, =>EditableOption.option-4
-                
+  checkbox-group:
+    Name: check-box-group
+    Title: Check box group
+    Options: =>EditableOption.option-3, =>EditableOption.option-4
+
+  colour-checkbox-group:
+    Name: colours
+    Title: 'Select Colours'
+    Options: =>EditableOption.option-7, =>EditableOption.option-8, =>EditableOption.option-9
+
 EditableEmailField:
-    email-field:
-        Name: email-field
-        Title: Email
-        
+  email-field:
+    Name: email-field
+    Title: Email
 
 EditableRadioField:
-    radio-field:
-        Name: radio-option
-        Title: Radio Option
-        Options: =>EditableOption.option-5, =>EditableOption.option-6
+  radio-field:
+    Name: radio-option
+    Title: Radio Option
+    Options: =>EditableOption.option-5, =>EditableOption.option-6
 
+UserDefinedForm_EmailRecipientCondition:
+# filtered recipient 1
+  blank-rule:
+    ConditionOption: IsBlank
+    ConditionField: =>EditableTextField.your-name-field
+
+  not-blank-rule:
+    ConditionOption: IsNotBlank
+    ConditionField: =>EditableTextField.address-field
+
+  equals-rule:
+    ConditionOption: Equals
+    ConditionField: =>EditableTextField.street-field
+    ConditionValue: 'Matches Equals'
+
+  not-equals-rule:
+    ConditionOption: NotEquals
+    ConditionField: =>EditableTextField.city-field
+    ConditionValue: 'Matches Not Equals'
+
+# filtered recipient 2
+  group-equals-rule:
+    ConditionOption: Equals
+    ConditionField: =>EditableCheckboxGroupField.colour-checkbox-group
+    ConditionValue: Red
+
+  group-not-equals-rule:
+    ConditionOption: NotEquals
+    ConditionField: =>EditableCheckboxGroupField.colour-checkbox-group
+    ConditionValue: Blue
+
+
+UserDefinedForm_EmailRecipient:
+  recipient-1:
+    EmailAddress: test@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    
+  no-html:
+    EmailAddress: nohtml@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    SendPlain: true
+    
+  no-data:
+    EmailAddress: nodata@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com  
+    HideFormData: true
+    
+  unfiltered-recipient-1:
+    EmailAddress: unfiltered@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    
+  filtered-recipient-1:
+    EmailAddress: filtered1@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    CustomRules: =>UserDefinedForm_EmailRecipientCondition.blank-rule,  =>UserDefinedForm_EmailRecipientCondition.not-blank-rule, =>UserDefinedForm_EmailRecipientCondition.equals-rule,  =>UserDefinedForm_EmailRecipientCondition.not-equals-rule
+    CustomRulesCondition: 'And'
+    
+  filtered-recipient-2:
+    EmailAddress: filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    CustomRules: =>UserDefinedForm_EmailRecipientCondition.group-equals-rule, =>UserDefinedForm_EmailRecipientCondition.group-not-equals-rule
+    CustomRulesCondition: 'Or'
 
 UserDefinedForm:
-    basic-form-page:
-        Title: User Defined Form
-        Fields: =>EditableTextField.basic-text
-        EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
-        
-    form-with-reset-and-custom-action:
-        Title: Form with Reset Action
-        SubmitButtonText: Custom Button
-        ShowClearButton: true
-        
-    validation-form:
-        Title: Validation Form
-        Fields: =>EditableTextField.required-text
-        
-    custom-rules-form:
-        Title: Custom Rules Form
-        Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
-    empty-form:
-        Title: Empty Form
-        
-        
+  basic-form-page:
+    Title: User Defined Form
+    Fields: =>EditableTextField.basic-text
+    EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
+    
+  form-with-reset-and-custom-action:
+    Title: Form with Reset Action
+    SubmitButtonText: Custom Button
+    ShowClearButton: true
+    
+  validation-form:
+    Title: Validation Form
+    Fields: =>EditableTextField.required-text
+    
+  custom-rules-form:
+    Title: Custom Rules Form
+    Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
+  empty-form:
+    Title: Empty Form
+
+  filtered-form-page:
+    Title: 'Page with filtered recipients'
+    Fields: =>EditableCheckboxGroupField.checkbox-group, =>EditableTextField.your-name-field, =>EditableTextField.street-field, =>EditableTextField.city-field
+    EmailRecipients: =>UserDefinedForm_EmailRecipient.unfiltered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-2
