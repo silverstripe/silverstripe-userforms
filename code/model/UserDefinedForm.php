@@ -25,6 +25,11 @@ class UserDefinedForm extends Page {
 	private static $translate_excluded_fields = array(
 		'Fields'
 	);
+
+	/**
+	 * @var string
+	 */
+	private static $email_template_directory = 'userforms/templates/email/';
 	
 	/**
 	 * @var array Fields on the user defined form page.
@@ -110,6 +115,10 @@ class UserDefinedForm extends Page {
 			$emailRecipients->getConfig()->getComponentByType('GridFieldAddNewButton')->setButtonName(
 				_t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
 			);
+			$emailRecipients
+				->getConfig()
+				->getComponentByType('GridFieldDetailForm')
+				->setItemRequestClass('UserDefinedForm_EmailRecipient_ItemRequest');
 			
 			$fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
 			$fields->addFieldToTab('Root.FormOptions', $emailRecipients);
@@ -989,7 +998,8 @@ JS
 		// email users on submit.
 		if($recipients = $this->FilteredEmailRecipients($data, $form)) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
-			
+			$mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
+
 			if($attachments) {
 				foreach($attachments as $file) {
 					if($file->ID != 0) {
@@ -1003,10 +1013,16 @@ JS
 			}
 
 			foreach($recipients as $recipient) {
+				$parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
+
+				if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
+					$email->setTemplate($recipient->EmailTemplate);
+				}
+
 				$email->populateTemplate($recipient);
 				$email->populateTemplate($emailData);
 				$email->setFrom($recipient->EmailFrom);
-				$email->setBody($recipient->EmailBody);
+				$email->setBody($parsedBody);
 				$email->setTo($recipient->EmailAddress);
 				$email->setSubject($recipient->EmailSubject);
 				
@@ -1043,7 +1059,7 @@ JS
 				$this->extend('updateEmail', $email, $recipient, $emailData);
 
 				if($recipient->SendPlain) {
-					$body = strip_tags($recipient->EmailBody) . "\n";
+					$body = strip_tags($recipient->getEmailBodyContent()) . "\n";
 					if(isset($emailData['Fields']) && !$recipient->HideFormData) {
 						foreach($emailData['Fields'] as $Field) {
 							$body .= $Field->Title .': '. $Field->Value ." \n";
@@ -1089,6 +1105,22 @@ JS
 		}
 
 		return $this->redirect($this->Link('finished') . $referrer . $this->config()->finished_anchor);
+	}
+
+	/**
+	 * Allows the use of field values in email body.
+	 *
+	 * @param ArrayList fields
+	 * @return ViewableData
+	 */
+	private function getMergeFieldsMap($fields = array()) {
+		$data = new ViewableData();
+
+		foreach ($fields as $field) {
+			$data->setField($field->Name, DBField::create_field('Text', $field->Value));
+		}
+
+		return $data;
 	}
 
 	/**
@@ -1150,6 +1182,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailFrom' => 'Varchar(200)',
 		'EmailReplyTo' => 'Varchar(200)',
 		'EmailBody' => 'Text',
+		'EmailBodyHtml' => 'HTMLText',
+		'EmailTemplate' => 'Varchar',
 		'SendPlain' => 'Boolean',
 		'HideFormData' => 'Boolean'
 	);
@@ -1167,6 +1201,16 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
+
+		// Only show the preview link if the recipient has been saved.
+		if (!empty($this->EmailTemplate)) {
+			$translatableKey = 'UserDefinedForm.EMAILPREVIEWAVAILABLE';
+			$previewHTML = '<p><a href="admin/pages/edit/EditForm/field/EmailRecipients/item/' . $this->ID . '/preview" target="_blank" class="ss-ui-button">Preview email</a></p>' . 
+				'<em>Note: Unsaved changes will not appear in the preview.</em>';
+		} else {
+			$translatableKey = 'UserDefinedForm.EMAILPREVIEWUNAVAILABLE';
+			$previewHTML = '<em>You can preview this email once you have saved the Recipient.</em>';
+		}
 		
 		$fields = new FieldList(
 			new TextField('EmailSubject', _t('UserDefinedForm.EMAILSUBJECT', 'Email subject')),
@@ -1182,7 +1226,10 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			new TextField('EmailAddress', _t('UserDefinedForm.SENDEMAILTO','Send email to')),
 			new CheckboxField('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
 			new CheckboxField('SendPlain', _t('UserDefinedForm.SENDPLAIN', 'Send email as plain text? (HTML will be stripped)')),
-			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body'))
+			new DropdownField('EmailTemplate', _t('UserDefinedForm.EMAILTEMPLATE', 'Email template'), $this->getEmailTemplateDropdownValues()),
+			new HTMLEditorField('EmailBodyHtml', _t('UserDefinedForm.EMAILBODYHTML','Body')),
+			new TextareaField('EmailBody', _t('UserDefinedForm.EMAILBODY','Body')),
+			new LiteralField('EmailPreview', '<div id="EmailPreview">' . _t($translatableKey, $previewHTML) . '</div>')
 		);
 		
 		$formID = ($this->FormID != 0) ? $this->FormID : Session::get('CMSMain.currentPage');
@@ -1259,6 +1306,79 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 */
 	public function canDelete($member = null) {
 		return $this->Form()->canDelete();
+	}
+
+	/**
+	 * Make sure the email template saved against the recipient exists on the file system.
+	 *
+	 * @param string
+	 *
+	 * @return boolean
+	 */
+	public function emailTemplateExists($template = '') {
+		$t = ($template ? $template : $this->EmailTemplate);
+
+		return in_array($t, $this->getEmailTemplateDropdownValues());
+	}
+
+	/**
+	 * Get the email body for the current email format
+	 *
+	 * @return string
+	 */
+	public function getEmailBodyContent() {
+		return $this->SendPlain ? $this->EmailBody : $this->EmailBodyHtml;
+	}
+
+	/**
+	 * Gets a list of email templates suitable for populating the email template dropdown.
+	 *
+	 * @return array
+	 */
+	public function getEmailTemplateDropdownValues() {
+		$templates = array();
+
+		$finder = new SS_FileFinder();
+		$finder->setOption('name_regex', '/^.*\.ss$/');
+
+		$found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->email_template_directory);
+
+		foreach ($found as $key => $value) {
+			$template = pathinfo($value);
+
+			$templates[$template['filename']] = $template['filename'];
+		}
+
+		return $templates;
+	}
+}
+
+/**
+ * Controller that handles requests to EmailRecipient's
+ *
+ * @package userforms
+ */
+class UserDefinedForm_EmailRecipient_ItemRequest extends GridFieldDetailForm_ItemRequest {
+
+	private static $allowed_actions = array(
+		'edit',
+		'view',
+		'ItemEditForm',
+		'preview'
+	);
+
+	public function edit($request) {
+		Requirements::javascript(USERFORMS_DIR . '/javascript/Recipient.js');
+		return parent::edit($request);
+	}
+
+	/**
+	 * Renders a preview of the recipient email.
+	 */
+	public function preview() {
+		return $this->customise(new ArrayData(array(
+			'Body' => $this->record->getEmailBodyContent()
+		)))->renderWith($this->record->EmailTemplate);
 	}
 }
 

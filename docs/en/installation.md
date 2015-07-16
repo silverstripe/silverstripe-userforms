@@ -18,3 +18,14 @@ Installation can be done either by composer or by manually downloading a release
 After installation, make sure you rebuild your database through `dev/build`.
 
 You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
+
+### Custom email templates
+
+If you want to use custom email templates set the following config option.
+
+````
+UserDefinedForm:
+  email_template_directory: your/template/path/
+````
+
+Any SilverStripe templates placed in your `email_template_directory` directory will be available for use with submission emails.

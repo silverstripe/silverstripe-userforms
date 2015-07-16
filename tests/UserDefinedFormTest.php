@@ -84,7 +84,52 @@ class UserDefinedFormTest extends FunctionalTest {
 		
 		$popup->delete();
 	}
-	
+
+	function testGetEmailBodyContent() {
+		$recipient = new UserDefinedForm_EmailRecipient();
+
+		$emailBody = 'not html';
+		$emailBodyHtml = '<p>html</p>';
+
+		$recipient->EmailBody = $emailBody;
+		$recipient->EmailBodyHtml = $emailBodyHtml;
+		$recipient->write();
+
+		$this->assertEquals($recipient->SendPlain, 0);
+		$this->assertEquals($recipient->getEmailBodyContent(), $emailBodyHtml);
+
+		$recipient->SendPlain = 1;
+		$recipient->write();
+
+		$this->assertEquals($recipient->getEmailBodyContent(), $emailBody);
+
+		$recipient->delete();
+	}
+
+	function testGetEmailTemplateDropdownValues() {
+		$recipient = new UserDefinedForm_EmailRecipient();
+
+		$defaultValues = array('SubmittedFormEmail' => 'SubmittedFormEmail');
+
+		$this->assertEquals($recipient->getEmailTemplateDropdownValues(), $defaultValues);
+	}
+
+	function testEmailTemplateExists() {
+		$recipient = new UserDefinedForm_EmailRecipient();
+
+		// Set the default template
+		$recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues()));
+		$recipient->write();
+
+		// The default template exists
+		$this->assertTrue($recipient->emailTemplateExists());
+
+		// A made up template doesn't exists
+		$this->assertFalse($recipient->emailTemplateExists('MyTemplateThatsNotThere'));
+
+		$recipient->delete();
+	}
+
 	function testCanEditAndDeleteRecipient() {
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
