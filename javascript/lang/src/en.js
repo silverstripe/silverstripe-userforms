@@ -10,5 +10,6 @@
 	"UserForms.ERROR_CREATING_OPTION": "Error creating option",
 	"UserForms.REMOVED_OPTION": "Removed option",
 	"UserForms.ADDING_RULE": "Adding rule",
+	"UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
 	"GRIDFIELD.ERRORINTRANSACTION": "An error occured while fetching data from the server\n Please try again later."
 }

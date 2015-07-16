@@ -174,3 +174,17 @@ to determine the size and the number of rows in a text field.
 **Or perhaps you'd like to add informational content to your form?**
 
 * Use [HTML Block](#html-block), with the appropriate level [Heading](#heading).
+
+## Configuration
+
+The 'Configuration' tab has a number of options used for customising your form's behaviour and appearance.
+
+![Configuration](_images/userforms-config.png)
+
+### Validation messages
+
+Validation messages are displayed below invalid fields by default. By checking the 'Display error messages above the form'
+option, an additional set of validation messages are displayed, at the top of the form.
+
+When a user submits an invalid form, they are directed to the top of the form, where they can review the messages.
+Each message links to it's corresponding field so users can easily make the required changes.
