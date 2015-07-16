@@ -327,6 +327,14 @@ class EditableFormFieldTest extends FunctionalTest {
         $this->assertNotNull($validationField);
     }
 
+	public function testFileField() {
+		$fileField = $this->objFromFixture('EditableFileField', 'file-field');
+		$formField = $fileField->getFormField();
+
+		$this->assertContains('jpg', $formField->getValidator()->getAllowedExtensions());
+		$this->assertNotContains('notallowedextension', $formField->getValidator()->getAllowedExtensions());
+	}
+
 }
 
 /**
