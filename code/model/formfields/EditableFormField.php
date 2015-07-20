@@ -401,6 +401,16 @@ class EditableFormField extends DataObject {
 	public function getFieldConfiguration() {
 		$extraClass = ($this->getSetting('ExtraClass')) ? $this->getSetting('ExtraClass') : '';
 
+		$mergeFieldName = new LiteralField('MergeFieldName', _t('EditableFormField.MERGEFIELDNAME',
+			'<div class="field">' .
+				'<label class="left" for="Fields-6-CustomSettings-RightTitle">Merge field</label>' .
+				'<div class="middleColumn">' .
+					'<p>$' . $this->Name . '</p>' .
+					'<em>Use this to display the field\'s value in email content.</em>' .
+				'</div>' .
+			'</div>'
+		));
+
 		if (is_array(self::$allowed_css) && !empty(self::$allowed_css)) {
 			foreach(self::$allowed_css as $k => $v) {
 				if (!is_array($v)) $cssList[$k]=$v;
@@ -429,6 +439,7 @@ class EditableFormField extends DataObject {
 		);
 
         $fields = FieldList::create(
+            $mergeFieldName,
             $ec,
             $right
         );

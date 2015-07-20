@@ -174,3 +174,17 @@ to determine the size and the number of rows in a text field.
 **Or perhaps you'd like to add informational content to your form?**
 
 * Use [HTML Block](#html-block), with the appropriate level [Heading](#heading).
+
+## Sending emails
+
+The UserForms module allows you to email form submissions to multiple people.
+
+### Using form fields in submission emails
+
+Each form field has a unique merge field located under the field's options.
+
+![Merge field option](_images/mergefield.png)
+
+Simply insert the merge field into the email content, and the field's value will be displayed, when the email is sent.
+
+![Merge field in content](_images/mergefieldcontent.png)

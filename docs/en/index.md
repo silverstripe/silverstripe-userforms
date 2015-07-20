@@ -16,6 +16,7 @@ and without getting involved in any PHP code.
 *  Construct a form using all major form fields (text, email, dropdown, radio, checkbox..)
 *  Ability to extend userforms from other modules to provide extra fields.
 *  Ability to email multiple people the form submission
+*  Custom email templates
 *  View submitted submissions and export them to CSV
 *  Define custom error messages and validation settings
 *  Optionally display and hide fields using javascript based on users input
