@@ -4,6 +4,8 @@ language: php
 php: 
  - 5.3
 
+sudo: false
+
 env:
  - DB=MYSQL CORE_RELEASE=3.1
  - DB=MYSQL CORE_RELEASE=3
