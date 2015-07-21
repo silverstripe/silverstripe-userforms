@@ -51,6 +51,19 @@ li.class-UserDefinedForm > a .jstree-pageicon { background-position: 0 -64px; }
 }
 */
 
+/* Email Recipient Form
+---------------------------------------- */
+.EmailRecipientForm .fieldgroup .fieldgroup-field {
+	padding-top: 0;
+}
+
+.EmailRecipientForm .fieldgroup .fieldgroup-field.last {
+	padding-bottom: 0;
+}
+
+.EmailRecipientForm .ss-ui-button {
+	margin-bottom: 4px;
+}
 
 
 /* Field Listing
