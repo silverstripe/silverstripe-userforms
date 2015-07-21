@@ -1377,7 +1377,8 @@ class UserDefinedForm_EmailRecipient_ItemRequest extends GridFieldDetailForm_Ite
 	 */
 	public function preview() {
 		return $this->customise(new ArrayData(array(
-			'Body' => $this->record->getEmailBodyContent()
+			'Body' => $this->record->getEmailBodyContent(),
+			'HideFormData' => true
 		)))->renderWith($this->record->EmailTemplate);
 	}
 }
