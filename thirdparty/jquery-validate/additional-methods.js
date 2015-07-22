@@ -1,5 +1,5 @@
 /*!
- * jQuery Validation Plugin v1.12.1pre
+ * jQuery Validation Plugin v1.13.1
  *
  * http://jqueryvalidation.org/
  *
@@ -300,7 +300,7 @@ $.validator.addMethod("currency", function(value, element, param) {
 
 }, "Please specify a valid currency");
 
-jQuery.validator.addMethod("dateFA", function(value, element) {
+$.validator.addMethod("dateFA", function(value, element) {
 	return this.optional(element) || /^[1-4]\d{3}\/((0?[1-6]\/((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))\/(30|([1-2][0-9])|(0?[1-9]))))$/.test(value);
 }, "Please enter a correct date");
 
@@ -329,11 +329,11 @@ $.validator.addMethod("dateITA", function(value, element) {
 		adata, gg, mm, aaaa, xdata;
 	if ( re.test(value)) {
 		adata = value.split("/");
-		gg = parseInt(adata[0],10);
-		mm = parseInt(adata[1],10);
-		aaaa = parseInt(adata[2],10);
+		gg = parseInt(adata[0], 10);
+		mm = parseInt(adata[1], 10);
+		aaaa = parseInt(adata[2], 10);
 		xdata = new Date(aaaa, mm - 1, gg, 12, 0, 0, 0);
-		if ( ( xdata.getFullYear() === aaaa ) && ( xdata.getMonth() === mm - 1 ) && ( xdata.getDate() === gg ) ){
+		if ( ( xdata.getUTCFullYear() === aaaa ) && ( xdata.getUTCMonth () === mm - 1 ) && ( xdata.getUTCDate() === gg ) ) {
 			check = true;
 		} else {
 			check = false;
@@ -372,7 +372,7 @@ $.validator.addMethod("iban", function(value, element) {
 	}
 
 	// remove spaces and to upper case
-	var iban = value.replace(/ /g,"").toUpperCase(),
+	var iban = value.replace(/ /g, "").toUpperCase(),
 		ibancheckdigits = "",
 		leadingZeroes = true,
 		cRest = "",
@@ -384,7 +384,7 @@ $.validator.addMethod("iban", function(value, element) {
 	}
 
 	// check the country code and find the country specific format
-	countrycode = iban.substring(0,2);
+	countrycode = iban.substring(0, 2);
 	bbancountrypatterns = {
 		"AL": "\\d{8}[\\dA-Z]{16}",
 		"AD": "\\d{8}[\\dA-Z]{12}",
@@ -468,7 +468,7 @@ $.validator.addMethod("iban", function(value, element) {
 	}
 
 	// now check the checksum, first convert to digits
-	ibancheck = iban.substring(4,iban.length) + iban.substring(0,4);
+	ibancheck = iban.substring(4, iban.length) + iban.substring(0, 4);
 	for (i = 0; i < ibancheck.length; i++) {
 		charAt = ibancheck.charAt(i);
 		if (charAt !== "0") {
@@ -609,7 +609,7 @@ $.validator.addMethod("pattern", function(value, element, param) {
 		return true;
 	}
 	if (typeof param === "string") {
-		param = new RegExp(param);
+		param = new RegExp("^(?:" + param + ")$");
 	}
 	return param.test(value);
 }, "Invalid format.");
@@ -685,9 +685,21 @@ $.validator.addMethod("phonesUK", function(phone_number, element) {
  * @type Boolean
  * @cat Plugins/Validate/Methods
  */
-jQuery.validator.addMethod( "postalCodeCA", function( value, element ) {
+$.validator.addMethod( "postalCodeCA", function( value, element ) {
 	return this.optional( element ) || /^[ABCEGHJKLMNPRSTVXY]\d[A-Z] \d[A-Z]\d$/.test( value );
 }, "Please specify a valid postal code" );
+
+/*
+* Valida CEPs do brasileiros:
+*
+* Formatos aceitos:
+* 99999-999
+* 99.999-999
+* 99999999
+*/
+$.validator.addMethod("postalcodeBR", function(cep_value, element) {
+	return this.optional(element) || /^\d{2}.\d{3}-\d{3}?$|^\d{5}-?\d{3}?$/.test( cep_value );
+}, "Informe um CEP válido.");
 
 /* Matches Italian postcode (CAP) */
 $.validator.addMethod("postalcodeIT", function(value, element) {
@@ -785,6 +797,65 @@ $.validator.addMethod("skip_or_fill_minimum", function(value, element, options) 
 	return isValid;
 }, $.validator.format("Please either skip these fields or fill at least {0} of them."));
 
+/* Validates US States and/or Territories by @jdforsythe
+ * Can be case insensitive or require capitalization - default is case insensitive
+ * Can include US Territories or not - default does not
+ * Can include US Military postal abbreviations (AA, AE, AP) - default does not
+ *
+ * Note: "States" always includes DC (District of Colombia)
+ *
+ * Usage examples:
+ *
+ *  This is the default - case insensitive, no territories, no military zones
+ *  stateInput: {
+ *     caseSensitive: false,
+ *     includeTerritories: false,
+ *     includeMilitary: false
+ *  }
+ *
+ *  Only allow capital letters, no territories, no military zones
+ *  stateInput: {
+ *     caseSensitive: false
+ *  }
+ *
+ *  Case insensitive, include territories but not military zones
+ *  stateInput: {
+ *     includeTerritories: true
+ *  }
+ *
+ *  Only allow capital letters, include territories and military zones
+ *  stateInput: {
+ *     caseSensitive: true,
+ *     includeTerritories: true,
+ *     includeMilitary: true
+ *  }
+ *
+ *
+ *
+ */
+
+jQuery.validator.addMethod("stateUS", function(value, element, options) {
+	var isDefault = typeof options === "undefined",
+		caseSensitive = ( isDefault || typeof options.caseSensitive === "undefined" ) ? false : options.caseSensitive,
+		includeTerritories = ( isDefault || typeof options.includeTerritories === "undefined" ) ? false : options.includeTerritories,
+		includeMilitary = ( isDefault || typeof options.includeMilitary === "undefined" ) ? false : options.includeMilitary,
+		regex;
+
+	if (!includeTerritories && !includeMilitary) {
+		regex = "^(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|PA|RI|S[CD]|T[NX]|UT|V[AT]|W[AIVY])$";
+	} else if (includeTerritories && includeMilitary) {
+		regex = "^(A[AEKLPRSZ]|C[AOT]|D[CE]|FL|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEINOPST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$";
+	} else if (includeTerritories) {
+		regex = "^(A[KLRSZ]|C[AOT]|D[CE]|FL|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEINOPST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$";
+	} else {
+		regex = "^(A[AEKLPRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|PA|RI|S[CD]|T[NX]|UT|V[AT]|W[AIVY])$";
+	}
+
+	regex = caseSensitive ? new RegExp(regex) : new RegExp(regex, "i");
+	return this.optional(element) || regex.test(value);
+},
+"Please specify a valid state");
+
 // TODO check if value starts with <, otherwise don't try stripping anything
 $.validator.addMethod("strippedminlength", function(value, element, param) {
 	return $(value).text().length >= param;
@@ -826,9 +897,9 @@ $.validator.addMethod("vinUS", function(v) {
 		rs = 0,
 		i, n, d, f, cd, cdv;
 
-	for (i = 0; i < 17; i++){
+	for (i = 0; i < 17; i++) {
 		f = FL[i];
-		d = v.slice(i,i + 1);
+		d = v.slice(i, i + 1);
 		if (i === 8) {
 			cdv = d;
 		}

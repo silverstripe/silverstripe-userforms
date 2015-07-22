@@ -174,6 +174,7 @@ to determine the size and the number of rows in a text field.
 
 * Use [HTML Block](#html-block), with the appropriate level [Heading](#heading).
 
+
 ## Viewing form submissions
 
 To view form submissions navigate to the 'Submissions' tab. You can click any of the listed submissions to view the content of each submission.
@@ -261,3 +262,16 @@ This decides whether to send the email based on two options
 * enter for the condition (the 'is blank' and 'is not blank' conditions do not require any text)
 
 
+## Configuration
+
+The 'Configuration' tab has a number of options used for customising your form's behaviour and appearance.
+
+![Configuration](_images/userforms-config.png)
+
+### Validation messages
+
+Validation messages are displayed below invalid fields by default. By checking the 'Display error messages above the form'
+option, an additional set of validation messages are displayed, at the top of the form.
+
+When a user submits an invalid form, they are directed to the top of the form, where they can review the messages.
+Each message links to it's corresponding field so users can easily make the required changes.
