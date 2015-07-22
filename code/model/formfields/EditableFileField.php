@@ -32,6 +32,11 @@ class EditableFileField extends EditableFormField {
 	public function getFormField() {
 		$field = FileField::create($this->Name, $this->Title);
 
+		// filter out '' since this would be a regex problem on JS end
+		$field->getValidator()->setAllowedExtensions(
+			array_filter(Config::inst()->get('File', 'allowed_extensions'))
+		);
+
 		if($this->getSetting('Folder')) {
 			$folder = Folder::get()->byId($this->getSetting('Folder'));
 

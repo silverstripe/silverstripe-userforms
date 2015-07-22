@@ -1,135 +1,141 @@
 EditableOption:
-    option-1:
-        Name: Option1
-        Title: Option 1
+  option-1:
+    Name: Option1
+    Title: Option 1
+  
+  option-2:
+    Name: Option2
+    Title: Option 2
+
+  department-1:
+    Name: dept1
+    Title: sales@example.com
+
+  department-2:
+    Name: dept2
+    Title: accounts@example.com
+
+  option-3:
+    Name: Option3
+    Title: Option 3
+
+  option-4:
+    Name: Option4
+    Title: Option 4
+
+  option-5:
+    Name: Option5
+    Title: Option 5
+
+  option-6:
+    Name: Option6
+    Title: Option 6
     
-    option-2:
-        Name: Option2
-        Title: Option 2
-
-    department-1:
-        Name: dept1
-        Title: sales@example.com
-
-    department-2:
-        Name: dept2
-        Title: accounts@example.com
-
-    option-3:
-        Name: Option3
-        Title: Option 3
-
-    option-4:
-        Name: Option4
-        Title: Option 4
-
-    option-5:
-        Name: Option5
-        Title: Option 5
-
-    option-6:
-        Name: Option6
-        Title: Option 6
-        
 UserDefinedForm_EmailRecipient:
-    recipient-1:
-        EmailAddress: test@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com
-        
-    no-html:
-        EmailAddress: nohtml@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com
-        SendPlain: true
-        
-    no-data:
-        EmailAddress: nodata@example.com
-        EmailSubject: Email Subject
-        EmailFrom: no-reply@example.com  
-        HideFormData: true
+  recipient-1:
+    EmailAddress: test@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
     
+  no-html:
+    EmailAddress: nohtml@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    SendPlain: true
+    
+  no-data:
+    EmailAddress: nodata@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com  
+    HideFormData: true
+  
 EditableTextField:
-    basic-text:
-        Name: basic-text-name
-        Title: Basic Text Field
+  basic-text:
+    Name: basic-text-name
+    Title: Basic Text Field
  
-    basic-text-2:
-        Name: basic-text-name
-        Title: Basic Text Field
-                  
-    required-text:
-        Name: required-text-field
-        Title: Required Text Field
-        CustomErrorMessage: Custom Error Message
-        Required: true
-        
+  basic-text-2:
+    Name: basic-text-name
+    Title: Basic Text Field
+          
+  required-text:
+    Name: required-text-field
+    Title: Required Text Field
+    CustomErrorMessage: Custom Error Message
+    Required: true
+    
 EditableDropdown:
-    basic-dropdown:
-        Name: basic-dropdown
-        Title: Basic Dropdown Field
-        Options: =>EditableOption.option-1, =>EditableOption.option-2
-        
-    department-dropdown:
-        Name: department
-        Title: Department
-        Options: =>EditableOption.department-1, =>EditableOption.department-2
-        
+  basic-dropdown:
+    Name: basic-dropdown
+    Title: Basic Dropdown Field
+    Options: =>EditableOption.option-1, =>EditableOption.option-2
+    
+  department-dropdown:
+    Name: department
+    Title: Department
+    Options: =>EditableOption.department-1, =>EditableOption.department-2
+    
 EditableCheckbox:
-    checkbox-1:
-        Name: checkbox-1
-        Title: Checkbox 1
-        
-    checkbox-2:
-        Name: checkbox-1
-        Title: Checkbox 1
-        
+  checkbox-1:
+    Name: checkbox-1
+    Title: Checkbox 1
+    
+  checkbox-2:
+    Name: checkbox-1
+    Title: Checkbox 1
+    
 EditableCheckboxGroupField:
-    checkbox-group:
-        Name: check-box-group
-        Title: Check box group
-        Options: =>EditableOption.option-3, =>EditableOption.option-4
-                
-EditableEmailField:
-    email-field:
-        Name: email-field
-        Title: Email
+  checkbox-group:
+    Name: check-box-group
+    Title: Check box group
+    Options: =>EditableOption.option-3, =>EditableOption.option-4
         
+EditableEmailField:
+  email-field:
+    Name: email-field
+    Title: Email
+    
 
 EditableRadioField:
-    radio-field:
-        Name: radio-option
-        Title: Radio Option
-        Options: =>EditableOption.option-5, =>EditableOption.option-6
+  radio-field:
+    Name: radio-option
+    Title: Radio Option
+    Options: =>EditableOption.option-5, =>EditableOption.option-6
+    
+    
+EditableFileField:
+  file-field:
+    Name: file-uploader
+    Title: Set file
 
 
 ExtendedEditableFormField:
-    extended-field:
-        Name: extended-field
-        Title: Extended Field
-        TestExtraField: Extra Field
-        TestValidationField: Extra Validation Field
+  extended-field:
+    Name: extended-field
+    Title: Extended Field
+    TestExtraField: Extra Field
+    TestValidationField: Extra Validation Field
 
 
 UserDefinedForm:
-    basic-form-page:
-        Title: User Defined Form
-        Fields: =>EditableTextField.basic-text
-        EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
-        
-    form-with-reset-and-custom-action:
-        Title: Form with Reset Action
-        SubmitButtonText: Custom Button
-        ShowClearButton: true
-        
-    validation-form:
-        Title: Validation Form
-        Fields: =>EditableTextField.required-text
-        
-    custom-rules-form:
-        Title: Custom Rules Form
-        Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
-    empty-form:
-        Title: Empty Form
-        
-        
+  basic-form-page:
+    Title: User Defined Form
+    Fields: =>EditableTextField.basic-text
+    EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
+    
+  form-with-reset-and-custom-action:
+    Title: Form with Reset Action
+    SubmitButtonText: Custom Button
+    ShowClearButton: true
+    
+  validation-form:
+    Title: Validation Form
+    Fields: =>EditableTextField.required-text
+    
+  custom-rules-form:
+    Title: Custom Rules Form
+    Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
+  empty-form:
+    Title: Empty Form
+    
+    

@@ -4,7 +4,8 @@ In this section:
 
 * Learn how to create and edit forms
 * Learn how to add fields to a form
-* Learn how to view submissions and reply to them automatically
+* Learn how to view submissions
+* Learn how to set up automated emails upon form completion
 
 ## Before we begin:
 
@@ -29,8 +30,6 @@ You will notice that a new page has been created, with the name of "New UserDefi
 Simply click on the new page in the content page to bring it up in the editing pane.
 
 <div class="note" markdown="1">
-### Notes:
-
 Don't worry if you create your page in the "wrong" place. Pages can be moved and re-ordered
 easily, and we will cover that under "Managing Your Site."
 </div>
@@ -174,3 +173,105 @@ to determine the size and the number of rows in a text field.
 **Or perhaps you'd like to add informational content to your form?**
 
 * Use [HTML Block](#html-block), with the appropriate level [Heading](#heading).
+
+
+## Viewing form submissions
+
+To view form submissions navigate to the 'Submissions' tab. You can click any of the listed submissions to view the content of each submission.
+
+![Viewing submissions](_images/viewing-submissions.png)
+
+## Setting up automated emails
+
+It is possible to set up automated emails upon each form submission, to do this navigate to the "Recipients" tab and click "Add Email Recipient".
+
+![Add email recipient](_images/add-email-recipient.png)
+
+You will be prompted with a form where you can fill in the details of the email.
+
+### Using form fields in submission emails
+
+Each form field has a unique merge field located under the field's options.
+
+![Merge field option](_images/mergefield.png)
+
+Simply insert the merge field into the email content, and the field's value will be displayed, when the email is sent.
+
+![Merge field in content](_images/mergefieldcontent.png)
+
+### Email details
+
+#### Email Subject
+
+The subject of the email, you can either type a custom subject here or select a field from the form to use as the email subject.
+
+#### Send email to
+
+This is the recipient's address where the email will be sent.
+
+#### Send email from
+
+This shows where the email was sent from, and will most likely need to be an email address on the same domain as your site. For example If your website is yoursite.com, the email address for this field should be something@yoursite.com.
+
+#### Email for reply to
+
+This will be the address which the email recipient will be able to 'reply' to.
+
+#### Email content
+
+In this field you can add a custom message to add to the email
+
+#### Hide form data from email?
+
+You can check this if you do not wish for the email recipient to see the form submission's data in the email.
+
+#### Send email as plain text?
+
+You can check this if you want to remove all of the HTML from the email, this means the email
+will have no custom styling and the recipient will only see the plain text.
+
+If `Send email as plain text?` is unselected, several additional options for HTML editing are displayed.
+
+If sending as HTML, there is the option to preview the HTML that is sent in the editor. Additionally, a HTML
+template can be selected to provide a standard formatted email to contain the editable HTML content.
+
+The list of available templates can be controlled by specifying the folder for these template files in yaml config.
+
+
+	:::yaml
+	UserDefinedForm:
+	  email_template_directory: mysite/templates/useremails/
+
+
+### Custom Rules
+
+In this section you can determine whether to send the email to the recipient based on the data in the form submission.
+
+#### Send conditions
+
+This decides whether to send the email based on two options
+
+1. *All* conditions are true (Every single custom rule must be met in order to send the email)
+2. *Any* conditions are true (At least one of the custom rules must be met in order to send the email)
+
+#### Adding a custom rule
+
+* Click 'Add' to add a custom sending rule.
+* Select the field which you want the custom rule to apply to
+* Select the condition the field must follow
+* enter for the condition (the 'is blank' and 'is not blank' conditions do not require any text)
+
+
+## Configuration
+
+The 'Configuration' tab has a number of options used for customising your form's behaviour and appearance.
+
+![Configuration](_images/userforms-config.png)
+
+### Validation messages
+
+Validation messages are displayed below invalid fields by default. By checking the 'Display error messages above the form'
+option, an additional set of validation messages are displayed, at the top of the form.
+
+When a user submits an invalid form, they are directed to the top of the form, where they can review the messages.
+Each message links to it's corresponding field so users can easily make the required changes.

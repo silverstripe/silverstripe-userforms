@@ -10,7 +10,8 @@
 	}],
 	"require": {
 		"silverstripe/framework": ">=3.1.0",
-		"silverstripe/cms": ">=3.1.0"
+		"silverstripe/cms": ">=3.1.0",
+		"silverstripe-australia/gridfieldextensions": "1.1.0"
 	},
 	"suggest": {
 		"colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions"
