@@ -19,7 +19,16 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 
 		$optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : array();
 
-		return new UserFormsCheckboxSetField($this->Name, $this->Title, $optionMap);
+		$field = new UserFormsCheckboxSetField($this->Name, $this->Title, $optionMap);
+
+		// Set the default checked items
+		$defaultCheckedItems = $optionSet->filter('Default', 1);
+
+		if ($defaultCheckedItems->count()) {
+			$field->setDefaultItems($optionSet->filter('Default', 1)->map('EscapedTitle')->keys());
+		}
+
+		return $field;
 	}
 	
 	public function getValueFromData($data) {

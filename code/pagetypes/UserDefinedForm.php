@@ -17,19 +17,18 @@ class UserDefinedForm extends Page {
 	private static $required_identifier = null;
 
 	/**
-	 * Prevent translatable module from attepmting to translate FieldEditor
-	 *
-	 * @var array
-	 * @config
-	 */
-	private static $translate_excluded_fields = array(
-		'Fields'
-	);
-
-	/**
 	 * @var string
 	 */
 	private static $email_template_directory = 'userforms/templates/email/';
+
+	/**
+	 * Built in extensions required by this page
+	 * @config
+	 * @var array
+	 */
+	private static $extensions = array(
+		'UserFormFieldEditorExtension'
+	);
 	
 	/**
 	 * @var array Fields on the user defined form page.
@@ -60,7 +59,6 @@ class UserDefinedForm extends Page {
 	 * @var array
 	 */
 	private static $has_many = array(
-		"Fields" => "EditableFormField",
 		"Submissions" => "SubmittedForm",
 		"EmailRecipients" => "UserDefinedForm_EmailRecipient"
 	);
@@ -98,13 +96,9 @@ class UserDefinedForm extends Page {
 		$this->beforeUpdateCMSFields(function($fields) use ($self) {
 			
 			// define tabs
-			$fields->findOrMakeTab('Root.FormContent', _t('UserDefinedForm.FORM', 'Form'));
 			$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
 			$fields->findOrMakeTab('Root.Recipients', _t('UserDefinedForm.RECIPIENTS', 'Recipients'));
 			$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
-			
-			// field editor
-			$fields->addFieldToTab('Root.FormContent', new FieldEditor('Fields', 'Fields', '', $self ));
 			
 			// text to show on complete
 			$onCompleteFieldSet = new CompositeField(
@@ -209,125 +203,6 @@ SQL;
 		
 		return $fields;
 	}
-	
-	
-	/**
-	 * When publishing copy the editable form fields to the live database
-	 * Not going to version emails and submissions as they are likely to 
-	 * persist over multiple versions.
-	 *
-	 * @return void
-	 */
-	public function doPublish() {
-		$parentID = (!empty($this->ID)) ? $this->ID : 0;
-		// remove fields on the live table which could have been orphaned.
-		$live = Versioned::get_by_stage("EditableFormField", "Live", "\"EditableFormField\".\"ParentID\" = $parentID");
-
-		if($live) {
-			foreach($live as $field) {
-				$field->doDeleteFromStage('Live');
-			}
-		}
-
-		// publish the draft pages
-		if($this->Fields()) {
-			foreach($this->Fields() as $field) {
-				$field->doPublish('Stage', 'Live');
-			}
-		}
-
-		parent::doPublish();
-	}
-	
-	/**
-	 * When un-publishing the page it has to remove all the fields from the 
-	 * live database table.
-	 *
-	 * @return void
-	 */
-	public function doUnpublish() {
-		if($this->Fields()) {
-			foreach($this->Fields() as $field) {
-				$field->doDeleteFromStage('Live');
-			}
-		}
-		
-		parent::doUnpublish();
-	}
-	
-	/**
-	 * Roll back a form to a previous version.
-	 *
-	 * @param string|int Version to roll back to
-	 */
-	public function doRollbackTo($version) {
-		parent::doRollbackTo($version);
-		
-		/*
-			Not implemented yet 
-	
-		// get the older version
-		$reverted = Versioned::get_version($this->ClassName, $this->ID, $version);
-		
-		if($reverted) {
-			
-			// using the lastedited date of the reverted object we can work out which
-			// form fields to revert back to
-			if($this->Fields()) {
-				foreach($this->Fields() as $field) {
-					// query to see when the version of the page was pumped
-					$editedDate = DB::query("
-						SELECT LastEdited
-						FROM \"SiteTree_versions\"
-						WHERE \"RecordID\" = '$this->ID' AND \"Version\" = $version
-					")->value(); 
-					
-
-					// find a the latest version which has been edited
-					$versionToGet = DB::query("
-						SELECT *
-						FROM \"EditableFormField_versions\" 
-						WHERE \"RecordID\" = '$field->ID' AND \"LastEdited\" <= '$editedDate'
-						ORDER BY Version DESC
-						LIMIT 1
-					")->record();
-
-					if($versionToGet) {
-						Debug::show('publishing field'. $field->Name);
-						Debug::show($versionToGet);
-						$field->publish($versionToGet, "Stage", true);
-						$field->writeWithoutVersion();
-					}
-					else {
-						Debug::show('deleting field'. $field->Name);
-						$this->Fields()->remove($field);
-						
-						$field->delete();
-						$field->destroy();
-					}
-				}
-			}
-			
-			// @todo Emails
-		}
-		*/
-	}
-	
-	/**
-	 * Revert the draft site to the current live site
-	 *
-	 * @return void
-	 */
-	public function doRevertToLive() {
-		if($this->Fields()) {
-			foreach($this->Fields() as $field) {
-				$field->publish("Live", "Stage", false);
-				$field->writeWithoutVersion();
-			}
-		}
-		
-		parent::doRevertToLive();
-	}
 
 	/**
 	 * Allow overriding the EmailRecipients on a {@link DataExtension}
@@ -348,67 +223,6 @@ SQL;
 		$this->extend('updateFilteredEmailRecipients', $recipients, $data, $form);
 
 		return $recipients;
-	}
-
-
-	/**
-	 * Store new and old ids of duplicated fields.
-	 * This method also serves as a hook for descendant classes.
-	 */
-	protected function afterDuplicateField($page, $fromField, $toField) {
-		$this->fieldsFromTo[$fromField->ClassName . $fromField->ID] = $toField->ClassName . $toField->ID;
-	}
-
-
-	/**
-	 * Duplicate this UserDefinedForm page, and its form fields.
-	 * Submissions, on the other hand, won't be duplicated.
-	 *
-	 * @return Page
-	 */
-	public function duplicate($doWrite = true) {
-		$page = parent::duplicate($doWrite);
-		
-		// the form fields
-		if($this->Fields()) {
-			foreach($this->Fields() as $field) {
-				$newField = $field->duplicate();
-				$newField->ParentID = $page->ID;
-				$newField->write();
-				$this->afterDuplicateField($page, $field, $newField);
-			}
-		}
-		
-		// the emails
-		if($this->EmailRecipients()) {
-			foreach($this->EmailRecipients() as $email) {
-				$newEmail = $email->duplicate();
-				$newEmail->FormID = $page->ID;
-				$newEmail->write();
-			}
-		}
-		
-		// Rewrite CustomRules
-		if($page->Fields()) {
-			foreach($page->Fields() as $field) {
-				// Rewrite name to make the CustomRules-rewrite below work.
-				$field->Name = $field->ClassName . $field->ID;
-				$rules = unserialize($field->CustomRules);
-
-				if (count($rules) && isset($rules[0]['ConditionField'])) {
-					$from = $rules[0]['ConditionField'];
-
-					if (array_key_exists($from, $this->fieldsFromTo)) {
-						$rules[0]['ConditionField'] = $this->fieldsFromTo[$from];
-						$field->CustomRules = serialize($rules);
-					}
-				}
-
-				$field->Write();
-			}
-		}
-
-		return $page;
 	}
 
 	/**
@@ -435,36 +249,6 @@ SQL;
 		$this->extend('updateFormOptions', $options);
 		
 		return $options;
-	}
-	
-	/**
-	 * Return if this form has been modified on the stage site and not published.
-	 * this is used on the workflow module and for a couple highlighting things
-	 *
-	 * @return boolean
-	 */
-	public function getIsModifiedOnStage() {
-		// new unsaved pages could be never be published
-		if($this->isNew()) {
-			return false;
-		}
-
-		$stageVersion = Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Stage', $this->ID);
-		$liveVersion = Versioned::get_versionnumber_by_stage('UserDefinedForm', 'Live', $this->ID);
-
-		$isModified = ($stageVersion && $stageVersion != $liveVersion);
-
-		if(!$isModified) {
-			if($this->Fields()) {
-				foreach($this->Fields() as $field) {
-					if($field->getIsModifiedOnStage()) {
-						$isModified = true;
-						break;
-					}
-				}
-			}
-		}
-		return $isModified;
 	}
 
 	/**
@@ -552,141 +336,23 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * Get the form for the page. Form can be modified by calling {@link updateForm()}
 	 * on a UserDefinedForm extension.
 	 *
-	 * @return Form|false
+	 * @return Forms
 	 */
 	public function Form() {
-		$fields = $this->getFormFields();
-		if(!$fields || !$fields->exists()) return false;
-		
-		$actions = $this->getFormActions();
-		
-		// get the required fields including the validation
-		$required = $this->getRequiredFields();
+		$form = UserForm::create($this);
 
-		// generate the conditional logic 
 		$this->generateConditionalJavascript();
-
-		$form = new Form($this, "Form", $fields, $actions, $required);
-		$form->setRedirectToFormOnValidationError(true);
-		
-		$data = Session::get("FormInfo.{$form->FormName()}.data");
-		
-		if(is_array($data)) $form->loadDataFrom($data);
-		
-		$this->extend('updateForm', $form);
-
-		if($this->DisableCsrfSecurityToken) {
-			$form->disableSecurityToken();
-		}
-
 		$this->generateValidationJavascript($form);
-		
+
 		return $form;
-	}
-
-	/**
-	 * Get the form fields for the form on this page. Can modify this FieldSet
-	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
-	 * is applied to this controller.
-	 *
-	 * @return FieldList
-	 */
-	public function getFormFields() {
-		$fields = new FieldList();
-
-		$editableFields = $this->Fields();
-		if($editableFields) foreach($editableFields as $editableField) {
-			// get the raw form field from the editable version
-			$field = $editableField->getFormField();
-			if(!$field) break;
-
-			// set the error / formatting messages
-			$field->setCustomValidationMessage($editableField->getErrorMessage());
-
-			// set the right title on this field
-			if($right = $editableField->getSetting('RightTitle')) {
-				// Since this field expects raw html, safely escape the user data prior
-				$field->setRightTitle(Convert::raw2xml($right));
-			}
-
-			// if this field is required add some
-			if($editableField->Required) {
-				$field->addExtraClass('requiredField');
-
-				if($identifier = UserDefinedForm::config()->required_identifier) {
-
-					$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
-					$field->setTitle($title);
-				}
-			}
-			// if this field has an extra class
-			if($extraClass = $editableField->getSetting('ExtraClass')) {
-				$field->addExtraClass(Convert::raw2att($extraClass));
-			}
-
-			// set the values passed by the url to the field
-			$request = $this->getRequest();
-			if($value = $request->getVar($field->getName())) {
-				$field->setValue($value);
-			}
-
-			$fields->push($field);
-		}
-		$this->extend('updateFormFields', $fields);
-
-		return $fields;
-	}
-	
-	/**
-	 * Generate the form actions for the UserDefinedForm. You 
-	 * can manipulate these by using {@link updateFormActions()} on
-	 * a decorator.
-	 *
-	 * @todo Make form actions editable via their own field editor.
-	 *
-	 * @return FieldList
-	 */
-	public function getFormActions() {
-		$submitText = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
-		$clearText = ($this->ClearButtonText) ? $this->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
-		
-		$actions = new FieldList(
-			new FormAction("process", $submitText)
-		);
-
-		if($this->ShowClearButton) {
-			$actions->push(new ResetFormAction("clearForm", $clearText));
-		}
-		
-		$this->extend('updateFormActions', $actions);
-		
-		return $actions;
-	}
-	
-	/**
-	 * Get the required form fields for this form.
-	 *
-	 * @return RequiredFields
-	 */
-	public function getRequiredFields() {
-		// Generate required field validator
-		$requiredNames = $this
-			->Fields()
-			->filter('Required', true)
-			->column('Name');
-		$required = new RequiredFields($requiredNames);
-		
-		$this->extend('updateRequiredFields', $required);
-		
-		return $required;
 	}
 
 	/**
 	 * Build jQuery validation script and require as a custom script
 	 * 
-	 * @param Form $form
+	 * @param UserForm $form
 	 */
-	public function generateValidationJavascript($form) {
+	public function generateValidationJavascript(UserForm $form) {
 		// set the custom script for this form
 		Requirements::customScript(
 			$this
@@ -711,139 +377,125 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
 				$fieldId = $field->Name;
-				
+
 				if($field->ClassName == 'EditableFormHeading') { 
-					$fieldId = 'Form_Form_'.$field->Name;
+					$fieldId = 'UserForm_Form_' . $field->Name;
 				}
-				
+
 				// Is this Field Show by Default
 				if(!$field->getShowOnLoad()) {
 					$default .= "$(\"#" . $fieldId . "\").hide();\n";
 				}
 
 				// Check for field dependencies / default
-				if($field->Dependencies()) {
-					foreach($field->Dependencies() as $dependency) {
-						if(is_array($dependency) && isset($dependency['ConditionField']) && $dependency['ConditionField'] != "") {
-							// get the field which is effected
-							$formName = Convert::raw2sql($dependency['ConditionField']);
-							$formFieldWatch = DataObject::get_one("EditableFormField", "\"Name\" = '$formName'");
-							
-							if(!$formFieldWatch) break;
-							
-							// watch out for multiselect options - radios and check boxes
-							if(is_a($formFieldWatch, 'EditableDropdown')) {
-								$fieldToWatch = "$(\"select[name='".$dependency['ConditionField']."']\")";
-								$fieldToWatchOnLoad = $fieldToWatch;
-							}
-							// watch out for checkboxs as the inputs don't have values but are 'checked
-							else if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."[".$dependency['Value']."]']\")";
-								$fieldToWatchOnLoad = $fieldToWatch;
-							}
-							else if(is_a($formFieldWatch, 'EditableRadioField')) {
-								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";
-								// We only want to trigger on load once for the radio group - hence we focus on the first option only.
-								$fieldToWatchOnLoad = "$(\"input[name='".$dependency['ConditionField']."']:first\")";
-							}
-							else {
-								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."']\")";
-								$fieldToWatchOnLoad = $fieldToWatch;
-							}
-							
-							// show or hide?
-							$view = (isset($dependency['Display']) && $dependency['Display'] == "Hide") ? "hide" : "show";
-							$opposite = ($view == "show") ? "hide" : "show";
-							
-							// what action do we need to keep track of. Something nicer here maybe?
-							// @todo encapulsation
-							$action = "change";
-							
-							if($formFieldWatch->ClassName == "EditableTextField") {
-								$action = "keyup";
-							}
-							
-							// is this field a special option field
-							$checkboxField = false;
-							$radioField = false;
+				foreach($field->CustomRules() as $rule) {
 
-							if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
-								$action = "click";
-								$checkboxField = true;
-							}
-							else if ($formFieldWatch->ClassName == "EditableRadioField") {
-								$radioField = true;
-							}
+					// Get the field which is effected
+					$formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
 
-							// Escape the values.
-							$dependency['Value'] = str_replace('"', '\"', $dependency['Value']);
-
-							// and what should we evaluate
-							switch($dependency['ConditionOption']) {
-								case 'IsNotBlank':
-									$expression = ($checkboxField || $radioField) ? '$(this).prop("checked")' :'$(this).val() != ""';
-
-									break;
-								case 'IsBlank':
-									$expression = ($checkboxField || $radioField) ? '!($(this).prop("checked"))' : '$(this).val() == ""';
-									
-									break;
-								case 'HasValue':
-									if ($checkboxField) {
-										$expression = '$(this).prop("checked")';
-									} else if ($radioField) {
-										// We cannot simply get the value of the radio group, we need to find the checked option first.
-										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $dependency['Value'] .'"';
-									} else {
-										$expression = '$(this).val() == "'. $dependency['Value'] .'"';
-									}
-
-									break;
-								case 'ValueLessThan':
-									$expression = '$(this).val() < parseFloat("'. $dependency['Value'] .'")';
-									
-									break;
-								case 'ValueLessThanEqual':
-									$expression = '$(this).val() <= parseFloat("'. $dependency['Value'] .'")';
-									
-									break;
-								case 'ValueGreaterThan':
-									$expression = '$(this).val() > parseFloat("'. $dependency['Value'] .'")';
-
-									break;
-								case 'ValueGreaterThanEqual':
-									$expression = '$(this).val() >= parseFloat("'. $dependency['Value'] .'")';
-
-									break;
-								default: // ==HasNotValue
-									if ($checkboxField) {
-										$expression = '!$(this).prop("checked")';
-									} else if ($radioField) {
-										// We cannot simply get the value of the radio group, we need to find the checked option first.
-										$expression = '$(this).parents(".field, .control-group").find("input:checked").val()!="'. $dependency['Value'] .'"';
-									} else {
-										$expression = '$(this).val() != "'. $dependency['Value'] .'"';
-									}
-								
-									break;
-							}
-	
-							if(!isset($watch[$fieldToWatch])) {
-								$watch[$fieldToWatch] = array();
-							}
-
-							$watch[$fieldToWatch][] =  array(
-								'expression' => $expression,
-								'field_id' => $fieldId,
-								'view' => $view,
-								'opposite' => $opposite,
-								'action' => $action
-							);
-
-							$watchLoad[$fieldToWatchOnLoad] = true;
-					
-						}
+					if($formFieldWatch->RecordClassName == 'EditableDropdown') {
+						// watch out for multiselect options - radios and check boxes
+						$fieldToWatch = "$(\"select[name='" . $formFieldWatch->Name . "']\")";
+						$fieldToWatchOnLoad = $fieldToWatch;
+					} else if($formFieldWatch->RecordClassName == 'EditableCheckboxGroupField') {
+						// watch out for checkboxs as the inputs don't have values but are 'checked
+						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "[" . $rule->FieldValue . "]']\")";
+						$fieldToWatchOnLoad = $fieldToWatch;
+					} else if($formFieldWatch->RecordClassName == 'EditableRadioField') {
+						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
+						// We only want to trigger on load once for the radio group - hence we focus on the first option only.
+						$fieldToWatchOnLoad = "$(\"input[name='" . $formFieldWatch->Name . "']:first\")";
+					} else {
+						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
+						$fieldToWatchOnLoad = $fieldToWatch;
 					}
+
+					// show or hide?
+					$view = ($rule->Display == 'Hide') ? 'hide' : 'show';
+					$opposite = ($view == "show") ? "hide" : "show";
+
+					// what action do we need to keep track of. Something nicer here maybe?
+					// @todo encapulsation
+					$action = "change";
+
+					if($formFieldWatch->ClassName == "EditableTextField") {
+						$action = "keyup";
+					}
+
+					// is this field a special option field
+					$checkboxField = false;
+					$radioField = false;
+
+					if(in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
+						$action = "click";
+						$checkboxField = true;
+					} else if ($formFieldWatch->ClassName == "EditableRadioField") {
+						$radioField = true;
+					}
+
+					// and what should we evaluate
+					switch($rule->ConditionOption) {
+						case 'IsNotBlank':
+							$expression = ($checkboxField || $radioField) ? '$(this).prop("checked")' :'$(this).val() != ""';
+
+							break;
+						case 'IsBlank':
+							$expression = ($checkboxField || $radioField) ? '!($(this).prop("checked"))' : '$(this).val() == ""';
+							
+							break;
+						case 'HasValue':
+							if ($checkboxField) {
+								$expression = '$(this).prop("checked")';
+							} else if ($radioField) {
+								// We cannot simply get the value of the radio group, we need to find the checked option first.
+								$expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
+							} else {
+								$expression = '$(this).val() == "'. $rule->FieldValue .'"';
+							}
+
+							break;
+						case 'ValueLessThan':
+							$expression = '$(this).val() < parseFloat("'. $rule->FieldValue .'")';
+							
+							break;
+						case 'ValueLessThanEqual':
+							$expression = '$(this).val() <= parseFloat("'. $rule->FieldValue .'")';
+							
+							break;
+						case 'ValueGreaterThan':
+							$expression = '$(this).val() > parseFloat("'. $rule->FieldValue .'")';
+
+							break;
+						case 'ValueGreaterThanEqual':
+							$expression = '$(this).val() >= parseFloat("'. $rule->FieldValue .'")';
+
+							break;
+						default: // ==HasNotValue
+							if ($checkboxField) {
+								$expression = '!$(this).prop("checked")';
+							} else if ($radioField) {
+								// We cannot simply get the value of the radio group, we need to find the checked option first.
+								$expression = '$(this).parents(".field, .control-group").find("input:checked").val()!="'. $rule->FieldValue .'"';
+							} else {
+								$expression = '$(this).val() != "'. $rule->FieldValue .'"';
+							}
+
+							break;
+					}
+
+					if(!isset($watch[$fieldToWatch])) {
+						$watch[$fieldToWatch] = array();
+					}
+
+					$watch[$fieldToWatch][] =  array(
+						'expression' => $expression,
+						'field_id' => $fieldId,
+						'view' => $view,
+						'opposite' => $opposite,
+						'action' => $action
+					);
+
+					$watchLoad[$fieldToWatchOnLoad] = true;
 				}
 			}
 		}
@@ -902,27 +554,7 @@ JS
 , 'UserFormsConditional');
 		}
 	}
-	
-	/**
-	 * Convert a PHP array to a JSON string. We cannot use {@link Convert::array2json}
-	 * as it escapes our values with "" which appears to break the validate plugin
-	 *
-	 * @param Array array to convert
-	 * @return JSON 
-	 */
-	public function array2json($array) {
-		foreach($array as $key => $value) {
-			if(is_array( $value )) {
-				$result[] = "$key:" . $this->array2json($value);
-			} else {
-				$value = ( is_bool($value) || is_numeric($value) ) ? $value : "\"$value\"";
-				$result[] = "$key:$value";
-			}
-		}
 
-		return (isset($result)) ? "{\n".implode( ', ', $result ) ."\n}\n": '{}';
-	}
-	
 	/**
 	 * Process the form that is submitted through the site
 	 * 
@@ -934,7 +566,7 @@ JS
 	public function process($data, $form) {
 		Session::set("FormInfo.{$form->FormName()}.data",$data);
 		Session::clear("FormInfo.{$form->FormName()}.errors");
-		
+
 		foreach($this->Fields() as $field) {
 			$messages[$field->Name] = $field->getErrorMessage()->HTML();
 			$formField = $field->getFormField();
@@ -953,13 +585,13 @@ JS
 				}
 			}
 		}
-		
+
 		if(Session::get("FormInfo.{$form->FormName()}.errors")){
 			Controller::curr()->redirectBack();
 
 			return;
 		}
-		
+
 		$submittedForm = Object::create('SubmittedForm');
 		$submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
 		$submittedForm->ParentID = $this->ID;
@@ -968,22 +600,22 @@ JS
 		if(!$this->DisableSaveSubmissions) {
 			$submittedForm->write();
 		}
-		
+
 		$values = array();
 		$attachments = array();
 
 		$submittedFields = new ArrayList();
-		
+
 		foreach($this->Fields() as $field) {
 			if(!$field->showInReports()) {
 				continue;
 			}
-			
+
 			$submittedField = $field->getSubmittedFormField();
 			$submittedField->ParentID = $submittedForm->ID;
 			$submittedField->Name = $field->Name;
 			$submittedField->Title = $field->getField('Title');
-			
+
 			// save the value from the data
 			if($field->hasMethod('getValueFromData')) {
 				$submittedField->Value = $field->getValueFromData($data);
@@ -1021,23 +653,23 @@ JS
 					}
 				}
 			}
-			
+
 			$submittedField->extend('onPopulationFromField', $field);
 			
 			if(!$this->DisableSaveSubmissions) {
 				$submittedField->write();
 			}
-	
+
 			$submittedFields->push($submittedField);
 		}
-		
+
 		$emailData = array(
 			"Sender" => Member::currentUser(),
 			"Fields" => $submittedFields
 		);
-		
+
 		$this->extend('updateEmailData', $emailData, $attachments);
-		
+
 		// email users on submit.
 		if($recipients = $this->FilteredEmailRecipients($data, $form)) {
 			$email = new UserDefinedForm_SubmittedFormEmail($submittedFields); 
@@ -1117,14 +749,13 @@ JS
 				}
 			}
 		}
-		
+
 		$submittedForm->extend('updateAfterProcess');
 
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
 		
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
-
 
 		// set a session variable from the security ID to stop people accessing 
 		// the finished method directly.
@@ -1142,7 +773,7 @@ JS
 				}
 			}
 		}
-		
+
 		if(!$this->DisableSaveSubmissions) {
 			Session::set('userformssubmission'. $this->ID, $submittedForm->ID);
 		}

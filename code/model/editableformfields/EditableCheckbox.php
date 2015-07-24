@@ -12,14 +12,24 @@ class EditableCheckbox extends EditableFormField {
 	private static $singular_name = 'Checkbox Field';
 	
 	private static $plural_name = 'Checkboxes';
-	
-	public function getFieldConfiguration() {
-		$options = parent::getFieldConfiguration();
-		$options->push(new CheckboxField("Fields[$this->ID][CustomSettings][Default]", _t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?'), $this->getSetting('Default')));
-		
-		return $options;
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+
+		$fields->addFieldToTab('Root.Main', CheckboxField::create(
+			"Fields[$this->ID][CustomSettings][Default]",
+			_t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?'),
+			$this->getSetting('Default')
+		));
+
+		return $fields;
 	}
-	
+
 	public function getFormField() {
 		
 		$field = CheckboxField::create( $this->Name, $this->Title, $this->getSetting('Default'));
@@ -31,6 +41,8 @@ class EditableCheckbox extends EditableFormField {
 			$field->setAttribute('data-rule-required', 'true');
 			$field->setAttribute('data-msg-required', $errorMessage);
 		}
+
+		$field->setValue($this->getSetting('Default'));
 		
 		return $field;
 	}

@@ -10,17 +10,30 @@ class EditableMemberListField extends EditableFormField {
 	private static $singular_name = 'Member List Field';
 	
 	private static $plural_name = 'Member List Fields';
-	
-	public function getFieldConfiguration() {
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+		$fields->removeByName('Validation');
+
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
-		$groups = DataObject::get("Group");
+		$groups = DataObject::get('Group');
 		
-		if($groups) $groups = $groups->map('ID', 'Title');
+		if($groups) {
+			$groups = $groups->map('ID', 'Title');
+		}
 		
-		$fields = new FieldList(
-			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
-		);
-		
+		$fields->addFieldToTab('Root.Main', DropdownField::create(
+			"Fields[$this->ID][CustomSettings][GroupID]",
+			_t('EditableFormField.GROUP', 'Group'),
+			$groups,
+			$groupID
+		));
+
 		return $fields;
 	}
 	

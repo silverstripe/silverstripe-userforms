@@ -12,27 +12,32 @@ class EditableTextField extends EditableFormField {
 	private static $singular_name = 'Text Field';
 	
 	private static $plural_name = 'Text Fields';
-	
-	public function getFieldConfiguration() {
-		$fields = parent::getFieldConfiguration();
-		
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
 		$min = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
 		$max = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
-		
+
 		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
-		
-		$extraFields = new FieldList(
-			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
-				new NumericField($this->getSettingName('MinLength'), "", $min),
-				new NumericField($this->getSettingName('MaxLength'), " - ", $max)
+
+		$fields->addFieldsToTab('Root.Main', array(
+			FieldGroup::create(
+				_t('EditableTextField.TEXTLENGTH', 'Text length'),
+				NumericField::create($this->getSettingName('MinLength'), '', $min),
+				NumericField::create($this->getSettingName('MaxLength'), ' - ', $max)
 			),
-			new NumericField($this->getSettingName('Rows'), _t('EditableTextField.NUMBERROWS',
-				'Number of rows'), $rows)
-		);
-		
-		$fields->merge($extraFields);
-		
-		return $fields;		
+			NumericField::create(
+				'Rows',
+				_t('EditableTextField.NUMBERROWS', 'Number of rows'),
+				$rows
+			)
+		));
+
+		return $fields;
 	}
 
 	/**
@@ -57,6 +62,8 @@ class EditableTextField extends EditableFormField {
 			$field->setAttribute('data-rule-required', 'true');
 			$field->setAttribute('data-msg-required', $errorMessage);
 		}
+
+		$field->setValue($this->Default);
 		
 		return $field;
 	}
