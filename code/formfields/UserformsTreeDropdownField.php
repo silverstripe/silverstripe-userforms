@@ -4,17 +4,14 @@
  * {@link TreeDropdownField} subclass for handling loading folders through the
  * nested {@link FormField} instances of the {@link FieldEditor}
  *
+ * @deprecated since version 4.0
  * @package userforms
  */
 class UserformsTreeDropdownField extends TreeDropdownField {
 
-	public function Link($action = null) {
-		$form = Controller::curr()->EditForm;
+	public function __construct($name, $title = null, $sourceObject = 'Group', $keyField = 'ID', $labelField = 'TreeTitle', $showSearch = true) {
+		parent::__construct($name, $title, $sourceObject, $keyField, $labelField, $showSearch);
 
-		return Controller::join_links(
-			$form->FormAction(), 'field/Fields/handleField/' . $this->name,
-			$action .
-			'?SecurityID='. $form->getSecurityToken()->getValue()
-		);
+		Deprecation::notice('4.0', __CLASS__ . " is deprecated");
 	}
 }

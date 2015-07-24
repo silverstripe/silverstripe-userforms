@@ -21,6 +21,15 @@ class EditableLiteralField extends EditableFormField {
 	 */
 	private static $editor_config = null;
 
+	private static $db = array(
+		'Content' => 'HTMLText', // From CustomSettings
+		'HideFromReports' => 'Boolean(0)' // from CustomSettings
+	);
+
+	private static $defaults = array(
+		'HideFromReports' => false
+	);
+
 	/**
 	 * Returns the {@see HtmlEditorConfig} instance to use for sanitisation
 	 *
@@ -56,7 +65,7 @@ class EditableLiteralField extends EditableFormField {
 	 */
 	public function getContent() {
 		// Apply html editor sanitisation rules
-		$content = $this->getSetting('Content');
+		$content = $this->getField('Content');
 		return $this->sanitiseContent($content);
 	}
 
@@ -68,41 +77,53 @@ class EditableLiteralField extends EditableFormField {
 	public function setContent($content) {
 		// Apply html editor sanitisation rules
 		$content = $this->sanitiseContent($content);
-		$this->setSetting('Content', $content);
+		$this->setField('Content', $content);
 	}
-	
-	public function getFieldConfiguration() {
-		$textAreaField = new HTMLEditorField(
-			$this->getSettingName('Content'),
-			"HTML",
-			$this->getContent()
-		);
-		$textAreaField->setRows(4);
-		$textAreaField->setColumns(20);
-				
-		return new FieldList(
-			$textAreaField,
-			new CheckboxField(
-				$this->getSettingName('HideFromReports'),
-				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?'), 
-				$this->getSetting('HideFromReports')
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+		$fields->removeByName('Validation');
+
+		$fields->addFieldsToTab('Root.Main', array(
+			HTMLEditorField::create('Content', _t('EditableLiteralField.CONTENT', 'HTML'))
+				->setRows(4)
+				->setColumns(20),
+			CheckboxField::create(
+				'HideFromReports',
+				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?')
 			)
-		);
+		));
+
+		return $fields;
 	}
 
 	public function getFormField() {
-		$label = $this->Title ? "<label class='left'>$this->Title</label>":"";
+		$label = $this->Title
+			? "<label class='left'>".Convert::raw2xml($this->Title)."</label>"
+			: "";
 		$classes = $this->Title ? "" : " nolabel";
 		
-		return new LiteralField("LiteralField[$this->ID]", 
-			"<div id='$this->Name' class='field text$classes'>
-				$label
-				<div class='middleColumn literalFieldArea'>". $this->getSetting('Content') ."</div>".
-			"</div>"
+		return new LiteralField(
+			"LiteralField[{$this->ID}]",
+			sprintf(
+				"<div id='%s' class='field text%s'>
+					%s
+					<div class='middleColumn literalFieldArea'>%s</div>".
+				"</div>",
+				Convert::raw2htmlname($this->Name),
+				Convert::raw2att($classes),
+				$label,
+				$this->Content
+			)
 		);
 	}
 	
 	public function showInReports() {
-		return (!$this->getSetting('HideFromReports'));
+		return ! $this->HideFromReports;
 	}
 }

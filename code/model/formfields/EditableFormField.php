@@ -4,11 +4,17 @@
  * object like {@link EditableTextField}. 
  *
  * @package userforms
+ * @method DataList DisplayRules() List of EditableCustomRule objects
  */
-
 class EditableFormField extends DataObject {
-	
-	private static $default_sort = "Sort";
+
+	/**
+	 * Default sort order
+	 *
+	 * @config
+	 * @var string
+	 */
+	private static $default_sort = '"Sort"';
 	
 	/**
 	 * A list of CSS classes that can be added
@@ -16,32 +22,67 @@ class EditableFormField extends DataObject {
 	 * @var array
 	 */
 	public static $allowed_css = array();
-	
+
+	/**
+	 * @config
+	 * @var array
+	 */
+	private static $summary_fields = array(
+		'Title'
+	);
+
+	/**
+	 * @config
+	 * @var array
+	 */
 	private static $db = array(
 		"Name" => "Varchar",
 		"Title" => "Varchar(255)",
-		"Default" => "Varchar",
+		"Default" => "Varchar(255)",
 		"Sort" => "Int",
 		"Required" => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
-		"CustomRules" => "Text",
-		"CustomSettings" => "Text",
-		"CustomParameter" => "Varchar(200)"
+
+		"CustomRules" => "Text", // @deprecated from 2.0
+		"CustomSettings" => "Text", // @deprecated from 2.0
+		"Migrated" => "Boolean", // set to true when migrated
+
+		"ExtraClass" => "Text", // from CustomSettings
+		"RightTitle" => "Varchar(255)", // from CustomSettings
+		"ShowOnLoad" => "Boolean(1)", // from CustomSettings
 	);
 
+	/**
+	 * @config
+	 * @var array
+	 */
 	private static $has_one = array(
 		"Parent" => "UserDefinedForm",
 	);
-	
+
+	/**
+	 * Built in extensions required
+	 *
+	 * @config
+	 * @var array
+	 */
 	private static $extensions = array(
 		"Versioned('Stage', 'Live')"
 	);
-	
+
+	/**
+	 * @config
+	 * @var array
+	 */
+	private static $has_many = array(
+		"DisplayRules" => "EditableCustomRule.Parent" // from CustomRules
+	);
+
 	/**
 	 * @var bool
 	 */
 	protected $readonly;
-	
+
 	/**
 	 * Set the visibility of an individual form field
 	 *
@@ -59,14 +100,163 @@ class EditableFormField extends DataObject {
 	private function isReadonly() {
 		return $this->readonly;
 	}
-	
+
 	/**
-	 * Template to render the form field into
-	 *
-	 * @return String
+	 * @return FieldList
 	 */
-	public function EditSegment() {
-		return $this->renderWith('EditableFormField');
+	public function getCMSFields() {
+		$fields = new FieldList(new TabSet('Root'));
+
+		// Main tab
+		$fields->addFieldsToTab(
+			'Root.Main',
+			array(
+				ReadonlyField::create(
+					'Type',
+					_t('EditableFormField.TYPE', 'Type'),
+					$this->i18n_singular_name()
+				),
+				LiteralField::create(
+					'MergeField',
+					_t(
+						'EditableFormField.MERGEFIELDNAME',
+						'<div class="field readonly">' .
+							'<label class="left">Merge field</label>' .
+							'<div class="middleColumn">' .
+								'<span class="readonly">$' . $this->Name . '</span>' .
+							'</div>' .
+						'</div>'
+					)
+				),
+				TextField::create('Title'),
+				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
+				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title'))
+			)
+		);
+
+		// Custom settings
+		if (!empty(self::$allowed_css)) {
+			$cssList = array();
+			foreach(self::$allowed_css as $k => $v) {
+				if (!is_array($v)) {
+					$cssList[$k]=$v;
+				} elseif ($k === $this->ClassName) {
+					$cssList = array_merge($cssList, $v);
+				}
+			}
+
+			$fields->addFieldToTab('Root.Main',
+				DropdownField::create(
+					'ExtraClass',
+					_t('EditableFormField.EXTRACLASS_TITLE', 'Extra Styling/Layout'),
+					$cssList
+				)->setDescription(_t(
+					'EditableFormField.EXTRACLASS_SELECT',
+					'Select from the list of allowed styles'
+				))
+			);
+		} else {
+			$fields->addFieldToTab('Root.Main',
+				TextField::create(
+					'ExtraClass',
+					_t('EditableFormField.EXTRACLASS_Title', 'Extra CSS Classes')
+				)->setDescription(_t(
+					'EditableFormField.EXTRACLASS_MULTIPLE',
+					'Separate each CSS class with a single space'
+				))
+			);
+		}
+
+		// Validation
+		$fields->addFieldsToTab(
+			'Root.Validation',
+			$this->getFieldValidationOptions()
+		);
+
+		$editableColumns = new GridFieldEditableColumns();
+		$editableColumns->setDisplayFields(array(
+			'Display' => '',
+			'ConditionFieldID' => function($record, $column, $grid) {
+				return DropdownField::create(
+					$column,
+					'',
+					EditableFormField::get()
+						->filter(array(
+							'ParentID' => $this->ParentID
+						))
+						->exclude(array(
+							'ID' => $this->ID
+						))
+						->map('ID', 'Title')
+					);
+			},
+			'ConditionOption' => function($record, $column, $grid) {
+				$options = Config::inst()->get('EditableCustomRule', 'condition_options');
+				return DropdownField::create($column, '', $options);
+			},
+			'FieldValue' => function($record, $column, $grid) {
+				return TextField::create($column);
+			},
+			'ParentID' => function($record, $column, $grid) {
+				return HiddenField::create($column, '', $this->ID);
+			}
+		));
+
+		// Custom rules
+		$customRulesConfig = GridFieldConfig::create()
+			->addComponents(
+				$editableColumns,
+				new GridFieldButtonRow(),
+				new GridFieldToolbarHeader(),
+				new GridFieldAddNewInlineButton(),
+				new GridFieldDeleteAction(),
+				new GridState_Component()
+			);
+
+		$fields->addFieldsToTab('Root.DisplayRules', array(
+			CheckboxField::create('ShowOnLoad')
+				->setDescription(_t(
+					'EditableFormField.SHOWONLOAD',
+					'Initial visibility before processing these rules'
+				)),
+			GridField::create(
+				'DisplayRules',
+				_t('EditableFormField.CUSTOMRULES', 'Custom Rules'),
+				$this->DisplayRules(),
+				$customRulesConfig
+			)
+		));
+
+		$this->extend('updateCMSFields', $fields);
+
+		return $fields;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function onBeforeWrite() {
+		parent::onBeforeWrite();
+
+		if(!$this->Sort && $this->ParentID) {
+			$parentID = $this->ParentID;
+			$this->Sort = EditableFormField::get()
+				->filter('ParentID', $parentID)
+				->max('Sort') + 1;
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function onAfterWrite() {
+		parent::onAfterWrite();
+
+		// Set a field name.
+		if(!$this->Name) {
+			$this->Name = $this->RecordClassName . $this->ID;
+			$this->write();
+		}
 	}
 	
 	/**
@@ -85,7 +275,11 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canDelete($member = null) {
-		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
+		if($this->Parent()) {
+			return $this->Parent()->canEdit($member) && !$this->isReadonly();
+		}
+
+		return true;
 	}
 	
 	/**
@@ -95,7 +289,11 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canEdit($member = null) {
-		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
+		if($this->Parent()) {
+			return $this->Parent()->canEdit($member) && !$this->isReadonly();
+		}
+
+		return true;
 	}
 	
 	/**
@@ -105,6 +303,11 @@ class EditableFormField extends DataObject {
 	 */
 	public function doPublish($fromStage, $toStage, $createNewVersion = false) {
 		$this->publish($fromStage, $toStage, $createNewVersion);
+
+		// Don't forget to publish the related custom rules...
+		foreach ($this->DisplayRules() as $rule) {
+			$rule->doPublish($fromStage, $toStage, $createNewVersion);
+		}
 	}
 	
 	/**
@@ -114,6 +317,11 @@ class EditableFormField extends DataObject {
 	 */
 	public function doDeleteFromStage($stage) {
 		$this->deleteFromStage($stage);
+
+		// Don't forget to delete the related custom rules...
+		foreach ($this->DisplayRules() as $rule) {
+			$rule->deleteFromStage($stage);
+		}
 	}
 	
 	/**
@@ -136,49 +344,32 @@ class EditableFormField extends DataObject {
 		if($this->isNew()) return false;
 
 		$stageVersion = Versioned::get_versionnumber_by_stage('EditableFormField', 'Stage', $this->ID);
-		$liveVersion =	Versioned::get_versionnumber_by_stage('EditableFormField', 'Live', $this->ID);
+		$liveVersion = Versioned::get_versionnumber_by_stage('EditableFormField', 'Live', $this->ID);
 
 		return ($stageVersion && $stageVersion != $liveVersion);
 	}
-
 	
 	/**
-	 * Show this form on load or not
-	 *
-	 * @return bool
-	 */
-	public function getShowOnLoad() {
-		return ($this->getSetting('ShowOnLoad') == "Show" || $this->getSetting('ShowOnLoad') == '') ? true : false;
-	}
-	
-	/**
-	 * To prevent having tables for each fields minor settings we store it as 
-	 * a serialized array in the database. 
-	 * 
-	 * @return Array Return all the Settings
+	 * @deprecated since version 4.0
 	 */
 	public function getSettings() {
+		Deprecation::notice('4.0', 'getSettings is deprecated');
 		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
 	}
 	
 	/**
-	 * Set the custom settings for this field as we store the minor details in
-	 * a serialized array in the database
-	 *
-	 * @param Array the custom settings
+	 * @deprecated since version 4.0
 	 */
 	public function setSettings($settings = array()) {
+		Deprecation::notice('4.0', 'setSettings is deprecated');
 		$this->CustomSettings = serialize($settings);
 	}
 	
 	/**
-	 * Set a given field setting. Appends the option to the settings or overrides
-	 * the existing value
-	 *
-	 * @param String key 
-	 * @param String value
+	 * @deprecated since version 4.0
 	 */
 	public function setSetting($key, $value) {
+		Deprecation::notice('4.0', "setSetting({$key}) is deprecated");
 		$settings = $this->getSettings();
 		$settings[$key] = $value;
 		
@@ -199,13 +390,11 @@ class EditableFormField extends DataObject {
 	}
 
 	/**
-	 * Return just one custom setting or empty string if it does
-	 * not exist
-	 *
-	 * @param String Value to use as key
-	 * @return String
+	 * @deprecated since version 4.0
 	 */
 	public function getSetting($setting) {
+		Deprecation::notice("4.0", "getSetting({$setting}) is deprecated");
+
 		$settings = $this->getSettings();
 		if(isset($settings) && count($settings) > 0) {
 			if(isset($settings[$setting])) {
@@ -243,51 +432,6 @@ class EditableFormField extends DataObject {
 	public function showExtraOptions() {
 		return true;
 	}
-	
-	/**
-	 * Return the custom validation fields for this field for the CMS
-	 *
-	 * @return array
-	 */
-	public function Dependencies() {
-		return ($this->CustomRules) ? unserialize($this->CustomRules) : array();
-	}
-	
-	/**
-	 * Return the custom validation fields for the field
-	 * 
-	 * @return DataObjectSet
-	 */
-	public function CustomRules() {
-		$output = new ArrayList();
-		$fields = $this->Parent()->Fields();
-
-		// check for existing ones
-		if($rules = $this->Dependencies()) {
-			foreach($rules as $rule => $data) {
-				// recreate all the field object to prevent caching
-				$outputFields = new ArrayList();
-				
-				foreach($fields as $field) {
-					$new = clone $field;
-
-					$new->isSelected = ($new->Name == $data['ConditionField']) ? true : false;
-					$outputFields->push($new);
-				}
-				
-				$output->push(new ArrayData(array(
-					'FieldName' => $this->getFieldName(),
-					'Display' => $data['Display'],
-					'Fields' => $outputFields,
-					'ConditionField' => $data['ConditionField'],
-					'ConditionOption' => $data['ConditionOption'],
-					'Value' => $data['Value']
-				)));
-			}
-		}
-	
-		return $output;
-	}
 
 	/**
 	 * Title field of the field in the backend of the page
@@ -307,164 +451,44 @@ class EditableFormField extends DataObject {
 		return $field;
 	}
 
-	/** Returns the Title for rendering in the front-end (with XML values escaped) */
+	/**
+	 * Returns the Title for rendering in the front-end (with XML values escaped)
+	 *
+	 * @return string
+	 */
 	public function getTitle() {
 		return Convert::raw2att($this->getField('Title'));
 	}
 
 	/**
-	 * Return the base name for this form field in the 
-	 * form builder. Optionally returns the name with the given field
-	 *
-	 * @param String Field Name
-	 *
-	 * @return String
+	 * @deprecated since version 4.0
 	 */
 	public function getFieldName($field = false) {
+		Deprecation::notice('4.0', "getFieldName({$field}) is deprecated");
 		return ($field) ? "Fields[".$this->ID."][".$field."]" : "Fields[".$this->ID."]";
 	}
 	
 	/**
-	 * Generate a name for the Setting field
-	 *
-	 * @param String name of the setting
-	 * @return String
+	 * @deprecated since version 4.0
 	 */
 	public function getSettingName($field) {
+		Deprecation::notice('4.0', "getSettingName({$field}) is deprecated");
 		$name = $this->getFieldName('CustomSettings');
 		
 		return $name . '[' . $field .']';
 	}
 	
 	/**
-	 * How to save the data submitted in this field into the database object 
-	 * which this field represents.
-	 *
-	 * Any class's which call this should also call 
-	 * {@link parent::populateFromPostData()} to ensure that this method is 
-	 * called
-	 *
-	 * @access public
-	 *
-	 * @param array $data
-	 */
-	public function populateFromPostData($data) {
-		$this->Title 		= (isset($data['Title'])) ? $data['Title']: "";
-		$this->Default 		= (isset($data['Default'])) ? $data['Default'] : "";
-		$this->Sort 		= (isset($data['Sort'])) ? $data['Sort'] : null;
-		$this->Required 	= !empty($data['Required']) ? 1 : 0;
-		$this->Name 		= $this->class.$this->ID;
-		$this->CustomRules	= "";
-		$this->CustomErrorMessage	= (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
-		$this->CustomSettings		= "";
-		
-		// custom settings
-		if(isset($data['CustomSettings'])) {
-			$this->setSettings($data['CustomSettings']);
-		}
-
-		// custom validation
-		if(isset($data['CustomRules'])) {
-			$rules = array();
-			
-			foreach($data['CustomRules'] as $key => $value) {
-
-				if(is_array($value)) {
-					$fieldValue = (isset($value['Value'])) ? $value['Value'] : '';
-					
-					if(isset($value['ConditionOption']) && $value['ConditionOption'] == "Blank" || $value['ConditionOption'] == "NotBlank") {
-						$fieldValue = "";
-					}
-					
-					$rules[] = array(
-						'Display' => (isset($value['Display'])) ? $value['Display'] : "",
-						'ConditionField' => (isset($value['ConditionField'])) ? $value['ConditionField'] : "",
-						'ConditionOption' => (isset($value['ConditionOption'])) ? $value['ConditionOption'] : "",
-						'Value' => $fieldValue
-					);
-				}
-			}
-			
-			$this->CustomRules = serialize($rules);
-		}
-
-		$this->extend('onPopulateFromPostData', $data);
-		$this->write();
-	}
-	 
-	/**
-	 * Implement custom field Configuration on this field. Includes such things as
-	 * settings and options of a given editable form field
-	 *
-	 * @return FieldSet
-	 */
-	public function getFieldConfiguration() {
-		$extraClass = ($this->getSetting('ExtraClass')) ? $this->getSetting('ExtraClass') : '';
-
-		$mergeFieldName = new LiteralField('MergeFieldName', _t('EditableFormField.MERGEFIELDNAME',
-			'<div class="field">' .
-				'<label class="left" for="Fields-6-CustomSettings-RightTitle">Merge field</label>' .
-				'<div class="middleColumn">' .
-					'<p>$' . $this->Name . '</p>' .
-					'<em>Use this to display the field\'s value in email content.</em>' .
-				'</div>' .
-			'</div>'
-		));
-
-		if (is_array(self::$allowed_css) && !empty(self::$allowed_css)) {
-			foreach(self::$allowed_css as $k => $v) {
-				if (!is_array($v)) $cssList[$k]=$v;
-				elseif ($k == $this->ClassName()) $cssList = array_merge($cssList, $v);
-			}
-			
-			$ec = new DropdownField(
-				$this->getSettingName('ExtraClass'), 
-				_t('EditableFormField.EXTRACLASSA', 'Extra Styling/Layout'), 
-				$cssList, $extraClass
-			);
-			
-		}
-		else {
-			$ec = new TextField(
-				$this->getSettingName('ExtraClass'), 
-				_t('EditableFormField.EXTRACLASSB', 'Extra css Class - separate multiples with a space'), 
-				$extraClass
-			);
-		}
-		
-		$right = new TextField(
-			$this->getSettingName('RightTitle'), 
-			_t('EditableFormField.RIGHTTITLE', 'Right Title'), 
-			$this->getSetting('RightTitle')
-		);
-
-        $fields = FieldList::create(
-            $mergeFieldName,
-            $ec,
-            $right
-        );
-        $this->extend('updateFieldConfiguration', $fields);
-        
-        return $fields;
-	}
-	
-	/**
 	 * Append custom validation fields to the default 'Validation' 
 	 * section in the editable options view
 	 * 
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getFieldValidationOptions() {
 		$fields = new FieldList(
-			new CheckboxField($this->getFieldName('Required'), _t('EditableFormField.REQUIRED', 'Is this field Required?'), $this->Required),
-			new TextField($this->getFieldName('CustomErrorMessage'), _t('EditableFormField.CUSTOMERROR','Custom Error Message'), $this->CustomErrorMessage)
+			CheckboxField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?')),
+			TextField::create('CustomErrorMessage', _t('EditableFormField.CUSTOMERROR','Custom Error Message'))
 		);
-		
-		if(!$this->canEdit()) {
-			foreach($fields as $field) {
-				$field->performReadonlyTransformation();
-			}
-		}
 
         $this->extend('updateFieldValidationOptions', $fields);
 		
@@ -532,5 +556,54 @@ class EditableFormField extends DataObject {
 		$errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
 		
 		return DBField::create_field('Varchar', $errorMessage);
+	}
+
+	/**
+	 * Validate the field taking into account its custom rules.
+	 *
+	 * @param Array $data
+	 * @param UserForm $form
+	 *
+	 * @return boolean
+	 */
+	public function validateField($data, $form) {
+		if($this->Required && $this->DisplayRules()->Count() == 0) {
+			$formField = $this->getFormField();
+
+			if(isset($data[$this->Name])) {
+				$formField->setValue($data[$this->Name]);
+			}
+
+			if(
+				!isset($data[$this->Name]) || 
+				!$data[$this->Name] ||
+				!$formField->validate($form->getValidator())
+			) {
+				$form->addErrorMessage($this->Name, $this->getErrorMessage(), 'bad');
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Invoked by UserFormUpgradeService to migrate settings specific to this field from CustomSettings
+	 * to the field proper
+	 *
+	 * @param array $data Unserialised data
+	 */
+	public function migrateSettings($data) {
+		// Map 'Show' / 'Hide' to boolean
+		if(isset($data['ShowOnLoad'])) {
+			$this->ShowOnLoad = $data['ShowOnLoad'] === '' || ($data['ShowOnLoad'] && $data['ShowOnLoad'] !== 'Hide');
+			unset($data['ShowOnLoad']);
+		}
+		
+		// Migrate all other settings
+		foreach($data as $key => $value) {
+			if($this->hasField($key)) {
+				$this->setField($key, $value);
+			}
+		}
 	}
 }

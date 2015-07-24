@@ -12,42 +12,63 @@ class EditableTextField extends EditableFormField {
 	private static $singular_name = 'Text Field';
 	
 	private static $plural_name = 'Text Fields';
-	
-	public function getFieldConfiguration() {
-		$fields = parent::getFieldConfiguration();
-		
-		$min = ($this->getSetting('MinLength')) ? $this->getSetting('MinLength') : '';
-		$max = ($this->getSetting('MaxLength')) ? $this->getSetting('MaxLength') : '';
-		
-		$rows = ($this->getSetting('Rows')) ? $this->getSetting('Rows') : '1';
-		
-		$extraFields = new FieldList(
-			new FieldGroup(_t('EditableTextField.TEXTLENGTH', 'Text length'),
-				new NumericField($this->getSettingName('MinLength'), "", $min),
-				new NumericField($this->getSettingName('MaxLength'), " - ", $max)
-			),
-			new NumericField($this->getSettingName('Rows'), _t('EditableTextField.NUMBERROWS',
-				'Number of rows'), $rows)
-		);
-		
-		$fields->merge($extraFields);
-		
-		return $fields;		
+
+	private static $db = array(
+		'MinLength' => 'Int',
+		'MaxLength' => 'Int',
+		'Rows' => 'Int(1)'
+	);
+
+	private static $defaults = array(
+		'Rows' => 1
+	);
+
+	public function getCMSFields() {
+		$this->beforeUpdateCMSFields(function($fields) {
+			$fields->addFieldToTab(
+				'Root.Main',
+				NumericField::create(
+					'Rows',
+					_t('EditableTextField.NUMBERROWS', 'Number of rows')
+				)->setDescription(_t(
+					'EditableTextField.NUMBERROWS_DESCRIPTION',
+					'Fields with more than one row will be generated as a textarea'
+				))
+			);
+		});
+
+		return parent::getCMSFields();
+	}
+
+	/**
+	 * @return FieldList
+	 */
+	public function getFieldValidationOptions() {
+		$fields = parent::getFieldValidationOptions();
+
+		$fields->merge(array(
+			FieldGroup::create(
+				_t('EditableTextField.TEXTLENGTH', 'Allowed text length'),
+				array(
+					NumericField::create('MinLength', false),
+					LiteralField::create('RangeLength', _t("EditableTextField.RANGE_TO", "to")),
+					NumericField::create('MaxLength', false)
+				)
+			)
+		));
+
+		return $fields;
 	}
 
 	/**
 	 * @return TextareaField|TextField
 	 */
 	public function getFormField() {
-		
-		$field = NULL;
-		
-		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
+		if($this->Rows > 1) {
 			$field = TextareaField::create($this->Name, $this->Title);
-			$field->setRows($this->getSetting('Rows'));
-		}
-		else {
-			$field = TextField::create($this->Name, $this->Title, null, $this->getSetting('MaxLength'));
+			$field->setRows($this->Rows);
+		} else {
+			$field = TextField::create($this->Name, $this->Title, null, $this->MaxLength);
 		}
 
 		if ($this->Required) {
@@ -57,6 +78,8 @@ class EditableTextField extends EditableFormField {
 			$field->setAttribute('data-rule-required', 'true');
 			$field->setAttribute('data-msg-required', $errorMessage);
 		}
+
+		$field->setValue($this->Default);
 		
 		return $field;
 	}
@@ -71,15 +94,12 @@ class EditableTextField extends EditableFormField {
 	 */
 	public function getValidation() {
 		$options = parent::getValidation();
-		
-		if($this->getSetting('MinLength')) {
-			$options['minlength'] = $this->getSetting('MinLength');
+		if($this->MinLength) {
+			$options['minlength'] = (int)$this->MinLength;
+		}	
+		if($this->MaxLength) {
+			$options['maxlength'] = (int)$this->MaxLength;
 		}
-			
-		if($this->getSetting('MaxLength')) {
-			$options['maxlength'] = $this->getSetting('MaxLength');
-		}
-		
 		return $options;
 	}
 }

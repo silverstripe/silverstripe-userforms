@@ -1,9 +1,0 @@
----
-name: userforms
----
-LeftAndMain:
-  extra_requirements_javascript:
-    - userforms/javascript/UserForm.js
-
-  extra_requirements_css:
-    - userforms/css/FieldEditor.css

@@ -121,27 +121,22 @@ UserDefinedForm_EmailRecipientCondition:
   blank-rule:
     ConditionOption: IsBlank
     ConditionField: =>EditableTextField.your-name-field
-
   not-blank-rule:
     ConditionOption: IsNotBlank
     ConditionField: =>EditableTextField.address-field
-
   equals-rule:
     ConditionOption: Equals
     ConditionField: =>EditableTextField.street-field
     ConditionValue: 'Matches Equals'
-
   not-equals-rule:
     ConditionOption: NotEquals
     ConditionField: =>EditableTextField.city-field
     ConditionValue: 'Matches Not Equals'
-
 # filtered recipient 2
   group-equals-rule:
     ConditionOption: Equals
     ConditionField: =>EditableCheckboxGroupField.colour-checkbox-group
     ConditionValue: Red
-
   group-not-equals-rule:
     ConditionOption: NotEquals
     ConditionField: =>EditableCheckboxGroupField.colour-checkbox-group

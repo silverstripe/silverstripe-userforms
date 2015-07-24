@@ -12,17 +12,27 @@ class EditableCheckbox extends EditableFormField {
 	private static $singular_name = 'Checkbox Field';
 	
 	private static $plural_name = 'Checkboxes';
-	
-	public function getFieldConfiguration() {
-		$options = parent::getFieldConfiguration();
-		$options->push(new CheckboxField("Fields[$this->ID][CustomSettings][Default]", _t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?'), $this->getSetting('Default')));
-		
-		return $options;
+
+	private static $db = array(
+		'CheckedDefault' => 'Boolean' // from CustomSettings
+	);
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->replaceField('Default', CheckboxField::create(
+			"CheckedDefault",
+			_t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?')
+		));
+
+		return $fields;
 	}
-	
+
 	public function getFormField() {
-		
-		$field = CheckboxField::create( $this->Name, $this->Title, $this->getSetting('Default'));
+		$field = CheckboxField::create($this->Name, $this->Title, $this->CheckedDefault);
 		
 		if ($this->Required) {
 			// Required validation can conflict so add the Required validation messages
@@ -39,5 +49,15 @@ class EditableCheckbox extends EditableFormField {
 		$value = (isset($data[$this->Name])) ? $data[$this->Name] : false;
 		
 		return ($value) ? _t('EditableFormField.YES', 'Yes') : _t('EditableFormField.NO', 'No');
+	}
+
+	public function migrateSettings($data) {
+		// Migrate 'Default' setting to 'CheckedDefault'
+		if(isset($data['Default'])) {
+			$this->CheckedDefault = (bool)$data['Default'];
+			unset($data['Default']);
+		}
+		
+		parent::migrateSettings($data);
 	}
 }

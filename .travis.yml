@@ -1,6 +1,9 @@
 # See https://github.com/silverstripe-labs/silverstripe-travis-support for setup details
 
-language: php 
+language: php
+
+sudo: false
+
 php: 
  - 5.4
 

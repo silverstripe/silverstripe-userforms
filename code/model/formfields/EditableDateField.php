@@ -12,24 +12,27 @@ class EditableDateField extends EditableFormField {
 	private static $singular_name = 'Date Field';
 	
 	private static $plural_name = 'Date Fields';
-	
-	public function getFieldConfiguration() {
-		$default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
-		$label = _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?');
-		
-		return new FieldList(
-			new CheckboxField($this->getSettingName("DefaultToToday"), $label, $default)
-		);
-	}
-	
-	public function populateFromPostData($data) {
-		$fieldPrefix = 'Default-';
-		
-		if(empty($data['Default']) && !empty($data[$fieldPrefix.'Year']) && !empty($data[$fieldPrefix.'Month']) && !empty($data[$fieldPrefix.'Day'])) {
-			$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];		
-		}
-		
-		parent::populateFromPostData($data);
+
+	private static $db = array(
+		'DefaultToToday' => 'Boolean' // From customsettings
+	);
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$this->beforeUpdateCMSFields(function(FieldList $fields) {
+			$fields->addFieldToTab(
+				'Root.Main',
+				CheckboxField::create(
+					'DefaultToToday',
+					_t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?')
+				),
+				'RightTitle'
+			);
+		});
+
+		return parent::getCMSFields();
 	}
 	
 	/**
@@ -37,7 +40,9 @@ class EditableDateField extends EditableFormField {
 	 *
 	 */
 	public function getFormField() {
-		$defaultValue = ($this->getSetting('DefaultToToday')) ? date('Y-m-d') : $this->Default;
+		$defaultValue = $this->DefaultToToday
+			? SS_Datetime::now()->Format('Y-m-d')
+			: $this->Default;
 		$field = EditableDateField_FormField::create( $this->Name, $this->Title, $defaultValue);
 		$field->setConfig('showcalendar', true);
 
