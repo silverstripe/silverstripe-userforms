@@ -2,7 +2,7 @@
 	$(document).ready(function() {
 		var formId = "{$Form.FormName.JS}",
 			errorContainerId = "{$ErrorContainerID.JS}",
-			errorContainer = $('<fieldset><div><h4></h4><ul></ul></div></fieldset>');
+			errorContainer = $('<fieldset><div><h2 id="errorContainerHeading" tabindex="-1"></h2><ul></ul></div></fieldset>');
 
 		var messages = {<% loop $Fields %><% if $ErrorMessage && not $SetsOwnError %><% if $ClassName == 'EditableCheckboxGroupField' %>
 			'{$Name.JS}[]': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% else %>
@@ -19,13 +19,20 @@
 
 		$("#" + formId).validate({
 			ignore: ':hidden',
-			errorClass: "required",
+			errorClass: "error",
 			errorElement: "span",
 			errorPlacement: function(error, element) {
 				error.addClass('message');
+				error.attr('tabindex', '-1');
 
 				if(element.is(":radio") || element.parents(".checkboxset").length > 0) {
 					error.insertAfter(element.closest("ul"));
+					element.closest(".field").find(".left").attr({
+						"id": element.attr("id") + "-legend", 
+						"tabindex": "-1"
+						});
+				} else if (element.is(".checkbox")) {
+					error.insertAfter(element.closest("label"));
 				} else {
 					error.insertAfter(element);
 				}
@@ -59,6 +66,7 @@
 			<% end_if %>
 
 			<% if $DisplayErrorMessagesAtTop %>
+				,focusInvalid: false
 				,invalidHandler: function (event, validator) {
 					var errorList = $('#' + errorContainerId + ' ul');
 
@@ -70,6 +78,8 @@
 					$.each(validator.errorList, function () {
 						applyTopErrorMessage($(this.element), this.message);
 					});
+
+					$("#errorContainerHeading").focus();
 				}
 				,onfocusout: false
 			<% end_if %>
@@ -92,13 +102,15 @@
 			 * @param {string} message - The error message to display (html escaped)
 			 * @desc Update an error message (displayed at the top of the form).
 			 */
+			function elementIsFieldType(element, fieldType) {
+				return element.attr('id').toLowerCase().indexOf(fieldType) !== -1;
+			}
 			function applyTopErrorMessage(input, message) {
 				var inputID = input.attr('id'),
 					anchor = '#' + inputID,
 					elementID = inputID + '-top-error',
 					errorContainer = $('#' + errorContainerId),
-					messageElement = $('#' + elementID),
-					describedBy = input.attr('aria-describedby');
+					messageElement = $('#' + elementID);
 
 				// The 'message' param will be an empty string if the field is valid.
 				if (!message) {
@@ -114,31 +126,26 @@
 					// Update the existing error message.
 					messageElement.show().find('a').html(message);
 				} else {
-					// Generate better link to field
-					input.closest('.field[id]').each(function(){
-						anchor = '#' + $(this).attr('id');
-					});
 					
 					// Add a new error message
-					messageElement = $('<li><a></a></li>');
-					messageElement
+					if (elementIsFieldType(input, 'checkboxgroup') || elementIsFieldType(input, 'radio')) {
+						messageElement = $('<li><a></a></li>');
+						messageElement
 						.attr('id', elementID)
 						.find('a')
-							.attr('href', location.pathname + location.search + anchor)
+							.attr('href', location.pathname + location.search + anchor + '-legend')
 							.html(message);
+					} else {
+						messageElement = $('<li><label></label></li>');
+						messageElement
+						.attr('id', elementID)
+						.find('label')
+							.attr('for', elementID.split('-top-error')[0])
+							.html(message);
+					}
 					errorContainer
 						.find('ul')
 						.append(messageElement);
-						
-					// link back to original input via aria
-					// Respect existing non-error aria-describedby
-					if ( !describedBy ) {
-						describedBy = elementID;
-					} else if ( !describedBy.match( new RegExp( "\\b" + elementID + "\\b" ) ) ) {
-						// Add to end of list if not already present
-						describedBy += " " + elementID;
-					}
-					input.attr( "aria-describedby", describedBy );
 				}
 			}
 			
@@ -146,7 +153,7 @@
 			errorContainer
 				.hide()
 				.attr('id', errorContainerId)
-				.find('h4')
+				.find('h2')
 					.text(ss.i18n._t(
 						"UserForms.ERROR_CONTAINER_HEADER",
 						"Please correct the following errors and try again:"

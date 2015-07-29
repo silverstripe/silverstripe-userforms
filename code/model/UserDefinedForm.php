@@ -555,6 +555,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 * @return Form|false
 	 */
 	public function Form() {
+		Requirements::themedCSS('userforms', 'userforms');
 		$fields = $this->getFormFields();
 		if(!$fields || !$fields->exists()) return false;
 		
