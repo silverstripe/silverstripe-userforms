@@ -9,8 +9,8 @@ class EditableFormFieldTest extends FunctionalTest {
 	static $fixture_file = 'userforms/tests/EditableFormFieldTest.yml';
 
 	protected $extraDataObjects = array(
-		'ExtendedEditableFormField',
-		'EditableFormFieldExtension'
+		'ExtendedEditableFormFieldTestOnly',
+		'EditableFormFieldExtensionTestOnly'
 	);
 	
 	function testFormFieldPermissions() {
@@ -309,7 +309,7 @@ class EditableFormFieldTest extends FunctionalTest {
 
     function testExtendedEditableFormField() {
         /** @var ExtendedEditableFormField $field */
-        $field = $this->objFromFixture('ExtendedEditableFormField', 'extended-field');
+        $field = $this->objFromFixture('ExtendedEditableFormFieldTestOnly', 'extended-field');
 
         // Check db fields
         $dbFields = $field->stat('db');
@@ -342,10 +342,10 @@ class EditableFormFieldTest extends FunctionalTest {
  * A base EditableFormFieldClass that will be extended with {@link EditableFormFieldExtension}
  * @mixin EditableFormFieldExtension
  */
-class ExtendedEditableFormField extends EditableFormField implements TestOnly
+class ExtendedEditableFormFieldTestOnly extends EditableFormField implements TestOnly
 {
     private static $extensions = array(
-        'EditableFormFieldExtension'
+        'EditableFormFieldExtensionTestOnly'
     );
 }
 
@@ -354,7 +354,7 @@ class ExtendedEditableFormField extends EditableFormField implements TestOnly
  * Used for testing extensions to EditableFormField and the extended Fields methods
  * @property EditableFormField owner
  */
-class EditableFormFieldExtension extends DataExtension implements TestOnly
+class EditableFormFieldExtensionTestOnly extends DataExtension implements TestOnly
 {
     private static $db = array(
         'TestExtraField'      => 'Varchar',

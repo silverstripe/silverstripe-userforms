@@ -108,14 +108,12 @@ EditableFileField:
     Name: file-uploader
     Title: Set file
 
-
-ExtendedEditableFormField:
+ExtendedEditableFormFieldTestOnly:
   extended-field:
     Name: extended-field
     Title: Extended Field
     TestExtraField: Extra Field
     TestValidationField: Extra Validation Field
-
 
 UserDefinedForm:
   basic-form-page:
