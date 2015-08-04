@@ -36,16 +36,40 @@ class UserForm extends Form {
 	}
 
 	/**
+	 * Get the form steps.
+	 *
+	 * @return ArrayList
+	 */
+	public function getFormSteps() {
+		$steps = new ArrayList();
+
+		foreach ($this->controller->Fields()->filter('ClassName', 'EditableFormStep') as $step) {
+			$steps->push(array(
+				'Title' => $step->Title,
+				'Fields' => $this->getFormFields($step)
+			));
+		}
+
+		return $steps;
+	}
+
+	/**
 	 * Get the form fields for the form on this page. Can modify this FieldSet
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
 	 * is applied to this controller.
 	 *
+	 * @param EditableFormStep $parent
+	 *
 	 * @return FieldList
 	 */
-	public function getFormFields() {
+	public function getFormFields($parent = null) {
+		if(!$parent) {
+			$parent = $this->controller;
+		}
+
 		$fields = new FieldList();
 
-		foreach($this->controller->Fields() as $editableField) {
+		foreach($parent->Fields() as $editableField) {
 			// get the raw form field from the editable version
 			$field = $editableField->getFormField();
 

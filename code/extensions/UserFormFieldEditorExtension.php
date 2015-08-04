@@ -34,6 +34,8 @@ class UserFormFieldEditorExtension extends DataExtension {
 	public function getFieldEditorGrid() {
 		$fields = $this->owner->Fields();
 
+		$this->createInitialFormStep();
+
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'ClassName' => function($record, $column, $grid) {
@@ -64,6 +66,30 @@ class UserFormFieldEditorExtension extends DataExtension {
 		);
 
 		return $fieldEditor;
+	}
+
+	/**
+	 * A UserForm must have at least one step.
+	 * If no steps exist, create an initial step, and put all fields inside it.
+	 *
+	 * @return void
+	 */
+	public function createInitialFormStep() {
+		// If there's already an initial step, do nothing.
+		if ($this->owner->Fields()->filter('ClassName', 'EditableFormStep')->Count()) {
+			return;
+		}
+
+		$step = EditableFormStep::create();
+
+		$step->ParentID = $this->owner->ID;
+		$step->write();
+
+		// Assign each field to the initial step.
+		foreach ($this->owner->Fields()->exclude('ID', $step->ID) as $field) {
+			$field->StepID = $step->ID;
+			$field->write();
+		}
 	}
 
 	/**
