@@ -26,23 +26,23 @@ class EditableOption extends DataObject {
 		"Versioned('Stage', 'Live')"
 	);
 
-    /**
-     * @param Member $member
-     *
-     * @return boolean
-     */
-    public function canEdit($member = null) {
-    	return ($this->Parent()->canEdit($member));
-    }
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canEdit($member = null) {
+		return ($this->Parent()->canEdit($member));
+	}
 
-    /**
-     * @param Member $member
-     *
-     * @return boolean
-     */
-    public function canDelete($member = null) {
-    	return ($this->Parent()->canDelete($member));
-    }
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canDelete($member = null) {
+		return ($this->Parent()->canDelete($member));
+	}
 
 	/**
 	 * Template for the editing view of this option field
@@ -68,20 +68,6 @@ class EditableOption extends DataObject {
 	public function FieldName() {
 		return "Fields[{$this->ParentID}][{$this->ID}]";
 	}
-
-	/**
-	 * Populate this option from the form field
-	 *
-	 * @param Array Data
-	 */
-	public function populateFromPostData($data) {
-		$this->Title = (isset($data['Title'])) ? $data['Title'] : "";
-		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
-		$this->Sort = (isset($data['Sort'])) ? $data['Sort'] : 0;
-		
-		$this->extend('onPopulateFromPostData', $data);
-		$this->write();
-	}
 	
 	/**
 	 * Make this option readonly 
@@ -91,7 +77,7 @@ class EditableOption extends DataObject {
 		return $this->EditSegment();
 	}
 
-    public function getEscapedTitle() {
-        return Convert::raw2att($this->Title);
-    }
+	public function getEscapedTitle() {
+		return Convert::raw2att($this->Title);
+	}
 }

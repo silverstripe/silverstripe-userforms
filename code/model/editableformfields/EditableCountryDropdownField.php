@@ -10,9 +10,20 @@ class EditableCountryDropdownField extends EditableFormField {
 	private static $singular_name = 'Country Dropdown';
 	
 	private static $plural_name = 'Country Dropdowns';
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+
+		return $fields;
+	}
 	
 	public function getFormField() {
-		return new CountryDropdownField($this->Name, $this->Title);
+		return CountryDropdownField::create($this->Name, $this->Title);
 	}
 	
 	public function getValueFromData($data) {

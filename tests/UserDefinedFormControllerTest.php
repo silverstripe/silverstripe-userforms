@@ -18,7 +18,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		// load the form
 		$this->get($form->URLSegment);	
-		$response = $this->submitForm('Form_Form', null, array('basic-text-name' => 'Basic Value'));
+		$response = $this->submitForm('UserForm_Form', null, array('basic-text-name' => 'Basic Value'));
 
 		// should have a submitted form field now
 		$submitted = DataObject::get('SubmittedFormField', "\"Name\" = 'basic-text-name'");
@@ -106,7 +106,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
-		$fields = $controller->getFormFields();
+		$fields = $controller->Form()->getFormFields();
 		
 		$this->assertEquals($fields->Count(), 1);
 		
@@ -116,7 +116,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		UserDefinedForm::config()->required_identifier = "*";
 		
-		$fields = $controller->getFormFields();
+		$fields = $controller->Form()->getFormFields();
 		
 		$this->assertEquals($fields->First()->getCustomValidationMessage()->getValue(), 'Custom Error Message');
 		$this->assertEquals($fields->First()->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
@@ -127,15 +127,15 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$field->write();
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
-		$fields = $controller->getFormFields();
+		$fields = $controller->Form()->getFormFields();
 
 		$this->assertEquals($fields->First()->RightTitle(), "Right Title");
 		
 		// test empty form
 		$emptyForm = $this->objFromFixture('UserDefinedForm', 'empty-form');
 		$controller = new UserDefinedFormControllerTest_Controller($emptyForm);
-		
-		$this->assertFalse($controller->Form());
+
+		$this->assertFalse($controller->Form()->getFormFields()->exists());
 	}
 	
 	function testGetFormActions() {
@@ -143,7 +143,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
-		$actions = $controller->getFormActions();
+		$actions = $controller->Form()->getFormActions();
 		
 		// by default will have 1 submit button which links to process
 		$expected = new FieldList(new FormAction('process', 'Submit'));
@@ -153,22 +153,13 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		// the custom popup should have a reset button and a custom text
 		$custom = $this->objFromFixture('UserDefinedForm', 'form-with-reset-and-custom-action');
 		$controller = new UserDefinedFormControllerTest_Controller($custom);
-		
-		$actions = $controller->getFormActions();
+		$actions = $controller->Form()->getFormActions();
 
 		$expected = new FieldList(new FormAction('process', 'Custom Button'));
 		$expected->push(new ResetFormAction("clearForm", "Clear"));
-		
+
 		$this->assertEquals($actions, $expected);
 	}
-	
-	function testArrayToJson() {
-		$array = array('1' => 'one', '2' => 'two');
-		$string = "{\n1:\"one\", 2:\"two\"\n}\n";
-		$form = new UserDefinedFormControllerTest_Controller();
-		$this->assertEquals($form->array2json($array), $string);
-	}
-	
 	
 	function testRenderingIntoFormTemplate() {
 		$form = $this->setupFormFrontend();
@@ -210,7 +201,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	}
 	
 	function checkTemplateIsCorrect($parser) {
-		$this->assertArrayHasKey(0, $parser->getBySelector('form#Form_Form'));
+		$this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form'));
 		
 		// check for the input
 		$this->assertArrayHasKey(0, $parser->getBySelector('input.text'));

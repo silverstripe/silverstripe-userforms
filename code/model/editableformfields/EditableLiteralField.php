@@ -70,24 +70,31 @@ class EditableLiteralField extends EditableFormField {
 		$content = $this->sanitiseContent($content);
 		$this->setSetting('Content', $content);
 	}
-	
-	public function getFieldConfiguration() {
-		$textAreaField = new HTMLEditorField(
-			$this->getSettingName('Content'),
-			"HTML",
-			$this->getContent()
-		);
-		$textAreaField->setRows(4);
-		$textAreaField->setColumns(20);
-				
-		return new FieldList(
-			$textAreaField,
-			new CheckboxField(
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+		$fields->removeByName('Validation');
+
+		$fields->addFieldsToTab('Root.Main', array(
+			HTMLEditorField::create(
+				$this->getSettingName('Content'),
+				'HTML',
+				$this->getContent())
+			->setRows(4)
+			->setColumns(20),
+			CheckboxField::create(
 				$this->getSettingName('HideFromReports'),
 				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?'), 
 				$this->getSetting('HideFromReports')
 			)
-		);
+		));
+
+		return $fields;
 	}
 
 	public function getFormField() {

@@ -12,21 +12,21 @@ class EditableFileField extends EditableFormField {
 	
 	private static $plural_names = 'File Fields';
 
-	public function getFieldConfiguration() {
-		$field = parent::getFieldConfiguration();
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
 		$folder = ($this->getSetting('Folder')) ? $this->getSetting('Folder') : null;
 
-		$tree = UserformsTreeDropdownField::create(
-			$this->getSettingName("Folder"),
+		$fields->addFieldToTab('Root.Main', UserformsTreeDropdownField::create(
+			$this->getSettingName('Folder'),
 			_t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
-			"Folder"
-		);
+			'Folder'
+		)->setValue($folder));
 
-		$tree->setValue($folder);
-
-		$field->push($tree);
-
-		return $field;
+		return $fields;
 	}
 
 	public function getFormField() {

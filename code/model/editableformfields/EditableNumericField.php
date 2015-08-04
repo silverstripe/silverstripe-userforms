@@ -23,6 +23,7 @@ class EditableNumericField extends EditableFormField {
 	public function getFormField() {
 		$field = new NumericField($this->Name, $this->Title);
 		$field->addExtraClass('number');
+		$field->setValue($this->Default);
 
 		if ($this->Required) {
 			// Required and numeric validation can conflict so add the

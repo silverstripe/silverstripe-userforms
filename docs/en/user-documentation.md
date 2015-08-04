@@ -53,8 +53,8 @@ puts the form at the end of all the content.
 ## Adding fields
 
 To add a field to the form, click on the "Form" tab under the "Content" tab in the
-Editing Pane. Select the type of field you want to add from the drop-down menu and
-press the "Add" button. You can label any field by typing in the appropriate label field in the backend.
+Editing Pane. Click the "Add" button then select the type of field you want from the dropdown.
+Save or publish the form to start editing your new field's properties.
 
 ![Adding fields](_images/add-fields.png)
 

@@ -18,6 +18,46 @@ class EditableMultipleOptionField extends EditableFormField {
 	private static $has_many = array(
 		"Options" => "EditableOption"
 	);
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$optionsGrid = GridField::create(
+			'Options',
+			_t('EditableFormField.CUSTOMOPTIONS', 'Options'),
+			$this->Options()
+		);
+
+		$optionsConfig = GridFieldConfig::create()
+			->addComponents(
+				(new GridFieldEditableColumns())
+				->setDisplayFields(array(
+					'Title' => function($record, $column, $grid) {
+						return TextField::create($column);
+					},
+					'Default' => function($record, $column, $grid) {
+						return CheckboxField::create($column);
+					},
+					'ParentID' => function($record, $column, $grid) {
+						return HiddenField::create($column, '', $this->ID);
+					}
+				)),
+				new GridFieldButtonRow(),
+				new GridFieldToolbarHeader(),
+				new GridFieldAddNewInlineButton(),
+				new GridFieldDeleteAction(),
+				new GridState_Component()
+			);
+
+		$optionsGrid->setConfig($optionsConfig);
+
+		$fields->addFieldToTab('Root.Options', $optionsGrid);
+
+		return $fields;
+	}
 	
 	/**
 	 * Publishing Versioning support.
@@ -98,29 +138,6 @@ class EditableMultipleOptionField extends EditableFormField {
 		}
 		
 		return $clonedNode;
-	}
-	
-	/**
-	 * On before saving this object we need to go through and keep an eye on 
-	 * all our option fields that are related to this field in the form 
-	 * 
-	 * @param ArrayData
-	 */
-	public function populateFromPostData($data) {
-		parent::populateFromPostData($data);
-		
-		// get the current options
-		$fieldSet = $this->Options();
-
-		// go over all the current options and check if ID and Title still exists
-		foreach($fieldSet as $option) {
-			if(isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
-				$option->populateFromPostData($data[$option->ID]);
-			}
-			else {
-				$option->delete();
-			}
-		}
 	}
 	
 	/**

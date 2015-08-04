@@ -82,58 +82,6 @@ class EditableFormFieldTest extends FunctionalTest {
 		$text->setSetting('ShowOnLoad', '');
 		$this->assertTrue($text->getShowOnLoad());
 	}
-
-	
-	function testPopulateFromPostData() {
-		$this->logInWithPermission('ADMIN');
-		$set = new ArrayList();
-		
-		$field = new EditableFormField();
-		
-		$data = array(
-			'Title' => 'Field Title',
-			'Default' => 'Default Value',
-			'Sort' => '2',
-			'Required' => 0,
-			'CustomErrorMessage' => 'Custom'
-		);
-		
-		$field->populateFromPostData($data);
-		$set->push($field);
-		$this->assertDOSEquals(array($data), $set);
-		
-		// test the custom settings
-		$data['CustomSettings'] = array(
-			'Foo' => 'Bar'
-		);
-		
-		$checkbox = new EditableCheckbox();
-		$checkbox->write();
-		
-		$checkbox->populateFromPostData(array('Title' => 'Checkbox'));
-		
-		$field->populateFromPostData($data);
-		
-		$this->assertEquals($field->getSettings(), array('Foo' => 'Bar'));
-
-		$rule = array(
-			'Display' => 'Hide',
-			'ConditionField' => $checkbox->Name,
-			'ConditionOption' => 'HasValue',
-			'Value' => 6
-		);
-		
-		// test the custom rules
-		$data['CustomRules'] = array(
-			'Rule1' => $rule
-		);
-		
-		$field->populateFromPostData($data);
-		
-		$rules = unserialize($field->CustomRules);
-		
-		$this->assertEquals($rules[0], $rule);
-	}
 	
 	function testCustomRules() {
 		$this->logInWithPermission('ADMIN');
@@ -142,58 +90,18 @@ class EditableFormFieldTest extends FunctionalTest {
 		$checkbox = $form->Fields()->find('ClassName', 'EditableCheckbox');
 		$field = $form->Fields()->find('ClassName', 'EditableTextField');
 
-		$rule = array(
-			'Display' => 'Hide',
-			'ConditionField' => $checkbox->Name,
-			'ConditionOption' => 'HasValue',
-			'Value' => 6
-		);
+		$rules = $checkbox->CustomRules();
 
-		$data['CustomRules'] = array(
-			'Rule1' => $rule
-		);
-
-		$field->populateFromPostData($data);
-		
-		$rules = $field->CustomRules();
-		
 		// form has 2 fields - a checkbox and a text field
 		// it has 1 rule - when ticked the checkbox hides the text field
 		$this->assertEquals($rules->Count(), 1);
 
-		// rules are ArrayDatas not dataobjects
-		// $this->assertDOSEquals(array($rule), $rules);
-		
 		$checkboxRule = $rules->First();
+		$checkboxRule->ConditionFieldID = $field->ID;
+
 		$this->assertEquals($checkboxRule->Display, 'Hide');
-		$this->assertEquals($checkboxRule->ConditionField, $checkbox->Name);
 		$this->assertEquals($checkboxRule->ConditionOption, 'HasValue');
-		$this->assertEquals($checkboxRule->Value, '6');
-		
-		foreach($checkboxRule->Fields as $condition) {
-			if($checkbox->Name == $condition->Name) {
-				$this->assertTrue($condition->isSelected);
-			}
-			else {
-				$this->assertFalse($condition->isSelected);
-			}
-		}
-		
-		$data['CustomRules'] = array(
-			'Rule2' => array(
-				'Display' => 'Hide',
-				'ConditionField' => $checkbox->Name,
-				'ConditionOption' => 'Blank'
-			)
-		);
-		
-		$field->populateFromPostData($data);
-	
-		$rules = $field->CustomRules();
-		
-		// test that saving additional rules deletes the old one
-		$this->assertEquals($rules->Count(), 1);
-		
+		$this->assertEquals($checkboxRule->FieldValue, '6');
 	}
 	
 	function testEditableDropdownField() {
@@ -262,50 +170,6 @@ class EditableFormFieldTest extends FunctionalTest {
 			$this->assertEquals($orginal->Sort, $option->Sort);
 		}
 	}
-	
-	function testMultipleOptionPopulateFromPostData() {
-		$dropdown = $this->objFromFixture('EditableDropdown','basic-dropdown');
-		
-		$data = array();
-		
-		foreach($dropdown->Options() as $option) {
-			$orginal[$option->ID] = array(
-				'Title' => $option->Title,
-				'Sort' => $option->Sort
-			);
-			
-			$data[$option->ID] = array(
-				'Title' => 'New - '. $option->Title,
-				'Sort' => $option->Sort + 1
-			);
-		}
-		
-		$dropdown->populateFromPostData($data);
-		
-		$count = $dropdown->Options()->Count();
-		
-		foreach($dropdown->Options() as $option) {
-			$this->assertEquals($option->Title, 'New - '. $orginal[$option->ID]['Title']);
-			$this->assertEquals($option->Sort, $orginal[$option->ID]['Sort'] + 1);
-		}
-
-		// remove the first one. can't assume by ID
-		foreach($data as $key => $value) {
-			unset($data[$key]);
-			break;
-		}
-
-		$dropdown->populateFromPostData($data);
-		
-		$this->assertEquals($dropdown->Options()->Count(), $count-1);
-	}
-	
-	function testEditableTextFieldConfiguration() {
-//		$text = $this->objFromFixture('EditableTextField', 'basic-text');
-		
-//		$configuration = $text->getFieldConfiguration();
-
-	}
 
     function testExtendedEditableFormField() {
         /** @var ExtendedEditableFormField $field */
@@ -315,11 +179,6 @@ class EditableFormFieldTest extends FunctionalTest {
         $dbFields = $field->stat('db');
         $this->assertTrue(array_key_exists('TestExtraField', $dbFields));
         $this->assertTrue(array_key_exists('TestValidationField', $dbFields));
-
-        // Check Field Configuration
-        $fieldConfiguration = $field->getFieldConfiguration();
-        $extraField = $fieldConfiguration->dataFieldByName($field->getSettingName('TestExtraField'));
-        $this->assertNotNull($extraField);
 
         // Check Validation Fields
         $fieldValidation = $field->getFieldValidationOptions();
