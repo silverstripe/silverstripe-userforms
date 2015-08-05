@@ -739,7 +739,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							}
 							// watch out for checkboxs as the inputs don't have values but are 'checked
 							else if(is_a($formFieldWatch, 'EditableCheckboxGroupField')) {
-								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."[".$dependency['Value']."]']\")";
+								$fieldToWatch = "$(\"input[name='".$dependency['ConditionField']."[]'][value='".$dependency['Value']."']\")";
 								$fieldToWatchOnLoad = $fieldToWatch;
 							}
 							else if(is_a($formFieldWatch, 'EditableRadioField')) {
@@ -803,17 +803,33 @@ class UserDefinedForm_Controller extends Page_Controller {
 								case 'ValueLessThan':
 									$expression = '$(this).val() < parseFloat("'. $dependency['Value'] .'")';
 									
+									if ($checkboxField) {
+                                        $expression .= ' && $(this).prop("checked")';
+                                    }
+									
 									break;
 								case 'ValueLessThanEqual':
 									$expression = '$(this).val() <= parseFloat("'. $dependency['Value'] .'")';
 									
+									if ($checkboxField) {
+                                        $expression .= ' && $(this).prop("checked")';
+                                    }
+									
 									break;
 								case 'ValueGreaterThan':
 									$expression = '$(this).val() > parseFloat("'. $dependency['Value'] .'")';
+									
+									if ($checkboxField) {
+                                        $expression .= ' && $(this).prop("checked")';
+                                    }
 
 									break;
 								case 'ValueGreaterThanEqual':
 									$expression = '$(this).val() >= parseFloat("'. $dependency['Value'] .'")';
+									
+									if ($checkboxField) {
+                                        $expression .= ' && $(this).prop("checked")';
+                                    }
 
 									break;
 								default: // ==HasNotValue
