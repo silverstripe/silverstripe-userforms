@@ -1,6 +1,6 @@
-<% if $IncludeFormTag %>
-<form $AttributesHTML>
-<% end_if %>
+<% include UserFormProgress %>
+
+<form class="userform" $AttributesHTML>
 
 <% if $Message %>
 <p id="{$FormName}_error" class="message $MessageType">$Message</p>
@@ -12,11 +12,12 @@
 	<% if $Legend %><legend>$Legend</legend><% end_if %>
 
 	<% loop $FormSteps %>
-	<fieldset>
+	<fieldset class="form-step">
 		<h2>$Title</h2>
 		<% loop $Fields %>
 		$FieldHolder
 		<% end_loop %>
+		<% include UserFormStepNav ContainingPage=$Top %>
 	</fieldset>
 	<% end_loop %>
 
@@ -26,11 +27,9 @@
 <% if $Actions %>
 <div class="Actions">
 	<% loop $Actions %>
-		$Field
+	$Field
 	<% end_loop %>
 </div>
 <% end_if %>
 
-<% if $IncludeFormTag %>
 </form>
-<% end_if %>

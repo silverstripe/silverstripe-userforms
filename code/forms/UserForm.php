@@ -36,6 +36,29 @@ class UserForm extends Form {
 	}
 
 	/**
+	 * Used for partial caching in the template.
+	 *
+	 * @return string
+	 */
+	public function getLastEdited() {
+		return $this->controller->LastEdited;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getNumberOfSteps() {
+		$steps = new ArrayList();
+		$numberOfSteps = $this->controller->Fields()->filter('ClassName', 'EditableFormStep')->Count();
+
+		for($i = 0; $i < $numberOfSteps; $i++) {
+			$steps->push($i);
+		}
+
+		return $steps;
+	}
+
+	/**
 	 * Get the form steps.
 	 *
 	 * @return ArrayList
