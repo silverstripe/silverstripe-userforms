@@ -9,7 +9,7 @@
 		<ul class="step-buttons">
 			<% loop $NumberOfSteps %>
 				<li class="step-button-wrapper<% if $Pos == '1' %> current<% end_if %>">
-					<button class="step-button-jump">$Pos</button>
+					<button class="step-button-jump" disabled="disabled">$Pos</button>
 				</li>
 			<% end_loop %>
 		<ul>
