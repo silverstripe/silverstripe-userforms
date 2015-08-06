@@ -169,6 +169,8 @@ jQuery(function ($) {
 			self.update(newStep + 1);
 		});
 
+		this.update(1);
+
 		return this;
 	}
 

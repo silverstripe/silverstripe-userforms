@@ -1,22 +1,28 @@
 <% if $FirstLast == "first last" %>
 <% else %>
 <nav class="step-navigation" aria-hidden="true" style="display:none;">
-	<ul>
+	<ul class="step-buttons">
 		<% if $FirstLast == "first" %>
 		<% else %>
-		<li><button class="step-button-prev">Prev</button><li>
+		<li class="step-button-wrapper">
+			<button class="step-button-prev">Prev</button>
+		</li>
 		<% end_if %>
 
 		<% if $FirstLast == "last" %>
+
 		<% if $ContainingPage.Actions %>
-		<div class="Actions">
-			<% loop $ContainingPage.Actions %>
+		<% loop $ContainingPage.Actions %>
+		<li class="step-button-wrapper">
 			$Field
-			<% end_loop %>
-		</div>
+		</li>
+		<% end_loop %>
 		<% end_if %>
+
 		<% else %>
-		<li><button class="step-button-next">Next</button></li>
+		<li class="step-button-wrapper">
+			<button class="step-button-next">Next</button>
+		</li>
 		<% end_if %>
 	</ul>
 </nav>
