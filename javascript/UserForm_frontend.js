@@ -25,7 +25,7 @@ jQuery(function ($) {
 		});
 
 		// Listen for events triggered by the progress bar.
-		this.$el.on('userform.progress.jump', function (e, stepNumber) {
+		$('#userform-progress').on('userform.progress.changestep', function (e, stepNumber) {
 			self.jumpToStep(stepNumber - 1);
 		});
 
@@ -76,6 +76,8 @@ jQuery(function ($) {
 
 		this.currentStep.hide();
 		this.setCurrentStep(targetStep);
+
+		this.$el.trigger('userform.form.changestep', [stepNumber]);
 	};
 
 	/**
@@ -102,16 +104,18 @@ jQuery(function ($) {
 	 * @desc Creates a form step.
 	 */
 	function FormStep(element) {
+		var self = this;
+
 		this.$el = element instanceof jQuery ? element : $(element);
 
 		// Bind the step navigation event listeners.
 		this.$el.find('.step-button-prev').on('click', function (e) {
 			e.preventDefault();
-			$(this).closest('.userform').trigger('userform.step.prev');
+			self.$el.trigger('userform.step.prev');
 		});
 		this.$el.find('.step-button-next').on('click', function (e) {
 			e.preventDefault();
-			$(this).closest('.userform').trigger('userform.step.next');
+			self.$el.trigger('userform.step.next');
 		});
 
 		this.hide();
@@ -143,19 +147,62 @@ jQuery(function ($) {
 	 * @desc Creates a progress bar.
 	 */
 	function ProgressBar(element) {
-		this.$el = element instanceof jQuery ? element : $(element);
-		this.buttons = [];
+		var self = this;
 
-		// Trigger events when the user clicks step buttons.
-		this.$el.find('.step-button-jump').each(function (i, stepButton) {
+		this.$el = element instanceof jQuery ? element : $(element);
+		this.$buttons = this.$el.find('.step-button-jump');
+
+		// Update the progress bar when 'step' buttons are clicked.
+		this.$buttons.each(function (i, stepButton) {
 			$(stepButton).on('click', function (e) {
+				var newStepNumber = parseInt($(this).text(), 10);
+
 				e.preventDefault();
-				$('.userform').trigger('userform.progress.jump', [$(this).text()]);
+
+				self.update(newStepNumber);
+				self.$el.trigger('userform.progress.changestep', [newStepNumber]);
 			});
+		});
+
+		// Update the progress bar when 'prev' and 'next' buttons are clicked.
+		$('.userform').on('userform.form.changestep', function (e, newStep) {
+			self.update(newStep + 1);
 		});
 
 		return this;
 	}
+
+	/**
+	 * @func ProgressBar.update
+	 * @param number newStep
+	 * @desc Update the progress element to show a new step.
+	 */
+	ProgressBar.prototype.update = function (newStep) {
+		// Update elements that contain the current step number.
+		this.$el.find('.current-step-number').each(function (i, element) {
+			$(element).text(newStep);
+		});
+
+		// Update aria attributes.
+		this.$el.find('[aria-valuenow]').each(function (i, element) {
+			$(element).attr('aria-valuenow', newStep);
+		});
+
+		// Update the CSS classes on step buttons.
+		this.$buttons.each(function (i, element) {
+			var $item = $(element).parent();
+
+			if (parseInt($(element).text(), 10) === newStep) {
+				$item.addClass('current');
+				return;
+			}
+
+			$item.removeClass('current');
+		});
+
+		// Update the width of the progress bar.
+		this.$el.find('.progress-bar').width(newStep / this.$buttons.length * 100 + '%');
+	};
 
 	/**
 	 * @func main
