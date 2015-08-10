@@ -11,26 +11,26 @@
 <fieldset>
 	<% if $Legend %><legend>$Legend</legend><% end_if %>
 
-	<% loop $FormSteps %>
-	<fieldset class="form-step">
-		<% if $Top.DisplayErrorMessagesAtTop %>
-		<fieldset class="error-container" aria-hidden="true" style="display: none;">
-			<div>
-				<h4></h4>
-				<ul class="error-list"></ul>
-			</div>
+	<% if $FormFields%><% loop $FormFields %>
+		<fieldset class="form-step">
+			<% if $Top.DisplayErrorMessagesAtTop %>
+				<fieldset class="error-container" aria-hidden="true" style="display: none;">
+					<div>
+						<h4></h4>
+						<ul class="error-list"></ul>
+					</div>
+				</fieldset>
+			<% end_if %>
+
+			<h2>$Title</h2>
+
+			<% loop $Children %>
+				$FieldHolder
+			<% end_loop %>
+
+			<% include UserFormStepNav ContainingPage=$Top %>
 		</fieldset>
-		<% end_if %>
-
-		<h2>$Title</h2>
-
-		<% loop $Children %>
-		$FieldHolder
-		<% end_loop %>
-
-		<% include UserFormStepNav ContainingPage=$Top %>
-	</fieldset>
-	<% end_loop %>
+	<% end_loop %><% end_if %>
 
 	<div class="clear"><!-- --></div>
 </fieldset>

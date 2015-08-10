@@ -32,16 +32,8 @@ class EditableCheckbox extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = CheckboxField::create($this->Name, $this->Title, $this->CheckedDefault);
-		
-		if ($this->Required) {
-			// Required validation can conflict so add the Required validation messages
-			// as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-		
+		$field = CheckboxField::create($this->Name, $this->EscapedTitle, $this->CheckedDefault);
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 	

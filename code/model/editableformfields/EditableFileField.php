@@ -35,7 +35,7 @@ class EditableFileField extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = FileField::create($this->Name, $this->Title);
+		$field = FileField::create($this->Name, $this->EscapedTitle);
 
 		// filter out '' since this would be a regex problem on JS end
 		$field->getValidator()->setAllowedExtensions(
@@ -49,13 +49,7 @@ class EditableFileField extends EditableFormField {
 			);
 		}
 
-		if ($this->Required) {
-			// Required validation can conflict so add the Required validation messages
-			// as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
+		$this->doUpdateFormField($field);
 
 		return $field;
 	}

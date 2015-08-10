@@ -34,12 +34,16 @@ class UserFormFieldEditorExtension extends DataExtension {
 	public function getFieldEditorGrid() {
 		$fields = $this->owner->Fields();
 
-		$this->createInitialFormStep();
+		$this->createInitialFormStep(true);
 
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'ClassName' => function($record, $column, $grid) {
-				return DropdownField::create($column, '', $this->getEditableFieldClasses());
+				if($record instanceof EditableFormStep) {
+					return new LabelField($column, "Page Break");
+				} else {
+					return DropdownField::create($column, '', $this->getEditableFieldClasses());
+				}
 			},
 			'Title' => function($record, $column, $grid) {
 				return TextField::create($column, ' ')
@@ -47,22 +51,28 @@ class UserFormFieldEditorExtension extends DataExtension {
 			}
 		));
 
+		$config = GridFieldConfig::create()
+			->addComponents(
+				$editableColumns,
+				new GridFieldButtonRow(),
+				$addField = new GridFieldAddNewInlineButton(),
+				$addStep = new GridFieldAddItemInlineButton('EditableFormStep'),
+				new GridFieldEditButton(),
+				new GridFieldDeleteAction(),
+				new GridFieldToolbarHeader(),
+				new GridFieldOrderableRows('Sort'),
+				new GridState_Component(),
+				new GridFieldDetailForm()
+			);
+		$addField->setTitle('Add Field');
+		$addStep->setTitle('Add Page Break');
+		$addStep->setExtraClass('uf-gridfield-steprow');
+
 		$fieldEditor = GridField::create(
 			'Fields',
 			_t('UserDefinedForm.FIELDS', 'Fields'),
 			$fields,
-			GridFieldConfig::create()
-				->addComponents(
-					$editableColumns,
-					new GridFieldButtonRow(),
-					new GridFieldAddNewInlineButton(),
-					new GridFieldEditButton(),
-					new GridFieldDeleteAction(),
-					new GridFieldToolbarHeader(),
-					new GridFieldOrderableRows('Sort'),
-					new GridState_Component(),
-					new GridFieldDetailForm()
-				)
+			$config
 		);
 
 		return $fieldEditor;
@@ -72,24 +82,41 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 * A UserForm must have at least one step.
 	 * If no steps exist, create an initial step, and put all fields inside it.
 	 *
+	 * @param bool $force
 	 * @return void
 	 */
-	public function createInitialFormStep() {
-		// If there's already an initial step, do nothing.
-		if ($this->owner->Fields()->filter('ClassName', 'EditableFormStep')->Count()) {
+	public function createInitialFormStep($force = false) {
+		// Only invoke once saved
+		if(!$this->owner->exists()) {
 			return;
 		}
 
-		$step = EditableFormStep::create();
+		// Check if first field is a step
+		$fields = $this->owner->Fields();
+		$firstField = $fields->first();
+		if($firstField instanceof EditableFormStep) {
+			return;
+		}
 
-		$step->ParentID = $this->owner->ID;
-		$step->write();
+		// Don't create steps on write if there are no formfields, as this
+		// can create duplicate first steps during publish of new records
+		if(!$force && !$firstField) {
+			return;
+		}
 
-		// Assign each field to the initial step.
-		foreach ($this->owner->Fields()->exclude('ID', $step->ID) as $field) {
-			$field->StepID = $step->ID;
+		// Re-apply sort to each field starting at 2
+		$next = 2;
+		foreach($fields as $field) {
+			$field->Sort = $next++;
 			$field->write();
 		}
+
+		// Add step
+		$step = EditableFormStep::create();
+		$step->Title = _t('EditableFormStep.TITLE_FIRST', 'First Step');
+		$step->Sort = 1;
+		$step->write();
+		$fields->add($step);
 	}
 
 	/**
@@ -117,6 +144,13 @@ class UserFormFieldEditorExtension extends DataExtension {
 		}
 
 		return $editableFieldClasses;
+	}
+
+	/**
+	 * Ensure that at least one page exists at the start
+	 */
+	public function onAfterWrite() {
+		$this->createInitialFormStep();
 	}
 
 	/**

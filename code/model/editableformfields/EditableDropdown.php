@@ -28,30 +28,14 @@ class EditableDropdown extends EditableMultipleOptionField {
 	 * @return DropdownField
 	 */
 	public function getFormField() {
-		$optionSet = $this->Options();
-		$defaultOptions = $optionSet->filter('Default', 1);
-		$options = array();
+		$field = DropdownField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
 
-		if($optionSet) {
-			foreach($optionSet as $option) {
-				$options[$option->Title] = $option->Title;
-			}
+		// Set default
+		$defaultOption = $this->getDefaultOptions()->first();
+		if($defaultOption) {
+			$field->setValue($defaultOption->EscapedTitle);
 		}
-		
-		$field = DropdownField::create($this->Name, $this->Title, $options);
-
-		if ($this->Required) {
-			// Required validation can conflict so add the Required validation messages
-			// as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-
-		if($defaultOptions->count()) {
-			$field->setValue($defaultOptions->First()->EscapedTitle);
-		}
-		
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 }

@@ -25,7 +25,6 @@ class EditableFormStep extends EditableFormField {
 		$fields = parent::getCMSFields();
 
 		$fields->removeByName('MergeField');
-		$fields->removeByName('StepID');
 		$fields->removeByName('Default');
 		$fields->removeByName('Validation');
 		$fields->removeByName('CustomRules');
@@ -37,7 +36,17 @@ class EditableFormStep extends EditableFormField {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		return CompositeField::create()->setTitle($this->Title);
+		$field = CompositeField::create()
+			->setTitle($this->EscapedTitle);
+		$this->doUpdateFormField($field);
+		return $field;
+	}
+
+	protected function updateFormField($field) {
+		// if this field has an extra class
+		if($field->ExtraClass) {
+			$field->addExtraClass($field->ExtraClass);
+		}
 	}
 
 	/**

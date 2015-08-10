@@ -6,7 +6,7 @@
 
 class UserDefinedFormControllerTest extends FunctionalTest {
 	
-	static $fixture_file = 'userforms/tests/UserDefinedFormTest.yml';
+	static $fixture_file = 'UserDefinedFormTest.yml';
 
 	function testProcess() {
 		$form = $this->setupFormFrontend();
@@ -83,7 +83,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	
 	function testForm() {
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
-		
+
 		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
 		// test form 
@@ -106,30 +106,35 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
 		
-		$fields = $controller->Form()->getFormFields();
-		
-		$this->assertEquals($fields->Count(), 1);
+		$formSteps = $controller->Form()->getFormFields();
+		$firstStep = $formSteps->first();
+
+		$this->assertEquals($formSteps->Count(), 1);
+		$this->assertEquals($firstStep->getChildren()->Count(), 1);
 		
 		// custom error message on a form field
 		$requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
 		$controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 		
 		UserDefinedForm::config()->required_identifier = "*";
-		
-		$fields = $controller->Form()->getFormFields();
-		
-		$this->assertEquals($fields->First()->getCustomValidationMessage()->getValue(), 'Custom Error Message');
-		$this->assertEquals($fields->First()->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
+
+		$formSteps = $controller->Form()->getFormFields();
+		$firstStep = $formSteps->first();
+		$firstField = $firstStep->getChildren()->first();
+
+		$this->assertEquals('Custom Error Message', $firstField->getCustomValidationMessage()->getValue());
+		$this->assertEquals($firstField->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
 		
 		// test custom right title
-		$field = $form->Fields()->First();
+		$field = $form->Fields()->limit(1, 1)->First();
 		$field->RightTitle = 'Right Title';
 		$field->write();
 		
 		$controller = new UserDefinedFormControllerTest_Controller($form);
-		$fields = $controller->Form()->getFormFields();
+		$formSteps = $controller->Form()->getFormFields();
+		$firstStep = $formSteps->first();
 
-		$this->assertEquals($fields->First()->RightTitle(), "Right Title");
+		$this->assertEquals($firstStep->getChildren()->First()->RightTitle(), "Right Title");
 		
 		// test empty form
 		$emptyForm = $this->objFromFixture('UserDefinedForm', 'empty-form');

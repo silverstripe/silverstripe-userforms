@@ -1,3 +1,13 @@
+EditableFormStep:
+  form1step1:
+    Title: 'Step 1'
+  form3step1:
+    Title: 'Step 1'
+  form4step1:
+    Title: 'Step 1'
+  form5step1:
+    Title: 'Step 1'
+
 EditableOption:
   option-1:
     Name: Option1
@@ -183,7 +193,7 @@ UserDefinedForm_EmailRecipient:
 UserDefinedForm:
   basic-form-page:
     Title: User Defined Form
-    Fields: =>EditableTextField.basic-text
+    Fields: =>EditableFormStep.form1step1,=>EditableTextField.basic-text
     EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
     
   form-with-reset-and-custom-action:
@@ -193,15 +203,15 @@ UserDefinedForm:
     
   validation-form:
     Title: Validation Form
-    Fields: =>EditableTextField.required-text
+    Fields: =>EditableFormStep.form3step1,=>EditableTextField.required-text
     
   custom-rules-form:
     Title: Custom Rules Form
-    Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
+    Fields: =>EditableFormStep.form4step1,=>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
   empty-form:
     Title: Empty Form
 
   filtered-form-page:
     Title: 'Page with filtered recipients'
-    Fields: =>EditableCheckboxGroupField.checkbox-group, =>EditableTextField.your-name-field, =>EditableTextField.street-field, =>EditableTextField.city-field
+    Fields: =>EditableFormStep.form5step1,=>EditableCheckboxGroupField.checkbox-group, =>EditableTextField.your-name-field, =>EditableTextField.street-field, =>EditableTextField.city-field
     EmailRecipients: =>UserDefinedForm_EmailRecipient.unfiltered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-2
