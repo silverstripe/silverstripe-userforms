@@ -45,6 +45,13 @@ class UserForm extends Form {
 	}
 
 	/**
+	 * @return boolean
+	 */
+	public function getDisplayErrorMessagesAtTop() {
+		return $this->controller->DisplayErrorMessagesAtTop;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getNumberOfSteps() {
@@ -66,11 +73,18 @@ class UserForm extends Form {
 	public function getFormSteps() {
 		$steps = new ArrayList();
 
-		foreach ($this->controller->Fields()->filter('ClassName', 'EditableFormStep') as $step) {
-			$steps->push(array(
-				'Title' => $step->Title,
-				'Fields' => $this->getFormFields($step)
-			));
+		foreach ($this->controller->Fields() as $field) {
+			if ($field instanceof EditableFormStep) {
+				$steps->push($field->getFormField());
+				continue;
+			}
+
+			if(empty($steps->last())) {
+				trigger_error('Missing first step in form', E_USER_WARNING);
+				$steps->push(CompositeField::create());
+			}
+
+			$steps->last()->push($field->getFormField());
 		}
 
 		return $steps;
@@ -81,18 +95,12 @@ class UserForm extends Form {
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
 	 * is applied to this controller.
 	 *
-	 * @param EditableFormStep $parent
-	 *
 	 * @return FieldList
 	 */
-	public function getFormFields($parent = null) {
-		if(!$parent) {
-			$parent = $this->controller;
-		}
-
+	public function getFormFields() {
 		$fields = new FieldList();
 
-		foreach($parent->Fields() as $editableField) {
+		foreach($this->controller->Fields() as $editableField) {
 			// get the raw form field from the editable version
 			$field = $editableField->getFormField();
 

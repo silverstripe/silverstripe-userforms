@@ -367,26 +367,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 		$form = UserForm::create($this);
 
 		$this->generateConditionalJavascript();
-		$this->generateValidationJavascript($form);
 
 		return $form;
 	}
 
-	/**
-	 * Build jQuery validation script and require as a custom script
-	 * 
-	 * @param UserForm $form
-	 */
-	public function generateValidationJavascript(UserForm $form) {
-		// set the custom script for this form
-		Requirements::customScript(
-			$this
-				->customise(array('Form' => $form))
-				->renderWith('ValidationScript'),
-			'UserFormsValidation'
-		);
-	}
-	
 	/**
 	 * Generate the javascript for the conditional field show / hiding logic.
 	 *

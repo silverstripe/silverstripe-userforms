@@ -5,18 +5,43 @@ jQuery(function ($) {
 
 	// Settings that come from the CMS.
 	var CONSTANTS = {
-		ERROR_CONTAINER_ID: '',
-		ENABLE_LIVE_VALIDATION: false,
-		DISPLAY_ERROR_MESSAGES_AT_TOP: false,
-		HIDE_FIELD_LABELS: false,
-		MESSAGES: {}
+		FORM_ID: 'UserForm_Form', // $Form.FormName.JS
+		ERROR_CONTAINER_ID: '', // $ErrorContainerID.JS
+		ENABLE_LIVE_VALIDATION: false, // $EnableLiveValidation
+		DISPLAY_ERROR_MESSAGES_AT_TOP: false, // $DisplayErrorMessagesAtTop
+		HIDE_FIELD_LABELS: false, // $HideFieldLabels
+		MESSAGES: {} // var meaasges
+	};
+
+	// TODO
+	// var messages = {<% loop $Fields %><% if $ErrorMessage && not $SetsOwnError %><% if $ClassName == 'EditableCheckboxGroupField' %>
+	// 	'{$Name.JS}[]': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% else %>
+	// 	'{$Name.JS}': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% end_if %><% end_if %><% end_loop %>
+	// };
+
+	// Common functions that extend multiple classes.
+	var commonMixin = {
+		/**
+		 * @func show
+		 * @desc Show the form step. Looks after aria attributes too.
+		 */
+		show: function () {
+			this.$el.attr('aria-hidden', false).show();
+		},
+		/**
+		 * @func hide
+		 * @desc Hide the form step. Looks after aria attributes too.
+		 */
+		hide: function () {
+			this.$el.attr('aria-hidden', true).hide();
+		}
 	};
 
 	/**
 	 * @func UserForm
 	 * @constructor
-	 * @param object element
-	 * @return object - The UserForm instance.
+	 * @param {object} element
+	 * @return {object} - The UserForm instance.
 	 * @desc The form
 	 */
 	function UserForm(element) {
@@ -38,12 +63,53 @@ jQuery(function ($) {
 			self.jumpToStep(stepNumber - 1);
 		});
 
+		this.$el.validate(this.validationOptions);
+
 		return this;
 	}
 
+	/*
+	 * Default options for step validation. These get extended in main().
+	 */
+	UserForm.prototype.validationOptions = {
+		ignore: ':hidden',
+		errorClass: 'required',
+		errorElement: 'span',
+		errorPlacement: function (error, element) {
+			error.addClass('message');
+
+			if(element.is(':radio') || element.parents('.checkboxset').length > 0) {
+				error.insertAfter(element.closest('ul'));
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		success: function (error) {
+			var errorId = $(error).attr('id');
+
+			error.remove();
+
+			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
+				// Pass the field's ID with the event.
+				$('.userform').trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
+			}
+		},
+		messages: CONSTANTS.MESSAGES,
+		rules: {
+			// TODO
+			// <% loop $Fields %>
+			// 	<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
+			// 		'{$Name.JS}[]': {$ValidationJSON.RAW},
+			// 	<% else %>
+			// 		'{$Name.JS}': {$ValidationJSON.RAW},
+			// 	<% end_if %><% end_if %>
+			// <% end_loop %>
+		}
+	};
+
 	/**
 	 * @func UserForm.addStep
-	 * @param object step - An instance of FormStep.
+	 * @param {object} step - An instance of FormStep.
 	 * @desc Adds a step to the UserForm.
 	 */
 	UserForm.prototype.addStep = function (step) {
@@ -57,7 +123,7 @@ jQuery(function ($) {
 
 	/**
 	 * @func UserForm.setCurrentStep
-	 * @param object step - An instance of FormStep.
+	 * @param {object} step - An instance of FormStep.
 	 * @desc Sets the step the user is currently on.
 	 */
 	UserForm.prototype.setCurrentStep = function (step) {
@@ -76,7 +142,7 @@ jQuery(function ($) {
 
 	/**
 	 * @func UserForm.jumpToStep
-	 * @param number stepNumber
+	 * @param {number} stepNumber
 	 * @desc Jumps to a specific form step.
 	 */
 	UserForm.prototype.jumpToStep = function (stepNumber) {
@@ -117,10 +183,104 @@ jQuery(function ($) {
 	};
 
 	/**
+	 * @func ErrorContainer
+	 * @constructor
+	 * @param {object} element - The error container element.
+	 * @return {object} - The ErrorContainer instance.
+	 * @desc Creates an error container. Used to display step error messages at the top.
+	 */
+	function ErrorContainer(element) {
+		this.$el = element instanceof jQuery ? element : $(element);
+
+		// Set the error container's heading.
+		this.$el.find('h4').text(ss.i18n._t('UserForms.ERROR_CONTAINER_HEADER', 'Please correct the following errors and try again:'));
+
+		return this;
+	}
+
+	/**
+	 * @func hasErrors
+	 * @return boolean
+	 * @desc Checks if the error container has any error messages.
+	 */
+	ErrorContainer.prototype.hasErrors = function () {
+		return this.$el.find('.error-list').children().length > 0;
+	};
+
+	/**
+	 * @func removeErrorMessage
+	 * @desc Removes an error message from the error container.
+	 */
+	ErrorContainer.prototype.removeErrorMessage = function (fieldId) {
+		this.$el.find('#' + fieldId + '-top-error').remove();
+
+		// If there are no more error then hide the container.
+		if (!this.hasErrors()) {
+			this.hide();
+		}
+	};
+
+	/**
+	 * @func ErrorContainer.updateErrorMessage
+	 * @param {object} $input - The jQuery input object which contains the field to validate.
+	 * @param {object} message - The error message to display (html escaped).
+	 * @desc Update an error message (displayed at the top of the form).
+	 */
+	ErrorContainer.prototype.updateErrorMessage = function ($input, message) {
+		var inputID = $input.attr('id'),
+			anchor = '#' + inputID,
+			elementID = inputID + '-top-error',
+			messageElement = $('#' + elementID),
+			describedBy = $input.attr('aria-describedby');
+
+		// The 'message' param will be an empty string if the field is valid.
+		if (!message) {
+			// Style issues as fixed if they already exist
+			messageElement.addClass('fixed');
+			return;
+		}
+
+		messageElement.removeClass('fixed');
+
+		this.show();
+
+		if (messageElement.length === 1) {
+			// Update the existing error message.
+			messageElement.show().find('a').html(message);
+		} else {
+			// Generate better link to field
+			$input.closest('.field[id]').each(function(){
+				anchor = '#' + $(this).attr('id');
+			});
+
+			// Add a new error message
+			messageElement = $('<li><a></a></li>');
+			messageElement
+				.attr('id', elementID)
+				.find('a')
+					.attr('href', location.pathname + location.search + anchor)
+					.html(message);
+
+			this.$el.find('ul').append(messageElement);
+
+			// link back to original input via aria
+			// Respect existing non-error aria-describedby
+			if (!describedBy) {
+				describedBy = elementID;
+			} else if (!describedBy.match(new RegExp('\\b' + elementID + '\\b'))) {
+				// Add to end of list if not already present
+				describedBy += " " + elementID;
+			}
+
+			$input.attr('aria-describedby', describedBy);
+		}
+	};
+
+	/**
 	 * @func FormStep
 	 * @constructor
-	 * @param object element
-	 * @return object - The FormStep instance.
+	 * @param {object} element
+	 * @return {object} - The FormStep instance.
 	 * @desc Creates a form step.
 	 */
 	function FormStep(element) {
@@ -143,71 +303,36 @@ jQuery(function ($) {
 			self.$el.trigger('userform.step.next');
 		});
 
-		// Set up validation for the step.
-		this.$el.validate(this.validationOptions);
+		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
+			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
+
+			// Listen for errors on the UserForm.
+			this.$el.closest('.userform').on('userform.form.error', function (e, validator) {
+				// The step only cares about errors if it's currently visible.
+				if (!self.$el.is(':visible')) {
+					return;
+				}
+
+				// Add or update each error in the list.
+				$.each(validator.errorList, function (i, error) {
+					self.errorContainer.updateErrorMessage($(error.element), error.message);
+				});
+			});
+
+			// Listen for fields becoming valid
+			this.$el.closest('.userform').on('userform.form.valid', function (e, fieldId) {
+				self.errorContainer.removeErrorMessage(fieldId);
+			});
+		}
 
 		return this;
 	}
 
-	/*
-	 * Default options for step validation. These get extended in main().
-	 */
-	FormStep.prototype.validationOptions = {
-		ignore: ':hidden',
-		errorClass: 'required',
-		errorElement: 'span',
-		errorPlacement: function (error, element) {
-			error.addClass('message');
-
-			if(element.is(':radio') || element.parents('.checkboxset').length > 0) {
-				error.insertAfter(element.closest('ul'));
-			} else {
-				error.insertAfter(element);
-			}
-
-			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-				// TODO
-				//applyTopErrorMessage(element, error.html());
-			}
-
-		},
-		success: function (error) {
-			error.remove();
-		},
-		messages: CONSTANTS.MESSAGES,
-		rules: {
-			// TODO
-			// <% loop $Fields %>
-			// 	<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
-			// 		'{$Name.JS}[]': {$ValidationJSON.RAW},
-			// 	<% else %>
-			// 		'{$Name.JS}': {$ValidationJSON.RAW},
-			// 	<% end_if %><% end_if %>
-			// <% end_loop %>
-		}
-	};
-
-	/**
-	 * @func FormStep.show
-	 * @desc Show the form step. Looks after aria attributes too.
-	 */
-	FormStep.prototype.show = function () {
-		this.$el.attr('aria-hidden', false).show();
-	};
-
-	/**
-	 * @func FormStep.hide
-	 * @desc Hide the form step. Looks after aria attributes too.
-	 */
-	FormStep.prototype.hide = function () {
-		this.$el.attr('aria-hidden', true).hide();
-	};
-
 	/**
 	 * @func ProgressBar
 	 * @constructor
-	 * @param object element
-	 * @return object - The Progress bar instance.
+	 * @param {object} element
+	 * @return {object} - The Progress bar instance.
 	 * @desc Creates a progress bar.
 	 */
 	function ProgressBar(element) {
@@ -236,7 +361,7 @@ jQuery(function ($) {
 
 	/**
 	 * @func ProgressBar.update
-	 * @param number newStep
+	 * @param {number} newStep
 	 * @desc Update the progress element to show a new step.
 	 */
 	ProgressBar.prototype.update = function (newStep) {
@@ -274,13 +399,17 @@ jQuery(function ($) {
 	 * @desc Bootstraps the front-end.
 	 */
 	function main() {
-		var userform = new UserForm($('.userform')),
-			progressBar = new ProgressBar($('#userform-progress'));
+		var userform = null,
+			progressBar = null;
+
+		// Extend classes with common functionality.
+		$.extend(FormStep.prototype, commonMixin);
+		$.extend(ErrorContainer.prototype, commonMixin);
 
 		// Extend the default validation options with conditional options
 		// that are set by the user in the CMS.
 		if (CONSTANTS.ENABLE_LIVE_VALIDATION) {
-			$.extend(FormStep.prototype.validationOptions, {
+			$.extend(UserForm.prototype.validationOptions, {
 				onfocusout: function (element) {
 					this.element(element);
 				}
@@ -288,21 +417,25 @@ jQuery(function ($) {
 		}
 
 		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-			$.extend(FormStep.prototype.validationOptions, {
+			$.extend(UserForm.prototype.validationOptions, {
+				// Callback for custom code when an invalid form / step is submitted.
 				invalidHandler: function (event, validator) {
-					var errorList = $('#' + CONSTANTS.ERROR_CONTAINER_ID + ' ul');
-
-					// Update the error list with errors from the validator.
-					// We do this because top messages are not part of the regular
-					// error message life cycle, which jquery.validate handles for us.
-					errorList.empty();
-
-					$.each(validator.errorList, function () {
-						// TODO
-						//applyTopErrorMessage($(this.element), this.message);
-					});
+					$('.userform').trigger('userform.form.error', [validator]);
 				},
 				onfocusout: false
+			});
+		}
+
+		userform = new UserForm($('.userform'));
+		progressBar = new ProgressBar($('#userform-progress'));
+
+		// Conditionally hide field labels and use HTML5 placeholder instead.
+		if (CONSTANTS.HIDE_FIELD_LABELS) {
+			$('#' + CONSTANTS.FORM_ID + ' label.left').each(function () {
+				var $label = $(this);
+
+				$('[name="' + $label.attr('for') + '"]').attr('placeholder', $label.text());
+				$label.remove();
 			});
 		}
 
@@ -326,6 +459,17 @@ jQuery(function ($) {
 		if (userform.steps.length > 1) {
 			userform.$el.children('.Actions').attr('aria-hidden', true).hide();
 		}
+
+		// Enable jQuery UI datepickers
+		$(document).on('click', 'input.text[data-showcalendar]', function() {
+			var $element = $(this);
+
+			$element.ssDatepicker();
+
+			if($element.data('datepicker')) {
+				$element.datepicker('show');
+			}
+		});
 
 		// Make sure the form doesn't expire on the user. Pings every 3 mins.
 		setInterval(function () {
