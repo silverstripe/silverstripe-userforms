@@ -551,25 +551,7 @@ class EditableFormField extends DataObject {
 	public function showInReports() {
 		return true;
 	}
- 
-	/**
-	 * Return the validation information related to this field. This is 
-	 * interrupted as a JSON object for validate plugin and used in the 
-	 * PHP. 
-	 *
-	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return Array
-	 */
-	public function getValidation() {
-		return $this->Required
-			? array('required' => true)
-			: array();
-	}
-	
-	public function getValidationJSON() {
-		return Convert::raw2json($this->getValidation());
-	}
-	
+
 	/**
 	 * Return the error message for this field. Either uses the custom
 	 * one (if provided) or the default SilverStripe message

@@ -45,7 +45,7 @@ class UserForm extends Form {
 	}
 
 	/**
-	 * @return boolean
+	 * @return int
 	 */
 	public function getDisplayErrorMessagesAtTop() {
 		return $this->controller->DisplayErrorMessagesAtTop;
@@ -169,5 +169,21 @@ class UserForm extends Form {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Override some we can add UserForm specific attributes to the form.
+	 *
+	 * @return array
+	 */
+	public function getAttributes() {
+		$attrs = parent::getAttributes();
+
+		$attrs['class'] = $attrs['class'] . ' userform';
+		$attrs['data-livevalidation'] = (bool)$this->controller->EnableLiveValidation;
+		$attrs['data-toperrors'] = (bool)$this->controller->DisplayErrorMessagesAtTop;
+		$attrs['data-hidefieldlabels'] = (bool)$this->controller->HideFieldLabels;
+
+		return $attrs;
 	}
 }

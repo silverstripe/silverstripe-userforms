@@ -45,14 +45,20 @@ class EditableNumericField extends EditableFormField {
 		return $fields;
 	}
 
-	public function getValidation() {
-		$options = array();
+	/**
+	 * Updates a formfield with the additional metadata specified by this field
+	 *
+	 * @param FormField $field
+	 */
+	protected function updateFormField($field) {
+		parent::updateFormField($field);
+
 		if($this->MinValue) {
-			$options['min'] = (int)$this->MinValue;
+			$field->setAttribute('data-rule-min', $this->MinValue);
 		}
+
 		if($this->MaxValue) {
-			$options['max'] = (int)$this->MaxValue;
+			$field->setAttribute('data-rule-max', $this->MaxValue);
 		}
-		return $options;
 	}
 }
