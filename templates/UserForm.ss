@@ -5,7 +5,7 @@
 <% if $Message %>
 <p id="{$FormName}_error" class="message $MessageType">$Message</p>
 <% else %>
-<p id="{$FormName}_error" class="message $MessageType" style="display: none"></p>
+<p id="{$FormName}_error" class="message $MessageType" aria-hidden="true" style="display: none;"></p>
 <% end_if %>
 
 <fieldset>
@@ -13,10 +13,21 @@
 
 	<% loop $FormSteps %>
 	<fieldset class="form-step">
+		<% if $DisplayErrorMessagesAtTop %>
+			<fieldset class="error-container" aria-hidden="true" style="display: none;">
+				<div>
+					<h4></h4>
+					<ul></ul>
+				</div>
+			</fieldset>
+		<% end_if %>
+
 		<h2>$Title</h2>
+
 		<% loop $Fields %>
 		$FieldHolder
 		<% end_loop %>
+
 		<% include UserFormStepNav ContainingPage=$Top %>
 	</fieldset>
 	<% end_loop %>
