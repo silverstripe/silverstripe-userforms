@@ -354,6 +354,15 @@ jQuery(function ($) {
 			self.update(newStep + 1);
 		});
 
+		// Spaces out the steps below progress bar evenly
+		this.$buttons.each(function (index, button) {
+			var $button = $(button),
+				leftPercent = (100 / (self.$buttons.length - 1) * index + '%'),
+				buttonOffset = -1 * ($button.innerWidth() / 2);
+
+			$button.css({left: leftPercent, marginLeft: buttonOffset});
+		});
+
 		this.update(1);
 
 		return this;
@@ -365,6 +374,8 @@ jQuery(function ($) {
 	 * @desc Update the progress element to show a new step.
 	 */
 	ProgressBar.prototype.update = function (newStep) {
+		var $newStepElement = $($('.form-step')[newStep - 1]);
+
 		// Update elements that contain the current step number.
 		this.$el.find('.current-step-number').each(function (i, element) {
 			$(element).text(newStep);
@@ -390,8 +401,11 @@ jQuery(function ($) {
 			$item.removeClass('current');
 		});
 
+		// Update the progress bar's title with the new step's title.
+		this.$el.find('.progress-title').text($newStepElement.data('title'));
+
 		// Update the width of the progress bar.
-		this.$el.find('.progress-bar').width(newStep / this.$buttons.length * 100 + '%');
+		this.$el.find('.progress-bar').width((newStep - 1) / (this.$buttons.length - 1) * 100 + '%');
 	};
 
 	/**
@@ -426,6 +440,9 @@ jQuery(function ($) {
 			});
 		}
 
+		// Display all the things that are hidden when JavaScript is disabled.
+		$('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
+
 		userform = new UserForm($('.userform'));
 		progressBar = new ProgressBar($('#userform-progress'));
 
@@ -438,11 +455,6 @@ jQuery(function ($) {
 				$label.remove();
 			});
 		}
-
-		// Display all the things that are hidden when JavaScript is disabled.
-		$.each(['#userform-progress', '.step-navigation'], function (i, selector) {
-			$(selector).attr('aria-hidden', false).show();
-		});
 
 		// Initialise the form steps.
 		userform.$el.find('.form-step').each(function (i, element) {

@@ -1,6 +1,7 @@
 <% cached "UserForms_Navigation", $LastEdited %>
 <% if $NumberOfSteps.Count > "1" %>
-<div id="userform-progress" aria-hidden="true" style="display:none;">
+<div id="userform-progress" class="userform-progress" aria-hidden="true" style="display:none;">
+	<h2 class="progress-title"></h2>
 	<p>Step <span class="current-step-number">1</span> of $NumberOfSteps.Count</p>
 	<div class="progress">
 		<div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="$NumberOfSteps.Count"></div>
