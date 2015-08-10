@@ -13,18 +13,18 @@
 
 	<% loop $FormSteps %>
 	<fieldset class="form-step">
-		<% if $DisplayErrorMessagesAtTop %>
-			<fieldset class="error-container" aria-hidden="true" style="display: none;">
-				<div>
-					<h4></h4>
-					<ul></ul>
-				</div>
-			</fieldset>
+		<% if $Top.DisplayErrorMessagesAtTop %>
+		<fieldset class="error-container" aria-hidden="true" style="display: none;">
+			<div>
+				<h4></h4>
+				<ul class="error-list"></ul>
+			</div>
+		</fieldset>
 		<% end_if %>
 
 		<h2>$Title</h2>
 
-		<% loop $Fields %>
+		<% loop $Children %>
 		$FieldHolder
 		<% end_loop %>
 

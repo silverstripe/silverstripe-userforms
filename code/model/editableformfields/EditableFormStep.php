@@ -19,14 +19,6 @@ class EditableFormStep extends EditableFormField {
 	private static $plural_name = 'Steps';
 
 	/**
-	 * @config
-	 * @var array
-	 */
-	private static $has_many = array(
-		'Fields' => 'EditableFormField'
-	);
-
-	/**
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
@@ -45,7 +37,7 @@ class EditableFormStep extends EditableFormField {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		return false;
+		return CompositeField::create()->setTitle($this->Title);
 	}
 
 	/**

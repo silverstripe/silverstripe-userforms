@@ -8,7 +8,7 @@ jQuery(function ($) {
 		FORM_ID: 'UserForm_Form', // $Form.FormName.JS
 		ERROR_CONTAINER_ID: '', // $ErrorContainerID.JS
 		ENABLE_LIVE_VALIDATION: false, // $EnableLiveValidation
-		DISPLAY_ERROR_MESSAGES_AT_TOP: true, // $DisplayErrorMessagesAtTop
+		DISPLAY_ERROR_MESSAGES_AT_TOP: false, // $DisplayErrorMessagesAtTop
 		HIDE_FIELD_LABELS: false, // $HideFieldLabels
 		MESSAGES: {} // var meaasges
 	};
@@ -63,8 +63,49 @@ jQuery(function ($) {
 			self.jumpToStep(stepNumber - 1);
 		});
 
+		this.$el.validate(this.validationOptions);
+
 		return this;
 	}
+
+	/*
+	 * Default options for step validation. These get extended in main().
+	 */
+	UserForm.prototype.validationOptions = {
+		ignore: ':hidden',
+		errorClass: 'required',
+		errorElement: 'span',
+		errorPlacement: function (error, element) {
+			error.addClass('message');
+
+			if(element.is(':radio') || element.parents('.checkboxset').length > 0) {
+				error.insertAfter(element.closest('ul'));
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		success: function (error) {
+			var errorId = $(error).attr('id');
+
+			error.remove();
+
+			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
+				// Pass the field's ID with the event.
+				$('.userform').trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
+			}
+		},
+		messages: CONSTANTS.MESSAGES,
+		rules: {
+			// TODO
+			// <% loop $Fields %>
+			// 	<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
+			// 		'{$Name.JS}[]': {$ValidationJSON.RAW},
+			// 	<% else %>
+			// 		'{$Name.JS}': {$ValidationJSON.RAW},
+			// 	<% end_if %><% end_if %>
+			// <% end_loop %>
+		}
+	};
 
 	/**
 	 * @func UserForm.addStep
@@ -158,17 +199,39 @@ jQuery(function ($) {
 	}
 
 	/**
+	 * @func hasErrors
+	 * @return boolean
+	 * @desc Checks if the error container has any error messages.
+	 */
+	ErrorContainer.prototype.hasErrors = function () {
+		return this.$el.find('.error-list').children().length > 0;
+	};
+
+	/**
+	 * @func removeErrorMessage
+	 * @desc Removes an error message from the error container.
+	 */
+	ErrorContainer.prototype.removeErrorMessage = function (fieldId) {
+		this.$el.find('#' + fieldId + '-top-error').remove();
+
+		// If there are no more error then hide the container.
+		if (!this.hasErrors()) {
+			this.hide();
+		}
+	};
+
+	/**
 	 * @func ErrorContainer.updateErrorMessage
-	 * @param {object} input - The jQuery input object which contains the field to validate.
+	 * @param {object} $input - The jQuery input object which contains the field to validate.
 	 * @param {object} message - The error message to display (html escaped).
 	 * @desc Update an error message (displayed at the top of the form).
 	 */
-	ErrorContainer.prototype.updateErrorMessage = function (input, message) {
-		var inputID = input.attr('id'),
+	ErrorContainer.prototype.updateErrorMessage = function ($input, message) {
+		var inputID = $input.attr('id'),
 			anchor = '#' + inputID,
 			elementID = inputID + '-top-error',
 			messageElement = $('#' + elementID),
-			describedBy = input.attr('aria-describedby');
+			describedBy = $input.attr('aria-describedby');
 
 		// The 'message' param will be an empty string if the field is valid.
 		if (!message) {
@@ -186,10 +249,10 @@ jQuery(function ($) {
 			messageElement.show().find('a').html(message);
 		} else {
 			// Generate better link to field
-			input.closest('.field[id]').each(function(){
+			$input.closest('.field[id]').each(function(){
 				anchor = '#' + $(this).attr('id');
 			});
-			
+
 			// Add a new error message
 			messageElement = $('<li><a></a></li>');
 			messageElement
@@ -199,17 +262,17 @@ jQuery(function ($) {
 					.html(message);
 
 			this.$el.find('ul').append(messageElement);
-				
+
 			// link back to original input via aria
 			// Respect existing non-error aria-describedby
-			if ( !describedBy ) {
+			if (!describedBy) {
 				describedBy = elementID;
-			} else if ( !describedBy.match( new RegExp( "\\b" + elementID + "\\b" ) ) ) {
+			} else if (!describedBy.match(new RegExp('\\b' + elementID + '\\b'))) {
 				// Add to end of list if not already present
 				describedBy += " " + elementID;
 			}
 
-			input.attr('aria-describedby', describedBy);
+			$input.attr('aria-describedby', describedBy);
 		}
 	};
 
@@ -224,10 +287,6 @@ jQuery(function ($) {
 		var self = this;
 
 		this.$el = element instanceof jQuery ? element : $(element);
-
-		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
-		}
 
 		// Has the step been viewed by the user?
 		this.viewed = false;
@@ -244,50 +303,30 @@ jQuery(function ($) {
 			self.$el.trigger('userform.step.next');
 		});
 
-		// Set up validation for the step.
-		this.$el.validate(this.validationOptions);
+		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
+			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
+
+			// Listen for errors on the UserForm.
+			this.$el.closest('.userform').on('userform.form.error', function (e, validator) {
+				// The step only cares about errors if it's currently visible.
+				if (!self.$el.is(':visible')) {
+					return;
+				}
+
+				// Add or update each error in the list.
+				$.each(validator.errorList, function (i, error) {
+					self.errorContainer.updateErrorMessage($(error.element), error.message);
+				});
+			});
+
+			// Listen for fields becoming valid
+			this.$el.closest('.userform').on('userform.form.valid', function (e, fieldId) {
+				self.errorContainer.removeErrorMessage(fieldId);
+			});
+		}
 
 		return this;
 	}
-
-	/*
-	 * Default options for step validation. These get extended in main().
-	 */
-	FormStep.prototype.validationOptions = {
-		ignore: ':hidden',
-		errorClass: 'required',
-		errorElement: 'span',
-		errorPlacement: function (error, element) {
-			debugger;
-			error.addClass('message');
-
-			if(element.is(':radio') || element.parents('.checkboxset').length > 0) {
-				error.insertAfter(element.closest('ul'));
-			} else {
-				error.insertAfter(element);
-			}
-
-			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-				// TODO
-				this.errorContainer.updateErrorMessage(element, error.html());
-			}
-
-		},
-		success: function (error) {
-			error.remove();
-		},
-		messages: CONSTANTS.MESSAGES,
-		rules: {
-			// TODO
-			// <% loop $Fields %>
-			// 	<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
-			// 		'{$Name.JS}[]': {$ValidationJSON.RAW},
-			// 	<% else %>
-			// 		'{$Name.JS}': {$ValidationJSON.RAW},
-			// 	<% end_if %><% end_if %>
-			// <% end_loop %>
-		}
-	};
 
 	/**
 	 * @func ProgressBar
@@ -360,8 +399,8 @@ jQuery(function ($) {
 	 * @desc Bootstraps the front-end.
 	 */
 	function main() {
-		var userform = new UserForm($('.userform')),
-			progressBar = new ProgressBar($('#userform-progress'));
+		var userform = null,
+			progressBar = null;
 
 		// Extend classes with common functionality.
 		$.extend(FormStep.prototype, commonMixin);
@@ -370,7 +409,7 @@ jQuery(function ($) {
 		// Extend the default validation options with conditional options
 		// that are set by the user in the CMS.
 		if (CONSTANTS.ENABLE_LIVE_VALIDATION) {
-			$.extend(FormStep.prototype.validationOptions, {
+			$.extend(UserForm.prototype.validationOptions, {
 				onfocusout: function (element) {
 					this.element(element);
 				}
@@ -378,23 +417,17 @@ jQuery(function ($) {
 		}
 
 		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-			$.extend(FormStep.prototype.validationOptions, {
+			$.extend(UserForm.prototype.validationOptions, {
+				// Callback for custom code when an invalid form / step is submitted.
 				invalidHandler: function (event, validator) {
-					var errorList = $('#' + CONSTANTS.ERROR_CONTAINER_ID + ' ul');
-
-					// Update the error list with errors from the validator.
-					// We do this because top messages are not part of the regular
-					// error message life cycle, which jquery.validate handles for us.
-					errorList.empty();
-
-					$.each(validator.errorList, function () {
-						// TODO
-						this.errorContainer.updateErrorMessage($(this.element), this.message);
-					});
+					$('.userform').trigger('userform.form.error', [validator]);
 				},
 				onfocusout: false
 			});
 		}
+
+		userform = new UserForm($('.userform'));
+		progressBar = new ProgressBar($('#userform-progress'));
 
 		// Conditionally hide field labels and use HTML5 placeholder instead.
 		if (CONSTANTS.HIDE_FIELD_LABELS) {
