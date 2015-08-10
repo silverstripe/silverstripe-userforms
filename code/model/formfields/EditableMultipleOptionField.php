@@ -18,6 +18,52 @@ class EditableMultipleOptionField extends EditableFormField {
 	private static $has_many = array(
 		"Options" => "EditableOption"
 	);
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$editableColumns = new GridFieldEditableColumns();
+		$editableColumns->setDisplayFields(array(
+			'Title' => array(
+				'title' => 'Title',
+				'callback' => function($record, $column, $grid) {
+					return TextField::create($column);
+				}
+			),
+			'Default' => array(
+				'title' => _t('EditableMultipleOptionField.DEFAULT', 'Selected by default?'),
+				'callback' => function($record, $column, $grid) {
+					return CheckboxField::create($column);
+				}
+			)
+		));
+			
+		$optionsConfig = GridFieldConfig::create()
+			->addComponents(
+				new GridFieldToolbarHeader(),
+				new GridFieldTitleHeader(),
+				$editableColumns,
+				new GridFieldButtonRow(),
+				new GridFieldAddNewInlineButton(),
+				new GridFieldDeleteAction(),
+				new GridState_Component()
+			);
+
+		$optionsGrid = GridField::create(
+			'Options',
+			_t('EditableFormField.CUSTOMOPTIONS', 'Options'),
+			$this->Options(),
+			$optionsConfig
+		);
+
+		$fields->insertAfter(new Tab('Options'), 'Main');
+		$fields->addFieldToTab('Root.Options', $optionsGrid);
+
+		return $fields;
+	}
 	
 	/**
 	 * Publishing Versioning support.
@@ -89,38 +135,14 @@ class EditableMultipleOptionField extends EditableFormField {
 	public function duplicate($doWrite = true) {
 		$clonedNode = parent::duplicate();
 		
-		if($this->Options()) {
-			foreach($this->Options() as $field) {
-				$newField = $field->duplicate();
-				$newField->ParentID = $clonedNode->ID;
-				$newField->write();
-			}
+		foreach($this->Options() as $field) {
+			$newField = $field->duplicate(false);
+			$newField->ParentID = $clonedNode->ID;
+			$newField->Version = 0;
+			$newField->write();
 		}
 		
 		return $clonedNode;
-	}
-	
-	/**
-	 * On before saving this object we need to go through and keep an eye on 
-	 * all our option fields that are related to this field in the form 
-	 * 
-	 * @param ArrayData
-	 */
-	public function populateFromPostData($data) {
-		parent::populateFromPostData($data);
-		
-		// get the current options
-		$fieldSet = $this->Options();
-
-		// go over all the current options and check if ID and Title still exists
-		foreach($fieldSet as $option) {
-			if(isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
-				$option->populateFromPostData($data[$option->ID]);
-			}
-			else {
-				$option->delete();
-			}
-		}
 	}
 	
 	/**

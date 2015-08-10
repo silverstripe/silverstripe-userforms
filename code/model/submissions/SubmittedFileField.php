@@ -20,7 +20,7 @@ class SubmittedFileField extends SubmittedFormField {
 	 * @return string
 	 */
 	public function getFormattedValue() {
-		$name = $this->getName();
+		$name = $this->getFileName();
 		$link = $this->getLink();
 		$title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
 		
@@ -61,7 +61,7 @@ class SubmittedFileField extends SubmittedFormField {
 	 *
 	 * @return string
 	 */
-	public function getName() {
+	public function getFileName() {
 		if($this->UploadedFile()) {
 			return $this->UploadedFile()->Name;
 		}

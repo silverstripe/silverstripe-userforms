@@ -12,21 +12,26 @@ class EditableFileField extends EditableFormField {
 	
 	private static $plural_names = 'File Fields';
 
-	public function getFieldConfiguration() {
-		$field = parent::getFieldConfiguration();
-		$folder = ($this->getSetting('Folder')) ? $this->getSetting('Folder') : null;
+	private static $has_one = array(
+		'Folder' => 'Folder' // From CustomFields
+	);
 
-		$tree = UserformsTreeDropdownField::create(
-			$this->getSettingName("Folder"),
-			_t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
-			"Folder"
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+		
+		$fields->addFieldToTab(
+			'Root.Main',
+			TreeDropdownField::create(
+				'FolderID',
+				_t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
+				'Folder'
+			)
 		);
 
-		$tree->setValue($folder);
-
-		$field->push($tree);
-
-		return $field;
+		return $fields;
 	}
 
 	public function getFormField() {
@@ -37,14 +42,11 @@ class EditableFileField extends EditableFormField {
 			array_filter(Config::inst()->get('File', 'allowed_extensions'))
 		);
 
-		if($this->getSetting('Folder')) {
-			$folder = Folder::get()->byId($this->getSetting('Folder'));
-
-			if($folder) {
-				$field->setFolderName(
-					preg_replace("/^assets\//","", $folder->Filename)
-				);
-			}
+		$folder = $this->Folder();
+		if($folder && $folder->exists()) {
+			$field->setFolderName(
+				preg_replace("/^assets\//","", $folder->Filename)
+			);
 		}
 
 		if ($this->Required) {
@@ -71,5 +73,16 @@ class EditableFileField extends EditableFormField {
 	
 	public function getSubmittedFormField() {
 		return new SubmittedFileField();
+	}
+
+
+	public function migrateSettings($data) {
+		// Migrate 'Folder' setting to 'FolderID'
+		if(isset($data['Folder'])) {
+			$this->FolderID = $data['Folder'];
+			unset($data['Folder']);
+		}
+
+		parent::migrateSettings($data);
 	}
 }

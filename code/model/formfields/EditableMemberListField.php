@@ -10,37 +10,46 @@ class EditableMemberListField extends EditableFormField {
 	private static $singular_name = 'Member List Field';
 	
 	private static $plural_name = 'Member List Fields';
-	
-	public function getFieldConfiguration() {
-		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
-		$groups = DataObject::get("Group");
+
+	private static $has_one = array(
+		'Group' => 'Group'
+	);
+
+	/**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->removeByName('Default');
+		$fields->removeByName('Validation');
 		
-		if($groups) $groups = $groups->map('ID', 'Title');
-		
-		$fields = new FieldList(
-			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableFormField.GROUP', 'Group'), $groups, $groupID)
+		$fields->addFieldToTab(
+			'Root.Main',
+			DropdownField::create(
+				"GroupID",
+				_t('EditableFormField.GROUP', 'Group'),
+				Group::get()->map()
+			)->setEmptyString(' ')
 		);
-		
+
 		return $fields;
 	}
 	
 	public function getFormField() {
-		if ($this->getSetting('GroupID')) {
-			$members = Member::map_in_groups($this->getSetting('GroupID'));
-			
-			return new DropdownField($this->Name, $this->Title, $members);
+		if(empty($this->GroupID)) {
+			return false;
 		}
 		
-		return false;
+		$members = Member::map_in_groups($this->GroupID);
+		return new DropdownField($this->Name, $this->Title, $members);
 	}
 	
 	public function getValueFromData($data) {
 		if(isset($data[$this->Name])) {
-			$value = Convert::raw2sql($data[$this->Name]);
-		
-			$member = DataObject::get_one('Member', "Member.ID = {$value}");
-			
-			return ($member) ? $member->getName() : "";
+			$memberID = $data[$this->Name];
+			$member = Member::get()->byID($memberID);
+			return $member ? $member->getName() : "";
 		}
 		
 		return false;

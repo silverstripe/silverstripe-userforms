@@ -28,6 +28,8 @@ class EditableEmailField extends EditableFormField {
 			$field->setAttribute('data-rule-required', 'true');
 			$field->setAttribute('data-msg-required', $errorMessage);
 		}
+
+		$field->setValue($this->Default);
 		
 		return $field;
 	}

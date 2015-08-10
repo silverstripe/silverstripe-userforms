@@ -6,7 +6,7 @@
 
 class UserDefinedFormTest extends FunctionalTest {
 	
-	static $fixture_file = 'userforms/tests/UserDefinedFormTest.yml';
+	static $fixture_file = 'UserDefinedFormTest.yml';
 	
 	
 	function testRollbackToVersion() {
