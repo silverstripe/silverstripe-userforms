@@ -5,7 +5,7 @@
  *
  * Provides an alternative to GridFieldAddNewInlineButton, but allows you to set a classname
  */
-class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_SaveHandler {
+class GridFieldAddItemInlineButton extends Object implements GridField_HTMLProvider, GridField_SaveHandler {
 
 	/**
 	 * Fragment id
@@ -15,6 +15,13 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	protected $fragment;
 
 	/**
+	 * Additonal CSS classes for the button
+	 *
+	 * @var string
+	 */
+	protected $buttonClass = null;
+
+	/**
 	 * Button title
 	 *
 	 * @var string
@@ -22,11 +29,11 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	protected $title;
 
 	/**
-	 * Class name
+	 * Class names
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $modelClass = null;
+	protected $modelClasses = null;
 
 	/**
 	 * Extra CSS classes for this row
@@ -35,14 +42,13 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	 */
 	protected $extraClass = null;
 
-
-
 	/**
-	 * @param string $class Name of class to default to
+	 * @param array $classes Class or list of classes to create.
+	 * If you enter more than one class, each click of the "add" button will create one of each
 	 * @param string $fragment The fragment to render the button into
 	 */
-	public function __construct($class, $fragment = 'buttons-before-left') {
-		$this->setClass($class);
+	public function __construct($classes, $fragment = 'buttons-before-left') {
+		$this->setClasses($classes);
 		$this->setFragment($fragment);
 		$this->setTitle(_t('GridFieldExtensions.ADD', 'Add'));
 	}
@@ -88,11 +94,11 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	}
 
 	public function getHTMLFragments($grid) {
-		if($grid->getList() && !singleton($grid->getModelClass())->canCreate()) {
-			return array();
+		foreach($this->getClasses() as $class) {
+			if(!singleton($class)->canCreate()) {
+				return array();
+			}
 		}
-
-		$fragment = $this->getFragment();
 
 		if(!$editable = $grid->getConfig()->getComponentByType('GridFieldEditableColumns')) {
 			throw new Exception('Inline adding requires the editable columns component');
@@ -100,31 +106,42 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 
 		Requirements::javascript(THIRDPARTY_DIR . '/javascript-templates/tmpl.js');
 		GridFieldExtensions::include_requirements();
-		Requirements::javascript(USERFORMS_DIR . '/javascript/GridFieldAddItemInlineButton.js');
+		Requirements::javascript(USERFORMS_DIR . '/javascript/GridFieldExtensions.js');
 
+		// Build button content
 		$data = new ArrayData(array(
 			'Title'  => $this->getTitle(),
-			'TemplateName' => $this->getRowTemplateName()
+			'ButtonClass' => $this->getButtonClass(),
+			'TemplateNames' => json_encode($this->getRowTemplateNames())
 		));
 
+		// Build template body
+		$templates = '';
+		foreach($this->getClasses() as $class) {
+			$templates .= $this->getItemRowTemplateFor($grid, $editable, $class);
+		}
+
 		return array(
-			$fragment => $data->renderWith(__CLASS__),
-			'after'   => $this->getItemRowTemplate($grid, $editable)
+			$this->getFragment() => $data->renderWith(__CLASS__),
+			'after'   => $templates
 		);
 	}
 
+
+
 	/**
-	 * Because getRowTemplate is private
+	 * Get the template for a given class
 	 *
 	 * @param GridField $grid
 	 * @param GridFieldEditableColumns $editable
+	 * @param string $class Name of class
 	 * @return type
 	 */
-	protected function getItemRowTemplate(GridField $grid, GridFieldEditableColumns $editable) {
+	protected function getItemRowTemplateFor(GridField $grid, GridFieldEditableColumns $editable, $class) {
 		$columns = new ArrayList();
 		$handled = array_keys($editable->getDisplayFields($grid));
 
-		$record = Object::create($this->getClass());
+		$record = Object::create($class);
 
 		$fields = $editable->getFields($grid, $record);
 
@@ -134,7 +151,7 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 				$field = $fields->dataFieldByName($column);
 				if($field) {
 					$field->setName(sprintf(
-						'%s[%s][%s][{%%=o.num%%}][%s]', $grid->getName(), __CLASS__, $this->getClass(), $field->getName()
+						'%s[%s][{%%=o.num%%}][%s][%s]', $grid->getName(), __CLASS__, $class, $field->getName()
 					));
 				} else {
 					$field = $fields->fieldByName($column);
@@ -160,30 +177,50 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 		$data = new ArrayData(array(
 			'Columns' => $columns,
 			'ExtraClass' => $this->getExtraClass(),
-			'RecordClass' => $this->getClass(),
-			'TemplateName' => $this->getRowTemplateName()
+			'RecordClass' => $class,
+			'TemplateName' => $this->getRowTemplateNameFor($class)
 		));
-		return $data->renderWith(__CLASS__ . '_Row');
+		return $data->renderWith('GridFieldAddItemTemplate');
 	}
 
 	public function handleSave(GridField $grid, DataObjectInterface $record) {
-		$list  = $grid->getList();
+		// Check that this submission relates to this component
 		$value = $grid->Value();
-		$class = $this->getClass();
-
-		if(!isset($value[__CLASS__][$class]) || !is_array($value[__CLASS__][$class])) {
+		if(empty($value[__CLASS__]) || !is_array($value[__CLASS__])) {
 			return;
 		}
 
+		// The way that this component works is that only the first component added to a form will
+		// be responsible for saving all records for each submission, in order to ensure creation
+		// and sort order is maintained
+		$addInlineComponents = $grid->getConfig()->getComponentsByType(__CLASS__);
+		if($this !== $addInlineComponents->first()) {
+			return;
+		}
+
+		// Get allowed classes
+		$classes = array();
+		foreach($addInlineComponents as $component) {
+			$classes = array_merge($classes, $component->getClasses());
+		}
+		$classes = array_filter($classes, function($class) {
+			return singleton($class)->canCreate();
+		});
+
+		// Get form
 		$editable = $grid->getConfig()->getComponentByType('GridFieldEditableColumns');
-		$form     = $editable->getForm($grid, $record);
+		$form = $editable->getForm($grid, $record);
 
-		if(!singleton($class)->canCreate()) {
-			return;
-		}
 
 		// Process records matching the specified class
-		foreach($value[__CLASS__][$class] as $fields) {
+		$list  = $grid->getList();
+		foreach($value[__CLASS__] as $row) {
+			$fields = reset($row);
+			$class = key($row);
+			if(!in_array($class, $classes)) {
+				continue;
+			}
+			
 			$item  = $class::create();
 			$extra = array();
 
@@ -200,21 +237,24 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	}
 
 	/**
-	 * Get the class of the object to create
+	 * Get the classes of the objects to create
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function getClass() {
-		return $this->modelClass;
+	public function getClasses() {
+		return $this->modelClasses;
 	}
 
 	/**
-	 * Specify the class to create
+	 * Specify the classes to create
 	 *
-	 * @param string $class
+	 * @param array $classes
 	 */
-	public function setClass($class) {
-		$this->modelClass = $class;
+	public function setClasses($classes) {
+		if(!is_array($classes)) {
+			$classes = array($classes);
+		}
+		$this->modelClasses = $classes;
 	}
 
 	/**
@@ -230,17 +270,52 @@ class GridFieldAddItemInlineButton implements GridField_HTMLProvider, GridField_
 	 * Sets extra CSS classes for this row
 	 *
 	 * @param string $extraClass
+	 * @return $this
 	 */
 	public function setExtraClass($extraClass) {
 		$this->extraClass = $extraClass;
+		return $this;
 	}
 
 	/**
-	 * Get name of item template
+	 * Get extra button class
 	 *
 	 * @return string
 	 */
-	public function getRowTemplateName() {
-		return 'ss-gridfield-add-inline-template-' . $this->getClass();
+	public function getButtonClass() {
+		return $this->buttonClass;
+	}
+
+	/**
+	 * Sets extra CSS classes for this button
+	 *
+	 * @param string $buttonClass
+	 * @return $this
+	 */
+	public function setButtonClass($buttonClass) {
+		$this->buttonClass = $buttonClass;
+		return $this;
+	}
+
+	/**
+	 * Get names of all item templates
+	 *
+	 * @return array
+	 */
+	public function getRowTemplateNames() {
+		$self = $this;
+		return array_map(function($class) use ($self) {
+			return $this->getRowTemplateNameFor($class);
+		}, $this->getClasses());
+	}
+
+	/**
+	 * Get the template name for a single class
+	 *
+	 * @param string $class
+	 * @return string
+	 */
+	public function getRowTemplateNameFor($class) {
+		return "ss-gridfield-add-inline-template-{$class}";
 	}
 }

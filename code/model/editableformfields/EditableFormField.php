@@ -9,6 +9,14 @@
 class EditableFormField extends DataObject {
 
 	/**
+	 * Set to true to hide from class selector
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $hidden = false;
+
+	/**
 	 * Default sort order
 	 *
 	 * @config

@@ -18,21 +18,12 @@
 
 		$(".ss-gridfield-add-new-item-inline").entwine({
 			onclick: function() {
-				// Get custom class from button
-				var template = this.data('template');
-				this.getGridField().trigger("addnewiteminline", template);
-				return false;
-			}
-		});
-
-		$(".ss-gridfield-delete-inline").entwine({
-			onclick: function() {
-				var msg = ss.i18n._t("GridFieldExtensions.CONFIRMDEL", "Are you sure you want to delete this?");
-
-				if(confirm(msg)) {
-					this.parents("tr").remove();
-				}
-
+				// Create each template
+				var gridfield = this.getGridField();
+				$.each(this.data('template-names'), function(index, template) {
+					console.log(template);
+					gridfield.trigger("addnewiteminline", template);
+				});
 				return false;
 			}
 		});

@@ -7,6 +7,14 @@
 class EditableFormStep extends EditableFormField {
 
 	/**
+	 * Disable selection of step class
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $hidden = true;
+
+	/**
 	 * @config
 	 * @var string
 	 */

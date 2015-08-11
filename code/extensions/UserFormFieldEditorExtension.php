@@ -37,12 +37,17 @@ class UserFormFieldEditorExtension extends DataExtension {
 		$this->createInitialFormStep(true);
 
 		$editableColumns = new GridFieldEditableColumns();
+		$fieldClasses = $this->getEditableFieldClasses();
 		$editableColumns->setDisplayFields(array(
-			'ClassName' => function($record, $column, $grid) {
+			'ClassName' => function($record, $column, $grid) use ($fieldClasses) {
 				if($record instanceof EditableFormStep) {
-					return new LabelField($column, "Page Break");
+					return new LabelField($column, _t('UserFormFieldEditorExtension.PAGE_BREAK', 'Page Break'));
+				} elseif($record instanceof EditableFieldGroup) {
+					return new LabelField($column, _t('UserFormFieldEditorExtension.FIELD_GROUP_START', 'Field Group (start)'));
+				} else if($record instanceof EditableFieldGroupEnd) {
+					return new LabelField($column, _t('UserFormFieldEditorExtension.FIELD_GROUP_END', 'Field Group (end)'));
 				} else {
-					return DropdownField::create($column, '', $this->getEditableFieldClasses());
+					return DropdownField::create($column, '', $fieldClasses);
 				}
 			},
 			'Title' => function($record, $column, $grid) {
@@ -55,8 +60,15 @@ class UserFormFieldEditorExtension extends DataExtension {
 			->addComponents(
 				$editableColumns,
 				new GridFieldButtonRow(),
-				$addField = new GridFieldAddNewInlineButton(),
-				$addStep = new GridFieldAddItemInlineButton('EditableFormStep'),
+				GridFieldAddItemInlineButton::create('EditableFormField')
+					->setTitle(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
+					->setButtonClass('ss-ui-action-constructive'),
+				GridFieldAddItemInlineButton::create('EditableFormStep')
+					->setTitle(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break'))
+					->setExtraClass('uf-gridfield-steprow'),
+				GridFieldAddItemInlineButton::create(array('EditableFieldGroup', 'EditableFieldGroupEnd'))
+					->setTitle(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group'))
+					->setExtraClass('uf-gridfield-grouprow'),
 				new GridFieldEditButton(),
 				new GridFieldDeleteAction(),
 				new GridFieldToolbarHeader(),
@@ -64,9 +76,6 @@ class UserFormFieldEditorExtension extends DataExtension {
 				new GridState_Component(),
 				new GridFieldDetailForm()
 			);
-		$addField->setTitle('Add Field');
-		$addStep->setTitle('Add Page Break');
-		$addStep->setExtraClass('uf-gridfield-steprow');
 
 		$fieldEditor = GridField::create(
 			'Fields',
@@ -126,21 +135,20 @@ class UserFormFieldEditorExtension extends DataExtension {
 		$classes = ClassInfo::getValidSubClasses('EditableFormField');
 
 		// Remove classes we don't want to display in the dropdown.
-		$classes = array_diff($classes, array(
-			'EditableFormField',
-			'EditableMultipleOptionField'
-		));
-
 		$editableFieldClasses = array();
-
-		foreach ($classes as $key => $className) {
-			$singleton = singleton($className);
-
+		foreach ($classes as $class) {
+			if(in_array($class, array('EditableFormField', 'EditableMultipleOptionField'))
+				|| Config::inst()->get($class, 'hidden')
+			) {
+				continue;
+			}
+			
+			$singleton = singleton($class);
 			if(!$singleton->canCreate()) {
 				continue;
 			}
 
-			$editableFieldClasses[$className] = $singleton->i18n_singular_name();
+			$editableFieldClasses[$class] = $singleton->i18n_singular_name();
 		}
 
 		return $editableFieldClasses;
