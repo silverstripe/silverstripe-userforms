@@ -1,6 +1,6 @@
 <% include UserFormProgress %>
 
-<form class="userform" $AttributesHTML>
+<form $AttributesHTML>
 
 <% if $Message %>
 <p id="{$FormName}_error" class="message $MessageType">$Message</p>
@@ -22,9 +22,9 @@
 				</fieldset>
 			<% end_if %>
 
-		<% loop $Children %>
-		$FieldHolder
-		<% end_loop %>
+			<% loop $Children %>
+			$FieldHolder
+			<% end_loop %>
 
 			<% include UserFormStepNav ContainingPage=$Top %>
 		</fieldset>

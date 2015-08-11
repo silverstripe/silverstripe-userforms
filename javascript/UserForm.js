@@ -3,21 +3,14 @@
  */
 jQuery(function ($) {
 
+	var $userform = $('.userform');
+
 	// Settings that come from the CMS.
 	var CONSTANTS = {
-		FORM_ID: 'UserForm_Form', // $Form.FormName.JS
-		ERROR_CONTAINER_ID: '', // $ErrorContainerID.JS
-		ENABLE_LIVE_VALIDATION: false, // $EnableLiveValidation
-		DISPLAY_ERROR_MESSAGES_AT_TOP: false, // $DisplayErrorMessagesAtTop
-		HIDE_FIELD_LABELS: false, // $HideFieldLabels
-		MESSAGES: {} // var meaasges
+		ENABLE_LIVE_VALIDATION: $userform.data('livevalidation') !== void 0,
+		DISPLAY_ERROR_MESSAGES_AT_TOP: $userform.data('toperrors') !== void 0,
+		HIDE_FIELD_LABELS: $userform.data('hidefieldlabels') !== void 0
 	};
-
-	// TODO
-	// var messages = {<% loop $Fields %><% if $ErrorMessage && not $SetsOwnError %><% if $ClassName == 'EditableCheckboxGroupField' %>
-	// 	'{$Name.JS}[]': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% else %>
-	// 	'{$Name.JS}': '{$ErrorMessage.JS}'<% if not Last %>,<% end_if %><% end_if %><% end_if %><% end_loop %>
-	// };
 
 	// Common functions that extend multiple classes.
 	var commonMixin = {
@@ -91,19 +84,8 @@ jQuery(function ($) {
 
 			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
 				// Pass the field's ID with the event.
-				$('.userform').trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
+				$userform.trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
 			}
-		},
-		messages: CONSTANTS.MESSAGES,
-		rules: {
-			// TODO
-			// <% loop $Fields %>
-			// 	<% if $Validation %><% if ClassName == EditableCheckboxGroupField %>
-			// 		'{$Name.JS}[]': {$ValidationJSON.RAW},
-			// 	<% else %>
-			// 		'{$Name.JS}': {$ValidationJSON.RAW},
-			// 	<% end_if %><% end_if %>
-			// <% end_loop %>
 		}
 	};
 
@@ -307,7 +289,7 @@ jQuery(function ($) {
 			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
 
 			// Listen for errors on the UserForm.
-			this.$el.closest('.userform').on('userform.form.error', function (e, validator) {
+			$userform.on('userform.form.error', function (e, validator) {
 				// The step only cares about errors if it's currently visible.
 				if (!self.$el.is(':visible')) {
 					return;
@@ -320,7 +302,7 @@ jQuery(function ($) {
 			});
 
 			// Listen for fields becoming valid
-			this.$el.closest('.userform').on('userform.form.valid', function (e, fieldId) {
+			$userform.on('userform.form.valid', function (e, fieldId) {
 				self.errorContainer.removeErrorMessage(fieldId);
 			});
 		}
@@ -350,7 +332,7 @@ jQuery(function ($) {
 		});
 
 		// Update the progress bar when 'prev' and 'next' buttons are clicked.
-		$('.userform').on('userform.form.changestep', function (e, newStep) {
+		$userform.on('userform.form.changestep', function (e, newStep) {
 			self.update(newStep + 1);
 		});
 
@@ -434,7 +416,7 @@ jQuery(function ($) {
 			$.extend(UserForm.prototype.validationOptions, {
 				// Callback for custom code when an invalid form / step is submitted.
 				invalidHandler: function (event, validator) {
-					$('.userform').trigger('userform.form.error', [validator]);
+					$userform.trigger('userform.form.error', [validator]);
 				},
 				onfocusout: false
 			});
@@ -443,12 +425,12 @@ jQuery(function ($) {
 		// Display all the things that are hidden when JavaScript is disabled.
 		$('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
 
-		userform = new UserForm($('.userform'));
+		userform = new UserForm($userform);
 		progressBar = new ProgressBar($('#userform-progress'));
 
 		// Conditionally hide field labels and use HTML5 placeholder instead.
 		if (CONSTANTS.HIDE_FIELD_LABELS) {
-			$('#' + CONSTANTS.FORM_ID + ' label.left').each(function () {
+			$userform.find('label.left').each(function () {
 				var $label = $(this);
 
 				$('[name="' + $label.attr('for') + '"]').attr('placeholder', $label.text());

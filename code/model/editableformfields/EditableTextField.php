@@ -73,23 +73,21 @@ class EditableTextField extends EditableFormField {
 		$this->doUpdateFormField($field);
 		return $field;
 	}
-	
+
 	/**
-	 * Return the validation information related to this field. This is 
-	 * interrupted as a JSON object for validate plugin and used in the 
-	 * PHP. 
+	 * Updates a formfield with the additional metadata specified by this field
 	 *
-	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return array
+	 * @param FormField $field
 	 */
-	public function getValidation() {
-		$options = parent::getValidation();
+	protected function updateFormField($field) {
+		parent::updateFormField($field);
+
 		if($this->MinLength) {
-			$options['minlength'] = (int)$this->MinLength;
-		}	
-		if($this->MaxLength) {
-			$options['maxlength'] = (int)$this->MaxLength;
+			$field->setAttribute('data-rule-minlength', $this->MinLength);
 		}
-		return $options;
+
+		if($this->MaxLength) {
+			$field->setAttribute('data-rule-maxlength', $this->MaxLength);
+		}
 	}
 }

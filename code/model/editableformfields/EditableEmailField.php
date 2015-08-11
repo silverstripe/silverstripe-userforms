@@ -24,16 +24,13 @@ class EditableEmailField extends EditableFormField {
 	}
 	
 	/**
-	 * Return the validation information related to this field. This is 
-	 * interrupted as a JSON object for validate plugin and used in the 
-	 * PHP. 
+	 * Updates a formfield with the additional metadata specified by this field
 	 *
-	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return Array
+	 * @param FormField $field
 	 */
-	public function getValidation() {
-		return array_merge(parent::getValidation(), array(
-			'email' => true
-		));
+	protected function updateFormField($field) {
+		parent::updateFormField($field);
+
+		$field->setAttribute('data-rule-email', true);
 	}
 }
