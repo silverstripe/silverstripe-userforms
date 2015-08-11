@@ -24,9 +24,9 @@ and without getting involved in any PHP code.
 
 ## Documentation
 
- * [Installation instructions](installation.md)
- * [Troubleshooting](troubleshooting.md)
- * [User Documentation](user-documentation.md)
+ * [Installation instructions](installation)
+ * [Troubleshooting](troubleshooting)
+ * [User Documentation](user-documentation)
 
 ## Thanks
 
