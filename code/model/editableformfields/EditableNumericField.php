@@ -26,18 +26,9 @@ class EditableNumericField extends EditableFormField {
 	 * @return NumericField
 	 */
 	public function getFormField() {
-		$field = new NumericField($this->Name, $this->Title);
+		$field = new NumericField($this->Name, $this->EscapedTitle, $this->Default);
 		$field->addExtraClass('number');
-		$field->setValue($this->Default);
-
-		if ($this->Required) {
-			// Required and numeric validation can conflict so add the
-			// required validation messages as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 

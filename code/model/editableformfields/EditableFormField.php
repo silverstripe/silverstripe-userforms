@@ -434,30 +434,12 @@ class EditableFormField extends DataObject {
 	}
 
 	/**
-	 * Title field of the field in the backend of the page
-	 *
-	 * @return TextField
-	 */
-	public function TitleField() {
-		$label = _t('EditableFormField.ENTERQUESTION', 'Enter Question');
-		
-		$field = new TextField('Title', $label, $this->getField('Title'));
-		$field->setName($this->getFieldName('Title'));
-
-		if(!$this->canEdit()) {
-			return $field->performReadonlyTransformation();
-		}
-
-		return $field;
-	}
-
-	/**
 	 * Returns the Title for rendering in the front-end (with XML values escaped)
 	 *
 	 * @return string
 	 */
-	public function getTitle() {
-		return Convert::raw2att($this->getField('Title'));
+	public function getEscapedTitle() {
+		return Convert::raw2xml($this->Title);
 	}
 
 	/**
@@ -497,12 +479,58 @@ class EditableFormField extends DataObject {
 	
 	/**
 	 * Return a FormField to appear on the front end. Implement on 
-	 * your subclass
+	 * your subclass.
 	 *
 	 * @return FormField
 	 */
 	public function getFormField() {
 		user_error("Please implement a getFormField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
+	}
+
+	/**
+	 * Updates a formfield with extensions
+	 *
+	 * @param FormField $field
+	 */
+	public function doUpdateFormField($field) {
+		$this->extend('beforeUpdateFormField', $field);
+		$this->updateFormField($field);
+		$this->extend('afterUpdateFormField', $field);
+	}
+
+	/**
+	 * Updates a formfield with the additional metadata specified by this field
+	 *
+	 * @param FormField $field
+	 */
+	protected function updateFormField($field) {
+		// set the error / formatting messages
+		$field->setCustomValidationMessage($this->getErrorMessage());
+
+		// set the right title on this field
+		if($this->RightTitle) {
+			// Since this field expects raw html, safely escape the user data prior
+			$field->setRightTitle(Convert::raw2xml($this->RightTitle));
+		}
+
+		// if this field is required add some
+		if($this->Required) {
+			// Required validation can conflict so add the Required validation messages as input attributes
+			$errorMessage = $this->getErrorMessage()->HTML();
+			$field->addExtraClass('requiredField');
+			$field->setAttribute('data-rule-required', 'true');
+			$field->setAttribute('data-msg-required', $errorMessage);
+
+			if($identifier = UserDefinedForm::config()->required_identifier) {
+				$title = $field->Title() . " <span class='required-identifier'>". $identifier . "</span>";
+				$field->setTitle($title);
+			}
+		}
+		
+		// if this field has an extra class
+		if($field->ExtraClass) {
+			$field->addExtraClass($field->ExtraClass);
+		}
 	}
 	
 	/**

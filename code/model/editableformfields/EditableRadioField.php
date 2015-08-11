@@ -25,22 +25,14 @@ class EditableRadioField extends EditableMultipleOptionField {
 	}
 	
 	public function getFormField() {
-		$optionSet = $this->Options();
-		$defaultOptions = $optionSet->filter('Default', 1);
-		$options = array();
+		$field = OptionsetField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
 
-		if($optionSet) {
-			foreach($optionSet as $option) {
-				$options[$option->EscapedTitle] = $option->Title;
-			}
+		// Set default item
+		$defaultOption = $this->getDefaultOptions()->first();
+		if($defaultOption) {
+			$field->setValue($defaultOption->EscapedTitle);
 		}
-
-		$field = OptionsetField::create($this->Name, $this->Title, $options);
-
-		if($defaultOptions->count()) {
-			$field->setValue($defaultOptions->First()->EscapedTitle);
-		}
-
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 }

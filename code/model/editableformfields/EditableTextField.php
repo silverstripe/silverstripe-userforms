@@ -65,22 +65,12 @@ class EditableTextField extends EditableFormField {
 	 */
 	public function getFormField() {
 		if($this->Rows > 1) {
-			$field = TextareaField::create($this->Name, $this->Title);
+			$field = TextareaField::create($this->Name, $this->EscapedTitle, $this->Default);
 			$field->setRows($this->Rows);
 		} else {
-			$field = TextField::create($this->Name, $this->Title, null, $this->MaxLength);
+			$field = TextField::create($this->Name, $this->EscapedTitle, $this->Default, $this->MaxLength);
 		}
-
-		if ($this->Required) {
-			// Required validation can conflict so add the Required validation messages
-			// as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-
-		$field->setValue($this->Default);
-		
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 	

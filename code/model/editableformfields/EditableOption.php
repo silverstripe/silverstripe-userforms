@@ -49,39 +49,6 @@ class EditableOption extends DataObject {
 		return ($this->Parent()->canDelete($member));
 	}
 
-	/**
-	 * Template for the editing view of this option field
-	 */
-	public function EditSegment() {
-		return $this->renderWith('EditableOption');
-	}
-
-	/**
-	 * The Title Field for this object
-	 * 
-	 * @return FormField
-	 */
-	public function TitleField() {
-		return new TextField("Fields[{$this->ParentID}][{$this->ID}][Title]", null, $this->Title );
-	}
-
-	/**
-	 * Name of this field in the form
-	 * 
-	 * @return String
-	 */
-	public function FieldName() {
-		return "Fields[{$this->ParentID}][{$this->ID}]";
-	}
-	
-	/**
-	 * Make this option readonly 
-	 */
-	public function ReadonlyOption() {
-		$this->readonly = true;
-		return $this->EditSegment();
-	}
-
 	public function getEscapedTitle() {
 		return Convert::raw2att($this->Title);
 	}

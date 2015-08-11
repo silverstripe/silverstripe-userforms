@@ -66,81 +66,41 @@ class UserForm extends Form {
 	}
 
 	/**
-	 * Get the form steps.
-	 *
-	 * @return ArrayList
-	 */
-	public function getFormSteps() {
-		$steps = new ArrayList();
-
-		foreach ($this->controller->Fields() as $field) {
-			if ($field instanceof EditableFormStep) {
-				$steps->push($field->getFormField());
-				continue;
-			}
-
-			if(empty($steps->last())) {
-				trigger_error('Missing first step in form', E_USER_WARNING);
-				$steps->push(CompositeField::create());
-			}
-
-			$steps->last()->push($field->getFormField());
-		}
-
-		return $steps;
-	}
-
-	/**
 	 * Get the form fields for the form on this page. Can modify this FieldSet
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
 	 * is applied to this controller.
+	 *
+	 * This will be a list of top level composite steps
 	 *
 	 * @return FieldList
 	 */
 	public function getFormFields() {
 		$fields = new FieldList();
+		$emptyStep = null; // Last empty step, which may or may not later have children
 
-		foreach($this->controller->Fields() as $editableField) {
-			// get the raw form field from the editable version
-			$field = $editableField->getFormField();
-
-			if(!$field) continue;
-
-			// set the error / formatting messages
-			$field->setCustomValidationMessage($editableField->getErrorMessage());
-
-			// set the right title on this field
-			if($right = $editableField->RightTitle) {
-				// Since this field expects raw html, safely escape the user data prior
-				$field->setRightTitle(Convert::raw2xml($right));
+		foreach ($this->controller->Fields() as $field) {
+			// When we encounter a step, save it
+			if ($field instanceof EditableFormStep) {
+				$emptyStep = $field->getFormField();
+				continue;
 			}
 
-			// if this field is required add some
-			if($editableField->Required) {
-				$field->addExtraClass('requiredField');
-
-				if($identifier = UserDefinedForm::config()->required_identifier) {
-
-					$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
-					$field->setTitle($title);
-				}
-			}
-			// if this field has an extra class
-			if($extraClass = $editableField->ExtraClass) {
-				$field->addExtraClass(Convert::raw2att($extraClass));
+			// Ensure that the last field is a step
+			if($emptyStep) {
+				// When we reach the first non-step field, any empty step will no longer be empty
+				$fields->push($emptyStep);
+				$emptyStep = null;
+				
+			} elseif(! $fields->last()) {
+				// If no steps have been saved yet, warn
+				trigger_error('Missing first step in form', E_USER_WARNING);
+				$fields->push(singleton('EditableFormStep')->getFormField());
 			}
 
-			// set the values passed by the url to the field
-			$request = $this->controller->getRequest();
-			if($value = $request->getVar($field->getName())) {
-				$field->setValue($value);
-			}
-
-			$fields->push($field);
+			$fields->last()->push($field->getFormField());
 		}
 
 		$this->extend('updateFormFields', $fields);
-
 		return $fields;
 	}
 

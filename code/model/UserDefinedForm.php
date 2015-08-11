@@ -98,6 +98,7 @@ class UserDefinedForm extends Page {
 	 * @return FieldList
 	 */
 	 public function getCMSFields() {
+		Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
 		
 		$self = $this;
 		
@@ -365,9 +366,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	public function Form() {
 		$form = UserForm::create($this);
-
 		$this->generateConditionalJavascript();
-
 		return $form;
 	}
 

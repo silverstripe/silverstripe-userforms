@@ -55,9 +55,22 @@ class EditableFormHeading extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$labelField = new HeaderField($this->Name, $this->Title, $this->Level);
+		$labelField = new HeaderField($this->Name, $this->EscapedTitle, $this->Level);
 		$labelField->addExtraClass('FormHeading');
+		$this->doUpdateFormField($labelField);
 		return $labelField;
+	}
+
+	protected function updateFormField($field) {
+		// set the right title on this field
+		if($this->RightTitle) {
+			// Since this field expects raw html, safely escape the user data prior
+			$field->setRightTitle(Convert::raw2xml($this->RightTitle));
+		}
+		// if this field has an extra class
+		if($field->ExtraClass) {
+			$field->addExtraClass($field->ExtraClass);
+		}
 	}
 	
 	public function showInReports() {
