@@ -12,7 +12,7 @@
 	<% if $Legend %><legend>$Legend</legend><% end_if %>
 
 	<% if $FormFields%><% loop $FormFields %>
-		<fieldset class="form-step">
+		<fieldset class="form-step" data-title="$Title">
 			<% if $Top.DisplayErrorMessagesAtTop %>
 				<fieldset class="error-container" aria-hidden="true" style="display: none;">
 					<div>
@@ -22,11 +22,9 @@
 				</fieldset>
 			<% end_if %>
 
-			<h2>$Title</h2>
-
-			<% loop $Children %>
-				$FieldHolder
-			<% end_loop %>
+		<% loop $Children %>
+		$FieldHolder
+		<% end_loop %>
 
 			<% include UserFormStepNav ContainingPage=$Top %>
 		</fieldset>
