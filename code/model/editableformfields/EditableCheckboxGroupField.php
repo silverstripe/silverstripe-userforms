@@ -15,6 +15,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	
 	public function getFormField() {
 		$field = new UserFormsCheckboxSetField($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+		$field->setTemplate('forms/UserFormsCheckboxSetField');
 
 		// Set the default checked items
 		$defaultCheckedItems = $this->getDefaultOptions();

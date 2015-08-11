@@ -484,7 +484,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 						$watch[$fieldToWatch] = array();
 					}
 
-					$watch[$fieldToWatch][] =  array(
+					$watch[$fieldToWatch][] = array(
 						'expression' => $expression,
 						'holder_selector' => $holderSelector,
 						'view' => $view,
@@ -505,7 +505,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				foreach($values as $rule) {
 					// Register conditional behaviour with an element, so it can be triggered from many places.
 					$logic[] = sprintf(
-						'if(%s) { %s.%s(); } else { %2$s.%s(); }', 
+						'if(%s) { %s.%s(); } else { %2$s.%s(); }',
 						$rule['expression'], 
 						$rule['holder_selector'],
 						$rule['view'], 
@@ -574,7 +574,7 @@ JS
 				}
 
 				if(
-					!isset($data[$field->Name]) || 
+					!isset($data[$field->Name]) ||
 					!$data[$field->Name] ||
 					!$formField->validate($form->getValidator())
 				) {
