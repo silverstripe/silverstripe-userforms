@@ -239,7 +239,9 @@
 
 					// variables
 					var options = $(this).parent("li");
-					var action = userforms.appendToURL($("#Form_EditForm").attr("action"), '/field/Fields/addoptionfield');
+					var theform = $("#Form_EditForm"); // edit from page
+					if ( theform.length < 1 ) theform = $("#Form_ItemEditForm"); // edit from modeladmin 
+					var action = userforms.appendToURL(theform.attr("action"), '/field/Fields/addoptionfield');
 					var parent = $(this).attr("rel");
 					var securityID = ($("input[name=SecurityID]").length > 0) ? $("input[name=SecurityID]").first().attr("value") : '';
 
