@@ -10,7 +10,7 @@
 		<ul class="step-buttons">
 			<% loop $NumberOfSteps %>
 				<li class="step-button-wrapper<% if $Pos == '1' %> current<% end_if %>">
-					<button class="step-button-jump" disabled="disabled">$Pos</button>
+					<button class="step-button-jump js-align" disabled="disabled">$Pos</button><!-- Remove js-align class to remove javascript positioning -->
 				</li>
 			<% end_loop %>
 		<ul>
