@@ -40,19 +40,14 @@ class UserFormFieldEditorExtension extends DataExtension {
 		$fieldClasses = $this->getEditableFieldClasses();
 		$editableColumns->setDisplayFields(array(
 			'ClassName' => function($record, $column, $grid) use ($fieldClasses) {
-				if($record instanceof EditableFormStep) {
-					return new LabelField($column, _t('UserFormFieldEditorExtension.PAGE_BREAK', 'Page Break'));
-				} elseif($record instanceof EditableFieldGroup) {
-					return new LabelField($column, _t('UserFormFieldEditorExtension.FIELD_GROUP_START', 'Field Group (start)'));
-				} else if($record instanceof EditableFieldGroupEnd) {
-					return new LabelField($column, _t('UserFormFieldEditorExtension.FIELD_GROUP_END', 'Field Group (end)'));
-				} else {
-					return DropdownField::create($column, '', $fieldClasses);
+				if($record instanceof EditableFormField) {
+					return $record->getInlineClassnameField($column, $fieldClasses);
 				}
 			},
 			'Title' => function($record, $column, $grid) {
-				return TextField::create($column, ' ')
-					->setAttribute('placeholder', _t('UserDefinedForm.TITLE', 'Title'));
+				if($record instanceof EditableFormField) {
+					return $record->getInlineTitleField($column);
+				}
 			}
 		));
 
