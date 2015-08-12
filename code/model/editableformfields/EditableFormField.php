@@ -624,4 +624,27 @@ class EditableFormField extends DataObject {
 			}
 		}
 	}
+
+	/**
+	 * Get the formfield to use when editing this inline in gridfield
+	 *
+	 * @param string $column name of column
+	 * @param array $fieldClasses List of allowed classnames if this formfield has a selectable class
+	 * @return FormField
+	 */
+	public function getInlineClassnameField($column, $fieldClasses) {
+		return DropdownField::create($column, false, $fieldClasses);
+	}
+
+	/**
+	 * Get the formfield to use when editing the title inline
+	 *
+	 * @param string $column
+	 * @return FormField
+	 */
+	public function getInlineTitleField($column) {
+		return TextField::create($column, false)
+			->setAttribute('placeholder', _t('EditableFormField.TITLE', 'Title'))
+			->setAttribute('data-placeholder', _t('EditableFormField.TITLE', 'Title'));
+	}
 }
