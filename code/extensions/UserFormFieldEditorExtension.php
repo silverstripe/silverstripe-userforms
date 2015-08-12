@@ -60,15 +60,13 @@ class UserFormFieldEditorExtension extends DataExtension {
 			->addComponents(
 				$editableColumns,
 				new GridFieldButtonRow(),
-				GridFieldAddItemInlineButton::create('EditableFormField')
-					->setTitle(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
+				GridFieldAddClassesButton::create('EditableFormField')
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
 					->setButtonClass('ss-ui-action-constructive'),
-				GridFieldAddItemInlineButton::create('EditableFormStep')
-					->setTitle(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break'))
-					->setExtraClass('uf-gridfield-steprow'),
-				GridFieldAddItemInlineButton::create(array('EditableFieldGroup', 'EditableFieldGroupEnd'))
-					->setTitle(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group'))
-					->setExtraClass('uf-gridfield-grouprow'),
+				GridFieldAddClassesButton::create('EditableFormStep')
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break')),
+				GridFieldAddClassesButton::create(array('EditableFieldGroup', 'EditableFieldGroupEnd'))
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group')),
 				new GridFieldEditButton(),
 				new GridFieldDeleteAction(),
 				new GridFieldToolbarHeader(),
