@@ -177,6 +177,8 @@ SQL;
 			$config->addComponent(new GridFieldDetailForm());
 			$config->addComponent($export = new GridFieldExportButton());
 			$config->addComponent($print = new GridFieldPrintButton());
+
+			Requirements::javascript(USERFORMS_DIR . '/javascript/Gridfield.js');
 			
 			/**
 			 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
