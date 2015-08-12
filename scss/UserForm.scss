@@ -1,0 +1,47 @@
+/**
+ * Lightweight base styles for the front-end form.
+ */
+
+.userform-progress {
+	.progress {
+		position: relative;
+		height: 1em;
+		background: #eee;
+
+		.progress-bar {
+			position: absolute;
+			height: 1em;
+			background: #666;
+		}
+	}
+
+	.step-buttons {
+		margin-left: 0;
+		position: relative;
+
+		.step-button-wrapper {
+			display: inline-block;
+			list-style-type: none;
+		}
+	}
+
+	.step-button-jump {
+		position: absolute;
+		top: 0;
+	}
+}
+
+.step-navigation {
+	.step-buttons {
+		margin-left: 0;
+
+		.step-button-wrapper {
+			display: inline-block;
+			list-style-type: none;
+		}
+	}
+}
+
+.userform {
+	clear: both;
+}

@@ -1,38 +1,37 @@
 /**
  * Lightweight base styles for the front-end form.
  */
-.userform-progress .step-buttons,
-.step-navigation .step-buttons {
-	margin-left: 0;
-}
-
-.userform-progress .step-buttons {
-	position: relative;
-}
-
-.userform-progress .step-button-jump {
-	position: absolute;
-	top: 0;
-}
-
-.userform-progress .step-buttons .step-button-wrapper,
-.step-navigation .step-buttons .step-button-wrapper {
-	display: inline-block;
-	list-style-type: none;
-}
-
 .userform-progress .progress {
-	position: relative;
-	height: 1em;
-	background: #eee;
+  position: relative;
+  height: 1em;
+  background: #eee;
+}
+.userform-progress .progress .progress-bar {
+  position: absolute;
+  height: 1em;
+  background: #666;
+}
+.userform-progress .step-buttons {
+  margin-left: 0;
+  position: relative;
+}
+.userform-progress .step-buttons .step-button-wrapper {
+  display: inline-block;
+  list-style-type: none;
+}
+.userform-progress .step-button-jump {
+  position: absolute;
+  top: 0;
 }
 
-.userform-progress .progress .progress-bar {
-	position: absolute;
-	height: 1em;
-	background: #666;
+.step-navigation .step-buttons {
+  margin-left: 0;
+}
+.step-navigation .step-buttons .step-button-wrapper {
+  display: inline-block;
+  list-style-type: none;
 }
 
 .userform {
-	clear: both;
+  clear: both;
 }

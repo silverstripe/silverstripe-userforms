@@ -1,24 +1,28 @@
-
-.cms .ss-gridfield > div.ss-gridfield-buttonrow-before {
-	margin-bottom: 10px;
-	overflow: auto;
-}
-
 /**
- * Styles for page steps
+ * Styles for cms
  */
-.cms table.ss-gridfield-table .ss-gridfield-inline-new.uf-gridfield-steprow,
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'],
-.cms table.ss-gridfield-table .ss-gridfield-inline-new.uf-gridfield-steprow:hover,
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep']:hover
-{
-	background: #dae2e7;
+.cms .ss-gridfield > div.ss-gridfield-buttonrow-before {
+  margin-bottom: 10px;
+  overflow: auto;
 }
-
-.cms table.ss-gridfield-table .ss-gridfield-inline-new.uf-gridfield-steprow label,
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'] label
-{
-	font-weight: bold;
-	color: #393939;
-	font-size: 1.1em;
+.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'], .cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep']:hover {
+  background: #dae2e7;
+}
+.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'] label {
+  font-weight: bold;
+  color: #444;
+  font-size: 1.1em;
+}
+.cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup'], .cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup']:hover {
+  background: #E7EFF4;
+}
+.cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup'] label {
+  font-weight: bold;
+}
+.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'] .col-Title input {
+  display: none;
+}
+.cms table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .col-reorder,
+.cms table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .handle {
+  background: #E7EFF4;
 }
