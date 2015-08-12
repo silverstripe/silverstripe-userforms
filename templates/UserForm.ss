@@ -1,44 +1,19 @@
-<% include UserFormProgress %>
-
 <form $AttributesHTML>
+	
+<% include UserFormProgress %>
+<% include UserFormStepErrors %>
 
 <% if $Message %>
-<p id="{$FormName}_error" class="message $MessageType">$Message</p>
+	<p id="{$FormName}_error" class="message $MessageType">$Message</p>
 <% else %>
-<p id="{$FormName}_error" class="message $MessageType" aria-hidden="true" style="display: none;"></p>
-<% end_if %>
-
-<% if $NumberOfSteps.Count > "1" %>
-<fieldset class="error-container form-wide-errors" aria-hidden="true" style="display: none;">
-	<div>
-		<h4></h4>
-		<ul class="error-list"></ul>
-	</div>
-</fieldset>
+	<p id="{$FormName}_error" class="message $MessageType" aria-hidden="true" style="display: none;"></p>
 <% end_if %>
 
 <fieldset>
 	<% if $Legend %><legend>$Legend</legend><% end_if %>
-
-	<% if $FormFields%><% loop $FormFields %>
-		<fieldset id="step-$Pos" class="form-step" data-title="$Title">
-			<% if $Top.DisplayErrorMessagesAtTop %>
-				<fieldset class="error-container" aria-hidden="true" style="display: none;">
-					<div>
-						<h4></h4>
-						<ul class="error-list"></ul>
-					</div>
-				</fieldset>
-			<% end_if %>
-
-			<% loop $Children %>
-			$FieldHolder
-			<% end_loop %>
-
-			<% include UserFormStepNav ContainingPage=$Top %>
-		</fieldset>
-	<% end_loop %><% end_if %>
-
+	<% loop $Fields %>
+		$FieldHolder
+	<% end_loop %>
 	<div class="clear"><!-- --></div>
 </fieldset>
 

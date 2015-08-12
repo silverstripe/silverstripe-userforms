@@ -37,7 +37,7 @@ class UserFormFieldEditorExtension extends DataExtension {
 		$this->createInitialFormStep(true);
 
 		$editableColumns = new GridFieldEditableColumns();
-		$fieldClasses = $this->getEditableFieldClasses();
+		$fieldClasses = singleton('EditableFormField')->getEditableFieldClasses();
 		$editableColumns->setDisplayFields(array(
 			'ClassName' => function($record, $column, $grid) use ($fieldClasses) {
 				if($record instanceof EditableFormField) {
@@ -119,32 +119,6 @@ class UserFormFieldEditorExtension extends DataExtension {
 		$step->Sort = 1;
 		$step->write();
 		$fields->add($step);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getEditableFieldClasses() {
-		$classes = ClassInfo::getValidSubClasses('EditableFormField');
-
-		// Remove classes we don't want to display in the dropdown.
-		$editableFieldClasses = array();
-		foreach ($classes as $class) {
-			if(in_array($class, array('EditableFormField', 'EditableMultipleOptionField'))
-				|| Config::inst()->get($class, 'hidden')
-			) {
-				continue;
-			}
-			
-			$singleton = singleton($class);
-			if(!$singleton->canCreate()) {
-				continue;
-			}
-
-			$editableFieldClasses[$class] = $singleton->i18n_singular_name();
-		}
-
-		return $editableFieldClasses;
 	}
 
 	/**

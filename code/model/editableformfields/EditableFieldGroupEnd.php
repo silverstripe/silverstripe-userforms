@@ -16,6 +16,14 @@ class EditableFieldGroupEnd extends EditableFormField {
 	 * @var bool
 	 */
 	private static $hidden = true;
+	
+	/**
+	 * Non-data type
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $literal = true;
 
 	public function getCMSTitle() {
 		$group = $this->Group();

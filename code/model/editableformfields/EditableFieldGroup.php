@@ -17,6 +17,13 @@ class EditableFieldGroup extends EditableFormField {
 	 */
 	private static $hidden = true;
 
+	/**
+	 * Non-data field type
+	 *
+	 * @var type
+	 */
+	private static $literal = true;
+
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		$fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));

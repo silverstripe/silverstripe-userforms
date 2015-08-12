@@ -17,6 +17,22 @@ class EditableFormField extends DataObject {
 	private static $hidden = false;
 
 	/**
+	 * Define this field as abstract (not inherited)
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $abstract = true;
+
+	/**
+	 * Flag this field type as non-data (e.g. literal, header, html)
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $literal = false;
+
+	/**
 	 * Default sort order
 	 *
 	 * @config
@@ -176,21 +192,25 @@ class EditableFormField extends DataObject {
 		}
 
 		// Validation
-		$fields->addFieldsToTab(
-			'Root.Validation',
-			$this->getFieldValidationOptions()
-		);
-
+		$validationFields = $this->getFieldValidationOptions();
+		if($validationFields) {
+			$fields->addFieldsToTab(
+				'Root.Validation',
+				$this->getFieldValidationOptions()
+			);
+		}
+		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'Display' => '',
-			'ConditionFieldID' => function($record, $column, $grid) {
+			'ConditionFieldID' => function($record, $column, $grid) use ($allowedClasses) {
 				return DropdownField::create(
 					$column,
 					'',
 					EditableFormField::get()
 						->filter(array(
-							'ParentID' => $this->ParentID
+							'ParentID' => $this->ParentID,
+							'ClassName' => $allowedClasses
 						))
 						->exclude(array(
 							'ID' => $this->ID
@@ -650,5 +670,58 @@ class EditableFormField extends DataObject {
 		return TextField::create($column, false)
 			->setAttribute('placeholder', _t('EditableFormField.TITLE', 'Title'))
 			->setAttribute('data-placeholder', _t('EditableFormField.TITLE', 'Title'));
+	}
+
+	/**
+	 * Get the JS expression for selecting the holder for this field
+	 *
+	 * @return string
+	 */
+	public function getSelectorHolder() {
+		return "$(\"#{$this->Name}\")";
+	}
+
+	/**
+	 * Gets the JS expression for selecting the value for this field
+	 *
+	 * @param EditableCustomRule $rule Custom rule this selector will be used with
+	 * @param bool $forOnLoad Set to true if this will be invoked on load
+	 */
+	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
+		return "$(\"input[name='{$this->Name}']\")";
+	}
+
+
+	/**
+	 * Get the list of classes that can be selected and used as data-values
+	 *
+	 * @param $includeLiterals Set to false to exclude non-data fields
+	 * @return array
+	 */
+	public function getEditableFieldClasses($includeLiterals = true) {
+		$classes = ClassInfo::getValidSubClasses('EditableFormField');
+
+		// Remove classes we don't want to display in the dropdown.
+		$editableFieldClasses = array();
+		foreach ($classes as $class) {
+			// Skip abstract / hidden classes
+			if(Config::inst()->get($class, 'abstract', Config::UNINHERITED) || Config::inst()->get($class, 'hidden')
+			) {
+				continue;
+			}
+
+			if(!$includeLiterals && Config::inst()->get($class, 'literal')) {
+				continue;
+			}
+
+			$singleton = singleton($class);
+			if(!$singleton->canCreate()) {
+				continue;
+			}
+
+			$editableFieldClasses[$class] = $singleton->i18n_singular_name();
+		}
+
+		return $editableFieldClasses;
 	}
 }

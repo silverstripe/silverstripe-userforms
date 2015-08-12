@@ -139,7 +139,7 @@ jQuery(function ($) {
 	 */
 	UserForm.prototype.setCurrentStep = function (step) {
 		// Make sure we're dealing with a form step.
-		if (!step instanceof FormStep) {
+		if (!(step instanceof FormStep)) {
 			return;
 		}
 
