@@ -286,6 +286,14 @@ SQL;
 		
 		DB::alteration_message('Migrated userforms', 'changed');
 	}
+
+
+	/**
+	 * Validate formfields
+	 */
+	public function getCMSValidator() {
+		return new UserFormValidator();
+	}
 }
 
 /**

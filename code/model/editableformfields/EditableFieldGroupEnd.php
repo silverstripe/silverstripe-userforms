@@ -5,6 +5,10 @@
  */
 class EditableFieldGroupEnd extends EditableFormField {
 
+	private static $belongs_to = array(
+		'Group' => 'EditableFieldGroup'
+	);
+
 	/**
 	 * Disable selection of group class
 	 *
@@ -13,6 +17,17 @@ class EditableFieldGroupEnd extends EditableFormField {
 	 */
 	private static $hidden = true;
 
+	public function getCMSTitle() {
+		$group = $this->Group();
+		return _t(
+			'EditableFieldGroupEnd.FIELD_GROUP_END',
+			'End of {group}',
+			array(
+				'group' => ($group && $group->exists() && $group->Title) ? $group->Title : 'group'
+			)
+		);
+	}
+
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		$fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));
@@ -20,10 +35,7 @@ class EditableFieldGroupEnd extends EditableFormField {
 	}
 
 	public function getInlineClassnameField($column, $fieldClasses) {
-		return new LabelField(
-			$column,
-			_t('EditableFieldGroupEnd.FIELD_GROUP_END', 'Field Group (end)')
-		);
+		return new LabelField($column, $this->CMSTitle);
 	}
 
 	public function getInlineTitleField($column) {
@@ -38,8 +50,37 @@ class EditableFieldGroupEnd extends EditableFormField {
 		return false;
 	}
 
-	public function canEdit($member = null) {
-		return false;
+	public function onAfterWrite() {
+		parent::onAfterWrite();
+
+		// If this is not attached to a group, find the first group prior to this
+		// with no end attached
+		$group = $this->Group();
+		if(!($group && $group->exists()) && $this->ParentID) {
+			$group = EditableFieldGroup::get()
+				->filter(array(
+					'ParentID' => $this->ParentID,
+					'Sort:LessThanOrEqual' => $this->Sort
+				))
+				->where('"EditableFieldGroup"."EndID" IS NULL OR "EditableFieldGroup"."EndID" = 0')
+				->sort('"Sort" DESC')
+				->first();
+			
+			// When a group is found, attach it to this end
+			if($group) {
+				$group->EndID = $this->ID;
+				$group->write();
+			}
+		}
+	}
+
+	protected function onAfterDelete() {
+		parent::onAfterDelete();
+
+		// Delete group
+		if(($group = $this->Group()) && $group->exists()) {
+			$group->delete();
+		}
 	}
 	
 }
