@@ -322,6 +322,7 @@ jQuery(function ($) {
 
 		this.$el = element instanceof jQuery ? element : $(element);
 		this.$buttons = this.$el.find('.step-button-jump');
+		this.$jsAlign = this.$el.find('.js-align');
 
 		// Update the progress bar when 'step' buttons are clicked.
 		this.$buttons.each(function (i, stepButton) {
@@ -337,9 +338,9 @@ jQuery(function ($) {
 		});
 
 		// Spaces out the steps below progress bar evenly
-		this.$buttons.each(function (index, button) {
+		this.$jsAlign.each(function (index, button) {
 			var $button = $(button),
-				leftPercent = (100 / (self.$buttons.length - 1) * index + '%'),
+				leftPercent = (100 / (self.$jsAlign.length - 1) * index + '%'),
 				buttonOffset = -1 * ($button.innerWidth() / 2);
 
 			$button.css({left: leftPercent, marginLeft: buttonOffset});
