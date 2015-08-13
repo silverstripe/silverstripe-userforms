@@ -177,6 +177,8 @@ SQL;
 			$config->addComponent(new GridFieldDetailForm());
 			$config->addComponent($export = new GridFieldExportButton());
 			$config->addComponent($print = new GridFieldPrintButton());
+
+			Requirements::javascript(USERFORMS_DIR . '/javascript/Gridfield.js');
 			
 			/**
 			 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
@@ -283,6 +285,14 @@ SQL;
 			->run();
 		
 		DB::alteration_message('Migrated userforms', 'changed');
+	}
+
+
+	/**
+	 * Validate formfields
+	 */
+	public function getCMSValidator() {
+		return new UserFormValidator();
 	}
 }
 

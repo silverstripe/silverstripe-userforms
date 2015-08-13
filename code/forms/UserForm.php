@@ -75,31 +75,11 @@ class UserForm extends Form {
 	 * @return FieldList
 	 */
 	public function getFormFields() {
-		$fields = new FieldList();
-		$emptyStep = null; // Last empty step, which may or may not later have children
-
+		$fields = new UserFormsFieldList();
+		$target = $fields;
 		foreach ($this->controller->Fields() as $field) {
-			// When we encounter a step, save it
-			if ($field instanceof EditableFormStep) {
-				$emptyStep = $field->getFormField();
-				continue;
-			}
-
-			// Ensure that the last field is a step
-			if($emptyStep) {
-				// When we reach the first non-step field, any empty step will no longer be empty
-				$fields->push($emptyStep);
-				$emptyStep = null;
-				
-			} elseif(! $fields->last()) {
-				// If no steps have been saved yet, warn
-				trigger_error('Missing first step in form', E_USER_WARNING);
-				$fields->push(singleton('EditableFormStep')->getFormField());
-			}
-
-			$fields->last()->push($field->getFormField());
+			$target = $target->processNext($field);
 		}
-
 		$this->extend('updateFormFields', $fields);
 		return $fields;
 	}

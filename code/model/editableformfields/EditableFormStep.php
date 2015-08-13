@@ -6,17 +6,17 @@
  */
 class EditableFormStep extends EditableFormField {
 
-	/**
-	 * @config
-	 * @var string
-	 */
-	private static $singular_name = 'Step';
+	private static $singular_name = 'Page Break';
+
+	private static $plural_name = 'Page Breaks';
 
 	/**
+	 * Disable selection of step class
+	 *
 	 * @config
-	 * @var string
+	 * @var bool
 	 */
-	private static $plural_name = 'Steps';
+	private static $hidden = true;
 
 	/**
 	 * @return FieldList
@@ -24,10 +24,7 @@ class EditableFormStep extends EditableFormField {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName('MergeField');
-		$fields->removeByName('Default');
-		$fields->removeByName('Validation');
-		$fields->removeByName('CustomRules');
+		$fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));
 
 		return $fields;
 	}
@@ -36,7 +33,7 @@ class EditableFormStep extends EditableFormField {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		$field = CompositeField::create()
+		$field = UserFormsStepField::create()
 			->setTitle($this->EscapedTitle);
 		$this->doUpdateFormField($field);
 		return $field;
@@ -54,5 +51,20 @@ class EditableFormStep extends EditableFormField {
 	 */
 	public function showInReports() {
 		return false;
+	}
+
+	public function getInlineClassnameField($column, $fieldClasses) {
+		return new LabelField(
+			$column,
+			$this->CMSTitle
+		);
+	}
+
+	public function getCMSTitle() {
+		$title = $this->i18n_singular_name();
+		if($this->Title) {
+			$title .= ' (' . $this->Title . ')';
+		}
+		return $title;
 	}
 }

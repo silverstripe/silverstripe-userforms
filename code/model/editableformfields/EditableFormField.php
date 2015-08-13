@@ -9,6 +9,14 @@
 class EditableFormField extends DataObject {
 
 	/**
+	 * Set to true to hide from class selector
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $hidden = false;
+
+	/**
 	 * Default sort order
 	 *
 	 * @config
@@ -442,6 +450,10 @@ class EditableFormField extends DataObject {
 		return Convert::raw2xml($this->Title);
 	}
 
+	public function getCMSTitle() {
+		return $this->i18n_singular_name() . ' (' . $this->Title . ')';
+	}
+
 	/**
 	 * @deprecated since version 4.0
 	 */
@@ -615,5 +627,28 @@ class EditableFormField extends DataObject {
 				$this->setField($key, $value);
 			}
 		}
+	}
+
+	/**
+	 * Get the formfield to use when editing this inline in gridfield
+	 *
+	 * @param string $column name of column
+	 * @param array $fieldClasses List of allowed classnames if this formfield has a selectable class
+	 * @return FormField
+	 */
+	public function getInlineClassnameField($column, $fieldClasses) {
+		return DropdownField::create($column, false, $fieldClasses);
+	}
+
+	/**
+	 * Get the formfield to use when editing the title inline
+	 *
+	 * @param string $column
+	 * @return FormField
+	 */
+	public function getInlineTitleField($column) {
+		return TextField::create($column, false)
+			->setAttribute('placeholder', _t('EditableFormField.TITLE', 'Title'))
+			->setAttribute('data-placeholder', _t('EditableFormField.TITLE', 'Title'));
 	}
 }
