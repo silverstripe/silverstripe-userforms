@@ -3,14 +3,11 @@
  */
 jQuery(function ($) {
 
-	var $userform = $('.userform');
+	// A reference to the UserForm instance.
+	var userform = null;
 
 	// Settings that come from the CMS.
-	var CONSTANTS = {
-		ENABLE_LIVE_VALIDATION: $userform.data('livevalidation') !== void 0,
-		DISPLAY_ERROR_MESSAGES_AT_TOP: $userform.data('toperrors') !== void 0,
-		HIDE_FIELD_LABELS: $userform.data('hidefieldlabels') !== void 0
-	};
+	var CONSTANTS = {};
 
 	// Common functions that extend multiple classes.
 	var commonMixin = {
@@ -43,6 +40,9 @@ jQuery(function ($) {
 		this.$el = element instanceof jQuery ? element : $(element);
 		this.steps = [];
 
+		// Add an error container which displays a list of invalid steps on form submission.
+		this.errorContainer = new ErrorContainer(this.$el.children('.error-container'));
+
 		// Listen for events triggered my form steps.
 		this.$el.on('userform.step.prev', function (e) {
 			self.prevStep();
@@ -54,6 +54,11 @@ jQuery(function ($) {
 		// Listen for events triggered by the progress bar.
 		$('#userform-progress').on('userform.progress.changestep', function (e, stepNumber) {
 			self.jumpToStep(stepNumber - 1);
+		});
+
+		// When a field becomes valid, remove errors from the error container.
+		this.$el.on('userform.form.valid', function (e, fieldId) {
+			self.errorContainer.removeStepLink(fieldId);
 		});
 
 		this.$el.validate(this.validationOptions);
@@ -77,15 +82,37 @@ jQuery(function ($) {
 				error.insertAfter(element);
 			}
 		},
+		// Callback for handling the actual submit when the form is valid.
+		// Submission in the jQuery.validate sence is handled at step level.
+		// So when the final step is submitted we have to also check all previous steps are valid.
+		submitHandler: function (form, e) {
+			var isValid = true;
+
+			// Validate the final step.
+			userform.steps[userform.steps.length - 1].valid = $(form).valid();
+
+			// Check for invalid previous steps.
+			$.each(userform.steps, function (i, step) {
+				if (!step.valid) {
+					isValid = false;
+					userform.errorContainer.addStepLink(step);
+				}
+			});
+
+			if (isValid) {
+				form.submit();
+			} else {
+				userform.errorContainer.show();
+			}
+		},
+		// When a field becomes valid.
 		success: function (error) {
 			var errorId = $(error).attr('id');
 
 			error.remove();
 
-			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-				// Pass the field's ID with the event.
-				$userform.trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
-			}
+			// Pass the field's ID with the event.
+			userform.$el.trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
 		}
 	};
 
@@ -99,6 +126,8 @@ jQuery(function ($) {
 		if (!step instanceof FormStep) {
 			return;
 		}
+
+		step.id = this.steps.length;
 
 		this.steps.push(step);
 	};
@@ -128,17 +157,25 @@ jQuery(function ($) {
 	 * @desc Jumps to a specific form step.
 	 */
 	UserForm.prototype.jumpToStep = function (stepNumber) {
-		var targetStep = this.steps[stepNumber];
+		var targetStep = this.steps[stepNumber],
+			isValid = false;
 
 		// Make sure the target step exists.
 		if (targetStep === void 0) {
 			return;
 		}
 
-		// Validate the current section.
-		// Users can navigate to step's they've already viewed
-		// even if the current step is invalid.
-		if (!this.$el.valid() && targetStep.viewed === false) {
+		// Validate the form.
+		// This well effectivly validate the current step and not the entire form.
+		// This is because hidden fields are excluded from validation, and all fields
+		// on all other steps, are currently hidden.
+		isValid = this.$el.valid();
+
+		// Set the 'valid' property on the current step.
+		this.steps[stepNumber - 1 >= 0 ? stepNumber - 1 : 0].valid = isValid;
+
+		// Users can navigate to step's they've already viewed even if the current step is invalid.
+		if (isValid === false && targetStep.viewed === false) {
 			return;
 		}
 
@@ -198,6 +235,49 @@ jQuery(function ($) {
 
 		// If there are no more error then hide the container.
 		if (!this.hasErrors()) {
+			this.hide();
+		}
+	};
+
+	/**
+	 * @func addStepLink
+	 * @param {object} step - FormStep instance.
+	 * @desc Adds a link to a form step as an error message.
+	 */
+	ErrorContainer.prototype.addStepLink = function (step) {
+		var self = this,
+			itemID = step.$el.attr('id') + '-error-link',
+			$itemElement = this.$el.find('#' + itemID),
+			stepID = step.$el.attr('id'),
+			stepTitle = step.$el.data('title');
+
+		// If the item already exists we don't need to do anything.
+		if ($itemElement.length) {
+			return;
+		}
+
+		$itemElement = $('<li id="' + itemID + '"><a href="#' + stepID + '">' + stepTitle + '</a></li>');
+
+		$itemElement.on('click', function (e) {
+			e.preventDefault();
+			userform.jumpToStep(step.id);
+		});
+
+		this.$el.find('.error-list').append($itemElement);
+	};
+
+	/**
+	 * @func removeStepLink
+	 * @param {object} step - FormStep instance.
+	 * @desc Removes a step link from the error container.
+	 */
+	ErrorContainer.prototype.removeStepLink = function (fieldId) {
+		var stepID = $('#' + fieldId).closest('.form-step').attr('id');
+
+		this.$el.find('#' + stepID + '-error-link').remove();
+
+		// Hide the error container if we've just removed the last error.
+		if (this.$el.find('.error-list').is(':empty')) {
 			this.hide();
 		}
 	};
@@ -273,6 +353,13 @@ jQuery(function ($) {
 		// Has the step been viewed by the user?
 		this.viewed = false;
 
+		// Is the form step valid?
+		// This value is used on form submission, which fails, if any of the steps are invalid.
+		this.valid = false;
+
+		// The internal id of the step. Used for getting the step from the UserForm.steps array.
+		this.id = null;
+
 		this.hide();
 
 		// Bind the step navigation event listeners.
@@ -289,7 +376,7 @@ jQuery(function ($) {
 			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
 
 			// Listen for errors on the UserForm.
-			$userform.on('userform.form.error', function (e, validator) {
+			userform.$el.on('userform.form.error', function (e, validator) {
 				// The step only cares about errors if it's currently visible.
 				if (!self.$el.is(':visible')) {
 					return;
@@ -302,7 +389,7 @@ jQuery(function ($) {
 			});
 
 			// Listen for fields becoming valid
-			$userform.on('userform.form.valid', function (e, fieldId) {
+			userform.$el.on('userform.form.valid', function (e, fieldId) {
 				self.errorContainer.removeErrorMessage(fieldId);
 			});
 		}
@@ -333,7 +420,7 @@ jQuery(function ($) {
 		});
 
 		// Update the progress bar when 'prev' and 'next' buttons are clicked.
-		$userform.on('userform.form.changestep', function (e, newStep) {
+		userform.$el.on('userform.form.changestep', function (e, newStep) {
 			self.update(newStep + 1);
 		});
 
@@ -396,12 +483,12 @@ jQuery(function ($) {
 	 * @desc Bootstraps the front-end.
 	 */
 	function main() {
-		var userform = null,
-			progressBar = null;
+		var progressBar = null,
+			$userform = $('.userform');
 
-		// Extend classes with common functionality.
-		$.extend(FormStep.prototype, commonMixin);
-		$.extend(ErrorContainer.prototype, commonMixin);
+		CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
+		CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== void 0;
+		CONSTANTS.HIDE_FIELD_LABELS = $userform.data('hidefieldlabels') !== void 0;
 
 		// Extend the default validation options with conditional options
 		// that are set by the user in the CMS.
@@ -425,6 +512,10 @@ jQuery(function ($) {
 
 		// Display all the things that are hidden when JavaScript is disabled.
 		$('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
+
+		// Extend classes with common functionality.
+		$.extend(FormStep.prototype, commonMixin);
+		$.extend(ErrorContainer.prototype, commonMixin);
 
 		userform = new UserForm($userform);
 		progressBar = new ProgressBar($('#userform-progress'));
