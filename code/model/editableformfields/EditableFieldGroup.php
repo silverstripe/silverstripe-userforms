@@ -5,6 +5,10 @@
  */
 class EditableFieldGroup extends EditableFormField {
 
+	private static $has_one = array(
+		'End' => 'EditableFieldGroupEnd'
+	);
+
 	/**
 	 * Disable selection of group class
 	 *
@@ -19,11 +23,18 @@ class EditableFieldGroup extends EditableFormField {
 		return $fields;
 	}
 
-	public function getInlineClassnameField($column, $fieldClasses) {
-		return new LabelField(
-			$column,
-			_t('EditableFieldGroup.FIELD_GROUP_START', 'Field Group (start)')
+	public function getCMSTitle() {
+		return _t(
+			'EditableFieldGroupEnd.FIELD_GROUP_START',
+			'Start of {group}',
+			array(
+				'group' => $this->Title ?: 'group'
+			)
 		);
+	}
+
+	public function getInlineClassnameField($column, $fieldClasses) {
+		return new LabelField($column, $this->CMSTitle);
 	}
 
 	public function showInReports() {
@@ -47,6 +58,22 @@ class EditableFieldGroup extends EditableFormField {
 		// if this field has an extra class
 		if($field->ExtraClass) {
 			$field->addExtraClass($field->ExtraClass);
+		}
+	}
+
+	protected function onBeforeDelete() {
+		parent::onBeforeDelete();
+
+		// Ensures EndID is lazy-loaded for onAfterDelete
+		$this->EndID;
+	}
+
+	protected function onAfterDelete() {
+		parent::onAfterDelete();
+
+		// Delete end
+		if(($end = $this->End()) && $end->exists()) {
+			$end->delete();
 		}
 	}
 	

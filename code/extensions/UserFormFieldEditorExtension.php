@@ -115,7 +115,7 @@ class UserFormFieldEditorExtension extends DataExtension {
 
 		// Add step
 		$step = EditableFormStep::create();
-		$step->Title = _t('EditableFormStep.TITLE_FIRST', 'First Step');
+		$step->Title = _t('EditableFormStep.TITLE_FIRST', 'First Page');
 		$step->Sort = 1;
 		$step->write();
 		$fields->add($step);

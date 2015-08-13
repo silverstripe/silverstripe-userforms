@@ -450,6 +450,10 @@ class EditableFormField extends DataObject {
 		return Convert::raw2xml($this->Title);
 	}
 
+	public function getCMSTitle() {
+		return $this->i18n_singular_name() . ' (' . $this->Title . ')';
+	}
+
 	/**
 	 * @deprecated since version 4.0
 	 */

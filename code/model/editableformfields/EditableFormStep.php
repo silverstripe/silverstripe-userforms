@@ -6,6 +6,10 @@
  */
 class EditableFormStep extends EditableFormField {
 
+	private static $singular_name = 'Page Break';
+
+	private static $plural_name = 'Page Breaks';
+
 	/**
 	 * Disable selection of step class
 	 *
@@ -13,18 +17,6 @@ class EditableFormStep extends EditableFormField {
 	 * @var bool
 	 */
 	private static $hidden = true;
-
-	/**
-	 * @config
-	 * @var string
-	 */
-	private static $singular_name = 'Step';
-
-	/**
-	 * @config
-	 * @var string
-	 */
-	private static $plural_name = 'Steps';
 
 	/**
 	 * @return FieldList
@@ -64,7 +56,15 @@ class EditableFormStep extends EditableFormField {
 	public function getInlineClassnameField($column, $fieldClasses) {
 		return new LabelField(
 			$column,
-			_t('EditableFieldGroupEnd.PAGE_BREAK', 'Page Break')
+			$this->CMSTitle
 		);
+	}
+
+	public function getCMSTitle() {
+		$title = $this->i18n_singular_name();
+		if($this->Title) {
+			$title .= ' (' . $this->Title . ')';
+		}
+		return $title;
 	}
 }
