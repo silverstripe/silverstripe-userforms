@@ -71,7 +71,7 @@ jQuery(function ($) {
 	 */
 	UserForm.prototype.validationOptions = {
 		ignore: ':hidden',
-		errorClass: 'required',
+		errorClass: 'error',
 		errorElement: 'span',
 		errorPlacement: function (error, element) {
 			error.addClass('message');
@@ -500,11 +500,9 @@ jQuery(function ($) {
 
 		// Extend the default validation options with conditional options
 		// that are set by the user in the CMS.
-		if (CONSTANTS.ENABLE_LIVE_VALIDATION) {
+		if (CONSTANTS.ENABLE_LIVE_VALIDATION === false) {
 			$.extend(UserForm.prototype.validationOptions, {
-				onfocusout: function (element) {
-					this.element(element);
-				}
+				onfocusout: false
 			});
 		}
 
