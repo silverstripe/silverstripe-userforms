@@ -7,21 +7,27 @@
 		position: relative;
 		height: 1em;
 		background: #eee;
+	}
 
-		.progress-bar {
-			position: absolute;
-			height: 1em;
-			background: #666;
-		}
+	.progress-bar {
+		position: absolute;
+		height: 1em;
+		background: #666;
 	}
 
 	.step-buttons {
 		margin-left: 0;
 		position: relative;
+	}
 
-		.step-button-wrapper {
-			display: inline-block;
-			list-style-type: none;
+	.step-button-wrapper {
+		display: inline-block;
+		list-style-type: none;
+
+		&.current {
+			.step-button-jump {
+				background: #666;
+			}
 		}
 	}
 
@@ -34,14 +40,16 @@
 .step-navigation {
 	.step-buttons {
 		margin-left: 0;
+	}
 
-		.step-button-wrapper {
-			display: inline-block;
-			list-style-type: none;
-		}
+	.step-button-wrapper {
+		display: inline-block;
+		list-style-type: none;
 	}
 }
 
 .userform {
 	clear: both;
+	width: 100%;
+	max-width: 100%;
 }

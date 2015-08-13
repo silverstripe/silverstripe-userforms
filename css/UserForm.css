@@ -6,7 +6,7 @@
   height: 1em;
   background: #eee;
 }
-.userform-progress .progress .progress-bar {
+.userform-progress .progress-bar {
   position: absolute;
   height: 1em;
   background: #666;
@@ -15,9 +15,12 @@
   margin-left: 0;
   position: relative;
 }
-.userform-progress .step-buttons .step-button-wrapper {
+.userform-progress .step-button-wrapper {
   display: inline-block;
   list-style-type: none;
+}
+.userform-progress .step-button-wrapper.current .step-button-jump {
+  background: #666;
 }
 .userform-progress .step-button-jump {
   position: absolute;
@@ -27,11 +30,13 @@
 .step-navigation .step-buttons {
   margin-left: 0;
 }
-.step-navigation .step-buttons .step-button-wrapper {
+.step-navigation .step-button-wrapper {
   display: inline-block;
   list-style-type: none;
 }
 
 .userform {
   clear: both;
+  width: 100%;
+  max-width: 100%;
 }
