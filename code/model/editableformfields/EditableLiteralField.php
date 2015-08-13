@@ -14,6 +14,14 @@ class EditableLiteralField extends EditableFormField {
 	private static $plural_name = 'HTML Blocks';
 
 	/**
+	 * Mark as literal only
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $literal = true;
+
+	/**
 	 * Get the name of the editor config to use for HTML sanitisation. Defaults to the active config.
 	 *
 	 * @var string

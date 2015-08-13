@@ -14,6 +14,14 @@
  */
 
 class EditableMultipleOptionField extends EditableFormField {
+
+	/**
+	 * Define this field as abstract (not inherited)
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $abstract = true;
 	
 	private static $has_many = array(
 		"Options" => "EditableOption"

@@ -38,4 +38,8 @@ class EditableCountryDropdownField extends EditableFormField {
 	public function getIcon() {
 		return  USERFORMS_DIR . '/images/editabledropdown.png';
 	}
+
+	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
+		return "$(\"select[name='{$this->Name}']\")";
+	}
 }

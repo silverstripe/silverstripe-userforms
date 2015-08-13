@@ -394,15 +394,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$fieldId = $field->Name;
-
-				if($field instanceof EditableFormHeading) {
-					$fieldId = 'UserForm_Form_' . $field->Name;
-				}
+				$holderSelector = $field->getSelectorHolder();
 
 				// Is this Field Show by Default
 				if(!$field->ShowOnLoad) {
-					$default .= "$(\"#" . $fieldId . "\").hide();\n";
+					$default .= "{$holderSelector}.hide();\n";
 				}
 
 				// Check for field dependencies / default
@@ -411,22 +407,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// Get the field which is effected
 					$formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
 
-					if($formFieldWatch->RecordClassName == 'EditableDropdown') {
-						// watch out for multiselect options - radios and check boxes
-						$fieldToWatch = "$(\"select[name='" . $formFieldWatch->Name . "']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					} else if($formFieldWatch->RecordClassName == 'EditableCheckboxGroupField') {
-						// watch out for checkboxs as the inputs don't have values but are 'checked
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "[" . $rule->FieldValue . "]']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					} else if($formFieldWatch->RecordClassName == 'EditableRadioField') {
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
-						// We only want to trigger on load once for the radio group - hence we focus on the first option only.
-						$fieldToWatchOnLoad = "$(\"input[name='" . $formFieldWatch->Name . "']:first\")";
-					} else {
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					}
+					$fieldToWatch = $formFieldWatch->getSelectorField($rule);
+					$fieldToWatchOnLoad = $formFieldWatch->getSelectorField($rule, true);
 
 					// show or hide?
 					$view = ($rule->Display == 'Hide') ? 'hide' : 'show';
@@ -436,7 +418,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// @todo encapulsation
 					$action = "change";
 
-					if($formFieldWatch->ClassName == "EditableTextField") {
+					if($formFieldWatch instanceof EditableTextField) {
 						$action = "keyup";
 					}
 
@@ -454,11 +436,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// and what should we evaluate
 					switch($rule->ConditionOption) {
 						case 'IsNotBlank':
-							$expression = ($checkboxField || $radioField) ? '$(this).prop("checked")' :'$(this).val() != ""';
+							$expression = ($checkboxField || $radioField) ? '$(this).is(":checked")' :'$(this).val() != ""';
 
 							break;
 						case 'IsBlank':
-							$expression = ($checkboxField || $radioField) ? '!($(this).prop("checked"))' : '$(this).val() == ""';
+							$expression = ($checkboxField || $radioField) ? '!($(this).is(":checked"))' : '$(this).val() == ""';
 							
 							break;
 						case 'HasValue':
@@ -507,7 +489,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 					$watch[$fieldToWatch][] =  array(
 						'expression' => $expression,
-						'field_id' => $fieldId,
+						'holder_selector' => $holderSelector,
 						'view' => $view,
 						'opposite' => $opposite,
 						'action' => $action
@@ -526,9 +508,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 				foreach($values as $rule) {
 					// Register conditional behaviour with an element, so it can be triggered from many places.
 					$logic[] = sprintf(
-						'if(%s) { $("#%s").%s(); } else { $("#%2$s").%s(); }', 
+						'if(%s) { %s.%s(); } else { %2$s.%s(); }', 
 						$rule['expression'], 
-						$rule['field_id'], 
+						$rule['holder_selector'],
 						$rule['view'], 
 						$rule['opposite']
 					);

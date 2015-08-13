@@ -22,6 +22,12 @@ class UserForm extends Form {
 			$this->getRequiredFields()
 		);
 
+		// Number each page
+		$stepNumber = 1;
+		foreach($this->getSteps() as $step) {
+			$step->setStepNumber($stepNumber++);
+		}
+
 		if($controller->DisableCsrfSecurityToken) {
 			$this->disableSecurityToken();
 		}
@@ -45,24 +51,21 @@ class UserForm extends Form {
 	}
 
 	/**
-	 * @return int
+	 * @return bool
 	 */
 	public function getDisplayErrorMessagesAtTop() {
-		return $this->controller->DisplayErrorMessagesAtTop;
+		return (bool)$this->controller->DisplayErrorMessagesAtTop;
 	}
 
 	/**
-	 * @return array
+	 * Return the fieldlist, filtered to only contain steps
+	 *
+	 * @return ArrayList
 	 */
-	public function getNumberOfSteps() {
-		$steps = new ArrayList();
-		$numberOfSteps = $this->controller->Fields()->filter('ClassName', 'EditableFormStep')->Count();
-
-		for($i = 0; $i < $numberOfSteps; $i++) {
-			$steps->push($i);
-		}
-
-		return $steps;
+	public function getSteps() {
+		return $this->Fields()->filterByCallback(function($field) {
+			return $field instanceof UserFormsStepField;
+		});
 	}
 
 	/**
@@ -123,9 +126,7 @@ class UserForm extends Form {
 			->filter('Required', true)
 			->column('Name');
 		$required = new RequiredFields($requiredNames);
-		
 		$this->extend('updateRequiredFields', $required);
-
 		return $required;
 	}
 

@@ -38,4 +38,8 @@ class EditableDropdown extends EditableMultipleOptionField {
 		$this->doUpdateFormField($field);
 		return $field;
 	}
+
+	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
+		return "$(\"select[name='{$this->Name}']\")";
+	}
 }

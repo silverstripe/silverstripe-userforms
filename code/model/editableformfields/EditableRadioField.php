@@ -35,4 +35,10 @@ class EditableRadioField extends EditableMultipleOptionField {
 		$this->doUpdateFormField($field);
 		return $field;
 	}
+
+	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
+		// We only want to trigger on load once for the radio group - hence we focus on the first option only.
+		$first = $forOnLoad ? ':first' : '';
+		return "$(\"input[name='{$this->Name}']{$first}\")";
+	}
 }
