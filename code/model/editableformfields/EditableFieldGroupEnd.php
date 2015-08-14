@@ -29,9 +29,9 @@ class EditableFieldGroupEnd extends EditableFormField {
 		$group = $this->Group();
 		return _t(
 			'EditableFieldGroupEnd.FIELD_GROUP_END',
-			'End of {group}',
+			'{group} end',
 			array(
-				'group' => ($group && $group->exists() && $group->Title) ? $group->Title : 'group'
+				'group' => ($group && $group->exists()) ? $group->CMSTitle : 'Group'
 			)
 		);
 	}

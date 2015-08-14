@@ -71,8 +71,8 @@ class EditableFormHeading extends EditableFormField {
 			$field->setRightTitle(Convert::raw2xml($this->RightTitle));
 		}
 		// if this field has an extra class
-		if($field->ExtraClass) {
-			$field->addExtraClass($field->ExtraClass);
+		if($this->ExtraClass) {
+			$field->addExtraClass($this->ExtraClass);
 		}
 	}
 	

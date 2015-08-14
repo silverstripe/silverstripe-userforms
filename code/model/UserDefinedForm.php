@@ -170,15 +170,12 @@ SQL;
 			$config->addComponent($filter = new UserFormsGridFieldFilterHeader());
 			$config->addComponent(new GridFieldDataColumns());
 			$config->addComponent(new GridFieldEditButton());
-			$config->addComponent(new GridState_Component());
 			$config->addComponent(new GridFieldDeleteAction());
 			$config->addComponent(new GridFieldPageCount('toolbar-header-right'));
 			$config->addComponent($pagination = new GridFieldPaginator(25));
 			$config->addComponent(new GridFieldDetailForm());
 			$config->addComponent($export = new GridFieldExportButton());
 			$config->addComponent($print = new GridFieldPrintButton());
-
-			Requirements::javascript(USERFORMS_DIR . '/javascript/Gridfield.js');
 			
 			/**
 			 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
