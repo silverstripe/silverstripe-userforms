@@ -237,8 +237,7 @@ class EditableFormField extends DataObject {
 				new GridFieldButtonRow(),
 				new GridFieldToolbarHeader(),
 				new GridFieldAddNewInlineButton(),
-				new GridFieldDeleteAction(),
-				new GridState_Component()
+				new GridFieldDeleteAction()
 			);
 
 		$fields->addFieldsToTab('Root.DisplayRules', array(
@@ -470,6 +469,45 @@ class EditableFormField extends DataObject {
 		return Convert::raw2xml($this->Title);
 	}
 
+	/**
+	 * Find the numeric indicator (1.1.2) that represents it's nesting value
+	 *
+	 * Only useful for fields attached to a current page, and that contain other fields such as pages
+	 * or groups
+	 *
+	 * @return string
+	 */
+	public function getFieldNumber() {
+		// Check if exists
+		if(!$this->exists()) {
+			return null;
+		}
+		// Check parent
+		$form = $this->Parent();
+		if(!$form || !$form->exists() || !($fields = $form->Fields())) {
+			return null;
+		}
+		
+		$prior = 0; // Number of prior group at this level
+		$stack = array(); // Current stack of nested groups, where the top level = the page
+		foreach($fields->map('ID', 'ClassName') as $id => $className) {
+			if($className === 'EditableFormStep') {
+				$priorPage = empty($stack) ? $prior : $stack[0];
+				$stack = array($priorPage + 1);
+				$prior = 0;
+			} elseif($className === 'EditableFieldGroup') {
+				$stack[] = $prior + 1;
+				$prior = 0;
+			} elseif($className === 'EditableFieldGroupEnd') {
+				$prior = array_pop($stack);
+			}
+			if($id == $this->ID) {
+				return implode('.', $stack);
+			}
+		}
+		return null;
+	}
+
 	public function getCMSTitle() {
 		return $this->i18n_singular_name() . ' (' . $this->Title . ')';
 	}
@@ -560,8 +598,8 @@ class EditableFormField extends DataObject {
 		}
 		
 		// if this field has an extra class
-		if($field->ExtraClass) {
-			$field->addExtraClass($field->ExtraClass);
+		if($this->ExtraClass) {
+			$field->addExtraClass($this->ExtraClass);
 		}
 	}
 	

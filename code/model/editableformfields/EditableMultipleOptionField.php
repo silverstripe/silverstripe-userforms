@@ -56,8 +56,7 @@ class EditableMultipleOptionField extends EditableFormField {
 				$editableColumns,
 				new GridFieldButtonRow(),
 				new GridFieldAddNewInlineButton(),
-				new GridFieldDeleteAction(),
-				new GridState_Component()
+				new GridFieldDeleteAction()
 			);
 
 		$optionsGrid = GridField::create(

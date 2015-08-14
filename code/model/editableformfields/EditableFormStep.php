@@ -34,6 +34,7 @@ class EditableFormStep extends EditableFormField {
 	 */
 	public function getFormField() {
 		$field = UserFormsStepField::create()
+			->setName($this->Name)
 			->setTitle($this->EscapedTitle);
 		$this->doUpdateFormField($field);
 		return $field;
@@ -41,8 +42,8 @@ class EditableFormStep extends EditableFormField {
 
 	protected function updateFormField($field) {
 		// if this field has an extra class
-		if($field->ExtraClass) {
-			$field->addExtraClass($field->ExtraClass);
+		if($this->ExtraClass) {
+			$field->addExtraClass($this->ExtraClass);
 		}
 	}
 
@@ -61,10 +62,16 @@ class EditableFormStep extends EditableFormField {
 	}
 
 	public function getCMSTitle() {
-		$title = $this->i18n_singular_name();
-		if($this->Title) {
-			$title .= ' (' . $this->Title . ')';
-		}
-		return $title;
+		$title = $this->getFieldNumber()
+			?: $this->Title
+			?: '';
+
+		return _t(
+			'EditableFormStep.STEP_TITLE',
+			'Page {page}',
+			array(
+				'page' => $title
+			)
+		);
 	}
 }

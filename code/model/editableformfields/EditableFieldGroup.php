@@ -31,11 +31,15 @@ class EditableFieldGroup extends EditableFormField {
 	}
 
 	public function getCMSTitle() {
+		$title = $this->getFieldNumber()
+			?: $this->Title
+			?: 'group';
+		
 		return _t(
 			'EditableFieldGroupEnd.FIELD_GROUP_START',
-			'Start of {group}',
+			'Group {group}',
 			array(
-				'group' => $this->Title ?: 'group'
+				'group' => $title
 			)
 		);
 	}
@@ -63,8 +67,8 @@ class EditableFieldGroup extends EditableFormField {
 		}
 		
 		// if this field has an extra class
-		if($field->ExtraClass) {
-			$field->addExtraClass($field->ExtraClass);
+		if($this->ExtraClass) {
+			$field->addExtraClass($this->ExtraClass);
 		}
 	}
 

@@ -1,28 +1,65 @@
 /**
  * Styles for cms
  */
-.cms .ss-gridfield > div.ss-gridfield-buttonrow-before {
+.cms .uf-field-editor > div.ss-gridfield-buttonrow-before {
   margin-bottom: 10px;
   overflow: auto;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'], .cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep']:hover {
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item:hover {
+  background: white;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item td {
+  border-right-width: 0;
+  border-bottom: 1px solid #EEE;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item td:last-child {
+  border-right-width: 1px;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup:hover {
+  background: #f2f9fd;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup td {
+  border-bottom: 1px solid #CCC;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .col-reorder, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .handle {
+  background: #BEE0F8;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup.inFieldGroup-level-2 .col-reorder, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup.inFieldGroup-level-2 .handle {
+  background: #99CEF4;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup.inFieldGroup-level-3 .col-reorder, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup.inFieldGroup-level-3 .handle {
+  background: #89BEF4;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'], .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep']:hover {
   background: #dae2e7;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'] label {
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFormStep'] label {
   font-weight: bold;
-  color: #444;
+  color: black;
   font-size: 1.1em;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup'], .cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup']:hover {
-  background: #E7EFF4;
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroup'] td {
+  border-top: 1px inset #c9e6f9;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class^='EditableFieldGroup'] label {
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroup'].inFieldGroup-level-2 td {
+  border-top-color: #a8d7f5;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroup'].inFieldGroup-level-3 td {
+  border-top-color: #94cef3;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroup'] label {
   font-weight: bold;
+  color: #444;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'] .col-Title input {
-  display: none;
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'] td {
+  border-bottom: 1px outset #c9e6f9;
 }
-.cms table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .col-reorder,
-.cms table.ss-gridfield-table .ss-gridfield-item.inFieldGroup .handle {
-  background: #E7EFF4;
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'].inFieldGroup-level-2 td {
+  border-bottom-color: #a8d7f5;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'].inFieldGroup-level-3 td {
+  border-bottom-color: #94cef3;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'] label {
+  color: #777;
 }

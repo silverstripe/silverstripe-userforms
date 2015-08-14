@@ -32,6 +32,8 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 * @return GridField
 	 */
 	public function getFieldEditorGrid() {
+		Requirements::javascript(USERFORMS_DIR . '/javascript/FieldEditor.js');
+			
 		$fields = $this->owner->Fields();
 
 		$this->createInitialFormStep(true);
@@ -66,7 +68,6 @@ class UserFormFieldEditorExtension extends DataExtension {
 				new GridFieldDeleteAction(),
 				new GridFieldToolbarHeader(),
 				new GridFieldOrderableRows('Sort'),
-				new GridState_Component(),
 				new GridFieldDetailForm()
 			);
 
@@ -75,7 +76,7 @@ class UserFormFieldEditorExtension extends DataExtension {
 			_t('UserDefinedForm.FIELDS', 'Fields'),
 			$fields,
 			$config
-		);
+		)->addExtraClass('uf-field-editor');
 
 		return $fieldEditor;
 	}
