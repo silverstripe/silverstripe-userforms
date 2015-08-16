@@ -7,10 +7,9 @@
 			</div>
 		</fieldset>
 	<% end_if %>
-	
+
 	<% loop $Children %>
 		$FieldHolder
 	<% end_loop %>
 
-	<% include UserFormStepNav %>
 </fieldset>

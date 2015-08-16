@@ -44,10 +44,10 @@ jQuery(function ($) {
 		this.errorContainer = new ErrorContainer(this.$el.children('.error-container'));
 
 		// Listen for events triggered my form steps.
-		this.$el.on('userform.step.prev', function (e) {
+		this.$el.on('userform.action.prev', function (e) {
 			self.prevStep();
 		});
-		this.$el.on('userform.step.next', function (e) {
+		this.$el.on('userform.action.next', function (e) {
 			self.nextStep();
 		});
 
@@ -88,12 +88,14 @@ jQuery(function ($) {
 		submitHandler: function (form, e) {
 			var isValid = true;
 
-			// Validate the final step.
-			userform.steps[userform.steps.length - 1].valid = $(form).valid();
+			// validate the current step
+			if(userform.currentStep) {
+				userform.currentStep.valid = $(form).valid();
+			}
 
 			// Check for invalid previous steps.
 			$.each(userform.steps, function (i, step) {
-				if (!step.valid) {
+				if (!step.valid && !step.conditionallyHidden()) {
 					isValid = false;
 					userform.errorContainer.addStepLink(step);
 				}
@@ -154,14 +156,28 @@ jQuery(function ($) {
 	/**
 	 * @func UserForm.jumpToStep
 	 * @param {number} stepNumber
+	 * @param {boolean} [direction] - Defaults to forward (true).
 	 * @desc Jumps to a specific form step.
 	 */
-	UserForm.prototype.jumpToStep = function (stepNumber) {
+	UserForm.prototype.jumpToStep = function (stepNumber, direction) {
 		var targetStep = this.steps[stepNumber],
-			isValid = false;
+			isValid = false,
+			forward = direction === void 0 ? true : direction;
 
 		// Make sure the target step exists.
 		if (targetStep === void 0) {
+			return;
+		}
+
+		// Make sure the step we're trying to set as current is not
+		// hidden by custom display rules. If it is then jump to the next step.
+		if (targetStep.conditionallyHidden()) {
+			if (forward) {
+				this.jumpToStep(stepNumber + 1);
+			} else {
+				this.jumpToStep(stepNumber - 1);
+			}
+
 			return;
 		}
 
@@ -172,7 +188,7 @@ jQuery(function ($) {
 		isValid = this.$el.valid();
 
 		// Set the 'valid' property on the current step.
-		this.steps[stepNumber - 1 >= 0 ? stepNumber - 1 : 0].valid = isValid;
+		this.currentStep.valid = isValid;
 
 		// Users can navigate to step's they've already viewed even if the current step is invalid.
 		if (isValid === false && targetStep.viewed === false) {
@@ -182,7 +198,7 @@ jQuery(function ($) {
 		this.currentStep.hide();
 		this.setCurrentStep(targetStep);
 
-		this.$el.trigger('userform.form.changestep', [stepNumber]);
+		this.$el.trigger('userform.form.changestep', [targetStep.id]);
 	};
 
 	/**
@@ -190,7 +206,7 @@ jQuery(function ($) {
 	 * @desc Advances the form to the next step.
 	 */
 	UserForm.prototype.nextStep = function () {
-		this.jumpToStep(this.steps.indexOf(this.currentStep) + 1);
+		this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
 	};
 
 	/**
@@ -198,7 +214,7 @@ jQuery(function ($) {
 	 * @desc Goes back one step (not bound to browser history).
 	 */
 	UserForm.prototype.prevStep = function () {
-		this.jumpToStep(this.steps.indexOf(this.currentStep) - 1);
+		this.jumpToStep(this.steps.indexOf(this.currentStep) - 1, false);
 	};
 
 	/**
@@ -349,7 +365,10 @@ jQuery(function ($) {
 		var self = this;
 
 		this.$el = element instanceof jQuery ? element : $(element);
-
+		
+		// Find button for this step
+		this.$elButton = $(".step-button-wrapper[data-for='" + this.$el.prop('id') + "']");
+		
 		// Has the step been viewed by the user?
 		this.viewed = false;
 
@@ -361,16 +380,6 @@ jQuery(function ($) {
 		this.id = null;
 
 		this.hide();
-
-		// Bind the step navigation event listeners.
-		this.$el.find('.step-button-prev').on('click', function (e) {
-			e.preventDefault();
-			self.$el.trigger('userform.step.prev');
-		});
-		this.$el.find('.step-button-next').on('click', function (e) {
-			e.preventDefault();
-			self.$el.trigger('userform.step.next');
-		});
 
 		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
 			this.errorContainer = new ErrorContainer(this.$el.find('.error-container'));
@@ -394,8 +403,28 @@ jQuery(function ($) {
 			});
 		}
 
+		// Ensure that page visibilty updates the step navigation
+		this
+			.$elButton
+			.on('userform.field.hide userform.field.show', function(){
+				userform.$el.trigger('userform.form.conditionalstep');
+			});
+
 		return this;
 	}
+	
+	/**
+	 * Determine if this step is conditionally disabled
+	 * 
+	 * @returns {Boolean}
+	 */
+	FormStep.prototype.conditionallyHidden = function(){
+		// Because the element itself could be visible but 0 height, so check visibility of button
+		return ! this
+			.$elButton
+			.find('button')
+			.is(':visible');
+	};
 
 	/**
 	 * @func ProgressBar
@@ -420,8 +449,26 @@ jQuery(function ($) {
 		});
 
 		// Update the progress bar when 'prev' and 'next' buttons are clicked.
-		userform.$el.on('userform.form.changestep', function (e, newStep) {
-			self.update(newStep + 1);
+		userform.$el.on('userform.form.changestep', function (e, stepID) {
+			self.update(stepID);
+		});
+
+		// Listen for steps being conditionally shown / hidden by display rules.
+		// We need to update step related UI like the number of step buttons
+		// and any text that shows the total number of steps.
+		userform.$el.on('userform.form.conditionalstep', function () {
+			// Update the step numbers on the buttons.
+			var $visibleButtons = self.$buttons.filter(':visible');
+
+			$visibleButtons.each(function (i, button) {
+				$(button).text(i + 1);
+			});
+
+			// Update the actual progress bar.
+			self.$el.find('.progress-bar').attr('aria-valuemax', $visibleButtons.length);
+
+			// Update any text that uses the total number of steps.
+			self.$el.find('.total-step-number').text($visibleButtons.length);
 		});
 
 		// Spaces out the steps below progress bar evenly
@@ -440,27 +487,39 @@ jQuery(function ($) {
 			}
 		});
 
-		this.update(1);
+		this.update(0);
 
 		return this;
 	}
 
 	/**
 	 * @func ProgressBar.update
-	 * @param {number} newStep
+	 * @param {number} stepID - Zero based index of the new step.
 	 * @desc Update the progress element to show a new step.
 	 */
-	ProgressBar.prototype.update = function (newStep) {
-		var $newStepElement = $($('.form-step')[newStep - 1]);
+	ProgressBar.prototype.update = function (stepID) {
+		var $newStepElement = $($('.form-step')[stepID]),
+			stepNumber = 0;
+
+		// Set the current step number.
+		this.$buttons.each(function (i, button) {
+			if (i > stepID) {
+				return false; // break the loop
+			}
+
+			if ($(button).is(':visible')) {
+				stepNumber += 1;
+			}
+		});
 
 		// Update elements that contain the current step number.
 		this.$el.find('.current-step-number').each(function (i, element) {
-			$(element).text(newStep);
+			$(element).text(stepNumber);
 		});
 
 		// Update aria attributes.
 		this.$el.find('[aria-valuenow]').each(function (i, element) {
-			$(element).attr('aria-valuenow', newStep);
+			$(element).attr('aria-valuenow', stepNumber);
 		});
 
 		// Update the CSS classes on step buttons.
@@ -468,7 +527,7 @@ jQuery(function ($) {
 			var $element = $(element),
 				$item = $element.parent();
 
-			if (parseInt($element.text(), 10) === newStep) {
+			if (parseInt($element.text(), 10) === stepNumber && $element.is(':visible')) {
 				$item.addClass('current viewed');
 				$element.removeAttr('disabled');
 
@@ -482,7 +541,72 @@ jQuery(function ($) {
 		this.$el.find('.progress-title').text($newStepElement.data('title'));
 
 		// Update the width of the progress bar.
-		this.$el.find('.progress-bar').width((newStep - 1) / (this.$buttons.length - 1) * 100 + '%');
+		this.$el.find('.progress-bar').width(stepID / (this.$buttons.length - 1) * 100 + '%');
+	};
+
+	/**
+	 * @func FormActions
+	 * @constructor
+	 * @param {object} element
+	 * @desc Creates the navigation and actions (Prev, Next, Submit buttons).
+	 */
+	function FormActions (element) {
+		var self = this;
+
+		this.$el = element instanceof jQuery ? element : $(element);
+
+		// Bind the step navigation event listeners.
+		this.$el.find('.step-button-prev').on('click', function (e) {
+			e.preventDefault();
+			self.$el.trigger('userform.action.prev');
+		});
+		this.$el.find('.step-button-next').on('click', function (e) {
+			e.preventDefault();
+			self.$el.trigger('userform.action.next');
+		});
+
+		// Listen for changes to the current form step, or conditional pages,
+		// so we can show hide buttons appropriatly.
+		userform.$el.on('userform.form.changestep userform.form.conditionalstep', function () {
+			self.update();
+		});
+
+		this.update();
+
+		return this;
+	}
+
+	/**
+	 * @func FormAcrions.update
+	 * @param {number} stepID - Zero based ID of the current step.
+	 * @desc Updates the form actions element to reflect the current state of the page.
+	 */
+	FormActions.prototype.update = function () {
+		var numberOfSteps = userform.steps.length,
+			stepID = userform.currentStep.id,
+			i, lastStep;
+
+		// Update the "Prev" button.
+		this.$el.find('.step-button-prev')[stepID === 0 ? 'hide' : 'show']();
+		
+		// Find last step, skipping hidden ones
+		for(i = numberOfSteps - 1; i >= 0; i--) {
+			lastStep = userform.steps[i];
+			
+			// Skip if step is hidden
+			if(lastStep.conditionallyHidden()) {
+				continue;
+			}
+
+			// Update the "Next" button.
+			this.$el.find('.step-button-next')[stepID >= i ? 'hide' : 'show']();
+
+			// Update the "Actions".
+			this.$el.find('.Actions')[stepID >= i ? 'show' : 'hide']();
+			
+			// Stop processing last step
+			break;
+		}
 	};
 
 	/**
@@ -491,6 +615,7 @@ jQuery(function ($) {
 	 */
 	function main() {
 		var progressBar = null,
+			formActions = null,
 			$userform = $('.userform');
 
 		CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
@@ -523,7 +648,6 @@ jQuery(function ($) {
 		$.extend(ErrorContainer.prototype, commonMixin);
 
 		userform = new UserForm($userform);
-		progressBar = new ProgressBar($('#userform-progress'));
 
 		// Conditionally hide field labels and use HTML5 placeholder instead.
 		if (CONSTANTS.HIDE_FIELD_LABELS) {
@@ -543,6 +667,10 @@ jQuery(function ($) {
 		});
 
 		userform.setCurrentStep(userform.steps[0]);
+		
+		// Initialise actions and progressbar
+		progressBar = new ProgressBar($('#userform-progress'));
+		formActions = new FormActions($('#step-navigation'));
 
 		// Hide the form-wide actions on multi-step forms.
 		// Because JavaScript is enabled we'll use the actions contained

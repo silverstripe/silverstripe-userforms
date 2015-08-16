@@ -395,7 +395,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 				// Is this Field Show by Default
 				if(!$field->ShowOnLoad) {
-					$default .= "{$holderSelector}.hide();\n";
+					$default .= "{$holderSelector}.hide().trigger('userform.field.hide');\n";
 				}
 
 				// Check for field dependencies / default
@@ -503,16 +503,26 @@ class UserDefinedForm_Controller extends Page_Controller {
 				$actions = array();
 
 				foreach($values as $rule) {
-					// Register conditional behaviour with an element, so it can be triggered from many places.
-					$logic[] = sprintf(
-						'if(%s) { %s.%s(); } else { %2$s.%s(); }',
-						$rule['expression'], 
-						$rule['holder_selector'],
-						$rule['view'], 
-						$rule['opposite']
-					);
-
+					// Assign action
 					$actions[$rule['action']] = $rule['action'];
+
+					// Assign behaviour
+					$expression = $rule['expression'];
+					$holder = $rule['holder_selector'];
+					$view = $rule['view']; // hide or show
+					$opposite = $rule['opposite'];
+					// Generated javascript for triggering visibility
+					$logic[] = <<<"EOS"
+if({$expression}) {
+	{$holder}
+		.{$view}()
+		.trigger('userform.field.{$view}');
+} else {
+	{$holder}
+		.{$opposite}()
+		.trigger('userform.field.{$opposite}');
+}
+EOS;
 				}
 
 				$logic = implode("\n", $logic);
