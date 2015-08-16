@@ -1,9 +1,17 @@
 <?php
+
+use SilverStripe\Forms\SegmentField;
+use SilverStripe\Forms\SegmentFieldModifier\IDSegmentFieldModifier;
+use SilverStripe\Forms\SegmentFieldModifier\SlugSegmentFieldModifier;
+
 /**
- * Represents the base class of a editable form field 
- * object like {@link EditableTextField}. 
+ * Represents the base class of a editable form field
+ * object like {@link EditableTextField}.
  *
  * @package userforms
+ *
+ * @property string Name
+ *
  * @method DataList DisplayRules() List of EditableCustomRule objects
  */
 class EditableFormField extends DataObject {
@@ -39,7 +47,7 @@ class EditableFormField extends DataObject {
 	 * @var string
 	 */
 	private static $default_sort = '"Sort"';
-	
+
 	/**
 	 * A list of CSS classes that can be added
 	 *
@@ -111,14 +119,14 @@ class EditableFormField extends DataObject {
 	 * Set the visibility of an individual form field
 	 *
 	 * @param bool
-	 */ 
+	 */
 	public function setReadonly($readonly = true) {
 		$this->readonly = $readonly;
 	}
 
 	/**
-	 * Returns whether this field is readonly 
-	 * 
+	 * Returns whether this field is readonly
+	 *
 	 * @return bool
 	 */
 	private function isReadonly() {
@@ -154,7 +162,11 @@ class EditableFormField extends DataObject {
 				),
 				TextField::create('Title'),
 				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
-				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title'))
+				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
+				SegmentField::create('Name')->setModifiers(array(
+					UnderscoreSegmentFieldModifier::create()->setDefault('Field'),
+					DisambiguationSegmentFieldModifier::create(),
+				))->setPreview($this->Name)
 			)
 		);
 
@@ -281,20 +293,20 @@ class EditableFormField extends DataObject {
 
 		// Set a field name.
 		if(!$this->Name) {
-			$this->Name = $this->RecordClassName . $this->ID;
+			$this->Name = get_class($this) . '_' . $this->ID;
 			$this->write();
 		}
 	}
-	
+
 	/**
 	 * Flag indicating that this field will set its own error message via data-msg='' attributes
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function getSetsOwnError() {
 		return false;
 	}
-	
+
 	/**
 	 * Return whether a user can delete this form field
 	 * based on whether they can edit the page
@@ -308,7 +320,7 @@ class EditableFormField extends DataObject {
 
 		return true;
 	}
-	
+
 	/**
 	 * Return whether a user can edit this form field
 	 * based on whether they can edit the page
@@ -322,10 +334,10 @@ class EditableFormField extends DataObject {
 
 		return true;
 	}
-	
+
 	/**
 	 * Publish this Form Field to the live site
-	 * 
+	 *
 	 * Wrapper for the {@link Versioned} publish function
 	 */
 	public function doPublish($fromStage, $toStage, $createNewVersion = false) {
@@ -336,7 +348,7 @@ class EditableFormField extends DataObject {
 			$rule->doPublish($fromStage, $toStage, $createNewVersion);
 		}
 	}
-	
+
 	/**
 	 * Delete this form from a given stage
 	 *
@@ -350,7 +362,7 @@ class EditableFormField extends DataObject {
 			$rule->deleteFromStage($stage);
 		}
 	}
-	
+
 	/**
 	 * checks wether record is new, copied from Sitetree
 	 */
@@ -375,7 +387,7 @@ class EditableFormField extends DataObject {
 
 		return ($stageVersion && $stageVersion != $liveVersion);
 	}
-	
+
 	/**
 	 * @deprecated since version 4.0
 	 */
@@ -383,7 +395,7 @@ class EditableFormField extends DataObject {
 		Deprecation::notice('4.0', 'getSettings is deprecated');
 		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
 	}
-	
+
 	/**
 	 * @deprecated since version 4.0
 	 */
@@ -391,7 +403,7 @@ class EditableFormField extends DataObject {
 		Deprecation::notice('4.0', 'setSettings is deprecated');
 		$this->CustomSettings = serialize($settings);
 	}
-	
+
 	/**
 	 * @deprecated since version 4.0
 	 */
@@ -399,13 +411,13 @@ class EditableFormField extends DataObject {
 		Deprecation::notice('4.0', "setSetting({$key}) is deprecated");
 		$settings = $this->getSettings();
 		$settings[$key] = $value;
-		
+
 		$this->setSettings($settings);
 	}
 
 	/**
 	 * Set the allowed css classes for the extraClass custom setting
-	 * 
+	 *
 	 * @param array The permissible CSS classes to add
 	 */
 	public function setAllowedCss(array $allowed) {
@@ -430,7 +442,7 @@ class EditableFormField extends DataObject {
 		}
 		return '';
 	}
-	
+
 	/**
 	 * Get the path to the icon for this field type, relative to the site root.
 	 *
@@ -439,7 +451,7 @@ class EditableFormField extends DataObject {
 	public function getIcon() {
 		return USERFORMS_DIR . '/images/' . strtolower($this->class) . '.png';
 	}
-	
+
 	/**
 	 * Return whether or not this field has addable options
 	 * such as a dropdown field or radio set
@@ -449,11 +461,11 @@ class EditableFormField extends DataObject {
 	public function getHasAddableOptions() {
 		return false;
 	}
-	
+
 	/**
 	 * Return whether or not this field needs to show the extra
 	 * options dropdown list
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function showExtraOptions() {
@@ -519,21 +531,21 @@ class EditableFormField extends DataObject {
 		Deprecation::notice('4.0', "getFieldName({$field}) is deprecated");
 		return ($field) ? "Fields[".$this->ID."][".$field."]" : "Fields[".$this->ID."]";
 	}
-	
+
 	/**
 	 * @deprecated since version 4.0
 	 */
 	public function getSettingName($field) {
 		Deprecation::notice('4.0', "getSettingName({$field}) is deprecated");
 		$name = $this->getFieldName('CustomSettings');
-		
+
 		return $name . '[' . $field .']';
 	}
-	
+
 	/**
-	 * Append custom validation fields to the default 'Validation' 
+	 * Append custom validation fields to the default 'Validation'
 	 * section in the editable options view
-	 * 
+	 *
 	 * @return FieldList
 	 */
 	public function getFieldValidationOptions() {
@@ -543,12 +555,12 @@ class EditableFormField extends DataObject {
 		);
 
         $this->extend('updateFieldValidationOptions', $fields);
-		
+
 		return $fields;
 	}
-	
+
 	/**
-	 * Return a FormField to appear on the front end. Implement on 
+	 * Return a FormField to appear on the front end. Implement on
 	 * your subclass.
 	 *
 	 * @return FormField
@@ -596,13 +608,13 @@ class EditableFormField extends DataObject {
 				$field->setTitle($title);
 			}
 		}
-		
+
 		// if this field has an extra class
 		if($this->ExtraClass) {
 			$field->addExtraClass($this->ExtraClass);
 		}
 	}
-	
+
 	/**
 	 * Return the instance of the submission field class
 	 *
@@ -611,8 +623,8 @@ class EditableFormField extends DataObject {
 	public function getSubmittedFormField() {
 		return new SubmittedFormField();
 	}
-	
-	
+
+
 	/**
 	 * Show this form field (and its related value) in the reports and in emails.
 	 *
@@ -631,10 +643,10 @@ class EditableFormField extends DataObject {
 	public function getErrorMessage() {
 		$title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
 		$standard = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
-		
+
 		// only use CustomErrorMessage if it has a non empty value
 		$errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
-		
+
 		return DBField::create_field('Varchar', $errorMessage);
 	}
 
@@ -655,7 +667,7 @@ class EditableFormField extends DataObject {
 			}
 
 			if(
-				!isset($data[$this->Name]) || 
+				!isset($data[$this->Name]) ||
 				!$data[$this->Name] ||
 				!$formField->validate($form->getValidator())
 			) {
@@ -678,7 +690,7 @@ class EditableFormField extends DataObject {
 			$this->ShowOnLoad = $data['ShowOnLoad'] === '' || ($data['ShowOnLoad'] && $data['ShowOnLoad'] !== 'Hide');
 			unset($data['ShowOnLoad']);
 		}
-		
+
 		// Migrate all other settings
 		foreach($data as $key => $value) {
 			if($this->hasField($key)) {

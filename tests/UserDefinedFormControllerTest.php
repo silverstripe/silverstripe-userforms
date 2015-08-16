@@ -15,10 +15,13 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		
 		$this->autoFollowRedirection = false;
 		$this->clearEmails();
-		
+
 		// load the form
-		$this->get($form->URLSegment);	
-		$response = $this->submitForm('UserForm_Form', null, array('basic-text-name' => 'Basic Value'));
+		$this->get($form->URLSegment);
+
+		$field = $this->objFromFixture('EditableTextField', 'basic-text');
+
+		$response = $this->submitForm('UserForm_Form', null, array($field->Name => 'Basic Value'));
 
 		// should have a submitted form field now
 		$submitted = DataObject::get('SubmittedFormField', "\"Name\" = 'basic-text-name'");
