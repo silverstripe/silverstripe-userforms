@@ -177,15 +177,14 @@ to determine the size and the number of rows in a text field.
 
 To create a multi-page form, simply click the 'Add Page Break' button. 
 This will create a page break field which is used to create a new page in the form. You can drag and drop this page break to separate form fields at the desired location.
+
 ![Multi-page forms](_images/multi-page-forms.png)
 
 ## Adding fieldgroups 
 
 Creating fieldgroups is as simple as clicking the 'Add fieldgroup' button, this create two 'markers' which act as the beginning/end for the fieldgroup. Any fields place between these two markers will be automatically included within the fieldgroup.
-<!---
-TODO:
-Include screenshots of fieldgroups in action
--->
+
+![Adding fieldgroups](_images/fieldgroups.png)
 
 ## Viewing form submissions
 

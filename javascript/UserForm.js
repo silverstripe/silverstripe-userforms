@@ -431,14 +431,13 @@ jQuery(function ($) {
 				buttonOffset = -1 * ($button.innerWidth() / 2);
 
 			$button.css({left: leftPercent, marginLeft: buttonOffset});
-
+			
 			// First and last buttons are kept within userform-progress container
 			if (index === self.$jsAlign.length - 1) {
 				$button.css({marginLeft: buttonOffset * 2});
 			} else if (index === 0) {
 				$button.css({marginLeft: 0});
 			}
-
 		});
 
 		this.update(1);

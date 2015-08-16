@@ -24,16 +24,15 @@
 		display: inline-block;
 		list-style-type: none;
 
-		&.current {
-			.step-button-jump {
-				background: #666;
-			}
+		&.viewed .step-button-jump {
+			opacity: 1;
 		}
 	}
 
 	.step-button-jump {
 		position: absolute;
 		top: 0;
+		opacity: .7;
 	}
 }
 
@@ -52,4 +51,19 @@
 	clear: both;
 	width: 100%;
 	max-width: 100%;
+}
+
+.userformsgroup {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 8px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+
+	legend {
+		padding-left: 4px;
+		padding-right: 4px;
+		border: 0;
+		width: auto;
+	}
 }
