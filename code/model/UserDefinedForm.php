@@ -554,41 +554,15 @@ JS
 
 	/**
 	 * Process the form that is submitted through the site
-	 * 
+	 *
+	 * {@see UserForm::validate()} for validation step prior to processing
+	 *
 	 * @param array $data
 	 * @param Form $form
 	 *
 	 * @return Redirection
 	 */
 	public function process($data, $form) {
-		Session::set("FormInfo.{$form->FormName()}.data",$data);
-		Session::clear("FormInfo.{$form->FormName()}.errors");
-
-		foreach($this->Fields() as $field) {
-			$messages[$field->Name] = $field->getErrorMessage()->HTML();
-			$formField = $field->getFormField();
-
-			if($field->Required && $field->DisplayRules()->Count() == 0) {
-				if(isset($data[$field->Name])) {
-					$formField->setValue($data[$field->Name]);
-				}
-
-				if(
-					!isset($data[$field->Name]) ||
-					!$data[$field->Name] ||
-					!$formField->validate($form->getValidator())
-				) {
-					$form->addErrorMessage($field->Name, $field->getErrorMessage(), 'bad');
-				}
-			}
-		}
-
-		if(Session::get("FormInfo.{$form->FormName()}.errors")){
-			Controller::curr()->redirectBack();
-
-			return;
-		}
-
 		$submittedForm = Object::create('SubmittedForm');
 		$submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
 		$submittedForm->ParentID = $this->ID;
@@ -598,9 +572,7 @@ JS
 			$submittedForm->write();
 		}
 
-		$values = array();
 		$attachments = array();
-
 		$submittedFields = new ArrayList();
 
 		foreach($this->Fields() as $field) {
