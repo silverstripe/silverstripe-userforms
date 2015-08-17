@@ -29,4 +29,15 @@ class UserFormsFieldList extends FieldList implements UserFormsFieldContainer {
 		return $this;
 	}
 
+	/**
+	 * Remove all empty steps
+	 */
+	public function clearEmptySteps() {
+		foreach($this as $field) {
+			if($field instanceof UserFormsStepField && count($field->getChildren()) === 0) {
+				$this->remove($field);
+			}
+		}
+	}
+
 }

@@ -83,6 +83,7 @@ class UserForm extends Form {
 		foreach ($this->controller->Fields() as $field) {
 			$target = $target->processNext($field);
 		}
+		$fields->clearEmptySteps();
 		$this->extend('updateFormFields', $fields);
 		return $fields;
 	}
