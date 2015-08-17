@@ -100,8 +100,8 @@ en:
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
   EditableRadioField:
-    PLURALNAME: 'Radio fields'
-    SINGULARNAME: 'Radio field'
+    PLURALNAME: 'Radio Groups'
+    SINGULARNAME: 'Radio Group'
   EditableTextField:
     NUMBERROWS: 'Number of rows'
     PLURALNAME: 'Text Fields'
