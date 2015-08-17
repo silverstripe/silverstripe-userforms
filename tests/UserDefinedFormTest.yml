@@ -7,6 +7,12 @@ EditableFormStep:
     Title: 'Step 1'
   form5step1:
     Title: 'Step 1'
+  form6step1:
+    Title: 'Step 1'
+  form6step2:
+    Title: 'Step 2'
+  form6step3:
+    Title: 'Step 2'
 
 EditableOption:
   option-1:
@@ -83,6 +89,12 @@ EditableTextField:
     Title: Required Text Field
     CustomErrorMessage: Custom Error Message
     Required: true
+    
+  field-1:
+    Name: Field1
+
+  field-2:
+    Name: Field2
     
 EditableDropdown:
   basic-dropdown:
@@ -215,3 +227,7 @@ UserDefinedForm:
     Title: 'Page with filtered recipients'
     Fields: =>EditableFormStep.form5step1,=>EditableCheckboxGroupField.checkbox-group, =>EditableTextField.your-name-field, =>EditableTextField.street-field, =>EditableTextField.city-field
     EmailRecipients: =>UserDefinedForm_EmailRecipient.unfiltered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-1, =>UserDefinedForm_EmailRecipient.filtered-recipient-2
+
+  empty-page:
+    Title: 'Page with empty step'
+    Fields: =>EditableFormStep.form6step1, =>EditableTextField.field-1, =>EditableFormStep.form6step2, =>EditableTextField.field-2, =>EditableFormStep.form6step3
