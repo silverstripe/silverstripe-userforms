@@ -164,7 +164,7 @@ class EditableFormField extends DataObject {
 				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
 				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
 				SegmentField::create('Name')->setModifiers(array(
-					UnderscoreSegmentFieldModifier::create()->setDefault('Field'),
+					UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
 					DisambiguationSegmentFieldModifier::create(),
 				))->setPreview($this->Name)
 			)
@@ -276,6 +276,10 @@ class EditableFormField extends DataObject {
 	 */
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
+
+		if($this->Name === 'Field') {
+			throw new ValidationException('Field name cannot be "Field"');
+		}
 
 		if(!$this->Sort && $this->ParentID) {
 			$parentID = $this->ParentID;
@@ -772,6 +776,7 @@ class EditableFormField extends DataObject {
 			$editableFieldClasses[$class] = $singleton->i18n_singular_name();
 		}
 
+		asort($editableFieldClasses);
 		return $editableFieldClasses;
 	}
 }
