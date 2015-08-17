@@ -675,7 +675,7 @@ class EditableFormField extends DataObject {
 				!$data[$this->Name] ||
 				!$formField->validate($form->getValidator())
 			) {
-				$form->addErrorMessage($this->Name, $this->getErrorMessage(), 'bad');
+				$form->addErrorMessage($this->Name, $this->getErrorMessage()->HTML(), 'bad', false);
 			}
 		}
 
