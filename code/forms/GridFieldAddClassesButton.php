@@ -3,15 +3,11 @@
 /**
  * A button which allows objects to be created with a specified classname(s)
  */
-class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider, GridField_URLHandler {
+class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider, GridField_ActionProvider {
 
-	private static $allowed_actions = array(
-		'handleAdd'
-	);
-	
 	/**
 	 * Name of fragment to insert into
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $targetFragment;
@@ -127,7 +123,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
 	 */
 	public function getClassesCreate($grid) {
 		// Get explicit or fallback class list
-		$classes = $this->modelClasses;
+		$classes = $this->getClasses();
 		if(empty($classes) && $grid) {
 			$classes = array($grid->getModelClass());
 		}
@@ -149,7 +145,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
 		}
 		$this->modelClasses = $classes;
 	}
-
+	
 	public function getHTMLFragments($grid) {
 		// Check create permission
 		$singleton = singleton($grid->getModelClass());
@@ -165,45 +161,59 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
 			$buttonName = _t('GridField.Add', 'Add {name}', array('name' => $objectName));
 		}
 
-		$data = new ArrayData(array(
-			'Title' => $this->getButtonName(),
-			'ButtonClass' => $this->getButtonClass(),
-			'Link' => Controller::join_links($grid->Link(), $this->getAction())
-		));
+		$addAction = new GridField_FormAction(
+			$grid,
+			$this->getAction(),
+			$buttonName,
+			$this->getAction(),
+			array()
+		);
+		$addAction->setAttribute('data-icon', 'add');
+
+		if($this->getButtonClass()) {
+			$addAction->addExtraClass($this->getButtonClass());
+		}
 
 		return array(
-			$this->getFragment() => $data->renderWith(__CLASS__)
+			$this->targetFragment => $addAction->forTemplate()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getActions($gridField) {
+		return array(
+			$this->getAction()
 		);
 	}
 
 	/**
 	 * Get the action suburl for this component
 	 *
-	 * @return type
+	 * @return string
 	 */
 	protected function getAction() {
-		$classes = implode('-', $this->getClasses());
-		return Controller::join_links('add-classes', $classes);
+		return 'add-classes-' . strtolower(implode('-', $this->getClasses()));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getURLHandlers($grid) {
-		return array(
-			$this->getAction() => 'handleAdd'
-		);
+	public function handleAction(GridField $gridField, $actionName, $arguments, $data) {
+		switch(strtolower($actionName)) {
+			case $this->getAction():
+				return $this->handleAdd($gridField);
+			default:
+				return null;
+		}
 	}
 
 	/**
 	 * Handles adding a new instance of a selected class.
 	 *
 	 * @param GridField $grid
-	 * @param SS_HTTPRequest $request
+	 * @return null
 	 */
-	public function handleAdd($grid, $request) {
+	public function handleAdd($grid) {
 		$classes = $this->getClassesCreate($grid);
-
 		if(empty($classes)) {
 			throw new SS_HTTPResponse_Exception(400);
 		}
@@ -216,10 +226,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
 			$list->add($item);
 		}
 
-		// Return directly to the gridfield again
-		return $grid
-			->getForm()
-			->getController()
-			->redirectBack();
+		// Should trigger a simple reload
+		return null;
 	}
 }

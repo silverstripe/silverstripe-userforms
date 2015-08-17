@@ -1,10 +1,6 @@
 /**
  * Styles for cms
  */
-.cms .uf-field-editor > div.ss-gridfield-buttonrow-before {
-  margin-bottom: 10px;
-  overflow: auto;
-}
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item:hover {
   background: white;
 }

@@ -782,10 +782,10 @@ JS
 	 * Allows the use of field values in email body.
 	 *
 	 * @param ArrayList fields
-	 * @return ViewableData
+	 * @return ArrayData
 	 */
 	private function getMergeFieldsMap($fields = array()) {
-		$data = new ViewableData();
+		$data = new ArrayData(array());
 
 		foreach ($fields as $field) {
 			$data->setField($field->Name, DBField::create_field('Text', $field->Value));

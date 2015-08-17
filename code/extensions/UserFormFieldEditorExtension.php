@@ -57,7 +57,7 @@ class UserFormFieldEditorExtension extends DataExtension {
 			->addComponents(
 				$editableColumns,
 				new GridFieldButtonRow(),
-				GridFieldAddClassesButton::create('EditableFormField')
+				GridFieldAddClassesButton::create('EditableTextField')
 					->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
 					->setButtonClass('ss-ui-action-constructive'),
 				GridFieldAddClassesButton::create('EditableFormStep')
