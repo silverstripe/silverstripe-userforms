@@ -24,7 +24,7 @@ class EditableFormStep extends EditableFormField {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));
+		$fields->removeByName(array('MergeField', 'Default', 'Validation'));
 
 		return $fields;
 	}
@@ -73,5 +73,14 @@ class EditableFormStep extends EditableFormField {
 				'page' => $title
 			)
 		);
+	}
+
+	/**
+	 * Get the JS expression for selecting the holder for this field
+	 *
+	 * @return string
+	 */
+	public function getSelectorHolder() {
+		return "$(\".step-button-wrapper[data-for='{$this->Name}']\")";
 	}
 }

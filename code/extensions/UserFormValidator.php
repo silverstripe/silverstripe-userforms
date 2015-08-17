@@ -16,11 +16,13 @@ class UserFormValidator extends RequiredFields {
 
 		// Current nesting
 		$stack = array();
+		$conditionalStep = false; // Is the current step conditional?
 		foreach($fields as $field) {
 			if($field instanceof EditableFormStep) {
 				// Page at top level, or after another page is ok
 				if(empty($stack) || (count($stack) === 1 && $stack[0] instanceof EditableFormStep)) {
 					$stack = array($field);
+					$conditionalStep = $field->DisplayRules()->count() > 0;
 					continue;
 				}
 
@@ -100,6 +102,22 @@ class UserFormValidator extends RequiredFields {
 
 				// Unnest group
 				array_pop($stack);
+			}
+
+			// Normal field type
+			if($conditionalStep && $field->Required) {
+				$this->validationError(
+					'FormFields',
+					_t(
+						"UserFormValidator.CONDITIONAL_REQUIRED",
+						"Required field '{name}' cannot be placed within a conditional page",
+						array(
+							'name' => $field->CMSTitle
+						)
+					),
+					'error'
+				);
+				return false;
 			}
 		}
 		

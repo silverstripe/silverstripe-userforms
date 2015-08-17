@@ -554,7 +554,8 @@ class EditableFormField extends DataObject {
 	 */
 	public function getFieldValidationOptions() {
 		$fields = new FieldList(
-			CheckboxField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?')),
+			CheckboxField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?'))
+				->setDescription(_t('EditableFormField.REQUIRED_DESCRIPTION', 'Please note that conditional fields can\'t be required')),
 			TextField::create('CustomErrorMessage', _t('EditableFormField.CUSTOMERROR','Custom Error Message'))
 		);
 
@@ -675,7 +676,7 @@ class EditableFormField extends DataObject {
 				!$data[$this->Name] ||
 				!$formField->validate($form->getValidator())
 			) {
-				$form->addErrorMessage($this->Name, $this->getErrorMessage()->HTML(), 'bad', false);
+				$form->addErrorMessage($this->Name, $this->getErrorMessage()->HTML(), 'error', false);
 			}
 		}
 
@@ -778,5 +779,13 @@ class EditableFormField extends DataObject {
 
 		asort($editableFieldClasses);
 		return $editableFieldClasses;
+	}
+
+	/**
+	 * @return EditableFormFieldValidator
+	 */
+	public function getCMSValidator() {
+		return EditableFormFieldValidator::create()
+			->setRecord($this);
 	}
 }
