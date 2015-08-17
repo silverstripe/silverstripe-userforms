@@ -32,65 +32,101 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 * @return GridField
 	 */
 	public function getFieldEditorGrid() {
+		Requirements::javascript(USERFORMS_DIR . '/javascript/FieldEditor.js');
+			
 		$fields = $this->owner->Fields();
 
+		$this->createInitialFormStep(true);
+
 		$editableColumns = new GridFieldEditableColumns();
+		$fieldClasses = singleton('EditableFormField')->getEditableFieldClasses();
 		$editableColumns->setDisplayFields(array(
-			'ClassName' => function($record, $column, $grid) {
-				return DropdownField::create($column, '', $this->getEditableFieldClasses());
+			'ClassName' => function($record, $column, $grid) use ($fieldClasses) {
+				if($record instanceof EditableFormField) {
+					return $record->getInlineClassnameField($column, $fieldClasses);
+				}
 			},
 			'Title' => function($record, $column, $grid) {
-				return TextField::create($column, ' ')
-					->setAttribute('placeholder', _t('UserDefinedForm.TITLE', 'Title'));
+				if($record instanceof EditableFormField) {
+					return $record->getInlineTitleField($column);
+				}
 			}
 		));
+
+		$config = GridFieldConfig::create()
+			->addComponents(
+				$editableColumns,
+				new GridFieldButtonRow(),
+				GridFieldAddClassesButton::create('EditableTextField')
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
+					->setButtonClass('ss-ui-action-constructive'),
+				GridFieldAddClassesButton::create('EditableFormStep')
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break')),
+				GridFieldAddClassesButton::create(array('EditableFieldGroup', 'EditableFieldGroupEnd'))
+					->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group')),
+				new GridFieldEditButton(),
+				new GridFieldDeleteAction(),
+				new GridFieldToolbarHeader(),
+				new GridFieldOrderableRows('Sort'),
+				new GridFieldDetailForm()
+			);
 
 		$fieldEditor = GridField::create(
 			'Fields',
 			_t('UserDefinedForm.FIELDS', 'Fields'),
 			$fields,
-			GridFieldConfig::create()
-				->addComponents(
-					$editableColumns,
-					new GridFieldButtonRow(),
-					new GridFieldAddNewInlineButton(),
-					new GridFieldEditButton(),
-					new GridFieldDeleteAction(),
-					new GridFieldToolbarHeader(),
-					new GridFieldOrderableRows('Sort'),
-					new GridState_Component(),
-					new GridFieldDetailForm()
-				)
-		);
+			$config
+		)->addExtraClass('uf-field-editor');
 
 		return $fieldEditor;
 	}
 
 	/**
-	 * @return array
+	 * A UserForm must have at least one step.
+	 * If no steps exist, create an initial step, and put all fields inside it.
+	 *
+	 * @param bool $force
+	 * @return void
 	 */
-	public function getEditableFieldClasses() {
-		$classes = ClassInfo::getValidSubClasses('EditableFormField');
-
-		// Remove classes we don't want to display in the dropdown.
-		$classes = array_diff($classes, array(
-			'EditableFormField',
-			'EditableMultipleOptionField'
-		));
-
-		$editableFieldClasses = array();
-
-		foreach ($classes as $key => $className) {
-			$singleton = singleton($className);
-
-			if(!$singleton->canCreate()) {
-				continue;
-			}
-
-			$editableFieldClasses[$className] = $singleton->i18n_singular_name();
+	public function createInitialFormStep($force = false) {
+		// Only invoke once saved
+		if(!$this->owner->exists()) {
+			return;
 		}
 
-		return $editableFieldClasses;
+		// Check if first field is a step
+		$fields = $this->owner->Fields();
+		$firstField = $fields->first();
+		if($firstField instanceof EditableFormStep) {
+			return;
+		}
+
+		// Don't create steps on write if there are no formfields, as this
+		// can create duplicate first steps during publish of new records
+		if(!$force && !$firstField) {
+			return;
+		}
+
+		// Re-apply sort to each field starting at 2
+		$next = 2;
+		foreach($fields as $field) {
+			$field->Sort = $next++;
+			$field->write();
+		}
+
+		// Add step
+		$step = EditableFormStep::create();
+		$step->Title = _t('EditableFormStep.TITLE_FIRST', 'First Page');
+		$step->Sort = 1;
+		$step->write();
+		$fields->add($step);
+	}
+
+	/**
+	 * Ensure that at least one page exists at the start
+	 */
+	public function onAfterWrite() {
+		$this->createInitialFormStep();
 	}
 
 	/**

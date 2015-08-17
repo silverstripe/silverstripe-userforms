@@ -42,7 +42,9 @@ class EditableMemberListField extends EditableFormField {
 		}
 		
 		$members = Member::map_in_groups($this->GroupID);
-		return new DropdownField($this->Name, $this->Title, $members);
+		$field = new DropdownField($this->Name, $this->EscapedTitle, $members);
+		$this->doUpdateFormField($field);
+		return $field;
 	}
 	
 	public function getValueFromData($data) {

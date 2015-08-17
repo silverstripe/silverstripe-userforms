@@ -22,6 +22,12 @@ class UserForm extends Form {
 			$this->getRequiredFields()
 		);
 
+		// Number each page
+		$stepNumber = 1;
+		foreach($this->getSteps() as $step) {
+			$step->setStepNumber($stepNumber++);
+		}
+
 		if($controller->DisableCsrfSecurityToken) {
 			$this->disableSecurityToken();
 		}
@@ -36,56 +42,49 @@ class UserForm extends Form {
 	}
 
 	/**
+	 * Used for partial caching in the template.
+	 *
+	 * @return string
+	 */
+	public function getLastEdited() {
+		return $this->controller->LastEdited;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDisplayErrorMessagesAtTop() {
+		return (bool)$this->controller->DisplayErrorMessagesAtTop;
+	}
+
+	/**
+	 * Return the fieldlist, filtered to only contain steps
+	 *
+	 * @return ArrayList
+	 */
+	public function getSteps() {
+		return $this->Fields()->filterByCallback(function($field) {
+			return $field instanceof UserFormsStepField;
+		});
+	}
+
+	/**
 	 * Get the form fields for the form on this page. Can modify this FieldSet
 	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
 	 * is applied to this controller.
 	 *
+	 * This will be a list of top level composite steps
+	 *
 	 * @return FieldList
 	 */
 	public function getFormFields() {
-		$fields = new FieldList();
-
-		foreach($this->controller->Fields() as $editableField) {
-			// get the raw form field from the editable version
-			$field = $editableField->getFormField();
-
-			if(!$field) continue;
-
-			// set the error / formatting messages
-			$field->setCustomValidationMessage($editableField->getErrorMessage());
-
-			// set the right title on this field
-			if($right = $editableField->RightTitle) {
-				// Since this field expects raw html, safely escape the user data prior
-				$field->setRightTitle(Convert::raw2xml($right));
-			}
-
-			// if this field is required add some
-			if($editableField->Required) {
-				$field->addExtraClass('requiredField');
-
-				if($identifier = UserDefinedForm::config()->required_identifier) {
-
-					$title = $field->Title() ." <span class='required-identifier'>". $identifier . "</span>";
-					$field->setTitle($title);
-				}
-			}
-			// if this field has an extra class
-			if($extraClass = $editableField->ExtraClass) {
-				$field->addExtraClass(Convert::raw2att($extraClass));
-			}
-
-			// set the values passed by the url to the field
-			$request = $this->controller->getRequest();
-			if($value = $request->getVar($field->getName())) {
-				$field->setValue($value);
-			}
-
-			$fields->push($field);
+		$fields = new UserFormsFieldList();
+		$target = $fields;
+		foreach ($this->controller->Fields() as $field) {
+			$target = $target->processNext($field);
 		}
-
+		$fields->clearEmptySteps();
 		$this->extend('updateFormFields', $fields);
-
 		return $fields;
 	}
 
@@ -128,9 +127,7 @@ class UserForm extends Form {
 			->filter('Required', true)
 			->column('Name');
 		$required = new RequiredFields($requiredNames);
-		
 		$this->extend('updateRequiredFields', $required);
-
 		return $required;
 	}
 
@@ -154,5 +151,21 @@ class UserForm extends Form {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Override some we can add UserForm specific attributes to the form.
+	 *
+	 * @return array
+	 */
+	public function getAttributes() {
+		$attrs = parent::getAttributes();
+
+		$attrs['class'] = $attrs['class'] . ' userform';
+		$attrs['data-livevalidation'] = (bool)$this->controller->EnableLiveValidation;
+		$attrs['data-toperrors'] = (bool)$this->controller->DisplayErrorMessagesAtTop;
+		$attrs['data-hidefieldlabels'] = (bool)$this->controller->HideFieldLabels;
+
+		return $attrs;
 	}
 }

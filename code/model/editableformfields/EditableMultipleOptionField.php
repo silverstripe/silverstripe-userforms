@@ -14,6 +14,14 @@
  */
 
 class EditableMultipleOptionField extends EditableFormField {
+
+	/**
+	 * Define this field as abstract (not inherited)
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $abstract = true;
 	
 	private static $has_many = array(
 		"Options" => "EditableOption"
@@ -48,8 +56,7 @@ class EditableMultipleOptionField extends EditableFormField {
 				$editableColumns,
 				new GridFieldButtonRow(),
 				new GridFieldAddNewInlineButton(),
-				new GridFieldDeleteAction(),
-				new GridState_Component()
+				new GridFieldDeleteAction()
 			);
 
 		$optionsGrid = GridField::create(
@@ -156,11 +163,25 @@ class EditableMultipleOptionField extends EditableFormField {
 	}
 
 	/**
-	 * Return the form field for this object in the front end form view
+	 * Gets map of field options suitable for use in a form
 	 *
-	 * @return FormField
+	 * @return array
 	 */
-	public function getFormField() {
-		return user_error('Please implement getFormField() on '. $this->class, E_USER_ERROR);
+	protected function getOptionsMap() {
+		$optionSet = $this->Options();
+		$optionMap = $optionSet->map('EscapedTitle', 'Title');
+		if($optionMap instanceof SS_Map) {
+			return $optionMap->toArray();
+		}
+		return $optionMap;
+	}
+
+	/**
+	 * Returns all default options
+	 *
+	 * @return SS_List
+	 */
+	protected function getDefaultOptions() {
+		return $this->Options()->filter('Default', 1);
 	}
 }

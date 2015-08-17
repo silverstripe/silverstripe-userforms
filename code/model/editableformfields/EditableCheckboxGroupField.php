@@ -14,17 +14,16 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 	private static $plural_name = "Checkbox Groups";
 	
 	public function getFormField() {
-		$optionSet = $this->Options();
-		$optionMap = $optionSet->map('EscapedTitle', 'Title');
-
-		$field = new UserFormsCheckboxSetField($this->Name, $this->Title, $optionMap);
+		$field = new UserFormsCheckboxSetField($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+		$field->setTemplate('forms/UserFormsCheckboxSetField');
 
 		// Set the default checked items
-		$defaultCheckedItems = $optionSet->filter('Default', 1);
+		$defaultCheckedItems = $this->getDefaultOptions();
 		if ($defaultCheckedItems->count()) {
 			$field->setDefaultItems($defaultCheckedItems->map('EscapedTitle')->keys());
 		}
 
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 	
@@ -45,5 +44,15 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField {
 			}
 		}
 		return $result;
+	}
+
+	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
+		// watch out for checkboxs as the inputs don't have values but are 'checked
+		// @todo - Test this
+		if($rule->FieldValue) {
+			return "$(\"input[name='{$this->Name}[]'][value='{$rule->FieldValue}']\")";
+		} else {
+			return "$(\"input[name='{$this->Name}[]']:first\")";
+		}
 	}
 }

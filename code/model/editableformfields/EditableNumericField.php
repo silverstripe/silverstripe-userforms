@@ -26,18 +26,9 @@ class EditableNumericField extends EditableFormField {
 	 * @return NumericField
 	 */
 	public function getFormField() {
-		$field = new NumericField($this->Name, $this->Title);
+		$field = new NumericField($this->Name, $this->EscapedTitle, $this->Default);
 		$field->addExtraClass('number');
-		$field->setValue($this->Default);
-
-		if ($this->Required) {
-			// Required and numeric validation can conflict so add the
-			// required validation messages as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-
+		$this->doUpdateFormField($field);
 		return $field;
 	}
 
@@ -54,14 +45,20 @@ class EditableNumericField extends EditableFormField {
 		return $fields;
 	}
 
-	public function getValidation() {
-		$options = array();
+	/**
+	 * Updates a formfield with the additional metadata specified by this field
+	 *
+	 * @param FormField $field
+	 */
+	protected function updateFormField($field) {
+		parent::updateFormField($field);
+
 		if($this->MinValue) {
-			$options['min'] = (int)$this->MinValue;
+			$field->setAttribute('data-rule-min', $this->MinValue);
 		}
+
 		if($this->MaxValue) {
-			$options['max'] = (int)$this->MaxValue;
+			$field->setAttribute('data-rule-max', $this->MaxValue);
 		}
-		return $options;
 	}
 }

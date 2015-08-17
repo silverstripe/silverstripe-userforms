@@ -88,7 +88,6 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				new GridFieldButtonRow('before'),
 				new GridFieldToolbarHeader(),
 				new GridFieldAddNewInlineButton(),
-				new GridState_Component(),
 				new GridFieldDeleteAction(),
 				$columns = new GridFieldEditableColumns()
 			);

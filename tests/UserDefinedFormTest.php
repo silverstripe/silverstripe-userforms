@@ -3,13 +3,11 @@
 /**
  * @package userforms
  */
-
 class UserDefinedFormTest extends FunctionalTest {
 	
 	static $fixture_file = 'UserDefinedFormTest.yml';
 	
-	
-	function testRollbackToVersion() {
+	public function testRollbackToVersion() {
 		$this->markTestSkipped(
 			'UserDefinedForm::rollback() has not been implemented completely'
 		);
@@ -37,7 +35,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->assertEquals($orignal->SubmitButtonText, 'Button Text');
 	}
 
-	function testGetCMSFields() {
+	public function testGetCMSFields() {
 		$this->logInWithPermission('ADMIN');
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
@@ -49,7 +47,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->assertTrue($fields->dataFieldByName('OnCompleteMessage') != null);
 	}
 
-	function testEmailRecipientPopup() {
+	public function testEmailRecipientPopup() {
 		$this->logInWithPermission('ADMIN');
 
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
@@ -160,13 +158,13 @@ class UserDefinedFormTest extends FunctionalTest {
 		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
 
 		$this->assertNotNull($live);
-		$this->assertEquals($live->Fields()->Count(), 1);
+		$this->assertEquals(2, $live->Fields()->Count()); // one page and one field
 
 		$dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
 		$form->Fields()->add($dropdown);
 
 		$stage = Versioned::get_one_by_stage("UserDefinedForm", "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
-		$this->assertEquals($stage->Fields()->Count(), 2);
+		$this->assertEquals(3, $stage->Fields()->Count());
 
 		// should not have published the dropdown
 		$liveDropdown = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $dropdown->ID");
@@ -176,11 +174,10 @@ class UserDefinedFormTest extends FunctionalTest {
 		$form->doPublish();
 
 		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
-		$this->assertEquals($live->Fields()->Count(), 2);
+		$this->assertEquals(3, $live->Fields()->Count());
 
 		// edit the title
-		$text = $form->Fields()->First();
-
+		$text = $form->Fields()->limit(1, 1)->First();
 		$text->Title = 'Edited title';
 		$text->write();
 
@@ -197,21 +194,20 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->logInWithPermission('ADMIN');
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 		$form->write();
-
+		$this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
 		$form->doPublish();
 
 		// assert that it exists and has a field
 		$live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
 
 		$this->assertTrue(isset($live));
-		$this->assertEquals(DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value(), 1);
+		$this->assertEquals(2, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
 
 		// unpublish
 		$form->doUnpublish();
 
 		$this->assertNull(Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID"));
-		$this->assertEquals(DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value(), 0);
-
+		$this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
 	}
 
 	function testDoRevertToLive() {

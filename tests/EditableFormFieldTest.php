@@ -80,27 +80,6 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);
 	}
 	
-	function testTitleField() {
-		$text = $this->objFromFixture('EditableTextField', 'basic-text');
-		$this->logInWithPermission('ADMIN');
-		
-		$title = $text->TitleField();
-		
-		$this->assertThat($title, $this->isInstanceOf('TextField'));
-		$this->assertEquals($title->Title(), "Enter Question");
-		$this->assertEquals($title->Value(), "Basic Text Field");
-
-		$member = Member::currentUser();
-		$member->logOut();
-		
-		// read only version
-		$title = $text->TitleField();
-		
-		$this->assertThat($title, $this->isInstanceOf('ReadonlyField'));
-		$this->assertEquals($title->Title(), "Enter Question");
-		$this->assertEquals($title->Value(), "Basic Text Field");
-	}
-	
 	function testMultipleOptionDuplication() {
 		$dropdown = $this->objFromFixture('EditableDropdown','basic-dropdown');
 		

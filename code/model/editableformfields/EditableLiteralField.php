@@ -14,6 +14,14 @@ class EditableLiteralField extends EditableFormField {
 	private static $plural_name = 'HTML Blocks';
 
 	/**
+	 * Mark as literal only
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $literal = true;
+
+	/**
 	 * Get the name of the editor config to use for HTML sanitisation. Defaults to the active config.
 	 *
 	 * @var string
@@ -103,12 +111,16 @@ class EditableLiteralField extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$label = $this->Title
-			? "<label class='left'>".Convert::raw2xml($this->Title)."</label>"
-			: "";
-		$classes = $this->Title ? "" : " nolabel";
+		// Build label and css classes
+		$label = '';
+		$classes = $this->ExtraClass;
+		if(empty($this->Title)) {
+			$classes .= " nolabel";
+		} else {
+			$label = "<label class='left'>{$this->EscapedTitle}</label>";
+		}
 		
-		return new LiteralField(
+		$field = new LiteralField(
 			"LiteralField[{$this->ID}]",
 			sprintf(
 				"<div id='%s' class='field text%s'>
@@ -121,6 +133,9 @@ class EditableLiteralField extends EditableFormField {
 				$this->Content
 			)
 		);
+
+		// When dealing with literal fields there is no further customisation that can be added at this point
+		return $field;
 	}
 	
 	public function showInReports() {

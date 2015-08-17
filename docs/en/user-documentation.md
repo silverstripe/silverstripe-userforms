@@ -52,8 +52,7 @@ puts the form at the end of all the content.
 
 ## Adding fields
 
-To add a field to the form, click on the "Form" tab under the "Content" tab in the
-Editing Pane. Click the "Add" button then select the type of field you want from the dropdown.
+To add a field to the form, click on the "Form Fields" in the Editing Pane. Click the "Add Field" button then select the type of field you want from the dropdown.
 Save or publish the form to start editing your new field's properties.
 
 ![Adding fields](_images/add-fields.png)
@@ -174,6 +173,18 @@ to determine the size and the number of rows in a text field.
 
 * Use [HTML Block](#html-block), with the appropriate level [Heading](#heading).
 
+## Creating a multi-page form
+
+To create a multi-page form, simply click the 'Add Page Break' button. 
+This will create a page break field which is used to create a new page in the form. You can drag and drop this page break to separate form fields at the desired location.
+
+![Multi-page forms](_images/multi-page-forms.png)
+
+## Adding fieldgroups 
+
+Creating fieldgroups is as simple as clicking the 'Add fieldgroup' button, this create two 'markers' which act as the beginning/end for the fieldgroup. Any fields place between these two markers will be automatically included within the fieldgroup.
+
+![Adding fieldgroups](_images/fieldgroups.png)
 
 ## Viewing form submissions
 

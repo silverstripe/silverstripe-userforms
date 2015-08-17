@@ -98,6 +98,7 @@ class UserDefinedForm extends Page {
 	 * @return FieldList
 	 */
 	 public function getCMSFields() {
+		Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
 		
 		$self = $this;
 		
@@ -169,7 +170,6 @@ SQL;
 			$config->addComponent($filter = new UserFormsGridFieldFilterHeader());
 			$config->addComponent(new GridFieldDataColumns());
 			$config->addComponent(new GridFieldEditButton());
-			$config->addComponent(new GridState_Component());
 			$config->addComponent(new GridFieldDeleteAction());
 			$config->addComponent(new GridFieldPageCount('toolbar-header-right'));
 			$config->addComponent($pagination = new GridFieldPaginator(25));
@@ -283,6 +283,14 @@ SQL;
 		
 		DB::alteration_message('Migrated userforms', 'changed');
 	}
+
+
+	/**
+	 * Validate formfields
+	 */
+	public function getCMSValidator() {
+		return new UserFormValidator();
+	}
 }
 
 /**
@@ -307,10 +315,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 		
 		// load the jquery
 		$lang = i18n::get_lang_from_locale(i18n::get_locale());
+		Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
 		Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
-		Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm_frontend.js');
+		Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
 		Requirements::javascript(
 			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
 		);
@@ -364,28 +373,10 @@ class UserDefinedForm_Controller extends Page_Controller {
 	 */
 	public function Form() {
 		$form = UserForm::create($this);
-
 		$this->generateConditionalJavascript();
-		$this->generateValidationJavascript($form);
-
 		return $form;
 	}
 
-	/**
-	 * Build jQuery validation script and require as a custom script
-	 * 
-	 * @param UserForm $form
-	 */
-	public function generateValidationJavascript(UserForm $form) {
-		// set the custom script for this form
-		Requirements::customScript(
-			$this
-				->customise(array('Form' => $form))
-				->renderWith('ValidationScript'),
-			'UserFormsValidation'
-		);
-	}
-	
 	/**
 	 * Generate the javascript for the conditional field show / hiding logic.
 	 *
@@ -400,15 +391,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 		if($this->Fields()) {
 			foreach($this->Fields() as $field) {
-				$fieldId = $field->Name;
-
-				if($field instanceof EditableFormHeading) {
-					$fieldId = 'UserForm_Form_' . $field->Name;
-				}
+				$holderSelector = $field->getSelectorHolder();
 
 				// Is this Field Show by Default
 				if(!$field->ShowOnLoad) {
-					$default .= "$(\"#" . $fieldId . "\").hide();\n";
+					$default .= "{$holderSelector}.hide().trigger('userform.field.hide');\n";
 				}
 
 				// Check for field dependencies / default
@@ -417,22 +404,8 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// Get the field which is effected
 					$formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
 
-					if($formFieldWatch->RecordClassName == 'EditableDropdown') {
-						// watch out for multiselect options - radios and check boxes
-						$fieldToWatch = "$(\"select[name='" . $formFieldWatch->Name . "']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					} else if($formFieldWatch->RecordClassName == 'EditableCheckboxGroupField') {
-						// watch out for checkboxs as the inputs don't have values but are 'checked
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "[" . $rule->FieldValue . "]']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					} else if($formFieldWatch->RecordClassName == 'EditableRadioField') {
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
-						// We only want to trigger on load once for the radio group - hence we focus on the first option only.
-						$fieldToWatchOnLoad = "$(\"input[name='" . $formFieldWatch->Name . "']:first\")";
-					} else {
-						$fieldToWatch = "$(\"input[name='" . $formFieldWatch->Name . "']\")";
-						$fieldToWatchOnLoad = $fieldToWatch;
-					}
+					$fieldToWatch = $formFieldWatch->getSelectorField($rule);
+					$fieldToWatchOnLoad = $formFieldWatch->getSelectorField($rule, true);
 
 					// show or hide?
 					$view = ($rule->Display == 'Hide') ? 'hide' : 'show';
@@ -442,7 +415,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// @todo encapulsation
 					$action = "change";
 
-					if($formFieldWatch->ClassName == "EditableTextField") {
+					if($formFieldWatch instanceof EditableTextField) {
 						$action = "keyup";
 					}
 
@@ -460,11 +433,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 					// and what should we evaluate
 					switch($rule->ConditionOption) {
 						case 'IsNotBlank':
-							$expression = ($checkboxField || $radioField) ? '$(this).prop("checked")' :'$(this).val() != ""';
+							$expression = ($checkboxField || $radioField) ? '$(this).is(":checked")' :'$(this).val() != ""';
 
 							break;
 						case 'IsBlank':
-							$expression = ($checkboxField || $radioField) ? '!($(this).prop("checked"))' : '$(this).val() == ""';
+							$expression = ($checkboxField || $radioField) ? '!($(this).is(":checked"))' : '$(this).val() == ""';
 							
 							break;
 						case 'HasValue':
@@ -511,9 +484,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 						$watch[$fieldToWatch] = array();
 					}
 
-					$watch[$fieldToWatch][] =  array(
+					$watch[$fieldToWatch][] = array(
 						'expression' => $expression,
-						'field_id' => $fieldId,
+						'holder_selector' => $holderSelector,
 						'view' => $view,
 						'opposite' => $opposite,
 						'action' => $action
@@ -530,16 +503,26 @@ class UserDefinedForm_Controller extends Page_Controller {
 				$actions = array();
 
 				foreach($values as $rule) {
-					// Register conditional behaviour with an element, so it can be triggered from many places.
-					$logic[] = sprintf(
-						'if(%s) { $("#%s").%s(); } else { $("#%2$s").%s(); }', 
-						$rule['expression'], 
-						$rule['field_id'], 
-						$rule['view'], 
-						$rule['opposite']
-					);
-
+					// Assign action
 					$actions[$rule['action']] = $rule['action'];
+
+					// Assign behaviour
+					$expression = $rule['expression'];
+					$holder = $rule['holder_selector'];
+					$view = $rule['view']; // hide or show
+					$opposite = $rule['opposite'];
+					// Generated javascript for triggering visibility
+					$logic[] = <<<"EOS"
+if({$expression}) {
+	{$holder}
+		.{$view}()
+		.trigger('userform.field.{$view}');
+} else {
+	{$holder}
+		.{$opposite}()
+		.trigger('userform.field.{$opposite}');
+}
+EOS;
 				}
 
 				$logic = implode("\n", $logic);
@@ -581,41 +564,15 @@ JS
 
 	/**
 	 * Process the form that is submitted through the site
-	 * 
+	 *
+	 * {@see UserForm::validate()} for validation step prior to processing
+	 *
 	 * @param array $data
 	 * @param Form $form
 	 *
 	 * @return Redirection
 	 */
 	public function process($data, $form) {
-		Session::set("FormInfo.{$form->FormName()}.data",$data);
-		Session::clear("FormInfo.{$form->FormName()}.errors");
-
-		foreach($this->Fields() as $field) {
-			$messages[$field->Name] = $field->getErrorMessage()->HTML();
-			$formField = $field->getFormField();
-
-			if($field->Required && $field->DisplayRules()->Count() == 0) {
-				if(isset($data[$field->Name])) {
-					$formField->setValue($data[$field->Name]);
-				}
-
-				if(
-					!isset($data[$field->Name]) || 
-					!$data[$field->Name] ||
-					!$formField->validate($form->getValidator())
-				) {
-					$form->addErrorMessage($field->Name, $field->getErrorMessage(), 'bad');
-				}
-			}
-		}
-
-		if(Session::get("FormInfo.{$form->FormName()}.errors")){
-			Controller::curr()->redirectBack();
-
-			return;
-		}
-
 		$submittedForm = Object::create('SubmittedForm');
 		$submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
 		$submittedForm->ParentID = $this->ID;
@@ -625,9 +582,7 @@ JS
 			$submittedForm->write();
 		}
 
-		$values = array();
 		$attachments = array();
-
 		$submittedFields = new ArrayList();
 
 		foreach($this->Fields() as $field) {
@@ -809,10 +764,10 @@ JS
 	 * Allows the use of field values in email body.
 	 *
 	 * @param ArrayList fields
-	 * @return ViewableData
+	 * @return ArrayData
 	 */
 	private function getMergeFieldsMap($fields = array()) {
-		$data = new ViewableData();
+		$data = new ArrayData(array());
 
 		foreach ($fields as $field) {
 			$data->setField($field->Name, DBField::create_field('Text', $field->Value));

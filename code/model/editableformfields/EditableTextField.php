@@ -65,41 +65,29 @@ class EditableTextField extends EditableFormField {
 	 */
 	public function getFormField() {
 		if($this->Rows > 1) {
-			$field = TextareaField::create($this->Name, $this->Title);
+			$field = TextareaField::create($this->Name, $this->EscapedTitle, $this->Default);
 			$field->setRows($this->Rows);
 		} else {
-			$field = TextField::create($this->Name, $this->Title, null, $this->MaxLength);
+			$field = TextField::create($this->Name, $this->EscapedTitle, $this->Default, $this->MaxLength);
 		}
-
-		if ($this->Required) {
-			// Required validation can conflict so add the Required validation messages
-			// as input attributes
-			$errorMessage = $this->getErrorMessage()->HTML();
-			$field->setAttribute('data-rule-required', 'true');
-			$field->setAttribute('data-msg-required', $errorMessage);
-		}
-
-		$field->setValue($this->Default);
-		
+		$this->doUpdateFormField($field);
 		return $field;
 	}
-	
+
 	/**
-	 * Return the validation information related to this field. This is 
-	 * interrupted as a JSON object for validate plugin and used in the 
-	 * PHP. 
+	 * Updates a formfield with the additional metadata specified by this field
 	 *
-	 * @see http://docs.jquery.com/Plugins/Validation/Methods
-	 * @return array
+	 * @param FormField $field
 	 */
-	public function getValidation() {
-		$options = parent::getValidation();
+	protected function updateFormField($field) {
+		parent::updateFormField($field);
+
 		if($this->MinLength) {
-			$options['minlength'] = (int)$this->MinLength;
-		}	
-		if($this->MaxLength) {
-			$options['maxlength'] = (int)$this->MaxLength;
+			$field->setAttribute('data-rule-minlength', $this->MinLength);
 		}
-		return $options;
+
+		if($this->MaxLength) {
+			$field->setAttribute('data-rule-maxlength', $this->MaxLength);
+		}
 	}
 }

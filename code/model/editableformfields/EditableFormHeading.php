@@ -11,6 +11,8 @@ class EditableFormHeading extends EditableFormField {
 	
 	private static $plural_name = 'Headings';
 
+	private static $literal = true;
+
 	private static $db = array(
 		'Level' => 'Int(3)', // From CustomSettings
 		'HideFromReports' => 'Boolean(0)' // from CustomSettings
@@ -55,9 +57,23 @@ class EditableFormHeading extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$labelField = new HeaderField($this->Name, $this->Title, $this->Level);
+		$labelField = new HeaderField($this->Name, $this->EscapedTitle, $this->Level);
 		$labelField->addExtraClass('FormHeading');
+		$labelField->setAttribute('data-id', $this->Name);
+		$this->doUpdateFormField($labelField);
 		return $labelField;
+	}
+
+	protected function updateFormField($field) {
+		// set the right title on this field
+		if($this->RightTitle) {
+			// Since this field expects raw html, safely escape the user data prior
+			$field->setRightTitle(Convert::raw2xml($this->RightTitle));
+		}
+		// if this field has an extra class
+		if($this->ExtraClass) {
+			$field->addExtraClass($this->ExtraClass);
+		}
 	}
 	
 	public function showInReports() {
@@ -66,5 +82,9 @@ class EditableFormHeading extends EditableFormField {
 	
 	public function getFieldValidationOptions() {
 		return false;
+	}
+
+	public function getSelectorHolder() {
+		return "$(\":header[data-id='{$this->Name}']\")";
 	}
 }
