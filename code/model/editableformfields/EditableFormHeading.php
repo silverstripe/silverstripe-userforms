@@ -87,4 +87,8 @@ class EditableFormHeading extends EditableFormField {
 	public function getSelectorHolder() {
 		return "$(\":header[data-id='{$this->Name}']\")";
 	}
+
+	public function getLevel() {
+        return $this->getField('Level') ?: 3;
+    }
 }
