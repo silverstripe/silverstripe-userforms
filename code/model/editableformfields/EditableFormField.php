@@ -1,8 +1,6 @@
 <?php
 
 use SilverStripe\Forms\SegmentField;
-use SilverStripe\Forms\SegmentFieldModifier\IDSegmentFieldModifier;
-use SilverStripe\Forms\SegmentFieldModifier\SlugSegmentFieldModifier;
 
 /**
  * Represents the base class of a editable form field
@@ -212,20 +210,21 @@ class EditableFormField extends DataObject {
 			);
 		}
 		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
+		$self = $this;
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'Display' => '',
-			'ConditionFieldID' => function($record, $column, $grid) use ($allowedClasses) {
+			'ConditionFieldID' => function($record, $column, $grid) use ($allowedClasses, $self) {
 				return DropdownField::create(
 					$column,
 					'',
 					EditableFormField::get()
 						->filter(array(
-							'ParentID' => $this->ParentID,
+							'ParentID' => $self->ParentID,
 							'ClassName' => $allowedClasses
 						))
 						->exclude(array(
-							'ID' => $this->ID
+							'ID' => $self->ID
 						))
 						->map('ID', 'Title')
 					);
@@ -237,8 +236,8 @@ class EditableFormField extends DataObject {
 			'FieldValue' => function($record, $column, $grid) {
 				return TextField::create($column);
 			},
-			'ParentID' => function($record, $column, $grid) {
-				return HiddenField::create($column, '', $this->ID);
+			'ParentID' => function($record, $column, $grid) use ($self) {
+				return HiddenField::create($column, '', $self->ID);
 			}
 		));
 
