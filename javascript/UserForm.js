@@ -499,7 +499,8 @@ jQuery(function ($) {
 	 */
 	ProgressBar.prototype.update = function (stepID) {
 		var $newStepElement = $($('.form-step')[stepID]),
-			stepNumber = 0;
+			stepNumber = 0,
+			barWidth = stepID / (this.$buttons.length - 1) * 100;
 
 		// Set the current step number.
 		this.$buttons.each(function (i, button) {
@@ -538,10 +539,11 @@ jQuery(function ($) {
 		});
 
 		// Update the progress bar's title with the new step's title.
-		this.$el.find('.progress-title').text($newStepElement.data('title'));
+		this.$el.siblings('.progress-title').text($newStepElement.data('title'));
 
 		// Update the width of the progress bar.
-		this.$el.find('.progress-bar').width(stepID / (this.$buttons.length - 1) * 100 + '%');
+		barWidth = barWidth ? barWidth + '%' : '';
+		this.$el.find('.progress-bar').width(barWidth);
 	};
 
 	/**
