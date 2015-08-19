@@ -1,6 +1,9 @@
 /**
  * Styles for cms
  */
+.cms .uf-field-editor {
+  padding-bottom: 0;
+}
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item:hover {
   background: white;
 }
