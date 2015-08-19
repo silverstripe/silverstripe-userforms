@@ -10,6 +10,8 @@
 		table.ss-gridfield-table {
 			// Standard rows
 			.ss-gridfield-item {
+				height: 46px;
+
 				&, &:hover {
 					background: white;
 				}
@@ -26,6 +28,10 @@
 				.handle {
 					min-height: 46px;
 				}
+			}
+
+			.ss-gridfield-item.ui-sortable-placeholder {
+				height: 50px;
 			}
 
 			.ss-gridfield-item.inFieldGroup {

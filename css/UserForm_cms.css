@@ -4,6 +4,9 @@
 .cms .uf-field-editor {
   padding-bottom: 0;
 }
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item {
+  height: 46px;
+}
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item:hover {
   background: white;
 }
@@ -16,6 +19,9 @@
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item .handle {
   min-height: 46px;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.ui-sortable-placeholder {
+  height: 50px;
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup, .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.inFieldGroup:hover {
   background: #f2f9fd;
