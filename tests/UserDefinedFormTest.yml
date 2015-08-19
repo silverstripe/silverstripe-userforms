@@ -204,6 +204,7 @@ UserDefinedForm_EmailRecipient:
 
 UserDefinedForm:
   basic-form-page:
+    Content: '<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>'
     Title: User Defined Form
     Fields: =>EditableFormStep.form1step1,=>EditableTextField.basic-text
     EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
