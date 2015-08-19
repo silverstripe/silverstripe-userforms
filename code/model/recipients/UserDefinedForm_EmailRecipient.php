@@ -132,9 +132,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		);
 		$validSubjectFields->merge($multiOptionFields);
 
-		// To address can only be email fields or multi option fields
-		$validEmailToFields = new ArrayList($validEmailFromFields->toArray());
-		$validEmailToFields->merge($multiOptionFields);
+		// To address cannot be unbound, so restrict to pre-defined lists
+		$validEmailToFields = $multiOptionFields;
 
 		// Build fieldlist
 		$fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
