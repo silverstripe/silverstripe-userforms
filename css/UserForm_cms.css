@@ -1,4 +1,26 @@
 /**
+ * Animations
+ */
+@keyframes rowSlide {
+  0% {
+    top: 20%;
+  }
+  100% {
+    top: 80%;
+  }
+}
+@keyframes flashBackground {
+  0% {
+    background-color: white;
+  }
+  10% {
+    background-color: #dcfedd;
+  }
+  70% {
+    background-color: #dcfedd;
+  }
+}
+/**
  * Styles for cms
  */
 .cms .uf-field-editor {
@@ -19,6 +41,13 @@
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item .handle {
   min-height: 46px;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.newField {
+  position: fixed;
+  animation: rowSlide .5s ease forwards;
+}
+.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.flashBackground {
+  animation: flashBackground 2s linear;
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.ui-sortable-placeholder {
   height: 50px;
@@ -77,4 +106,19 @@
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item[data-class='EditableFieldGroupEnd'] label {
   color: #777;
+}
+.cms .uf-field-editor .stickyButtons {
+  position: fixed;
+  top: 40px;
+  z-index: 2;
+  background: #E6EAED;
+  box-shadow: 0 12px 4px -8px #999;
+  padding: 12px;
+  margin-left: -12px;
+}
+.cms .uf-field-editor .stickyButtons button.action {
+  margin-bottom: 0;
+}
+.cms .uf-field-editor .stickyButtons ~ .ss-gridfield-table {
+  margin-top: 40px;
 }
