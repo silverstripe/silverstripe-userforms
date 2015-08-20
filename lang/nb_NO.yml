@@ -139,7 +139,6 @@ nb_NO:
     ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
     ORSELECTAFIELDTOUSEASFROM: '...eller velg et felt til å bruke som "svar til"-adresse'
     ORSELECTAFIELDTOUSEASTO: '...eller velg et felt til å bruke som adresse'
-    PLURALNAME: 'Base sider'
     REPLYADDRESS: 'E-post som "reply to"'
     SAVESUBMISSIONS: 'Slå av auto lagring'
     SENDEMAILTO: 'Send e-post til'

@@ -145,7 +145,6 @@ nl_NL:
     ONCOMPLETELABEL: 'Bericht na succesvol verzonden'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'
     ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
-    PLURALNAME: 'Formulier pagina''s'
     REPLYADDRESS: 'E-mail voor antwoord op'
     SAVESUBMISSIONS: 'Schakel opslaan van inzendingen uit'
     SENDEMAILTO: 'Stuur email naar'

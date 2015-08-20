@@ -138,7 +138,6 @@ zh:
     ONCOMPLETELABEL: '完成时显示'
     ORSELECTAFIELDTOUSEASFROM: '.. 或选择某字段作为回复地址'
     ORSELECTAFIELDTOUSEASTO: '.. 或选择某字段作为地址使用'
-    PLURALNAME: '基本页面'
     REPLYADDRESS: '用于回复的电子邮件'
     SAVESUBMISSIONS: '禁用保存提交内容到服务器'
     SENDEMAILTO: '发送电子邮件到'

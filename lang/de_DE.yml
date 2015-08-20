@@ -145,7 +145,6 @@ de_DE:
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
     ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Formularfeld als Empfängeradresse'
-    PLURALNAME: 'Anpassbare Formulare'
     REPLYADDRESS: 'E-Mail Adresse für "Antworten an"'
     SAVESUBMISSIONS: 'Speichern von Einreichungen deaktivieren'
     SENDEMAILTO: 'E-Mail senden an'

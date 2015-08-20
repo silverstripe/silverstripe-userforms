@@ -145,7 +145,6 @@ fi_FI:
     ONCOMPLETELABEL: 'Näytä valmistuessa'
     ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
-    PLURALNAME: 'Käyttäjän määrittelemät lomakkeet'
     REPLYADDRESS: 'Vastaussähköposti'
     SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
     SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'

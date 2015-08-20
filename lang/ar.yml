@@ -138,7 +138,6 @@ ar:
     ONCOMPLETELABEL: 'اعرض عند الاكتمال'
     ORSELECTAFIELDTOUSEASFROM: '.. أو تحديد حقل لاستخدامه كعنوان للرد'
     ORSELECTAFIELDTOUSEASTO: '.. أو تحديد حقل لاستخدامه على أنه عنوان المرسل إليه'
-    PLURALNAME: 'الصفحات الأساسية'
     REPLYADDRESS: 'بريد إلكتروني للرد علي'
     SAVESUBMISSIONS: 'قم بتعطيل حفظ التقديمات إلى الخادم'
     SENDEMAILTO: 'ارسل بريد إلكتروني إلى'

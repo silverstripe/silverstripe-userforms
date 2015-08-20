@@ -22,6 +22,9 @@ en:
   EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
+  EditableCustomRule:
+    PLURALNAME: 'Editable Custom Rules'
+    SINGULARNAME: 'Editable Custom Rule'
   EditableDateField:
     PLURALNAME: 'Date Fields'
     SINGULARNAME: 'Date Field'
@@ -31,6 +34,14 @@ en:
   EditableEmailField:
     PLURALNAME: 'Email Fields'
     SINGULARNAME: 'Email Field'
+  EditableFieldGroup:
+    PLURALNAME: 'Editable Field Groups'
+    SINGULARNAME: 'Editable Field Group'
+  EditableFieldGroupEnd:
+    FIELD_GROUP_END: '{group} end'
+    FIELD_GROUP_START: 'Group {group}'
+    PLURALNAME: 'Editable Field Group Ends'
+    SINGULARNAME: 'Editable Field Group End'
   EditableFileField:
     PLURALNAME: 'File Upload Fields'
     SINGULARNAME: 'File Upload Field'
@@ -41,13 +52,19 @@ en:
     BLANK: Blank
     CHECKEDBYDEFAULT: 'Checked by Default?'
     CUSTOMERROR: 'Custom Error Message'
+    CUSTOMOPTIONS: Options
     CUSTOMRULES: 'Custom Rules'
+    DEFAULT: 'Default value'
     DEFAULTTOTODAY: 'Default to Today?'
     DELETE: Delete
     DRAG: 'Drag to rearrange order of fields'
     ENTERQUESTION: 'Enter Question'
     EXTRACLASSA: 'Extra Styling/Layout'
     EXTRACLASSB: 'Extra css Class - separate multiples with a space'
+    EXTRACLASS_MULTIPLE: 'Separate each CSS class with a single space'
+    EXTRACLASS_SELECT: 'Select from the list of allowed styles'
+    EXTRACLASS_TITLE: 'Extra Styling/Layout'
+    EXTRACLASS_Title: 'Extra CSS Classes'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
     GREATERTHAN: 'Value Greater Than'
@@ -67,20 +84,32 @@ en:
     OPTIONS: Options
     PLURALNAME: 'Editable Form Fields'
     REQUIRED: 'Is this field Required?'
-    RIGHTTITLE: 'Right Title'
+    REQUIRED_DESCRIPTION: 'Please note that conditional fields can''t be required'
+    RIGHTTITLE: 'Right title'
     SHOW: Show
+    SHOWONLOAD: 'Initial visibility before processing these rules'
     SHOWOPTIONS: 'Show Options'
     SHOWTHISFIELD: 'Show This Field'
     SINGULARNAME: 'Editable Form Field'
+    TITLE: Title
+    TYPE: Type
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
     'YES': 'Yes'
+  EditableFormFieldValidator:
+    REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
   EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
     SINGULARNAME: Heading
+  EditableFormStep:
+    PLURALNAME: 'Page Breaks'
+    SINGULARNAME: 'Page Break'
+    STEP_TITLE: 'Page {page}'
+    TITLE_FIRST: 'First Page'
   EditableLiteralField:
+    CONTENT: HTML
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
@@ -88,10 +117,13 @@ en:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
   EditableMultipleOptionField:
+    DEFAULT: 'Selected by default?'
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
   EditableNumericField:
     PLURALNAME: 'Numeric Fields'
+    RANGE: 'Allowed numeric range'
+    RANGE_TO: to
     SINGULARNAME: 'Numeric Field'
   EditableOption:
     DELETE: 'Remove this option'
@@ -104,9 +136,11 @@ en:
     SINGULARNAME: 'Radio Group'
   EditableTextField:
     NUMBERROWS: 'Number of rows'
+    NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
     PLURALNAME: 'Text Fields'
+    RANGE_TO: to
     SINGULARNAME: 'Text Field'
-    TEXTLENGTH: 'Text length'
+    TEXTLENGTH: 'Allowed text length'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:
@@ -137,13 +171,17 @@ en:
     DESCRIPTION: 'Adds a customizable form.'
     DISABLEAUTHENICATEDFINISHACTION: 'Disable Authenication on finish action'
     DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Display error messages above the form?'
     EMAILADDRESS: Email
     EMAILBODY: Body
+    EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email subject'
+    EMAILTEMPLATE: 'Email template'
     ENABLELIVEVALIDATION: 'Enable live validation'
     EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
+    FIELDS: Fields
     FORM: Form
     FROMADDRESS: 'Send email from'
     HIDEFIELDLABELS: 'Hide field labels'
@@ -152,10 +190,18 @@ en:
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     PLURALNAME: 'Base Pages'
+    PREVIEW_EMAIL: 'Preview email'
+    PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'
+    RECIPIENTS: Recipients
     REPLYADDRESS: 'Email for reply to'
+    REPLYADDRESS_DESCRIPTION: 'The email address which the recipient is able to ''reply'' to.'
+    RulesDescription: 'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'
     SENDEMAILTO: 'Send email to'
+    SENDEMAILTO_DESCRIPTION: 'You may enter multiple email addresses as a comma separated list.'
+    SENDIF: 'Send condition'
     SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
@@ -163,9 +209,26 @@ en:
     SUBMITBUTTON: Submit
     TEXTONCLEAR: 'Text on clear button:'
     TEXTONSUBMIT: 'Text on submit button:'
+    TYPEREPLY: 'Type reply address'
+    TYPESUBJECT: 'Type subject'
+    TYPETO: 'Type to address'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+  UserDefinedForm_EmailRecipientCondition:
+    PLURALNAME: 'User Defined Form Email Recipient Conditions'
+    SINGULARNAME: 'User Defined Form Email Recipient Condition'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'Add Field'
+    ADD_FIELD_GROUP: 'Add Field Group'
+    ADD_PAGE_BREAK: 'Add Page Break'
+    FORMFIELDS: 'Form Fields'
+  UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
+    NO_PAGE: 'Field ''{name}'' found before any pages'
+    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
+    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filter Submissions..'
     WHEREVALUEIS: 'where value is..'
