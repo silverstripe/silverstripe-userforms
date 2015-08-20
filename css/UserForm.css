@@ -41,6 +41,9 @@
   width: 100%;
   max-width: 100%;
 }
+.userform .field label.right {
+  color: #555;
+}
 
 .userformsgroup {
   border: 1px solid #ccc;
