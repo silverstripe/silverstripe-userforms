@@ -27,6 +27,7 @@ and without getting involved in any PHP code.
  * [Installation instructions](installation)
  * [Troubleshooting](troubleshooting)
  * [User Documentation](user-documentation)
+ * [Compiling Front-End Files](compiling-front-end-files)
 
 ## Thanks
 
