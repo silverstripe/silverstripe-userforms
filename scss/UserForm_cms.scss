@@ -1,4 +1,19 @@
 /**
+ * Animations
+ */
+
+@keyframes rowSlide {
+	0% {top: 20%;}
+	100% {top: 80%;}
+}
+
+@keyframes flashBackground {
+	0% {background-color: white;}
+	10% {background-color: #dcfedd;}
+	70% {background-color: #dcfedd;}
+}
+
+/**
  * Styles for cms
  */
 
@@ -28,10 +43,19 @@
 				.handle {
 					min-height: 46px;
 				}
-			}
 
-			.ss-gridfield-item.ui-sortable-placeholder {
-				height: 50px;
+				&.newField {
+					position: fixed;
+					animation: rowSlide .5s ease forwards;
+				}
+
+				&.flashBackground {
+					animation: flashBackground 2s linear;
+				}
+
+				&.ui-sortable-placeholder {
+					height: 50px;
+				}
 			}
 
 			.ss-gridfield-item.inFieldGroup {
@@ -115,6 +139,24 @@
 				label {
 					color: #777;
 				}
+			}
+		}
+
+		.stickyButtons {
+			position: fixed;
+			top: 40px;
+			z-index: 2;
+			background: #E6EAED;
+			box-shadow: 0 12px 4px -8px #999;
+			padding: 12px;
+			margin-left: -12px;
+
+			& button.action {
+				margin-bottom: 0;
+			}
+
+			~ .ss-gridfield-table {
+				margin-top: 40px;
 			}
 		}
 	}
