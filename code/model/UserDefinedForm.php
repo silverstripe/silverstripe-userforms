@@ -342,7 +342,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->Content && $form = $this->Form()) {
 			$hasLocation = stristr($this->Content, '$UserDefinedForm');
 			if($hasLocation) {
-				$content = str_ireplace('$UserDefinedForm', $form->forTemplate(), $this->Content);
+				$content = preg_replace('/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i', $form->forTemplate(), $this->Content);
 				return array(
 					'Content' => DBField::create_field('HTMLText', $content),
 					'Form' => ""

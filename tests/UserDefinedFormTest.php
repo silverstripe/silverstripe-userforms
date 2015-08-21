@@ -353,4 +353,20 @@ class UserDefinedFormTest extends FunctionalTest {
 			$result4
 		);
 	}
+
+	public function testIndex() {
+		// Test that the $UserDefinedForm is stripped out
+		$page = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+		$page->publish('Stage', 'Live');
+
+		$result = $this->get($page->Link());
+		$body = Convert::nl2os($result->getBody(), ''); // strip out newlines
+		$this->assertFalse($result->isError());
+		$this->assertContains('<p>Here is my form</p><form', $body);
+		$this->assertContains('</form><p>Thank you for filling it out</p>', $body);
+		
+		$this->assertNotContains('<p>$UserDefinedForm</p>', $body);
+		$this->assertNotContains('<p></p>', $body);
+		$this->assertNotContains('</p><p>Thank you for filling it out</p>', $body);
+	}
 }
