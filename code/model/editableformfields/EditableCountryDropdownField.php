@@ -23,8 +23,12 @@ class EditableCountryDropdownField extends EditableFormField {
 	}
 	
 	public function getFormField() {
-		$field = CountryDropdownField::create($this->Name, $this->EscapedTitle);
+		$field = CountryDropdownField::create($this->Name, $this->EscapedTitle)
+			->setFieldHolderTemplate('UserFormsField_holder')
+			->setTemplate('UserFormsDropdownField');
+
 		$this->doUpdateFormField($field);
+
 		return $field;
 	}
 	

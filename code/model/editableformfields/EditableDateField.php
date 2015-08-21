@@ -43,9 +43,14 @@ class EditableDateField extends EditableFormField {
 		$defaultValue = $this->DefaultToToday
 			? SS_Datetime::now()->Format('Y-m-d')
 			: $this->Default;
-		$field = EditableDateField_FormField::create( $this->Name, $this->EscapedTitle, $defaultValue);
-		$field->setConfig('showcalendar', true);
+
+		$field = EditableDateField_FormField::create( $this->Name, $this->EscapedTitle, $defaultValue)
+			->setConfig('showcalendar', true)
+			->setFieldHolderTemplate('UserFormsField_holder')
+			->setTemplate('UserFormsField');
+
 		$this->doUpdateFormField($field);
+
 		return $field;
 	}
 }

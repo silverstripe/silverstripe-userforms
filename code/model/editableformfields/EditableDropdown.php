@@ -28,7 +28,9 @@ class EditableDropdown extends EditableMultipleOptionField {
 	 * @return DropdownField
 	 */
 	public function getFormField() {
-		$field = DropdownField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+		$field = DropdownField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap())
+			->setFieldHolderTemplate('UserFormsField_holder')
+			->setTemplate('UserFormsDropdownField');
 
 		// Set default
 		$defaultOption = $this->getDefaultOptions()->first();

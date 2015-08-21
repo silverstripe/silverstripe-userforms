@@ -52,9 +52,23 @@
   margin-top: 12px;
   margin-bottom: 12px;
 }
-.userformsgroup legend {
+.userformsgroup > legend {
   padding-left: 4px;
   padding-right: 4px;
   border: 0;
   width: auto;
+}
+
+.right-title {
+  clear: both;
+  display: block;
+}
+
+.checkbox .right-title {
+  display: inline;
+}
+
+.left {
+  margin-bottom: 5px;
+  font-weight: bold;
 }

@@ -29,8 +29,7 @@ class EditableFormHeading extends EditableFormField {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName('Default');
-		$fields->removeByName('Validation');
+		$fields->removeByName(array('Default', 'Validation', 'RightTitle'));
 
 		$levels = array(
 			'1' => '1',

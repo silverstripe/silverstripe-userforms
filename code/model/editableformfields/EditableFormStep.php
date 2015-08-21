@@ -24,7 +24,7 @@ class EditableFormStep extends EditableFormField {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName(array('MergeField', 'Default', 'Validation'));
+		$fields->removeByName(array('MergeField', 'Default', 'Validation', 'RightTitle'));
 
 		return $fields;
 	}

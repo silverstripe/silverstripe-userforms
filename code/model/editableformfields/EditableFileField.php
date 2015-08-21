@@ -35,7 +35,9 @@ class EditableFileField extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = FileField::create($this->Name, $this->EscapedTitle);
+		$field = FileField::create($this->Name, $this->EscapedTitle)
+			->setFieldHolderTemplate('UserFormsField_holder')
+			->setTemplate('UserFormsFileField');
 
 		// filter out '' since this would be a regex problem on JS end
 		$field->getValidator()->setAllowedExtensions(
