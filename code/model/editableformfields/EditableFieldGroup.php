@@ -54,7 +54,8 @@ class EditableFieldGroup extends EditableFormField {
 
 	public function getFormField() {
 		$field = UserFormsGroupField::create()
-			->setTitle($this->EscapedTitle ?: false);
+			->setTitle($this->EscapedTitle ?: false)
+			->setName($this->Name);
 		$this->doUpdateFormField($field);
 		return $field;
 	}

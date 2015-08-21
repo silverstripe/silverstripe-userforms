@@ -94,8 +94,7 @@ class EditableLiteralField extends EditableFormField {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName('Default');
-		$fields->removeByName('Validation');
+		$fields->removeByName(array('Default', 'Validation', 'RightTitle'));
 
 		$fields->addFieldsToTab('Root.Main', array(
 			HTMLEditorField::create('Content', _t('EditableLiteralField.CONTENT', 'HTML'))

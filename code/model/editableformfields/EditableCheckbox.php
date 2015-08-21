@@ -32,8 +32,12 @@ class EditableCheckbox extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = CheckboxField::create($this->Name, $this->EscapedTitle, $this->CheckedDefault);
+		$field = CheckboxField::create($this->Name, $this->EscapedTitle, $this->CheckedDefault)
+			->setFieldHolderTemplate('UserFormsCheckboxField_holder')
+			->setTemplate('UserFormsCheckboxField');
+
 		$this->doUpdateFormField($field);
+
 		return $field;
 	}
 	
