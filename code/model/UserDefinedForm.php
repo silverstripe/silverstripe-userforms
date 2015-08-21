@@ -174,8 +174,9 @@ SQL;
 			$config->addComponent(new GridFieldPageCount('toolbar-header-right'));
 			$config->addComponent($pagination = new GridFieldPaginator(25));
 			$config->addComponent(new GridFieldDetailForm());
-			$config->addComponent($export = new GridFieldExportButton());
-			$config->addComponent($print = new GridFieldPrintButton());
+			$config->addComponent(new GridFieldButtonRow('after'));
+			$config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
+			$config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
 			
 			/**
 			 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
