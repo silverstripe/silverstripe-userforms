@@ -321,6 +321,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
 		Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
 		Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+
 		Requirements::javascript(
 			USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
 		);

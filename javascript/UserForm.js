@@ -557,12 +557,19 @@ jQuery(function ($) {
 
 		this.$el = element instanceof jQuery ? element : $(element);
 
+		this.$prevButton = this.$el.find('.step-button-prev');
+		this.$nextButton = this.$el.find('.step-button-next');
+
+		// Show the buttons.
+		this.$prevButton.parent().attr('aria-hidden', false).show();
+		this.$nextButton.parent().attr('aria-hidden', false).show();
+
 		// Bind the step navigation event listeners.
-		this.$el.find('.step-button-prev').on('click', function (e) {
+		this.$prevButton.on('click', function (e) {
 			e.preventDefault();
 			self.$el.trigger('userform.action.prev');
 		});
-		this.$el.find('.step-button-next').on('click', function (e) {
+		this.$nextButton.on('click', function (e) {
 			e.preventDefault();
 			self.$el.trigger('userform.action.next');
 		});
@@ -620,6 +627,11 @@ jQuery(function ($) {
 			formActions = null,
 			$userform = $('.userform');
 
+		// If there's no userform, do nothing.
+		if ($userform.length === 0) {
+			return;
+		}
+
 		CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
 		CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== void 0;
 		CONSTANTS.HIDE_FIELD_LABELS = $userform.data('hidefieldlabels') !== void 0;
@@ -673,13 +685,6 @@ jQuery(function ($) {
 		// Initialise actions and progressbar
 		progressBar = new ProgressBar($('#userform-progress'));
 		formActions = new FormActions($('#step-navigation'));
-
-		// Hide the form-wide actions on multi-step forms.
-		// Because JavaScript is enabled we'll use the actions contained
-		// in the final step's navigation.
-		if (userform.steps.length > 1) {
-			userform.$el.children('.Actions').attr('aria-hidden', true).hide();
-		}
 
 		// Enable jQuery UI datepickers
 		$(document).on('click', 'input.text[data-showcalendar]', function() {
