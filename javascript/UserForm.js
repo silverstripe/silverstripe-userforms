@@ -43,7 +43,7 @@ jQuery(function ($) {
 		// Add an error container which displays a list of invalid steps on form submission.
 		this.errorContainer = new ErrorContainer(this.$el.children('.error-container'));
 
-		// Listen for events triggered my form steps.
+		// Listen for events triggered by form steps.
 		this.$el.on('userform.action.prev', function (e) {
 			self.prevStep();
 		});
@@ -63,6 +63,13 @@ jQuery(function ($) {
 
 		this.$el.validate(this.validationOptions);
 
+		// Ensure checkbox groups are validated correctly
+		$('.optionset.requiredField input').each(function() {
+		    $(this).rules('add', {
+		        required: true
+		    });
+		});
+
 		return this;
 	}
 
@@ -76,11 +83,19 @@ jQuery(function ($) {
 		errorPlacement: function (error, element) {
 			error.addClass('message');
 
-			if(element.is(':radio') || element.parents('.checkboxset').length > 0) {
+			if (element.is(':radio') || element.parents('.checkboxset').length > 0) {
 				error.insertAfter(element.closest('ul'));
+			} else if (element.parents('.checkbox').length > 0) {
+				error.insertAfter(element.next('label'));
 			} else {
 				error.insertAfter(element);
 			}
+		},
+		invalidHandler: function (event, validator) {
+			//setTimeout 0 so it runs after errorPlacement
+			setTimeout(function () {
+				validator.currentElements.filter('.error').first().focus();
+			}, 0);
 		},
 		// Callback for handling the actual submit when the form is valid.
 		// Submission in the jQuery.validate sence is handled at step level.
@@ -109,12 +124,21 @@ jQuery(function ($) {
 		},
 		// When a field becomes valid.
 		success: function (error) {
-			var errorId = $(error).attr('id');
+			var errorId = $(error).attr('id'),
+				fieldId = errorId.substr(0, errorId.indexOf('-error')),
+				isCheckboxGroup = $(error).closest('.requiredField').hasClass('checkboxset');
+
+			// We need to escapse the field id if it's a checkboxfield
+			// because jQuery breaks when using selector that end with
+			// square brackets.
+			if (isCheckboxGroup) {
+				fieldId = fieldId.replace('[]', '\\\\[\\\\]');
+			}
 
 			error.remove();
 
 			// Pass the field's ID with the event.
-			userform.$el.trigger('userform.form.valid', [errorId.substr(0, errorId.indexOf('-error'))]);
+			userform.$el.trigger('userform.form.valid', [fieldId]);
 		}
 	};
 
