@@ -87,7 +87,7 @@
 
 		<% if $HideFieldLabels %>
 			// Hide field labels (use HTML5 placeholder instead)
-			$("#" + formId + "label.left").each(function() {
+			$("#" + formId + " label.left").each(function() {
 				$("#"+$(this).attr("for"))
 					.attr("placeholder", $(this).text());
 				$(this).remove();
