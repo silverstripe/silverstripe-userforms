@@ -1,5 +1,5 @@
 <fieldset id="$Name" class="field<% if $extraClass %> $extraClass<% end_if %>"<% if $RightTitle %> aria-describedby="{$Name}_right_title"<% end_if %>>
-	<% if $Title %><legend class="left">$Title</legend><% end_if %>
+	<% if $Title %><legend class="left">$Title <% if $Required %><span class="req-indicator">(required)</span><% end_if %></legend><% end_if %>
 
 	<div class="middleColumn">
 		$Field
