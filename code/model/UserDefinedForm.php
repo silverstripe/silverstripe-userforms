@@ -706,11 +706,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							// what action do we need to keep track of. Something nicer here maybe?
 							// @todo encapulsation
 							$action = "change";
-							
-							if($formFieldWatch->ClassName == "EditableTextField") {
-								$action = "keyup";
-							}
-							
+
 							// is this field a special option field
 							$checkboxField = false;
 							$radioField = false;
