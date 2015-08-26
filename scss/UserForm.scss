@@ -85,3 +85,20 @@
 	margin-bottom: 5px;
 	font-weight: bold;
 }
+
+//Required fields
+span.req-indicator {
+	position:relative;
+	color: red;
+	overflow: hidden;
+	text-indent: -999px;
+	display: inline-block;
+	width: 6px;
+	height: 16px;
+	&:after{
+		content: "*";
+		position:absolute;
+		left:0;
+		text-indent:0%;
+	}
+}
