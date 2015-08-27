@@ -102,4 +102,12 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertNotContains('notallowedextension', $formField->getValidator()->getAllowedExtensions());
 	}
 
+	public function testFileFieldAllowedExtensionsBlacklist() {
+		Config::inst()->update('EditableFileField', 'allowed_extensions_blacklist', array('jpg'));
+		$fileField = $this->objFromFixture('EditableFileField', 'file-field');
+		$formField = $fileField->getFormField();
+
+		$this->assertNotContains('jpg', $formField->getValidator()->getAllowedExtensions());
+	}
+
 }
