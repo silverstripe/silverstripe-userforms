@@ -193,7 +193,7 @@ class EditableFormField extends DataObject {
 			$fields->addFieldToTab('Root.Main',
 				TextField::create(
 					'ExtraClass',
-					_t('EditableFormField.EXTRACLASS_Title', 'Extra CSS Classes')
+					_t('EditableFormField.EXTRACLASS_Title', 'Extra CSS classes')
 				)->setDescription(_t(
 					'EditableFormField.EXTRACLASS_MULTIPLE',
 					'Separate each CSS class with a single space'
