@@ -111,6 +111,10 @@ The folder that this field uploads to can be customised by selecting "Show Optio
 and then selecting a new folder from the "Select upload folder" option. If no folder
 is selected it will upload by default to the "Uploads" folder.
 
+Only certain file extensions are considered safe for upload,
+e.g. webserver script files will be denied but images will be allowed.
+The webserver environment also imposes a limit on file size by default.
+
 #### Heading
 
 Selecting a Heading allows adds a place where you can put a heading for a form, or for
