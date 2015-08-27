@@ -103,6 +103,7 @@ de_DE:
     PLURALNAME: 'Textfelder'
     SINGULARNAME: 'Textfeld'
     TEXTLENGTH: 'Textlänge'
+    PLACEHOLDER: 'Platzhalter'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   FieldEditor:

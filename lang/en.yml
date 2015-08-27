@@ -141,6 +141,7 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
+    PLACEHOLDER: 'Placeholder'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:

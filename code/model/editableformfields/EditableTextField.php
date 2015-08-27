@@ -16,7 +16,8 @@ class EditableTextField extends EditableFormField {
 	private static $db = array(
 		'MinLength' => 'Int',
 		'MaxLength' => 'Int',
-		'Rows' => 'Int(1)'
+		'Rows' => 'Int(1)',
+        'Placeholder' => 'Varchar(255)'
 	);
 
 	private static $defaults = array(
@@ -35,6 +36,14 @@ class EditableTextField extends EditableFormField {
 					'Fields with more than one row will be generated as a textarea'
 				))
 			);
+
+            $fields->addFieldToTab(
+                'Root.Main',
+                TextField::create(
+                    'Placeholder',
+                    _t('EditableTextField.PLACEHOLDER', 'Placeholder')
+                )
+            );
 		});
 
 		return parent::getCMSFields();
@@ -95,5 +104,9 @@ class EditableTextField extends EditableFormField {
 		if($this->MaxLength) {
 			$field->setAttribute('data-rule-maxlength', $this->MaxLength);
 		}
+
+        if($this->Placeholder) {
+            $field->setAttribute('placeholder', $this->Placeholder);
+        }
 	}
 }
