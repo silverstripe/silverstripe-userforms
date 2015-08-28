@@ -17,6 +17,13 @@ class EditableFileField extends EditableFormField {
 	);
 
 	/**
+	 * Disable file upload fields by default since every implementation
+	 * needs to first consider how to secure files uploaded in the webroot.
+	 * Please check the installation documenation for more details.
+	 */
+	private static $hidden = true;
+
+	/**
 	 * @return FieldList
 	 */
 	public function getCMSFields() {

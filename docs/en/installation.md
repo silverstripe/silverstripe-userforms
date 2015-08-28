@@ -21,26 +21,34 @@ You should see a new PageType in the CMS 'User Defined Form'. This has a new 'Fo
 
 ## File Uploads and Security
 
-The module allows adding a "File Upload Field" to a form,
-which enables users of this form to upload files to the website's assets
+The module optionally allows adding a "File Upload Field" to a form.
+The field enables users of this form to upload files to the website's assets
 so they can be viewed later by CMS authors. Small files
 are also attached to the (optional) email notifications
 to any configured recipients.
 
-Allowed file extensions can be configured globally through `File.allowed_extensions`,
-and default to a safe set of files (e.g. disallowing `*.php` uploads).
-The allowed upload size is determined by PHP configuration
-for this website (the smaller value of `upload_max_filesize` or `post_max_size`).
-
+The field is disabled by default since implementors need to determine how files are secured.
 Since uploaded files are kept in `assets/` folder of the webroot, there is no built-in
 permission control around who can view them. It is unlikely
 that website users guess the URLs to uploaded files unless
 they are specifically exposed through custom code.
 
-Nevertheless, you should think carefully about the use case for file uploads.
+You should think carefully about the use case for file uploads.
 Unauthorised viewing of files might be desired, e.g. submissions for public competitions. 
 In other cases, submissions could be expected to contain private data.
 Please consider securing these files, e.g. through the [secureassets](http://addons.silverstripe.org/add-ons/silverstripe/secureassets) module.
+
+The field can be enabled with the following configuration setting:
+
+```yml
+EditableFileField:
+  hidden: false
+```
+
+Allowed file extensions can be configured globally through `File.allowed_extensions`,
+and default to a safe set of files (e.g. disallowing `*.php` uploads).
+The allowed upload size is determined by PHP configuration
+for this website (the smaller value of `upload_max_filesize` or `post_max_size`).
 
 ### Custom email templates
 

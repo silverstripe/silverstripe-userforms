@@ -106,6 +106,8 @@ automatically when a form is filled out.
 
 Selecting a File Upload Field adds a field where users can upload a file from their
 computers. This is useful for getting documents and media files.
+This field is disabled by default. Please talk to your CMS administrator for details
+if the functionality is not available in your CMS installation.
 
 The folder that this field uploads to can be customised by selecting "Show Options"
 and then selecting a new folder from the "Select upload folder" option. If no folder
