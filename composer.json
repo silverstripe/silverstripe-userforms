@@ -15,7 +15,8 @@
 		"silverstripe/segment-field": "^1.0"
 	},
 	"suggest": {
-		"colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions"
+		"colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
+		"silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access"
 	},
 	"extra": {
 		"branch-alias": {
