@@ -17,6 +17,15 @@ class EditableFileField extends EditableFormField {
 	);
 
 	/**
+	 * Further limit uploadable file extensions in addition to the restrictions
+	 * imposed by the File.allowed_extensions global configuration.
+	 * @config
+	 */
+	private static $allowed_extensions_blacklist = array(
+		'htm', 'html', 'xhtml', 'swf', 'xml'
+	);
+
+	/**
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
@@ -44,9 +53,12 @@ class EditableFileField extends EditableFormField {
 			->setFieldHolderTemplate('UserFormsField_holder')
 			->setTemplate('UserFormsFileField');
 
-		// filter out '' since this would be a regex problem on JS end
 		$field->getValidator()->setAllowedExtensions(
-			array_filter(Config::inst()->get('File', 'allowed_extensions'))
+			array_diff(
+				// filter out '' since this would be a regex problem on JS end
+				array_filter(Config::inst()->get('File', 'allowed_extensions')),
+				$this->config()->allowed_extensions_blacklist
+			)
 		);
 
 		$folder = $this->Folder();

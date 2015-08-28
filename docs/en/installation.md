@@ -29,6 +29,9 @@ to any configured recipients.
 
 Allowed file extensions can be configured globally through `File.allowed_extensions`,
 and default to a safe set of files (e.g. disallowing `*.php` uploads).
+You can define further exclusions through the `EditableFileField.allowed_extensions_blacklist`
+configuration setting.
+
 The allowed upload size is determined by PHP configuration
 for this website (the smaller value of `upload_max_filesize` or `post_max_size`).
 
