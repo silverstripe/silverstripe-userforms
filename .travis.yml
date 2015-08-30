@@ -40,7 +40,4 @@ before_script:
   - cd ~/builds/ss
 
 script: 
-  - phpunit --coverage-clover userforms/coverage.clover userforms/tests
-  - cd userforms
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - phpunit userforms/tests
