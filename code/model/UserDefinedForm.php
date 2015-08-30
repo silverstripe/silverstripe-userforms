@@ -162,7 +162,11 @@ LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."Parent
 WHERE "SubmittedForm"."ParentID" = '$parentID'
 ORDER BY "Title" ASC
 SQL;
-			$columns = DB::query($columnSQL)->map();
+			// Sanitise periods in title
+			$columns = array();
+			foreach(DB::query($columnSQL)->map() as $name => $title) {
+				$columns[$name] = trim(strtr($title, '.', ' '));
+			}
 			
 			$config = new GridFieldConfig();
 			$config->addComponent(new GridFieldToolbarHeader());
