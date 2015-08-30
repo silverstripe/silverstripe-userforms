@@ -94,7 +94,7 @@ class UserDefinedForm extends Page {
 	 public function getCMSFields() {
 		
 		$self = $this;
-		
+		Session::set('CMSMain.currentPage',$this->ID); // hack to support modeladmin
 		$this->beforeUpdateCMSFields(function($fields) use ($self) {
 			
 			// define tabs
