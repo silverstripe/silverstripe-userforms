@@ -29,10 +29,14 @@ matrix:
       env: DB=PGSQL CORE_RELEASE=3.1
     - php: 5.6
       env: DB=PGSQL CORE_RELEASE=3.1
+  include:
+    - php: 5.4
+      env: DB=MYSQL CORE_RELEASE=3.1 SECUREASSETS=1
 
 before_script:
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
-  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+  - "if [ \"$SECUREASSETS\" = \"\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss; fi"
+  - "if [ \"$SECUREASSETS\" = \"1\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require silverstripe/secureassets; fi"
   - cd ~/builds/ss
 
 script: 

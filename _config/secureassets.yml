@@ -1,0 +1,16 @@
+---
+Name: userformssecurity
+Only:
+  ModuleExists: secureassets
+---
+EditableFileField:
+  extensions:
+    - SecureEditableFileField
+
+---
+Name: userformsnosecurity
+Except:
+  ModuleExists: secureassets
+---
+EditableFileField:
+  hidden: true
