@@ -8,7 +8,7 @@
 class EditableCountryDropdownField extends EditableFormField {
 
 	private static $singular_name = 'Country Dropdown';
-	
+
 	private static $plural_name = 'Country Dropdowns';
 
 	/**
@@ -21,7 +21,7 @@ class EditableCountryDropdownField extends EditableFormField {
 
 		return $fields;
 	}
-	
+
 	public function getFormField() {
 		$field = CountryDropdownField::create($this->Name, $this->EscapedTitle)
 			->setFieldHolderTemplate('UserFormsField_holder')
@@ -31,14 +31,14 @@ class EditableCountryDropdownField extends EditableFormField {
 
 		return $field;
 	}
-	
+
 	public function getValueFromData($data) {
 		if(isset($data[$this->Name])) {
 			$source = $this->getFormField()->getSource();
 			return $source[$data[$this->Name]];
 		}
 	}
-	
+
 	public function getIcon() {
 		return  USERFORMS_DIR . '/images/editabledropdown.png';
 	}

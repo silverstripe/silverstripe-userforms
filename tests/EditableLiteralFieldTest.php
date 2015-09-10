@@ -24,7 +24,7 @@ class EditableLiteralFieldTest extends SapphireTest {
 		$rawContent = '<h1>Welcome</h1><script>alert("Hello!");</script><p>Giant Robots!</p>';
 		$safeContent = '<h1>Welcome</h1><p>Giant Robots!</p>';
 		$field = new EditableLiteralField();
-		
+
 		// Test with sanitisation enabled
 		Config::inst()->update('HtmlEditorField', 'sanitise_server_side', true);
 		$field->setContent($rawContent);

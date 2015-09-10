@@ -14,7 +14,7 @@ class UserFormsGroupField extends UserFormsCompositeField {
 		// Legend defaults to title
 		return parent::getLegend() ?: $this->Title();
 	}
-	
+
 	public function processNext(EditableFormField $field) {
 		// When ending a group, jump up one level
 		if($field instanceof EditableFieldGroupEnd) {

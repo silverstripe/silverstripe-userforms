@@ -4,9 +4,9 @@
  * @package userforms
  */
 class UserDefinedFormTest extends FunctionalTest {
-	
+
 	static $fixture_file = 'UserDefinedFormTest.yml';
-	
+
 	public function testRollbackToVersion() {
 		$this->markTestSkipped(
 			'UserDefinedForm::rollback() has not been implemented completely'
@@ -364,7 +364,7 @@ class UserDefinedFormTest extends FunctionalTest {
 		$this->assertFalse($result->isError());
 		$this->assertContains('<p>Here is my form</p><form', $body);
 		$this->assertContains('</form><p>Thank you for filling it out</p>', $body);
-		
+
 		$this->assertNotContains('<p>$UserDefinedForm</p>', $body);
 		$this->assertNotContains('<p></p>', $body);
 		$this->assertNotContains('</p><p>Thank you for filling it out</p>', $body);

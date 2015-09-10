@@ -8,15 +8,15 @@
  */
 
 class EditableEmailField extends EditableFormField {
-	
+
 	private static $singular_name = 'Email Field';
-	
+
 	private static $plural_name = 'Email Fields';
-	
+
 	public function getSetsOwnError() {
 		return true;
 	}
-	
+
 	public function getFormField() {
 		$field = EmailField::create($this->Name, $this->EscapedTitle, $this->Default)
 			->setFieldHolderTemplate('UserFormsField_holder')
@@ -26,7 +26,7 @@ class EditableEmailField extends EditableFormField {
 
 		return $field;
 	}
-	
+
 	/**
 	 * Updates a formfield with the additional metadata specified by this field
 	 *

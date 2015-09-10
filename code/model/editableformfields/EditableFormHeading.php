@@ -8,7 +8,7 @@
 class EditableFormHeading extends EditableFormField {
 
 	private static $singular_name = 'Heading';
-	
+
 	private static $plural_name = 'Headings';
 
 	private static $literal = true;
@@ -39,7 +39,7 @@ class EditableFormHeading extends EditableFormField {
 			'5' => '5',
 			'6' => '6'
 		);
-		
+
 		$fields->addFieldsToTab('Root.Main', array(
 			DropdownField::create(
 				'Level',
@@ -74,11 +74,11 @@ class EditableFormHeading extends EditableFormField {
 			$field->addExtraClass($this->ExtraClass);
 		}
 	}
-	
+
 	public function showInReports() {
 		return !$this->HideFromReports;
 	}
-	
+
 	public function getFieldValidationOptions() {
 		return false;
 	}

@@ -89,7 +89,7 @@ class UserForm extends Form {
 	}
 
 	/**
-	 * Generate the form actions for the UserDefinedForm. You 
+	 * Generate the form actions for the UserDefinedForm. You
 	 * can manipulate these by using {@link updateFormActions()} on
 	 * a decorator.
 	 *

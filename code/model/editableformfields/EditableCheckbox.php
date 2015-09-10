@@ -3,14 +3,14 @@
  * EditableCheckbox
  *
  * A user modifiable checkbox on a UserDefinedForm
- * 
+ *
  * @package userforms
  */
 
 class EditableCheckbox extends EditableFormField {
-	
+
 	private static $singular_name = 'Checkbox Field';
-	
+
 	private static $plural_name = 'Checkboxes';
 
 	private static $db = array(
@@ -40,10 +40,10 @@ class EditableCheckbox extends EditableFormField {
 
 		return $field;
 	}
-	
+
 	public function getValueFromData($data) {
 		$value = (isset($data[$this->Name])) ? $data[$this->Name] : false;
-		
+
 		return ($value) ? _t('EditableFormField.YES', 'Yes') : _t('EditableFormField.NO', 'No');
 	}
 
@@ -53,7 +53,7 @@ class EditableCheckbox extends EditableFormField {
 			$this->CheckedDefault = (bool)$data['Default'];
 			unset($data['Default']);
 		}
-		
+
 		parent::migrateSettings($data);
 	}
 }

@@ -5,7 +5,7 @@
  */
 
 class UserDefinedForm extends Page {
-	
+
 	/**
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class UserDefinedForm extends Page {
 	private static $extensions = array(
 		'UserFormFieldEditorExtension'
 	);
-	
+
 	/**
 	 * @var array Fields on the user defined form page.
 	 */
@@ -53,10 +53,10 @@ class UserDefinedForm extends Page {
 		'DisableAuthenicatedFinishAction' => 'Boolean',
 		'DisableCsrfSecurityToken' => 'Boolean'
 	);
-	
+
 	/**
 	 * @var array Default values of variables when this page is created
-	 */ 
+	 */
 	private static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
@@ -99,34 +99,34 @@ class UserDefinedForm extends Page {
 	 */
 	 public function getCMSFields() {
 		Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
-		
+
 		$self = $this;
-		
+
 		$this->beforeUpdateCMSFields(function($fields) use ($self) {
-			
+
 			// define tabs
 			$fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
 			$fields->findOrMakeTab('Root.Recipients', _t('UserDefinedForm.RECIPIENTS', 'Recipients'));
 			$fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
-			
+
 			// text to show on complete
 			$onCompleteFieldSet = new CompositeField(
 				$label = new LabelField('OnCompleteMessageLabel',_t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
 				$editor = new HtmlEditorField( 'OnCompleteMessage', '', _t('UserDefinedForm.ONCOMPLETEMESSAGE', $self->OnCompleteMessage))
 			);
-			
+
 			$onCompleteFieldSet->addExtraClass('field');
-			
+
 			$editor->setRows(3);
 			$label->addExtraClass('left');
-			
+
 			// Define config for email recipients
 			$emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
 			$emailRecipientsConfig->getComponentByType('GridFieldAddNewButton')
 				->setButtonName(
 					_t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
 				);
-			
+
 			// who do we email on submission
 			$emailRecipients = new GridField(
 				'EmailRecipients',
@@ -138,22 +138,22 @@ class UserDefinedForm extends Page {
 				->getConfig()
 				->getComponentByType('GridFieldDetailForm')
 				->setItemRequestClass('UserFormRecipientItemRequest');
-			
+
 			$fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
 			$fields->addFieldToTab('Root.Recipients', $emailRecipients);
 			$fields->addFieldsToTab('Root.FormOptions', $self->getFormOptions());
-			
-			
+
+
 			// view the submissions
 			$submissions = new GridField(
-				'Submissions', 
+				'Submissions',
 				_t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
 				 $self->Submissions()->sort('Created', 'DESC')
 			);
-			
+
 			// make sure a numeric not a empty string is checked against this int column for SQL server
 			$parentID = (!empty($self->ID)) ? $self->ID : 0;
-			
+
 			// get a list of all field names and values used for print and export CSV views of the GridField below.
 			$columnSQL = <<<SQL
 SELECT "Name", "Title"
@@ -167,7 +167,7 @@ SQL;
 			foreach(DB::query($columnSQL)->map() as $name => $title) {
 				$columns[$name] = trim(strtr($title, '.', ' '));
 			}
-			
+
 			$config = new GridFieldConfig();
 			$config->addComponent(new GridFieldToolbarHeader());
 			$config->addComponent($sort = new GridFieldSortableHeader());
@@ -181,39 +181,39 @@ SQL;
 			$config->addComponent(new GridFieldButtonRow('after'));
 			$config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
 			$config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
-			
+
 			/**
 			 * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
 			 */
 			if(class_exists('GridFieldBulkManager')) {
 				$config->addComponent(new GridFieldBulkManager());
 			}
-			
+
 			$sort->setThrowExceptionOnBadDataType(false);
 			$filter->setThrowExceptionOnBadDataType(false);
 			$pagination->setThrowExceptionOnBadDataType(false);
-			
-			// attach every column to the print view form 
+
+			// attach every column to the print view form
 			$columns['Created'] = 'Created';
 			$filter->setColumns($columns);
-			
+
 			// print configuration
-			
+
 			$print->setPrintHasHeader(true);
 			$print->setPrintColumns($columns);
-			
+
 			// export configuration
 			$export->setCsvHasHeader(true);
 			$export->setExportColumns($columns);
-			
+
 			$submissions->setConfig($config);
 			$fields->addFieldToTab('Root.Submissions', $submissions);
 			$fields->addFieldToTab('Root.FormOptions', new CheckboxField('DisableSaveSubmissions', _t('UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')));
-			
+
 		});
-		
+
 		$fields = parent::getCMSFields();
-		
+
 		return $fields;
 	}
 
@@ -239,7 +239,7 @@ SQL;
 	}
 
 	/**
-	 * Custom options for the form. You can extend the built in options by 
+	 * Custom options for the form. You can extend the built in options by
 	 * using {@link updateFormOptions()}
 	 *
 	 * @return FieldList
@@ -247,7 +247,7 @@ SQL;
 	public function getFormOptions() {
 		$submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
 		$clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
-		
+
 		$options = new FieldList(
 			new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $submit),
 			new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
@@ -258,9 +258,9 @@ SQL;
 			new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
 			new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
 		);
-		
+
 		$this->extend('updateFormOptions', $options);
-		
+
 		return $options;
 	}
 
@@ -285,7 +285,7 @@ SQL;
 			->create('UserFormsUpgradeService')
 			->setQuiet(true)
 			->run();
-		
+
 		DB::alteration_message('Migrated userforms', 'changed');
 	}
 
@@ -305,7 +305,7 @@ SQL;
  */
 
 class UserDefinedForm_Controller extends Page_Controller {
-	
+
 	private static $finished_anchor = '#uff';
 
 	private static $allowed_actions = array(
@@ -317,7 +317,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 	public function init() {
 		parent::init();
-		
+
 		// load the jquery
 		$lang = i18n::get_lang_from_locale(i18n::get_locale());
 		Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
@@ -336,7 +336,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 			Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
 		}
 	}
-	
+
 	/**
 	 * Using $UserDefinedForm in the Content area of the page shows
 	 * where the form should be rendered into. If it does not exist
@@ -444,7 +444,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 							break;
 						case 'IsBlank':
 							$expression = ($checkboxField || $radioField) ? '!($(this).is(":checked"))' : '$(this).val() == ""';
-							
+
 							break;
 						case 'HasValue':
 							if ($checkboxField) {
@@ -459,11 +459,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 							break;
 						case 'ValueLessThan':
 							$expression = '$(this).val() < parseFloat("'. $rule->FieldValue .'")';
-							
+
 							break;
 						case 'ValueLessThanEqual':
 							$expression = '$(this).val() <= parseFloat("'. $rule->FieldValue .'")';
-							
+
 							break;
 						case 'ValueGreaterThan':
 							$expression = '$(this).val() > parseFloat("'. $rule->FieldValue .'")';
@@ -502,7 +502,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				}
 			}
 		}
-		
+
 		if($watch) {
 			foreach($watch as $key => $values) {
 				$logic = array();
@@ -614,7 +614,7 @@ JS
 				if(in_array("EditableFileField", $field->getClassAncestry())) {
 					if(isset($_FILES[$field->Name])) {
 						$foldername = $field->getFormField()->getFolderName();
-						
+
 						// create the file from post data
 						$upload = new Upload();
 						$file = new File();
@@ -630,7 +630,7 @@ JS
 
 						// write file to form field
 						$submittedField->UploadedFileID = $file->ID;
-						
+
 						// attach a file only if lower than 1MB
 						if($file->getAbsoluteSize() < 1024*1024*1) {
 							$attachments[] = $file;
@@ -640,7 +640,7 @@ JS
 			}
 
 			$submittedField->extend('onPopulationFromField', $field);
-			
+
 			if(!$this->DisableSaveSubmissions) {
 				$submittedField->write();
 			}
@@ -664,8 +664,8 @@ JS
 				foreach($attachments as $file) {
 					if($file->ID != 0) {
 						$email->attachFile(
-							$file->Filename, 
-							$file->Filename, 
+							$file->Filename,
+							$file->Filename,
 							HTTP::get_mime_type($file->Filename)
 						);
 					}
@@ -685,7 +685,7 @@ JS
 				$email->setBody($parsedBody);
 				$email->setTo($recipient->EmailAddress);
 				$email->setSubject($recipient->EmailSubject);
-				
+
 				if($recipient->EmailReplyTo) {
 					$email->setReplyTo($recipient->EmailReplyTo);
 				}
@@ -701,12 +701,12 @@ JS
 				// check to see if they are a dynamic reciever eg based on a dropdown field a user selected
 				if($recipient->SendEmailToField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
-					
+
 					if($submittedFormField && is_string($submittedFormField->Value)) {
 						$email->setTo($submittedFormField->Value);
 					}
 				}
-				
+
 				// check to see if there is a dynamic subject
 				if($recipient->SendEmailSubjectField()) {
 					$submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
@@ -739,10 +739,10 @@ JS
 
 		Session::clear("FormInfo.{$form->FormName()}.errors");
 		Session::clear("FormInfo.{$form->FormName()}.data");
-		
+
 		$referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 
-		// set a session variable from the security ID to stop people accessing 
+		// set a session variable from the security ID to stop people accessing
 		// the finished method directly.
 		if(!$this->DisableAuthenicatedFinishAction) {
 			if (isset($data['SecurityID'])) {
@@ -783,7 +783,7 @@ JS
 	}
 
 	/**
-	 * This action handles rendering the "finished" message, which is 
+	 * This action handles rendering the "finished" message, which is
 	 * customizable by editing the ReceivedFormSubmission template.
 	 *
 	 * @return ViewableData
@@ -796,7 +796,7 @@ JS
 		}
 
 		$referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
-		
+
 		if(!$this->DisableAuthenicatedFinishAction) {
 			$formProcessed = Session::get('FormProcessed');
 

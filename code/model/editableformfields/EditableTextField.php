@@ -10,7 +10,7 @@
 class EditableTextField extends EditableFormField {
 
 	private static $singular_name = 'Text Field';
-	
+
 	private static $plural_name = 'Text Fields';
 
 	private static $db = array(

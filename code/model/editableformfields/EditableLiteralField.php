@@ -3,14 +3,14 @@
 /**
  * Editable Literal Field. A literal field is just a blank slate where
  * you can add your own HTML / Images / Flash
- * 
+ *
  * @package userforms
  */
 
 class EditableLiteralField extends EditableFormField {
-	
+
 	private static $singular_name = 'HTML Block';
-	
+
 	private static $plural_name = 'HTML Blocks';
 
 	/**
@@ -118,7 +118,7 @@ class EditableLiteralField extends EditableFormField {
 		} else {
 			$label = "<label class='left'>{$this->EscapedTitle}</label>";
 		}
-		
+
 		$field = new LiteralField(
 			"LiteralField[{$this->ID}]",
 			sprintf(
@@ -136,7 +136,7 @@ class EditableLiteralField extends EditableFormField {
 		// When dealing with literal fields there is no further customisation that can be added at this point
 		return $field;
 	}
-	
+
 	public function showInReports() {
 		return ! $this->HideFromReports;
 	}

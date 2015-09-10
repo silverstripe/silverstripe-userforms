@@ -11,7 +11,7 @@ class SecureEditableFileFieldTest extends SapphireTest {
 
 	public function setUp() {
 		parent::setUp();
-		
+
 		if(!class_exists('SecureFileExtension')) {
 			$this->skipTest = true;
 			$this->markTestSkipped(get_class() . ' skipped unless running with securefiles');

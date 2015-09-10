@@ -42,7 +42,7 @@ class EditableCustomRule extends DataObject {
 
 	/**
 	 * Publish this custom rule to the live site
-	 * 
+	 *
 	 * Wrapper for the {@link Versioned} publish function
 	 */
 	public function doPublish($fromStage, $toStage, $createNewVersion = false) {

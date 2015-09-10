@@ -6,13 +6,13 @@
  */
 
 class SubmittedFormField extends DataObject {
-	
+
 	private static $db = array(
 		"Name" => "Varchar",
 		"Value" => "Text",
 		"Title" => "Varchar(255)"
 	);
-	
+
 	private static $has_one = array(
 		"Parent" => "SubmittedForm"
 	);
@@ -68,7 +68,7 @@ class SubmittedFormField extends DataObject {
 	public function getFormattedValue() {
 		return nl2br($this->dbObject('Value')->ATT());
 	}
-	
+
 	/**
 	 * Return the value of this submitted form field suitable for inclusion
 	 * into the CSV
@@ -84,7 +84,7 @@ class SubmittedFormField extends DataObject {
 	 *
 	 * Note the field may have been modified or deleted from the original form
 	 * so this may not always return the data you expect. If you need to save
-	 * a particular state of editable form field at time of submission, copy 
+	 * a particular state of editable form field at time of submission, copy
 	 * that value to the submission.
 	 *
 	 * @return EditableFormField

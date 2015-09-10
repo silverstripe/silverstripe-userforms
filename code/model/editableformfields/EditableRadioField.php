@@ -8,9 +8,9 @@
  */
 
 class EditableRadioField extends EditableMultipleOptionField {
-	
+
 	private static $singular_name = 'Radio Group';
-	
+
 	private static $plural_name = 'Radio Groups';
 
 	/**
@@ -23,7 +23,7 @@ class EditableRadioField extends EditableMultipleOptionField {
 
 		return $fields;
 	}
-	
+
 	public function getFormField() {
 		$field = OptionsetField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
 		$field->setFieldHolderTemplate('UserFormsMultipleOptionField_holder');

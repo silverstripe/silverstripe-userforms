@@ -16,7 +16,7 @@ class EditableFieldGroupEnd extends EditableFormField {
 	 * @var bool
 	 */
 	private static $hidden = true;
-	
+
 	/**
 	 * Non-data type
 	 *
@@ -73,7 +73,7 @@ class EditableFieldGroupEnd extends EditableFormField {
 				->where('"EditableFieldGroup"."EndID" IS NULL OR "EditableFieldGroup"."EndID" = 0')
 				->sort('"Sort" DESC')
 				->first();
-			
+
 			// When a group is found, attach it to this end
 			if($group) {
 				$group->EndID = $this->ID;
@@ -90,5 +90,5 @@ class EditableFieldGroupEnd extends EditableFormField {
 			$group->delete();
 		}
 	}
-	
+
 }
