@@ -41,9 +41,9 @@ class EditableFileField extends EditableFormField {
 		);
 
 		$fields->addFieldToTab("Root.Main", new LiteralField("FileUploadWarning", 
-                "<p class=\"message notice\">" . _t("UserDefinedForm.FileUploadWarning", 
-                "Files uploaded through this field could be publicly accessible if the exact URL is known")
-                . "</p>"), "Type");
+				"<p class=\"message notice\">" . _t("UserDefinedForm.FileUploadWarning", 
+				"Files uploaded through this field could be publicly accessible if the exact URL is known")
+				. "</p>"), "Type");
 
 		return $fields;
 	}

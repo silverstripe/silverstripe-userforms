@@ -554,7 +554,7 @@ EOS;
 		}
 
 		// Only add customScript if $default or $rules is defined
-    	if($default  || $rules) {
+		if($default  || $rules) {
 			Requirements::customScript(<<<JS
 				(function($) {
 					$(document).ready(function() {

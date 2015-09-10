@@ -558,7 +558,7 @@ class EditableFormField extends DataObject {
 			TextField::create('CustomErrorMessage', _t('EditableFormField.CUSTOMERROR','Custom Error Message'))
 		);
 
-        $this->extend('updateFieldValidationOptions', $fields);
+		$this->extend('updateFieldValidationOptions', $fields);
 
 		return $fields;
 	}
