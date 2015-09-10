@@ -10,18 +10,18 @@
 class EditableNumericField extends EditableFormField {
 
 	private static $singular_name = 'Numeric Field';
-	
+
 	private static $plural_name = 'Numeric Fields';
 
 	private static $db = array(
 		'MinValue' => 'Int',
 		'MaxValue' => 'Int'
 	);
-	
+
 	public function getSetsOwnError() {
 		return true;
 	}
-	
+
 	/**
 	 * @return NumericField
 	 */

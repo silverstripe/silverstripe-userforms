@@ -7,9 +7,9 @@
  */
 
 class EditableFileField extends EditableFormField {
-	
+
 	private static $singular_name = 'File Upload Field';
-	
+
 	private static $plural_names = 'File Fields';
 
 	private static $has_one = array(
@@ -30,7 +30,7 @@ class EditableFileField extends EditableFormField {
 	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
-		
+
 		$fields->addFieldToTab(
 			'Root.Main',
 			TreeDropdownField::create(
@@ -40,8 +40,8 @@ class EditableFileField extends EditableFormField {
 			)
 		);
 
-		$fields->addFieldToTab("Root.Main", new LiteralField("FileUploadWarning", 
-				"<p class=\"message notice\">" . _t("UserDefinedForm.FileUploadWarning", 
+		$fields->addFieldToTab("Root.Main", new LiteralField("FileUploadWarning",
+				"<p class=\"message notice\">" . _t("UserDefinedForm.FileUploadWarning",
 				"Files uploaded through this field could be publicly accessible if the exact URL is known")
 				. "</p>"), "Type");
 
@@ -72,8 +72,8 @@ class EditableFileField extends EditableFormField {
 
 		return $field;
 	}
-	
-	
+
+
 	/**
 	 * Return the value for the database, link to the file is stored as a
 	 * relation so value for the field can be null.
@@ -83,7 +83,7 @@ class EditableFileField extends EditableFormField {
 	public function getValueFromData() {
 		return null;
 	}
-	
+
 	public function getSubmittedFormField() {
 		return new SubmittedFileField();
 	}

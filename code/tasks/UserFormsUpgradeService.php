@@ -56,7 +56,7 @@ class UserFormsUpgradeService {
 
 		// Migrate custom settings
 		$this->migrateCustomSettings($field, $stage);
-		
+
 		// Flag as migrated
 		$field->Migrated = true;
 		$field->write();
@@ -214,5 +214,5 @@ class UserFormsUpgradeService {
 	public function getQuiet() {
 		return $this->quiet;
 	}
-	
+
 }

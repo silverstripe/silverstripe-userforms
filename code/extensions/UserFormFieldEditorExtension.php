@@ -33,7 +33,7 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 */
 	public function getFieldEditorGrid() {
 		Requirements::javascript(USERFORMS_DIR . '/javascript/FieldEditor.js');
-			
+
 		$fields = $this->owner->Fields();
 
 		$this->createInitialFormStep(true);

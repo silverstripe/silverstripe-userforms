@@ -121,7 +121,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest {
 		$field1 = $this->objFromFixture('EditableTextField', 'text1');
 		$field2 = $this->objFromFixture('EditableTextField', 'text2');
 		$field3 = $this->objFromFixture('EditableTextField', 'text3');
-		
+
 		$this->assertDOSEquals(array(
 			array(
 				'Display' => 'Show',
@@ -148,7 +148,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest {
 		$group1 = $this->objFromFixture('Group', 'group1');
 		$form = $this->objFromFixture('UserDefinedForm', 'form-with-settings');
 		$folder = $this->objFromFixture('Folder', 'folder1');
-		
+
 		$this->assertDOSEquals(array(
 			array(
 				'ClassName' => 'EditableTextField',

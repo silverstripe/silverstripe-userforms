@@ -8,9 +8,9 @@
  */
 
 class EditableDropdown extends EditableMultipleOptionField {
-	
+
 	private static $singular_name = 'Dropdown Field';
-	
+
 	private static $plural_name = 'Dropdowns';
 
 	/**
@@ -23,7 +23,7 @@ class EditableDropdown extends EditableMultipleOptionField {
 
 		return $fields;
 	}
-	
+
 	/**
 	 * @return DropdownField
 	 */

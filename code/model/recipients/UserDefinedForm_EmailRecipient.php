@@ -113,7 +113,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 */
 	public function getCMSFields() {
 		Requirements::javascript(USERFORMS_DIR . '/javascript/Recipient.js');
-		
+
 		// Determine optional field values
 		$form = $this->getFormParent();
 

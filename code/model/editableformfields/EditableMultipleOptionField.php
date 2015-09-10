@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Base class for multiple option fields such as {@link EditableDropdownField} 
- * and radio sets. 
- * 
- * Implemented as a class but should be viewed as abstract, you should 
+ * Base class for multiple option fields such as {@link EditableDropdownField}
+ * and radio sets.
+ *
+ * Implemented as a class but should be viewed as abstract, you should
  * instantiate a subclass such as {@link EditableDropdownField}
  *
  * @see EditableCheckboxGroupField
@@ -22,7 +22,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @var bool
 	 */
 	private static $abstract = true;
-	
+
 	private static $has_many = array(
 		"Options" => "EditableOption"
 	);
@@ -48,7 +48,7 @@ class EditableMultipleOptionField extends EditableFormField {
 				}
 			)
 		));
-			
+
 		$optionsConfig = GridFieldConfig::create()
 			->addComponents(
 				new GridFieldToolbarHeader(),
@@ -71,13 +71,13 @@ class EditableMultipleOptionField extends EditableFormField {
 
 		return $fields;
 	}
-	
+
 	/**
 	 * Publishing Versioning support.
 	 *
 	 * When publishing it needs to handle copying across / publishing
 	 * each of the individual field options
-	 * 
+	 *
 	 * @return void
 	 */
 	public function doPublish($fromStage, $toStage, $createNewVersion = false) {
@@ -88,19 +88,19 @@ class EditableMultipleOptionField extends EditableFormField {
 				$option->delete();
 			}
 		}
-		
+
 		if($this->Options()) {
 			foreach($this->Options() as $option) {
 				$option->publish($fromStage, $toStage, $createNewVersion);
 			}
 		}
-		
+
 		$this->publish($fromStage, $toStage, $createNewVersion);
 	}
-	
+
 	/**
 	 * Unpublishing Versioning support
-	 * 
+	 *
 	 * When unpublishing the field it has to remove all options attached
 	 *
 	 * @return void
@@ -111,12 +111,12 @@ class EditableMultipleOptionField extends EditableFormField {
 				$option->deleteFromStage($stage);
 			}
 		}
-		
+
 		$this->deleteFromStage($stage);
 	}
-	
+
 	/**
-	 * Deletes all the options attached to this field before deleting the 
+	 * Deletes all the options attached to this field before deleting the
 	 * field. Keeps stray options from floating around
 	 *
 	 * @return void
@@ -129,31 +129,31 @@ class EditableMultipleOptionField extends EditableFormField {
 				$option->delete();
 			}
 		}
-		
-		parent::delete(); 
+
+		parent::delete();
 	}
-	
+
 	/**
-	 * Duplicate a pages content. We need to make sure all the fields attached 
+	 * Duplicate a pages content. We need to make sure all the fields attached
 	 * to that page go with it
-	 * 
+	 *
 	 * @return DataObject
 	 */
 	public function duplicate($doWrite = true) {
 		$clonedNode = parent::duplicate();
-		
+
 		foreach($this->Options() as $field) {
 			$newField = $field->duplicate(false);
 			$newField->ParentID = $clonedNode->ID;
 			$newField->Version = 0;
 			$newField->write();
 		}
-		
+
 		return $clonedNode;
 	}
-	
+
 	/**
-	 * Return whether or not this field has addable options such as a 
+	 * Return whether or not this field has addable options such as a
 	 * {@link EditableDropdownField} or {@link EditableRadioField}
 	 *
 	 * @return bool

@@ -502,7 +502,7 @@ class EditableFormField extends DataObject {
 		if(!$form || !$form->exists() || !($fields = $form->Fields())) {
 			return null;
 		}
-		
+
 		$prior = 0; // Number of prior group at this level
 		$stack = array(); // Current stack of nested groups, where the top level = the page
 		foreach($fields->map('ID', 'ClassName') as $id => $className) {

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Extension to the build in SilverStripe {@link GridField} to allow for 
- * filtering {@link SubmittedForm} objects in the submissions tab by 
+ * Extension to the build in SilverStripe {@link GridField} to allow for
+ * filtering {@link SubmittedForm} objects in the submissions tab by
  * entering the value of a field
  *
  * @package userforms
@@ -41,7 +41,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 
 		$selectedField = $state->filter;
 		$selectedValue = $state->value;
-		
+
 		// show dropdown of all the fields available from the submitted form fields
 		// that have been saved. Takes the titles from the currently live form.
 		$columnField = new DropdownField('FieldNameFilter', '');
@@ -58,7 +58,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		$valueField->addExtraClass('ss-gridfield-sort');
 		$valueField->addExtraClass('no-change-track');
 		$valueField->setAttribute(
-			'placeholder', 
+			'placeholder',
 			_t('UserFormsGridFieldFilterHeader.WHEREVALUEIS', 'where value is..'
 		));
 
@@ -114,10 +114,10 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		if($filter = $state->UserFormsGridField->toArray()) {
 			if(isset($filter['filter']) && $filter['filter'] && isset($filter['value']) && $filter['value']) {
 				$dataList = $dataList->where(sprintf("
-					SELECT COUNT(*) FROM SubmittedFormField 
-					WHERE ( 
+					SELECT COUNT(*) FROM SubmittedFormField
+					WHERE (
 						ParentID = SubmittedForm.ID AND
-						Name = '%s' AND 
+						Name = '%s' AND
 						Value LIKE '%s'
 					) > 0",
 

@@ -145,7 +145,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
 		}
 		$this->modelClasses = $classes;
 	}
-	
+
 	public function getHTMLFragments($grid) {
 		// Check create permission
 		$singleton = singleton($grid->getModelClass());

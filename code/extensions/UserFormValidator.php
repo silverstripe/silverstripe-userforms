@@ -120,7 +120,7 @@ class UserFormValidator extends RequiredFields {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 }

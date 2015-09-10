@@ -34,7 +34,7 @@ class EditableFieldGroup extends EditableFormField {
 		$title = $this->getFieldNumber()
 			?: $this->Title
 			?: 'group';
-		
+
 		return _t(
 			'EditableFieldGroupEnd.FIELD_GROUP_START',
 			'Group {group}',
@@ -66,7 +66,7 @@ class EditableFieldGroup extends EditableFormField {
 			// Since this field expects raw html, safely escape the user data prior
 			$field->setRightTitle(Convert::raw2xml($this->RightTitle));
 		}
-		
+
 		// if this field has an extra class
 		if($this->ExtraClass) {
 			$field->addExtraClass($this->ExtraClass);
@@ -88,5 +88,5 @@ class EditableFieldGroup extends EditableFormField {
 			$end->delete();
 		}
 	}
-	
+
 }

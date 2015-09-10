@@ -8,9 +8,9 @@
  */
 
 class EditableDateField extends EditableFormField {
-	
+
 	private static $singular_name = 'Date Field';
-	
+
 	private static $plural_name = 'Date Fields';
 
 	private static $db = array(
@@ -34,7 +34,7 @@ class EditableDateField extends EditableFormField {
 
 		return parent::getCMSFields();
 	}
-	
+
 	/**
 	 * Return the form field
 	 *
