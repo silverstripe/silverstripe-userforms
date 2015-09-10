@@ -47,7 +47,7 @@ class UserDefinedForm_EmailRecipientCondition extends DataObject {
 			default:
 				$matches = is_array($fieldValue)
 					? in_array($this->ConditionValue, $fieldValue)
-					: $this->ConditionValue === (string)$fieldValue;
+					: $this->ConditionValue === (string) $fieldValue;
 				return ($this->ConditionOption === 'Equals') === (bool)$matches;
 		}
 	}
