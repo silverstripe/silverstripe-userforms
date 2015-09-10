@@ -88,6 +88,6 @@ class EditableFormHeading extends EditableFormField {
 	}
 
 	public function getLevel() {
-        return $this->getField('Level') ?: 3;
-    }
+		return $this->getField('Level') ?: 3;
+	}
 }
