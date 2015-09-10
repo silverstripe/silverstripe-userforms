@@ -610,7 +610,7 @@ JS
 				}
 			}
 
-			if(!empty($data[$field->Name])){
+			if(!empty($data[$field->Name])) {
 				if(in_array("EditableFileField", $field->getClassAncestry())) {
 					if(isset($_FILES[$field->Name])) {
 						$foldername = $field->getFormField()->getFolderName();
@@ -632,7 +632,7 @@ JS
 						$submittedField->UploadedFileID = $file->ID;
 						
 						// attach a file only if lower than 1MB
-						if($file->getAbsoluteSize() < 1024*1024*1){
+						if($file->getAbsoluteSize() < 1024*1024*1) {
 							$attachments[] = $file;
 						}
 					}
