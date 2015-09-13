@@ -4,14 +4,32 @@
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "userforms"],
 	"license": "BSD-3-Clause",
-	"authors": [{
-		"name": "Will Rossiter",
-		"email": "will@fullscreen.io"
-	}],
+	"authors": [
+		{
+			"name": "Will Rossiter",
+			"email": "will@fullscreen.io"
+		},
+		{
+			"name": "Damian Mooyman",
+			"email": "damian@silverstripe.com"
+		},
+		{
+			"name": "David Craig",
+			"email": "david@silverstripe.com"
+		},
+		{
+			"name": "Scott Hutchinson",
+			"email": "scott@silverstripe.com"
+		},
+		{
+			"name": "Christopher Pitt",
+			"email": "chris@silverstripe.com"
+		}
+	],
 	"require": {
-		"silverstripe/framework": ">=3.1.0",
-		"silverstripe/cms": ">=3.1.0",
-		"silverstripe-australia/gridfieldextensions": "1.1.0",
+		"silverstripe/framework": "~3.1",
+		"silverstripe/cms": "~3.1",
+		"silverstripe-australia/gridfieldextensions": "~1.1",
 		"silverstripe/segment-field": "^1.0"
 	},
 	"suggest": {

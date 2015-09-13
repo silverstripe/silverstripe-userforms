@@ -1,37 +1,27 @@
 # See https://github.com/silverstripe-labs/silverstripe-travis-support for setup details
 
-language: php
-
 sudo: false
+
+language: php
 
 php:
   - 5.3
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
 
 env:
- - DB=MYSQL CORE_RELEASE=3
- - DB=MYSQL CORE_RELEASE=3.1
- - DB=PGSQL CORE_RELEASE=3.1
+  - DB=MYSQL CORE_RELEASE=3.1
 
 matrix:
-  exclude:
-    - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=3
-    - php: 5.5
-      env: DB=MYSQL CORE_RELEASE=3
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3
-    - php: 5.4
-      env: DB=PGSQL CORE_RELEASE=3.1
-    - php: 5.5
-      env: DB=PGSQL CORE_RELEASE=3.1
-    - php: 5.6
-      env: DB=PGSQL CORE_RELEASE=3.1
   include:
-    - php: 5.4
+    - php: 5.6
+      env: DB=MYSQL CORE_RELEASE=3
+    - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.1 SECUREASSETS=1
+    - php: 5.6
+      env: DB=PGSQL CORE_RELEASE=3.1
 
 before_script:
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
@@ -39,5 +29,15 @@ before_script:
   - "if [ \"$SECUREASSETS\" = \"1\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require silverstripe/secureassets; fi"
   - cd ~/builds/ss
 
-script: 
-  - phpunit userforms/tests
+script:
+  - vendor/bin/phpunit --coverage-clover coverage.clover userforms/tests
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover --repository=g/silverstripe/silverstripe-userforms
+
+branches:
+  only:
+    - master
+
+matrix:
+  allow_failures:
+    - php: 7.0
