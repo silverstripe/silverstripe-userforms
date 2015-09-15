@@ -12,6 +12,7 @@ Installation can be done either by composer or by manually downloading a release
  2.  Extract the file (if you are on windows try 7-zip for extracting tar.gz files
  3.  Make sure the folder after being extracted is named 'userforms' 
  4.  Place this directory in your sites root directory. This is the one with framework and cms in it.
+ 5.  Install the dependencies. See the "require" section of [composer.json](https://github.com/silverstripe/silverstripe-userforms/blob/master/composer.json)
 
 ## Configuration
 
