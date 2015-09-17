@@ -409,6 +409,11 @@ class UserDefinedForm_Controller extends Page_Controller {
 
 					// Get the field which is effected
 					$formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
+					
+					// Skip deleted fields
+					if(!$formFieldWatch) {
+						continue;
+					}
 
 					$fieldToWatch = $formFieldWatch->getSelectorField($rule);
 					$fieldToWatchOnLoad = $formFieldWatch->getSelectorField($rule, true);

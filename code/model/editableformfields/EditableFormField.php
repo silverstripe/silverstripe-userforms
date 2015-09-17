@@ -353,17 +353,20 @@ class EditableFormField extends DataObject {
 	}
 
 	/**
-	 * Delete this form from a given stage
+	 * Delete this field from a given stage
 	 *
 	 * Wrapper for the {@link Versioned} deleteFromStage function
 	 */
 	public function doDeleteFromStage($stage) {
-		$this->deleteFromStage($stage);
-
-		// Don't forget to delete the related custom rules...
-		foreach ($this->DisplayRules() as $rule) {
+		// Remove custom rules in this stage
+		$rules = Versioned::get_by_stage('EditableCustomRule', $stage)
+			->filter('ParentID', $this->ID);
+		foreach ($rules as $rule) {
 			$rule->deleteFromStage($stage);
 		}
+
+		// Remove record
+		$this->deleteFromStage($stage);
 	}
 
 	/**

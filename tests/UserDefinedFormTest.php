@@ -188,6 +188,34 @@ class UserDefinedFormTest extends FunctionalTest {
 
 		$liveText = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $text->ID");
 		$this->assertTrue($liveText->Title == $text->Title);
+
+		// Add a display rule to the dropdown
+		$displayRule = new EditableCustomRule();
+		$displayRule->ParentID = $dropdown->ID;
+		$displayRule->ConditionFieldID = $text->ID;
+		$displayRule->write();
+		$ruleID = $displayRule->ID;
+
+		// Not live
+		$liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+		$this->assertEmpty($liveRule);
+
+		// Publish form, it's now live
+		$form->doPublish();
+		$liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+		$this->assertNotEmpty($liveRule);
+
+		// Remove rule
+		$displayRule->delete();
+
+		// Live rule still exists
+		$liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+		$this->assertNotEmpty($liveRule);
+
+		// Publish form, it should remove this rule
+		$form->doPublish();
+		$liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+		$this->assertEmpty($liveRule);
 	}
 
 	function testUnpublishing() {
