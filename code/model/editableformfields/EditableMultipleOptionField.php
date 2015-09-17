@@ -95,7 +95,7 @@ class EditableMultipleOptionField extends EditableFormField {
 			}
 		}
 
-		$this->publish($fromStage, $toStage, $createNewVersion);
+		parent::doPublish($fromStage, $toStage, $createNewVersion);
 	}
 
 	/**
@@ -106,13 +106,14 @@ class EditableMultipleOptionField extends EditableFormField {
 	 * @return void
 	 */
 	public function doDeleteFromStage($stage) {
-		if($this->Options()) {
-			foreach($this->Options() as $option) {
-				$option->deleteFromStage($stage);
-			}
+		// Remove options
+		$options = Versioned::get_by_stage('EditableOption', $stage)
+			->filter('ParentID', $this->ID);
+		foreach($options as $option) {
+			$option->deleteFromStage($stage);
 		}
 
-		$this->deleteFromStage($stage);
+		parent::doDeleteFromStage($stage);
 	}
 
 	/**
