@@ -275,6 +275,29 @@ class UserDefinedFormTest extends FunctionalTest {
 
 		// can't compare object since the dates/ids change
 		$this->assertEquals($form->Fields()->First()->Title, $duplicate->Fields()->First()->Title);
+
+		// Test duplicate with group
+		$form2 = $this->objFromFixture('UserDefinedForm', 'page-with-group');
+		$form2Validator = new UserFormValidator();
+		$form2Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+		$this->assertTrue($form2Validator->php($form2->toMap()));
+
+		// Check field groups exist
+		$form2GroupStart = $form2->Fields()->filter('ClassName', 'EditableFieldGroup')->first();
+		$form2GroupEnd = $form2->Fields()->filter('ClassName', 'EditableFieldGroupEnd')->first();
+		$this->assertEquals($form2GroupEnd->ID, $form2GroupStart->EndID);
+
+		// Duplicate this
+		$form3 = $form2->duplicate();
+		$form3Validator = new UserFormValidator();
+		$form3Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+		$this->assertTrue($form3Validator->php($form3->toMap()));
+
+		// Check field groups exist
+		$form3GroupStart = $form3->Fields()->filter('ClassName', 'EditableFieldGroup')->first();
+		$form3GroupEnd = $form3->Fields()->filter('ClassName', 'EditableFieldGroupEnd')->first();
+		$this->assertEquals($form3GroupEnd->ID, $form3GroupStart->EndID);
+		$this->assertNotEquals($form2GroupEnd->ID, $form3GroupStart->EndID);
 	}
 
 	function testFormOptions() {

@@ -170,12 +170,27 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 * @return DataObject
 	 */
 	public function onAfterDuplicate($newPage) {
+		// List of EditableFieldGroups, where the
+		// key of the array is the ID of the old end group
+		$fieldGroups = array();
 		foreach($this->owner->Fields() as $field) {
 			$newField = $field->duplicate(false);
 			$newField->ParentID = $newPage->ID;
 			$newField->ParentClass = $newPage->ClassName;
 			$newField->Version = 0;
 			$newField->write();
+
+			// If we encounter a group start, record it for later use
+			if($field instanceof EditableFieldGroup) {
+				$fieldGroups[$field->EndID] = $newField;
+			}
+
+			// If we encounter an end group, link it back to the group start
+			if($field instanceof EditableFieldGroupEnd && isset($fieldGroups[$field->ID])) {
+				$groupStart = $fieldGroups[$field->ID];
+				$groupStart->EndID = $newField->ID;
+				$groupStart->write();
+			}
 
 			foreach ($field->DisplayRules() as $customRule) {
 				$newRule = $customRule->duplicate(false);
