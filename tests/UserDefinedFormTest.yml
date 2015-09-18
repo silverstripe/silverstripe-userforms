@@ -13,6 +13,8 @@ EditableFormStep:
     Title: 'Step 2'
   form6step3:
     Title: 'Step 2'
+  form7step1:
+    Title: 'Step 1'
 
 EditableOption:
   option-1:
@@ -96,6 +98,9 @@ EditableTextField:
   field-2:
     Name: Field2
     
+  some-field:
+    Name: SomeField
+    
 EditableDropdown:
   basic-dropdown:
     Name: basic-dropdown
@@ -137,6 +142,15 @@ EditableRadioField:
     Name: radio-option
     Title: Radio Option
     Options: =>EditableOption.option-5, =>EditableOption.option-6
+    
+EditableFieldGroupEnd:
+  group1end:
+    Name: group1end
+    
+EditableFieldGroup:
+  group1start:
+    Name: group1start
+    End: =>EditableFieldGroupEnd.group1end
 
 UserDefinedForm_EmailRecipientCondition:
 # filtered recipient 1
@@ -208,6 +222,11 @@ UserDefinedForm:
     Title: User Defined Form
     Fields: =>EditableFormStep.form1step1,=>EditableTextField.basic-text
     EmailRecipients: =>UserDefinedForm_EmailRecipient.recipient-1, =>UserDefinedForm_EmailRecipient.no-html, =>UserDefinedForm_EmailRecipient.no-data
+  
+  page-with-group:
+    Content: 'Page with group'
+    Title: 'page with group'
+    Fields: =>EditableFormStep.form7step1, =>EditableFieldGroup.group1start, =>EditableTextField.some-field, =>EditableFieldGroupEnd.group1end
     
   form-with-reset-and-custom-action:
     Title: Form with Reset Action
