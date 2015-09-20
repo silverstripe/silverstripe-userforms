@@ -15,3 +15,7 @@ Changelog added.
 * Update documentation to include requirements
 * Fix DisplayRule versioning
 * Fix duplication of forms with groups
+
+## [3.0.2]
+
+ * Fix Casting to integer to prevent potential SQL injection.
