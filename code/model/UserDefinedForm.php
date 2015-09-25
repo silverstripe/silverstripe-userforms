@@ -155,16 +155,17 @@ class UserDefinedForm extends Page {
 			$parentID = (!empty($self->ID)) ? (int)$self->ID : 0;
 
 			// get a list of all field names and values used for print and export CSV views of the GridField below.
-			$columnSQL = <<<SQL
-SELECT "Name", "Title"
-FROM "SubmittedFormField"
-LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
-WHERE "SubmittedForm"."ParentID" = '$parentID'
-ORDER BY "Title" ASC
-SQL;
+			$columnSQL = new SQLQuery();
+			$columnSQL->setSelect(array('Name', 'Title'))
+				->setFrom('SubmittedFormField')
+				->addInnerJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
+				->addWhere("SubmittedForm.ParentID = '$id'")
+				->addGroupBy('Name')
+				->setOrderBy('Title', 'ASC');
+
 			// Sanitise periods in title
 			$columns = array();
-			foreach(DB::query($columnSQL)->map() as $name => $title) {
+			foreach($columnSQL->execute()->map() as $name => $title) {
 				$columns[$name] = trim(strtr($title, '.', ' '));
 			}
 
