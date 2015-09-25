@@ -159,7 +159,7 @@ class UserDefinedForm extends Page {
 			$columnSQL->setSelect(array('Name', 'Title'))
 				->setFrom('SubmittedFormField')
 				->addInnerJoin('SubmittedForm', 'SubmittedFormField.ParentID = SubmittedForm.ID')
-				->addWhere("SubmittedForm.ParentID = '$id'")
+				->addWhere("SubmittedForm.ParentID = '$parentID'")
 				->addGroupBy('Name')
 				->setOrderBy('Title', 'ASC');
 
