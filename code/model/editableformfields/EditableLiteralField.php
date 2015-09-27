@@ -31,7 +31,8 @@ class EditableLiteralField extends EditableFormField {
 
 	private static $db = array(
 		'Content' => 'HTMLText', // From CustomSettings
-		'HideFromReports' => 'Boolean(0)' // from CustomSettings
+		'HideFromReports' => 'Boolean(0)', // from CustomSettings
+		'HideLabel' => 'Boolean(0)'
 	);
 
 	private static $defaults = array(
@@ -103,6 +104,10 @@ class EditableLiteralField extends EditableFormField {
 			CheckboxField::create(
 				'HideFromReports',
 				_t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?')
+			),
+			CheckboxField::create(
+				'HideLabel',
+				_t('EditableLiteralField.HIDELABEL', "Hide 'Title' label on frontend?")
 			)
 		));
 
@@ -113,7 +118,7 @@ class EditableLiteralField extends EditableFormField {
 		// Build label and css classes
 		$label = '';
 		$classes = $this->ExtraClass;
-		if(empty($this->Title)) {
+		if(empty($this->Title) || $this->HideLabel) {
 			$classes .= " nolabel";
 		} else {
 			$label = "<label class='left'>{$this->EscapedTitle}</label>";
