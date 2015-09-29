@@ -125,7 +125,7 @@ jQuery(function ($) {
 		// When a field becomes valid.
 		success: function (error) {
 			var errorId = $(error).attr('id'),
-				fieldId = errorId.substr(0, errorId.indexOf('-error')),
+				fieldId = errorId.substr(0, errorId.indexOf('-error')).replace(/[\\[\\]]/, ''),
 				isCheckboxGroup = $(error).closest('.requiredField').hasClass('checkboxset');
 
 			// We need to escapse the field id if it's a checkboxfield
