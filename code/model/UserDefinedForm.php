@@ -662,22 +662,23 @@ JS
 
 		// email users on submit.
 		if($recipients = $this->FilteredEmailRecipients($data, $form)) {
-			$email = new UserFormRecipientEmail($submittedFields);
-			$mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-
-			if($attachments) {
-				foreach($attachments as $file) {
-					if($file->ID != 0) {
-						$email->attachFile(
-							$file->Filename,
-							$file->Filename,
-							HTTP::get_mime_type($file->Filename)
-						);
-					}
-				}
-			}
 
 			foreach($recipients as $recipient) {
+				$email = new UserFormRecipientEmail($submittedFields);
+				$mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
+	
+				if($attachments) {
+					foreach($attachments as $file) {
+						if($file->ID != 0) {
+							$email->attachFile(
+								$file->Filename,
+								$file->Filename,
+								HTTP::get_mime_type($file->Filename)
+							);
+						}
+					}
+				}
+				
 				$parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
 				if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
