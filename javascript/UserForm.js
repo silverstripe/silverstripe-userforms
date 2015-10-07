@@ -125,15 +125,11 @@ jQuery(function ($) {
 		// When a field becomes valid.
 		success: function (error) {
 			var errorId = $(error).attr('id'),
-				fieldId = errorId.substr(0, errorId.indexOf('-error')),
-				isCheckboxGroup = $(error).closest('.requiredField').hasClass('checkboxset');
+				fieldId = errorId.substr(0, errorId.indexOf('-error')).replace(/[\\[\\]]/, '');
 
-			// We need to escapse the field id if it's a checkboxfield
-			// because jQuery breaks when using selector that end with
+			// Remove square brackets since jQuery.validate.js uses idOrName,
+			// which breaks further on when using a selector that end with
 			// square brackets.
-			if (isCheckboxGroup) {
-				fieldId = fieldId.replace('[]', '\\\\[\\\\]');
-			}
 
 			error.remove();
 
