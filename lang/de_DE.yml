@@ -48,6 +48,8 @@ de_DE:
     ENTERQUESTION: 'Tragen Sie die Frage hier ein'
     EXTRACLASSA: 'Extra Styling/Layout'
     EXTRACLASSB: 'Extra CSS Klasse - mehrere mit Leerzeichen trennen'
+    EXTRACLASS_MULTIPLE: 'Mehrere CSS Klassen mit Leerzeichen trennen'
+    EXTRACLASS_Title: 'Extra CSS Klassen'
     FIELDCONFIGURATION: 'Feld Konfiguration'
     FIELDONDEFAULT: 'Standard Feld'
     GREATERTHAN: 'Wert größer als'
@@ -69,6 +71,8 @@ de_DE:
     SHOWOPTIONS: 'Optionen anzeigen'
     SHOWTHISFIELD: 'Feld anzeigen'
     SINGULARNAME: 'Editierbares Formularfeld'
+    TITLE: Titel
+    TYPE: Typ
     VALIDATION: Validierung
     VALUE: Wert
     WHEN: Wann
@@ -76,6 +80,11 @@ de_DE:
     LEVEL: 'Überschriftsebene auswählen'
     PLURALNAME: Überschriften
     SINGULARNAME: Überschrift
+  EditableFormStep:
+    PLURALNAME: 'Seiten'
+    SINGULARNAME: 'Seiten'
+    STEP_TITLE: 'Seite {page}'
+    TITLE_FIRST: 'Erste Seite'
   EditableLiteralField:
     HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
     PLURALNAME: 'HTML Blöcke'
@@ -139,6 +148,7 @@ de_DE:
     EMAILSUBJECT: 'Betreff'
     ENABLELIVEVALIDATION: 'Live Validierung einschalten'
     EmailFromContent: 'Mit der Absenderadresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
+    FIELDS: Felder
     FORM: Formular
     FROMADDRESS: 'E-Mail versendet von'
     HIDEFIELDLABELS: 'Feldbezeichnungen verbergen'
@@ -146,6 +156,7 @@ de_DE:
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
     ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Formularfeld als Empfängeradresse'
+    RECIPIENTS: Empfänger
     REPLYADDRESS: 'E-Mail Adresse für "Antworten an"'
     SAVESUBMISSIONS: 'Speichern von Einreichungen deaktivieren'
     SENDEMAILTO: 'E-Mail senden an'
@@ -159,6 +170,11 @@ de_DE:
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Anpassbares Formular E-Mail Empfänger'
     SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'Feld hinzufügen'
+    ADD_FIELD_GROUP: 'Gruppe hinzufügen'
+    ADD_PAGE_BREAK: 'Seite hinzufügen'
+    FORMFIELDS: 'Formularfelder'
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Einreichungen filtern...'
     WHEREVALUEIS: 'nach Wert...'
