@@ -35,4 +35,15 @@ class EditableLiteralFieldTest extends SapphireTest {
 		$field->setContent($rawContent);
 		$this->assertEquals($rawContent, $field->getContent());
 	}
+
+	public function testHideLabel() {
+		$field = new EditableLiteralField(array(
+			'Title' => 'Test label'
+		));
+
+		$this->assertContains('Test label', $field->getFormField()->Field());
+
+		$field->HideLabel = true;
+		$this->assertNotContains('Test label', $field->getFormField()->Field());
+	}
 }

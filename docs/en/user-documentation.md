@@ -132,6 +132,10 @@ You can edit the HTML blog from the "Show options" link.
 If you do not check the "Hide from reports" checkbox then this field will be displayed
 in submission reports.
 
+If you check the "Hide 'Title' label on frontend" checkbox then the title of this field
+will be hidden on the form. This is useful when you want to output specific HTML code and
+add your own headings within the content of this field.
+
 Note: Take care not to allow input from unauthorised sources or users, as custom script
 or code could be injected into your form.
 
