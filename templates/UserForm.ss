@@ -17,6 +17,10 @@
 	<div class="clear"><!-- --></div>
 </fieldset>
 
-<% include UserFormStepNav %>
+<% if $Steps.Count > 1 %>
+	<% include UserFormStepNav %>
+<% else %>
+	<% include UserFormActionNav %>
+<% end_if %>
 
 </form>
