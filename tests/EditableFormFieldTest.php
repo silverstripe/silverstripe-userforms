@@ -110,4 +110,25 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertNotContains('jpg', $formField->getValidator()->getAllowedExtensions());
 	}
 
+	/**
+	 * Verify that unique names are automatically generated for each formfield
+	 */
+	public function testUniqueName() {
+		$textfield1 = new EditableTextField();
+		$this->assertEmpty($textfield1->Name);
+
+		// Write values
+		$textfield1->write();
+		$textfield2 = new EditableTextField();
+		$textfield2->write();
+		$checkboxField = new EditableCheckbox();
+		$checkboxField->write();
+
+		// Test values are in the expected format
+		$this->assertRegExp('/^EditableTextField_.+/', $textfield1->Name);
+		$this->assertRegExp('/^EditableTextField_.+/', $textfield2->Name);
+		$this->assertRegExp('/^EditableCheckbox_.+/', $checkboxField->Name);
+		$this->assertNotEquals($textfield1->Name, $textfield2->Name);
+	}
+
 }

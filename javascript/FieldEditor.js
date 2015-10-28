@@ -82,9 +82,9 @@
 				this.on('addnewinline', function () {
 					self.one('reload', function () {
 						//If fieldgroup, focus on the start marker
-						var $newField = self.find('.ss-gridfield-item').last()
+						var $newField = self.find('.ss-gridfield-item').last(), $groupEnd;
 						if ($newField.attr('data-class') === 'EditableFieldGroupEnd') {
-							var $groupEnd = $newField;
+							$groupEnd = $newField;
 							$groupEnd.prev().find('.col-Title input').focus();
 							$newField = $groupEnd.add($groupEnd.prev());
 							$groupEnd.css('visibility', 'hidden');
@@ -101,7 +101,9 @@
 						setTimeout(function () {
 							$newField.removeClass('newField').addClass('flashBackground');
 							$(".cms-content-fields").scrollTop($(".cms-content-fields")[0].scrollHeight);
-							$groupEnd.css('visibility', 'visible');
+							if($groupEnd) {
+								$groupEnd.css('visibility', 'visible');
+							}
 						}, 500);
 					});
 				});
