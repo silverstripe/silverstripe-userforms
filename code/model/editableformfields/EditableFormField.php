@@ -276,7 +276,12 @@ class EditableFormField extends DataObject {
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
-		if($this->Name === 'Field') {
+		// Set a field name.
+		if(!$this->Name) {
+			// New random name
+			$this->Name = $this->generateName();
+
+		} elseif($this->Name === 'Field') {
 			throw new ValidationException('Field name cannot be "Field"');
 		}
 
@@ -289,16 +294,21 @@ class EditableFormField extends DataObject {
 	}
 
 	/**
-	 * @return void
+	 * Generate a new non-conflicting Name value
+	 *
+	 * @return string
 	 */
-	public function onAfterWrite() {
-		parent::onAfterWrite();
+	protected function generateName() {
+		do {
+			// Generate a new random name after this class
+			$class = get_class($this);
+			$entropy = substr(sha1(uniqid()), 0, 5);
+			$name = "{$class}_{$entropy}";
 
-		// Set a field name.
-		if(!$this->Name) {
-			$this->Name = get_class($this) . '_' . $this->ID;
-			$this->write();
-		}
+			// Check if it conflicts
+			$exists = EditableFormField::get()->filter('Name', $name)->count() > 0;
+		} while($exists);
+		return $name;
 	}
 
 	/**
