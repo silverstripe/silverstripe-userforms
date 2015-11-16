@@ -12,6 +12,17 @@ class EditableEmailField extends EditableFormField {
 	private static $singular_name = 'Email Field';
 
 	private static $plural_name = 'Email Fields';
+	
+	private static $db = array(
+		'Placeholder' => 'Varchar(255)'
+	);
+
+	public function getCMSFields() {
+		$this->beforeUpdateCMSFields(function($fields) {
+			$fields->addFieldToTab('Root.Main',	TextField::create('Placeholder', _t('EditableTextField.PLACEHOLDER', 'Placeholder')));
+		});
+		return parent::getCMSFields();
+	}
 
 	public function getSetsOwnError() {
 		return true;
