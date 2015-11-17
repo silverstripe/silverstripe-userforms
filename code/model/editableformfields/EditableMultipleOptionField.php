@@ -36,7 +36,7 @@ class EditableMultipleOptionField extends EditableFormField {
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'Title' => array(
-				'title' => 'Title',
+				'title' => _t('EditableMultipleOptionField.TITLE', 'Title'),
 				'callback' => function($record, $column, $grid) {
 					return TextField::create($column);
 				}
@@ -66,7 +66,7 @@ class EditableMultipleOptionField extends EditableFormField {
 			$optionsConfig
 		);
 
-		$fields->insertAfter(new Tab('Options'), 'Main');
+		$fields->insertAfter(new Tab('Options', _t('EditableMultipleOptionField.OPTIONSTAB','Options')), 'Main');
 		$fields->addFieldToTab('Root.Options', $optionsGrid);
 
 		return $fields;
