@@ -139,7 +139,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		$fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
 
 		// Configuration fields
-		$fields->addFieldsToTab('Root.EmailDetails', array(
+		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'EmailDetails'), array(
 			// Subject
 			FieldGroup::create(
 				TextField::create('EmailSubject', _t('UserDefinedForm.TYPESUBJECT', 'Type subject'))
@@ -216,7 +216,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		}
 
 		// Email templates
-		$fields->addFieldsToTab('Root.EmailContent', array(
+		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'EmailContent'), array(
 			CheckboxField::create('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
 			CheckboxField::create(
 				'SendPlain',
@@ -248,7 +248,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			'UserDefinedForm.RulesDescription',
 			'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
 		));
-		$fields->addFieldsToTab('Root.CustomRules', array(
+		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'CustomRules'), array(
 			new DropdownField(
 				'CustomRulesCondition',
 				_t('UserDefinedForm.SENDIF', 'Send condition'),
