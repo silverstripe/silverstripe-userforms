@@ -68,8 +68,8 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader {
 		)));
 
 		$fields->push(new FieldGroup(new CompositeField(
-			$start = new DateField('StartFilter', 'From'),
-			$end = new DateField('EndFilter', 'Till')
+			$start = new DateField('StartFilter', _t('UserFormsGridFieldFilterHeader.FROM', 'From')),
+			$end = new DateField('EndFilter', _t('UserFormsGridFieldFilterHeader.TILL', 'Till'))
 		)));
 
 		foreach(array($start, $end) as $date) {
