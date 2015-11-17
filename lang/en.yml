@@ -64,7 +64,7 @@ en:
     EXTRACLASS_MULTIPLE: 'Separate each CSS class with a single space'
     EXTRACLASS_SELECT: 'Select from the list of allowed styles'
     EXTRACLASS_TITLE: 'Extra Styling/Layout'
-    EXTRACLASS_Title: 'Extra CSS Classes'
+    EXTRACLASS_Title: 'Extra CSS classes'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
     GREATERTHAN: 'Value Greater Than'
@@ -111,6 +111,7 @@ en:
   EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Hide from reports?'
+    HIDELABEL: 'Hide ''Title'' label on frontend?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
   EditableMemberListField:
@@ -137,11 +138,11 @@ en:
   EditableTextField:
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
+    PLACEHOLDER: Placeholder
     PLURALNAME: 'Text Fields'
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
-    PLACEHOLDER: 'Placeholder'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   FieldEditor:
@@ -170,7 +171,7 @@ en:
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
     DESCRIPTION: 'Adds a customizable form.'
-    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authenication on finish action'
+    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
     DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
     DISPLAYERRORMESSAGESATTOP: 'Display error messages above the form?'
     EMAILADDRESS: Email
@@ -185,6 +186,7 @@ en:
     FIELDS: Fields
     FORM: Form
     FROMADDRESS: 'Send email from'
+    FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
     HIDEFIELDLABELS: 'Hide field labels'
     HIDEFORMDATA: 'Hide form data from email?'
     ONCOMPLETELABEL: 'Show on completion'

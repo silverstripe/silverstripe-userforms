@@ -22,6 +22,9 @@ eo:
   EditableCountryDropdownField:
     PLURALNAME: 'Landaj fallistoj'
     SINGULARNAME: 'Landa fallisto'
+  EditableCustomRule:
+    PLURALNAME: 'Redakteblaj propraj reguloj'
+    SINGULARNAME: 'Redaktebla propra regulo'
   EditableDateField:
     PLURALNAME: 'Kampoj por dato'
     SINGULARNAME: 'Kampo por dato'
@@ -31,6 +34,14 @@ eo:
   EditableEmailField:
     PLURALNAME: 'Kampoj por retpoŝto'
     SINGULARNAME: 'Kampo por retpoŝto'
+  EditableFieldGroup:
+    PLURALNAME: 'Redakteblaj kampaj grupoj'
+    SINGULARNAME: 'Redaktebla kampa grupo'
+  EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'fino de {group}'
+    FIELD_GROUP_START: 'Grupo {group}'
+    PLURALNAME: 'Redakteblaj kampaj grupoj finas'
+    SINGULARNAME: 'Redaktebla kampa grupo finas'
   EditableFileField:
     PLURALNAME: 'Kampoj por dosiera alŝuto'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
@@ -41,13 +52,19 @@ eo:
     BLANK: Vaka
     CHECKEDBYDEFAULT: 'Ĉu kontrolita apriore?'
     CUSTOMERROR: 'Propra mesaĝo pri eraro'
+    CUSTOMOPTIONS: Agordoj
     CUSTOMRULES: 'Propraj reguloj'
+    DEFAULT: 'Apriora valoro'
     DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
     DELETE: Forigi
     DRAG: 'Ŝovi por rearanĝi kampojn'
     ENTERQUESTION: 'Enigi demandon'
     EXTRACLASSA: 'Ekstra stilado/aranĝado'
     EXTRACLASSB: 'Ekstra css-klaso - apartigi opojn per spaceto'
+    EXTRACLASS_MULTIPLE: 'Disigi ĉiun CSS-klason per unu spaceto'
+    EXTRACLASS_SELECT: 'Elekti el la listo de eblaj stiloj'
+    EXTRACLASS_TITLE: 'Ekstra fasonado/aranĝado'
+    EXTRACLASS_Title: 'Ekstraj CSS-klasoj'
     FIELDCONFIGURATION: 'Agordi kampon'
     FIELDONDEFAULT: 'Kampo al apriora'
     GREATERTHAN: 'Valoro pli ol'
@@ -61,24 +78,38 @@ eo:
     LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
     MAXVALUE: 'Maks valoro'
     MINVALUE: 'Min valoro'
+    'NO': 'Ne'
     NOTBLANK: 'Ne vaka'
     NOTVALUE: 'Ne valoro'
     OPTIONS: Agordoj
     PLURALNAME: 'Redakteblaj formularaj kampoj'
     REQUIRED: 'Ĉu ĉi tiu kampo estas nepra?'
+    REQUIRED_DESCRIPTION: 'Bonvolu noti ke kondiĉaj kampoj ne povas esti nepraj'
     RIGHTTITLE: 'Dekstra titolo'
     SHOW: Vidigi
+    SHOWONLOAD: 'Komenca videbleco antaŭ ol trakti ĉi tiujn regulojn'
     SHOWOPTIONS: 'Vidigi agordojn'
     SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
     SINGULARNAME: 'Redaktebla formulara kampo'
+    TITLE: Titolo
+    TYPE: Tipo
     VALIDATION: Validigo
     VALUE: Valoro
     WHEN: Kiam
+    'YES': 'Jes'
+  EditableFormFieldValidator:
+    REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
   EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'
     PLURALNAME: Titoloj
     SINGULARNAME: Titolo
+  EditableFormStep:
+    PLURALNAME: 'Paĝosaltoj'
+    SINGULARNAME: 'Paĝosalto'
+    STEP_TITLE: 'Paĝo {page}'
+    TITLE_FIRST: 'Unua paĝo'
   EditableLiteralField:
+    CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
     PLURALNAME: 'HTML-blokoj'
     SINGULARNAME: 'HTML-bloko'
@@ -86,10 +117,13 @@ eo:
     PLURALNAME: 'Kampoj por membrolisto'
     SINGULARNAME: 'Kampo por membrolisto'
   EditableMultipleOptionField:
+    DEFAULT: 'Elektita apriore?'
     PLURALNAME: 'Redakteblaj plureblaj kampoj'
     SINGULARNAME: 'Redaktebla plurebla kampo'
   EditableNumericField:
     PLURALNAME: 'Numeraj kampoj'
+    RANGE: 'Ebla numera amplekso'
+    RANGE_TO: 'al '
     SINGULARNAME: 'Numera kampo'
   EditableOption:
     DELETE: 'Forigi ĉi tiun agordon'
@@ -102,9 +136,12 @@ eo:
     SINGULARNAME: 'Radiobutona kampo'
   EditableTextField:
     NUMBERROWS: 'Nombro da vicoj'
+    NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLURALNAME: 'Tekstaj kampoj'
+    RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Longo de teksto'
+    PLACEHOLDER: 'Lokokupilo'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
   FieldEditor:
@@ -135,13 +172,17 @@ eo:
     DESCRIPTION: 'Aldonas adapteblan formularon'
     DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtenigi finan agon'
     DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
+    DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
     EMAILADDRESS: Retpoŝto
     EMAILBODY: Korpo
+    EMAILBODYHTML: Korpo
     EMAILFROM: De
     EMAILRECIPIENTS: 'Retpoŝtaj ricevontoj'
     EMAILSUBJECT: 'Temo de retpoŝto'
+    EMAILTEMPLATE: 'Retpoŝta ŝablono'
     ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
     EmailFromContent: 'La de-adreso ebligas agordi de kiu la retpoŝto iros. Ĉe plejmultaj serviloj tio devas agordiĝi al retadreso de la sama domajna nomo kiel via retejo. Ekzemple, ĉe viaretejo.com la de-adreso eble devas esti en la formo io@viaretejo.com. Tamen, iu ajn adreso validos kiel la respondu-al-adreso.'
+    FIELDS: Kampoj
     FORM: Formularo
     FROMADDRESS: 'Sendi retpoŝton de'
     HIDEFIELDLABELS: 'Kaŝi kampajn etikedojn'
@@ -149,10 +190,19 @@ eo:
     ONCOMPLETELABEL: 'Vidigi je kompletigo'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
+    PLURALNAME: 'Bazaj paĝoj'
+    PREVIEW_EMAIL: 'Antaŭvidi retpoŝton'
+    PREVIEW_EMAIL_DESCRIPTION: 'Notu: nekonservitaj mesaĝoj ne vidiĝos en la antaŭvido.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Konservinte la ricevonton vi povos antaŭvidi la retpoŝton.'
+    RECIPIENTS: Ricevontoj
     REPLYADDRESS: 'Retpoŝto al kiu respondi'
+    REPLYADDRESS_DESCRIPTION: 'La retpoŝta adreso al kiu la ricevonto povos respondi.'
+    RulesDescription: 'Retpoŝtoj sendiĝos al la ricevonto nur se la propraj reguloj estas plenumitaj. Se neniu regulo estas agordita, tiu ricevonto ricevos atentigon por ĉiu sendo.'
     SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
     SELECTAFIELDTOSETSUBJECT: '.. aŭ elekti kampon uzotan kiel la temon'
     SENDEMAILTO: 'Sendi retpoŝton al'
+    SENDEMAILTO_DESCRIPTION: 'Vi povas enigi plurajn retadresojn kiel komodisigitan liston.'
+    SENDIF: 'Senda kondiĉo'
     SENDPLAIN: 'Ĉu sendi retpoŝton kiel simplan tekston? (HTML foriĝos) '
     SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
     SINGULARNAME: 'Propre difinita formularo'
@@ -160,9 +210,26 @@ eo:
     SUBMITBUTTON: Sendi
     TEXTONCLEAR: 'Teksto sur vakiga butono:'
     TEXTONSUBMIT: 'Teksto sur senda butono:'
+    TYPEREPLY: 'Tajpi respondan adreson'
+    TYPESUBJECT: 'Tajpi temon'
+    TYPETO: 'Tajpi al-adreson'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
     SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
+  UserDefinedForm_EmailRecipientCondition:
+    PLURALNAME: 'Retpoŝtaj ricevontaj kondiĉoj de propra formularo'
+    SINGULARNAME: 'Retpoŝta ricevonta kondiĉo de propra formularo'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'Aldoni kampon'
+    ADD_FIELD_GROUP: 'Aldoni kampogrupon'
+    ADD_PAGE_BREAK: 'Aldoni paĝosalton'
+    FORMFIELDS: 'Formularaj kampoj'
+  UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
+    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ iuj paĝoj'
+    UNEXPECTED_BREAK: 'Neatendita paĝosalto ''{name}'' en ingita kampo ''{group}'''
+    UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
+    WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
     WHEREVALUEIS: 'kie valoro estas..'

@@ -4,7 +4,7 @@ es_ES:
     DELETE: Borrar
     GREATERTHAN: 'Valor mayor que'
     GREATERTHANEQUAL: 'Valor mayor o igual'
-    HIDETHISFIELD: 'Esconder este campo'
+    HIDETHISFIELD: 'Ocultar este campo'
     IS: Es
     LESSTHAN: 'Valor menor que'
     LESSTHANEQUAL: 'Valor menos o igual'
@@ -20,8 +20,11 @@ es_ES:
     PLURALNAME: 'Grupos de casillas de verificación'
     SINGULARNAME: 'Grupo de casillas de verificación'
   EditableCountryDropdownField:
-    PLURALNAME: 'Selector de países'
+    PLURALNAME: 'Selectores de país'
     SINGULARNAME: 'Selector de país'
+  EditableCustomRule:
+    PLURALNAME: 'Reglas personalizadas editables'
+    SINGULARNAME: 'Regla personalizada editable'
   EditableDateField:
     PLURALNAME: 'Campos de fecha'
     SINGULARNAME: 'Campo de fecha'
@@ -30,6 +33,10 @@ es_ES:
   EditableEmailField:
     PLURALNAME: 'Correos electrónicos'
     SINGULARNAME: 'Campo de correo electrónico'
+  EditableFieldGroup:
+    PLURALNAME: 'Grupos de campos editables'
+  EditableFieldGroupEnd:
+    FIELD_GROUP_START: 'Grupo {group}'
   EditableFileField:
     PLURALNAME: 'Campos subir archivo'
     SINGULARNAME: 'Campo subir archivo'
@@ -40,6 +47,7 @@ es_ES:
     BLANK: blanco
     CHECKEDBYDEFAULT: '¿Marcado por defecto?'
     CUSTOMERROR: 'Mensaje de error personalizado'
+    CUSTOMOPTIONS: Opciones
     CUSTOMRULES: 'Reglas especiales'
     DEFAULTTOTODAY: '¿Por defecto a hoy?'
     DELETE: Borrar este campo
