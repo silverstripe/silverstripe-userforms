@@ -11,7 +11,7 @@ and without getting involved in any PHP code.
 
 ## Requirements
 
- * SilverStripe 3.1
+See the "require" section of [composer.json](https://github.com/silverstripe/silverstripe-userforms/blob/master/composer.json)
 
 ## Features
 
