@@ -628,7 +628,7 @@ jQuery(function ($) {
 			}
 
 			// Update the "Next" button.
-			this.$el.find('.step-button-next')[stepID >= i ? 'hide' : 'show']();
+			this.$el.find('.step-button-next').parent()[stepID >= i ? 'hide' : 'show']();
 
 			// Update the "Actions".
 			this.$el.find('.Actions')[stepID >= i ? 'show' : 'hide']();
