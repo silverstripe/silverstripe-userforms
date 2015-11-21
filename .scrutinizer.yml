@@ -1,9 +1,5 @@
 inherit: true
 
-tools:
-  external_code_coverage:
-    timeout: 1800 # 30 minute delay to allow for coverage reporting taking ages!
-
 checks:
   php:
     code_rating: true
