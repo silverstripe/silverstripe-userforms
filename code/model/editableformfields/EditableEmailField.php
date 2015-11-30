@@ -13,6 +13,10 @@ class EditableEmailField extends EditableFormField {
 
 	private static $plural_name = 'Email Fields';
 
+	private static $db = array(
+		'Placeholder' => 'Varchar(255)'
+	);
+
 	public function getSetsOwnError() {
 		return true;
 	}
@@ -26,6 +30,13 @@ class EditableEmailField extends EditableFormField {
 
 		return $field;
 	}
+	
+	public function getCMSFields() {
+		$this->beforeUpdateCMSFields(function($fields) {
+			$fields->addFieldToTab('Root.Main',	TextField::create('Placeholder', _t('EditableTextField.PLACEHOLDER', 'Placeholder')));
+		});
+		return parent::getCMSFields();
+	}
 
 	/**
 	 * Updates a formfield with the additional metadata specified by this field
@@ -34,6 +45,10 @@ class EditableEmailField extends EditableFormField {
 	 */
 	protected function updateFormField($field) {
 		parent::updateFormField($field);
+		
+		if($this->Placeholder) {
+			$field->setAttribute('placeholder', $this->Placeholder);
+		}
 
 		$field->setAttribute('data-rule-email', true);
 	}
