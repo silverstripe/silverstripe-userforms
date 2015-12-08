@@ -14,9 +14,9 @@ class UserFormsCheckboxSetField extends CheckboxSetField {
 	public function getOptions() {
 		$options = parent::getOptions();
 
-		foreach($options as $option) {
-			$option->Name = "{$this->name}[]";
-		}
+		// foreach($options as $option) {
+		// 	$option->Name = "{$this->name}[]";
+		// }
 
 		return $options;
 	}
