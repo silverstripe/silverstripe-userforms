@@ -24,10 +24,10 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
 
 ## Documentation
 
- * [Installation instructions](installation)
+ * [Installation instructions](installation.md)
  * [Troubleshooting](troubleshooting)
- * [User Documentation](user-documentation)
- * [Compiling Front-End Files](compiling-front-end-files)
+ * [User Documentation](userguide/index.md)
+ * [Compiling Front-End Files](compiling-front-end-files.md)
 
 ## Thanks
 
