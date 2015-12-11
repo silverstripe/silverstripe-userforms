@@ -7,14 +7,7 @@ class EditableLiteralFieldTest extends SapphireTest {
 
 	public function setUp() {
 		parent::setUp();
-		Config::nest();
 		HtmlEditorConfig::set_active('cms');
-	}
-
-
-	public function tearDown() {
-		Config::unnest();
-		parent::tearDown();
 	}
 
 	/**

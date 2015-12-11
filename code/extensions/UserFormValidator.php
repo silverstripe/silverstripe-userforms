@@ -22,7 +22,7 @@ class UserFormValidator extends RequiredFields {
 				// Page at top level, or after another page is ok
 				if(empty($stack) || (count($stack) === 1 && $stack[0] instanceof EditableFormStep)) {
 					$stack = array($field);
-					$conditionalStep = $field->DisplayRules()->count() > 0;
+					$conditionalStep = $field->EffectiveDisplayRules()->count() > 0;
 					continue;
 				}
 
