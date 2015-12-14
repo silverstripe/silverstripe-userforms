@@ -15,11 +15,26 @@ class EditableNumericField extends EditableFormField {
 
 	private static $db = array(
 		'MinValue' => 'Int',
-		'MaxValue' => 'Int'
+		'MaxValue' => 'Int',
+		'Placeholder' => 'Varchar(255)'
 	);
 
 	public function getSetsOwnError() {
 		return true;
+	}
+
+	public function getCMSFields() {
+		$this->beforeUpdateCMSFields(function($fields) {
+			$fields->addFieldToTab(
+				'Root.Main',
+				TextField::create(
+					'Placeholder',
+					_t('EditableTextField.PLACEHOLDER', 'Placeholder')
+				)
+			);
+		});
+
+		return parent::getCMSFields();
 	}
 
 	/**
@@ -63,6 +78,10 @@ class EditableNumericField extends EditableFormField {
 
 		if($this->MaxValue) {
 			$field->setAttribute('data-rule-max', $this->MaxValue);
+		}
+
+		if($this->Placeholder) {
+			$field->setAttribute('placeholder', $this->Placeholder);
 		}
 	}
 }
