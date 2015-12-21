@@ -6,17 +6,14 @@
 	}
 }(function( $ ) {
 
-/*
- * Localized default methods for the jQuery validation plugin.
- * Locale: FI
- */
-$.extend($.validator.methods, {
-	date: function(value, element) {
-		return this.optional(element) || /^\d{1,2}\.\d{1,2}\.\d{4}$/.test(value);
-	},
-	number: function(value, element) {
-		return this.optional(element) || /^-?(?:\d+)(?:,\d+)?$/.test(value);
-	}
-});
-
+	/*
+	 * Localized default methods for the jQuery validation plugin.
+	 * Locale: FR
+	 */
+	$.extend($.validator.methods, {
+		date: function(value, element) {
+			//validate date like 18 sept. 2015 or 19 dÃ©c. 2015
+			return this.optional(element) || /^\d\d\s.+?\.\s\d\d\d\d?$/.test(value);
+		}
+	});
 }));
