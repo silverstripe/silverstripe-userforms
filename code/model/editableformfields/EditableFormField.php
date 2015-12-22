@@ -327,11 +327,7 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canDelete($member = null) {
-		if($this->Parent()) {
-			return $this->Parent()->canEdit($member) && !$this->isReadonly();
-		}
-
-		return true;
+		return $this->canEdit($member);
 	}
 
 	/**
@@ -346,6 +342,30 @@ class EditableFormField extends DataObject {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return whether a user can view this form field
+	 * based on whether they can view the page
+	 *
+	 * @return bool
+	 */
+	public function canView($member = null) {
+		if($this->Parent()) {
+			return $this->Parent()->canView($member) && !$this->isReadonly();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Return whether a user can create this form field
+	 * based on whether they can edit the page
+	 *
+	 * @return bool
+	 */
+	public function canCreate($member = null) {
+		return $this->canEdit($member);
 	}
 
 	/**
