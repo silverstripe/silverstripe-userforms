@@ -346,13 +346,13 @@ class EditableFormField extends DataObject {
 
 	/**
 	 * Return whether a user can view this form field
-	 * based on whether they can view the page
+	 * based on whether they can view the page, regardless of the ReadOnly status of the field
 	 *
 	 * @return bool
 	 */
 	public function canView($member = null) {
 		if($this->Parent()) {
-			return $this->Parent()->canView($member) && !$this->isReadonly();
+			return $this->Parent()->canView($member);
 		}
 
 		return true;
