@@ -189,7 +189,7 @@ class UserFormsUpgradeService {
 		return $rule;
 	}
 
-	protected function log($message) {
+	public function log($message) {
 		if($this->getQuiet()) {
 			return;
 		}
