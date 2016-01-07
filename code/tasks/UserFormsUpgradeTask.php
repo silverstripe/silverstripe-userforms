@@ -12,11 +12,10 @@ class UserFormsUpgradeTask extends BuildTask {
 	protected $description = "Upgrade tool for sites upgrading to userforms 3.0";
 
 	public function run($request) {
-		$this->log("Upgrading userforms module");
-		Injector::inst()
-			->create('UserFormsUpgradeService')
-			->setQuiet(false)
+		$service = Injector::inst()->create('UserFormsUpgradeService');
+		$service->log("Upgrading userforms module");
+		$service->setQuiet(false)
 			->run();
-		$this->log("Done");
+		$service->log("Done");
 	}
 }
