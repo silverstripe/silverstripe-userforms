@@ -612,7 +612,7 @@ jQuery(function ($) {
 	 */
 	FormActions.prototype.update = function () {
 		var numberOfSteps = userform.steps.length,
-			stepID = userform.currentStep.id,
+			stepID = userform.currentStep ? userform.currentStep.id : 0,
 			i, lastStep;
 
 		// Update the "Prev" button.
@@ -721,6 +721,14 @@ jQuery(function ($) {
 		setInterval(function () {
 			$.ajax({ url: 'UserDefinedForm_Controller/ping' });
 		}, 180 * 1000);
+
+		// Bind a confirmation message when navigating away from a partially completed form.
+		var form = $('form.userform');
+		if(typeof form.areYouSure != 'undefined') {
+			form.areYouSure({
+				message: ss.i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!')
+			});
+		}
 	}
 
 	main();

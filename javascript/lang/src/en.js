@@ -10,5 +10,6 @@
     "UserForms.ERROR_CREATING_OPTION": "Error creating option",
     "UserForms.REMOVED_OPTION": "Removed option",
     "UserForms.ADDING_RULE": "Adding rule",
+    "UserForms.LEAVE_CONFIRMATION": "You have unsaved changes!",
     "GRIDFIELD.ERRORINTRANSACTION": "An error occured while fetching data from the server\n Please try again later."
 }
