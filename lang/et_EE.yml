@@ -36,6 +36,7 @@ et_EE:
     LESSTHAN: 'Value Less Than'
     LESSTHANEQUAL: 'Value Less Than Or Equal'
     LOCKED: 'Neid väli ei saa muuta'
+    'NO': 'Ei'
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -46,6 +47,7 @@ et_EE:
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
+    'YES': 'Jah'
   EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'

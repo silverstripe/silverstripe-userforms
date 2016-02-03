@@ -135,7 +135,6 @@ pl_PL:
     CLEARBUTTON: Czyść
     CONFIGURATION: Ustawienia
     DESCRIPTION: 'Dodaj własny formularz'
-    DISABLEAUTHENICATEDFINISHACTION: 'Wyłącz uwierzytelnienie na koniec działania'
     DISABLECSRFSECURITYTOKEN: 'Wyłącz token CSRF'
     EMAILADDRESS: Email
     EMAILBODY: Body

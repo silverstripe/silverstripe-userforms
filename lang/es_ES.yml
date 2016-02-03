@@ -137,7 +137,6 @@ es_ES:
     ADDEMAILRECIPIENT: 'Agregar destinatario de email'
     CONFIGURATION: Configuración
     DESCRIPTION: 'Agrega un formulario personalizable.'
-    DISABLEAUTHENICATEDFINISHACTION: 'Deshabilitar la autenticación al terminar la acción'
     EMAILADDRESS: Email
     EMAILBODY: Cuerpo
     EMAILFROM: De

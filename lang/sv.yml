@@ -71,6 +71,7 @@ sv:
     SHOWOPTIONS: 'Visa alternativ'
     SHOWTHISFIELD: 'Visa detta fält'
     SINGULARNAME: 'Redigeringsbart formulärfält'
+    TITLE: Titel
     VALIDATION: Validering
     VALUE: Värde
     WHEN: När
@@ -78,6 +79,8 @@ sv:
     LEVEL: 'Välj rubrikstorlek'
     PLURALNAME: Rubriker
     SINGULARNAME: Rubrik
+  EditableFormStep:
+    STEP_TITLE: 'Sida {page}'
   EditableLiteralField:
     HIDEFROMREPORT: 'Göm från rapport?'
     PLURALNAME: 'HTML-block'
@@ -133,7 +136,6 @@ sv:
     CLEARBUTTON: Rensa
     CONFIGURATION: Konfiguration
     DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
-    DISABLEAUTHENICATEDFINISHACTION: 'Inaktivera autentisering när åtgärden är genomförd'
     DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
     EMAILADDRESS: E-post
     EMAILBODY: Innehåll
@@ -149,6 +151,7 @@ sv:
     ONCOMPLETELABEL: 'Visa vid slutförande'
     ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'
     ORSELECTAFIELDTOUSEASTO: '.. eller välj ett fält att använda som mottagare'
+    PLURALNAME: 'Bas sidor'
     REPLYADDRESS: 'E-postadress att svara till'
     SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
     SELECTAFIELDTOSETSUBJECT: '.. eller välj ett fält att använda som ämne'

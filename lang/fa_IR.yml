@@ -1,0 +1,65 @@
+fa_IR:
+  CustomRule:
+    DELETE: حذف
+  EditableDateField:
+    PLURALNAME: 'فیلدهای تاریخ'
+    SINGULARNAME: 'فیلد تاریخ'
+  EditableEmailField:
+    PLURALNAME: 'فیلدهای ایمیل'
+    SINGULARNAME: 'فیلد ایمیل'
+  EditableFormField:
+    ADD: افزودن
+    DEFAULTTOTODAY: 'تاریخ پیش فرض به امروز؟'
+    DELETE: حذف
+    GROUP: گروه
+    MAXVALUE: 'بیشترین مقدار'
+    MINVALUE: 'کمترین مقدار'
+    REQUIRED: 'آیا این فیلد الزامی است؟'
+    RIGHTTITLE: 'عنوان سمت راست'
+    TITLE: عنوان
+    'YES': 'بله'
+  EditableFormStep:
+    TITLE_FIRST: 'صفحه نخست'
+  EditableLiteralField:
+    PLURALNAME: 'بلوک های HTML'
+    SINGULARNAME: 'بلوک HTML'
+  EditableMultipleOptionField:
+    DEFAULT: 'انتخاب به عنوان پیش فرض؟'
+  EditableNumericField:
+    PLURALNAME: 'فیلد عددی'
+    RANGE_TO: به
+    SINGULARNAME: 'فیلد عددی'
+  EditableTextField:
+    NUMBERROWS: 'تعداد سطر ها'
+    RANGE_TO: به
+  FieldEditor:
+    ADD: افزودن
+    SELECTAFIELD: 'انتخاب یک فیلد'
+  GridField:
+    Filter: پالایش
+    ResetFilter: از نو
+  SiteTree:
+    PLURALNAME: صفحات
+    SINGULARNAME: صفحه
+  SubmittedFileField:
+    DOWNLOADFILE: 'دانلود فایل'
+  UserDefinedForm:
+    CLEARBUTTON: پاک‌کردن
+    DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
+    EMAILADDRESS: ایمیل
+    EMAILFROM: از
+    EMAILSUBJECT: 'موضوع پست الکترونیک'
+    EMAILTEMPLATE: 'قالب پست الکترونیک'
+    FIELDS: فیلدها
+    FORM: فرم
+    PLURALNAME: 'صفحه اصلی'
+    RECIPIENTS: دریافت کنندگان
+    SENDEMAILTO: 'ارسال ایمیل به'
+    SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
+    SUBMITBUTTON: ثبت کردن
+    TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
+    TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'افزودن فیلد'
+    ADD_FIELD_GROUP: 'افزودن فیلد گروهی'
+    FORMFIELDS: 'فیلدهای فرم'

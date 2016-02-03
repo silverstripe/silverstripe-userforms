@@ -64,7 +64,7 @@ eo:
     EXTRACLASS_MULTIPLE: 'Disigi ĉiun CSS-klason per unu spaceto'
     EXTRACLASS_SELECT: 'Elekti el la listo de eblaj stiloj'
     EXTRACLASS_TITLE: 'Ekstra fasonado/aranĝado'
-    EXTRACLASS_Title: 'Ekstraj CSS-klasoj'
+    EXTRACLASS_Title: 'Ekstraj CDD-klasoj'
     FIELDCONFIGURATION: 'Agordi kampon'
     FIELDONDEFAULT: 'Kampo al apriora'
     GREATERTHAN: 'Valoro pli ol'
@@ -111,6 +111,7 @@ eo:
   EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
+    HIDELABEL: 'Ĉu kaŝi etikedon ''Titolo'' en fasado?'
     PLURALNAME: 'HTML-blokoj'
     SINGULARNAME: 'HTML-bloko'
   EditableMemberListField:
@@ -137,11 +138,11 @@ eo:
   EditableTextField:
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
+    PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Tekstaj kampoj'
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Longo de teksto'
-    PLACEHOLDER: 'Lokokupilo'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
   FieldEditor:
@@ -170,7 +171,7 @@ eo:
     CLEARBUTTON: Vakigi
     CONFIGURATION: Agordaro
     DESCRIPTION: 'Aldonas adapteblan formularon'
-    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtenigi finan agon'
+    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentikigon je fina ago'
     DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
     DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
     EMAILADDRESS: Retpoŝto
@@ -185,6 +186,7 @@ eo:
     FIELDS: Kampoj
     FORM: Formularo
     FROMADDRESS: 'Sendi retpoŝton de'
+    FileUploadWarning: 'Dosieroj alŝutitaj per ĉi tiu kampo eble estos alireblaj se la ĝusta URL estas sciata.'
     HIDEFIELDLABELS: 'Kaŝi kampajn etikedojn'
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
     ONCOMPLETELABEL: 'Vidigi je kompletigo'

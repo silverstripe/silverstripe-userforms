@@ -100,10 +100,10 @@ de_DE:
     SINGULARNAME: 'Radio-Button'
   EditableTextField:
     NUMBERROWS: 'Anzahl der Zeilen'
+    PLACEHOLDER: Platzhalter
     PLURALNAME: 'Textfelder'
     SINGULARNAME: 'Textfeld'
     TEXTLENGTH: 'Textlänge'
-    PLACEHOLDER: 'Platzhalter'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   FieldEditor:
