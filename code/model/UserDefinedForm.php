@@ -88,6 +88,15 @@ class UserDefinedForm extends Page {
 	private static $error_container_id = 'error-container';
 
 	/**
+	 * The configuration used to determine whether a confirmation message is to
+	 * appear when navigating away from a partially completed form.
+	 *
+	 * @var boolean
+	 * @config
+	 */
+	private static $enable_are_you_sure = true;
+
+	/**
 	 * Temporary storage of field ids when the form is duplicated.
 	 * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
 	 * @var array
@@ -334,6 +343,12 @@ class UserDefinedForm_Controller extends Page_Controller {
 		);
 		if($this->HideFieldLabels) {
 			Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
+		}
+
+		// Bind a confirmation message when navigating away from a partially completed form.
+		$page = $this->data();
+		if($page::config()->enable_are_you_sure) {
+			Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
 		}
 	}
 
