@@ -34,6 +34,9 @@ class EditableFormFieldTest extends FunctionalTest {
 		$text->setReadonly(true);
 		$this->assertFalse($text->canEdit());
 		$this->assertFalse($text->canDelete());
+
+		$this->logInWithPermission('SITETREE_EDIT_ALL');
+		$this->assertTrue(singleton('EditableTextField')->canCreate());
 	}
 
 	function testCustomRules() {

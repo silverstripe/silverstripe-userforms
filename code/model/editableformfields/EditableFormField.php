@@ -364,8 +364,24 @@ class EditableFormField extends DataObject {
 	 *
 	 * @return bool
 	 */
-	public function canCreate($member = null) {
-		return $this->canEdit($member);
+	public function canCreate($member = null, $context = array()) {
+		$controller = Controller::curr();
+		$parent = null;
+
+		// get the parent from context or from the controller stack
+		if(isset($context['Parent'])) {
+			$parent = $context['Parent'];
+		} elseif($controller instanceof LeftAndMain && ($parentID = $controller->currentPageID())) {
+			$parent = SiteTree::get()->byId($parentID);
+		}
+
+		// check if parent is editable
+		if($parent) {
+			return $parent->canEdit($member);
+		}
+
+		// otherwise
+		return Permission::checkMember($member, 'SITETREE_EDIT_ALL');
 	}
 
 	/**
