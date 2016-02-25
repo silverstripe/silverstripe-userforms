@@ -11,6 +11,8 @@ php:
   - 5.6
   - 7.0
 
+sudo: false
+
 env:
   - DB=MYSQL CORE_RELEASE=3.1
 
