@@ -17,10 +17,13 @@ class UserForm extends Form {
 		parent::__construct(
 			$controller,
 			$name,
-			$this->getFormFields(),
-			$this->getFormActions(),
-			$this->getRequiredFields()
+			new FieldList(),
+			new FieldList()
 		);
+
+		$this->setFields($this->getFormFields());
+		$this->setActions($this->getFormActions());
+		$this->setValidator($this->getRequiredFields());
 
 		// Number each page
 		$stepNumber = 1;
