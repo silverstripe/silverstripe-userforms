@@ -12,14 +12,18 @@ class EditableFormFieldTest extends FunctionalTest {
 		$text = $this->objFromFixture('EditableTextField', 'basic-text');
 
 		$this->logInWithPermission('ADMIN');
+		$this->assertTrue($text->canCreate());
+		$this->assertTrue($text->canView());
 		$this->assertTrue($text->canEdit());
 		$this->assertTrue($text->canDelete());
 
 		$text->setReadonly(true);
+		$this->assertTrue($text->canView());
 		$this->assertFalse($text->canEdit());
 		$this->assertFalse($text->canDelete());
 
 		$text->setReadonly(false);
+		$this->assertTrue($text->canView());
 		$this->assertTrue($text->canEdit());
 		$this->assertTrue($text->canDelete());
 
@@ -27,11 +31,15 @@ class EditableFormFieldTest extends FunctionalTest {
 		$member->logout();
 
 		$this->logInWithPermission('SITETREE_VIEW_ALL');
+		$this->assertFalse($text->canCreate());
+
 		$text->setReadonly(false);
+		$this->assertTrue($text->canView());
 		$this->assertFalse($text->canEdit());
 		$this->assertFalse($text->canDelete());
 
 		$text->setReadonly(true);
+		$this->assertTrue($text->canView());
 		$this->assertFalse($text->canEdit());
 		$this->assertFalse($text->canDelete());
 	}
