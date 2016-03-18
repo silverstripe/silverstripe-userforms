@@ -21,8 +21,10 @@ class UserForm extends Form {
 			new FieldList()
 		);
 
-		$this->setFields($this->getFormFields());
-		$this->setActions($this->getFormActions());
+		$this->setFields($fields = $this->getFormFields());
+		$fields->setForm($this);
+		$this->setActions($actions = $this->getFormActions());
+		$actions->setForm($this);
 		$this->setValidator($this->getRequiredFields());
 
 		// Number each page
