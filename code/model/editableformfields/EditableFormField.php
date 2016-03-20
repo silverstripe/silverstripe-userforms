@@ -327,11 +327,7 @@ class EditableFormField extends DataObject {
 	 * @return bool
 	 */
 	public function canDelete($member = null) {
-		if($this->Parent()) {
-			return $this->Parent()->canEdit($member) && !$this->isReadonly();
-		}
-
-		return true;
+		return $this->canEdit($member);
 	}
 
 	/**
@@ -346,6 +342,46 @@ class EditableFormField extends DataObject {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return whether a user can view this form field
+	 * based on whether they can view the page, regardless of the ReadOnly status of the field
+	 *
+	 * @return bool
+	 */
+	public function canView($member = null) {
+		if($this->Parent()) {
+			return $this->Parent()->canView($member);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Return whether a user can create this form field
+	 * based on whether they can edit the page
+	 *
+	 * @return bool
+	 */
+	public function canCreate($member = null, $context = array()) {
+		$controller = Controller::curr();
+		$parent = null;
+
+		// get the parent from context or from the controller stack
+		if(isset($context['Parent'])) {
+			$parent = $context['Parent'];
+		} elseif($controller instanceof LeftAndMain && ($parentID = $controller->currentPageID())) {
+			$parent = SiteTree::get()->byId($parentID);
+		}
+
+		// check if parent is editable
+		if($parent) {
+			return $parent->canEdit($member);
+		}
+
+		// otherwise
+		return Permission::checkMember($member, 'SITETREE_EDIT_ALL');
 	}
 
 	/**
