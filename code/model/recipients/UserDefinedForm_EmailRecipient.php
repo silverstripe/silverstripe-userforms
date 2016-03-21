@@ -265,13 +265,42 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	}
 
 	/**
-	 * @param Member
+	 * Return whether a user can create an object of this type
 	 *
-	 * @return boolean
+     * @param Member $member
+     * @param array $context Virtual parameter to allow context to be passed in to check
+	 * @return bool
 	 */
 	public function canCreate($member = null) {
-		return $this->Form()->canCreate();
+		// Check parent page
+        $parent = $this->getCanCreateContext(func_get_args());
+        if($parent) {
+            return $parent->canEdit($member);
+        }
+
+        // Fall back to secure admin permissions
+        return parent::canCreate($member);
 	}
+
+    /**
+     * Helper method to check the parent for this object
+     *
+     * @param array $args List of arguments passed to canCreate
+     * @return SiteTree Parent page instance
+     */
+    protected function getCanCreateContext($args) {
+        // Inspect second parameter to canCreate for a 'Parent' context
+        if(isset($args[1]['Form'])) {
+            return $args[1]['Form'];
+        }
+        // Hack in currently edited page if context is missing
+        if(Controller::has_curr() && Controller::curr() instanceof CMSMain) {
+            return Controller::curr()->currentPage();
+        }
+
+        // No page being edited
+        return null;
+    }
 
 	/**
 	 * @param Member
@@ -279,7 +308,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return boolean
 	 */
 	public function canView($member = null) {
-		return $this->Form()->canView();
+		return $this->Form()->canView($member);
 	}
 
 	/**
@@ -288,7 +317,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
-		return $this->Form()->canEdit();
+		return $this->Form()->canEdit($member);
 	}
 
 	/**
@@ -297,7 +326,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
-		return $this->Form()->canDelete();
+		return $this->canEdit($member);
 	}
 
 	/*

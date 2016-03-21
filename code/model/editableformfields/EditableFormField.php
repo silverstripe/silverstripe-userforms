@@ -9,7 +9,7 @@ use SilverStripe\Forms\SegmentField;
  * @package userforms
  *
  * @property string Name
- *
+ * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
  */
 class EditableFormField extends DataObject {
@@ -320,33 +320,107 @@ class EditableFormField extends DataObject {
 		return false;
 	}
 
-	/**
-	 * Return whether a user can delete this form field
-	 * based on whether they can edit the page
-	 *
-	 * @return bool
-	 */
+    /**
+     * Return whether a user can delete this form field
+     * based on whether they can edit the page
+     *
+     * @param Member $member
+     * @return bool
+     */
 	public function canDelete($member = null) {
-		if($this->Parent()) {
-			return $this->Parent()->canEdit($member) && !$this->isReadonly();
+		return $this->canEdit($member);
+	}
+
+    /**
+     * Return whether a user can edit this form field
+     * based on whether they can edit the page
+     *
+     * @param Member $member
+     * @return bool
+     */
+	public function canEdit($member = null) {
+        $parent = $this->Parent();
+		if($parent && $parent->exists()) {
+			return $parent->canEdit($member) && !$this->isReadonly();
+		}
+
+        // Fallback to secure admin permissions
+		return parent::canEdit($member);
+	}
+
+    /**
+     * Return whether a user can view this form field
+     * based on whether they can view the page, regardless of the ReadOnly status of the field
+     *
+     * @param Member $member
+     * @return bool
+     */
+	public function canView($member = null) {
+		$parent = $this->Parent();
+		if($parent && $parent->exists()) {
+			return $parent->canView($member);
 		}
 
 		return true;
 	}
 
 	/**
-	 * Return whether a user can edit this form field
-	 * based on whether they can edit the page
+	 * Return whether a user can create an object of this type
 	 *
+     * @param Member $member
+     * @param array $context Virtual parameter to allow context to be passed in to check
 	 * @return bool
 	 */
-	public function canEdit($member = null) {
-		if($this->Parent()) {
-			return $this->Parent()->canEdit($member) && !$this->isReadonly();
-		}
+	public function canCreate($member = null) {
+		// Check parent page
+        $parent = $this->getCanCreateContext(func_get_args());
+        if($parent) {
+            return $parent->canEdit($member);
+        }
 
-		return true;
+        // Fall back to secure admin permissions
+        return parent::canCreate($member);
 	}
+
+    /**
+     * Helper method to check the parent for this object
+     *
+     * @param array $args List of arguments passed to canCreate
+     * @return SiteTree Parent page instance
+     */
+    protected function getCanCreateContext($args) {
+        // Inspect second parameter to canCreate for a 'Parent' context
+        if(isset($args[1]['Parent'])) {
+            return $args[1]['Parent'];
+        }
+        // Hack in currently edited page if context is missing
+        if(Controller::has_curr() && Controller::curr() instanceof CMSMain) {
+            return Controller::curr()->currentPage();
+        }
+
+        // No page being edited
+        return null;
+    }
+
+    /**
+     * Check if can publish
+     *
+     * @param Member $member
+     * @return bool
+     */
+    public function canPublish($member = null) {
+        return $this->canEdit($member);
+    }
+
+    /**
+     * Check if can unpublish
+     *
+     * @param Member $member
+     * @return bool
+     */
+    public function canUnpublish($member = null) {
+        return $this->canDelete($member);
+    }
 
 	/**
 	 * Publish this Form Field to the live site
