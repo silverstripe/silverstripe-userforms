@@ -21,7 +21,6 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
 *  View submitted submissions and export them to CSV
 *  Define custom error messages and validation settings
 *  Optionally display and hide fields using javascript based on users input
-*  Pre fill your form fields, by passing your values by url (http://yoursite.com/formpage?EditableField1=MyValue)
 *  Displays a confirmation message when navigating away from a partially completed form.
 
 ## Installation
