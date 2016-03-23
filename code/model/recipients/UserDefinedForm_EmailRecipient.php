@@ -253,8 +253,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				'CustomRulesCondition',
 				_t('UserDefinedForm.SENDIF', 'Send condition'),
 				array(
-					'Or' => 'Any conditions are true',
-					'And' => 'All conditions are true'
+					'Or' => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
+					'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true')
 				)
 			),
 			$grid
