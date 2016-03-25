@@ -156,7 +156,7 @@ class EditableFormField extends DataObject {
 						'</div>'
 					)
 				),
-				TextField::create('Title'_t('EditableFormField.TITLE', 'Title')),
+				TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
 				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
 				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
 				SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
