@@ -154,7 +154,6 @@ class EditableFormField extends DataObject {
 								'<span class="readonly">$' . $this->Name . '</span>' .
 							'</div>' .
 						'</div>'
-					)
 				),
 				TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
 				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
@@ -205,9 +204,11 @@ class EditableFormField extends DataObject {
 		$validationFields = $this->getFieldValidationOptions();
 		if($validationFields) {
 			$fields->addFieldsToTab(
-				'Root.'._t('EditableFormField.VALIDATIONTAB', 'Validation'),
+				'Root.Validation',
 				$this->getFieldValidationOptions()
 			);
+			
+			$fields->fieldByName('Root.Validation')->setTitle(_t('EditableFormField.VALIDATIONTAB', 'Validation'));
 		}
 		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
 		$self = $this;
@@ -251,7 +252,7 @@ class EditableFormField extends DataObject {
 				new GridFieldDeleteAction()
 			);
 
-		$fields->addFieldsToTab('Root.'._t('EditableFormField.DISPLAYRULESTAB', 'Display Rules'), array(
+		$fields->addFieldsToTab('Root.DisplayRules', array(
 			CheckboxField::create('ShowOnLoad', _t('EditableFormField.SHOWONLOADTITLE','Show on load'))
 				->setDescription(_t(
 					'EditableFormField.SHOWONLOAD',
@@ -264,6 +265,8 @@ class EditableFormField extends DataObject {
 				$customRulesConfig
 			)
 		));
+		
+		$fields->fieldByName('Root.DisplayRules')->setTitle(_t('EditableFormField.DISPLAYRULESTAB', 'Display Rules'));
 
 		$this->extend('updateCMSFields', $fields);
 
