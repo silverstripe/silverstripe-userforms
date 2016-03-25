@@ -139,7 +139,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		$fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
 
 		// Configuration fields
-		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'EmailDetails'), array(
+		$fields->addFieldsToTab('Root.EmailDetails', array(
 			// Subject
 			FieldGroup::create(
 				TextField::create('EmailSubject', _t('UserDefinedForm.TYPESUBJECT', 'Type subject'))
@@ -196,6 +196,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 					'The email address which the recipient is able to \'reply\' to.'
 				))
 		));
+		
+		$fields->fieldByName('Root.EmailDetails')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'Email Details'));
 
 		// Only show the preview link if the recipient has been saved.
 		if (!empty($this->EmailTemplate)) {
@@ -216,7 +218,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		}
 
 		// Email templates
-		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'EmailContent'), array(
+		$fields->addFieldsToTab('Root.EmailContent', array(
 			CheckboxField::create('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
 			CheckboxField::create(
 				'SendPlain',
@@ -236,6 +238,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				'<div id="EmailPreview" class="field toggle-html-only">' . $preview . '</div>'
 			)
 		));
+		
+		$fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
 
 		// Custom rules for sending this field
 		$grid = new GridField(
@@ -248,7 +252,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			'UserDefinedForm.RulesDescription',
 			'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
 		));
-		$fields->addFieldsToTab('Root.'._t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'CustomRules'), array(
+		$fields->addFieldsToTab('Root.CustomRules', array(
 			new DropdownField(
 				'CustomRulesCondition',
 				_t('UserDefinedForm.SENDIF', 'Send condition'),
@@ -259,6 +263,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			),
 			$grid
 		));
+		
+		$fields->fieldByName('Root.CustomRules')->setTitle(_t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'Custom Rules'));
 
 		$this->extend('updateCMSFields', $fields);
 		return $fields;
