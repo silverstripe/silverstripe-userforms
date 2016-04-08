@@ -196,6 +196,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 					'The email address which the recipient is able to \'reply\' to.'
 				))
 		));
+		
+		$fields->fieldByName('Root.EmailDetails')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'Email Details'));
 
 		// Only show the preview link if the recipient has been saved.
 		if (!empty($this->EmailTemplate)) {
@@ -236,6 +238,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				'<div id="EmailPreview" class="field toggle-html-only">' . $preview . '</div>'
 			)
 		));
+		
+		$fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
 
 		// Custom rules for sending this field
 		$grid = new GridField(
@@ -259,6 +263,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			),
 			$grid
 		));
+		
+		$fields->fieldByName('Root.CustomRules')->setTitle(_t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'Custom Rules'));
 
 		$this->extend('updateCMSFields', $fields);
 		return $fields;
