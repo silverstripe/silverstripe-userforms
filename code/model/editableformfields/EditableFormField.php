@@ -148,20 +148,17 @@ class EditableFormField extends DataObject {
 				),
 				LiteralField::create(
 					'MergeField',
-					_t(
-						'EditableFormField.MERGEFIELDNAME',
 						'<div class="field readonly">' .
-							'<label class="left">Merge field</label>' .
+							'<label class="left">' . _t('EditableFormField.MERGEFIELDNAME', 'Merge field') . '</label>' .
 							'<div class="middleColumn">' .
 								'<span class="readonly">$' . $this->Name . '</span>' .
 							'</div>' .
 						'</div>'
-					)
 				),
-				TextField::create('Title'),
+				TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
 				TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
 				TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
-				SegmentField::create('Name')->setModifiers(array(
+				SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
 					UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
 					DisambiguationSegmentFieldModifier::create(),
 				))->setPreview($this->Name)
@@ -200,6 +197,8 @@ class EditableFormField extends DataObject {
 				))
 			);
 		}
+		
+		$fields->fieldByName('Root.Main')->setTitle(_t('SiteTree.TABMAIN', 'Main'));
 
 		// Validation
 		$validationFields = $this->getFieldValidationOptions();
@@ -208,6 +207,8 @@ class EditableFormField extends DataObject {
 				'Root.Validation',
 				$this->getFieldValidationOptions()
 			);
+			
+			$fields->fieldByName('Root.Validation')->setTitle(_t('EditableFormField.VALIDATIONTAB', 'Validation'));
 		}
 		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
 		$self = $this;
@@ -252,7 +253,7 @@ class EditableFormField extends DataObject {
 			);
 
 		$fields->addFieldsToTab('Root.DisplayRules', array(
-			CheckboxField::create('ShowOnLoad')
+			CheckboxField::create('ShowOnLoad', _t('EditableFormField.SHOWONLOADTITLE','Show on load'))
 				->setDescription(_t(
 					'EditableFormField.SHOWONLOAD',
 					'Initial visibility before processing these rules'
@@ -264,6 +265,8 @@ class EditableFormField extends DataObject {
 				$customRulesConfig
 			)
 		));
+		
+		$fields->fieldByName('Root.DisplayRules')->setTitle(_t('EditableFormField.DISPLAYRULESTAB', 'Display Rules'));
 
 		$this->extend('updateCMSFields', $fields);
 
