@@ -43,6 +43,8 @@ class UserForm extends Form {
 			$this->loadDataFrom($data);
 		}
 
+		$this->setupFormErrors();
+
 		$this->extend('updateForm');
 	}
 
