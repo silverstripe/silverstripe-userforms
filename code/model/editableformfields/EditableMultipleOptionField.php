@@ -53,6 +53,7 @@ class EditableMultipleOptionField extends EditableFormField {
 			->addComponents(
 				new GridFieldToolbarHeader(),
 				new GridFieldTitleHeader(),
+				new GridFieldOrderableRows('Sort'),
 				$editableColumns,
 				new GridFieldButtonRow(),
 				new GridFieldAddNewInlineButton(),
