@@ -15,7 +15,8 @@ class EditableOption extends DataObject {
 		"Name" => "Varchar(255)",
 		"Title" => "Varchar(255)",
 		"Default" => "Boolean",
-		"Sort" => "Int"
+        "Sort" => "Int",
+        "Value" => "Varchar(255)",
 	);
 
 	private static $has_one = array(

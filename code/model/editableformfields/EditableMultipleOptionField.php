@@ -40,7 +40,13 @@ class EditableMultipleOptionField extends EditableFormField {
 				'callback' => function($record, $column, $grid) {
 					return TextField::create($column);
 				}
-			),
+            ),
+            'Value' => array(
+                'title' => _t('EditableMultipleOptionField.VALUE', 'Value'),
+                'callback' => function($record, $column, $grid) {
+                    return TextField::create($column);
+                }
+            ),
 			'Default' => array(
 				'title' => _t('EditableMultipleOptionField.DEFAULT', 'Selected by default?'),
 				'callback' => function($record, $column, $grid) {
@@ -171,7 +177,7 @@ class EditableMultipleOptionField extends EditableFormField {
 	 */
 	protected function getOptionsMap() {
 		$optionSet = $this->Options();
-		$optionMap = $optionSet->map('EscapedTitle', 'Title');
+		$optionMap = $optionSet->map('Value', 'Title');
 		if($optionMap instanceof SS_Map) {
 			return $optionMap->toArray();
 		}
