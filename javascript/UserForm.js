@@ -101,6 +101,10 @@ jQuery(function ($) {
 		// Submission in the jQuery.validate sence is handled at step level.
 		// So when the final step is submitted we have to also check all previous steps are valid.
 		submitHandler: function (form, e) {
+
+			// When using the "are you sure?" plugin, ensure the form immediately submits.
+			$(form).removeClass('dirty');
+
 			var isValid = true;
 
 			// validate the current step
