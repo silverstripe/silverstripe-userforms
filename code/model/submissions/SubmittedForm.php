@@ -83,6 +83,10 @@ class SubmittedForm extends DataObject {
 	 * @return boolean
 	 */
 	public function canCreate($member = null) {
+		$extended = $this->extendedCan(__FUNCTION__, $member);
+		if($extended !== null) {
+			return $extended;
+		}
 		return $this->Parent()->canCreate();
 	}
 
@@ -92,6 +96,10 @@ class SubmittedForm extends DataObject {
 	 * @return boolean
 	 */
 	public function canView($member = null) {
+		$extended = $this->extendedCan(__FUNCTION__, $member);
+		if($extended !== null) {
+			return $extended;
+		}
 		return $this->Parent()->canView();
 	}
 
@@ -101,6 +109,10 @@ class SubmittedForm extends DataObject {
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
+		$extended = $this->extendedCan(__FUNCTION__, $member);
+		if($extended !== null) {
+			return $extended;
+		}
 		return $this->Parent()->canEdit();
 	}
 
@@ -110,6 +122,10 @@ class SubmittedForm extends DataObject {
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
+		$extended = $this->extendedCan(__FUNCTION__, $member);
+		if($extended !== null) {
+			return $extended;
+		}
 		return $this->Parent()->canDelete();
 	}
 
