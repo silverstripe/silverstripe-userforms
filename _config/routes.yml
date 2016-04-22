@@ -1,0 +1,7 @@
+---
+Name: userformsroutes
+After: framework/routes#coreroutes
+---
+Director:
+  rules:
+    'UserDefinedForm_Controller//$Action' : 'UserDefinedForm_Controller'
