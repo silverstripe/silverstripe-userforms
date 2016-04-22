@@ -8,7 +8,12 @@ use SilverStripe\Forms\SegmentField;
  *
  * @package userforms
  *
- * @property string Name
+ * @property string $Name
+ * @property string $Title
+ * @property string $Default
+ * @property int $Sort
+ * @property bool $Required
+ * @property string $CustomErrorMessage
  * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
  */
@@ -203,14 +208,39 @@ class EditableFormField extends DataObject {
 
 		// Validation
 		$validationFields = $this->getFieldValidationOptions();
-		if($validationFields) {
-			$fields->addFieldsToTab(
-				'Root.Validation',
-				$this->getFieldValidationOptions()
+		if($validationFields && $validationFields->count()) {
+			$fields->addFieldsToTab('Root.Validation', $validationFields);
+		}
+
+		// Add display rule fields
+		$displayFields = $this->getDisplayRuleFields();
+		if($displayFields && $displayFields->count()) {
+			$fields->addFieldsToTab('Root.DisplayRules', $displayFields);
+		}
+
+		$this->extend('updateCMSFields', $fields);
+
+		return $fields;
+	}
+
+	/**
+	 * Return fields to display on the 'Display Rules' tab
+	 *
+	 * @return FieldList
+	 */
+	protected function getDisplayRuleFields() {
+		// Check display rules
+		if($this->Required) {
+			return new FieldList(
+				LabelField::create(_t(
+					'EditableFormField.DISPLAY_RULES_DISABLED',
+					'Display rules are not enabled for required fields. ' .
+					'Please uncheck "Is this field Required?" under "Validation" to re-enable.'
+				))->addExtraClass('message warning')
 			);
 		}
-		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
 		$self = $this;
+		$allowedClasses = array_keys($this->getEditableFieldClasses(false));
 		$editableColumns = new GridFieldEditableColumns();
 		$editableColumns->setDisplayFields(array(
 			'Display' => '',
@@ -251,7 +281,7 @@ class EditableFormField extends DataObject {
 				new GridFieldDeleteAction()
 			);
 
-		$fields->addFieldsToTab('Root.DisplayRules', array(
+		return new FieldList(
 			CheckboxField::create('ShowOnLoad')
 				->setDescription(_t(
 					'EditableFormField.SHOWONLOAD',
@@ -263,16 +293,9 @@ class EditableFormField extends DataObject {
 				$this->DisplayRules(),
 				$customRulesConfig
 			)
-		));
-
-		$this->extend('updateCMSFields', $fields);
-
-		return $fields;
+		);
 	}
 
-	/**
-	 * @return void
-	 */
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
@@ -320,24 +343,24 @@ class EditableFormField extends DataObject {
 		return false;
 	}
 
-    /**
-     * Return whether a user can delete this form field
-     * based on whether they can edit the page
-     *
+	/**
+	 * Return whether a user can delete this form field
+	 * based on whether they can edit the page
+	 *
      * @param Member $member
-     * @return bool
-     */
+	 * @return bool
+	 */
 	public function canDelete($member = null) {
 		return $this->canEdit($member);
-	}
+		}
 
-    /**
-     * Return whether a user can edit this form field
-     * based on whether they can edit the page
-     *
+	/**
+	 * Return whether a user can edit this form field
+	 * based on whether they can edit the page
+	 *
      * @param Member $member
-     * @return bool
-     */
+	 * @return bool
+	 */
 	public function canEdit($member = null) {
         $parent = $this->Parent();
 		if($parent && $parent->exists()) {
@@ -346,7 +369,7 @@ class EditableFormField extends DataObject {
 
         // Fallback to secure admin permissions
 		return parent::canEdit($member);
-	}
+		}
 
     /**
      * Return whether a user can view this form field
@@ -678,7 +701,7 @@ class EditableFormField extends DataObject {
 	 */
 	protected function updateFormField($field) {
 		// set the error / formatting messages
-		$field->setCustomValidationMessage($this->getErrorMessage());
+		$field->setCustomValidationMessage($this->getErrorMessage()->RAW());
 
 		// set the right title on this field
 		if($this->RightTitle) {
@@ -739,34 +762,6 @@ class EditableFormField extends DataObject {
 		$errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
 
 		return DBField::create_field('Varchar', $errorMessage);
-	}
-
-	/**
-	 * Validate the field taking into account its custom rules.
-	 *
-	 * @param Array $data
-	 * @param UserForm $form
-	 *
-	 * @return boolean
-	 */
-	public function validateField($data, $form) {
-		if($this->Required && $this->DisplayRules()->Count() == 0) {
-			$formField = $this->getFormField();
-
-			if(isset($data[$this->Name])) {
-				$formField->setValue($data[$this->Name]);
-			}
-
-			if(
-				!isset($data[$this->Name]) ||
-				!$data[$this->Name] ||
-				!$formField->validate($form->getValidator())
-			) {
-				$form->addErrorMessage($this->Name, $this->getErrorMessage()->HTML(), 'error', false);
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -874,4 +869,17 @@ class EditableFormField extends DataObject {
 		return EditableFormFieldValidator::create()
 			->setRecord($this);
 	}
+
+	/**
+	 * Determine effective display rules for this field.
+	 *
+	 * @return SS_List
+	 */
+	public function EffectiveDisplayRules() {
+		if($this->Required) {
+			return new ArrayList();
+		}
+		return $this->DisplayRules();
+	}
+
 }
