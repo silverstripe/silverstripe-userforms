@@ -8,7 +8,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 
 	static $fixture_file = 'UserDefinedFormTest.yml';
 
-	function testProcess() {
+	public function testProcess() {
 		$form = $this->setupFormFrontend();
 
 		$controller = new UserDefinedFormControllerTest_Controller($form);
@@ -60,7 +60,40 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertStringEndsWith('finished#uff', $response->getHeader('Location'));
 	}
 
-	function testFinished() {
+	public function testValidation() {
+		$form = $this->setupFormFrontend('email-form');
+
+		// Post with no fields
+		$this->get($form->URLSegment);
+		$response = $this->submitForm('UserForm_Form', null, array());
+		$this->assertPartialMatchBySelector(
+			'.field .message',
+			array('This field is required')
+		);
+
+		// Post with all fields, but invalid email
+		$this->get($form->URLSegment);
+		$this->submitForm('UserForm_Form', null, array(
+			'required-email' => 'invalid',
+			'required-text' => 'bob'
+		));
+		$this->assertPartialMatchBySelector(
+			'.field .message',
+			array('Please enter an email address')
+		);
+
+		// Post with only required
+		$this->get($form->URLSegment);
+		$this->submitForm('UserForm_Form', null, array(
+			'required-text' => 'bob'
+		));
+		$this->assertPartialMatchBySelector(
+			'p',
+			array("Thanks, we've received your submission.")
+		);
+	}
+
+	public function testFinished() {
 		$form = $this->setupFormFrontend();
 
 		// set formProcessed and SecurityID to replicate the form being filled out
@@ -72,7 +105,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertContains($form->OnCompleteMessage ,$response->getBody());
 	}
 
-	function testAppendingFinished() {
+	public function testAppendingFinished() {
 		$form = $this->setupFormFrontend();
 
 		// replicate finished being added to the end of the form URL without the form being filled out
@@ -84,7 +117,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertNotContains($form->OnCompleteMessage ,$response->getBody());
 	}
 
-	function testForm() {
+	public function testForm() {
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
 		$controller = new UserDefinedFormControllerTest_Controller($form);
@@ -103,7 +136,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 1);
 	}
 
-	function testGetFormFields() {
+	public function testGetFormFields() {
 		// generating the fieldset of fields
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
@@ -125,7 +158,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$firstStep = $formSteps->first();
 		$firstField = $firstStep->getChildren()->first();
 
-		$this->assertEquals('Custom Error Message', $firstField->getCustomValidationMessage()->getValue());
+		$this->assertEquals('Custom Error Message', $firstField->getCustomValidationMessage());
 		$this->assertEquals($firstField->Title(), 'Required Text Field <span class=\'required-identifier\'>*</span>');
 
 		// test custom right title
@@ -146,7 +179,8 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->assertFalse($controller->Form()->getFormFields()->exists());
 	}
 
-	function testGetFormActions() {
+	public function testGetFormActions()
+	{
 		// generating the fieldset of actions
 		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
 
@@ -155,6 +189,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 
 		// by default will have 1 submit button which links to process
 		$expected = new FieldList(new FormAction('process', 'Submit'));
+		$expected->setForm($controller->Form());
 
 		$this->assertEquals($actions, $expected);
 
@@ -165,11 +200,12 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 
 		$expected = new FieldList(new FormAction('process', 'Custom Button'));
 		$expected->push(new ResetFormAction("clearForm", "Clear"));
+		$expected->setForm($controller->Form());
 
 		$this->assertEquals($actions, $expected);
 	}
 
-	function testRenderingIntoFormTemplate() {
+	public function testRenderingIntoFormTemplate() {
 		$form = $this->setupFormFrontend();
 
 		$form->Content = 'This is some content without a form nested between it';
@@ -184,7 +220,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		$this->checkTemplateIsCorrect($parser);
 	}
 
-	function testRenderingIntoTemplateWithSubstringReplacement() {
+	public function testRenderingIntoTemplateWithSubstringReplacement() {
 		$form = $this->setupFormFrontend();
 
 		$controller = new UserDefinedFormControllerTest_Controller($form);
@@ -195,9 +231,14 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 
 		$this->checkTemplateIsCorrect($parser);
 	}
-
-	function setupFormFrontend() {
-		$form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+	/**
+	 * Publish a form for use on the frontend
+	 *
+	 * @param string $fixtureName
+	 * @return UserDefinedForm
+	 */
+	protected function setupFormFrontend($fixtureName = 'basic-form-page') {
+		$form = $this->objFromFixture('UserDefinedForm', $fixtureName);
 		$this->logInWithPermission('ADMIN');
 
 		$form->doPublish();
@@ -208,7 +249,7 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 		return $form;
 	}
 
-	function checkTemplateIsCorrect($parser) {
+	public function checkTemplateIsCorrect($parser) {
 		$this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form'));
 
 		// check for the input
@@ -228,12 +269,12 @@ class UserDefinedFormControllerTest extends FunctionalTest {
 	}
 }
 
-class UserDefinedFormControllerTest_Controller extends UserDefinedForM_Controller implements TestOnly {
+class UserDefinedFormControllerTest_Controller extends UserDefinedForm_Controller implements TestOnly {
 
 	/**
 	 * Overloaded to avoid inconsistencies between 2.4.2 and 2.4.3 (disables all security tokens in unit tests by default)
 	 */
-	function Form() {
+	public function Form() {
 		$form = parent::Form();
 
 		if($form) $form->disableSecurityToken();

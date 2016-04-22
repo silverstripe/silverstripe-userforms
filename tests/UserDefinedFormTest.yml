@@ -100,7 +100,13 @@ EditableTextField:
     
   some-field:
     Name: SomeField
-    
+
+  another-required:
+    Name: required-text
+    Title: Required Text Field
+    Required: true
+    CustomErrorMessage: 'This field is required'
+
 EditableDropdown:
   basic-dropdown:
     Name: basic-dropdown
@@ -136,6 +142,11 @@ EditableEmailField:
   email-field:
     Name: email-field
     Title: Email
+
+  another-email-field:
+    Name: required-email
+    Title: Enter your email
+    CustomErrorMessage: 'That email is not valid'
 
 EditableRadioField:
   radio-field:
@@ -251,3 +262,7 @@ UserDefinedForm:
   empty-page:
     Title: 'Page with empty step'
     Fields: =>EditableFormStep.form6step1, =>EditableTextField.field-1, =>EditableFormStep.form6step2, =>EditableTextField.field-2, =>EditableFormStep.form6step3
+
+  email-form:
+    Title: 'Page with email field'
+    Fields: =>EditableEmailField.another-email-field, =>EditableTextField.another-required

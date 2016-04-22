@@ -426,7 +426,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 				}
 
 				// Check for field dependencies / default
-				foreach($field->DisplayRules() as $rule) {
+				foreach($field->EffectiveDisplayRules() as $rule) {
 
 					// Get the field which is effected
 					$formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);

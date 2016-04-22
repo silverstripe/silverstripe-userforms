@@ -27,6 +27,9 @@ class UserForm extends Form {
 		$actions->setForm($this);
 		$this->setValidator($this->getRequiredFields());
 
+		// This needs to be re-evaluated since fields have been assigned
+		$this->setupFormErrors();
+
 		// Number each page
 		$stepNumber = 1;
 		foreach($this->getSteps() as $step) {
@@ -44,6 +47,16 @@ class UserForm extends Form {
 		}
 
 		$this->extend('updateForm');
+	}
+
+	public function setupFormErrors()
+	{
+		// Suppress setupFormErrors if fields haven't been bootstrapped
+		if($this->fields && $this->fields->exists()) {
+			return parent::setupFormErrors();
+		}
+
+		return $this;
 	}
 
 	/**
@@ -90,6 +103,7 @@ class UserForm extends Form {
 		}
 		$fields->clearEmptySteps();
 		$this->extend('updateFormFields', $fields);
+		$fields->setForm($this);
 		return $fields;
 	}
 
@@ -115,7 +129,7 @@ class UserForm extends Form {
 		}
 
 		$this->extend('updateFormActions', $actions);
-
+		$actions->setForm($this);
 		return $actions;
 	}
 
@@ -127,35 +141,14 @@ class UserForm extends Form {
 	public function getRequiredFields() {
 		// Generate required field validator
 		$requiredNames = $this
-			->controller
+			->getController()
 			->Fields()
 			->filter('Required', true)
 			->column('Name');
 		$required = new RequiredFields($requiredNames);
 		$this->extend('updateRequiredFields', $required);
+		$required->setForm($this);
 		return $required;
-	}
-
-	/**
-	 * Override validation so conditional fields can be validated correctly.
-	 *
-	 * @return boolean
-	 */
-	public function validate() {
-		$data = $this->getData();
-
-		Session::set("FormInfo.{$this->FormName()}.data", $data);
-		Session::clear("FormInfo.{$this->FormName()}.errors");
-
-		foreach ($this->controller->Fields() as $key => $field) {
-			$field->validateField($data, $this);
-		}
-
-		if(Session::get("FormInfo.{$this->FormName()}.errors")) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
