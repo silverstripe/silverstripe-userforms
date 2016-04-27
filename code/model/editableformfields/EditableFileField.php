@@ -49,9 +49,14 @@ class EditableFileField extends EditableFormField {
 	}
 
 	public function getFormField() {
-		$field = FileField::create($this->Name, $this->EscapedTitle)
-			->setFieldHolderTemplate('UserFormsField_holder')
-			->setTemplate('UserFormsFileField');
+		if(isset(Config::inst()->get('EditableFileField', 'use_uploadfield')) && Config::inst()->get('EditableFileField', 'use_uploadfield')) {
+			$field = Upload::create($this->Name, $this->EscapedTitle);
+		} else {
+			$field = FileField::create($this->Name, $this->EscapedTitle);
+		}
+	
+		$field->setFieldHolderTemplate('UserFormsField_holder')
+				->setTemplate('UserFormsFileField');
 
 		$field->getValidator()->setAllowedExtensions(
 			array_diff(
