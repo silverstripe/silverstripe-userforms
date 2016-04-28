@@ -4,24 +4,20 @@ sudo: false
 
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-
-env:
-  - DB=MYSQL CORE_RELEASE=3.1
-
 matrix:
   include:
+    - php: 5.3
+      env: DB=MYSQL CORE_RELEASE=3.1
+    - php: 5.4
+      env: DB=MYSQL CORE_RELEASE=3.2
+    - php: 5.5
+      env: DB=MYSQL CORE_RELEASE=3.3
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.1 SECUREASSETS=1
     - php: 5.6
-      env: DB=PGSQL CORE_RELEASE=3.1
+      env: DB=PGSQL CORE_RELEASE=3.3
 
 before_script:
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
@@ -35,11 +31,3 @@ script:
   - git remote rm origin
   - git remote add origin git@github.com:silverstripe/silverstripe-userforms.git
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-
-branches:
-  only:
-    - master
-
-matrix:
-  allow_failures:
-    - php: 7.0
