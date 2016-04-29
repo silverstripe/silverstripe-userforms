@@ -83,8 +83,8 @@ class EditableFormField extends DataObject {
 	);
 	
 	private static $defaults = array(
-    	'ShowOnLoad' => true,
-    );
+		'ShowOnLoad' => true,
+	);
 
 
 	/**
