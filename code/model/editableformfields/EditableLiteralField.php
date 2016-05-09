@@ -127,7 +127,7 @@ class EditableLiteralField extends EditableFormField {
 		$field = new LiteralField(
 			"LiteralField[{$this->ID}]",
 			sprintf(
-				"<div id='%s' class='field text%s'>
+				"<div id='%s' class='field text %s'>
 					%s
 					<div class='middleColumn literalFieldArea'>%s</div>".
 				"</div>",
