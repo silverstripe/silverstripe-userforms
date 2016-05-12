@@ -86,6 +86,11 @@ class EditableFormField extends DataObject {
 		"RightTitle" => "Varchar(255)", // from CustomSettings
 		"ShowOnLoad" => "Boolean(1)", // from CustomSettings
 	);
+	
+	private static $defaults = array(
+		'ShowOnLoad' => true,
+	);
+
 
 	/**
 	 * @config
