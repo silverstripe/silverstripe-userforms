@@ -760,7 +760,7 @@ class EditableFormField extends DataObject {
 	 * @return Varchar
 	 */
 	public function getErrorMessage() {
-		$title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
+		$title = strip_tags($this->Title ? $this->Title : $this->Name);
 		$standard = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
 
 		// only use CustomErrorMessage if it has a non empty value
