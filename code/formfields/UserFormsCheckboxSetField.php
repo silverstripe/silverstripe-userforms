@@ -20,4 +20,46 @@ class UserFormsCheckboxSetField extends CheckboxSetField {
 
 		return $options;
 	}
+
+	/**
+	 * @inheritdoc
+	 *
+	 * @return array
+	 */
+	public function getSourceAsArray()
+	{
+		$array = parent::getSourceAsArray();
+
+		return array_values($array);
+	}
+
+	/**
+	 * @inheritdoc
+	 *
+	 * @param Validator $validator
+	 *
+	 * @return bool
+	 */
+	public function validate($validator)
+	{
+		// get the previous values (could contain comma-delimited list)
+
+		$previous = $value = $this->Value();
+
+		if (strstr($value, ",")) {
+			$value = explode(",", $value);
+		}
+
+		// set the value as an array for parent validation
+
+		$this->setValue($value);
+
+		$validated = parent::validate($validator);
+
+		// restore previous value after validation
+
+		$this->setValue($previous);
+
+		return $validated;
+	}
 }
