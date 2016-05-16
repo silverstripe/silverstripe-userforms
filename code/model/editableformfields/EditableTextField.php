@@ -79,7 +79,7 @@ class EditableTextField extends EditableFormField {
 				->setTemplate('UserFormsTextareaField')
 				->setRows($this->Rows);
 		} else {
-			$field = TextField::create($this->Name, $this->EscapedTitle, $this->Default, $this->MaxLength)
+			$field = TextField::create($this->Name, $this->EscapedTitle, $this->Default)
 				->setFieldHolderTemplate('UserFormsField_holder')
 				->setTemplate('UserFormsField');
 		}
@@ -97,12 +97,15 @@ class EditableTextField extends EditableFormField {
 	protected function updateFormField($field) {
 		parent::updateFormField($field);
 
-		if($this->MinLength) {
-			$field->setAttribute('data-rule-minlength', $this->MinLength);
+		if(is_numeric($this->MinLength) && $this->MinLength > 0) {
+			$field->setAttribute('data-rule-minlength', intval($this->MinLength));
 		}
 
-		if($this->MaxLength) {
-			$field->setAttribute('data-rule-maxlength', $this->MaxLength);
+		if(is_numeric($this->MaxLength) && $this->MaxLength > 0) {
+            if($field instanceof TextField) {
+                $field->setMaxLength(intval($this->MaxLength));
+            }
+			$field->setAttribute('data-rule-maxlength', intval($this->MaxLength));
 		}
 
 		if($this->Placeholder) {
