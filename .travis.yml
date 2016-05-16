@@ -1,25 +1,25 @@
 # See https://github.com/silverstripe-labs/silverstripe-travis-support for setup details
 
-language: php 
-php: 
- - 5.3
+language: php
+php:
+  - 5.3
 
 sudo: false
 
 env:
- - DB=MYSQL CORE_RELEASE=3.1
- - DB=MYSQL CORE_RELEASE=3
- - DB=PGSQL CORE_RELEASE=3.1
+  - DB=MYSQL CORE_RELEASE=3.1
+  - DB=MYSQL CORE_RELEASE=3
+  - DB=PGSQL CORE_RELEASE=3.1
 
 matrix:
   include:
     - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=master
+      env: DB=MYSQL CORE_RELEASE=3.2
 
 before_script:
- - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
- - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
- - cd ~/builds/ss
+  - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+  - cd ~/builds/ss
 
-script: 
- - phpunit userforms/tests/
+script:
+  - vendor/bin/phpunit userforms/tests/
