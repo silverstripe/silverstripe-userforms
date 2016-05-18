@@ -1,0 +1,237 @@
+sk:
+  CustomRule:
+    BLANK: Prázdne
+    DELETE: Vymazať
+    GREATERTHAN: 'Hodnotu väčšiu ako'
+    GREATERTHANEQUAL: 'Hodnotu väčšiu alebo rovnú ako'
+    HIDETHISFIELD: 'Skryť toto pole'
+    IS: je/má
+    LESSTHAN: 'Hodnotu menšiu ako'
+    LESSTHANEQUAL: 'Hodnotu menšiu alebo rovnú ako'
+    NOTBLANK: 'Vyplnené'
+    NOTVALUE: 'Nie zadanú hodnotu'
+    SHOWTHISFIELD: 'Zobraziť toto pole'
+    VALUE: Zadanú hodnotu
+    WHEN: ak pole
+  EditableCheckbox:
+    PLURALNAME: Zaškrtávacie polia (checkbox)
+    SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Skupiny zaškrtávacích polí'
+    SINGULARNAME: 'Skupina zaškrtávacích polí'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Rozbaľovacie polia (výber krajiny)'
+    SINGULARNAME: 'Rozbaľovacie pole (výber krajiny)'
+  EditableCustomRule:
+    PLURALNAME: 'Vlastné pravidlá'
+    SINGULARNAME: 'Vlastne pravidlo'
+  EditableDateField:
+    PLURALNAME: 'Dátumové polia'
+    SINGULARNAME: 'Dátumové pole'
+  EditableDropdown:
+    PLURALNAME: Rozbaľovacie polia
+    SINGULARNAME: 'Rozbaľovacie pole'
+  EditableEmailField:
+    PLURALNAME: 'E-mailové polia'
+    SINGULARNAME: 'E-mailové pole'
+  EditableFieldGroup:
+    PLURALNAME: 'Skupiny polí'
+    SINGULARNAME: 'Skupina polí'
+  EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'Koniec {group}'
+    FIELD_GROUP_START: 'Skupina {group}'
+    PLURALNAME: 'Konce skupiny polí'
+    SINGULARNAME: 'Koniec skupiny polí'
+  EditableFileField:
+    PLURALNAME: 'Polia pre nahratie súboru'
+    SINGULARNAME: 'Pole pre nahratie súboru'
+  EditableFormField:
+    ADD: Pridať
+    ADDLabel: 'Pridať voľbu/možnosť'
+    ADDRULE: 'Pridať pravidlo'
+    BLANK: Prázdne
+    CHECKEDBYDEFAULT: 'Zaškrtnuté v predvolenom režime?'
+    CUSTOMERROR: 'Vlastná chybová správa'
+    CUSTOMOPTIONS: Voľby/možnosti
+    CUSTOMRULES: 'Vlastné pravidlá'
+    DEFAULT: 'Predvolená hodnota'
+    DEFAULTTOTODAY: 'Zobraziť v predvolenom režime na dnešný dátum?'
+    DELETE: Vymazať
+    DRAG: 'Ťahaním preskupiť poradie polí'
+    ENTERQUESTION: 'Zadajte otázku'
+    EXTRACLASSA: 'Extra úprava/vzhľad'
+    EXTRACLASSB: 'Extra CSS triedy - viaceré triedy oddeľujte medzerou'
+    EXTRACLASS_MULTIPLE: 'Jednotlivé CSS triedy oddeľte jednou medzerou'
+    EXTRACLASS_SELECT: 'Vyberte si zo zoznamu povolených štýlov'
+    EXTRACLASS_TITLE: 'Extra úprava/vzhľad'
+    EXTRACLASS_Title: 'Extra CSS triedy'
+    FIELDCONFIGURATION: 'Konfigurácia poľa'
+    FIELDONDEFAULT: 'Pole v predvolenom režime'
+    GREATERTHAN: 'Hodnotu väčšiu ako'
+    GREATERTHANEQUAL: 'Hodnotu väčšiu alebo rovnú ako'
+    GROUP: Skupina
+    HIDE: Skryť
+    HIDETHISFIELD: 'Skryť toto pole'
+    IS: je/má
+    LESSTHAN: 'Hodnotu menšiu ako'
+    LESSTHANEQUAL: 'Hodnotu menšiu alebo rovnú ako'
+    LOCKED: 'Tieto polia nie je možné meniť'
+    MAXVALUE: 'Maximálna hodnota'
+    MINVALUE: 'Minimálna hodnota'
+    'NO': ' Nie'
+    NOTBLANK: 'Vyplnené'
+    NOTVALUE: 'Nie zadanú hodnotu'
+    OPTIONS: Voľba/možnosť
+    PLURALNAME: 'Formulárové polia'
+    REQUIRED: 'Je pole povinné/vyžadované?'
+    REQUIRED_DESCRIPTION: 'Všimnite si prosím, že podmienené polia nemôžu byť vyžadované.'
+    RIGHTTITLE: 'Popis vpravo'
+    SHOW: Zobraziť
+    SHOWONLOAD: 'Počiatočná viditeľnosť pred spracovaním týchto pravidiel'
+    SHOWOPTIONS: 'Zobraziť možnosti'
+    SHOWTHISFIELD: 'Zobraziť toto pole'
+    SINGULARNAME: 'Formulárové pole'
+    TITLE: Titulok
+    TYPE: Typ
+    VALIDATION: Validácia
+    VALUE: Zadanú hodnotu
+    WHEN: ak pole
+    'YES': 'Áno'
+  EditableFormFieldValidator:
+    REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
+  EditableFormHeading:
+    LEVEL: 'Úroveň nadpisu'
+    PLURALNAME: Nadpisy
+    SINGULARNAME: Nadpis
+  EditableFormStep:
+    PLURALNAME: 'Zlomy strán'
+    SINGULARNAME: 'Zlom strany'
+    STEP_TITLE: 'Strana {page}'
+    TITLE_FIRST: 'Prvá strana'
+  EditableLiteralField:
+    CONTENT: HTML
+    HIDEFROMREPORT: 'Skryť z reportu?'
+    HIDELABEL: 'Skryť titulok na FrontEnd-e?'
+    PLURALNAME: 'HTML bloky'
+    SINGULARNAME: 'HTML blok'
+  EditableMemberListField:
+    PLURALNAME: 'Polia zoznamu členov'
+    SINGULARNAME: 'Pole zoznamu členov'
+  EditableMultipleOptionField:
+    DEFAULT: 'Vybrané v predvolenom režime?'
+    PLURALNAME: 'Polia s viacerými možnosťami'
+    SINGULARNAME: 'Pole s viacerými možnosťami'
+  EditableNumericField:
+    PLURALNAME: 'Numerické/číselné polia'
+    RANGE: 'Povolený rozsah'
+    RANGE_TO: do
+    SINGULARNAME: 'Numerické/číselné pole'
+  EditableOption:
+    DELETE: 'Odstráň túto možnosť'
+    DRAG: 'Ťahaním preskupiť poradie polí'
+    LOCKED: 'Tieto polia nie je možné meniť'
+    PLURALNAME: 'Možnosti'
+    SINGULARNAME: 'Možnosť'
+  EditableRadioField:
+    PLURALNAME: 'Prepínacie polia (radio)'
+    SINGULARNAME: 'Prepínacie pole (radio)'
+  EditableTextField:
+    NUMBERROWS: 'Počet riadkov'
+    NUMBERROWS_DESCRIPTION: 'Políčka s viac ako jedným riadkom sú generované ako textarea.'
+    PLACEHOLDER: Zástupná/Ukážková hodnota (placeholder)
+    PLURALNAME: 'Textové polia'
+    RANGE_TO: do
+    SINGULARNAME: 'Textové pole'
+    TEXTLENGTH: 'Povolená dĺžka textu'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
+  FieldEditor:
+    ADD: Pridať
+    SELECTAFIELD: 'Vyberte pole'
+  Form:
+    FIELDISREQUIRED: '%s je vyžadované'
+  GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SiteTree:
+    PLURALNAME: Stránky
+    SINGULARNAME: Stránka
+  SubmittedFileField:
+    DOWNLOADFILE: 'Stiahnuť súbor'
+    PLURALNAME: 'Pole s odoslanými súbormi'
+    SINGULARNAME: 'Pole s odoslaným súborom'
+  SubmittedForm:
+    PLURALNAME: 'Odoslané formuláre'
+    SINGULARNAME: 'Odoslaný formulár'
+  SubmittedFormField:
+    PLURALNAME: 'Odoslané formulárové polia'
+    SINGULARNAME: 'Odoslané formulárove pole'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Pridať príjemcu'
+    CLEARBUTTON: Vyčistiť
+    CONFIGURATION: Konfigurácia
+    DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
+    DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'
+    DISPLAYERRORMESSAGESATTOP: 'Zobrazovať chybové hlásenia nad formulárom?'
+    EMAILADDRESS: E-mail
+    EMAILBODY: Správa
+    EMAILBODYHTML: Správa
+    EMAILFROM: Od
+    EMAILRECIPIENTS: 'Príjemcovia'
+    EMAILSUBJECT: 'Predmet'
+    EMAILTEMPLATE: 'E-mailová šablóna'
+    ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
+    EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
+    FIELDS: Políčka
+    FORM: Formulár
+    FROMADDRESS: 'E-mail odosielateľa'
+    FileUploadWarning: 'Súbory nahraté pomocou tohto políčka môžu byť verejné prístupné, pokiaľ je známa presná URL adresa.'
+    HIDEFIELDLABELS: 'Skyť popisky (menovky) polí?'
+    HIDEFORMDATA: 'Skryť dáta z e-mailu?'
+    ONCOMPLETELABEL: 'Správa po odoslaní formulára'
+    ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte poľe, ktoré sa použije na odpoveď'
+    ORSELECTAFIELDTOUSEASTO: '... alebo vyberte poľe, ktoré sa použije ako E-mail príjemcu'
+    PLURALNAME: 'Jednoduché formuláre'
+    PREVIEW_EMAIL: 'Náhľad e-mailu'
+    PREVIEW_EMAIL_DESCRIPTION: 'Poznámka: Neuložené zmeny sa v náhľade nezobrazujú.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Akonáhle uložite príjemcu, budete si môcť pozrieť ako bude vyzerať tento e-mail.'
+    RECIPIENTS: Príjemcovia
+    REPLYADDRESS: 'Odpoveď na'
+    REPLYADDRESS_DESCRIPTION: 'E-mailová adresa, na ktorú príde odpoveď od príjemcu.'
+    RulesDescription: 'E-maily budú zasielane príjemcovi len vtedy, ak sú splnené vlastné pravidlá. Ak pravidlá nie sú definované, príjemca bude dostávať e-maily pri každom podanom formulári.'
+    SAVESUBMISSIONS: 'Zakázať ukladanie odoslaných formulárov na server?'
+    SELECTAFIELDTOSETSUBJECT: '... alebo vyber poľe, ktoré sa použije ako predmet'
+    SENDEMAILTO: 'E-mail príjemcu'
+    SENDEMAILTO_DESCRIPTION: 'Môžete zadať viac e-mailových adries, pričom jednotlivé adresy oddeľujte čiarkou.'
+    SENDIF: 'Podmienka poslania'
+    SENDPLAIN: 'Poslať e-mail ako obyčajný text? (HTML značky budú odstránené)'
+    SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
+    SINGULARNAME: 'Jednoduchý formulár'
+    SUBMISSIONS: Podané formuláre
+    SUBMITBUTTON: Odoslať
+    TEXTONCLEAR: 'Text na tlačidle RESET:'
+    TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
+    TYPEREPLY: 'Napíšte adresu'
+    TYPESUBJECT: 'Napíšte predmet'
+    TYPETO: 'Napíšte adresu'
+  UserDefinedForm_EmailRecipient:
+    PLURALNAME: 'Užívateľom definovaný formulár - príjemcovia e-mailu'
+    SINGULARNAME: 'Užívateľom definovaný formulár - príjemca e-mailu'
+  UserDefinedForm_EmailRecipientCondition:
+    PLURALNAME: 'Užívateľom definovaný formulár - podmienky príjemcu e-mailu'
+    SINGULARNAME: 'Užívateľom definovaný formulár - podmienka príjemcu e-mailu'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'Pridať políčko'
+    ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
+    ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
+    FORMFIELDS: 'Formulár'
+  UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
+    NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
+    UNEXPECTED_BREAK: 'Neočakávaný zlom strany ''{name}'' vnútri obaľovacej skupiny ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' nájdený bez odpovedajúcho začiatku'
+    WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrovať ...'
+    WHEREVALUEIS: 'kde hodnota je ...'

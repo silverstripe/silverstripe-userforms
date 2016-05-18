@@ -57,6 +57,7 @@ en:
     DEFAULT: 'Default value'
     DEFAULTTOTODAY: 'Default to Today?'
     DELETE: Delete
+    DISPLAY_RULES_DISABLED: 'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
     DRAG: 'Drag to rearrange order of fields'
     ENTERQUESTION: 'Enter Question'
     EXTRACLASSA: 'Extra Styling/Layout'
@@ -119,8 +120,10 @@ en:
     SINGULARNAME: 'Member List Field'
   EditableMultipleOptionField:
     DEFAULT: 'Selected by default?'
+    OPTIONSTAB: Options
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
+    TITLE: Title
   EditableNumericField:
     PLURALNAME: 'Numeric Fields'
     RANGE: 'Allowed numeric range'
@@ -205,6 +208,8 @@ en:
     SENDEMAILTO: 'Send email to'
     SENDEMAILTO_DESCRIPTION: 'You may enter multiple email addresses as a comma separated list.'
     SENDIF: 'Send condition'
+    SENDIFAND: 'All conditions are true'
+    SENDIFOR: 'Any conditions are true'
     SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
@@ -216,6 +221,9 @@ en:
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
   UserDefinedForm_EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
+    EMAILCONTENTTAB: 'Email Content'
+    EMAILDETAILSTAB: 'Email Details'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
   UserDefinedForm_EmailRecipientCondition:
@@ -234,4 +242,6 @@ en:
     WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filter Submissions..'
+    FROM: From
+    TILL: Till
     WHEREVALUEIS: 'where value is..'
