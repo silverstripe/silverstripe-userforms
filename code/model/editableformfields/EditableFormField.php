@@ -365,6 +365,22 @@ class EditableFormField extends DataObject {
         $parent = $this->Parent();
 		if($parent && $parent->exists()) {
 			return $parent->canEdit($member) && !$this->isReadonly();
+		} else if ($this->ID == 0) {
+			// This is for GridFieldOrderableRows support as it checks edit permissions on 
+			// singleton of the class. Allows editing of User Defined Form pages by 
+			// 'Content Authors' and those with permission to edit the UDF page. (ie. CanEditType/EditorGroups)
+			// This is to restore User Forms 2.x backwards compatibility.
+			$controller = Controller::curr();
+			if ($controller && $controller instanceof CMSPageEditController)
+			{
+				$parent = $controller->getRecord($controller->currentPageID());
+				// Only allow this behaviour on pages using UserFormFieldEditorExtension, such
+				// as UserDefinedForm page type.
+				if ($parent && $parent->hasExtension('UserFormFieldEditorExtension'))
+				{
+					return $parent->canEdit($member);
+				}
+			}
 		}
 
         // Fallback to secure admin permissions
