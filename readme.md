@@ -8,6 +8,7 @@ and without getting involved in any PHP code.
 [![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms)
 [![Version](http://img.shields.io/packagist/v/silverstripe/userforms.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-userforms)
 [![License](http://img.shields.io/packagist/l/silverstripe/userforms.svg?style=flat-square)](LICENSE.md)
+![helpfulrobot](https://helpfulrobot.io/silverstripe/userforms/badge)
 
 ## Requirements
 
