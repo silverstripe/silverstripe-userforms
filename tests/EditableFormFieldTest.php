@@ -144,4 +144,35 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertNotEquals($textfield1->Name, $textfield2->Name);
 	}
 
+    public function testLengthRange() {
+        /** @var EditableTextField $textField */
+        $textField = $this->objFromFixture('EditableTextField', 'basic-text');
+
+        // Empty range
+        /** @var TextField $formField */
+        $textField->MinLength = 0;
+        $textField->MaxLength = 0;
+        $attributes = $textField->getFormField()->getAttributes();
+        $this->assertFalse(isset($attributes['maxLength']));
+        $this->assertFalse(isset($attributes['data-rule-minlength']));
+        $this->assertFalse(isset($attributes['data-rule-maxlength']));
+
+        // Test valid range
+        $textField->MinLength = 10;
+        $textField->MaxLength = 20;
+        $attributes = $textField->getFormField()->getAttributes();
+        $this->assertEquals(20, $attributes['maxLength']);
+        $this->assertEquals(20, $attributes['size']);
+        $this->assertEquals(10, $attributes['data-rule-minlength']);
+        $this->assertEquals(20, $attributes['data-rule-maxlength']);
+
+        // textarea
+        $textField->Rows = 3;
+        $attributes = $textField->getFormField()->getAttributes();
+        $this->assertFalse(isset($attributes['maxLength']));
+        $this->assertEquals(10, $attributes['data-rule-minlength']);
+        $this->assertEquals(20, $attributes['data-rule-maxlength']);
+    }
+
+
 }
