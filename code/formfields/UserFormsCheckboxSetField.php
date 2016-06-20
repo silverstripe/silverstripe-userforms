@@ -46,7 +46,7 @@ class UserFormsCheckboxSetField extends CheckboxSetField {
 
 		$previous = $value = $this->Value();
 
-		if (strstr($value, ",")) {
+		if (is_string($value) && strstr($value, ",")) {
 			$value = explode(",", $value);
 		}
 
