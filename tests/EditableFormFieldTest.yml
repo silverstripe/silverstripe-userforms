@@ -8,34 +8,42 @@ EditableOption:
   option-1:
     Name: Option1
     Title: Option 1
+    Value: Option 1
 
   option-2:
     Name: Option2
     Title: Option 2
+    Value: Option 2
 
   department-1:
     Name: dept1
     Title: sales@example.com
+    Value: sales@example.com
 
   department-2:
     Name: dept2
     Title: accounts@example.com
+    Value: accounts@example.com
 
   option-3:
     Name: Option3
     Title: Option 3
+    Value: Option 3
 
   option-4:
     Name: Option4
     Title: Option 4
+    Value: Option 4
 
   option-5:
     Name: Option5
     Title: Option 5
+    Value: Option 5
 
   option-6:
     Name: Option6
     Title: Option 6
+    Value: Option 6
 
 UserDefinedForm_EmailRecipient:
   recipient-1:
@@ -52,7 +60,7 @@ UserDefinedForm_EmailRecipient:
   no-data:
     EmailAddress: nodata@example.com
     EmailSubject: Email Subject
-    EmailFrom: no-reply@example.com  
+    EmailFrom: no-reply@example.com
     HideFormData: true
 
 EditableTextField:

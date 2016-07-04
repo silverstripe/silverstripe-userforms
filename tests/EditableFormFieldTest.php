@@ -70,6 +70,26 @@ class EditableFormFieldTest extends FunctionalTest {
 		$this->assertEquals(0, $checkbox->EffectiveDisplayRules()->count());
 	}
 
+    /**
+     * @covers EditableOption::getValue
+     */
+    public function testEditableOptionEmptyValue() {
+         $option = $this->objFromFixture('EditableOption', 'option-1');
+         $option->Value = '';
+
+         // Disallow empty values
+         EditableOption::set_allow_empty_values(false);
+         $this->assertEquals($option->Title, $option->Value);
+
+         $option->Value = 'test';
+         $this->assertEquals('test', $option->Value);
+
+         // Allow empty values
+         EditableOption::set_allow_empty_values(true);
+         $option->Value = '';
+         $this->assertEquals('', $option->Value);
+    }
+
 	function testEditableDropdownField() {
 		$dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
 
