@@ -23,7 +23,7 @@ class EditableCustomRule extends DataObject {
 	private static $db = array(
 		'Display' => 'Enum("Show,Hide")',
 		'ConditionOption' => 'Enum("IsBlank,IsNotBlank,HasValue,ValueNot,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
-		'FieldValue' => 'Varchar'
+		'FieldValue' => 'Varchar(255)'
 	);
 
 	private static $has_one = array(
