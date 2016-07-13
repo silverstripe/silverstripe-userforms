@@ -365,7 +365,7 @@ class EditableFormField extends DataObject {
         $parent = $this->Parent();
 		if($parent && $parent->exists()) {
 			return $parent->canEdit($member) && !$this->isReadonly();
-		} else if ($this->ID == 0) {
+		} else if (!$this->exists() && Controller::has_curr()) {
 			// This is for GridFieldOrderableRows support as it checks edit permissions on 
 			// singleton of the class. Allows editing of User Defined Form pages by 
 			// 'Content Authors' and those with permission to edit the UDF page. (ie. CanEditType/EditorGroups)
