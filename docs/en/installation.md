@@ -84,3 +84,12 @@ UserDefinedForm:
 ````
 
 Any SilverStripe templates placed in your `email_template_directory` directory will be available for use with submission emails.
+
+### Custom Multi-Step button Text
+
+If you want to change the button text when using the Multi-Step/Page Break feature, simply add the following to your `config.yml`:
+
+````
+UserForm:
+  button_text: 'Your Text Here'
+````

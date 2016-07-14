@@ -311,6 +311,7 @@ SQL;
 	public function getCMSValidator() {
 		return new UserFormValidator();
 	}
+
 }
 
 /**

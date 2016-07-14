@@ -9,7 +9,7 @@
 				<% loop $Steps %>
 				<li class="step-button-wrapper<% if $First %> current<% end_if %>" data-for="$Name">
 					<%-- Remove js-align class to remove javascript positioning --%>
-					<button class="step-button-jump js-align" disabled="disabled">$Pos</button>
+					<button class="step-button-jump js-align" disabled="disabled" data-step="$Pos"><% if $Top.ButtonText %>$Top.ButtonText <% end_if %>$Pos</button>
 				</li>
 				<% end_loop %>
 			</ul>
