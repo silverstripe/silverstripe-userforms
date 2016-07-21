@@ -39,6 +39,17 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		'EmailFrom'
 	);
 
+	/**
+	 * Setting this to true will allow you to select "risky" fields as
+	 * email recipient, such as free-text entry fields.
+	 *
+	 * It's advisable to leave this off.
+	 *
+	 * @config
+	 * @var bool
+	 */
+	private static $allow_unbound_recipient_fields = false;
+
 	public function summaryFields() {
 		$fields = parent::summaryFields();
 		if(isset($fields['EmailAddress'])) {
@@ -132,8 +143,16 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 		);
 		$validSubjectFields->merge($multiOptionFields);
 
-		// To address cannot be unbound, so restrict to pre-defined lists
-		$validEmailToFields = $multiOptionFields;
+
+		// Check valid email-recipient fields
+		if($this->config()->allow_unbound_recipient_fields) {
+			// To address can only be email fields or multi option fields
+			$validEmailToFields = ArrayList::create($validEmailFromFields->toArray());
+			$validEmailToFields->merge($multiOptionFields);
+		} else {
+			// To address cannot be unbound, so restrict to pre-defined lists
+			$validEmailToFields = $multiOptionFields;
+		}
 
 		// Build fieldlist
 		$fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
@@ -196,7 +215,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 					'The email address which the recipient is able to \'reply\' to.'
 				))
 		));
-		
+
 		$fields->fieldByName('Root.EmailDetails')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'Email Details'));
 
 		// Only show the preview link if the recipient has been saved.
@@ -238,7 +257,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 				'<div id="EmailPreview" class="field toggle-html-only">' . $preview . '</div>'
 			)
 		));
-		
+
 		$fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
 
 		// Custom rules for sending this field
@@ -263,7 +282,7 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 			),
 			$grid
 		));
-		
+
 		$fields->fieldByName('Root.CustomRules')->setTitle(_t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'Custom Rules'));
 
 		$this->extend('updateCMSFields', $fields);
