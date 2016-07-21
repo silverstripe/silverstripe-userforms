@@ -7,11 +7,13 @@
  * @deprecated since version 4.0
  * @package userforms
  */
-class UserformsTreeDropdownField extends TreeDropdownField {
+class UserformsTreeDropdownField extends TreeDropdownField
+{
 
-	public function __construct($name, $title = null, $sourceObject = 'Group', $keyField = 'ID', $labelField = 'TreeTitle', $showSearch = true) {
-		parent::__construct($name, $title, $sourceObject, $keyField, $labelField, $showSearch);
+    public function __construct($name, $title = null, $sourceObject = 'Group', $keyField = 'ID', $labelField = 'TreeTitle', $showSearch = true)
+    {
+        parent::__construct($name, $title, $sourceObject, $keyField, $labelField, $showSearch);
 
-		Deprecation::notice('4.0', __CLASS__ . " is deprecated");
-	}
+        Deprecation::notice('4.0', __CLASS__ . " is deprecated");
+    }
 }

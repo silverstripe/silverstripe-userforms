@@ -7,60 +7,65 @@
  * @package userforms
  */
 
-class EditableDateField extends EditableFormField {
+class EditableDateField extends EditableFormField
+{
 
-	private static $singular_name = 'Date Field';
+    private static $singular_name = 'Date Field';
 
-	private static $plural_name = 'Date Fields';
+    private static $plural_name = 'Date Fields';
 
-	private static $db = array(
-		'DefaultToToday' => 'Boolean' // From customsettings
-	);
+    private static $db = array(
+        'DefaultToToday' => 'Boolean' // From customsettings
+    );
 
-	/**
-	 * @return FieldList
-	 */
-	public function getCMSFields() {
-		$this->beforeUpdateCMSFields(function(FieldList $fields) {
-			$fields->addFieldToTab(
-				'Root.Main',
-				CheckboxField::create(
-					'DefaultToToday',
-					_t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?')
-				),
-				'RightTitle'
-			);
-		});
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->addFieldToTab(
+                'Root.Main',
+                CheckboxField::create(
+                    'DefaultToToday',
+                    _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?')
+                ),
+                'RightTitle'
+            );
+        });
 
-		return parent::getCMSFields();
-	}
+        return parent::getCMSFields();
+    }
 
-	/**
-	 * Return the form field
-	 *
-	 */
-	public function getFormField() {
-		$defaultValue = $this->DefaultToToday
-			? SS_Datetime::now()->Format('Y-m-d')
-			: $this->Default;
+    /**
+     * Return the form field
+     *
+     */
+    public function getFormField()
+    {
+        $defaultValue = $this->DefaultToToday
+            ? SS_Datetime::now()->Format('Y-m-d')
+            : $this->Default;
 
-		$field = EditableDateField_FormField::create( $this->Name, $this->EscapedTitle, $defaultValue)
-			->setConfig('showcalendar', true)
-			->setFieldHolderTemplate('UserFormsField_holder')
-			->setTemplate('UserFormsField');
+        $field = EditableDateField_FormField::create($this->Name, $this->EscapedTitle, $defaultValue)
+            ->setConfig('showcalendar', true)
+            ->setFieldHolderTemplate('UserFormsField_holder')
+            ->setTemplate('UserFormsField');
 
-		$this->doUpdateFormField($field);
+        $this->doUpdateFormField($field);
 
-		return $field;
-	}
+        return $field;
+    }
 }
 
 /**
   * @package userforms
  */
-class EditableDateField_FormField extends DateField {
+class EditableDateField_FormField extends DateField
+{
 
-	public function Type() {
-		return "date-alt text";
-	}
+    public function Type()
+    {
+        return "date-alt text";
+    }
 }
