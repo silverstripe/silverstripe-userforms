@@ -114,4 +114,15 @@ class EditableOption extends DataObject {
     public function canUnpublish($member = null) {
         return $this->canDelete($member);
     }
+
+    /**
+     *
+     */
+    protected function onBeforeWrite() {
+        if (!$this->Sort) {
+            $this->Sort = EditableOption::get()->max('Sort') + 1;
+        }
+
+        parent::onBeforeWrite();
+    }
 }
