@@ -5,7 +5,7 @@
  */
 
 class UserDefinedForm extends Page {
-	
+
 	/**
 	 * @var string
 	 */
@@ -100,6 +100,12 @@ class UserDefinedForm extends Page {
 	 * @config
 	 */
 	private static $enable_are_you_sure = true;
+
+	/**
+	 * @var bool
+     * @config
+	 */
+	private static $recipients_warning_enabled = false;
 
 	/**
 	 * Temporary storage of field ids when the form is duplicated.
@@ -228,6 +234,13 @@ SQL;
 		});
 
 		$fields = parent::getCMSFields();
+
+		if($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
+			$fields->addFieldToTab("Root.Main", new LiteralField("EmailRecipientsWarning",
+				"<p class=\"message warning\">" . _t("UserDefinedForm.NORECIPIENTS",
+				"Warning: You have not configured any recipients. Form submissions may be missed.")
+				. "</p>"), "Title");
+		}
 
 		return $fields;
 	}
@@ -687,7 +700,7 @@ JS
 			foreach($recipients as $recipient) {
 				$email = new UserFormRecipientEmail($submittedFields);
 				$mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-	
+
 				if($attachments) {
 					foreach($attachments as $file) {
 						if($file->ID != 0) {
@@ -699,7 +712,7 @@ JS
 						}
 					}
 				}
-				
+
 				$parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
 				if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
