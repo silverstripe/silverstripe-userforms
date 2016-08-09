@@ -7,30 +7,31 @@
  * @method EditableMultipleOptionField Parent()
  * @package userforms
  */
-class EditableOption extends DataObject {
+class EditableOption extends DataObject
+{
 
-	private static $default_sort = "Sort";
+    private static $default_sort = "Sort";
 
-	private static $db = array(
-		"Name" => "Varchar(255)",
-		"Title" => "Varchar(255)",
-		"Default" => "Boolean",
+    private static $db = array(
+        "Name" => "Varchar(255)",
+        "Title" => "Varchar(255)",
+        "Default" => "Boolean",
         "Sort" => "Int",
         "Value" => "Varchar(255)",
-	);
+    );
 
-	private static $has_one = array(
-		"Parent" => "EditableMultipleOptionField",
-	);
+    private static $has_one = array(
+        "Parent" => "EditableMultipleOptionField",
+    );
 
-	private static $extensions = array(
-		"Versioned('Stage', 'Live')"
-	);
+    private static $extensions = array(
+        "Versioned('Stage', 'Live')"
+    );
 
-	private static $summary_fields = array(
-		'Title',
-		'Default'
-	);
+    private static $summary_fields = array(
+        'Title',
+        'Default'
+    );
 
     protected static $allow_empty_values = false;
 
@@ -39,7 +40,8 @@ class EditableOption extends DataObject {
      *
      * @return boolean
      */
-    public static function allow_empty_values() {
+    public static function allow_empty_values()
+    {
         return (bool) self::$allow_empty_values;
     }
 
@@ -48,57 +50,63 @@ class EditableOption extends DataObject {
      *
      * @param boolean $allow
      */
-    public static function set_allow_empty_values($allow) {
+    public static function set_allow_empty_values($allow)
+    {
         self::$allow_empty_values = (bool) $allow;
     }
 
-	/**
-	 * @param Member $member
-	 *
-	 * @return boolean
-	 */
-	public function canEdit($member = null) {
-		return $this->Parent()->canEdit($member);
-	}
+    /**
+     * @param Member $member
+     *
+     * @return boolean
+     */
+    public function canEdit($member = null)
+    {
+        return $this->Parent()->canEdit($member);
+    }
 
-	/**
-	 * @param Member $member
-	 *
-	 * @return boolean
-	 */
-	public function canDelete($member = null) {
-		return $this->canEdit($member);
-	}
+    /**
+     * @param Member $member
+     *
+     * @return boolean
+     */
+    public function canDelete($member = null)
+    {
+        return $this->canEdit($member);
+    }
 
-	public function getEscapedTitle() {
-		return Convert::raw2att($this->Title);
-	}
+    public function getEscapedTitle()
+    {
+        return Convert::raw2att($this->Title);
+    }
 
     /**
      * @param Member $member
      * @return bool
      */
-	public function canView($member = null) {
-		return $this->Parent()->canView($member);
-	}
+    public function canView($member = null)
+    {
+        return $this->Parent()->canView($member);
+    }
 
-	/**
-	 * Return whether a user can create an object of this type
-	 *
+    /**
+     * Return whether a user can create an object of this type
+     *
      * @param Member $member
      * @param array $context Virtual parameter to allow context to be passed in to check
-	 * @return bool
-	 */
-	public function canCreate($member = null) {
-		// Check parent page
+     * @return bool
+     */
+    public function canCreate($member = null)
+    {
+        // Check parent page
         $parent = $this->getCanCreateContext(func_get_args());
-        if($parent) {
+        if ($parent) {
             return $parent->canEdit($member);
         }
 
         // Fall back to secure admin permissions
         return parent::canCreate($member);
-	}
+    }
 
     /**
      * Helper method to check the parent for this object
@@ -106,13 +114,14 @@ class EditableOption extends DataObject {
      * @param array $args List of arguments passed to canCreate
      * @return DataObject Some parent dataobject to inherit permissions from
      */
-    protected function getCanCreateContext($args) {
+    protected function getCanCreateContext($args)
+    {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if(isset($args[1]['Parent'])) {
+        if (isset($args[1]['Parent'])) {
             return $args[1]['Parent'];
         }
         // Hack in currently edited page if context is missing
-        if(Controller::has_curr() && Controller::curr() instanceof CMSMain) {
+        if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
             return Controller::curr()->currentPage();
         }
 
@@ -124,7 +133,8 @@ class EditableOption extends DataObject {
      * @param Member $member
      * @return bool
      */
-    public function canPublish($member = null) {
+    public function canPublish($member = null)
+    {
         return $this->canEdit($member);
     }
 
@@ -132,7 +142,8 @@ class EditableOption extends DataObject {
      * @param Member $member
      * @return bool
      */
-    public function canUnpublish($member = null) {
+    public function canUnpublish($member = null)
+    {
         return $this->canDelete($member);
     }
 
@@ -145,7 +156,7 @@ class EditableOption extends DataObject {
     public function getValue()
     {
         $value = $this->getField('Value');
-        if(empty($value) && !self::allow_empty_values()) {
+        if (empty($value) && !self::allow_empty_values()) {
             return $this->Title;
         }
         return $value;

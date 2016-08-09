@@ -10,30 +10,29 @@
  * @package userforms
  */
 
-class UserFormsVersionedTask extends MigrationTask {
+class UserFormsVersionedTask extends MigrationTask
+{
 
-	protected $title = "UserForms Versioned Initial Migration";
+    protected $title = "UserForms Versioned Initial Migration";
 
-	protected $description = "Publishes the existing forms";
+    protected $description = "Publishes the existing forms";
 
-	/**
-	 * Publish the existing forms.
-	 *
-	 */
-	public function run($request) {
-		$forms = Versioned::get_by_stage('UserDefinedForm', 'Live');
+    /**
+     * Publish the existing forms.
+     *
+     */
+    public function run($request)
+    {
+        $forms = Versioned::get_by_stage('UserDefinedForm', 'Live');
 
-		if($forms) {
-			foreach($forms as $form) {
-				echo "Publishing $form->Title <br />";
-				$form->doPublish();
-			}
-			echo "Complete";
-		}
-		else {
-			echo "No Forms Found";
-		}
-	}
+        if ($forms) {
+            foreach ($forms as $form) {
+                echo "Publishing $form->Title <br />";
+                $form->doPublish();
+            }
+            echo "Complete";
+        } else {
+            echo "No Forms Found";
+        }
+    }
 }
-
-

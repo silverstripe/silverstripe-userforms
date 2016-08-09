@@ -5,45 +5,51 @@
  *
  * @package userforms
  */
-class EditableCountryDropdownField extends EditableFormField {
+class EditableCountryDropdownField extends EditableFormField
+{
 
-	private static $singular_name = 'Country Dropdown';
+    private static $singular_name = 'Country Dropdown';
 
-	private static $plural_name = 'Country Dropdowns';
+    private static $plural_name = 'Country Dropdowns';
 
-	/**
-	 * @return FieldList
-	 */
-	public function getCMSFields() {
-		$fields = parent::getCMSFields();
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
 
-		$fields->removeByName('Default');
+        $fields->removeByName('Default');
 
-		return $fields;
-	}
+        return $fields;
+    }
 
-	public function getFormField() {
-		$field = CountryDropdownField::create($this->Name, $this->EscapedTitle)
-			->setFieldHolderTemplate('UserFormsField_holder')
-			->setTemplate('UserFormsDropdownField');
+    public function getFormField()
+    {
+        $field = CountryDropdownField::create($this->Name, $this->EscapedTitle)
+            ->setFieldHolderTemplate('UserFormsField_holder')
+            ->setTemplate('UserFormsDropdownField');
 
-		$this->doUpdateFormField($field);
+        $this->doUpdateFormField($field);
 
-		return $field;
-	}
+        return $field;
+    }
 
-	public function getValueFromData($data) {
-		if(isset($data[$this->Name])) {
-			$source = $this->getFormField()->getSource();
-			return $source[$data[$this->Name]];
-		}
-	}
+    public function getValueFromData($data)
+    {
+        if (isset($data[$this->Name])) {
+            $source = $this->getFormField()->getSource();
+            return $source[$data[$this->Name]];
+        }
+    }
 
-	public function getIcon() {
-		return USERFORMS_DIR . '/images/editabledropdown.png';
-	}
+    public function getIcon()
+    {
+        return USERFORMS_DIR . '/images/editabledropdown.png';
+    }
 
-	public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false) {
-		return "$(\"select[name='{$this->Name}']\")";
-	}
+    public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)
+    {
+        return "$(\"select[name='{$this->Name}']\")";
+    }
 }
