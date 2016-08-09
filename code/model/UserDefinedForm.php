@@ -56,7 +56,8 @@ class UserDefinedForm extends Page {
 		'HideFieldLabels' => 'Boolean',
 		'DisplayErrorMessagesAtTop' => 'Boolean',
 		'DisableAuthenicatedFinishAction' => 'Boolean',
-		'DisableCsrfSecurityToken' => 'Boolean'
+		'DisableCsrfSecurityToken' => 'Boolean',
+		'CustomIndividualFileSize' => 'Int'
 	);
 
 	/**
@@ -65,6 +66,7 @@ class UserDefinedForm extends Page {
 	private static $defaults = array(
 		'Content' => '$UserDefinedForm',
 		'DisableSaveSubmissions' => 0,
+		'CustomIndividualFileSize' => 1,
 		'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
 	);
 
@@ -228,6 +230,7 @@ SQL;
 			$export->setExportColumns($columns);
 
 			$submissions->setConfig($config);
+			$fields->addFieldToTab('Root.FormOptions', new NumericField('CustomIndividualFileSize', _t('UserDefinedForm.CustomIndividualFileSize', 'Enter in the Custom file size for indivual upload fields.')));
 			$fields->addFieldToTab('Root.Submissions', $submissions);
 			$fields->addFieldToTab('Root.FormOptions', new CheckboxField('DisableSaveSubmissions', _t('UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')));
 
@@ -671,7 +674,7 @@ JS
 						$submittedField->UploadedFileID = $file->ID;
 
 						// attach a file only if lower than 1MB
-						if($file->getAbsoluteSize() < 1024*1024*1) {
+						if($file->getAbsoluteSize() < 1024*1024*$this->CustomIndividualFileSize) {
 							$attachments[] = $file;
 						}
 					}
