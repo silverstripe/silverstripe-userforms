@@ -37,7 +37,7 @@ You'll also need to run `dev/build`. You should see a new page type in the CMS '
  * [Index](docs/en/index.md)
  * [Installation instructions](docs/en/installation.md)
  * [Troubleshooting](docs/en/troubleshooting.md)
- * [User Documentation](docs/en/user-documentation.md)
+ * [User Documentation](docs/en/userguide/index.md)
 
 ## Thanks
 
