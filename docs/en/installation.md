@@ -33,7 +33,7 @@ and default to a safe set of files (e.g. disallowing `*.php` uploads).
 You can define further exclusions through the `EditableFileField.allowed_extensions_blacklist`
 configuration setting.
 
-The allowed upload size is determined by PHP configuration
+The allowed upload size can be set in the cms as long as it doesn't exceed the PHP configuration
 for this website (the smaller value of `upload_max_filesize` or `post_max_size`).
 
 The field is disabled by default since implementors need to determine how files are secured.
