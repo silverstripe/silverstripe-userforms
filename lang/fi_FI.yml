@@ -57,6 +57,7 @@ fi_FI:
     DEFAULT: 'Oletusarvo'
     DEFAULTTOTODAY: 'Oletus ''Tänään''?'
     DELETE: Poista
+    DISPLAY_RULES_DISABLED: 'Näyttösäännöt ei ole päällä vaadituille kentille. Ole hyvä ja poista valinta "Onko tämä kenttä pakollinen?" kohdasta "Validointi" kytkeäksesi ne päälle.'
     DRAG: 'Raahaa muuttaaksesi kenttien järjestystä'
     ENTERQUESTION: 'Lisää kysymys'
     EXTRACLASSA: 'Ylimääräinen stailaus/leiska'
@@ -93,7 +94,7 @@ fi_FI:
     SINGULARNAME: 'Muokattava lomakekenttä'
     TITLE: Otsikko
     TYPE: Tyyppi
-    VALIDATION: Vahvistaminen
+    VALIDATION: Validointi
     VALUE: On sama kuin
     WHEN: Kun
     'YES': 'Kyllä'
@@ -119,8 +120,10 @@ fi_FI:
     SINGULARNAME: 'Jäsenlistakenttä'
   EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
+    OPTIONSTAB: Valinnat
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
+    TITLE: Otsikko
   EditableNumericField:
     PLURALNAME: 'Numeeriset kentät'
     RANGE: 'Sallittu numeerinen väli'
@@ -205,6 +208,8 @@ fi_FI:
     SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
     SENDEMAILTO_DESCRIPTION: 'Voit lisätä useamman osoitteen pilkulla erotettuna listana'
     SENDIF: 'Lähetyssääntö'
+    SENDIFAND: 'Kaikki ehdot ovat tosia'
+    SENDIFOR: 'Kaikki ehdot ovat tosia'
     SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
     SHOWCLEARFORM: 'Näytä lomakkeentyhjennysnappi'
     SINGULARNAME: 'Lomake'
@@ -216,6 +221,9 @@ fi_FI:
     TYPESUBJECT: 'Kirjoita otsikko'
     TYPETO: 'Kirjoita vastaanottajan osoite'
   UserDefinedForm_EmailRecipient:
+    CUSTOMRULESTAB: 'Mukautetut säännöt'
+    EMAILCONTENTTAB: 'Sähköpostin sisältö'
+    EMAILDETAILSTAB: 'Sähköpostin tiedot'
     PLURALNAME: 'Lomakkeen vastaanottosähköpostit'
     SINGULARNAME: 'Lomakkeen vastaanottosähköposti'
   UserDefinedForm_EmailRecipientCondition:
@@ -234,4 +242,6 @@ fi_FI:
     WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Suodata lomakkeella lähetettyjä...'
+    FROM: Lähettäjä
+    TILL: Asti
     WHEREVALUEIS: 'jonka arvo on...'

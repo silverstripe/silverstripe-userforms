@@ -124,6 +124,7 @@ en:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     TITLE: Title
+    VALUE: Value
   EditableNumericField:
     PLURALNAME: 'Numeric Fields'
     RANGE: 'Allowed numeric range'
@@ -192,6 +193,7 @@ en:
     FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
     HIDEFIELDLABELS: 'Hide field labels'
     HIDEFORMDATA: 'Hide form data from email?'
+    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
     ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'

@@ -57,6 +57,7 @@ eo:
     DEFAULT: 'Apriora valoro'
     DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
     DELETE: Forigi
+    DISPLAY_RULES_DISABLED: 'Vidigaj reguloj ne estas enŝaltitaj por bezonataj kampoj. Por reaktivigi ĝin, bonvolu malmarki "Ĉu ĉi tiu kampo estas bezonata?" sub "Validigo".'
     DRAG: 'Ŝovi por rearanĝi kampojn'
     ENTERQUESTION: 'Enigi demandon'
     EXTRACLASSA: 'Ekstra stilado/aranĝado'
@@ -119,8 +120,10 @@ eo:
     SINGULARNAME: 'Kampo por membrolisto'
   EditableMultipleOptionField:
     DEFAULT: 'Elektita apriore?'
+    OPTIONSTAB: Agordoj
     PLURALNAME: 'Redakteblaj plureblaj kampoj'
     SINGULARNAME: 'Redaktebla plurebla kampo'
+    TITLE: Titolo
   EditableNumericField:
     PLURALNAME: 'Numeraj kampoj'
     RANGE: 'Ebla numera amplekso'
@@ -205,6 +208,8 @@ eo:
     SENDEMAILTO: 'Sendi retpoŝton al'
     SENDEMAILTO_DESCRIPTION: 'Vi povas enigi plurajn retadresojn kiel komodisigitan liston.'
     SENDIF: 'Senda kondiĉo'
+    SENDIFAND: 'Ĉiuj kondiĉoj estas veraj'
+    SENDIFOR: 'Iuj kondiĉoj estas veraj'
     SENDPLAIN: 'Ĉu sendi retpoŝton kiel simplan tekston? (HTML foriĝos) '
     SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
     SINGULARNAME: 'Propre difinita formularo'
@@ -216,6 +221,9 @@ eo:
     TYPESUBJECT: 'Tajpi temon'
     TYPETO: 'Tajpi al-adreson'
   UserDefinedForm_EmailRecipient:
+    CUSTOMRULESTAB: 'Propraj reguloj'
+    EMAILCONTENTTAB: 'Retpoŝta enhavo'
+    EMAILDETAILSTAB: 'Retpoŝtaj detaloj'
     PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
     SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
   UserDefinedForm_EmailRecipientCondition:
@@ -234,4 +242,6 @@ eo:
     WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
+    FROM: De
+    TILL: Ĝis
     WHEREVALUEIS: 'kie valoro estas..'
