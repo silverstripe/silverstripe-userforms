@@ -64,7 +64,7 @@ class EditableMultipleOptionField extends EditableFormField
                 new GridFieldOrderableRows('Sort'),
                 $editableColumns,
                 new GridFieldButtonRow(),
-                new GridFieldAddNewInlineButton(),
+                new GridFieldAddClassesButton(array('EditableOption')),
                 new GridFieldDeleteAction()
             );
 
