@@ -13,6 +13,7 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.ADDING_OPTION": "Adding option",
     "UserForms.ADDING_RULE": "Adding rule",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "All submissions will be permanently removed. Continue?",
+	"UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Error creating field",
     "UserForms.ERROR_CREATING_OPTION": "Error creating option",
     "UserForms.HIDE_OPTIONS": "Hide options",
