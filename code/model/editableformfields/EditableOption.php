@@ -162,7 +162,8 @@ class EditableOption extends DataObject
         return $value;
     }
 
-    protected function onBeforeWrite() {
+    protected function onBeforeWrite()
+    {
         if (!$this->Sort) {
             $this->Sort = EditableOption::get()->max('Sort') + 1;
         }
