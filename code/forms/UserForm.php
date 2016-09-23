@@ -166,4 +166,12 @@ class UserForm extends Form {
 
 		return $attrs;
 	}
+
+    /**
+     * @return string
+     */
+    public function getButtonText() {
+        return $this->config()->get('button_text');
+    }
+
 }

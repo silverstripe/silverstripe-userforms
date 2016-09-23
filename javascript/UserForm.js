@@ -468,7 +468,7 @@ jQuery(function ($) {
 		this.$buttons.each(function (i, stepButton) {
 			$(stepButton).on('click', function (e) {
 				e.preventDefault();
-				self.$el.trigger('userform.progress.changestep', [parseInt($(this).text(), 10)]);
+				self.$el.trigger('userform.progress.changestep', [parseInt($(this).data('step'), 10)]);
 			});
 		});
 
@@ -552,7 +552,7 @@ jQuery(function ($) {
 			var $element = $(element),
 				$item = $element.parent();
 
-			if (parseInt($element.text(), 10) === stepNumber && $element.is(':visible')) {
+			if (parseInt($element.data('step'), 10) === stepNumber && $element.is(':visible')) {
 				$item.addClass('current viewed');
 				$element.removeAttr('disabled');
 
