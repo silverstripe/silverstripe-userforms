@@ -7,3 +7,6 @@ LeftAndMain:
 
   extra_requirements_css:
     - userforms/css/FieldEditor.css
+Director:
+  rules:
+    'UserDefinedForm_Controller//$Action': 'UserDefinedForm_Controller'

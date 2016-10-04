@@ -599,7 +599,7 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($editableFields) foreach($editableFields as $editableField) {
 			// get the raw form field from the editable version
 			$field = $editableField->getFormField();
-			if(!$field) break;
+			if(!$field) continue;
 
 			// set the error / formatting messages
 			$field->setCustomValidationMessage($editableField->getErrorMessage());
