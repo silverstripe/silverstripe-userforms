@@ -25,6 +25,7 @@
  */
 .cms .uf-field-editor {
   padding-bottom: 0;
+  min-height: 300px;
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item {
   height: 46px;
@@ -121,4 +122,15 @@
 }
 .cms .uf-field-editor .stickyButtons ~ .ss-gridfield-table {
   margin-top: 40px;
+}
+
+.cms .uf-field-editor .ss-userform-add-new-classes-list {
+    margin-bottom: 8px !important;
+}
+
+.cms .uf-field-editor .ss-userform-add-new-classes-list .field {
+    border: none;
+    box-shadow: none;
+    float: left;
+    margin: 0 4px 0 0;
 }
