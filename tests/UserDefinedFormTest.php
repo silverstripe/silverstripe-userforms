@@ -1,5 +1,14 @@
 <?php
 
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\DB;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Core\Convert;
+use SilverStripe\Dev\FunctionalTest;
+
 /**
  * @package userforms
  */
@@ -95,7 +104,7 @@ class UserDefinedFormTest extends FunctionalTest
         $popup->write();
 
         $fields = $popup->getCMSFields();
-        $this->assertThat($fields->dataFieldByName('SendEmailToFieldID'), $this->isInstanceOf('DropdownField'));
+        $this->assertThat($fields->dataFieldByName('SendEmailToFieldID'), $this->isInstanceOf('SilverStripe\\Forms\\DropdownField'));
 
         // if the front end has checkboxs or dropdown they can select from that can also be used to send things
         $dropdown = $this->objFromFixture('EditableDropdown', 'department-dropdown');
@@ -311,7 +320,7 @@ class UserDefinedFormTest extends FunctionalTest
         // Test duplicate with group
         $form2 = $this->objFromFixture('UserDefinedForm', 'page-with-group');
         $form2Validator = new UserFormValidator();
-        $form2Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+        $form2Validator->setForm(new Form(new Controller(), 'SilverStripe\\Forms\\Form', new FieldList(), new FieldList()));
         $this->assertTrue($form2Validator->php($form2->toMap()));
 
         // Check field groups exist
@@ -322,7 +331,7 @@ class UserDefinedFormTest extends FunctionalTest
         // Duplicate this
         $form3 = $form2->duplicate();
         $form3Validator = new UserFormValidator();
-        $form3Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+        $form3Validator->setForm(new Form(new Controller(), 'SilverStripe\\Forms\\Form', new FieldList(), new FieldList()));
         $this->assertTrue($form3Validator->php($form3->toMap()));
 
         // Check field groups exist

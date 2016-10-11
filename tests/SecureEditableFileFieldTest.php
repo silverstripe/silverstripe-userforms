@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Assets\Filesystem;
+use SilverStripe\Assets\Folder;
+use SilverStripe\Dev\SapphireTest;
+
 /**
  * Tests integration of EditableFileField with the securefiles module
  *

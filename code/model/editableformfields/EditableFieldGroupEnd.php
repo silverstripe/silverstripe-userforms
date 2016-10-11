@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\HiddenField;
+
 /**
  * Specifies that this ends a group of fields
  */
@@ -33,7 +36,7 @@ class EditableFieldGroupEnd extends EditableFormField
             'EditableFieldGroupEnd.FIELD_GROUP_END',
             '{group} end',
             array(
-                'group' => ($group && $group->exists()) ? $group->CMSTitle : 'Group'
+                'group' => ($group && $group->exists()) ? $group->CMSTitle : 'SilverStripe\\Security\\Group'
             )
         );
     }

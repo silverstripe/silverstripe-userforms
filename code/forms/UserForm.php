@@ -1,5 +1,13 @@
 <?php
 
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\ResetFormAction;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Form;
+
 /**
  * @package userforms
  */
@@ -10,7 +18,7 @@ class UserForm extends Form
 	 * @param Controller $controller
 	 * @param string $name
 	 */
-    public function __construct(Controller $controller, $name = 'Form')
+    public function __construct(Controller $controller, $name = 'SilverStripe\\Forms\\Form')
     {
 		$this->controller = $controller;
 		$this->setRedirectToFormOnValidationError(true);

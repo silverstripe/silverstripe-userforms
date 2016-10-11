@@ -1,5 +1,18 @@
 <?php
 
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\DateField;
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\SS_List;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\GridField\GridFieldFilterHeader;
+
 /**
  * Extension to the build in SilverStripe {@link GridField} to allow for
  * filtering {@link SubmittedForm} objects in the submissions tab by

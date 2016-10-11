@@ -1,4 +1,9 @@
 <?php
+
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Core\Convert;
 /**
  * Allows an editor to insert a generic heading into a field
  *

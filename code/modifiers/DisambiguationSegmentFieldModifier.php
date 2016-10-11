@@ -1,6 +1,8 @@
 <?php
 
 use SilverStripe\Forms\SegmentFieldModifier\AbstractSegmentFieldModifier;
+use SilverStripe\Forms\Form;
+
 
 class DisambiguationSegmentFieldModifier extends AbstractSegmentFieldModifier
 {

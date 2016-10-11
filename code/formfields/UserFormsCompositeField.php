@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Forms\CompositeField;
+
 /**
  * Represents a composite field group, which may contain other groups
  */

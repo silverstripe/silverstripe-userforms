@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
 
 /**
  * Declares a condition that determines whether an email can be sent to a given recipient

@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\CSSContentParser;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ResetFormAction;
+use SilverStripe\View\ArrayData;
+use SilverStripe\Security\Member;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\Dev\TestOnly;
+
 /**
  * @package userforms
  */
@@ -129,7 +139,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $controller = new UserDefinedFormControllerTest_Controller($form);
 
         // test form
-        $this->assertEquals($controller->Form()->getName(), 'Form', 'The form is referenced as Form');
+        $this->assertEquals($controller->Form()->getName(), 'SilverStripe\\Forms\\Form', 'The form is referenced as Form');
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
         $this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);

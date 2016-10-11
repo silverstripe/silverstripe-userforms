@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Control\Email\Email;
+
 
 /**
  * Email that gets sent to the people listed in the Email Recipients when a

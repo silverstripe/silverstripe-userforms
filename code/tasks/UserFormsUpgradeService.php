@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Control\Director;
+
 /**
  * Service to support upgrade of userforms module
  */

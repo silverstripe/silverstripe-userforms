@@ -1,4 +1,6 @@
 <?php
+
+use SilverStripe\Forms\LabelField;
 /**
  * A step in multi-page user form
  *

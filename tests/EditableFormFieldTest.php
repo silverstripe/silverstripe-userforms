@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\Security\Member;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\FunctionalTest;
+
 /**
  * @package userforms
  */
@@ -101,7 +105,7 @@ class EditableFormFieldTest extends FunctionalTest
         $field = $dropdown->getFormField();
 
 
-        $this->assertThat($field, $this->isInstanceOf('DropdownField'));
+        $this->assertThat($field, $this->isInstanceOf('SilverStripe\\Forms\\DropdownField'));
         $values = $field->getSource();
 
         $this->assertEquals(array('Option 1' => 'Option 1', 'Option 2' => 'Option 2'), $values);
@@ -113,7 +117,7 @@ class EditableFormFieldTest extends FunctionalTest
 
         $field = $radio->getFormField();
 
-        $this->assertThat($field, $this->isInstanceOf('OptionsetField'));
+        $this->assertThat($field, $this->isInstanceOf('SilverStripe\\Forms\\OptionsetField'));
         $values = $field->getSource();
 
         $this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);

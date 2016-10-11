@@ -1,6 +1,33 @@
 <?php
 
 use SilverStripe\Forms\SegmentField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Dev\Deprecation;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataObject;
+
 
 /**
  * Represents the base class of a editable form field
@@ -88,7 +115,7 @@ class EditableFormField extends DataObject
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
         "ShowInSummary" => "Boolean",
     );
-    
+
     private static $defaults = array(
         'ShowOnLoad' => true,
     );
@@ -109,7 +136,7 @@ class EditableFormField extends DataObject
      * @var array
      */
     private static $extensions = array(
-        "Versioned('Stage', 'Live')"
+        "SilverStripe\\ORM\\Versioning\\Versioned('Stage', 'Live')"
     );
 
     /**
@@ -382,8 +409,8 @@ class EditableFormField extends DataObject
         if ($parent && $parent->exists()) {
             return $parent->canEdit($member) && !$this->isReadonly();
         } elseif (!$this->exists() && Controller::has_curr()) {
-            // This is for GridFieldOrderableRows support as it checks edit permissions on 
-            // singleton of the class. Allows editing of User Defined Form pages by 
+            // This is for GridFieldOrderableRows support as it checks edit permissions on
+            // singleton of the class. Allows editing of User Defined Form pages by
             // 'Content Authors' and those with permission to edit the UDF page. (ie. CanEditType/EditorGroups)
             // This is to restore User Forms 2.x backwards compatibility.
             $controller = Controller::curr();
@@ -425,10 +452,10 @@ class EditableFormField extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
         // Check parent page
-        $parent = $this->getCanCreateContext(func_get_args());
+        $parent = $this->getCanCreateContext($context);
         if ($parent) {
             return $parent->canEdit($member);
         }
@@ -443,11 +470,11 @@ class EditableFormField extends DataObject
      * @param array $args List of arguments passed to canCreate
      * @return SiteTree Parent page instance
      */
-    protected function getCanCreateContext($args)
+    protected function getCanCreateContext($context)
     {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if (isset($args[1]['Parent'])) {
-            return $args[1]['Parent'];
+        if (isset($context['Parent'])) {
+            return $context['Parent'];
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {

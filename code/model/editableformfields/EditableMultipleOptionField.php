@@ -1,5 +1,16 @@
 <?php
 
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\ORM\Map;
+
 /**
  * Base class for multiple option fields such as {@link EditableDropdownField}
  * and radio sets.
@@ -188,7 +199,7 @@ class EditableMultipleOptionField extends EditableFormField
     {
         $optionSet = $this->Options();
         $optionMap = $optionSet->map('Value', 'Title');
-        if ($optionMap instanceof SS_Map) {
+        if ($optionMap instanceof Map) {
             return $optionMap->toArray();
         }
         return $optionMap;

@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Forms\CountryDropdownField;
+
 /**
  * A dropdown field which allows the user to select a country
  *

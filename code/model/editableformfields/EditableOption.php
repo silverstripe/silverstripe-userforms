@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Core\Convert;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Base Class for EditableOption Fields such as the ones used in
  * dropdown fields and in radio check box groups

@@ -1,5 +1,26 @@
 <?php
 
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\View\Requirements;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Assets\FileFinder;
+use SilverStripe\ORM\DataObject;
+
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -55,7 +76,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $fields = parent::summaryFields();
         if (isset($fields['EmailAddress'])) {
-            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', 'Email');
+            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', 'SilverStripe\\Control\\Email\\Email');
         }
         if (isset($fields['EmailSubject'])) {
             $fields['EmailSubject'] = _t('UserDefinedForm.EMAILSUBJECT', 'Subject');
@@ -429,7 +450,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $templates = array();
 
-        $finder = new SS_FileFinder();
+        $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
         $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->email_template_directory);

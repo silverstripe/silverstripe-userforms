@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
 /**
  * A custom rule for showing / hiding an EditableFormField
  * based the value of another EditableFormField.

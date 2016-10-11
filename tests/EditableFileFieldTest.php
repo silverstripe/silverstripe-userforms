@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Dev\SapphireTest;
+
 /**
  * @package userforms
  */
@@ -46,7 +48,7 @@ class EditableFileFieldTest extends SapphireTest
     {
 
         $fileField = $this->objFromFixture('EditableFileField', 'file-field');
-        $this->setExpectedException('ValidationException');
+        $this->setExpectedException('SilverStripe\\ORM\\ValidationException');
         $fileField->MaxFileSizeMB = $this->php_max_file_size * 2;
         $fileField->write();
     }

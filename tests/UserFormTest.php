@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\Dev\SapphireTest;
+
 
 class UserFormTest extends SapphireTest
 {

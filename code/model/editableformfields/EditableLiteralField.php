@@ -1,5 +1,11 @@
 <?php
 
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\LiteralField;
+
 /**
  * Editable Literal Field. A literal field is just a blank slate where
  * you can add your own HTML / Images / Flash

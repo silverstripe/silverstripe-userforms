@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Core\Convert;
+
 /**
  * Specifies that this ends a group of fields
  */

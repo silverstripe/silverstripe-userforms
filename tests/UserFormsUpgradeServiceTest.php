@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\SapphireTest;
+
 class UserFormsUpgradeServiceTest extends SapphireTest
 {
 
@@ -54,7 +57,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $numeric1->write();
 
-        $group1 = $this->objFromFixture('Group', 'group1');
+        $group1 = $this->objFromFixture('SilverStripe\\Security\\Group', 'group1');
         $members1 = $this->objFromFixture('EditableMemberListField', 'members1');
         $members1->CustomSettings = serialize(array(
             'RightTitle' => 'Select group',
@@ -81,7 +84,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $heading1->write();
 
-        $folder = $this->objFromFixture('Folder', 'folder1');
+        $folder = $this->objFromFixture('SilverStripe\\Assets\\Folder', 'folder1');
         $file1 = $this->objFromFixture('EditableFileField', 'file1');
         $file1->CustomSettings = serialize(array(
             'RightTitle' => 'File field',
@@ -149,9 +152,9 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         $service->setQuiet(true);
         $service->run();
 
-        $group1 = $this->objFromFixture('Group', 'group1');
+        $group1 = $this->objFromFixture('SilverStripe\\Security\\Group', 'group1');
         $form = $this->objFromFixture('UserDefinedForm', 'form-with-settings');
-        $folder = $this->objFromFixture('Folder', 'folder1');
+        $folder = $this->objFromFixture('SilverStripe\\Assets\\Folder', 'folder1');
 
         $this->assertDOSEquals(array(
             array(
