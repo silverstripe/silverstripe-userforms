@@ -36,7 +36,7 @@ class EditableFieldGroupEnd extends EditableFormField
             'EditableFieldGroupEnd.FIELD_GROUP_END',
             '{group} end',
             array(
-                'group' => ($group && $group->exists()) ? $group->CMSTitle : 'SilverStripe\\Security\\Group'
+                'group' => ($group && $group->exists()) ? $group->CMSTitle : 'Group'
             )
         );
     }

@@ -84,7 +84,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $heading1->write();
 
-        $folder = $this->objFromFixture('SilverStripe\\Assets\\Folder', 'folder1');
+        $folder = $this->objFromFixture('Folder', 'folder1');
         $file1 = $this->objFromFixture('EditableFileField', 'file1');
         $file1->CustomSettings = serialize(array(
             'RightTitle' => 'File field',
@@ -154,7 +154,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
 
         $group1 = $this->objFromFixture('SilverStripe\\Security\\Group', 'group1');
         $form = $this->objFromFixture('UserDefinedForm', 'form-with-settings');
-        $folder = $this->objFromFixture('SilverStripe\\Assets\\Folder', 'folder1');
+        $folder = $this->objFromFixture('Folder', 'folder1');
 
         $this->assertDOSEquals(array(
             array(

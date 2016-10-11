@@ -18,7 +18,7 @@ class UserForm extends Form
 	 * @param Controller $controller
 	 * @param string $name
 	 */
-    public function __construct(Controller $controller, $name = 'SilverStripe\\Forms\\Form')
+    public function __construct(Controller $controller, $name = 'Form')
     {
 		$this->controller = $controller;
 		$this->setRedirectToFormOnValidationError(true);

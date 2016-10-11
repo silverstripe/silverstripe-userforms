@@ -320,7 +320,7 @@ class UserDefinedFormTest extends FunctionalTest
         // Test duplicate with group
         $form2 = $this->objFromFixture('UserDefinedForm', 'page-with-group');
         $form2Validator = new UserFormValidator();
-        $form2Validator->setForm(new Form(new Controller(), 'SilverStripe\\Forms\\Form', new FieldList(), new FieldList()));
+        $form2Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
         $this->assertTrue($form2Validator->php($form2->toMap()));
 
         // Check field groups exist
@@ -331,7 +331,7 @@ class UserDefinedFormTest extends FunctionalTest
         // Duplicate this
         $form3 = $form2->duplicate();
         $form3Validator = new UserFormValidator();
-        $form3Validator->setForm(new Form(new Controller(), 'SilverStripe\\Forms\\Form', new FieldList(), new FieldList()));
+        $form3Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
         $this->assertTrue($form3Validator->php($form3->toMap()));
 
         // Check field groups exist

@@ -48,7 +48,7 @@ class EditableFileField extends EditableFormField
             TreeDropdownField::create(
                 'FolderID',
                 _t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
-                'SilverStripe\\Assets\\Folder'
+                'Folder'
             )
         );
 
@@ -138,9 +138,9 @@ class EditableFileField extends EditableFormField
     public function migrateSettings($data)
     {
         // Migrate 'Folder' setting to 'FolderID'
-        if (isset($data['SilverStripe\\Assets\\Folder'])) {
-            $this->FolderID = $data['SilverStripe\\Assets\\Folder'];
-            unset($data['SilverStripe\\Assets\\Folder']);
+        if (isset($data['Folder'])) {
+            $this->FolderID = $data['Folder'];
+            unset($data['Folder']);
         }
 
         parent::migrateSettings($data);

@@ -34,7 +34,7 @@ class EditableMemberListField extends EditableFormField
             'Root.Main',
             DropdownField::create(
                 "GroupID",
-                _t('EditableFormField.GROUP', 'SilverStripe\\Security\\Group'),
+                _t('EditableFormField.GROUP', 'Group'),
                 Group::get()->map()
             )->setEmptyString(' ')
         );
