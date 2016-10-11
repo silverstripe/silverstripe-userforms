@@ -30,7 +30,7 @@ class EditableOption extends DataObject
 	);
 
 	private static $extensions = array(
-		"Versioned('Stage', 'Live')"
+		"SilverStripe\\ORM\\Versioning\\Versioned('Stage', 'Live')"
 	);
 
 	private static $summary_fields = array(

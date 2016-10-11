@@ -2,6 +2,8 @@
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorConfig;
 
 /**
  * Tests the {@see EditableLiteralField} class
@@ -25,12 +27,12 @@ class EditableLiteralFieldTest extends SapphireTest
         $field = new EditableLiteralField();
 
         // Test with sanitisation enabled
-        Config::inst()->update('HtmlEditorField', 'sanitise_server_side', true);
+        Config::inst()->update(HTMLEditorField::class, 'sanitise_server_side', true);
         $field->setContent($rawContent);
         $this->assertEquals($safeContent, $field->getContent());
 
         // Test with sanitisation disabled
-        Config::inst()->remove('HtmlEditorField', 'sanitise_server_side');
+        Config::inst()->remove(HTMLEditorField::class, 'sanitise_server_side');
         $field->setContent($rawContent);
         $this->assertEquals($rawContent, $field->getContent());
     }

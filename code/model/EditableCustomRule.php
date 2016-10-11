@@ -43,7 +43,7 @@ class EditableCustomRule extends DataObject
      * @var array
      */
     private static $extensions = array(
-        "Versioned('Stage', 'Live')"
+        "SilverStripe\\ORM\\Versioning\\Versioned('Stage', 'Live')"
     );
 
     /**

@@ -121,7 +121,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
 
         return array(
-            'header' => $forTemplate->renderWith('GridFieldFilterHeader_Row')
+            'header' => $forTemplate->renderWith('SilverStripe\\Forms\\GridField\\GridFieldFilterHeader_Row')
         );
     }
 

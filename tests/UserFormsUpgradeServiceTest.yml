@@ -1,8 +1,8 @@
-Group:
+SilverStripe\Security\Group:
   group1:
     Title: 'Awesome Group'
 
-Folder:
+SilverStripe\Assets\Folder:
   folder1:
     Title: 'Folder 1'
 
