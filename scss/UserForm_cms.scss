@@ -20,6 +20,7 @@
 .cms {
 	.uf-field-editor {
 		padding-bottom: 0;
+        min-height: 300px;
 
 		// Row styles
 		table.ss-gridfield-table {
@@ -157,6 +158,17 @@
 
 			~ .ss-gridfield-table {
 				margin-top: 40px;
+			}
+		}
+
+		.ss-userform-add-new-classes-list {
+			margin-bottom: 8px !important;
+
+			.field {
+				border: none;
+				box-shadow: none;
+				float: left;
+				margin: 0 4px 0 0;
 			}
 		}
 	}
