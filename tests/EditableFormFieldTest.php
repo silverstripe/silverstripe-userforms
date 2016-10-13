@@ -36,7 +36,7 @@ class EditableFormFieldTest extends FunctionalTest
         $member = Member::currentUser();
         $member->logout();
 
-        $this->logInWithPermission('SITETREE_VIEW_ALL');
+        $this->logInWithPermission(['SITETREE_VIEW_ALL', 'VIEW_DRAFT_CONTENT']);
         $this->assertFalse($text->canCreate());
 
         $text->setReadonly(false);
