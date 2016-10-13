@@ -7,6 +7,7 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TabSet;
 use SilverStripe\View\Requirements;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Forms\FieldList;
@@ -182,7 +183,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
         }
 
         // Build fieldlist
-        $fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
+        $fields = FieldList::create(TabSet::create('Root')->addExtraClass('EmailRecipientForm'));
 
         // Configuration fields
         $fields->addFieldsToTab('Root.EmailDetails', array(

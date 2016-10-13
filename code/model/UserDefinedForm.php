@@ -36,6 +36,8 @@ use SilverStripe\Control\HTTP;
 use SilverStripe\View\SSViewer;
 use SilverStripe\Control\Session;
 use SilverStripe\View\ArrayData;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+
 
 /**
  * @package userforms
