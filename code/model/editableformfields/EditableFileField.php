@@ -54,7 +54,7 @@ class EditableFileField extends EditableFormField
             'Root.Main',
             NumericField::create('MaxFileSizeMB')
                 ->setTitle('Max File Size MB')
-                ->setDescription("Note: Maximum php allowed size is {$this->getPHPMaxFileSize()} MB")
+                ->setDescription("Note: Maximum php allowed size is {$this->getPHPMaxFileSizeMB()} MB")
         );
 
         return $fields;
