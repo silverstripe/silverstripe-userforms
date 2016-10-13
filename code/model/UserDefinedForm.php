@@ -411,7 +411,7 @@ class UserDefinedForm_Controller extends Page_Controller
         // load the jquery
         $lang = i18n::get_lang_from_locale(i18n::get_locale());
         Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
-        Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+        Requirements::javascript('http://code.jquery.com/jquery-1.7.2.min.js');
         Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
         Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
         Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
