@@ -14,7 +14,7 @@ class EditableLiteralFieldTest extends SapphireTest
     public function setUp()
     {
         parent::setUp();
-        HtmlEditorConfig::set_active('cms');
+        HtmlEditorConfig::set_active_identifier('cms');
     }
 
     /**
