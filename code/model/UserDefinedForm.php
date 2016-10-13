@@ -416,12 +416,17 @@ class UserDefinedForm_Controller extends Page_Controller
         Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
         Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
 
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
-        );
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-        );
+
+        if(file_exists(BASE_PATH . '/' . USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js")) {
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+            );
+        }
+        if(file_exists(BASE_PATH . '/' . USERFORMS_DIR . "//thirdparty/jquery-validate/localization/methods_{$lang}.min.js")) {
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+            );
+        }
         if ($this->HideFieldLabels) {
             Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
         }
