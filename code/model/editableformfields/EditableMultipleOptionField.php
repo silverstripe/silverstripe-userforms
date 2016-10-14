@@ -39,6 +39,10 @@ class EditableMultipleOptionField extends EditableFormField
         "Options" => "EditableOption"
     );
 
+    private static $owns = [
+        "Options",
+    ];
+
     /**
      * @return FieldList
      */

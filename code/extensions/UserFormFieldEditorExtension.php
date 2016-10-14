@@ -26,6 +26,10 @@ class UserFormFieldEditorExtension extends DataExtension
         'Fields' => 'EditableFormField'
     );
 
+    private static $owns = array(
+        'Fields',
+    );
+
     /**
      * Adds the field editor to the page.
      *
