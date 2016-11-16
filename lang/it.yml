@@ -132,118 +132,118 @@ it:
     SINGULARNAME: 'Campo numerico'
   EditableOption:
     DELETE: 'Rimuovi questa opzione'
-    DRAG: 'Drag to rearrange order of options'
-    LOCKED: 'These fields cannot be modified'
-    PLURALNAME: 'Editable Options'
-    SINGULARNAME: 'Editable Option'
+    DRAG: "Trascina per modificare l'ordine delle opzioni"
+    LOCKED: 'Questi campi non possono essere modificati'
+    PLURALNAME: 'Opzioni modificabili'
+    SINGULARNAME: 'Opzione modificabile'
   EditableRadioField:
-    PLURALNAME: 'Radio Groups'
-    SINGULARNAME: 'Radio Group'
+    PLURALNAME: 'Gruppi di pulsanti a scelta singola'
+    SINGULARNAME: 'Gruppo di pulsanti a scelta singola'
   EditableTextField:
-    NUMBERROWS: 'Number of rows'
-    NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
-    PLACEHOLDER: Placeholder
-    PLURALNAME: 'Text Fields'
-    RANGE_TO: to
-    SINGULARNAME: 'Text Field'
-    TEXTLENGTH: 'Allowed text length'
+    NUMBERROWS: 'Numero di righe'
+    NUMBERROWS_DESCRIPTION: 'Campi con più di una riga verranno generati come area testo'
+    PLACEHOLDER: Segnaposto
+    PLURALNAME: 'Campi testo'
+    RANGE_TO: a
+    SINGULARNAME: 'Campo testo'
+    TEXTLENGTH: 'Lunghezza testo consentita'
   EditableUploadField:
-    SELECTUPLOADFOLDER: 'Select upload folder'
+    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
   FieldEditor:
-    ADD: Add
-    SELECTAFIELD: 'Select a Field'
+    ADD: Aggiungi
+    SELECTAFIELD: 'Seleziona un campo'
   Form:
-    FIELDISREQUIRED: '%s is required'
+    FIELDISREQUIRED: '%s è richiesto'
   GridField:
-    Filter: Filter
+    Filter: Filtro
     ResetFilter: Reset
   SiteTree:
-    PLURALNAME: Pages
-    SINGULARNAME: Page
+    PLURALNAME: Pagine
+    SINGULARNAME: Pagina
   SubmittedFileField:
-    DOWNLOADFILE: 'Download File'
-    PLURALNAME: 'Submitted File Fields'
-    SINGULARNAME: 'Submitted File Field'
+    DOWNLOADFILE: 'Scarica file'
+    PLURALNAME: 'Campi file inviati'
+    SINGULARNAME: 'Campo file inviati'
   SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
-    SINGULARNAME: 'Submitted Form'
+    PLURALNAME: 'Moduli inviati'
+    SINGULARNAME: 'Modulo inviati'
   SubmittedFormField:
-    PLURALNAME: 'Submitted Form Fields'
-    SINGULARNAME: 'Submitted Form Field'
+    PLURALNAME: 'Campi modulo inviati'
+    SINGULARNAME: 'Campo modulo inviati'
   UserDefinedForm:
-    ADDEMAILRECIPIENT: 'Add Email Recipient'
-    CLEARBUTTON: Clear
-    CONFIGURATION: Configuration
-    DESCRIPTION: 'Adds a customizable form.'
-    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
-    DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
-    DISPLAYERRORMESSAGESATTOP: 'Display error messages above the form?'
-    EMAILADDRESS: Email
-    EMAILBODY: Body
-    EMAILBODYHTML: Body
-    EMAILFROM: From
-    EMAILRECIPIENTS: 'Email Recipients'
-    EMAILSUBJECT: 'Email subject'
-    EMAILTEMPLATE: 'Email template'
-    ENABLELIVEVALIDATION: 'Enable live validation'
-    EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
-    FIELDS: Fields
-    FORM: Form
-    FROMADDRESS: 'Send email from'
-    FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
-    HIDEFIELDLABELS: 'Hide field labels'
-    HIDEFORMDATA: 'Hide form data from email?'
-    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
-    ONCOMPLETELABEL: 'Show on completion'
-    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
-    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'Base Pages'
-    PREVIEW_EMAIL: 'Preview email'
-    PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
-    PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'
-    RECIPIENTS: Recipients
-    REPLYADDRESS: 'Email for reply to'
-    REPLYADDRESS_DESCRIPTION: 'The email address which the recipient is able to ''reply'' to.'
-    RulesDescription: 'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
-    SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'
-    SENDEMAILTO: 'Send email to'
-    SENDEMAILTO_DESCRIPTION: 'You may enter multiple email addresses as a comma separated list.'
-    SENDIF: 'Send condition'
-    SENDIFAND: 'All conditions are true'
-    SENDIFOR: 'Any conditions are true'
-    SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
-    SINGULARNAME: 'User Defined Form'
-    SUBMISSIONS: Submissions
-    SUBMITBUTTON: Submit
-    TEXTONCLEAR: 'Text on clear button:'
-    TEXTONSUBMIT: 'Text on submit button:'
-    TYPEREPLY: 'Type reply address'
-    TYPESUBJECT: 'Type subject'
-    TYPETO: 'Type to address'
+    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
+    CLEARBUTTON: Azzera
+    CONFIGURATION: Configurazione
+    DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
+    DISABLEAUTHENICATEDFINISHACTION: "Disabilita autenticazione sull'azione finale"
+    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
+    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
+    EMAILADDRESS: E-mail
+    EMAILBODY: Corpo
+    EMAILBODYHTML: Corpo
+    EMAILFROM: Da
+    EMAILRECIPIENTS: 'Destinatari e-mail'
+    EMAILSUBJECT: 'Oggetto e-mail'
+    EMAILTEMPLATE: 'Schema e-mail'
+    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
+    EmailFromContent: "L'indirizzo mittente ti permette di impostare da chi viene l'e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l'indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere."
+    FIELDS: Campi
+    FORM: Modulo
+    FROMADDRESS: 'Manda e-mail da'
+    FileUploadWarning: 'I files caricati attraverso questo campo potrebbero essere pubblicamente accessibili se si conosce la loro URL esatta'
+    HIDEFIELDLABELS: 'Nascondi etichette dei campi'
+    HIDEFORMDATA: "Nascondi dati del modulo dall'email?"
+    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
+    ONCOMPLETELABEL: 'Mostra al completamento'
+    ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
+    ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
+    PLURALNAME: 'Pagine base'
+    PREVIEW_EMAIL: 'Anteprima e-mail'
+    PREVIEW_EMAIL_DESCRIPTION: "Nota: Le modifiche non salvate non appariranno nell'anteprima"
+    PREVIEW_EMAIL_UNAVAILABLE: "Puoi vedere un'anteprima di questa email dopo aver salvato il destinatario."
+    RECIPIENTS: Destinatari
+    REPLYADDRESS: 'Indirizzo e-mail a cui rispondere'
+    REPLYADDRESS_DESCRIPTION: "L'indirizzo email a cui il destinatario può 'rispondere'."
+    RulesDescription: 'Le email saranno spedite solo al destinatario se sono soddisfatte le regole personalizzate. Se non è definita nessuna regola, il destinatario riceverà notifiche per ogni invio.'
+    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
+    SELECTAFIELDTOSETSUBJECT: '.. o seleziona un campo da usare come oggetto'
+    SENDEMAILTO: 'Manda email a'
+    SENDEMAILTO_DESCRIPTION: 'Puoi inserire più indirizzi email sotto forma di lista separata da virgole.'
+    SENDIF: 'Condizione di invio'
+    SENDIFAND: 'Tutte le condizioni sono vere'
+    SENDIFOR: 'Una qualunque delle condizioni è vera'
+    SENDPLAIN: "Manda e-mail come testo semplice? (L'HTML verrà rimosso)"
+    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
+    SINGULARNAME: "Modulo definito dall'utente"
+    SUBMISSIONS: Invii
+    SUBMITBUTTON: Invia
+    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
+    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
+    TYPEREPLY: "Inserisci l'e-mail di risposta"
+    TYPESUBJECT: "Inserisci l'oggetto"
+    TYPETO: "Inserisci l'e-mail destinatario"
   UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Custom Rules'
-    EMAILCONTENTTAB: 'Email Content'
-    EMAILDETAILSTAB: 'Email Details'
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'
+    CUSTOMRULESTAB: 'Regole personalizzate'
+    EMAILCONTENTTAB: "Contenuto dell'e-mail"
+    EMAILDETAILSTAB: "Dettagli dell'e-mail"
+    PLURALNAME: "Destinatari email del modulo definito dall'utente"
+    SINGULARNAME: "Destinatario emaail del form definito dall'utente"
   UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'User Defined Form Email Recipient Conditions'
-    SINGULARNAME: 'User Defined Form Email Recipient Condition'
+    PLURALNAME: "Condizioni per il destinatario del modulo definito dall'utente"
+    SINGULARNAME: "Condizione per il destinatario del modulo definito dall'utente"
   UserFormFieldEditorExtension:
-    ADD_FIELD: 'Add Field'
-    ADD_FIELD_GROUP: 'Add Field Group'
-    ADD_PAGE_BREAK: 'Add Page Break'
-    FORMFIELDS: 'Form Fields'
+    ADD_FIELD: 'Aggiungi campo'
+    ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
+    ADD_PAGE_BREAK: 'Aggiungi interruzione di pagina'
+    FORMFIELDS: 'Campi del modulo'
   UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
-    NO_PAGE: 'Field ''{name}'' found before any pages'
-    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
-    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
+    CONDITIONAL_REQUIRED: 'Il campo richiesto ''{name}'' non può essere posizionato all''interno di una pagina condizionale'
+    NO_PAGE: 'Il campo ''{name}'' è stato trovato prima di una qualunque pagina'
+    UNEXPECTED_BREAK: 'Interruzione di pagina ''{name}'' inattesa all''interno del campo nidificato ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' trovato senza un gruppo corrispondente'
+    WRONG_GROUP_END: '''{name}'' trovato chiude il gruppo sbagliato ''{group}'''
   UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filter Submissions..'
-    FROM: From
-    TILL: Till
-    WHEREVALUEIS: 'where value is..'
+    FILTERSUBMISSIONS: 'Filtra invii..'
+    FROM: Da
+    TILL: 'Fino a'
+    WHEREVALUEIS: 'dove il valore è..'
