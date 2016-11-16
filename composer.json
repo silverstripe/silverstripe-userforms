@@ -1,44 +1,43 @@
 {
-	"name": "silverstripe/userforms",
-	"description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "userforms"],
-	"license": "BSD-3-Clause",
-	"authors": [
-		{
-			"name": "Will Rossiter",
-			"email": "will@fullscreen.io"
-		},
-		{
-			"name": "Damian Mooyman",
-			"email": "damian@silverstripe.com"
-		},
-		{
-			"name": "David Craig",
-			"email": "david@silverstripe.com"
-		},
-		{
-			"name": "Scott Hutchinson",
-			"email": "scott@silverstripe.com"
-		},
-		{
-			"name": "Christopher Pitt",
-			"email": "chris@silverstripe.com"
-		}
-	],
-	"require": {
-		"silverstripe/framework": "~3.1",
-		"silverstripe/cms": "~3.1",
-		"silverstripe-australia/gridfieldextensions": "~1.1",
-		"silverstripe/segment-field": "^1.0"
-	},
-	"suggest": {
-		"colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
-		"silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access"
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "4.2.x-dev"
-		}
-	}
+    "name": "silverstripe/userforms",
+    "description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
+    "type": "silverstripe-module",
+    "keywords": [
+        "silverstripe",
+        "userforms"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Will Rossiter",
+            "email": "will@fullscreen.io"
+        },
+        {
+            "name": "Damian Mooyman",
+            "email": "damian@silverstripe.com"
+        },
+        {
+            "name": "David Craig",
+            "email": "david@silverstripe.com"
+        },
+        {
+            "name": "Scott Hutchinson",
+            "email": "scott@silverstripe.com"
+        },
+        {
+            "name": "Christopher Pitt",
+            "email": "chris@silverstripe.com"
+        }
+    ],
+    "require": {
+        "silverstripe/framework": "~3.1",
+        "silverstripe/cms": "~3.1",
+        "silverstripe-australia/gridfieldextensions": "~1.1",
+        "silverstripe/segment-field": "^1.0"
+    },
+    "suggest": {
+        "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
+        "silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access"
+    },
+    "extra": []
 }
