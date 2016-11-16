@@ -11,29 +11,29 @@ fi_FI:
     NOTBLANK: 'Ei ole tyhjä'
     NOTVALUE: 'Ei ole sama kuin'
     SHOWTHISFIELD: 'Näytä tämä kenttä'
-    VALUE: On sama kuin
+    VALUE: 'On sama kuin'
     WHEN: Kun
   EditableCheckbox:
     PLURALNAME: Valintaruudut
-    SINGULARNAME: 'Valintaruutukenttä'
+    SINGULARNAME: Valintaruutukenttä
   EditableCheckboxGroupField:
-    PLURALNAME: 'Valintaruutu-ryhmät'
-    SINGULARNAME: 'Valintaruutu-ryhmä'
+    PLURALNAME: Valintaruutu-ryhmät
+    SINGULARNAME: Valintaruutu-ryhmä
   EditableCountryDropdownField:
-    PLURALNAME: 'Maavalikot'
-    SINGULARNAME: 'Maavalikko'
+    PLURALNAME: Maavalikot
+    SINGULARNAME: Maavalikko
   EditableCustomRule:
     PLURALNAME: 'Muokattavat mukautetut säännöt'
     SINGULARNAME: 'Muokattava mukautettu sääntö'
   EditableDateField:
-    PLURALNAME: 'Päivämääräkentät'
-    SINGULARNAME: 'Päivämääräkenttä'
+    PLURALNAME: Päivämääräkentät
+    SINGULARNAME: Päivämääräkenttä
   EditableDropdown:
     PLURALNAME: Pudotusvalikot
-    SINGULARNAME: 'Pudotusvalikko'
+    SINGULARNAME: Pudotusvalikko
   EditableEmailField:
-    PLURALNAME: 'Sähköpostikentät'
-    SINGULARNAME: 'Sähköpostikenttä'
+    PLURALNAME: Sähköpostikentät
+    SINGULARNAME: Sähköpostikenttä
   EditableFieldGroup:
     PLURALNAME: 'Muokattavat kenttäryhmät'
     SINGULARNAME: 'Muokattava kenttäryhmä'
@@ -43,8 +43,8 @@ fi_FI:
     PLURALNAME: 'Muokattavien kenttäryhmien loppu'
     SINGULARNAME: 'Muokattavan kenttäryhmän loppu'
   EditableFileField:
-    PLURALNAME: 'Tiedostonlähettämiskentät'
-    SINGULARNAME: 'Tiedostonlähettämiskenttä'
+    PLURALNAME: Tiedostonlähettämiskentät
+    SINGULARNAME: Tiedostonlähettämiskenttä
   EditableFormField:
     ADD: Lisää
     ADDLabel: 'Lisää valinta'
@@ -54,7 +54,7 @@ fi_FI:
     CUSTOMERROR: 'Oma virheviesti'
     CUSTOMOPTIONS: Valinnat
     CUSTOMRULES: 'Mukautetut säännöt'
-    DEFAULT: 'Oletusarvo'
+    DEFAULT: Oletusarvo
     DEFAULTTOTODAY: 'Oletus ''Tänään''?'
     DELETE: Poista
     DISPLAY_RULES_DISABLED: 'Näyttösäännöt ei ole päällä vaadituille kentille. Ole hyvä ja poista valinta "Onko tämä kenttä pakollinen?" kohdasta "Validointi" kytkeäksesi ne päälle.'
@@ -77,9 +77,9 @@ fi_FI:
     LESSTHAN: 'Arvo on pienempi kuin'
     LESSTHANEQUAL: 'Arvo on pienempi tai yhtä suuri kuin'
     LOCKED: 'Näitä kenttiä ei voida muokata'
-    MAXVALUE: 'Maksimiarvo'
-    MINVALUE: 'Minimiarvo'
-    'NO': 'Ei'
+    MAXVALUE: Maksimiarvo
+    MINVALUE: Minimiarvo
+    'NO': Ei
     NOTBLANK: 'Ei ole tyhjä'
     NOTVALUE: 'Ei ole sama kuin'
     OPTIONS: Valinnat
@@ -95,9 +95,9 @@ fi_FI:
     TITLE: Otsikko
     TYPE: Tyyppi
     VALIDATION: Validointi
-    VALUE: On sama kuin
+    VALUE: 'On sama kuin'
     WHEN: Kun
-    'YES': 'Kyllä'
+    'YES': Kyllä
   EditableFormFieldValidator:
     REQUIRED_ERROR: 'Lomakekentät eivät voi olla pakollisia ja sisältää ehdollisia näyttösääntöjä'
   EditableFormHeading:
@@ -105,19 +105,19 @@ fi_FI:
     PLURALNAME: Otsikot
     SINGULARNAME: Otsikko
   EditableFormStep:
-    PLURALNAME: 'Sivuvaihdot'
-    SINGULARNAME: 'Sivunvaihto'
+    PLURALNAME: Sivuvaihdot
+    SINGULARNAME: Sivunvaihto
     STEP_TITLE: 'Sivu {page}'
     TITLE_FIRST: 'Ensimmäinen sivu'
   EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Piilota raporteista?'
     HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
-    PLURALNAME: 'HTML-alueet'
-    SINGULARNAME: 'HTML-alue'
+    PLURALNAME: HTML-alueet
+    SINGULARNAME: HTML-alue
   EditableMemberListField:
-    PLURALNAME: 'Jäsenlistakentät'
-    SINGULARNAME: 'Jäsenlistakenttä'
+    PLURALNAME: Jäsenlistakentät
+    SINGULARNAME: Jäsenlistakenttä
   EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
     OPTIONSTAB: Valinnat
@@ -136,15 +136,15 @@ fi_FI:
     PLURALNAME: 'Muokattavat vaihtoehdot'
     SINGULARNAME: 'Muokattava vaihtoehto'
   EditableRadioField:
-    PLURALNAME: 'Radiopainikkeet'
-    SINGULARNAME: 'Radiopainike'
+    PLURALNAME: Radiopainikkeet
+    SINGULARNAME: Radiopainike
   EditableTextField:
     NUMBERROWS: 'Rivien määrä'
     NUMBERROWS_DESCRIPTION: 'Kenttät, joissa on enemmän kuin yksi rivi, luodaan tekstialueena.'
     PLACEHOLDER: Opastusteksti
-    PLURALNAME: 'Tekstikentät'
+    PLURALNAME: Tekstikentät
     RANGE_TO: –
-    SINGULARNAME: 'Tekstikenttä'
+    SINGULARNAME: Tekstikenttä
     TEXTLENGTH: 'Tekstin pituus'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
@@ -181,9 +181,9 @@ fi_FI:
     EMAILBODY: Viesti
     EMAILBODYHTML: Viesti
     EMAILFROM: Lähettäjä
-    EMAILRECIPIENTS: 'Vastaanottajat'
-    EMAILSUBJECT: 'Otsikko'
-    EMAILTEMPLATE: 'Sähköpostipohja'
+    EMAILRECIPIENTS: Vastaanottajat
+    EMAILSUBJECT: Otsikko
+    EMAILTEMPLATE: Sähköpostipohja
     ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
     EmailFromContent: 'Lähettäjän sähköpostiosoite kenttään voit laittaa osoitteen, josta lomake näkyy lähetetyn. Jotkut palvelimet vaativat, että osoitteen on oltava samalla domain päätteellä kuin sivustosi. Esimerkiksi omasivusto.fi domainilla osoitteen tulisi olla osoitteesi@omasivusto.fi. Voit käyttää kuitenkin haluamaasi osoitetta, jos sille ei ole teknistä estettä.'
     FIELDS: Kentät
@@ -195,24 +195,24 @@ fi_FI:
     ONCOMPLETELABEL: 'Näytä valmistuessa'
     ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
-    PLURALNAME: 'Pohjasivut'
+    PLURALNAME: Pohjasivut
     PREVIEW_EMAIL: 'Esikatsele sähköposti'
     PREVIEW_EMAIL_DESCRIPTION: 'Huomio: tallentamattomat muutokset eivät näy esikatselussa.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Voit esikatsella tämän sähköpostin, kunhan olet tallentanut Vastaanottajan.'
     RECIPIENTS: Vastaanottajat
-    REPLYADDRESS: 'Vastaussähköposti'
+    REPLYADDRESS: Vastaussähköposti
     REPLYADDRESS_DESCRIPTION: 'Sähköpostiosoite, johon vastaanottajalla on mahdollisuus vastata.'
     RulesDescription: 'Sähköpostit lähetetään vastaanottajalle vain, mikäli kustomoidut säännöt toteutuvat. Mikäli ehdot eivät toteudu, vastaanottaja saa huomautuksen jokaisesta lähetyksestä.'
     SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
     SELECTAFIELDTOSETSUBJECT: '... tai valitse kenttä, jota käytetään Aiheena'
     SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
     SENDEMAILTO_DESCRIPTION: 'Voit lisätä useamman osoitteen pilkulla erotettuna listana'
-    SENDIF: 'Lähetyssääntö'
+    SENDIF: Lähetyssääntö
     SENDIFAND: 'Kaikki ehdot ovat tosia'
     SENDIFOR: 'Kaikki ehdot ovat tosia'
     SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
     SHOWCLEARFORM: 'Näytä lomakkeentyhjennysnappi'
-    SINGULARNAME: 'Lomake'
+    SINGULARNAME: Lomake
     SUBMISSIONS: Lähetykset
     SUBMITBUTTON: Lähetä
     TEXTONCLEAR: 'Tyhjennä-nappulan teksti:'
@@ -233,7 +233,7 @@ fi_FI:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
     ADD_PAGE_BREAK: 'Lisää sivunvaihto'
-    FORMFIELDS: 'Lomakekentät'
+    FORMFIELDS: Lomakekentät
   UserFormValidator:
     CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
     NO_PAGE: 'Kenttä ''{name}'' löydetty ennen yhtään sivua'

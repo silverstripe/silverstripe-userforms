@@ -24,7 +24,7 @@ ms_MY:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Hapuskan medan ini
+    DELETE: 'Hapuskan medan ini'
     DRAG: 'Seret untuk mengubah susunan medan-medan'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

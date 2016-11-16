@@ -5,7 +5,7 @@ de_DE:
     GREATERTHAN: 'Wert größer als'
     GREATERTHANEQUAL: 'Wert größer oder gleich'
     HIDETHISFIELD: 'Feld verstecken'
-    IS: Ist gleich
+    IS: 'Ist gleich'
     LESSTHAN: 'Wert kleiner als'
     LESSTHANEQUAL: 'Wert kleiner oder gleich'
     NOTBLANK: 'Nicht leer'
@@ -23,8 +23,8 @@ de_DE:
     PLURALNAME: 'Länder Dropdowns'
     SINGULARNAME: 'Länder Dropdown'
   EditableDateField:
-    PLURALNAME: 'Datumsfelder'
-    SINGULARNAME: 'Datumsfeld'
+    PLURALNAME: Datumsfelder
+    SINGULARNAME: Datumsfeld
   EditableDropdown:
     PLURALNAME: Dropdowns
     SINGULARNAME: 'Dropdown Feld'
@@ -43,7 +43,7 @@ de_DE:
     CUSTOMERROR: 'Eigene Fehlermeldung'
     CUSTOMRULES: 'Eigene Regeln'
     DEFAULTTOTODAY: 'Standardmäßig auf heute'
-    DELETE: Lösche dieses Feld
+    DELETE: 'Lösche dieses Feld'
     DRAG: 'Klicken und Festhalten um die Anordnung der Felder zu verändern'
     ENTERQUESTION: 'Tragen Sie die Frage hier ein'
     EXTRACLASSA: 'Extra Styling/Layout'
@@ -81,8 +81,8 @@ de_DE:
     PLURALNAME: Überschriften
     SINGULARNAME: Überschrift
   EditableFormStep:
-    PLURALNAME: 'Seiten'
-    SINGULARNAME: 'Seiten'
+    PLURALNAME: Seiten
+    SINGULARNAME: Seiten
     STEP_TITLE: 'Seite {page}'
     TITLE_FIRST: 'Erste Seite'
   EditableLiteralField:
@@ -96,8 +96,8 @@ de_DE:
     PLURALNAME: 'Editierbare Multi-Option Felder'
     SINGULARNAME: 'Editierbares Multi-Option Feld'
   EditableNumericField:
-    PLURALNAME: 'Zahlenfelder'
-    SINGULARNAME: 'Zahlenfeld'
+    PLURALNAME: Zahlenfelder
+    SINGULARNAME: Zahlenfeld
   EditableOption:
     DELETE: 'Option entfernen'
     DRAG: 'Ziehen um Optionen neu zu ordnen'
@@ -105,14 +105,14 @@ de_DE:
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
   EditableRadioField:
-    PLURALNAME: 'Radio-Buttons'
-    SINGULARNAME: 'Radio-Button'
+    PLURALNAME: Radio-Buttons
+    SINGULARNAME: Radio-Button
   EditableTextField:
     NUMBERROWS: 'Anzahl der Zeilen'
     PLACEHOLDER: Platzhalter
-    PLURALNAME: 'Textfelder'
-    SINGULARNAME: 'Textfeld'
-    TEXTLENGTH: 'Textlänge'
+    PLURALNAME: Textfelder
+    SINGULARNAME: Textfeld
+    TEXTLENGTH: Textlänge
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   FieldEditor:
@@ -145,7 +145,7 @@ de_DE:
     EMAILBODY: Inhalt
     EMAILFROM: Von
     EMAILRECIPIENTS: 'E-Mail Empfänger'
-    EMAILSUBJECT: 'Betreff'
+    EMAILSUBJECT: Betreff
     ENABLELIVEVALIDATION: 'Live Validierung einschalten'
     EmailFromContent: 'Mit der Absenderadresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
     FIELDS: Felder
@@ -174,7 +174,7 @@ de_DE:
     ADD_FIELD: 'Feld hinzufügen'
     ADD_FIELD_GROUP: 'Gruppe hinzufügen'
     ADD_PAGE_BREAK: 'Seite hinzufügen'
-    FORMFIELDS: 'Formularfelder'
+    FORMFIELDS: Formularfelder
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Einreichungen filtern...'
     WHEREVALUEIS: 'nach Wert...'

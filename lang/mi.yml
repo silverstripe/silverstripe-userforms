@@ -5,7 +5,7 @@ mi:
     GREATERTHAN: 'Uara Nui Ake I'
     GREATERTHANEQUAL: 'Uara Nui Ake Ōrite Rānei '
     HIDETHISFIELD: 'Hunaia Tēnei Āpure'
-    IS: ko te
+    IS: 'ko te'
     LESSTHAN: 'Uara Iti Iho I'
     LESSTHANEQUAL: 'Uara Iti Iho Ōrite Rānei'
     NOTBLANK: 'Pātea Kore'
@@ -14,7 +14,7 @@ mi:
     VALUE: Uara
     WHEN: Ina
   EditableCheckbox:
-    PLURALNAME: Ngā Pouakataki
+    PLURALNAME: 'Ngā Pouakataki'
     SINGULARNAME: 'Āpure Pouakataki'
   EditableCheckboxGroupField:
     PLURALNAME: 'Ngā Rōpū Pouakataki'
@@ -26,7 +26,7 @@ mi:
     PLURALNAME: 'Ngā Āpure Rā'
     SINGULARNAME: 'Āpure Rā'
   EditableDropdown:
-    PLURALNAME: Ngā Takaiho
+    PLURALNAME: 'Ngā Takaiho'
     SINGULARNAME: 'Āpure Takaiho'
   EditableEmailField:
     PLURALNAME: 'Ngā Āpure Īmēra'
@@ -54,13 +54,13 @@ mi:
     GROUP: Rōpū
     HIDE: Huna
     HIDETHISFIELD: 'Hunaia Tēnei Āpure'
-    IS: Ko te
+    IS: 'Ko te'
     LESSTHAN: 'Uara Iti Iho I'
     LESSTHANEQUAL: 'Uara Iti Iho Ōrite Rānei'
     LOCKED: 'Kāore e taea te whakakē ēnei āpure'
     NOTBLANK: 'Pātea Kore'
     NOTVALUE: 'Uara Kore'
-    OPTIONS: Ngā Kōwhiringa
+    OPTIONS: 'Ngā Kōwhiringa'
     PLURALNAME: 'Ngā Āpure Puka Ka Taea Te Whakatika'
     REQUIRED: 'He Whakaritenga tēnei āpure'
     RIGHTTITLE: 'Taitara Tika'
@@ -73,7 +73,7 @@ mi:
     WHEN: Ina
   EditableFormHeading:
     LEVEL: 'Kōwhiri Taumata Pane'
-    PLURALNAME: Ngā Pane
+    PLURALNAME: 'Ngā Pane'
     SINGULARNAME: Pane
   EditableLiteralField:
     HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
@@ -106,9 +106,9 @@ mi:
     FIELDISREQUIRED: 'Kei te hiahiatia te %s'
   GridField:
     Filter: Tātari
-    ResetFilter: Tautuhi Anō
+    ResetFilter: 'Tautuhi Anō'
   SiteTree:
-    PLURALNAME: Ngā Whārangi
+    PLURALNAME: 'Ngā Whārangi'
     SINGULARNAME: Whārangi
   SubmittedFileField:
     DOWNLOADFILE: 'Tikiake Kōnae'
@@ -144,7 +144,7 @@ mi:
     SENDPLAIN: 'Tuku īmēra hei kuputuhi tōkau? (ka tangohia te HTML)'
     SHOWCLEARFORM: 'Whakaatu Pātene Ūkui Puka'
     SINGULARNAME: 'Puka Tautuhi ā-Kaiwhakamahi'
-    SUBMISSIONS: Ngā Tukunga
+    SUBMISSIONS: 'Ngā Tukunga'
     SUBMITBUTTON: Tuku
     TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
   UserDefinedForm_EmailRecipient:

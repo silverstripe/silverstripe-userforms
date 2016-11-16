@@ -36,7 +36,7 @@ hr_HR:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Obriši ovo polje
+    DELETE: 'Obriši ovo polje'
     DRAG: 'Povuci za promjenu redoslijeda polja'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

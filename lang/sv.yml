@@ -15,27 +15,27 @@ sv:
     WHEN: När
   EditableCheckbox:
     PLURALNAME: Kryssrutor
-    SINGULARNAME: 'Kryssrutefält'
+    SINGULARNAME: Kryssrutefält
   EditableCheckboxGroupField:
-    PLURALNAME: 'Kryssrutegrupper'
-    SINGULARNAME: 'Kryssrutegrupp'
+    PLURALNAME: Kryssrutegrupper
+    SINGULARNAME: Kryssrutegrupp
   EditableCountryDropdownField:
     PLURALNAME: 'Rullgardinsmenyer för länder'
     SINGULARNAME: 'Rullgardinsmeny för länder'
   EditableDateField:
-    PLURALNAME: 'Datumfält'
-    SINGULARNAME: 'Datumfält'
+    PLURALNAME: Datumfält
+    SINGULARNAME: Datumfält
   EditableDropdown:
     PLURALNAME: Rullgardinsmenyer
-    SINGULARNAME: 'Rullgardinsmenyfält'
+    SINGULARNAME: Rullgardinsmenyfält
   EditableEmailField:
-    PLURALNAME: 'E-postfält'
-    SINGULARNAME: 'E-postfält'
+    PLURALNAME: E-postfält
+    SINGULARNAME: E-postfält
   EditableFileField:
-    PLURALNAME: 'Filuppladdningsfält'
-    SINGULARNAME: 'Filuppladdningsfält'
+    PLURALNAME: Filuppladdningsfält
+    SINGULARNAME: Filuppladdningsfält
   EditableFormField:
-    ADD: Lägg till
+    ADD: 'Lägg till'
     ADDLabel: 'Lägg till alternativ'
     ADDRULE: 'Lägg till regel'
     BLANK: Tom
@@ -48,7 +48,7 @@ sv:
     ENTERQUESTION: 'Skriv fråga'
     EXTRACLASSA: 'Extra stilar/layout'
     EXTRACLASSB: 'Extra CSS-klasser - separera med mellanrum'
-    FIELDCONFIGURATION: 'Fältkonfiguration'
+    FIELDCONFIGURATION: Fältkonfiguration
     FIELDONDEFAULT: 'Fält som standard'
     GREATERTHAN: 'Värde större än'
     GREATERTHANEQUAL: 'Värde större än eller lika med'
@@ -59,14 +59,14 @@ sv:
     LESSTHAN: 'Värde mindre än'
     LESSTHANEQUAL: 'Värde mindre än eller lika med'
     LOCKED: 'Dessa fält kan inte modifieras'
-    MAXVALUE: 'Maxvärde'
-    MINVALUE: 'Minimivärde'
+    MAXVALUE: Maxvärde
+    MINVALUE: Minimivärde
     NOTBLANK: 'Inte tomt'
     NOTVALUE: 'Inte värde'
     OPTIONS: Alternativ
     PLURALNAME: 'Redigeringsbara formulärfält'
     REQUIRED: 'Är detta fält obligatoriskt?'
-    RIGHTTITLE: 'Högertitel'
+    RIGHTTITLE: Högertitel
     SHOW: Visa
     SHOWOPTIONS: 'Visa alternativ'
     SHOWTHISFIELD: 'Visa detta fält'
@@ -83,11 +83,11 @@ sv:
     STEP_TITLE: 'Sida {page}'
   EditableLiteralField:
     HIDEFROMREPORT: 'Göm från rapport?'
-    PLURALNAME: 'HTML-block'
-    SINGULARNAME: 'HTML-block'
+    PLURALNAME: HTML-block
+    SINGULARNAME: HTML-block
   EditableMemberListField:
-    PLURALNAME: 'Medlemsfält'
-    SINGULARNAME: 'Medlemsfält'
+    PLURALNAME: Medlemsfält
+    SINGULARNAME: Medlemsfält
   EditableMultipleOptionField:
     PLURALNAME: 'Redigeringsbart multialternativfält'
     SINGULARNAME: 'Redigeringsbart multialternativfält'
@@ -101,17 +101,17 @@ sv:
     PLURALNAME: 'Redigeringsbara alternativ'
     SINGULARNAME: 'Redigeringsbart alternativ'
   EditableRadioField:
-    PLURALNAME: 'Radiofält'
-    SINGULARNAME: 'Radiofält'
+    PLURALNAME: Radiofält
+    SINGULARNAME: Radiofält
   EditableTextField:
     NUMBERROWS: 'Antal rader'
-    PLURALNAME: 'Textfält'
-    SINGULARNAME: 'Textfält'
-    TEXTLENGTH: 'Textlängd'
+    PLURALNAME: Textfält
+    SINGULARNAME: Textfält
+    TEXTLENGTH: Textlängd
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
   FieldEditor:
-    ADD: Lägg till
+    ADD: 'Lägg till'
     SELECTAFIELD: 'Välj ett fält'
   Form:
     FIELDISREQUIRED: '%s är obligatoriskt'
@@ -140,8 +140,8 @@ sv:
     EMAILADDRESS: E-post
     EMAILBODY: Innehåll
     EMAILFROM: Från
-    EMAILRECIPIENTS: 'E-postmottagare'
-    EMAILSUBJECT: 'E-postämne'
+    EMAILRECIPIENTS: E-postmottagare
+    EMAILSUBJECT: E-postämne
     ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
     EmailFromContent: 'Från-adressen låter dig ställa in varifrån e-postmeddelandet skickas. På de flesta servrar måste adressen ha samma domännamn som din sajt. Till exempel på yoursite.com så måste adressen vara something@yoursite.com. Det är däremot möjligt att lägga valfri e-postadress under "E-postadress att svara till". '
     FORM: Formulär
@@ -159,7 +159,7 @@ sv:
     SENDPLAIN: 'Skicka e-post som vanlig text? (All HTML kommer tas bort)'
     SHOWCLEARFORM: 'Visa Rensa-knapp'
     SINGULARNAME: 'Användardefinierat formulär'
-    SUBMISSIONS: Inskickade svar
+    SUBMISSIONS: 'Inskickade svar'
     SUBMITBUTTON: Skicka
     TEXTONCLEAR: 'Text på Rensa-knapp:'
     TEXTONSUBMIT: 'Text på Skicka-knapp:'

@@ -79,7 +79,7 @@ eo:
     LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
     MAXVALUE: 'Maks valoro'
     MINVALUE: 'Min valoro'
-    'NO': 'Ne'
+    'NO': Ne
     NOTBLANK: 'Ne vaka'
     NOTVALUE: 'Ne valoro'
     OPTIONS: Agordoj
@@ -97,7 +97,7 @@ eo:
     VALIDATION: Validigo
     VALUE: Valoro
     WHEN: Kiam
-    'YES': 'Jes'
+    'YES': Jes
   EditableFormFieldValidator:
     REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
   EditableFormHeading:
@@ -105,16 +105,16 @@ eo:
     PLURALNAME: Titoloj
     SINGULARNAME: Titolo
   EditableFormStep:
-    PLURALNAME: 'Paĝosaltoj'
-    SINGULARNAME: 'Paĝosalto'
+    PLURALNAME: Paĝosaltoj
+    SINGULARNAME: Paĝosalto
     STEP_TITLE: 'Paĝo {page}'
     TITLE_FIRST: 'Unua paĝo'
   EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
     HIDELABEL: 'Ĉu kaŝi etikedon ''Titolo'' en fasado?'
-    PLURALNAME: 'HTML-blokoj'
-    SINGULARNAME: 'HTML-bloko'
+    PLURALNAME: HTML-blokoj
+    SINGULARNAME: HTML-bloko
   EditableMemberListField:
     PLURALNAME: 'Kampoj por membrolisto'
     SINGULARNAME: 'Kampo por membrolisto'
@@ -124,6 +124,7 @@ eo:
     PLURALNAME: 'Redakteblaj plureblaj kampoj'
     SINGULARNAME: 'Redaktebla plurebla kampo'
     TITLE: Titolo
+    VALUE: Valoro
   EditableNumericField:
     PLURALNAME: 'Numeraj kampoj'
     RANGE: 'Ebla numera amplekso'
@@ -192,6 +193,7 @@ eo:
     FileUploadWarning: 'Dosieroj alŝutitaj per ĉi tiu kampo eble estos alireblaj se la ĝusta URL estas sciata.'
     HIDEFIELDLABELS: 'Kaŝi kampajn etikedojn'
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
+    NORECIPIENTS: 'Averto: Vi ne agordis ricevantojn. Eble mankos sendoj de formularoj.'
     ONCOMPLETELABEL: 'Vidigi je kompletigo'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
