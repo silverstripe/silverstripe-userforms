@@ -1,0 +1,249 @@
+it:
+  CustomRule:
+    BLANK: Vuoto
+    DELETE: Elimina
+    GREATERTHAN: 'Valore più elevato di'
+    GREATERTHANEQUAL: 'Valore più elevato o uguale a'
+    HIDETHISFIELD: 'Nascondi questo campo'
+    IS: "È"
+    LESSTHAN: 'Valore minore di'
+    LESSTHANEQUAL: 'Valore minore o uguale a'
+    NOTBLANK: 'Non vuoto'
+    NOTVALUE: 'Non valore'
+    SHOWTHISFIELD: 'Mostra questo campo'
+    VALUE: Valore
+    WHEN: Quando
+  EditableCheckbox:
+    PLURALNAME: 'Caselle di controllo'
+    SINGULARNAME: 'Campo casella di controllo'
+  EditableCheckboxGroupField:
+    PLURALNAME: 'Gruppi di caselle di controllo'
+    SINGULARNAME: 'Gruppo di caselle di controllo'
+  EditableCountryDropdownField:
+    PLURALNAME: 'Menù a tendina Nazioni'
+    SINGULARNAME: 'Menù a tendina Nazioni'
+  EditableCustomRule:
+    PLURALNAME: 'Regole personalizzate modificabili'
+    SINGULARNAME: 'Regola personalizzata modificabile'
+  EditableDateField:
+    PLURALNAME: 'Campi date'
+    SINGULARNAME: 'Campo data'
+  EditableDropdown:
+    PLURALNAME: 'Menù a tendina'
+    SINGULARNAME: 'Campo menù a tendina'
+  EditableEmailField:
+    PLURALNAME: 'Campi e-mail'
+    SINGULARNAME: 'Campo e-mail'
+  EditableFieldGroup:
+    PLURALNAME: 'Gruppi di campi modificabili'
+    SINGULARNAME: 'Gruppo di campi modificabili'
+  EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'fine {group}'
+    FIELD_GROUP_START: 'Gruppo {group}'
+    PLURALNAME: 'Fine dei gruppi di campi modificabili'
+    SINGULARNAME: 'Fine del gruppo di campi modificabili'
+  EditableFileField:
+    PLURALNAME: 'Campi di caricamento file'
+    SINGULARNAME: 'Campo di caricamento file'
+  EditableFormField:
+    ADD: Aggiungi
+    ADDLabel: 'Aggiungi opzione'
+    ADDRULE: 'Aggiungi regola'
+    BLANK: Vuoto
+    CHECKEDBYDEFAULT: 'Spuntato di default?'
+    CUSTOMERROR: 'Messaggio di errore personalizzato'
+    CUSTOMOPTIONS: Opzioni
+    CUSTOMRULES: 'Regole personalizzate'
+    DEFAULT: 'Valore di default'
+    DEFAULTTOTODAY: 'Di default a oggi?'
+    DELETE: Elimina
+    DISPLAY_RULES_DISABLED: 'Le regole di visualizzazione non sono attivate per i campi richiesti. Per piacere deseleziona "Questo campo è obbligatorio?" sotto "Validazione" per ri-abilitare.'
+    DRAG: "Trascina per riordinare l'ordine dei campi"
+    ENTERQUESTION: 'Inserisci la domanda'
+    EXTRACLASSA: 'Style/Layout extra'
+    EXTRACLASSB: 'Classe CSS extra - separa valori multipli con uno spazio'
+    EXTRACLASS_MULTIPLE: 'Separa ogni classe CSS con uno spazio singolo'
+    EXTRACLASS_SELECT: 'Seleziona da una lista di stili consentiti'
+    EXTRACLASS_TITLE: 'Style/Layout extra'
+    EXTRACLASS_Title: 'Classi CSS extra'
+    FIELDCONFIGURATION: 'Configurazione campo'
+    FIELDONDEFAULT: 'Campo su default'
+    GREATERTHAN: 'Valore maggiore di'
+    GREATERTHANEQUAL: 'Valore maggiore o uguale a'
+    GROUP: Gruppo
+    HIDE: Nascondi
+    HIDETHISFIELD: 'Nascondi questo campo'
+    IS: "È"
+    LESSTHAN: 'Valore minore di'
+    LESSTHANEQUAL: 'Valore minore di o uguale a'
+    LOCKED: 'Questi campi non possono essere modificati'
+    MAXVALUE: 'Valore massimo'
+    MINVALUE: 'Valore minimo'
+    'NO': 'No'
+    NOTBLANK: 'Non vuoto'
+    NOTVALUE: 'Non valore'
+    OPTIONS: Opzioni
+    PLURALNAME: 'Campi modulo modificabili'
+    REQUIRED: 'Questo campo è obbligatorio?'
+    REQUIRED_DESCRIPTION: 'Prego nota che i campi condizionali non possono essere obbligatori'
+    RIGHTTITLE: 'Titolo a destra'
+    SHOW: Mostra
+    SHOWONLOAD: 'Visibilità iniziale prima di processare queste regole'
+    SHOWOPTIONS: 'Mostra opzioni'
+    SHOWTHISFIELD: 'Mostra questo campo'
+    SINGULARNAME: 'Campo form editabile'
+    TITLE: Titolo
+    TYPE: Tipo
+    VALIDATION: Validazione
+    VALUE: Valore
+    WHEN: Quando
+    'YES': 'Si'
+  EditableFormFieldValidator:
+    REQUIRED_ERROR: 'I campi dei form non possono essere obblicatori e avere regole di visualizzazione condizionali.'
+  EditableFormHeading:
+    LEVEL: 'Seleziona livello di intestazione'
+    PLURALNAME: Intestazioni
+    SINGULARNAME: Intestazione
+  EditableFormStep:
+    PLURALNAME: 'Interruzioni di pagina'
+    SINGULARNAME: 'Interruzione di pagina'
+    STEP_TITLE: 'Pagina {page}'
+    TITLE_FIRST: 'Prima pagina'
+  EditableLiteralField:
+    CONTENT: HTML
+    HIDEFROMREPORT: 'Nascondi dai rapporti?'
+    HIDELABEL: 'Nascondi etichetta ''Titolo'' dal frontend?'
+    PLURALNAME: 'Blocchi HTML'
+    SINGULARNAME: 'Blocco HTML'
+  EditableMemberListField:
+    PLURALNAME: 'Campi lista membri'
+    SINGULARNAME: 'Campo lista membri'
+  EditableMultipleOptionField:
+    DEFAULT: 'Selezionato di default?'
+    OPTIONSTAB: Opzioni
+    PLURALNAME: 'Campi a opzione multipla editabili'
+    SINGULARNAME: 'Campo a opzione multipla editabili'
+    TITLE: Titolo
+    VALUE: Valore
+  EditableNumericField:
+    PLURALNAME: 'Campi numerici'
+    RANGE: 'Intervallo numerico ammesso'
+    RANGE_TO: 'fino a'
+    SINGULARNAME: 'Campo numerico'
+  EditableOption:
+    DELETE: 'Rimuovi questa opzione'
+    DRAG: 'Drag to rearrange order of options'
+    LOCKED: 'These fields cannot be modified'
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+  EditableRadioField:
+    PLURALNAME: 'Radio Groups'
+    SINGULARNAME: 'Radio Group'
+  EditableTextField:
+    NUMBERROWS: 'Number of rows'
+    NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
+    PLACEHOLDER: Placeholder
+    PLURALNAME: 'Text Fields'
+    RANGE_TO: to
+    SINGULARNAME: 'Text Field'
+    TEXTLENGTH: 'Allowed text length'
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Select upload folder'
+  FieldEditor:
+    ADD: Add
+    SELECTAFIELD: 'Select a Field'
+  Form:
+    FIELDISREQUIRED: '%s is required'
+  GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SiteTree:
+    PLURALNAME: Pages
+    SINGULARNAME: Page
+  SubmittedFileField:
+    DOWNLOADFILE: 'Download File'
+    PLURALNAME: 'Submitted File Fields'
+    SINGULARNAME: 'Submitted File Field'
+  SubmittedForm:
+    PLURALNAME: 'Submitted Forms'
+    SINGULARNAME: 'Submitted Form'
+  SubmittedFormField:
+    PLURALNAME: 'Submitted Form Fields'
+    SINGULARNAME: 'Submitted Form Field'
+  UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Add Email Recipient'
+    CLEARBUTTON: Clear
+    CONFIGURATION: Configuration
+    DESCRIPTION: 'Adds a customizable form.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
+    DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Display error messages above the form?'
+    EMAILADDRESS: Email
+    EMAILBODY: Body
+    EMAILBODYHTML: Body
+    EMAILFROM: From
+    EMAILRECIPIENTS: 'Email Recipients'
+    EMAILSUBJECT: 'Email subject'
+    EMAILTEMPLATE: 'Email template'
+    ENABLELIVEVALIDATION: 'Enable live validation'
+    EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
+    FIELDS: Fields
+    FORM: Form
+    FROMADDRESS: 'Send email from'
+    FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
+    HIDEFIELDLABELS: 'Hide field labels'
+    HIDEFORMDATA: 'Hide form data from email?'
+    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
+    ONCOMPLETELABEL: 'Show on completion'
+    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
+    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
+    PLURALNAME: 'Base Pages'
+    PREVIEW_EMAIL: 'Preview email'
+    PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'
+    RECIPIENTS: Recipients
+    REPLYADDRESS: 'Email for reply to'
+    REPLYADDRESS_DESCRIPTION: 'The email address which the recipient is able to ''reply'' to.'
+    RulesDescription: 'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'
+    SENDEMAILTO: 'Send email to'
+    SENDEMAILTO_DESCRIPTION: 'You may enter multiple email addresses as a comma separated list.'
+    SENDIF: 'Send condition'
+    SENDIFAND: 'All conditions are true'
+    SENDIFOR: 'Any conditions are true'
+    SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
+    SUBMISSIONS: Submissions
+    SUBMITBUTTON: Submit
+    TEXTONCLEAR: 'Text on clear button:'
+    TEXTONSUBMIT: 'Text on submit button:'
+    TYPEREPLY: 'Type reply address'
+    TYPESUBJECT: 'Type subject'
+    TYPETO: 'Type to address'
+  UserDefinedForm_EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
+    EMAILCONTENTTAB: 'Email Content'
+    EMAILDETAILSTAB: 'Email Details'
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
+  UserDefinedForm_EmailRecipientCondition:
+    PLURALNAME: 'User Defined Form Email Recipient Conditions'
+    SINGULARNAME: 'User Defined Form Email Recipient Condition'
+  UserFormFieldEditorExtension:
+    ADD_FIELD: 'Add Field'
+    ADD_FIELD_GROUP: 'Add Field Group'
+    ADD_PAGE_BREAK: 'Add Page Break'
+    FORMFIELDS: 'Form Fields'
+  UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
+    NO_PAGE: 'Field ''{name}'' found before any pages'
+    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
+    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
+  UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filter Submissions..'
+    FROM: From
+    TILL: Till
+    WHEREVALUEIS: 'where value is..'
