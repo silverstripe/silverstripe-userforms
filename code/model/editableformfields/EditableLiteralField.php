@@ -145,7 +145,7 @@ class EditableLiteralField extends EditableFormField
                 Convert::raw2htmlname($this->Name),
                 Convert::raw2att($classes),
                 $label,
-                $this->dbObject('Content')
+                (string)$this->dbObject('Content')
             )
         );
 
