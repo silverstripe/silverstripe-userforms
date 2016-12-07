@@ -18,7 +18,8 @@ class EditableTextField extends EditableFormField
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
         'Rows' => 'Int(1)',
-        'Placeholder' => 'Varchar(255)'
+        'Placeholder' => 'Varchar(255)',
+        'Autocomplete' => 'Varchar(255)'
     );
 
     private static $defaults = array(
@@ -46,6 +47,45 @@ class EditableTextField extends EditableFormField
                     _t('EditableTextField.PLACEHOLDER', 'Placeholder')
                 )
             );
+
+            $fields->addFieldToTab(
+                'Root.Main',
+                DropdownField::create(
+                    'Autocomplete',
+                    'HTML5 Autocomplete value',
+                    array(
+                      'off' => 'Off',
+                      'on' => 'On',
+                      'name' => 'Full name',
+                      'honorific-prefix' => 'Prefix or title',
+                      'given-name' => 'First name',
+                      'additional-name' => 'Additional name',
+                      'family-name' => 'Family name',
+                      'honorific-suffix' => 'Suffix (e.g Jr.)',
+                      'nickname' => 'Nickname',
+                      'email' => 'Email',
+                      'organization-title' => 'Job title',
+                      'organization' => 'Organization',
+                      'street-address' => 'Street address',
+                      'address-line1' => 'Address line1',
+                      'address-line2' => 'Address line2',
+                      'address-line3' => 'Address line3',
+                      'address-level1' => 'Address level1',
+                      'address-level2' => 'Address level2',
+                      'address-level3' => 'Address level3',
+                      'address-level4' => 'Address level4',
+                      'country' => 'Country',
+                      'country-name' => 'Country name',
+                      'postal-code' => 'Postal code',
+                      'bday' => 'Birthday',
+                      'sex' => 'Gender identity',
+                      'tel' => 'Telephone Number',
+                      'url' => 'Home page url'
+                    ),
+                    _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete')
+                  )
+            );
+
         });
 
         return parent::getCMSFields();
@@ -116,5 +156,10 @@ class EditableTextField extends EditableFormField
         if ($this->Placeholder) {
             $field->setAttribute('placeholder', $this->Placeholder);
         }
+
+        if ($this->Autocomplete) {
+            $field->setAttribute('autocomplete', $this->Autocomplete);
+        }
+
     }
 }
