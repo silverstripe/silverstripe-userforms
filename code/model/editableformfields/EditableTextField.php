@@ -54,10 +54,13 @@ class EditableTextField extends EditableFormField
                 'Root.Main',
                 DropdownField::create(
                     'Autocomplete',
-                    'HTML5 Autocomplete value',
+                    'Autocomplete',
                     $this->config()->get('autocomplete_options'),
                     _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete')
-                  )
+                  )->setDescription(_t(
+                      'EditableTextField.AUTOCOMPLETE_DESCRIPTION',
+                      'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
+                  ))
             );
 
         });
