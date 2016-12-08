@@ -178,7 +178,7 @@ class UserDefinedForm extends Page
 
             // get a list of all field names and values used for print and export CSV views of the GridField below.
             $columnSQL = <<<SQL
-SELECT "SubmittedFormField"."Name" as "Name", "EditableFormField"."Title" as "Title", COALESCE("EditableFormField"."Sort", 999) AS "Sort"
+SELECT "SubmittedFormField"."Name" as "Name", COALESCE("EditableFormField"."Title", "SubmittedFormField"."Title") as "Title", COALESCE("EditableFormField"."Sort", 999) AS "Sort"
 FROM "SubmittedFormField"
 LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
 LEFT JOIN "EditableFormField" ON "EditableFormField"."Name" = "SubmittedFormField"."Name" AND "EditableFormField"."ParentID" = '$parentID'
