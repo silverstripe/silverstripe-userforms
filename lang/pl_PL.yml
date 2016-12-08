@@ -103,6 +103,8 @@ pl_PL:
     PLURALNAME: 'Pola wyboru'
     SINGULARNAME: 'Pole wyboru'
   EditableTextField:
+    AUTOCOMPLETE: 'autouzupełnienie'
+    AUTOCOMPLETE_DESCRIPTION: 'Obsługiwane przeglądarki podejmie próbę wypełnienia tego pola automatycznie z informacji użytkowników, należy ustawić wartość zaludnionych'
     NUMBERROWS: 'Liczba wierszy'
     PLURALNAME: 'Pola tekstowe'
     SINGULARNAME: 'Pole tekstowe'

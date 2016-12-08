@@ -54,7 +54,7 @@ class EditableTextField extends EditableFormField
                 'Root.Main',
                 DropdownField::create(
                     'Autocomplete',
-                    'Autocomplete',
+                    _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete'),
                     $this->config()->get('autocomplete_options'),
                     _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete')
                   )->setDescription(_t(
