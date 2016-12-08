@@ -14,7 +14,35 @@ class EditableTextField extends EditableFormField
 
     private static $plural_name = 'Text Fields';
 
-    private static $autocomplete_options = array('off' => 'Off','on' => 'On','name' => 'Full name','honorific-prefix' => 'Prefix or title','given-name' => 'First name','additional-name' => 'Additional name','family-name' => 'Family name','honorific-suffix' => 'Suffix (e.g Jr.)','nickname' => 'Nickname','email' => 'Email','organization-title' => 'Job title','organization' => 'Organization','street-address' => 'Street address','address-line1' => 'Address line1','address-line2' => 'Address line2','address-line3' => 'Address line3','address-level1' => 'Address level1','address-level2' => 'Address level2','address-level3' => 'Address level3','address-level4' => 'Address level4','country' => 'Country','country-name' => 'Country name','postal-code' => 'Postal code','bday' => 'Birthday','sex' => 'Gender identity','tel' => 'Telephone Number','url' => 'Home page');
+    private static $autocomplete_options = array(
+        'off' => 'Off',
+        'on' => 'On',
+        'name' => 'Full name',
+        'honorific-prefix' => 'Prefix or title',
+        'given-name' => 'First name',
+        'additional-name' => 'Additional name',
+        'family-name' => 'Family name',
+        'honorific-suffix' => 'Suffix (e.g Jr.)',
+        'nickname' => 'Nickname',
+        'email' => 'Email',
+        'organization-title' => 'Job title',
+        'organization' => 'Organization',
+        'street-address' => 'Street address',
+        'address-line1' => 'Address line1',
+        'address-line2' => 'Address line2',
+        'address-line3' => 'Address line3',
+        'address-level1' => 'Address level1',
+        'address-level2' => 'Address level2',
+        'address-level3' => 'Address level3',
+        'address-level4' => 'Address level4',
+        'country' => 'Country',
+        'country-name' => 'Country name',
+        'postal-code' => 'Postal code',
+        'bday' => 'Birthday',
+        'sex' => 'Gender identity',
+        'tel' => 'Telephone Number',
+        'url' => 'Home page'
+      );
 
     private static $db = array(
         'MinLength' => 'Int',
@@ -55,8 +83,7 @@ class EditableTextField extends EditableFormField
                 DropdownField::create(
                     'Autocomplete',
                     _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete'),
-                    $this->config()->get('autocomplete_options'),
-                    _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete')
+                    $this->config()->get('autocomplete_options')
                   )->setDescription(_t(
                       'EditableTextField.AUTOCOMPLETE_DESCRIPTION',
                       'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
