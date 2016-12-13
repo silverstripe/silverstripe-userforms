@@ -60,6 +60,9 @@ ru_RU:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
+  EditableTextField:
+    AUTOCOMPLETE: 'автозаполнения'
+    AUTOCOMPLETE_DESCRIPTION: 'Поддерживаемые браузеры будут пытаться автоматически заполнять это поле с информацией пользователей, используйте для установки значения населенную'
   Form:
     FIELDISREQUIRED: '%s is required'
   SubmittedFileField:

@@ -60,6 +60,9 @@ fr_FR:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
+  EditableTextField:
+    AUTOCOMPLETE: 'Autocomplétion'
+    AUTOCOMPLETE_DESCRIPTION: 'Les navigateurs pris en charge essaieront de remplir automatiquement ce champ avec les informations des utilisateurs, utilisez pour définir la valeur remplie'
   Form:
     FIELDISREQUIRED: '%s is required'
   SubmittedFileField:

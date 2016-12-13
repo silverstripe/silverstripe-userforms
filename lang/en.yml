@@ -140,6 +140,8 @@ en:
     PLURALNAME: 'Radio Groups'
     SINGULARNAME: 'Radio Group'
   EditableTextField:
+    AUTOCOMPLETE: 'Autocomplete'
+    AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
     PLACEHOLDER: Placeholder

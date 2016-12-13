@@ -14,11 +14,42 @@ class EditableTextField extends EditableFormField
 
     private static $plural_name = 'Text Fields';
 
+    private static $autocomplete_options = array(
+        'off' => 'Off',
+        'on' => 'On',
+        'name' => 'Full name',
+        'honorific-prefix' => 'Prefix or title',
+        'given-name' => 'First name',
+        'additional-name' => 'Additional name',
+        'family-name' => 'Family name',
+        'honorific-suffix' => 'Suffix (e.g Jr.)',
+        'nickname' => 'Nickname',
+        'email' => 'Email',
+        'organization-title' => 'Job title',
+        'organization' => 'Organization',
+        'street-address' => 'Street address',
+        'address-line1' => 'Address line 1',
+        'address-line2' => 'Address line 2',
+        'address-line3' => 'Address line 3',
+        'address-level1' => 'Address level 1',
+        'address-level2' => 'Address level 2',
+        'address-level3' => 'Address level 3',
+        'address-level4' => 'Address level 4',
+        'country' => 'Country',
+        'country-name' => 'Country name',
+        'postal-code' => 'Postal code',
+        'bday' => 'Birthday',
+        'sex' => 'Gender identity',
+        'tel' => 'Telephone number',
+        'url' => 'Home page'
+      );
+
     private static $db = array(
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
         'Rows' => 'Int(1)',
-        'Placeholder' => 'Varchar(255)'
+        'Placeholder' => 'Varchar(255)',
+        'Autocomplete' => 'Varchar(255)'
     );
 
     private static $defaults = array(
@@ -46,6 +77,19 @@ class EditableTextField extends EditableFormField
                     _t('EditableTextField.PLACEHOLDER', 'Placeholder')
                 )
             );
+
+            $fields->addFieldToTab(
+                'Root.Main',
+                DropdownField::create(
+                    'Autocomplete',
+                    _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete'),
+                    $this->config()->get('autocomplete_options')
+                  )->setDescription(_t(
+                      'EditableTextField.AUTOCOMPLETE_DESCRIPTION',
+                      'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
+                  ))
+            );
+
         });
 
         return parent::getCMSFields();
@@ -116,5 +160,10 @@ class EditableTextField extends EditableFormField
         if ($this->Placeholder) {
             $field->setAttribute('placeholder', $this->Placeholder);
         }
+
+        if ($this->Autocomplete) {
+            $field->setAttribute('autocomplete', $this->Autocomplete);
+        }
+
     }
 }
