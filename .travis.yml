@@ -7,17 +7,13 @@ language: php
 matrix:
   include:
     - php: 5.3
-      env: DB=MYSQL CORE_RELEASE=3.1
+      env: DB=MYSQL CORE_RELEASE=3.4
     - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=3.2
-    - php: 5.5
-      env: DB=MYSQL CORE_RELEASE=3.3
+      env: DB=MYSQL CORE_RELEASE=3.5
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3
     - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.1 SECUREASSETS=1
-    - php: 5.6
-      env: DB=PGSQL CORE_RELEASE=3.3
+      env: DB=MYSQL CORE_RELEASE=3.5 SECUREASSETS=1
 
 before_script:
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
@@ -28,6 +24,7 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-clover coverage.clover userforms/tests
   - wget https://scrutinizer-ci.com/ocular.phar
+  - cd ./userforms
   - git remote rm origin
   - git remote add origin git@github.com:silverstripe/silverstripe-userforms.git
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
