@@ -26,18 +26,6 @@ class UserFormsCheckboxSetField extends CheckboxSetField
     /**
      * @inheritdoc
      *
-     * @return array
-     */
-    public function getSourceAsArray()
-    {
-        $array = parent::getSourceAsArray();
-
-        return array_values($array);
-    }
-
-    /**
-     * @inheritdoc
-     *
      * @param Validator $validator
      *
      * @return bool
