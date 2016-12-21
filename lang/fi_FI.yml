@@ -124,6 +124,7 @@ fi_FI:
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
     TITLE: Otsikko
+    VALUE: Arvo
   EditableNumericField:
     PLURALNAME: 'Numeeriset kentät'
     RANGE: 'Sallittu numeerinen väli'
@@ -192,6 +193,7 @@ fi_FI:
     FileUploadWarning: 'Tällä kentällä lähetetyt tiedostot ovat avattavissa julkisesti, mikäli tarkka verkko-osoite on käyttäjän tiedossa.'
     HIDEFIELDLABELS: 'Piilota kenttien nimikkeet'
     HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
+    NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
     ONCOMPLETELABEL: 'Näytä valmistuessa'
     ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
