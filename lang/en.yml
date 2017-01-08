@@ -230,6 +230,9 @@ en:
     EMAILDETAILSTAB: 'Email Details'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+    EMAILADDRESSINVALID: 'Email address has a invalid email address'
+    EMAILFROMINVALID: 'Email from has a invalid email address'
+    EMAILREPLYTOINVALID: 'Email reply has a invalid email address'
   UserDefinedForm_EmailRecipientCondition:
     PLURALNAME: 'User Defined Form Email Recipient Conditions'
     SINGULARNAME: 'User Defined Form Email Recipient Condition'

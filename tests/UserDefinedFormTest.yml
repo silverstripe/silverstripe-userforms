@@ -227,6 +227,16 @@ UserDefinedForm_EmailRecipient:
     CustomRules: =>UserDefinedForm_EmailRecipientCondition.group-equals-rule, =>UserDefinedForm_EmailRecipientCondition.group-not-equals-rule
     CustomRulesCondition: 'Or'
 
+  valid-recipient-list:
+    EmailAddress: filtered@example.com, filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+  invalid-recipient-list:
+    EmailAddress: filtered.example.com, filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
 UserDefinedForm:
   basic-form-page:
     Content: '<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>'

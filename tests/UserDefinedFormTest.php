@@ -435,4 +435,24 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotContains('<p></p>', $body);
         $this->assertNotContains('</p><p>Thank you for filling it out</p>', $body);
     }
+
+    public function testEmailAddressValidation()
+    {
+        $this->logInWithPermission('ADMIN');
+
+        // test invalid email addresses fail validation
+        $recipient = $this->objFromFixture('UserDefinedForm_EmailRecipient',
+            'invalid-recipient-list');
+        $result = $recipient->validate();
+        $this->assertFalse($result->valid());
+        $this->assertContains('filtered.example.com', $result->message());
+        $this->assertNotContains('filtered2@example.com', $result->message());
+
+        // test valid email addresses pass validation
+        $recipient = $this->objFromFixture('UserDefinedForm_EmailRecipient',
+            'valid-recipient-list');
+        $result = $recipient->validate();
+        $this->assertTrue($result->valid());
+        $this->assertEmpty($result->message());
+    }
 }
