@@ -136,19 +136,33 @@ class UserFormFieldEditorExtension extends DataExtension {
 	 * @return void
 	 */
 	public function onAfterPublish($original) {
-		// Remove fields on the live table which could have been orphaned.
-		$live = Versioned::get_by_stage("EditableFormField", "Live")
-			->filter('ParentID', $original->ID);
+        // store IDs of fields we've published
+        $seenIDs = array();
 
-		if($live) {
-			foreach($live as $field) {
-				$field->doDeleteFromStage('Live');
-			}
-		}
+        foreach ($this->owner->Fields() as $field) {
+            // store any IDs of fields we publish so we don't unpublish them
+            $seenIDs[] = $field->ID;
+            $field->doPublish('Stage', 'Live');
+            $field->destroy();
+        }
 
-		foreach($this->owner->Fields() as $field) {
-			$field->doPublish('Stage', 'Live');
-		}
+        // fetch any orphaned live records
+        $live = Versioned::get_by_stage("EditableFormField", "Live")
+            ->filter(array(
+                'ParentID' => $original->ID,
+            ));
+
+        if (!empty($seenIDs)) {
+            $live = $live->exclude(array(
+                'ID' => $seenIDs,
+            ));
+        }
+
+        // delete orphaned records
+        foreach ($live as $field) {
+            $field->doDeleteFromStage('Live');
+            $field->destroy();
+        }
 	}
 
 	/**
