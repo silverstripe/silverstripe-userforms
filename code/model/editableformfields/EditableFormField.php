@@ -86,7 +86,7 @@ class EditableFormField extends DataObject
         "ExtraClass" => "Text", // from CustomSettings
         "RightTitle" => "Varchar(255)", // from CustomSettings
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
-        "ShowInSummary" => "Boolean"
+        "ShowInSummary" => "Boolean",
     );
     
     private static $defaults = array(

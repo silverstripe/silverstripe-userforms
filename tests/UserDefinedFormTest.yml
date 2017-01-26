@@ -106,6 +106,16 @@ EditableTextField:
     Title: Required Text Field
     Required: true
     CustomErrorMessage: 'This field is required'
+    
+  summary-show:
+    Name: SummaryShow
+    Title: Summary Text Field
+    ShowInSummary: true
+    
+  summary-hide:
+    Name: SummaryHide
+    Title: Summary Text Field
+    ShowInSummary: false
 
 EditableDropdown:
   basic-dropdown:
@@ -251,6 +261,11 @@ UserDefinedForm:
   custom-rules-form:
     Title: Custom Rules Form
     Fields: =>EditableFormStep.form4step1,=>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
+    
+  summary-rules-form:
+    Title: Summary Fields Form
+    Fields: =>EditableFormStep.form1step1, =>EditableTextField.summary-show, =>EditableTextField.summary-hide
+    
   empty-form:
     Title: Empty Form
 

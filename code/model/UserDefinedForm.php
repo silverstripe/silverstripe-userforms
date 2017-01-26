@@ -213,7 +213,7 @@ SQL;
             );
             foreach(EditableFormField::get()->filter(array("ParentID" => $parentID)) as $eff) {
                 if($eff->ShowInSummary) {
-                    $summaryarray[$eff->Name] = $eff->Title ? $eff->Title : $eff->Name;
+                    $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
             
