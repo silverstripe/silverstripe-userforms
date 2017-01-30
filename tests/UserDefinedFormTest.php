@@ -58,7 +58,7 @@ class UserDefinedFormTest extends FunctionalTest
 
         $fields = $form->getCMSFields();
 
-        $this->assertTrue($fields->dataFieldByName('Submissions') != null);
+        $this->assertInstanceOf('GridField', $fields->dataFieldByName('Submissions'));
 
         $submissionsgrid = $fields->dataFieldByName('Submissions');
         $gridFieldDataColumns = $submissionsgrid->getConfig()->getComponentByType('GridFieldDataColumns');

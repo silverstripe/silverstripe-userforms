@@ -260,11 +260,11 @@ UserDefinedForm:
     
   custom-rules-form:
     Title: Custom Rules Form
-    Fields: =>EditableFormStep.form4step1,=>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
+    Fields: =>EditableCheckbox.checkbox-2, =>EditableTextField.basic-text-2
     
   summary-rules-form:
     Title: Summary Fields Form
-    Fields: =>EditableFormStep.form1step1, =>EditableTextField.summary-show, =>EditableTextField.summary-hide
+    Fields: =>EditableTextField.summary-show, =>EditableTextField.summary-hide
     
   empty-form:
     Title: Empty Form
