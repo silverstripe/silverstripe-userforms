@@ -205,6 +205,20 @@ SQL;
             $config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
             $config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
 
+            // show user form items in the summary tab
+            $summaryarray = array(
+                'ID' => 'ID',
+                'Created' => 'Created',
+                'LastEdited' => 'Last Edited'
+            );
+            foreach(EditableFormField::get()->filter(array("ParentID" => $parentID)) as $eff) {
+                if($eff->ShowInSummary) {
+                    $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
+                }
+            }
+            
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
+            
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */

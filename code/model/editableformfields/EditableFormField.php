@@ -86,6 +86,7 @@ class EditableFormField extends DataObject
         "ExtraClass" => "Text", // from CustomSettings
         "RightTitle" => "Varchar(255)", // from CustomSettings
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
+        "ShowInSummary" => "Boolean",
     );
     
     private static $defaults = array(
@@ -160,6 +161,7 @@ class EditableFormField extends DataObject
                     _t('EditableFormField.TYPE', 'Type'),
                     $this->i18n_singular_name()
                 ),
+                CheckboxField::create('ShowInSummary', _t('EditableFormField.SHOWINSUMMARY', 'Show in summary gridfield')),
                 LiteralField::create(
                     'MergeField',
                     _t(
