@@ -17,7 +17,7 @@ fa_IR:
     REQUIRED: 'آیا این فیلد الزامی است؟'
     RIGHTTITLE: 'عنوان سمت راست'
     TITLE: عنوان
-    'YES': 'بله'
+    'YES': بله
   EditableFormStep:
     TITLE_FIRST: 'صفحه نخست'
   EditableLiteralField:
@@ -37,7 +37,7 @@ fa_IR:
     SELECTAFIELD: 'انتخاب یک فیلد'
   GridField:
     Filter: پالایش
-    ResetFilter: از نو
+    ResetFilter: 'از نو'
   SiteTree:
     PLURALNAME: صفحات
     SINGULARNAME: صفحه
@@ -46,17 +46,17 @@ fa_IR:
   UserDefinedForm:
     CLEARBUTTON: پاک‌کردن
     DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
-    EMAILADDRESS: ایمیل
+    EMAILADDRESS: 'ایمیل'
     EMAILFROM: از
     EMAILSUBJECT: 'موضوع پست الکترونیک'
     EMAILTEMPLATE: 'قالب پست الکترونیک'
     FIELDS: فیلدها
-    FORM: فرم
+    FORM: 'فرم'
     PLURALNAME: 'صفحه اصلی'
-    RECIPIENTS: دریافت کنندگان
+    RECIPIENTS: 'دریافت کنندگان'
     SENDEMAILTO: 'ارسال ایمیل به'
     SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
-    SUBMITBUTTON: ثبت کردن
+    SUBMITBUTTON: 'ثبت کردن'
     TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
     TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
   UserFormFieldEditorExtension:

@@ -24,7 +24,7 @@ fr_FR:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Supprimer ce champ
+    DELETE: 'Supprimer ce champ'
     DRAG: 'Glisser pour arranger l''ordre des champs'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

@@ -24,7 +24,7 @@ ru_RU:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Удалить это поле
+    DELETE: 'Удалить это поле'
     DRAG: 'Перетащите для изменения порядка полей'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

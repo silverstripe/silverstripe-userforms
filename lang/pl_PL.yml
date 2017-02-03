@@ -43,7 +43,7 @@ pl_PL:
     CUSTOMERROR: 'Własny komunikat o błędzie'
     CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Domyślnie to dzisiaj?'
-    DELETE: Usuń to pole
+    DELETE: 'Usuń to pole'
     DRAG: 'Przeciągnij aby zmienić kolejność pól'
     ENTERQUESTION: 'Wpisz pytanie'
     EXTRACLASSA: 'Dodatkowy styl / layout'
@@ -61,7 +61,7 @@ pl_PL:
     LOCKED: 'Te pola nie mogą być modyfikowane'
     MAXVALUE: 'Wartość max'
     MINVALUE: 'Wartość min'
-    'NO': 'Nie'
+    'NO': Nie
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -75,7 +75,7 @@ pl_PL:
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
-    'YES': 'Tak'
+    'YES': Tak
   EditableFormHeading:
     LEVEL: 'Wybierzpoziom nagłówka'
     PLURALNAME: Nagłówki

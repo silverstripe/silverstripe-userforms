@@ -17,6 +17,7 @@ en_GB:
     FORM: Form
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
+    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
     ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
@@ -27,7 +28,6 @@ en_GB:
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
-    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'

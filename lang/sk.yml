@@ -8,13 +8,13 @@ sk:
     IS: je/má
     LESSTHAN: 'Hodnotu menšiu ako'
     LESSTHANEQUAL: 'Hodnotu menšiu alebo rovnú ako'
-    NOTBLANK: 'Vyplnené'
+    NOTBLANK: Vyplnené
     NOTVALUE: 'Nie zadanú hodnotu'
     SHOWTHISFIELD: 'Zobraziť toto pole'
-    VALUE: Zadanú hodnotu
-    WHEN: ak pole
+    VALUE: 'Zadanú hodnotu'
+    WHEN: 'ak pole'
   EditableCheckbox:
-    PLURALNAME: Zaškrtávacie polia (checkbox)
+    PLURALNAME: 'Zaškrtávacie polia (checkbox)'
     SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
   EditableCheckboxGroupField:
     PLURALNAME: 'Skupiny zaškrtávacích polí'
@@ -29,7 +29,7 @@ sk:
     PLURALNAME: 'Dátumové polia'
     SINGULARNAME: 'Dátumové pole'
   EditableDropdown:
-    PLURALNAME: Rozbaľovacie polia
+    PLURALNAME: 'Rozbaľovacie polia'
     SINGULARNAME: 'Rozbaľovacie pole'
   EditableEmailField:
     PLURALNAME: 'E-mailové polia'
@@ -79,7 +79,7 @@ sk:
     MAXVALUE: 'Maximálna hodnota'
     MINVALUE: 'Minimálna hodnota'
     'NO': ' Nie'
-    NOTBLANK: 'Vyplnené'
+    NOTBLANK: Vyplnené
     NOTVALUE: 'Nie zadanú hodnotu'
     OPTIONS: Voľba/možnosť
     PLURALNAME: 'Formulárové polia'
@@ -94,9 +94,9 @@ sk:
     TITLE: Titulok
     TYPE: Typ
     VALIDATION: Validácia
-    VALUE: Zadanú hodnotu
-    WHEN: ak pole
-    'YES': 'Áno'
+    VALUE: 'Zadanú hodnotu'
+    WHEN: 'ak pole'
+    'YES': Áno
   EditableFormFieldValidator:
     REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
   EditableFormHeading:
@@ -130,15 +130,15 @@ sk:
     DELETE: 'Odstráň túto možnosť'
     DRAG: 'Ťahaním preskupiť poradie polí'
     LOCKED: 'Tieto polia nie je možné meniť'
-    PLURALNAME: 'Možnosti'
-    SINGULARNAME: 'Možnosť'
+    PLURALNAME: Možnosti
+    SINGULARNAME: Možnosť
   EditableRadioField:
     PLURALNAME: 'Prepínacie polia (radio)'
     SINGULARNAME: 'Prepínacie pole (radio)'
   EditableTextField:
     NUMBERROWS: 'Počet riadkov'
     NUMBERROWS_DESCRIPTION: 'Políčka s viac ako jedným riadkom sú generované ako textarea.'
-    PLACEHOLDER: Zástupná/Ukážková hodnota (placeholder)
+    PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
     PLURALNAME: 'Textové polia'
     RANGE_TO: do
     SINGULARNAME: 'Textové pole'
@@ -178,8 +178,8 @@ sk:
     EMAILBODY: Správa
     EMAILBODYHTML: Správa
     EMAILFROM: Od
-    EMAILRECIPIENTS: 'Príjemcovia'
-    EMAILSUBJECT: 'Predmet'
+    EMAILRECIPIENTS: Príjemcovia
+    EMAILSUBJECT: Predmet
     EMAILTEMPLATE: 'E-mailová šablóna'
     ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
     EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
@@ -208,7 +208,7 @@ sk:
     SENDPLAIN: 'Poslať e-mail ako obyčajný text? (HTML značky budú odstránené)'
     SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
     SINGULARNAME: 'Jednoduchý formulár'
-    SUBMISSIONS: Podané formuláre
+    SUBMISSIONS: 'Podané formuláre'
     SUBMITBUTTON: Odoslať
     TEXTONCLEAR: 'Text na tlačidle RESET:'
     TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
@@ -225,7 +225,7 @@ sk:
     ADD_FIELD: 'Pridať políčko'
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
     ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
-    FORMFIELDS: 'Formulár'
+    FORMFIELDS: Formulár
   UserFormValidator:
     CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
     NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'

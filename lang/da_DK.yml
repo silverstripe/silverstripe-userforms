@@ -27,7 +27,7 @@ da_DK:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Slet dette felt
+    DELETE: 'Slet dette felt'
     DRAG: 'Træk for at ændre felternes rækkefølge'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

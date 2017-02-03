@@ -24,7 +24,7 @@ es_MX:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Eliminar este campo
+    DELETE: 'Eliminar este campo'
     DRAG: 'Arrastra para cambiar el orden de los campos'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

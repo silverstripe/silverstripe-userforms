@@ -88,7 +88,7 @@ class EditableFormField extends DataObject
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
         "ShowInSummary" => "Boolean",
     );
-    
+
     private static $defaults = array(
         'ShowOnLoad' => true,
     );
@@ -382,8 +382,8 @@ class EditableFormField extends DataObject
         if ($parent && $parent->exists()) {
             return $parent->canEdit($member) && !$this->isReadonly();
         } elseif (!$this->exists() && Controller::has_curr()) {
-            // This is for GridFieldOrderableRows support as it checks edit permissions on 
-            // singleton of the class. Allows editing of User Defined Form pages by 
+            // This is for GridFieldOrderableRows support as it checks edit permissions on
+            // singleton of the class. Allows editing of User Defined Form pages by
             // 'Content Authors' and those with permission to edit the UDF page. (ie. CanEditType/EditorGroups)
             // This is to restore User Forms 2.x backwards compatibility.
             $controller = Controller::curr();
@@ -489,11 +489,27 @@ class EditableFormField extends DataObject
     {
         $this->publish($fromStage, $toStage, $createNewVersion);
 
-        // Don't forget to publish the related custom rules...
-        foreach ($this->DisplayRules() as $rule) {
-            $rule->doPublish($fromStage, $toStage, $createNewVersion);
+		$seenIDs = array();
+
+		// Don't forget to publish the related custom rules...
+		foreach ($this->DisplayRules() as $rule) {
+			$seenIDs[] = $rule->ID;
+			$rule->doPublish($fromStage, $toStage, $createNewVersion);
+			$rule->destroy();
+		}
+
+		// remove any orphans from the "fromStage"
+        $rules = Versioned::get_by_stage('EditableCustomRule', $toStage)
+            ->filter('ParentID', $this->ID);
+
+		if (!empty($seenIDs)) {
+            $rules = $rules->exclude('ID', $seenIDs);
         }
-    }
+
+		foreach ($rules as $rule) {
+		    $rule->deleteFromStage($toStage);
+		}
+	}
 
     /**
      * Delete this field from a given stage

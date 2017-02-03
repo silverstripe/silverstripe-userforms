@@ -24,7 +24,7 @@ pt_PT:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Apagar este campo
+    DELETE: 'Apagar este campo'
     DRAG: 'Arraste para reordenar os campos'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
