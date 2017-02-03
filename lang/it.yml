@@ -5,11 +5,11 @@ it:
     GREATERTHAN: 'Valore più elevato di'
     GREATERTHANEQUAL: 'Valore più elevato o uguale a'
     HIDETHISFIELD: 'Nascondi questo campo'
-    IS: "È"
+    IS: è
     LESSTHAN: 'Valore minore di'
     LESSTHANEQUAL: 'Valore minore o uguale a'
     NOTBLANK: 'Non vuoto'
-    NOTVALUE: 'Non valore'
+    NOTVALUE: 'Non valorizzato'
     SHOWTHISFIELD: 'Mostra questo campo'
     VALUE: Valore
     WHEN: Quando
@@ -57,14 +57,14 @@ it:
     DEFAULT: 'Valore di default'
     DEFAULTTOTODAY: 'Di default a oggi?'
     DELETE: Elimina
-    DISPLAY_RULES_DISABLED: 'Le regole di visualizzazione non sono attivate per i campi richiesti. Per piacere deseleziona "Questo campo è obbligatorio?" sotto "Validazione" per ri-abilitare.'
-    DRAG: "Trascina per riordinare l'ordine dei campi"
+    DISPLAY_RULES_DISABLED: 'Le regole di visualizzazione non sono attivate per i campi richiesti. Per piacere deseleziona "Questo campo è obbligatorio?" sotto "Validazione" per riabilitarle.'
+    DRAG: 'Trascina per riordinare l''ordine dei campi'
     ENTERQUESTION: 'Inserisci la domanda'
-    EXTRACLASSA: 'Style/Layout extra'
+    EXTRACLASSA: 'Stile/Layout extra'
     EXTRACLASSB: 'Classe CSS extra - separa valori multipli con uno spazio'
     EXTRACLASS_MULTIPLE: 'Separa ogni classe CSS con uno spazio singolo'
     EXTRACLASS_SELECT: 'Seleziona da una lista di stili consentiti'
-    EXTRACLASS_TITLE: 'Style/Layout extra'
+    EXTRACLASS_TITLE: 'Stile/Layout extra'
     EXTRACLASS_Title: 'Classi CSS extra'
     FIELDCONFIGURATION: 'Configurazione campo'
     FIELDONDEFAULT: 'Campo su default'
@@ -73,7 +73,7 @@ it:
     GROUP: Gruppo
     HIDE: Nascondi
     HIDETHISFIELD: 'Nascondi questo campo'
-    IS: "È"
+    IS: è
     LESSTHAN: 'Valore minore di'
     LESSTHANEQUAL: 'Valore minore di o uguale a'
     LOCKED: 'Questi campi non possono essere modificati'
@@ -97,9 +97,9 @@ it:
     VALIDATION: Validazione
     VALUE: Valore
     WHEN: Quando
-    'YES': 'Si'
+    'YES': Si
   EditableFormFieldValidator:
-    REQUIRED_ERROR: 'I campi dei form non possono essere obblicatori e avere regole di visualizzazione condizionali.'
+    REQUIRED_ERROR: 'I campi dei form non possono essere obbligatori e avere regole di visualizzazione condizionali.'
   EditableFormHeading:
     LEVEL: 'Seleziona livello di intestazione'
     PLURALNAME: Intestazioni
@@ -132,7 +132,7 @@ it:
     SINGULARNAME: 'Campo numerico'
   EditableOption:
     DELETE: 'Rimuovi questa opzione'
-    DRAG: "Trascina per modificare l'ordine delle opzioni"
+    DRAG: 'Trascina per modificare l''ordine delle opzioni'
     LOCKED: 'Questi campi non possono essere modificati'
     PLURALNAME: 'Opzioni modificabili'
     SINGULARNAME: 'Opzione modificabile'
@@ -168,16 +168,16 @@ it:
     SINGULARNAME: 'Campo file inviati'
   SubmittedForm:
     PLURALNAME: 'Moduli inviati'
-    SINGULARNAME: 'Modulo inviati'
+    SINGULARNAME: 'Modulo inviato'
   SubmittedFormField:
-    PLURALNAME: 'Campi modulo inviati'
-    SINGULARNAME: 'Campo modulo inviati'
+    PLURALNAME: 'Campi moduli inviati'
+    SINGULARNAME: 'Campo modulo inviato'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
-    DISABLEAUTHENICATEDFINISHACTION: "Disabilita autenticazione sull'azione finale"
+    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
     DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
     DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
     EMAILADDRESS: E-mail
@@ -188,51 +188,51 @@ it:
     EMAILSUBJECT: 'Oggetto e-mail'
     EMAILTEMPLATE: 'Schema e-mail'
     ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
-    EmailFromContent: "L'indirizzo mittente ti permette di impostare da chi viene l'e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l'indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere."
+    EmailFromContent: 'L''indirizzo mittente ti permette di impostare da chi viene l''e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l''indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere.'
     FIELDS: Campi
     FORM: Modulo
     FROMADDRESS: 'Manda e-mail da'
     FileUploadWarning: 'I files caricati attraverso questo campo potrebbero essere pubblicamente accessibili se si conosce la loro URL esatta'
     HIDEFIELDLABELS: 'Nascondi etichette dei campi'
-    HIDEFORMDATA: "Nascondi dati del modulo dall'email?"
+    HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
     NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
     ONCOMPLETELABEL: 'Mostra al completamento'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
     PLURALNAME: 'Pagine base'
     PREVIEW_EMAIL: 'Anteprima e-mail'
-    PREVIEW_EMAIL_DESCRIPTION: "Nota: Le modifiche non salvate non appariranno nell'anteprima"
-    PREVIEW_EMAIL_UNAVAILABLE: "Puoi vedere un'anteprima di questa email dopo aver salvato il destinatario."
+    PREVIEW_EMAIL_DESCRIPTION: 'Nota: Le modifiche non salvate non appariranno nell''anteprima'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Puoi vedere un''anteprima di questa email dopo aver salvato il destinatario.'
     RECIPIENTS: Destinatari
     REPLYADDRESS: 'Indirizzo e-mail a cui rispondere'
-    REPLYADDRESS_DESCRIPTION: "L'indirizzo email a cui il destinatario può 'rispondere'."
+    REPLYADDRESS_DESCRIPTION: 'L''indirizzo email a cui il destinatario può ''rispondere''.'
     RulesDescription: 'Le email saranno spedite solo al destinatario se sono soddisfatte le regole personalizzate. Se non è definita nessuna regola, il destinatario riceverà notifiche per ogni invio.'
     SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
     SELECTAFIELDTOSETSUBJECT: '.. o seleziona un campo da usare come oggetto'
-    SENDEMAILTO: 'Manda email a'
+    SENDEMAILTO: 'Manda e-mail a'
     SENDEMAILTO_DESCRIPTION: 'Puoi inserire più indirizzi email sotto forma di lista separata da virgole.'
     SENDIF: 'Condizione di invio'
     SENDIFAND: 'Tutte le condizioni sono vere'
     SENDIFOR: 'Una qualunque delle condizioni è vera'
-    SENDPLAIN: "Manda e-mail come testo semplice? (L'HTML verrà rimosso)"
+    SENDPLAIN: 'Manda e-mail come testo semplice? (L''HTML verrà rimosso)'
     SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
-    SINGULARNAME: "Modulo definito dall'utente"
+    SINGULARNAME: 'Modulo definito dall''utente'
     SUBMISSIONS: Invii
     SUBMITBUTTON: Invia
     TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
     TEXTONSUBMIT: 'Testo sul pulsante di invio:'
-    TYPEREPLY: "Inserisci l'e-mail di risposta"
-    TYPESUBJECT: "Inserisci l'oggetto"
-    TYPETO: "Inserisci l'e-mail destinatario"
+    TYPEREPLY: 'Inserisci l''e-mail di risposta'
+    TYPESUBJECT: 'Inserisci l''oggetto'
+    TYPETO: 'Inserisci l''e-mail destinatario'
   UserDefinedForm_EmailRecipient:
     CUSTOMRULESTAB: 'Regole personalizzate'
-    EMAILCONTENTTAB: "Contenuto dell'e-mail"
-    EMAILDETAILSTAB: "Dettagli dell'e-mail"
-    PLURALNAME: "Destinatari email del modulo definito dall'utente"
-    SINGULARNAME: "Destinatario emaail del form definito dall'utente"
+    EMAILCONTENTTAB: 'Contenuto dell''e-mail'
+    EMAILDETAILSTAB: 'Dettagli dell''e-mail'
+    PLURALNAME: 'Destinatari e-mail del modulo definito dall''utente'
+    SINGULARNAME: 'Destinatario e-mail del modulo definito dall''utente'
   UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: "Condizioni per il destinatario del modulo definito dall'utente"
-    SINGULARNAME: "Condizione per il destinatario del modulo definito dall'utente"
+    PLURALNAME: 'Condizioni per il destinatario del modulo definito dall''utente'
+    SINGULARNAME: 'Condizione per il destinatario del modulo definito dall''utente'
   UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'

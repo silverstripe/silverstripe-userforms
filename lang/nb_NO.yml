@@ -23,8 +23,8 @@ nb_NO:
     PLURALNAME: 'Land nedfellsmenyer'
     SINGULARNAME: 'Land nedfellsmeny'
   EditableDateField:
-    PLURALNAME: 'Datofelter'
-    SINGULARNAME: 'Datofelt'
+    PLURALNAME: Datofelter
+    SINGULARNAME: Datofelt
   EditableDropdown:
     PLURALNAME: Nedfellsmeny
     SINGULARNAME: 'Nedfellsmeny felt'
@@ -32,10 +32,10 @@ nb_NO:
     PLURALNAME: 'Epost felt'
     SINGULARNAME: 'Epost felt'
   EditableFileField:
-    PLURALNAME: 'Filopplastingsfelter'
-    SINGULARNAME: 'Filopplastingsfelt'
+    PLURALNAME: Filopplastingsfelter
+    SINGULARNAME: Filopplastingsfelt
   EditableFormField:
-    ADD: Legg til
+    ADD: 'Legg til'
     ADDLabel: 'Legt til alternativ'
     ADDRULE: 'Legg til regel'
     BLANK: Blank
@@ -93,15 +93,15 @@ nb_NO:
     PLURALNAME: 'Redigerbart alternativer'
     SINGULARNAME: 'Redigerbart alternativ'
   EditableRadioField:
-    PLURALNAME: 'Radiofelt'
-    SINGULARNAME: 'Radiofelt'
+    PLURALNAME: Radiofelt
+    SINGULARNAME: Radiofelt
   EditableTextField:
     NUMBERROWS: 'Antall rader'
-    PLURALNAME: 'Tekstfelt'
-    SINGULARNAME: 'Tekstfelt'
+    PLURALNAME: Tekstfelt
+    SINGULARNAME: Tekstfelt
     TEXTLENGTH: 'Tekst lengde'
   FieldEditor:
-    ADD: Legg til
+    ADD: 'Legg til'
     SELECTAFIELD: 'Velg et felt'
   Form:
     FIELDISREQUIRED: '%er er påkrevd'

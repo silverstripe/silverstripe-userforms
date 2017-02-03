@@ -24,7 +24,7 @@ tr_TR:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Bu alanı sil
+    DELETE: 'Bu alanı sil'
     DRAG: 'Alanlari yeniden sıralamak için sürükleyin'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

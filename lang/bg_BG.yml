@@ -24,7 +24,7 @@ bg_BG:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Изтрий това поле
+    DELETE: 'Изтрий това поле'
     DRAG: 'Плъзнете, за да подредите реда на полетата'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

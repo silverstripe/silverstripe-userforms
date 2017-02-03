@@ -24,7 +24,7 @@ sr_RS:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Обриши ово поље
+    DELETE: 'Обриши ово поље'
     DRAG: 'Drag to rearrange order of fields'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'

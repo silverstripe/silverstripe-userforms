@@ -24,7 +24,7 @@ et_EE:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: Kustuta see väli
+    DELETE: 'Kustuta see väli'
     DRAG: 'Väljade ümber paigutamiseks lohistage neid'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
@@ -36,7 +36,7 @@ et_EE:
     LESSTHAN: 'Value Less Than'
     LESSTHANEQUAL: 'Value Less Than Or Equal'
     LOCKED: 'Neid väli ei saa muuta'
-    'NO': 'Ei'
+    'NO': Ei
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -47,7 +47,7 @@ et_EE:
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
-    'YES': 'Jah'
+    'YES': Jah
   EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'

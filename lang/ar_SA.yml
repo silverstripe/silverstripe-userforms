@@ -24,7 +24,7 @@ ar_SA:
     ADDRULE: 'Add Rule'
     BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: حذف هذا الحقل
+    DELETE: 'حذف هذا الحقل'
     DRAG: 'أعد ترتيب الحقول بواسطة خاصية السحب و الإفلات'
     FIELDCONFIGURATION: 'Field Configuration'
     FIELDONDEFAULT: 'Field On Default'
@@ -78,7 +78,7 @@ ar_SA:
     EMAILFROM: From
     EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email Subject'
-    FORM: النموذج
+    FORM: 'النموذج'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'عرض الطلبات المكتملة'
@@ -89,7 +89,7 @@ ar_SA:
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
-    SUBMISSIONS: الملفات المرسلة
+    SUBMISSIONS: 'الملفات المرسلة'
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'النص ال'
   UserDefinedForm_EmailRecipient:

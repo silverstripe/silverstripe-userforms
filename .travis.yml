@@ -24,7 +24,7 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-clover coverage.clover userforms/tests
 
-after_script:
+after_success:
   - mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/
   - cd ~/build/$TRAVIS_REPO_SLUG
   - wget https://scrutinizer-ci.com/ocular.phar
