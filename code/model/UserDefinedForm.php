@@ -45,7 +45,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -255,9 +255,9 @@ SQL;
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
-            
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
-            
+
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
@@ -392,7 +392,7 @@ SQL;
  * @package userforms
  */
 
-class UserDefinedForm_Controller extends Page_Controller
+class UserDefinedForm_Controller extends PageController
 {
 
     private static $finished_anchor = '#uff';
@@ -771,7 +771,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -783,7 +783,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
