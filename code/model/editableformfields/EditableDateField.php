@@ -1,4 +1,9 @@
 <?php
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\Forms\DateField;
 /**
  * EditableDateField
  *
@@ -44,7 +49,7 @@ class EditableDateField extends EditableFormField
     public function getFormField()
     {
         $defaultValue = $this->DefaultToToday
-            ? SS_Datetime::now()->Format('Y-m-d')
+            ? DBDatetime::now()->Format('Y-m-d')
             : $this->Default;
 
         $field = EditableDateField_FormField::create($this->Name, $this->EscapedTitle, $defaultValue)

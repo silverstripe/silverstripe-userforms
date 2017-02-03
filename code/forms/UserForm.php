@@ -1,5 +1,13 @@
 <?php
 
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\ResetFormAction;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Form;
+
 /**
  * @package userforms
  */

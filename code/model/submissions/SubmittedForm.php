@@ -1,4 +1,11 @@
 <?php
+
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\ORM\DataObject;
 /**
  * Contents of an UserDefinedForm submission
  *
@@ -9,7 +16,7 @@ class SubmittedForm extends DataObject
 {
 
     private static $has_one = array(
-        "SubmittedBy" => "Member",
+        "SubmittedBy" => "SilverStripe\\Security\\Member",
         "Parent" => "UserDefinedForm",
     );
 
@@ -84,7 +91,7 @@ class SubmittedForm extends DataObject
      *
      * @return boolean
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
         $extended = $this->extendedCan(__FUNCTION__, $member);
         if ($extended !== null) {

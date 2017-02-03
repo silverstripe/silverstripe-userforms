@@ -1,5 +1,27 @@
 <?php
 
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\View\Requirements;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Assets\FileFinder;
+use SilverStripe\ORM\DataObject;
+
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -55,7 +77,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $fields = parent::summaryFields();
         if (isset($fields['EmailAddress'])) {
-            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', 'Email');
+            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', 'SilverStripe\\Control\\Email\\Email');
         }
         if (isset($fields['EmailSubject'])) {
             $fields['EmailSubject'] = _t('UserDefinedForm.EMAILSUBJECT', 'Subject');
@@ -161,7 +183,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
         }
 
         // Build fieldlist
-        $fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
+        $fields = FieldList::create(TabSet::create('Root')->addExtraClass('EmailRecipientForm'));
 
         // Configuration fields
         $fields->addFieldsToTab('Root.EmailDetails', array(
@@ -302,10 +324,10 @@ class UserDefinedForm_EmailRecipient extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
         // Check parent page
-        $parent = $this->getCanCreateContext(func_get_args());
+        $parent = $this->getCanCreateContext($context);
         if ($parent) {
             return $parent->canEdit($member);
         }
@@ -320,11 +342,11 @@ class UserDefinedForm_EmailRecipient extends DataObject
      * @param array $args List of arguments passed to canCreate
      * @return SiteTree Parent page instance
      */
-    protected function getCanCreateContext($args)
+    protected function getCanCreateContext($context)
     {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if (isset($args[1]['Form'])) {
-            return $args[1]['Form'];
+        if (isset($context['Form'])) {
+            return $context['Form'];
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
@@ -429,7 +451,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $templates = array();
 
-        $finder = new SS_FileFinder();
+        $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
         $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->email_template_directory);

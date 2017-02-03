@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Forms\RequiredFields;
+
 class EditableFormFieldValidator extends RequiredFields
 {
 

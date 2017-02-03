@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Forms\FieldList;
+
 /**
  * A list of formfields which allows for iterative processing of nested composite fields
  */

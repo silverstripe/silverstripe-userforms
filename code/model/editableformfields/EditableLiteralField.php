@@ -1,5 +1,14 @@
 <?php
 
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorConfig;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorSanitiser;
+use SilverStripe\View\Parsers\HTMLValue;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\LiteralField;
+
 /**
  * Editable Literal Field. A literal field is just a blank slate where
  * you can add your own HTML / Images / Flash
@@ -69,7 +78,7 @@ class EditableLiteralField extends EditableFormField
 
         // Perform sanitisation
         $htmlValue = Injector::inst()->create('HTMLValue', $content);
-        $santiser = Injector::inst()->create('HtmlEditorSanitiser', $this->getEditorConfig());
+        $santiser = Injector::inst()->create(HtmlEditorSanitiser::class, $this->getEditorConfig());
         $santiser->sanitise($htmlValue);
         return $htmlValue->getContent();
     }

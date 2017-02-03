@@ -1,5 +1,18 @@
 <?php
 
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Tab;
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\ORM\DataExtension;
+
 /**
  * @package userforms
  */
@@ -11,6 +24,10 @@ class UserFormFieldEditorExtension extends DataExtension
      */
     private static $has_many = array(
         'Fields' => 'EditableFormField'
+    );
+
+    private static $owns = array(
+        'Fields',
     );
 
     /**
@@ -140,11 +157,11 @@ class UserFormFieldEditorExtension extends DataExtension
      *
      * @return void
      */
-    public function onAfterPublish($original)
+    public function onAfterPublish()
     {
         // Remove fields on the live table which could have been orphaned.
         $live = Versioned::get_by_stage("EditableFormField", "Live")
-            ->filter('ParentID', $original->ID);
+            ->filter('ParentID', $this->owner->ID);
 
         if ($live) {
             foreach ($live as $field) {
@@ -163,9 +180,9 @@ class UserFormFieldEditorExtension extends DataExtension
      *
      * @return void
      */
-    public function onAfterUnpublish($page)
+    public function onAfterUnpublish()
     {
-        foreach ($page->Fields() as $field) {
+        foreach ($this->owner->Fields() as $field) {
             $field->doDeleteFromStage('Live');
         }
     }
@@ -176,12 +193,14 @@ class UserFormFieldEditorExtension extends DataExtension
      *
      * @return DataObject
      */
-    public function onAfterDuplicate($newPage)
+    public function onAfterDuplicate($oldPage)
     {
+        $newPage = $this->owner;
+
         // List of EditableFieldGroups, where the
         // key of the array is the ID of the old end group
         $fieldGroups = array();
-        foreach ($this->owner->Fields() as $field) {
+        foreach ($oldPage->Fields() as $field) {
             $newField = $field->duplicate(false);
             $newField->ParentID = $newPage->ID;
             $newField->ParentClass = $newPage->ClassName;
@@ -237,9 +256,9 @@ class UserFormFieldEditorExtension extends DataExtension
      *
      * @return void
      */
-    public function onAfterRevertToLive($page)
+    public function onAfterRevertToLive()
     {
-        foreach ($page->Fields() as $field) {
+        foreach ($this->owner->Fields() as $field) {
             $field->publish('Live', 'Stage', false);
             $field->writeWithoutVersion();
         }

@@ -1,5 +1,12 @@
 <?php
 
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Control\HTTPResponse_Exception;
+use SilverStripe\Core\Object;
+use SilverStripe\Forms\GridField\GridField_HTMLProvider;
+use SilverStripe\Forms\GridField\GridField_ActionProvider;
+
 /**
  * A button which allows objects to be created with a specified classname(s)
  */
@@ -231,7 +238,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
     {
         $classes = $this->getClassesCreate($grid);
         if (empty($classes)) {
-            throw new SS_HTTPResponse_Exception(400);
+            throw new HTTPResponse_Exception(400);
         }
 
         // Add item to gridfield

@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Control\Director;
+
 /**
  * Service to support upgrade of userforms module
  */
@@ -53,7 +56,7 @@ class UserFormsUpgradeService
      */
     protected function upgradeFieldInStage(EditableFormField $field, $stage)
     {
-        Versioned::reading_stage($stage);
+        Versioned::set_stage($stage);
 
         // Migrate field rules
         $this->migrateRules($field, $stage);

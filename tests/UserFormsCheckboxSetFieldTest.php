@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Dev\SapphireTest;
+
 class UserFormsCheckboxSetFieldTest extends SapphireTest
 {
     public function testValidate() {

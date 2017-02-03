@@ -1,4 +1,9 @@
 <?php
+
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\FieldGroup;
 /**
  * EditableNumericField
  *

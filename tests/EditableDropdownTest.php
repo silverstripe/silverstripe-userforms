@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Dev\SapphireTest;
+
 /**
  * Tests the {@see EditableDropdown} class
  */

@@ -1,4 +1,6 @@
 <?php
+
+use SilverStripe\ORM\DataObject;
 /**
  * Data received from a UserDefinedForm submission
  *
@@ -28,7 +30,7 @@ class SubmittedFormField extends DataObject
      *
      * @return boolean
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
         return $this->Parent()->canCreate();
     }

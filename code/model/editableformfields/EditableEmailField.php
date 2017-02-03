@@ -1,4 +1,7 @@
 <?php
+
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\EmailField;
 /**
  * EditableEmailField
  *

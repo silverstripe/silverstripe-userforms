@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\CSSContentParser;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ResetFormAction;
+use SilverStripe\View\ArrayData;
+use SilverStripe\Security\Member;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\Dev\TestOnly;
+
 /**
  * @package userforms
  */

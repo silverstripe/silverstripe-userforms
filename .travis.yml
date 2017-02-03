@@ -6,14 +6,16 @@ language: php
 
 matrix:
   include:
-    - php: 5.3
-      env: DB=MYSQL CORE_RELEASE=3.4
-    - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=3.5
+    - php: 5.5
+      env: DB=MYSQL CORE_RELEASE=4
     - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.5 SECUREASSETS=1
+      env: DB=MYSQL CORE_RELEASE=4
+    #- php: 5.6
+    #  env: DB=MYSQL CORE_RELEASE=4 SECUREASSETS=1
+    - php: 7.0
+      env: DB=PGSQL CORE_RELEASE=4
+    - php: 7.1
+      env: DB=PGSQL CORE_RELEASE=4
 
 before_script:
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
@@ -24,7 +26,7 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-clover coverage.clover userforms/tests
 
-after_script:
+after_success:
   - mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/
   - cd ~/build/$TRAVIS_REPO_SLUG
   - wget https://scrutinizer-ci.com/ocular.phar

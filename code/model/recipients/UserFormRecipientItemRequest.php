@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
+
 /**
  * Controller that handles requests to EmailRecipient's
  *

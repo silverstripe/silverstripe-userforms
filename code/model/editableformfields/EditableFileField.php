@@ -1,5 +1,12 @@
 <?php
 
+use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\FileField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Assets\File;
+
 /**
  * Allows a user to add a field that can be used to upload a file.
  *
@@ -17,7 +24,7 @@ class EditableFileField extends EditableFormField
     );
 
     private static $has_one = array(
-        'Folder' => 'Folder' // From CustomFields
+        'Folder' => 'SilverStripe\\Assets\\Folder' // From CustomFields
     );
 
     /**
@@ -87,7 +94,7 @@ class EditableFileField extends EditableFormField
         $field->getValidator()->setAllowedExtensions(
             array_diff(
             // filter out '' since this would be a regex problem on JS end
-                array_filter(Config::inst()->get('File', 'allowed_extensions')),
+                array_filter(Config::inst()->get('SilverStripe\\Assets\\File', 'allowed_extensions')),
                 $this->config()->allowed_extensions_blacklist
             )
         );

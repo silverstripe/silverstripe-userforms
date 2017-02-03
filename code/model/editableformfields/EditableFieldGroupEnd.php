@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\HiddenField;
+
 /**
  * Specifies that this ends a group of fields
  */

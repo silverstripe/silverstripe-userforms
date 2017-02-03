@@ -1,12 +1,51 @@
 <?php
 
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\DB;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldPageCount;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\i18n\i18n;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Core\Object;
+use SilverStripe\Security\Member;
+use SilverStripe\Assets\Upload;
+use SilverStripe\Assets\File;
+use SilverStripe\Control\Controller;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Control\HTTP;
+use SilverStripe\View\SSViewer;
+use SilverStripe\Control\Session;
+use SilverStripe\View\ArrayData;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+
+
 /**
  * @package userforms
  */
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -144,7 +183,7 @@ class UserDefinedForm extends Page
 
             // Define config for email recipients
             $emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
-            $emailRecipientsConfig->getComponentByType('GridFieldAddNewButton')
+            $emailRecipientsConfig->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldAddNewButton')
                 ->setButtonName(
                     _t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
                 );
@@ -158,7 +197,7 @@ class UserDefinedForm extends Page
             );
             $emailRecipients
                 ->getConfig()
-                ->getComponentByType('GridFieldDetailForm')
+                ->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDetailForm')
                 ->setItemRequestClass('UserFormRecipientItemRequest');
 
             $fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
@@ -216,9 +255,9 @@ SQL;
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
-            
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
-            
+
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
@@ -353,7 +392,7 @@ SQL;
  * @package userforms
  */
 
-class UserDefinedForm_Controller extends Page_Controller
+class UserDefinedForm_Controller extends PageController
 {
 
     private static $finished_anchor = '#uff';
@@ -372,17 +411,22 @@ class UserDefinedForm_Controller extends Page_Controller
         // load the jquery
         $lang = i18n::get_lang_from_locale(i18n::get_locale());
         Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
-        Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+        Requirements::javascript('http://code.jquery.com/jquery-1.7.2.min.js');
         Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
         Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
         Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
 
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
-        );
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-        );
+
+        if(file_exists(BASE_PATH . '/' . USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js")) {
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+            );
+        }
+        if(file_exists(BASE_PATH . '/' . USERFORMS_DIR . "//thirdparty/jquery-validate/localization/methods_{$lang}.min.js")) {
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+            );
+        }
         if ($this->HideFieldLabels) {
             Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
         }
@@ -727,7 +771,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -739,7 +783,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {

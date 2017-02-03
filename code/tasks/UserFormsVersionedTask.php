@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Dev\MigrationTask;
+
 /**
  * UserForms Versioned Task
  *

@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\ORM\DB;
+use SilverStripe\Dev\MigrationTask;
+
 /**
  * UserForms Column Clean Task
  *

@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\BuildTask;
+
 /**
  * Assists with upgrade of userforms to 3.0
  *

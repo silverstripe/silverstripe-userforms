@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Core\Convert;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Base Class for EditableOption Fields such as the ones used in
  * dropdown fields and in radio check box groups
@@ -25,7 +30,7 @@ class EditableOption extends DataObject
 	);
 
 	private static $extensions = array(
-		"Versioned('Stage', 'Live')"
+		"SilverStripe\\ORM\\Versioning\\Versioned('Stage', 'Live')"
 	);
 
 	private static $summary_fields = array(
@@ -96,10 +101,10 @@ class EditableOption extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
 	 * @return bool
 	 */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
 		// Check parent page
-        $parent = $this->getCanCreateContext(func_get_args());
+        $parent = $this->getCanCreateContext($context);
         if($parent) {
             return $parent->canEdit($member);
         }
@@ -114,11 +119,11 @@ class EditableOption extends DataObject
      * @param array $args List of arguments passed to canCreate
      * @return DataObject Some parent dataobject to inherit permissions from
      */
-    protected function getCanCreateContext($args)
+    protected function getCanCreateContext($context)
     {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if(isset($args[1]['Parent'])) {
-            return $args[1]['Parent'];
+        if(isset($context['Parent'])) {
+            return $context['Parent'];
         }
         // Hack in currently edited page if context is missing
         if(Controller::has_curr() && Controller::curr() instanceof CMSMain) {

@@ -1,4 +1,6 @@
 <?php
+
+use SilverStripe\Forms\CheckboxField;
 /**
  * EditableCheckbox
  *
