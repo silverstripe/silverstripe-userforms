@@ -57,6 +57,7 @@ sk:
     DEFAULT: 'Predvolená hodnota'
     DEFAULTTOTODAY: 'Zobraziť v predvolenom režime na dnešný dátum?'
     DELETE: Vymazať
+    DISPLAY_RULES_DISABLED: 'Pravidlá zobrazenia nie sú povolené pre povinné/vyžadované polia. Prosím odškrtnite "Je pole povinné/vyžadované?" na záložke "Validácia".'
     DRAG: 'Ťahaním preskupiť poradie polí'
     ENTERQUESTION: 'Zadajte otázku'
     EXTRACLASSA: 'Extra úprava/vzhľad'
@@ -91,7 +92,7 @@ sk:
     SHOWOPTIONS: 'Zobraziť možnosti'
     SHOWTHISFIELD: 'Zobraziť toto pole'
     SINGULARNAME: 'Formulárové pole'
-    TITLE: Titulok
+    TITLE: Názov
     TYPE: Typ
     VALIDATION: Validácia
     VALUE: 'Zadanú hodnotu'
@@ -111,7 +112,7 @@ sk:
   EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Skryť z reportu?'
-    HIDELABEL: 'Skryť titulok na FrontEnd-e?'
+    HIDELABEL: 'Skryť ''Názov'' na FrontEnd-e?'
     PLURALNAME: 'HTML bloky'
     SINGULARNAME: 'HTML blok'
   EditableMemberListField:
@@ -119,8 +120,11 @@ sk:
     SINGULARNAME: 'Pole zoznamu členov'
   EditableMultipleOptionField:
     DEFAULT: 'Vybrané v predvolenom režime?'
+    OPTIONSTAB: Možnosti
     PLURALNAME: 'Polia s viacerými možnosťami'
     SINGULARNAME: 'Pole s viacerými možnosťami'
+    TITLE: Názov
+    VALUE: Hodnota
   EditableNumericField:
     PLURALNAME: 'Numerické/číselné polia'
     RANGE: 'Povolený rozsah'
@@ -189,6 +193,7 @@ sk:
     FileUploadWarning: 'Súbory nahraté pomocou tohto políčka môžu byť verejné prístupné, pokiaľ je známa presná URL adresa.'
     HIDEFIELDLABELS: 'Skyť popisky (menovky) polí?'
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
+    NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre môžu chýbať.'
     ONCOMPLETELABEL: 'Správa po odoslaní formulára'
     ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte poľe, ktoré sa použije na odpoveď'
     ORSELECTAFIELDTOUSEASTO: '... alebo vyberte poľe, ktoré sa použije ako E-mail príjemcu'
@@ -205,6 +210,8 @@ sk:
     SENDEMAILTO: 'E-mail príjemcu'
     SENDEMAILTO_DESCRIPTION: 'Môžete zadať viac e-mailových adries, pričom jednotlivé adresy oddeľujte čiarkou.'
     SENDIF: 'Podmienka poslania'
+    SENDIFAND: 'Všetky podmienky sú splnené'
+    SENDIFOR: 'Akékoľvek podmienky sú splnené'
     SENDPLAIN: 'Poslať e-mail ako obyčajný text? (HTML značky budú odstránené)'
     SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
     SINGULARNAME: 'Jednoduchý formulár'
@@ -216,6 +223,9 @@ sk:
     TYPESUBJECT: 'Napíšte predmet'
     TYPETO: 'Napíšte adresu'
   UserDefinedForm_EmailRecipient:
+    CUSTOMRULESTAB: 'Vlastné pravidlá'
+    EMAILCONTENTTAB: 'Obsah e-mailu'
+    EMAILDETAILSTAB: 'Detaily e-mailu'
     PLURALNAME: 'Užívateľom definovaný formulár - príjemcovia e-mailu'
     SINGULARNAME: 'Užívateľom definovaný formulár - príjemca e-mailu'
   UserDefinedForm_EmailRecipientCondition:
@@ -234,4 +244,6 @@ sk:
     WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
   UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrovať ...'
+    FROM: Od
+    TILL: Do
     WHEREVALUEIS: 'kde hodnota je ...'
