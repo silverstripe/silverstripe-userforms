@@ -95,7 +95,7 @@ class EditableMultipleOptionField extends EditableFormField
 
         if ($live) {
             foreach ($live as $option) {
-                $option->delete();
+                $option->deleteFromStage('Live');
             }
         }
 
