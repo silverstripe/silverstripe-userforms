@@ -838,7 +838,7 @@ JS
      * @param ArrayList fields
      * @return ArrayData
      */
-    private function getMergeFieldsMap($fields = array())
+    protected function getMergeFieldsMap($fields = array())
     {
         $data = new ArrayData(array());
 
