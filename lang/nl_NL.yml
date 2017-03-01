@@ -140,7 +140,6 @@ nl_NL:
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
     FORM: Formulier
     FROMADDRESS: 'Email verzonden vanaf'
-    HIDEFIELDLABELS: 'Verberg veld labels'
     HIDEFORMDATA: 'Verberg formulier gegevens in email?'
     ONCOMPLETELABEL: 'Bericht na succesvol verzonden'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'

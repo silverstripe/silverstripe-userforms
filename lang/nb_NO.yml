@@ -134,7 +134,6 @@ nb_NO:
     EmailFromContent: 'Skjemaadressen tillater deg å vis hvem melding kommer fra. På de fleste servere må denne e-post adressen være den samme som doment for din side. For eksempel om du har domene din-side.no, må e-post adressen være noen@din-side.no.'
     FORM: Skjema
     FROMADDRESS: 'Sendt e-post fra'
-    HIDEFIELDLABELS: 'Skjul overskrifter'
     HIDEFORMDATA: 'Skjul skjemadata fra e-post'
     ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
     ORSELECTAFIELDTOUSEASFROM: '...eller velg et felt til å bruke som "svar til"-adresse'

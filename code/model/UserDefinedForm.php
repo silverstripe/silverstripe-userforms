@@ -36,6 +36,20 @@ class UserDefinedForm extends Page
     private static $upgrade_on_build = true;
 
     /**
+     * Set this to true to disable automatic inclusion of CSS files
+     * @config
+     * @var bool
+     */
+    private static $block_default_userforms_css = false;
+
+    /**
+     * Set this to true to disable automatic inclusion of JavaScript files
+     * @config
+     * @var bool
+     */
+    private static $block_default_userforms_js = false;
+
+    /**
      * Built in extensions required by this page
      * @config
      * @var array
@@ -54,7 +68,6 @@ class UserDefinedForm extends Page
         "ShowClearButton" => "Boolean",
         'DisableSaveSubmissions' => 'Boolean',
         'EnableLiveValidation' => 'Boolean',
-        'HideFieldLabels' => 'Boolean',
         'DisplayErrorMessagesAtTop' => 'Boolean',
         'DisableAuthenicatedFinishAction' => 'Boolean',
         'DisableCsrfSecurityToken' => 'Boolean'
@@ -304,7 +317,6 @@ SQL;
             new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
             new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
             new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
-            new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels')),
             new CheckboxField("DisplayErrorMessagesAtTop", _t('UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
             new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
             new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
@@ -374,13 +386,20 @@ class UserDefinedForm_Controller extends Page_Controller
     {
         parent::init();
 
+        $page = $this->data();
+
+        // load the css
+        if (!$page->config()->block_default_userforms_css) {
+            Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
+        }
+
         // load the jquery
-        $lang = i18n::get_lang_from_locale(i18n::get_locale());
-        Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
-        Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-        Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
-        Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
-        Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+        if (!$page->config()->block_default_userforms_js) {
+            $lang = i18n::get_lang_from_locale(i18n::get_locale());
+            Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+            Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
+            Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
 
         Requirements::javascript(
             USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
@@ -388,14 +407,12 @@ class UserDefinedForm_Controller extends Page_Controller
         Requirements::javascript(
             USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
         );
-        if ($this->HideFieldLabels) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
-        }
 
-        // Bind a confirmation message when navigating away from a partially completed form.
-        $page = $this->data();
-        if ($page::config()->enable_are_you_sure) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+
+            // Bind a confirmation message when navigating away from a partially completed form.
+            if ($page::config()->enable_are_you_sure) {
+                Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+            }
         }
     }
 
@@ -443,7 +460,8 @@ class UserDefinedForm_Controller extends Page_Controller
      */
     public function Form()
     {
-        $form = UserForm::create($this);
+        $form = UserForm::create($this, 'Form_' . $this->ID);
+        $form->setFormAction(Controller::join_links($this->Link(), 'Form'));
         $this->generateConditionalJavascript();
         return $form;
     }
@@ -530,7 +548,7 @@ JS
 
             if (!empty($data[$field->Name])) {
                 if (in_array("EditableFileField", $field->getClassAncestry())) {
-                    if (isset($_FILES[$field->Name])) {
+                    if (!empty($_FILES[$field->Name]['name'])) {
                         $foldername = $field->getFormField()->getFolderName();
 
                         // create the file from post data

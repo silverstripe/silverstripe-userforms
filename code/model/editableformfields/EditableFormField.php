@@ -196,17 +196,17 @@ class EditableFormField extends DataObject
                     _t(
                         'EditableFormField.MERGEFIELDNAME',
                         '<div class="field readonly">' .
-                            '<label class="left">Merge field</label>' .
+                            '<label class="left">' . _t('EditableFormField.MERGEFIELDNAME', 'Merge field') . '</label>' .
                             '<div class="middleColumn">' .
                                 '<span class="readonly">$' . $this->Name . '</span>' .
                             '</div>' .
                         '</div>'
                     )
                 ),
-                TextField::create('Title'),
+                TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
                 TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
                 TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
-                SegmentField::create('Name')->setModifiers(array(
+                SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
                     UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
                     DisambiguationSegmentFieldModifier::create(),
                 ))->setPreview($this->Name)
