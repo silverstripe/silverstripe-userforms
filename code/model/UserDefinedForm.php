@@ -679,7 +679,7 @@ JS
 
             if (!empty($data[$field->Name])) {
                 if (in_array("EditableFileField", $field->getClassAncestry())) {
-                    if (isset($_FILES[$field->Name])) {
+                    if (!empty($_FILES[$field->Name]['name'])) {
                         $foldername = $field->getFormField()->getFolderName();
 
                         // create the file from post data
