@@ -417,7 +417,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
      */
     public function getEmailBodyContent()
     {
-        return $this->SendPlain ? $this->EmailBody : $this->EmailBodyHtml;
+        return $this->SendPlain ? $this->EmailBody : ShortcodeParser::get_active()->parse( $this->EmailBodyHtml );
     }
 
     /**
