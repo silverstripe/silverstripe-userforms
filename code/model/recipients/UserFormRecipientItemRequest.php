@@ -20,6 +20,9 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
      */
     public function preview()
     {
+        // Enable theme for preview (may be needed for Shortcodes)
+        Config::inst()->update('SSViewer', 'theme_enabled', true);
+        
         return $this->customise(new ArrayData(array(
             'Body' => $this->record->getEmailBodyContent(),
             'HideFormData' => $this->record->HideFormData,
