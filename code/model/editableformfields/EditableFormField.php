@@ -16,6 +16,7 @@ use SilverStripe\Forms\SegmentField;
  * @property string $CustomErrorMessage
  * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
+ * @mixin Versioned
  */
 class EditableFormField extends DataObject
 {
@@ -482,32 +483,47 @@ class EditableFormField extends DataObject
      * Publish this Form Field to the live site
      *
      * Wrapper for the {@link Versioned} publish function
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
      */
     public function doPublish($fromStage, $toStage, $createNewVersion = false)
     {
         $this->publish($fromStage, $toStage, $createNewVersion);
+        $this->publishRules($fromStage, $toStage, $createNewVersion);
+	}
 
-		$seenIDs = array();
+    /**
+     * Publish all field rules
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
+     */
+    protected function publishRules($fromStage, $toStage, $createNewVersion)
+    {
+        $seenRuleIDs = array();
 
-		// Don't forget to publish the related custom rules...
-		foreach ($this->DisplayRules() as $rule) {
-			$seenIDs[] = $rule->ID;
-			$rule->doPublish($fromStage, $toStage, $createNewVersion);
-			$rule->destroy();
-		}
+        // Don't forget to publish the related custom rules...
+        foreach ($this->DisplayRules() as $rule) {
+            $seenRuleIDs[] = $rule->ID;
+            $rule->doPublish($fromStage, $toStage, $createNewVersion);
+            $rule->destroy();
+        }
 
-		// remove any orphans from the "fromStage"
+        // remove any orphans from the "fromStage"
         $rules = Versioned::get_by_stage('EditableCustomRule', $toStage)
             ->filter('ParentID', $this->ID);
 
-		if (!empty($seenIDs)) {
-            $rules = $rules->exclude('ID', $seenIDs);
+        if (!empty($seenRuleIDs)) {
+            $rules = $rules->exclude('ID', $seenRuleIDs);
         }
 
-		foreach ($rules as $rule) {
-		    $rule->deleteFromStage($toStage);
-		}
-	}
+        foreach ($rules as $rule) {
+            $rule->deleteFromStage($toStage);
+        }
+    }
 
     /**
      * Delete this field from a given stage
@@ -528,7 +544,7 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * checks wether record is new, copied from Sitetree
+     * checks whether record is new, copied from SiteTree
      */
     public function isNew()
     {
@@ -593,7 +609,7 @@ class EditableFormField extends DataObject
     /**
      * Set the allowed css classes for the extraClass custom setting
      *
-     * @param array The permissible CSS classes to add
+     * @param array $allowed The permissible CSS classes to add
      */
     public function setAllowedCss(array $allowed)
     {
