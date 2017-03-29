@@ -6,7 +6,7 @@
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -34,6 +34,20 @@ class UserDefinedForm extends Page
      * @var bool
      */
     private static $upgrade_on_build = true;
+
+    /**
+     * Set this to true to disable automatic inclusion of CSS files
+     * @config
+     * @var bool
+     */
+    private static $block_default_userforms_css = false;
+
+    /**
+     * Set this to true to disable automatic inclusion of JavaScript files
+     * @config
+     * @var bool
+     */
+    private static $block_default_userforms_js = false;
 
     /**
      * Built in extensions required by this page
@@ -216,9 +230,9 @@ SQL;
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
-            
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
-            
+
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
@@ -369,28 +383,35 @@ class UserDefinedForm_Controller extends Page_Controller
     {
         parent::init();
 
-        // load the jquery
-        $lang = i18n::get_lang_from_locale(i18n::get_locale());
-        Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
-        Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-        Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
-        Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
-        Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+        $page = $this->data();
 
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
-        );
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-        );
-        if ($this->HideFieldLabels) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
+        // load the css
+        if (!$page->config()->block_default_userforms_css) {
+            Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
         }
 
-        // Bind a confirmation message when navigating away from a partially completed form.
-        $page = $this->data();
-        if ($page::config()->enable_are_you_sure) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+        // load the jquery
+        if (!$page->config()->block_default_userforms_js) {
+            $lang = i18n::get_lang_from_locale(i18n::get_locale());
+            Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+            Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
+            Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+            );
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+            );
+            if ($this->HideFieldLabels) {
+                Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
+            }
+
+            // Bind a confirmation message when navigating away from a partially completed form.
+            if ($page::config()->enable_are_you_sure) {
+                Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+            }
         }
     }
 
@@ -517,7 +538,7 @@ class UserDefinedForm_Controller extends Page_Controller
                                 $expression = '$(this).prop("checked")';
                             } elseif ($radioField) {
                                 // We cannot simply get the value of the radio group, we need to find the checked option first.
-                                $expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
+                                $expression = '$(this).closest(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
                             } else {
                                 $expression = '$(this).val() == "'. $rule->FieldValue .'"';
                             }
@@ -727,7 +748,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -739,7 +760,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
