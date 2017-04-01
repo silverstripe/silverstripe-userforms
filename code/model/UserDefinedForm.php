@@ -6,7 +6,7 @@
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -216,9 +216,9 @@ SQL;
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
-            
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
-            
+
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
@@ -438,7 +438,8 @@ class UserDefinedForm_Controller extends Page_Controller
      */
     public function Form()
     {
-        $form = UserForm::create($this);
+        $form = UserForm::create($this, 'Form_' . $this->ID);
+        $form->setFormAction(Controller::join_links($this->owner->Link(), 'Form'));
         $this->generateConditionalJavascript();
         return $form;
     }
@@ -727,7 +728,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -739,7 +740,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
