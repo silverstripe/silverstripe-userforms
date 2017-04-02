@@ -23,7 +23,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $field = $this->objFromFixture('EditableTextField', 'basic-text');
 
-        $response = $this->submitForm('UserForm_Form', null, array($field->Name => 'Basic Value'));
+        $response = $this->submitForm('UserForm_Form_' . $this->ID, null, array($field->Name => 'Basic Value'));
 
         // should have a submitted form field now
         $submitted = DataObject::get('SubmittedFormField', "\"Name\" = 'basic-text-name'");
@@ -68,7 +68,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // Post with no fields
         $this->get($form->URLSegment);
-        $response = $this->submitForm('UserForm_Form', null, array());
+        $response = $this->submitForm('UserForm_Form_' . $this->ID, null, array());
         $this->assertPartialMatchBySelector(
             '.field .message',
             array('This field is required')
@@ -76,7 +76,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // Post with all fields, but invalid email
         $this->get($form->URLSegment);
-        $this->submitForm('UserForm_Form', null, array(
+        $this->submitForm('UserForm_Form_' . $this->ID, null, array(
             'required-email' => 'invalid',
             'required-text' => 'bob'
         ));
@@ -87,7 +87,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // Post with only required
         $this->get($form->URLSegment);
-        $this->submitForm('UserForm_Form', null, array(
+        $this->submitForm('UserForm_Form_' . $this->ID, null, array(
             'required-text' => 'bob'
         ));
         $this->assertPartialMatchBySelector(
@@ -129,7 +129,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $controller = new UserDefinedFormControllerTest_Controller($form);
 
         // test form
-        $this->assertEquals($controller->Form()->getName(), 'Form', 'The form is referenced as Form');
+        $this->assertEquals($controller->Form()->getName(), 'Form_' . $this->ID, 'The form is referenced as Form');
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
         $this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);
@@ -261,7 +261,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
     public function checkTemplateIsCorrect($parser)
     {
-        $this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form'));
+        $this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $this->ID));
 
         // check for the input
         $this->assertArrayHasKey(0, $parser->getBySelector('input.text'));
