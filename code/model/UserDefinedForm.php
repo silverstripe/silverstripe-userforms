@@ -503,7 +503,7 @@ class UserDefinedForm_Controller extends Page_Controller
                                 $expression = '$(this).prop("checked")';
                             } elseif ($radioField) {
                                 // We cannot simply get the value of the radio group, we need to find the checked option first.
-                                $expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
+                                $expression = '$(this).closest(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
                             } else {
                                 $expression = '$(this).val() == "'. $rule->FieldValue .'"';
                             }
