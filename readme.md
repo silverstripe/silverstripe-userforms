@@ -5,7 +5,7 @@ and without getting involved in any PHP code.
 
 [![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://travis-ci.org/silverstripe/silverstripe-userforms)
 [![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms)
+[![Code Coverage](https://img.shields.io/codecov/c/github/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://codecov.io/gh/silverstripe/silverstripe-userforms)
 [![Version](http://img.shields.io/packagist/v/silverstripe/userforms.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-userforms)
 [![License](http://img.shields.io/packagist/l/silverstripe/userforms.svg?style=flat-square)](LICENSE.md)
 ![helpfulrobot](https://helpfulrobot.io/silverstripe/userforms/badge)

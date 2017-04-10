@@ -15,19 +15,19 @@ matrix:
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.5 SECUREASSETS=1
     - php: 7.1
-      env: DB=MYSQL CORE_RELEASE=3.6
+      env: DB=MYSQL CORE_RELEASE=3.6 PHPUNIT_COVERAGE_TEST=1
 
 before_script:
+  - phpenv rehash
+  - if [[ ! $PHPUNIT_COVERAGE_TEST ]]; then phpenv config-rm xdebug.ini; fi
   - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
-  - "if [ \"$SECUREASSETS\" = \"\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss; fi"
-  - "if [ \"$SECUREASSETS\" = \"1\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require silverstripe/secureassets; fi"
+  - if [[ ! $SECUREASSETS ]]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss; fi
+  - if [[ $SECUREASSETS ]]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require silverstripe/secureassets; fi
   - cd ~/builds/ss
 
 script:
-  - vendor/bin/phpunit --coverage-clover coverage.clover userforms/tests
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then ./vendor/bin/phpunit --coverage-clover=coverage.xml userforms/tests; fi
+  - if [[ ! $PHPUNIT_COVERAGE_TEST ]]; then ./vendor/bin/phpunit userforms/tests; fi
 
 after_success:
-  - mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/
-  - cd ~/build/$TRAVIS_REPO_SLUG
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash); fi
