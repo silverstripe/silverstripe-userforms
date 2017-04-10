@@ -78,8 +78,10 @@ en:
     LESSTHANEQUAL: 'Value Less Than Or Equal'
     LOCKED: 'These fields cannot be modified'
     MAXVALUE: 'Max Value'
+    MERGEFIELDNAME: 'Merge field'
     MINVALUE: 'Min Value'
     'NO': 'No'
+    NAME: 'Name'
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -89,6 +91,7 @@ en:
     RIGHTTITLE: 'Right title'
     SHOW: Show
     SHOWONLOAD: 'Initial visibility before processing these rules'
+    SHOWONLOAD_TITLE: 'Show on load'
     SHOWOPTIONS: 'Show Options'
     SHOWTHISFIELD: 'Show This Field'
     SINGULARNAME: 'Editable Form Field'
