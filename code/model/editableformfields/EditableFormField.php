@@ -167,22 +167,23 @@ class EditableFormField extends DataObject
                     _t(
                         'EditableFormField.MERGEFIELDNAME',
                         '<div class="field readonly">' .
-                            '<label class="left">Merge field</label>' .
+                            '<label class="left">' . _t('EditableFormField.MERGEFIELDNAME', 'Merge field') . '</label>' .
                             '<div class="middleColumn">' .
                                 '<span class="readonly">$' . $this->Name . '</span>' .
                             '</div>' .
                         '</div>'
                     )
                 ),
-                TextField::create('Title'),
+                TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
                 TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
                 TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
-                SegmentField::create('Name')->setModifiers(array(
+                SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
                     UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
                     DisambiguationSegmentFieldModifier::create(),
                 ))->setPreview($this->Name)
             )
         );
+        $fields->fieldByName('Root.Main')->setTitle(_t('SiteTree.TABMAIN', 'Main'));
 
         // Custom settings
         if (!empty(self::$allowed_css)) {
@@ -221,6 +222,7 @@ class EditableFormField extends DataObject
         $validationFields = $this->getFieldValidationOptions();
         if ($validationFields && $validationFields->count()) {
             $fields->addFieldsToTab('Root.Validation', $validationFields);
+            $fields->fieldByName('Root.Validation')->setTitle(_t('EditableFormField.VALIDATION', 'Validation'));
         }
 
         // Add display rule fields
@@ -294,11 +296,15 @@ class EditableFormField extends DataObject
             );
 
         return new FieldList(
-            CheckboxField::create('ShowOnLoad')
-                ->setDescription(_t(
+            CheckboxField::create(
+                'ShowOnLoad',
+                _t('EditableFormField.SHOWONLOAD_TITLE', 'Show on load')
+            )->setDescription(
+                _t(
                     'EditableFormField.SHOWONLOAD',
                     'Initial visibility before processing these rules'
-                )),
+                )
+            ),
             GridField::create(
                 'DisplayRules',
                 _t('EditableFormField.CUSTOMRULES', 'Custom Rules'),
