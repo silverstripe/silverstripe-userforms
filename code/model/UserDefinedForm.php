@@ -651,7 +651,7 @@ EOS;
 					})
 				})(jQuery);
 JS
-, 'UserFormsConditional');
+, 'UserFormsConditional-'.$this->ID);
         }
     }
 
