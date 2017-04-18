@@ -459,7 +459,8 @@ class UserDefinedForm_Controller extends Page_Controller
      */
     public function Form()
     {
-        $form = UserForm::create($this);
+        $form = UserForm::create($this, 'Form_' . $this->ID);
+        $form->setFormAction(Controller::join_links($this->Link(), 'Form'));
         $this->generateConditionalJavascript();
         return $form;
     }
