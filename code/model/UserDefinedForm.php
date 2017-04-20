@@ -907,11 +907,15 @@ JS
             Session::clear('FormProcessed');
         }
 
+        $data = array(
+            'Submission' => $submission,
+            'Link' => $referrer
+        );
+
+        $this->extend('updateReceivedFormSubmissionData', $data);
+
         return $this->customise(array(
-            'Content' => $this->customise(array(
-                'Submission' => $submission,
-                'Link' => $referrer
-            ))->renderWith('ReceivedFormSubmission'),
+            'Content' => $this->customise($data)->renderWith('ReceivedFormSubmission'),
             'Form' => '',
         ));
     }
