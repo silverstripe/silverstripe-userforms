@@ -147,4 +147,94 @@ class EditableCustomRule extends DataObject
     {
         return $this->canDelete($member);
     }
+
+    /**
+     * Substitutes configured rule logic with it's JS equivalents and returns them as array elements
+     * @return array
+     */
+    public function buildExpression()
+    {
+        /** @var EditableFormField $formFieldWatch */
+        $formFieldWatch = $this->ConditionField();
+        //Encapsulated the action to the object
+        $action = $formFieldWatch->getJsEventHandler();
+
+        // is this field a special option field
+        $checkboxField = $formFieldWatch->isCheckBoxField();
+        $radioField = $formFieldWatch->isRadioField();
+
+        $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
+
+        // and what should we evaluate
+        switch ($this->ConditionOption) {
+            case 'IsNotBlank':
+                $expression = ($checkboxField || $radioField) ? "{$target}.is(\":checked\")" : "{$target}.val() != ''";
+
+                break;
+            case 'IsBlank':
+                $expression = ($checkboxField || $radioField) ? "!({$target}.is(':checked'))" : "{$target}.val() == ''";
+
+                break;
+            case 'HasValue':
+                if ($checkboxField) {
+                    $expression = "{$target}.prop('checked')";
+                } elseif ($radioField) {
+                    // We cannot simply get the value of the radio group, we need to find the checked option first.
+                    $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val()=="%s"',
+                        $target, $this->FieldValue);
+                } else {
+                    $expression = sprintf('%s.val() == "%s"', $target, $this->FieldValue);
+                }
+
+                break;
+            case 'ValueLessThan':
+                $expression = sprintf('%s.val() < parseFloat("%s")', $target, $this->FieldValue);
+
+                break;
+            case 'ValueLessThanEqual':
+                $expression = sprintf('%s.val() <= parseFloat("%s")', $target, $this->FieldValue);
+
+                break;
+            case 'ValueGreaterThan':
+                $expression = sprintf('%s.val() > parseFloat("%s")', $target, $this->FieldValue);
+
+                break;
+            case 'ValueGreaterThanEqual':
+                $expression = sprintf('%s.val() >= parseFloat("%s")', $target, $this->FieldValue);
+
+                break;
+            default: // ==HasNotValue
+                if ($checkboxField) {
+                    $expression = sprintf('!%s.prop("checked")', $target);
+                } elseif ($radioField) {
+                    // We cannot simply get the value of the radio group, we need to find the checked option first.
+                    $expression = sprintf('%s.parents(".field, .control-group").find("input:checked").val()!="%s"',
+                        $target, $this->FieldValue);
+                } else {
+                    $expression = sprintf('%s.val() != "%s"', $target,
+                        $this->FieldValue);
+                }
+
+                break;
+        }
+
+        $result = array(
+            'operation' => $expression,
+            'event'     => $action,
+        );
+
+        return $result;
+    }
+
+    /**
+     * Returns the opposite of the show/hide pairs of strings
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public function toggleDisplayText($text)
+    {
+        return (strtolower($text) === 'show') ? 'hide' : 'show';
+    }
 }

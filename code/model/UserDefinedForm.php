@@ -6,7 +6,7 @@
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -454,183 +454,29 @@ class UserDefinedForm_Controller extends Page_Controller
         $rules = "";
 
         $watch = array();
-        $watchLoad = array();
 
         if ($this->Fields()) {
+            /** @var EditableFormField $field */
             foreach ($this->Fields() as $field) {
-                $holderSelector = $field->getSelectorHolder();
-
-                // Is this Field Show by Default
-                if (!$field->ShowOnLoad) {
-                    $default .= "{$holderSelector}.hide().trigger('userform.field.hide');\n";
-                }
-
-                // Check for field dependencies / default
-                foreach ($field->EffectiveDisplayRules() as $rule) {
-
-                    // Get the field which is effected
-                    $formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
-
-                    // Skip deleted fields
-                    if (!$formFieldWatch) {
-                        continue;
-                    }
-
-                    $fieldToWatch = $formFieldWatch->getSelectorField($rule);
-                    $fieldToWatchOnLoad = $formFieldWatch->getSelectorField($rule, true);
-
-                    // show or hide?
-                    $view = ($rule->Display == 'Hide') ? 'hide' : 'show';
-                    $opposite = ($view == "show") ? "hide" : "show";
-
-                    // what action do we need to keep track of. Something nicer here maybe?
-                    // @todo encapulsation
-                    $action = "change";
-
-                    if ($formFieldWatch instanceof EditableTextField) {
-                        $action = "keyup";
-                    }
-
-                    // is this field a special option field
-                    $checkboxField = false;
-                    $radioField = false;
-
-                    if (in_array($formFieldWatch->ClassName, array('EditableCheckboxGroupField', 'EditableCheckbox'))) {
-                        $action = "click";
-                        $checkboxField = true;
-                    } elseif ($formFieldWatch->ClassName == "EditableRadioField") {
-                        $radioField = true;
-                    }
-
-                    // and what should we evaluate
-                    switch ($rule->ConditionOption) {
-                        case 'IsNotBlank':
-                            $expression = ($checkboxField || $radioField) ? '$(this).is(":checked")' :'$(this).val() != ""';
-
-                            break;
-                        case 'IsBlank':
-                            $expression = ($checkboxField || $radioField) ? '!($(this).is(":checked"))' : '$(this).val() == ""';
-
-                            break;
-                        case 'HasValue':
-                            if ($checkboxField) {
-                                $expression = '$(this).prop("checked")';
-                            } elseif ($radioField) {
-                                // We cannot simply get the value of the radio group, we need to find the checked option first.
-                                $expression = '$(this).parents(".field, .control-group").find("input:checked").val()=="'. $rule->FieldValue .'"';
-                            } else {
-                                $expression = '$(this).val() == "'. $rule->FieldValue .'"';
-                            }
-
-                            break;
-                        case 'ValueLessThan':
-                            $expression = '$(this).val() < parseFloat("'. $rule->FieldValue .'")';
-
-                            break;
-                        case 'ValueLessThanEqual':
-                            $expression = '$(this).val() <= parseFloat("'. $rule->FieldValue .'")';
-
-                            break;
-                        case 'ValueGreaterThan':
-                            $expression = '$(this).val() > parseFloat("'. $rule->FieldValue .'")';
-
-                            break;
-                        case 'ValueGreaterThanEqual':
-                            $expression = '$(this).val() >= parseFloat("'. $rule->FieldValue .'")';
-
-                            break;
-                        default: // ==HasNotValue
-                            if ($checkboxField) {
-                                $expression = '!$(this).prop("checked")';
-                            } elseif ($radioField) {
-                                // We cannot simply get the value of the radio group, we need to find the checked option first.
-                                $expression = '$(this).parents(".field, .control-group").find("input:checked").val()!="'. $rule->FieldValue .'"';
-                            } else {
-                                $expression = '$(this).val() != "'. $rule->FieldValue .'"';
-                            }
-
-                            break;
-                    }
-
-                    if (!isset($watch[$fieldToWatch])) {
-                        $watch[$fieldToWatch] = array();
-                    }
-
-                    $watch[$fieldToWatch][] = array(
-                        'expression' => $expression,
-                        'holder_selector' => $holderSelector,
-                        'view' => $view,
-                        'opposite' => $opposite,
-                        'action' => $action
-                    );
-
-                    $watchLoad[$fieldToWatchOnLoad] = true;
+                if ($result = $field->formatDisplayRules()) {
+                    $watch[] = $result;
                 }
             }
         }
-
         if ($watch) {
-            foreach ($watch as $key => $values) {
-                $logic = array();
-                $actions = array();
-
-                foreach ($values as $rule) {
-                    // Assign action
-                    $actions[$rule['action']] = $rule['action'];
-
-                    // Assign behaviour
-                    $expression = $rule['expression'];
-                    $holder = $rule['holder_selector'];
-                    $view = $rule['view']; // hide or show
-                    $opposite = $rule['opposite'];
-                    // Generated javascript for triggering visibility
-                    $logic[] = <<<"EOS"
-if({$expression}) {
-	{$holder}
-		.{$view}()
-		.trigger('userform.field.{$view}');
-} else {
-	{$holder}
-		.{$opposite}()
-		.trigger('userform.field.{$opposite}');
-}
-EOS;
-                }
-
-                $logic = implode("\n", $logic);
-                $rules .= $key.".each(function() {\n
-	$(this).data('userformConditions', function() {\n
-		$logic\n
-	}); \n
-});\n";
-                foreach ($actions as $action) {
-                    $rules .= $key.".$action(function() {
-	$(this).data('userformConditions').call(this);\n
-});\n";
-                }
-            }
-        }
-
-        if ($watchLoad) {
-            foreach ($watchLoad as $key => $value) {
-                $rules .= $key.".each(function() {
-	$(this).data('userformConditions').call(this);\n
-});\n";
-            }
+            $rules .= $this->buildWatchJS($watch);
         }
 
         // Only add customScript if $default or $rules is defined
-        if ($default  || $rules) {
+        if ($rules) {
             Requirements::customScript(<<<JS
-				(function($) {
-					$(document).ready(function() {
-						$default
-
-						$rules
-					})
-				})(jQuery);
+                (function($) {
+                    $(document).ready(function() {
+                        {$rules}
+                    });
+                })(jQuery);
 JS
-, 'UserFormsConditional');
+                , 'UserFormsConditional');
         }
     }
 
@@ -727,7 +573,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -739,7 +585,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
@@ -897,4 +743,46 @@ JS
             'Form' => '',
         ));
     }
+
+    /**
+     * Outputs the required JS from the $watch input
+     *
+     * @param array $watch
+     *
+     * @return string
+     */
+    protected function buildWatchJS($watch)
+    {
+        $result = '';
+        foreach ($watch as $key => $rule) {
+            $events = implode(' ', $rule['events']);
+            $selectors = implode(', ', $rule['selectors']);
+            $conjunction = $rule['conjunction'];
+            $operations = implode(" {$conjunction} ", $rule['operations']);
+            $target = $rule['targetFieldID'];
+            $initialState = $rule['initialState'];
+            $view = $rule['view'];
+            $opposite = $rule['opposite'];
+
+            $result .= <<<EOS
+\n
+    //Initial state
+    $('{$target}').{$initialState}();
+
+    $('.userform').on('{$events}',
+    "{$selectors}",
+    function (){
+        if({$operations}) {
+            $('{$target}').{$view}();
+        } else {
+            $('{$target}').{$opposite}();
+        }
+    });	
+EOS;
+
+        }
+
+        return $result;
+    }
+
 }

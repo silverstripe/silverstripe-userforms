@@ -14,6 +14,8 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
 
     private static $plural_name = "Checkbox Groups";
 
+    protected $jsEventHandler = 'click';
+
     public function getFormField()
     {
         $field = new UserFormsCheckboxSetField($this->Name, $this->EscapedTitle, $this->getOptionsMap());
@@ -59,4 +61,8 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
             return "$(\"input[name='{$this->Name}[]']:first\")";
         }
     }
+
+	public function isCheckBoxField() {
+		return true;
+	}
 }

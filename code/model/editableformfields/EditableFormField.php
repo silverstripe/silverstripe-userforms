@@ -14,6 +14,8 @@ use SilverStripe\Forms\SegmentField;
  * @property int $Sort
  * @property bool $Required
  * @property string $CustomErrorMessage
+ * @property boolean $ShowOnLoad
+ * @property string $DisplayRulesConjunction
  * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
  */
@@ -87,7 +89,9 @@ class EditableFormField extends DataObject
         "RightTitle" => "Varchar(255)", // from CustomSettings
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
         "ShowInSummary" => "Boolean",
+        'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
     );
+
 
     private static $defaults = array(
         'ShowOnLoad' => true,
@@ -124,6 +128,22 @@ class EditableFormField extends DataObject
      * @var bool
      */
     protected $readonly;
+
+    /**
+     * Property holds the JS event which gets fired for this type of element
+     *
+     * @var string
+     */
+    protected $jsEventHandler = 'change';
+
+    /**
+     * Returns the jsEventHandler property for the current object. Bearing in mind it could've been overridden.
+     * @return string
+     */
+    public function getJsEventHandler()
+    {
+        return $this->jsEventHandler;
+    }
 
     /**
      * Set the visibility of an individual form field
@@ -244,44 +264,36 @@ class EditableFormField extends DataObject
         // Check display rules
         if ($this->Required) {
             return new FieldList(
-                LabelField::create(_t(
-                    'EditableFormField.DISPLAY_RULES_DISABLED',
-                    'Display rules are not enabled for required fields. ' .
-                    'Please uncheck "Is this field Required?" under "Validation" to re-enable.'
-                ))->addExtraClass('message warning')
-            );
+                LabelField::create(
+                    _t(
+                        'EditableFormField.DISPLAY_RULES_DISABLED',
+                    'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'))
+                  ->addExtraClass('message warning'));
         }
         $self = $this;
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields(array(
-            'Display' => '',
-            'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
-                return DropdownField::create(
-                    $column,
-                    '',
-                    EditableFormField::get()
-                        ->filter(array(
-                            'ParentID' => $self->ParentID,
-                            'ClassName' => $allowedClasses
-                        ))
-                        ->exclude(array(
-                            'ID' => $self->ID
-                        ))
-                        ->map('ID', 'Title')
-                    );
-            },
-            'ConditionOption' => function ($record, $column, $grid) {
-                $options = Config::inst()->get('EditableCustomRule', 'condition_options');
-                return DropdownField::create($column, '', $options);
-            },
-            'FieldValue' => function ($record, $column, $grid) {
-                return TextField::create($column);
-            },
-            'ParentID' => function ($record, $column, $grid) use ($self) {
-                return HiddenField::create($column, '', $self->ID);
-            }
-        ));
+                'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
+                    return DropdownField::create($column, '', EditableFormField::get()->filter(array(
+                            'ParentID'  => $self->ParentID,
+                            'ClassName' => $allowedClasses,
+                        ))->exclude(array(
+                            'ID' => $self->ID,
+                        ))->map('ID', 'Title'));
+                },
+                'ConditionOption'  => function ($record, $column, $grid) {
+                    $options = Config::inst()->get('EditableCustomRule', 'condition_options');
+
+                    return DropdownField::create($column, '', $options);
+                },
+                'FieldValue'       => function ($record, $column, $grid) {
+                    return TextField::create($column);
+                },
+                'ParentID'         => function ($record, $column, $grid) use ($self) {
+                    return HiddenField::create($column, '', $self->ID);
+                },
+            ));
 
         // Custom rules
         $customRulesConfig = GridFieldConfig::create()
@@ -294,11 +306,20 @@ class EditableFormField extends DataObject
             );
 
         return new FieldList(
-            CheckboxField::create('ShowOnLoad')
-                ->setDescription(_t(
-                    'EditableFormField.SHOWONLOAD',
-                    'Initial visibility before processing these rules'
-                )),
+            DropdownField::create('ShowOnLoad',
+                _t('EditableFormField.INITIALVISIBILITY', 'Initial visibility'),
+                array(
+                    1 => 'Show',
+                    0 => 'Hide',
+                )
+            ),
+            DropdownField::create('DisplayRulesConjunction',
+                _t('EditableFormField.DISPLAYIF', 'Toggle visibility when'),
+                array(
+                    'Or'  => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
+                    'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true'),
+                )
+            ),
             GridField::create(
                 'DisplayRules',
                 _t('EditableFormField.CUSTOMRULES', 'Custom Rules'),
@@ -488,6 +509,7 @@ class EditableFormField extends DataObject
     public function doPublish($fromStage, $toStage, $createNewVersion = false)
     {
         $this->publish($fromStage, $toStage, $createNewVersion);
+
 
 		$seenIDs = array();
 
@@ -899,18 +921,38 @@ class EditableFormField extends DataObject
      */
     public function getSelectorHolder()
     {
-        return "$(\"#{$this->Name}\")";
+        return sprintf('$("%s")', $this->getSelectorOnly());
+    }
+
+    /**
+     * Returns only the JS identifier of a string, less the $(), which can be inserted elsewhere, for example when you
+     * want to perform selections on multiple selectors
+     * @return string
+     */
+    public function getSelectorOnly()
+    {
+        return "#{$this->Name}";
     }
 
     /**
      * Gets the JS expression for selecting the value for this field
      *
-     * @param EditableCustomRule $rule Custom rule this selector will be used with
-     * @param bool $forOnLoad Set to true if this will be invoked on load
+     * @param EditableCustomRule $rule      Custom rule this selector will be used with
+     * @param bool               $forOnLoad Set to true if this will be invoked on load
+     *
+     * @return string
      */
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)
     {
-        return "$(\"input[name='{$this->Name}']\")";
+        return sprintf("$(%s)", $this->getSelectorFieldOnly());
+    }
+
+    /**
+     * @return string
+     */
+    public function getSelectorFieldOnly()
+    {
+        return "[name='{$this->Name}']";
     }
 
 
@@ -969,5 +1011,87 @@ class EditableFormField extends DataObject
             return new ArrayList();
         }
         return $this->DisplayRules();
+    }
+
+    /**
+     * Extracts info from DisplayRules into array so UserDefinedForm->buildWatchJS can run through it.
+     * @return array|null
+     */
+    public function formatDisplayRules()
+    {
+        $holderSelector = $this->getSelectorOnly();
+        $result = array(
+            'targetFieldID' => $holderSelector,
+            'conjunction'   => $this->DisplayRulesConjunctionNice(),
+            'selectors'     => array(),
+            'events'        => array(),
+            'operations'    => array(),
+            'initialState'  => $this->ShowOnLoadNice(),
+            'view'          => array(),
+            'opposite'      => array(),
+        );
+        // Check for field dependencies / default
+        /** @var EditableCustomRule $rule */
+        foreach ($this->EffectiveDisplayRules() as $rule) {
+            // Get the field which is effected
+            /** @var EditableFormField $formFieldWatch */
+            $formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
+            // Skip deleted fields
+            if (! $formFieldWatch) {
+                continue;
+            }
+            $fieldToWatch = $formFieldWatch->getSelectorFieldOnly();
+
+            $expression = $rule->buildExpression();
+            if (! in_array($fieldToWatch, $result['selectors'])) {
+                $result['selectors'][] = $fieldToWatch;
+            }
+            if (! in_array($expression['event'], $result['events'])) {
+                $result['events'][] = $expression['event'];
+            }
+            $result['operations'][] = $expression['operation'];
+
+            //View/Show should read
+            $result['view'] = $rule->toggleDisplayText($result['initialState']);
+            $result['opposite'] = $rule->toggleDisplayText($result['view']);
+        }
+
+        return (count($result['selectors'])) ? $result : null;
+    }
+
+    /**
+     * Replaces the set DisplayRulesConjunction with their JS logical operators
+     * @return string
+     */
+    public function DisplayRulesConjunctionNice()
+    {
+        return (strtolower($this->DisplayRulesConjunction) === 'or') ? '||' : '&&';
+    }
+
+    /**
+     * Replaces boolean ShowOnLoad with its JS string equivalent
+     * @return string
+     */
+    public function ShowOnLoadNice()
+    {
+        return ($this->ShowOnLoad) ? 'show' : 'hide';
+    }
+
+    /**
+     * Returns whether this is of type EditableCheckBoxField
+     * @return bool
+     */
+    public function isCheckBoxField()
+    {
+        return false;
+    }
+
+    /**
+     * Returns whether this is of type EditableRadioField
+     * @return bool
+     */
+    public function isRadioField()
+    {
+        return false;
     }
 }
