@@ -131,6 +131,7 @@ class UserFormsUpgradeService
         // - MinLength (EditableTextField)
         // - MaxLength (EditableTextField)
         // - Rows (EditableTextField)
+        // - Placeholder (EditableTextField / EditableEmailField / EditableNumericField)
 
         $customSettings = $field->CustomSettings
             ? unserialize($field->CustomSettings)

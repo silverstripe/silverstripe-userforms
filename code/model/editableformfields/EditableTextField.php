@@ -14,6 +14,8 @@ class EditableTextField extends EditableFormField
 
     private static $plural_name = 'Text Fields';
 
+    private static $has_placeholder = true;
+
     private static $autocomplete_options = array(
         'off' => 'Off',
         'on' => 'On',
@@ -48,7 +50,6 @@ class EditableTextField extends EditableFormField
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
         'Rows' => 'Int(1)',
-        'Placeholder' => 'Varchar(255)',
         'Autocomplete' => 'Varchar(255)'
     );
 
@@ -68,14 +69,6 @@ class EditableTextField extends EditableFormField
                     'EditableTextField.NUMBERROWS_DESCRIPTION',
                     'Fields with more than one row will be generated as a textarea'
                 ))
-            );
-
-            $fields->addFieldToTab(
-                'Root.Main',
-                TextField::create(
-                    'Placeholder',
-                    _t('EditableTextField.PLACEHOLDER', 'Placeholder')
-                )
             );
 
             $fields->addFieldToTab(
@@ -157,13 +150,63 @@ class EditableTextField extends EditableFormField
             $field->setAttribute('data-rule-maxlength', intval($this->MaxLength));
         }
 
-        if ($this->Placeholder) {
-            $field->setAttribute('placeholder', $this->Placeholder);
-        }
-
         if ($this->Autocomplete) {
             $field->setAttribute('autocomplete', $this->Autocomplete);
         }
 
+    }
+
+    public function migrateSettings($data)
+    {
+        $this->migratePlaceholder();
+        parent::migrateSettings($data);
+    }
+
+    private function migratePlaceholder()
+    {
+        // Migrate Placeholder setting from EditableTextField table to EditableFormField table
+        if ($this->Placeholder) {
+            return;
+        }
+        // Check if draft table exists
+        $query = "SHOW TABLES LIKE 'EditableTextField'";
+        $tableExists = DB::query($query)->value();
+        if ($tableExists == null) {
+            return;
+        }
+        // Check if old Placeholder column exists
+        $query = "SHOW COLUMNS FROM `EditableTextField` LIKE 'Placeholder'";
+        $columnExists = DB::query($query)->value();
+        if ($columnExists == null) {
+            return;
+        }
+        // Fetch existing draft Placeholder value
+        $query = "SELECT `Placeholder` FROM `EditableTextField` WHERE `ID` = '$this->ID'";
+        $draftPlaceholder = DB::query($query)->value();
+
+        if (!$draftPlaceholder) {
+            return;
+        }
+        // Update draft Placeholder value
+        $query = "UPDATE `EditableFormField` SET `Placeholder` = '$draftPlaceholder' WHERE `ID` = '$this->ID'";
+        DB::query($query);
+
+        $livePlaceholder = $draftPlaceholder;
+
+        // Check if live table exists
+        $query = "SHOW TABLES LIKE 'EditableTextField_Live'";
+        $tableExists = DB::query($query)->value();
+        if ($tableExists != null) {
+            // Fetch existing live Placeholder value
+            $query = "SELECT `Placeholder` FROM `EditableTextField_Live` WHERE `ID` = '" . $this->ID . "'";
+            $livePlaceholder = DB::query($query)->value();
+            if (!$livePlaceholder) {
+                $livePlaceholder = $draftPlaceholder;
+            }
+        }
+
+        // Update live Placeholder value
+        $query = "UPDATE `EditableFormField_Live` SET `Placeholder` = '$livePlaceholder' WHERE `ID` = '$this->ID'";
+        DB::query($query);
     }
 }
