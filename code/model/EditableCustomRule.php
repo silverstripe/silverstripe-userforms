@@ -164,7 +164,7 @@ class EditableCustomRule extends DataObject
         $radioField = $formFieldWatch->isRadioField();
 
         $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
-
+        $fieldValue = Convert::raw2js($this->FieldValue);
         // and what should we evaluate
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
@@ -181,40 +181,41 @@ class EditableCustomRule extends DataObject
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
                     $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val()=="%s"',
-                        $target, $this->FieldValue);
+                        $target, $fieldValue);
                 } else {
-                    $expression = sprintf('%s.val() == "%s"', $target, $this->FieldValue);
+                    $expression = sprintf('%s.val() == "%s"', $target, $fieldValue);
                 }
 
                 break;
             case 'ValueLessThan':
-                $expression = sprintf('%s.val() < parseFloat("%s")', $target, $this->FieldValue);
+                $expression = sprintf('%s.val() < parseFloat("%s")', $target, $fieldValue);
 
                 break;
             case 'ValueLessThanEqual':
-                $expression = sprintf('%s.val() <= parseFloat("%s")', $target, $this->FieldValue);
+                $expression = sprintf('%s.val() <= parseFloat("%s")', $target, $fieldValue);
 
                 break;
             case 'ValueGreaterThan':
-                $expression = sprintf('%s.val() > parseFloat("%s")', $target, $this->FieldValue);
+                $expression = sprintf('%s.val() > parseFloat("%s")', $target, $fieldValue);
 
                 break;
             case 'ValueGreaterThanEqual':
-                $expression = sprintf('%s.val() >= parseFloat("%s")', $target, $this->FieldValue);
+                $expression = sprintf('%s.val() >= parseFloat("%s")', $target, $fieldValue);
 
                 break;
-            default: // ==HasNotValue
+            case 'ValueNot':
                 if ($checkboxField) {
                     $expression = sprintf('!%s.prop("checked")', $target);
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
                     $expression = sprintf('%s.parents(".field, .control-group").find("input:checked").val()!="%s"',
-                        $target, $this->FieldValue);
+                        $target, $fieldValue);
                 } else {
-                    $expression = sprintf('%s.val() != "%s"', $target,
-                        $this->FieldValue);
+                    $expression = sprintf('%s.val() != "%s"', $target, $fieldValue);
                 }
-
+                break;
+            default:
+                throw new LogicException("Unhandled rule {$this->ConditionOption}");
                 break;
         }
 
