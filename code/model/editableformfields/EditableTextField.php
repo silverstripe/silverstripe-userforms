@@ -44,6 +44,8 @@ class EditableTextField extends EditableFormField
         'url' => 'Home page'
       );
 
+    protected $jsEventHandler = 'keyup';
+
     private static $db = array(
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
