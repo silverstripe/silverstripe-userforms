@@ -6,6 +6,10 @@
  *
  * @method EditableFormField Parent()
  * @package userforms
+ *
+ * @property string Display
+ * @property string ConditionOption
+ * @property string FieldValue
  */
 class EditableCustomRule extends DataObject
 {
@@ -164,16 +168,25 @@ class EditableCustomRule extends DataObject
         $radioField = $formFieldWatch->isRadioField();
         $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
         $fieldValue = Convert::raw2js($this->FieldValue);
+
+        $conditionOptions = array(
+            'ValueLessThan'         => '<',
+            'ValueLessThanEqual'    => '<=',
+            'ValueGreaterThan'      => '>',
+            'ValueGreaterThanEqual' => '>='
+        );
         // and what should we evaluate
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
-                $expression = ($checkboxField || $radioField) ? "{$target}.is(\":checked\")" : "{$target}.val() != ''";
-                break;
             case 'IsBlank':
-                $expression = ($checkboxField || $radioField) ? "!({$target}.is(':checked'))" : "{$target}.val() == ''";
-
+                $expression = ($checkboxField || $radioField) ? "{$target}.is(\":checked\")" : "{$target}.val() == ''";
+                if ($this->ConditionOption == 'IsNotBlank') {
+                    //Negate
+                    $expression = "!({$expression})";
+                }
                 break;
             case 'HasValue':
+            case 'ValueNot':
                 if ($checkboxField) {
                     if ($formFieldWatch->isCheckBoxGroupField()) {
                         $expression = sprintf("$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
@@ -183,39 +196,23 @@ class EditableCustomRule extends DataObject
                     }
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
-                    $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val()=="%s"',
+                    $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val() == "%s"',
                         $target, $fieldValue);
                 } else {
                     $expression = sprintf('%s.val() == "%s"', $target, $fieldValue);
                 }
 
+                if ($this->ConditionOption == 'ValueNot') {
+                    //Negate
+                    $expression = "!({$expression})";
+                }
                 break;
             case 'ValueLessThan':
-                $expression = sprintf('%s.val() < parseFloat("%s")', $target, $fieldValue);
-
-                break;
             case 'ValueLessThanEqual':
-                $expression = sprintf('%s.val() <= parseFloat("%s")', $target, $fieldValue);
-
-                break;
             case 'ValueGreaterThan':
-                $expression = sprintf('%s.val() > parseFloat("%s")', $target, $fieldValue);
-
-                break;
             case 'ValueGreaterThanEqual':
-                $expression = sprintf('%s.val() >= parseFloat("%s")', $target, $fieldValue);
-
-                break;
-            case 'ValueNot':
-                if ($checkboxField) {
-                    $expression = sprintf('!%s.prop("checked")', $target);
-                } elseif ($radioField) {
-                    // We cannot simply get the value of the radio group, we need to find the checked option first.
-                    $expression = sprintf('%s.parents(".field, .control-group").find("input:checked").val()!="%s"',
-                        $target, $fieldValue);
-                } else {
-                    $expression = sprintf('%s.val() != "%s"', $target, $fieldValue);
-                }
+                $expression = sprintf('%s.val() %s parseFloat("%s")', $target,
+                    $conditionOptions[$this->ConditionOption], $fieldValue);
                 break;
             default:
                 throw new LogicException("Unhandled rule {$this->ConditionOption}");
