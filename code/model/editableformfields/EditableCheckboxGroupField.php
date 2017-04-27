@@ -70,4 +70,9 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
     {
         return "[name='{$this->Name}[]']";
     }
+
+    public function isCheckBoxGroupField()
+    {
+        return true;
+    }
 }

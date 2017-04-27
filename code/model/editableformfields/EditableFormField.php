@@ -1094,4 +1094,13 @@ class EditableFormField extends DataObject
     {
         return false;
     }
+
+    /**
+     * Determined is this is of type EditableCheckboxGroupField
+     * @return bool
+     */
+    public function isCheckBoxGroupField()
+    {
+        return false;
+    }
 }

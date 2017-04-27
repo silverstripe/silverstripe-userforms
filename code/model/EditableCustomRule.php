@@ -162,14 +162,12 @@ class EditableCustomRule extends DataObject
         // is this field a special option field
         $checkboxField = $formFieldWatch->isCheckBoxField();
         $radioField = $formFieldWatch->isRadioField();
-
         $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
         $fieldValue = Convert::raw2js($this->FieldValue);
         // and what should we evaluate
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
                 $expression = ($checkboxField || $radioField) ? "{$target}.is(\":checked\")" : "{$target}.val() != ''";
-
                 break;
             case 'IsBlank':
                 $expression = ($checkboxField || $radioField) ? "!({$target}.is(':checked'))" : "{$target}.val() == ''";
@@ -177,7 +175,12 @@ class EditableCustomRule extends DataObject
                 break;
             case 'HasValue':
                 if ($checkboxField) {
-                    $expression = "{$target}.prop('checked')";
+                    if ($formFieldWatch->isCheckBoxGroupField()) {
+                        $expression = sprintf("$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
+                            $fieldValue, $target);
+                    } else {
+                        $expression = "{$target}.prop('checked')";
+                    }
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
                     $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val()=="%s"',
