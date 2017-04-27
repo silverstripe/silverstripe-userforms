@@ -179,7 +179,7 @@ class EditableCustomRule extends DataObject
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
             case 'IsBlank':
-                $expression = ($checkboxField || $radioField) ? "{$target}.is(\":checked\")" : "{$target}.val() == ''";
+                $expression = ($checkboxField || $radioField) ? "!{$target}.is(\":checked\")" : "{$target}.val() == ''";
                 if ($this->ConditionOption == 'IsNotBlank') {
                     //Negate
                     $expression = "!({$expression})";
