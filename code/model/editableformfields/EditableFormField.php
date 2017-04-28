@@ -62,6 +62,13 @@ class EditableFormField extends DataObject
     public static $allowed_css = array();
 
     /**
+     * Set this to true to enable placeholder field for any given class
+     * @config
+     * @var bool
+     */
+    private static $has_placeholder = false;
+
+    /**
      * @config
      * @var array
      */
@@ -89,6 +96,7 @@ class EditableFormField extends DataObject
         "RightTitle" => "Varchar(255)", // from CustomSettings
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
         "ShowInSummary" => "Boolean",
+        "Placeholder" => "Varchar(255)",
         'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
     );
 
@@ -247,6 +255,17 @@ class EditableFormField extends DataObject
         $displayFields = $this->getDisplayRuleFields();
         if ($displayFields && $displayFields->count()) {
             $fields->addFieldsToTab('Root.DisplayRules', $displayFields);
+        }
+
+        // Placeholder
+        if ($this->config()->has_placeholder) {
+            $fields->addFieldToTab(
+                'Root.Main',
+                TextField::create(
+                    'Placeholder',
+                    _t('EditableFormField.PLACEHOLDER', 'Placeholder')
+                )
+            );
         }
 
         $this->extend('updateCMSFields', $fields);
@@ -826,6 +845,11 @@ class EditableFormField extends DataObject
         // if this field has an extra class
         if ($this->ExtraClass) {
             $field->addExtraClass($this->ExtraClass);
+        }
+
+        // if this field has a placeholder
+        if ($this->Placeholder) {
+            $field->setAttribute('placeholder', $this->Placeholder);
         }
     }
 
