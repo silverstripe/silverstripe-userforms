@@ -6,6 +6,10 @@
  *
  * @method EditableFormField Parent()
  * @package userforms
+ *
+ * @property string Display
+ * @property string ConditionOption
+ * @property string FieldValue
  */
 class EditableCustomRule extends DataObject
 {
@@ -146,5 +150,92 @@ class EditableCustomRule extends DataObject
     public function canUnpublish($member = null)
     {
         return $this->canDelete($member);
+    }
+
+    /**
+     * Substitutes configured rule logic with it's JS equivalents and returns them as array elements
+     * @return array
+     */
+    public function buildExpression()
+    {
+        /** @var EditableFormField $formFieldWatch */
+        $formFieldWatch = $this->ConditionField();
+        //Encapsulated the action to the object
+        $action = $formFieldWatch->getJsEventHandler();
+
+        // is this field a special option field
+        $checkboxField = $formFieldWatch->isCheckBoxField();
+        $radioField = $formFieldWatch->isRadioField();
+        $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
+        $fieldValue = Convert::raw2js($this->FieldValue);
+
+        $conditionOptions = array(
+            'ValueLessThan'         => '<',
+            'ValueLessThanEqual'    => '<=',
+            'ValueGreaterThan'      => '>',
+            'ValueGreaterThanEqual' => '>='
+        );
+        // and what should we evaluate
+        switch ($this->ConditionOption) {
+            case 'IsNotBlank':
+            case 'IsBlank':
+                $expression = ($checkboxField || $radioField) ? "!{$target}.is(\":checked\")" : "{$target}.val() == ''";
+                if ($this->ConditionOption == 'IsNotBlank') {
+                    //Negate
+                    $expression = "!({$expression})";
+                }
+                break;
+            case 'HasValue':
+            case 'ValueNot':
+                if ($checkboxField) {
+                    if ($formFieldWatch->isCheckBoxGroupField()) {
+                        $expression = sprintf("$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
+                            $fieldValue, $target);
+                    } else {
+                        $expression = "{$target}.prop('checked')";
+                    }
+                } elseif ($radioField) {
+                    // We cannot simply get the value of the radio group, we need to find the checked option first.
+                    $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val() == "%s"',
+                        $target, $fieldValue);
+                } else {
+                    $expression = sprintf('%s.val() == "%s"', $target, $fieldValue);
+                }
+
+                if ($this->ConditionOption == 'ValueNot') {
+                    //Negate
+                    $expression = "!({$expression})";
+                }
+                break;
+            case 'ValueLessThan':
+            case 'ValueLessThanEqual':
+            case 'ValueGreaterThan':
+            case 'ValueGreaterThanEqual':
+                $expression = sprintf('%s.val() %s parseFloat("%s")', $target,
+                    $conditionOptions[$this->ConditionOption], $fieldValue);
+                break;
+            default:
+                throw new LogicException("Unhandled rule {$this->ConditionOption}");
+                break;
+        }
+
+        $result = array(
+            'operation' => $expression,
+            'event'     => $action,
+        );
+
+        return $result;
+    }
+
+    /**
+     * Returns the opposite of the show/hide pairs of strings
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public function toggleDisplayText($text)
+    {
+        return (strtolower($text) === 'show') ? 'hide' : 'show';
     }
 }
