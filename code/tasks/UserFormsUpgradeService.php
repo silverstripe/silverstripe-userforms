@@ -143,6 +143,11 @@ class UserFormsUpgradeService
         }
 
         $field->migrateSettings($customSettings);
+
+        if ($field->config()->has_placeholder) {
+            $this->migratePlaceholder($field, $field->ClassName);
+        }
+
         $field->write();
     }
 
@@ -224,5 +229,63 @@ class UserFormsUpgradeService
     public function getQuiet()
     {
         return $this->quiet;
+    }
+
+
+    /**
+     * Migrate Placeholder data from field specific table to the EditableFormField table
+     *
+     * @param EditableFormField $field
+     * @param string $tableName
+     */
+    private function migratePlaceholder($field, $tableName)
+    {
+        // Migrate Placeholder setting from $tableName table to EditableFormField table
+        if ($field->Placeholder) {
+            return;
+        }
+        // Check if draft table exists
+        if (!DB::get_schema()->hasTable($tableName)) {
+            // Check if _obsolete_ draft table exists
+            $tableName = '_obsolete_' . $tableName;
+            if (!DB::get_schema()->hasTable($tableName)) {
+                return;
+            }
+        }
+        // Check if old Placeholder column exists
+        if (!DB::get_schema()->hasField($tableName, 'Placeholder')) {
+            return;
+        }
+        // Fetch existing draft Placeholder value
+        $query = "SELECT \"Placeholder\" FROM \"$tableName\" WHERE \"ID\" = '$field->ID'";
+        $draftPlaceholder = DB::query($query)->value();
+
+        if (!$draftPlaceholder) {
+            return;
+        }
+        // Update draft Placeholder value
+        DB::prepared_query(
+            "UPDATE \"EditableFormField\" SET \"Placeholder\" = ? WHERE \"ID\" = ?",
+            array($draftPlaceholder, $field->ID)
+        );
+
+        $livePlaceholder = $draftPlaceholder;
+
+        // Check if live table exists
+        $tableName = $tableName . '_Live';
+        if (DB::get_schema()->hasTable($tableName)) {
+            // Fetch existing live Placeholder value
+            $query = "SELECT \"Placeholder\" FROM \"$tableName\" WHERE \"ID\" = '" . $field->ID . "'";
+            $livePlaceholder = DB::query($query)->value();
+            if (!$livePlaceholder) {
+                $livePlaceholder = $draftPlaceholder;
+            }
+        }
+
+        // Update live Placeholder value
+        DB::prepared_query(
+            "UPDATE \"EditableFormField_Live\" SET \"Placeholder\" = ? WHERE \"ID\" = ?",
+            array($draftPlaceholder, $field->ID)
+        );
     }
 }
