@@ -204,4 +204,13 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertEquals(10, $attributes['data-rule-minlength']);
         $this->assertEquals(20, $attributes['data-rule-maxlength']);
     }
+
+	public function testFormatDisplayRules()
+	{
+		/** @var EditableCheckbox $checkbox */
+		$checkbox = $this->objFromFixture('EditableFormField', 'irdNumberField');
+		$displayRules = $checkbox->formatDisplayRules();
+		$this->assertNotNull($displayRules);
+		$this->assertCount(1, $displayRules['operations']);
+	}
 }

@@ -1,9 +1,25 @@
+EditableFormField:
+  irdNumberField:
+    ClassName: EditableTextField
+    Name: IRDNumber
+    Title: "Enter your IRD Number"
+  countryTextField:
+    ClassName: EditableTextField
+    Name: CountryTextSelection
+    Title: "Enter your country (2 digit prefix)"
+    DisplayRulesConjunction: And
+    ShowOnLoad: false
 EditableCustomRule:
+  rule1:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: NZ
+    ConditionField: =>EditableFormField.countryTextField
+    Parent: =>EditableFormField.irdNumberField
   rule-1:
     Display: Hide
     ConditionOption: HasValue
     FieldValue: 6
-
 EditableOption:
   option-1:
     Name: Option1

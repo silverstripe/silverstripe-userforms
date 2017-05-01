@@ -11,8 +11,8 @@ ar:
     NOTBLANK: 'ليس بفراغ'
     NOTVALUE: 'ليست قيمة'
     SHOWTHISFIELD: 'إظهار هذا الحقل'
-    VALUE: 'القيمة'
-    WHEN: 'عندما'
+    VALUE: القيمة
+    WHEN: عندما
   EditableCheckbox:
     PLURALNAME: 'مربعات لوضع إشارة'
     SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
@@ -51,7 +51,7 @@ ar:
     FIELDONDEFAULT: 'القيمة المبدئية للحقل'
     GREATERTHAN: 'القيمة أكبر من'
     GREATERTHANEQUAL: 'القيمة أكبر من أو تساوي'
-    GROUP: 'مجموعة'
+    GROUP: مجموعة
     HIDE: إخفاء
     HIDETHISFIELD: 'إخفاء هذا الحقل'
     IS: إنه
@@ -68,9 +68,9 @@ ar:
     SHOWOPTIONS: 'إظهار الخيارات'
     SHOWTHISFIELD: 'أعرض هذه الحقل'
     SINGULARNAME: 'حقل استمارة قابل للتحرير'
-    VALIDATION: 'المصادقة'
-    VALUE: 'القيمة'
-    WHEN: 'عندما'
+    VALIDATION: المصادقة
+    VALUE: القيمة
+    WHEN: عندما
   EditableFormHeading:
     LEVEL: 'حدد مستوى العنوان'
     PLURALNAME: عناوين
@@ -122,16 +122,16 @@ ar:
     SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
   UserDefinedForm:
     ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
-    CONFIGURATION: 'مواصفات'
+    CONFIGURATION: مواصفات
     DESCRIPTION: 'يضيف استمارة مخصصة.'
     EMAILADDRESS: 'البريد الإلكتروني'
     EMAILBODY: هيئة
-    EMAILFROM: 'من'
+    EMAILFROM: من
     EMAILRECIPIENTS: 'متلقي البريد الإلكتروني'
     EMAILSUBJECT: 'موضوع البريد الإلكتروني'
     ENABLELIVEVALIDATION: 'تفعيل المصادقة الآنية'
     EmailFromContent: 'عنوان خانة المرسل يسمح لك بتعيين من الذي يأتي منه البريد الالكتروني. في معظم الخوادم هذا سوف يحتاج إلى أن يعين إلى عنوان بريد إلكتروني على نفس اسم مجال موقع الويب الخاص بك. على سبيل المثال على yoursite.com عنوان خانة المرسل قد يحتاج إلى أن يكون something@yoursite.com. يمكنك مع ذلك، تعيين أي عنوان بريد إلكتروني ترغب كعنوان للرد.'
-    FORM: 'نموذج'
+    FORM: نموذج
     FROMADDRESS: 'ارسل بريد إلكتروني من'
     HIDEFIELDLABELS: 'إخفاء تسميات الحقول'
     HIDEFORMDATA: 'إخفاء بيانات النموذج من البريد الإلكتروني؟'
@@ -144,8 +144,8 @@ ar:
     SENDPLAIN: 'إرسال البريد الإلكتروني كنص عادي؟ (سيتم تجريد كود الHTML)'
     SHOWCLEARFORM: 'زر عرض النموذج ممسوحاً'
     SINGULARNAME: 'نموذج يحدده المستخدم'
-    SUBMISSIONS: 'التقديمات'
-    SUBMITBUTTON: 'تقديم'
+    SUBMISSIONS: التقديمات
+    SUBMITBUTTON: تقديم
     TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
   UserDefinedForm_EmailRecipient:
     PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'

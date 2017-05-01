@@ -83,6 +83,7 @@ fi_FI:
     NOTBLANK: 'Ei ole tyhjä'
     NOTVALUE: 'Ei ole sama kuin'
     OPTIONS: Valinnat
+    PLACEHOLDER: Opastusteksti
     PLURALNAME: 'Muokattavat lomakekentät'
     REQUIRED: 'Onko tämä kenttä pakollinen?'
     REQUIRED_DESCRIPTION: 'Huomioithan, että ehdolliset kentät eivät voi olla pakollisia'
@@ -142,7 +143,6 @@ fi_FI:
   EditableTextField:
     NUMBERROWS: 'Rivien määrä'
     NUMBERROWS_DESCRIPTION: 'Kenttät, joissa on enemmän kuin yksi rivi, luodaan tekstialueena.'
-    PLACEHOLDER: Opastusteksti
     PLURALNAME: Tekstikentät
     RANGE_TO: –
     SINGULARNAME: Tekstikenttä

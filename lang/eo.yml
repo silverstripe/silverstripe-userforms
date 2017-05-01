@@ -83,6 +83,7 @@ eo:
     NOTBLANK: 'Ne vaka'
     NOTVALUE: 'Ne valoro'
     OPTIONS: Agordoj
+    PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Redakteblaj formularaj kampoj'
     REQUIRED: 'Ĉu ĉi tiu kampo estas nepra?'
     REQUIRED_DESCRIPTION: 'Bonvolu noti ke kondiĉaj kampoj ne povas esti nepraj'
@@ -142,7 +143,6 @@ eo:
   EditableTextField:
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
-    PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Tekstaj kampoj'
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'

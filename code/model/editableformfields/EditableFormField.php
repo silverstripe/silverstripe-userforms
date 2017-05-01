@@ -14,8 +14,11 @@ use SilverStripe\Forms\SegmentField;
  * @property int $Sort
  * @property bool $Required
  * @property string $CustomErrorMessage
+ * @property boolean $ShowOnLoad
+ * @property string $DisplayRulesConjunction
  * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
+ * @mixin Versioned
  */
 class EditableFormField extends DataObject
 {
@@ -60,6 +63,13 @@ class EditableFormField extends DataObject
     public static $allowed_css = array();
 
     /**
+     * Set this to true to enable placeholder field for any given class
+     * @config
+     * @var bool
+     */
+    private static $has_placeholder = false;
+
+    /**
      * @config
      * @var array
      */
@@ -87,7 +97,10 @@ class EditableFormField extends DataObject
         "RightTitle" => "Varchar(255)", // from CustomSettings
         "ShowOnLoad" => "Boolean(1)", // from CustomSettings
         "ShowInSummary" => "Boolean",
+        "Placeholder" => "Varchar(255)",
+        'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
     );
+
 
     private static $defaults = array(
         'ShowOnLoad' => true,
@@ -124,6 +137,22 @@ class EditableFormField extends DataObject
      * @var bool
      */
     protected $readonly;
+
+    /**
+     * Property holds the JS event which gets fired for this type of element
+     *
+     * @var string
+     */
+    protected $jsEventHandler = 'change';
+
+    /**
+     * Returns the jsEventHandler property for the current object. Bearing in mind it could've been overridden.
+     * @return string
+     */
+    public function getJsEventHandler()
+    {
+        return $this->jsEventHandler;
+    }
 
     /**
      * Set the visibility of an individual form field
@@ -231,6 +260,17 @@ class EditableFormField extends DataObject
             $fields->addFieldsToTab('Root.DisplayRules', $displayFields);
         }
 
+        // Placeholder
+        if ($this->config()->has_placeholder) {
+            $fields->addFieldToTab(
+                'Root.Main',
+                TextField::create(
+                    'Placeholder',
+                    _t('EditableFormField.PLACEHOLDER', 'Placeholder')
+                )
+            );
+        }
+
         $this->extend('updateCMSFields', $fields);
 
         return $fields;
@@ -246,35 +286,27 @@ class EditableFormField extends DataObject
         // Check display rules
         if ($this->Required) {
             return new FieldList(
-                LabelField::create(_t(
+                LabelField::create(
+                    _t(
                     'EditableFormField.DISPLAY_RULES_DISABLED',
-                    'Display rules are not enabled for required fields. ' .
-                    'Please uncheck "Is this field Required?" under "Validation" to re-enable.'
-                ))->addExtraClass('message warning')
-            );
+                    'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'))
+                  ->addExtraClass('message warning'));
         }
         $self = $this;
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields(array(
-            'Display' => '',
             'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
-                return DropdownField::create(
-                    $column,
-                    '',
-                    EditableFormField::get()
-                        ->filter(array(
+                    return DropdownField::create($column, '', EditableFormField::get()->filter(array(
                             'ParentID' => $self->ParentID,
-                            'ClassName' => $allowedClasses
-                        ))
-                        ->exclude(array(
-                            'ID' => $self->ID
-                        ))
-                        ->map('ID', 'Title')
-                    );
+                            'ClassName' => $allowedClasses,
+                        ))->exclude(array(
+                            'ID' => $self->ID,
+                        ))->map('ID', 'Title'));
             },
             'ConditionOption' => function ($record, $column, $grid) {
                 $options = Config::inst()->get('EditableCustomRule', 'condition_options');
+
                 return DropdownField::create($column, '', $options);
             },
             'FieldValue' => function ($record, $column, $grid) {
@@ -282,7 +314,7 @@ class EditableFormField extends DataObject
             },
             'ParentID' => function ($record, $column, $grid) use ($self) {
                 return HiddenField::create($column, '', $self->ID);
-            }
+                },
         ));
 
         // Custom rules
@@ -296,13 +328,18 @@ class EditableFormField extends DataObject
             );
 
         return new FieldList(
-            CheckboxField::create(
-                'ShowOnLoad',
-                _t('EditableFormField.SHOWONLOAD_TITLE', 'Show on load')
-            )->setDescription(
-                _t(
-                    'EditableFormField.SHOWONLOAD',
-                    'Initial visibility before processing these rules'
+            DropdownField::create('ShowOnLoad',
+                _t('EditableFormField.INITIALVISIBILITY', 'Initial visibility'),
+                array(
+                    1 => 'Show',
+                    0 => 'Hide',
+                )
+            ),
+            DropdownField::create('DisplayRulesConjunction',
+                _t('EditableFormField.DISPLAYIF', 'Toggle visibility when'),
+                array(
+                    'Or'  => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
+                    'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true'),
                 )
             ),
             GridField::create(
@@ -490,32 +527,47 @@ class EditableFormField extends DataObject
      * Publish this Form Field to the live site
      *
      * Wrapper for the {@link Versioned} publish function
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
      */
     public function doPublish($fromStage, $toStage, $createNewVersion = false)
     {
         $this->publish($fromStage, $toStage, $createNewVersion);
+        $this->publishRules($fromStage, $toStage, $createNewVersion);
+    }
 
-		$seenIDs = array();
+    /**
+     * Publish all field rules
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
+     */
+    protected function publishRules($fromStage, $toStage, $createNewVersion)
+    {
+        $seenRuleIDs = array();
 
-		// Don't forget to publish the related custom rules...
-		foreach ($this->DisplayRules() as $rule) {
-			$seenIDs[] = $rule->ID;
-			$rule->doPublish($fromStage, $toStage, $createNewVersion);
-			$rule->destroy();
-		}
+        // Don't forget to publish the related custom rules...
+        foreach ($this->DisplayRules() as $rule) {
+            $seenRuleIDs[] = $rule->ID;
+            $rule->doPublish($fromStage, $toStage, $createNewVersion);
+            $rule->destroy();
+        }
 
-		// remove any orphans from the "fromStage"
+        // remove any orphans from the "fromStage"
         $rules = Versioned::get_by_stage('EditableCustomRule', $toStage)
             ->filter('ParentID', $this->ID);
 
-		if (!empty($seenIDs)) {
-            $rules = $rules->exclude('ID', $seenIDs);
+        if (!empty($seenRuleIDs)) {
+            $rules = $rules->exclude('ID', $seenRuleIDs);
         }
 
-		foreach ($rules as $rule) {
-		    $rule->deleteFromStage($toStage);
-		}
-	}
+        foreach ($rules as $rule) {
+            $rule->deleteFromStage($toStage);
+        }
+    }
 
     /**
      * Delete this field from a given stage
@@ -536,7 +588,7 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * checks wether record is new, copied from Sitetree
+     * checks whether record is new, copied from SiteTree
      */
     public function isNew()
     {
@@ -601,7 +653,7 @@ class EditableFormField extends DataObject
     /**
      * Set the allowed css classes for the extraClass custom setting
      *
-     * @param array The permissible CSS classes to add
+     * @param array $allowed The permissible CSS classes to add
      */
     public function setAllowedCss(array $allowed)
     {
@@ -811,6 +863,11 @@ class EditableFormField extends DataObject
         if ($this->ExtraClass) {
             $field->addExtraClass($this->ExtraClass);
         }
+
+        // if this field has a placeholder
+        if ($this->Placeholder) {
+            $field->setAttribute('placeholder', $this->Placeholder);
+        }
     }
 
     /**
@@ -905,7 +962,17 @@ class EditableFormField extends DataObject
      */
     public function getSelectorHolder()
     {
-        return "$(\"#{$this->Name}\")";
+        return sprintf('$("%s")', $this->getSelectorOnly());
+    }
+
+    /**
+     * Returns only the JS identifier of a string, less the $(), which can be inserted elsewhere, for example when you
+     * want to perform selections on multiple selectors
+     * @return string
+     */
+    public function getSelectorOnly()
+    {
+        return "#{$this->Name}";
     }
 
     /**
@@ -913,10 +980,20 @@ class EditableFormField extends DataObject
      *
      * @param EditableCustomRule $rule Custom rule this selector will be used with
      * @param bool $forOnLoad Set to true if this will be invoked on load
+     *
+     * @return string
      */
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)
     {
-        return "$(\"input[name='{$this->Name}']\")";
+        return sprintf("$(%s)", $this->getSelectorFieldOnly());
+    }
+
+    /**
+     * @return string
+     */
+    public function getSelectorFieldOnly()
+    {
+        return "[name='{$this->Name}']";
     }
 
 
@@ -975,5 +1052,96 @@ class EditableFormField extends DataObject
             return new ArrayList();
         }
         return $this->DisplayRules();
+    }
+
+    /**
+     * Extracts info from DisplayRules into array so UserDefinedForm->buildWatchJS can run through it.
+     * @return array|null
+     */
+    public function formatDisplayRules()
+    {
+        $holderSelector = $this->getSelectorOnly();
+        $result = array(
+            'targetFieldID' => $holderSelector,
+            'conjunction'   => $this->DisplayRulesConjunctionNice(),
+            'selectors'     => array(),
+            'events'        => array(),
+            'operations'    => array(),
+            'initialState'  => $this->ShowOnLoadNice(),
+            'view'          => array(),
+            'opposite'      => array(),
+        );
+        // Check for field dependencies / default
+        /** @var EditableCustomRule $rule */
+        foreach ($this->EffectiveDisplayRules() as $rule) {
+            // Get the field which is effected
+            /** @var EditableFormField $formFieldWatch */
+            $formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
+            // Skip deleted fields
+            if (! $formFieldWatch) {
+                continue;
+            }
+            $fieldToWatch = $formFieldWatch->getSelectorFieldOnly();
+
+            $expression = $rule->buildExpression();
+            if (! in_array($fieldToWatch, $result['selectors'])) {
+                $result['selectors'][] = $fieldToWatch;
+            }
+            if (! in_array($expression['event'], $result['events'])) {
+                $result['events'][] = $expression['event'];
+            }
+            $result['operations'][] = $expression['operation'];
+
+            //View/Show should read
+            $result['view'] = $rule->toggleDisplayText($result['initialState']);
+            $result['opposite'] = $rule->toggleDisplayText($result['view']);
+        }
+
+        return (count($result['selectors'])) ? $result : null;
+    }
+
+    /**
+     * Replaces the set DisplayRulesConjunction with their JS logical operators
+     * @return string
+     */
+    public function DisplayRulesConjunctionNice()
+    {
+        return (strtolower($this->DisplayRulesConjunction) === 'or') ? '||' : '&&';
+    }
+
+    /**
+     * Replaces boolean ShowOnLoad with its JS string equivalent
+     * @return string
+     */
+    public function ShowOnLoadNice()
+    {
+        return ($this->ShowOnLoad) ? 'show' : 'hide';
+    }
+
+    /**
+     * Returns whether this is of type EditableCheckBoxField
+     * @return bool
+     */
+    public function isCheckBoxField()
+    {
+        return false;
+    }
+
+    /**
+     * Returns whether this is of type EditableRadioField
+     * @return bool
+     */
+    public function isRadioField()
+    {
+        return false;
+    }
+
+    /**
+     * Determined is this is of type EditableCheckboxGroupField
+     * @return bool
+     */
+    public function isCheckBoxGroupField()
+    {
+        return false;
     }
 }

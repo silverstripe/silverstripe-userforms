@@ -14,6 +14,8 @@ class EditableDateField extends EditableFormField
 
     private static $plural_name = 'Date Fields';
 
+    private static $has_placeholder = true;
+
     private static $db = array(
         'DefaultToToday' => 'Boolean' // From customsettings
     );

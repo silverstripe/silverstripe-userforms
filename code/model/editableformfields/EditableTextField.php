@@ -14,6 +14,8 @@ class EditableTextField extends EditableFormField
 
     private static $plural_name = 'Text Fields';
 
+    private static $has_placeholder = true;
+
     private static $autocomplete_options = array(
         'off' => 'Off',
         'on' => 'On',
@@ -44,11 +46,12 @@ class EditableTextField extends EditableFormField
         'url' => 'Home page'
       );
 
+    protected $jsEventHandler = 'keyup';
+
     private static $db = array(
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
         'Rows' => 'Int(1)',
-        'Placeholder' => 'Varchar(255)',
         'Autocomplete' => 'Varchar(255)'
     );
 
@@ -68,14 +71,6 @@ class EditableTextField extends EditableFormField
                     'EditableTextField.NUMBERROWS_DESCRIPTION',
                     'Fields with more than one row will be generated as a textarea'
                 ))
-            );
-
-            $fields->addFieldToTab(
-                'Root.Main',
-                TextField::create(
-                    'Placeholder',
-                    _t('EditableTextField.PLACEHOLDER', 'Placeholder')
-                )
             );
 
             $fields->addFieldToTab(
@@ -155,10 +150,6 @@ class EditableTextField extends EditableFormField
                 $field->setMaxLength(intval($this->MaxLength));
             }
             $field->setAttribute('data-rule-maxlength', intval($this->MaxLength));
-        }
-
-        if ($this->Placeholder) {
-            $field->setAttribute('placeholder', $this->Placeholder);
         }
 
         if ($this->Autocomplete) {
