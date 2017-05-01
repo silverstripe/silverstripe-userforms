@@ -78,7 +78,7 @@ ar_SA:
     EMAILFROM: From
     EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email Subject'
-    FORM: 'النموذج'
+    FORM: النموذج
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'عرض الطلبات المكتملة'
