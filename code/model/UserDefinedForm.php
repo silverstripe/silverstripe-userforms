@@ -216,9 +216,9 @@ SQL;
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
-            
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
-            
+
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
@@ -465,7 +465,7 @@ class UserDefinedForm_Controller extends Page_Controller
         }
         if ($watch) {
             $rules .= $this->buildWatchJS($watch);
-        }
+                }
 
         // Only add customScript if $default or $rules is defined
         if ($rules) {
@@ -476,7 +476,7 @@ class UserDefinedForm_Controller extends Page_Controller
                     });
                 })(jQuery);
 JS
-                , 'UserFormsConditional');
+, 'UserFormsConditional');
         }
     }
 
@@ -732,8 +732,8 @@ JS
         }
 
         $data = array(
-            'Submission' => $submission,
-            'Link' => $referrer
+                'Submission' => $submission,
+                'Link' => $referrer
         );
 
         $this->extend('updateReceivedFormSubmissionData', $data);
@@ -777,7 +777,7 @@ JS
         } else {
             $('{$target}').{$opposite}();
         }
-    });	
+    });
 EOS;
 
         }

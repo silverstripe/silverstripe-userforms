@@ -18,6 +18,7 @@ use SilverStripe\Forms\SegmentField;
  * @property string $DisplayRulesConjunction
  * @method UserDefinedForm Parent() Parent page
  * @method DataList DisplayRules() List of EditableCustomRule objects
+ * @mixin Versioned
  */
 class EditableFormField extends DataObject
 {
@@ -285,7 +286,7 @@ class EditableFormField extends DataObject
             return new FieldList(
                 LabelField::create(
                     _t(
-                        'EditableFormField.DISPLAY_RULES_DISABLED',
+                    'EditableFormField.DISPLAY_RULES_DISABLED',
                     'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'))
                   ->addExtraClass('message warning'));
         }
@@ -293,26 +294,26 @@ class EditableFormField extends DataObject
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields(array(
-                'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
+            'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
                     return DropdownField::create($column, '', EditableFormField::get()->filter(array(
-                            'ParentID'  => $self->ParentID,
+                            'ParentID' => $self->ParentID,
                             'ClassName' => $allowedClasses,
                         ))->exclude(array(
                             'ID' => $self->ID,
                         ))->map('ID', 'Title'));
-                },
-                'ConditionOption'  => function ($record, $column, $grid) {
-                    $options = Config::inst()->get('EditableCustomRule', 'condition_options');
+            },
+            'ConditionOption' => function ($record, $column, $grid) {
+                $options = Config::inst()->get('EditableCustomRule', 'condition_options');
 
-                    return DropdownField::create($column, '', $options);
+                return DropdownField::create($column, '', $options);
+            },
+            'FieldValue' => function ($record, $column, $grid) {
+                return TextField::create($column);
+            },
+            'ParentID' => function ($record, $column, $grid) use ($self) {
+                return HiddenField::create($column, '', $self->ID);
                 },
-                'FieldValue'       => function ($record, $column, $grid) {
-                    return TextField::create($column);
-                },
-                'ParentID'         => function ($record, $column, $grid) use ($self) {
-                    return HiddenField::create($column, '', $self->ID);
-                },
-            ));
+        ));
 
         // Custom rules
         $customRulesConfig = GridFieldConfig::create()
@@ -524,33 +525,47 @@ class EditableFormField extends DataObject
      * Publish this Form Field to the live site
      *
      * Wrapper for the {@link Versioned} publish function
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
      */
     public function doPublish($fromStage, $toStage, $createNewVersion = false)
     {
         $this->publish($fromStage, $toStage, $createNewVersion);
+        $this->publishRules($fromStage, $toStage, $createNewVersion);
+    }
 
+    /**
+     * Publish all field rules
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
+     */
+    protected function publishRules($fromStage, $toStage, $createNewVersion)
+    {
+        $seenRuleIDs = array();
 
-		$seenIDs = array();
+        // Don't forget to publish the related custom rules...
+        foreach ($this->DisplayRules() as $rule) {
+            $seenRuleIDs[] = $rule->ID;
+            $rule->doPublish($fromStage, $toStage, $createNewVersion);
+            $rule->destroy();
+        }
 
-		// Don't forget to publish the related custom rules...
-		foreach ($this->DisplayRules() as $rule) {
-			$seenIDs[] = $rule->ID;
-			$rule->doPublish($fromStage, $toStage, $createNewVersion);
-			$rule->destroy();
-		}
-
-		// remove any orphans from the "fromStage"
+        // remove any orphans from the "fromStage"
         $rules = Versioned::get_by_stage('EditableCustomRule', $toStage)
             ->filter('ParentID', $this->ID);
 
-		if (!empty($seenIDs)) {
-            $rules = $rules->exclude('ID', $seenIDs);
+        if (!empty($seenRuleIDs)) {
+            $rules = $rules->exclude('ID', $seenRuleIDs);
         }
 
-		foreach ($rules as $rule) {
-		    $rule->deleteFromStage($toStage);
-		}
-	}
+        foreach ($rules as $rule) {
+            $rule->deleteFromStage($toStage);
+        }
+    }
 
     /**
      * Delete this field from a given stage
@@ -571,7 +586,7 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * checks wether record is new, copied from Sitetree
+     * checks whether record is new, copied from SiteTree
      */
     public function isNew()
     {
@@ -636,7 +651,7 @@ class EditableFormField extends DataObject
     /**
      * Set the allowed css classes for the extraClass custom setting
      *
-     * @param array The permissible CSS classes to add
+     * @param array $allowed The permissible CSS classes to add
      */
     public function setAllowedCss(array $allowed)
     {
@@ -961,8 +976,8 @@ class EditableFormField extends DataObject
     /**
      * Gets the JS expression for selecting the value for this field
      *
-     * @param EditableCustomRule $rule      Custom rule this selector will be used with
-     * @param bool               $forOnLoad Set to true if this will be invoked on load
+     * @param EditableCustomRule $rule Custom rule this selector will be used with
+     * @param bool $forOnLoad Set to true if this will be invoked on load
      *
      * @return string
      */

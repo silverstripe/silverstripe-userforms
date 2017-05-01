@@ -89,25 +89,45 @@ class EditableMultipleOptionField extends EditableFormField
      * When publishing it needs to handle copying across / publishing
      * each of the individual field options
      *
-     * @return void
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
      */
     public function doPublish($fromStage, $toStage, $createNewVersion = false)
     {
-        $live = Versioned::get_by_stage("EditableOption", "Live", "\"EditableOption\".\"ParentID\" = $this->ID");
-
-        if ($live) {
-            foreach ($live as $option) {
-                $option->delete();
-            }
-        }
-
-        if ($this->Options()) {
-            foreach ($this->Options() as $option) {
-                $option->publish($fromStage, $toStage, $createNewVersion);
-            }
-        }
-
         parent::doPublish($fromStage, $toStage, $createNewVersion);
+        $this->publishOptions($fromStage, $toStage, $createNewVersion);
+    }
+
+
+    /**
+     * Publish list options
+     *
+     * @param string $fromStage
+     * @param string $toStage
+     * @param bool $createNewVersion
+     */
+    protected function publishOptions($fromStage, $toStage, $createNewVersion)
+    {
+        $seenIDs = array();
+
+        // Publish all options
+        foreach ($this->Options() as $option) {
+            $seenIDs[] = $option->ID;
+            $option->publish($fromStage, $toStage, $createNewVersion);
+        }
+
+        // remove any orphans from the "fromStage"
+        $options = Versioned::get_by_stage('EditableOption', $toStage)
+            ->filter('ParentID', $this->ID);
+
+        if (!empty($seenIDs)) {
+            $options = $options->exclude('ID', $seenIDs);
+        }
+
+        foreach ($options as $rule) {
+            $rule->deleteFromStage($toStage);
+        }
     }
 
     /**
