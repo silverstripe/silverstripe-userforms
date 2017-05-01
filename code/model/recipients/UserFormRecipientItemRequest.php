@@ -42,10 +42,10 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
 
         foreach ($fields as $field) {
             $data->push(new ArrayData(array(
-                'Name' => $field->Name,
-                'Title' => $field->Title,
-                'Value' => '$' . $field->Name,
-                'FormattedValue' => '$' . $field->Name
+                'Name' => $field->dbObject('Name'),
+                'Title' => $field->dbObject('Title'),
+                'Value' => DBField::create_field('Varchar', '$' . $field->Name),
+                'FormattedValue' => DBField::create_field('Varchar', '$' . $field->Name)
             )));
         }
 
