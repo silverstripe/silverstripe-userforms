@@ -72,3 +72,11 @@
   margin-bottom: 5px;
   font-weight: bold;
 }
+
+.userform[data-hidefieldlabels] .field.text label,
+.userform[data-hidefieldlabels] .field.email label,
+.userform[data-hidefieldlabels] .field.textarea label,
+.userform[data-hidefieldlabels] .field.numeric label,
+.userform[data-hidefieldlabels] .field.date label {
+  display: none;
+}

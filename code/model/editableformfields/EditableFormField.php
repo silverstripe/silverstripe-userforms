@@ -862,6 +862,12 @@ class EditableFormField extends DataObject
             $field->addExtraClass($this->ExtraClass);
         }
 
+
+        // set placeholder text when form is set to hide field labels
+        if ($this->Parent()->HideFieldLabels && $this->config()->has_placeholder) {
+            $field->setAttribute('placeholder', $this->Title);
+        }
+
         // if this field has a placeholder
         if ($this->Placeholder) {
             $field->setAttribute('placeholder', $this->Placeholder);

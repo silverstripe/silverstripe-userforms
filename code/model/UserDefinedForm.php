@@ -383,9 +383,6 @@ class UserDefinedForm_Controller extends Page_Controller
         Requirements::javascript(
             USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
         );
-        if ($this->HideFieldLabels) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
-        }
 
         // Bind a confirmation message when navigating away from a partially completed form.
         $page = $this->data();
