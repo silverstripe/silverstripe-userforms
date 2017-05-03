@@ -649,76 +649,80 @@ jQuery(function ($) {
 	function main() {
 		var progressBar = null,
 			formActions = null,
-			$userform = $('.userform');
+			$userforms = $('.userform');
 
 		// If there's no userform, do nothing.
-		if ($userform.length === 0) {
+		if ($userforms.length === 0) {
 			return;
 		}
 
-		CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
-		CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== void 0;
-		CONSTANTS.HIDE_FIELD_LABELS = $userform.data('hidefieldlabels') !== void 0;
+		$userforms.each(function(index, el) {
+			$userform = $(el);
 
-		// Extend the default validation options with conditional options
-		// that are set by the user in the CMS.
-		if (CONSTANTS.ENABLE_LIVE_VALIDATION === false) {
-			$.extend(UserForm.prototype.validationOptions, {
-				onfocusout: false
-			});
-		}
+			CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
+			CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== void 0;
+			CONSTANTS.HIDE_FIELD_LABELS = $userform.data('hidefieldlabels') !== void 0;
 
-		if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
-			$.extend(UserForm.prototype.validationOptions, {
-				// Callback for custom code when an invalid form / step is submitted.
-				invalidHandler: function (event, validator) {
-					$userform.trigger('userform.form.error', [validator]);
-				},
-				onfocusout: false
-			});
-		}
-
-		// Display all the things that are hidden when JavaScript is disabled.
-		$('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
-
-		// Extend classes with common functionality.
-		$.extend(FormStep.prototype, commonMixin);
-		$.extend(ErrorContainer.prototype, commonMixin);
-
-		userform = new UserForm($userform);
-
-		// Conditionally hide field labels and use HTML5 placeholder instead.
-		if (CONSTANTS.HIDE_FIELD_LABELS) {
-			$userform.find('label.left').each(function () {
-				var $label = $(this);
-
-				$('[name="' + $label.attr('for') + '"]').attr('placeholder', $label.text());
-				$label.remove();
-			});
-		}
-
-		// Initialise the form steps.
-		userform.$el.find('.form-step').each(function (i, element) {
-			var step = new FormStep(element);
-
-			userform.addStep(step);
-		});
-
-		userform.setCurrentStep(userform.steps[0]);
-		
-		// Initialise actions and progressbar
-		progressBar = new ProgressBar($('#userform-progress'));
-		formActions = new FormActions($('#step-navigation'));
-
-		// Enable jQuery UI datepickers
-		$(document).on('click', 'input.text[data-showcalendar]', function() {
-			var $element = $(this);
-
-			$element.ssDatepicker();
-
-			if($element.data('datepicker')) {
-				$element.datepicker('show');
+			// Extend the default validation options with conditional options
+			// that are set by the user in the CMS.
+			if (CONSTANTS.ENABLE_LIVE_VALIDATION === false) {
+				$.extend(UserForm.prototype.validationOptions, {
+					onfocusout: false
+				});
 			}
+
+			if (CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP) {
+				$.extend(UserForm.prototype.validationOptions, {
+					// Callback for custom code when an invalid form / step is submitted.
+					invalidHandler: function (event, validator) {
+						$userform.trigger('userform.form.error', [validator]);
+					},
+					onfocusout: false
+				});
+			}
+
+			// Display all the things that are hidden when JavaScript is disabled.
+			$('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
+
+			// Extend classes with common functionality.
+			$.extend(FormStep.prototype, commonMixin);
+			$.extend(ErrorContainer.prototype, commonMixin);
+
+			userform = new UserForm($userform);
+
+			// Conditionally hide field labels and use HTML5 placeholder instead.
+			if (CONSTANTS.HIDE_FIELD_LABELS) {
+				$userform.find('label.left').each(function () {
+					var $label = $(this);
+
+					$('[name="' + $label.attr('for') + '"]').attr('placeholder', $label.text());
+					$label.remove();
+				});
+			}
+
+			// Initialise the form steps.
+			userform.$el.find('.form-step').each(function (i, element) {
+				var step = new FormStep(element);
+
+				userform.addStep(step);
+			});
+
+			userform.setCurrentStep(userform.steps[0]);
+
+			// Initialise actions and progressbar
+			progressBar = new ProgressBar($('#userform-progress'));
+			formActions = new FormActions($('#step-navigation'));
+
+			// Enable jQuery UI datepickers
+			$(document).on('click', 'input.text[data-showcalendar]', function() {
+				var $element = $(this);
+
+				$element.ssDatepicker();
+
+				if($element.data('datepicker')) {
+					$element.datepicker('show');
+				}
+			});
 		});
 
 		// Make sure the form doesn't expire on the user. Pings every 3 mins.

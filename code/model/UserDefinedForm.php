@@ -498,7 +498,7 @@ class UserDefinedForm_Controller extends Page_Controller
                     });
                 })(jQuery);
 JS
-, 'UserFormsConditional');
+, 'UserFormsConditional-'.$this->ID);
         }
     }
 
