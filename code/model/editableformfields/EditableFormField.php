@@ -862,6 +862,11 @@ class EditableFormField extends DataObject
             $field->addExtraClass($this->ExtraClass);
         }
 
+        // if ShowOnLoad is false hide the field
+        if (!$this->ShowOnLoad) {
+            $field->addExtraClass($this->ShowOnLoadNice());
+        }
+
         // if this field has a placeholder
         if ($this->Placeholder) {
             $field->setAttribute('placeholder', $this->Placeholder);
