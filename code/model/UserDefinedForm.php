@@ -766,9 +766,6 @@ JS
 
             $result .= <<<EOS
 \n
-    //Initial state
-    $('{$target}').{$initialState}();
-
     $('.userform').on('{$events}',
     "{$selectors}",
     function (){
