@@ -191,7 +191,6 @@ sk:
     FORM: Formulár
     FROMADDRESS: 'E-mail odosielateľa'
     FileUploadWarning: 'Súbory nahraté pomocou tohto políčka môžu byť verejné prístupné, pokiaľ je známa presná URL adresa.'
-    HIDEFIELDLABELS: 'Skyť popisky (menovky) polí?'
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
     NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre môžu chýbať.'
     ONCOMPLETELABEL: 'Správa po odoslaní formulára'

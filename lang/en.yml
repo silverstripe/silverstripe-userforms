@@ -196,7 +196,6 @@ en:
     FORM: Form
     FROMADDRESS: 'Send email from'
     FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
-    HIDEFIELDLABELS: 'Hide field labels'
     HIDEFORMDATA: 'Hide form data from email?'
     NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
     ONCOMPLETELABEL: 'Show on completion'

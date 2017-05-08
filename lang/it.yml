@@ -193,7 +193,6 @@ it:
     FORM: Modulo
     FROMADDRESS: 'Manda e-mail da'
     FileUploadWarning: 'I files caricati attraverso questo campo potrebbero essere pubblicamente accessibili se si conosce la loro URL esatta'
-    HIDEFIELDLABELS: 'Nascondi etichette dei campi'
     HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
     NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
     ONCOMPLETELABEL: 'Mostra al completamento'

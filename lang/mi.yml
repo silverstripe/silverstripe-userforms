@@ -133,7 +133,6 @@ mi:
     EmailFromContent: 'Ka taea koe mā te wāhitau mai te tautuhi i te tangata nā wai te īmēra. Kei te nuinga o ngā tūmau me tautuhi tēnei ki tētahi wāhitau īmēra i te ingoa rohe e ōrite ana ki tō pae. Hei tauira kei yoursite.com me noho te wāhitau mai ko something@yoursite.com. Heoi ka taea te tautuhi i tāu e hiahia ai hei wāhitau whakautu ki.'
     FORM: Puka
     FROMADDRESS: 'Tuku īmēra mai'
-    HIDEFIELDLABELS: 'Hunaia ngā tapanga āpure'
     HIDEFORMDATA: 'Me huna te raraunga puka i te īmēra?'
     ONCOMPLETELABEL: 'Whakaaturia ina oti'
     ORSELECTAFIELDTOUSEASFROM: '.. ka tīpako rānei i tētahi āpure hei whakamahi hei wāhitau whakautu ki'
