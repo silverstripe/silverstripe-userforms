@@ -191,7 +191,6 @@ fi_FI:
     FORM: Lomake
     FROMADDRESS: 'Lähetä sähköposti osoitteesta'
     FileUploadWarning: 'Tällä kentällä lähetetyt tiedostot ovat avattavissa julkisesti, mikäli tarkka verkko-osoite on käyttäjän tiedossa.'
-    HIDEFIELDLABELS: 'Piilota kenttien nimikkeet'
     HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
     NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
     ONCOMPLETELABEL: 'Näytä valmistuessa'

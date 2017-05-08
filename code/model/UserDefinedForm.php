@@ -68,7 +68,6 @@ class UserDefinedForm extends Page
         "ShowClearButton" => "Boolean",
         'DisableSaveSubmissions' => 'Boolean',
         'EnableLiveValidation' => 'Boolean',
-        'HideFieldLabels' => 'Boolean',
         'DisplayErrorMessagesAtTop' => 'Boolean',
         'DisableAuthenicatedFinishAction' => 'Boolean',
         'DisableCsrfSecurityToken' => 'Boolean'
@@ -313,7 +312,6 @@ SQL;
             new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
             new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
             new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
-            new CheckboxField("HideFieldLabels", _t('UserDefinedForm.HIDEFIELDLABELS', 'Hide field labels')),
             new CheckboxField("DisplayErrorMessagesAtTop", _t('UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
             new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
             new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
@@ -404,9 +402,6 @@ class UserDefinedForm_Controller extends Page_Controller
         Requirements::javascript(
             USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
         );
-        if ($this->HideFieldLabels) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/Placeholders.js/Placeholders.min.js');
-        }
 
         // Bind a confirmation message when navigating away from a partially completed form.
         if ($page::config()->enable_are_you_sure) {

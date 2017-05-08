@@ -146,7 +146,6 @@ sv:
     EmailFromContent: 'Från-adressen låter dig ställa in varifrån e-postmeddelandet skickas. På de flesta servrar måste adressen ha samma domännamn som din sajt. Till exempel på yoursite.com så måste adressen vara something@yoursite.com. Det är däremot möjligt att lägga valfri e-postadress under "E-postadress att svara till". '
     FORM: Formulär
     FROMADDRESS: 'E-postadress att skicka formulär från'
-    HIDEFIELDLABELS: 'Göm fältetiketter'
     HIDEFORMDATA: 'Göm formulärdata från e-post?'
     ONCOMPLETELABEL: 'Visa vid slutförande'
     ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'

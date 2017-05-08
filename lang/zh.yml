@@ -133,7 +133,6 @@ zh:
     EmailFromContent: '表格地址允许您设置电子邮件的发送人。在大多数服务器上这必须要设置成域名与您的站点域名一致的电子邮件地址。例如在 yoursite.com 上，发送人的电子邮件地址必须为 something@yoursite.com。但是您可以随意设置回复的电子邮件地址。'
     FORM: 表格
     FROMADDRESS: 发送人电子邮件
-    HIDEFIELDLABELS: 隐藏字段标签
     HIDEFORMDATA: 从电子邮件中隐藏表格数据？
     ONCOMPLETELABEL: 完成时显示
     ORSELECTAFIELDTOUSEASFROM: '.. 或选择某字段作为回复地址'
