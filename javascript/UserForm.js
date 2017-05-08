@@ -77,7 +77,7 @@ jQuery(function ($) {
 	 * Default options for step validation. These get extended in main().
 	 */
 	UserForm.prototype.validationOptions = {
-		ignore: ':hidden',
+		ignore: ':hidden,ul',
 		errorClass: 'error',
 		errorElement: 'span',
 		errorPlacement: function (error, element) {
