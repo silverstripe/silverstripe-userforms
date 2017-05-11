@@ -50,6 +50,26 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertTrue($fields->dataFieldByName('OnCompleteMessage') != null);
     }
 
+	
+    public function testGetCMSFieldsShowInSummary() 
+    {
+        $this->logInWithPermission('ADMIN');
+        $form = $this->objFromFixture('UserDefinedForm', 'summary-rules-form');
+
+        $fields = $form->getCMSFields();
+
+        $this->assertInstanceOf('GridField', $fields->dataFieldByName('Submissions'));
+
+        $submissionsgrid = $fields->dataFieldByName('Submissions');
+        $gridFieldDataColumns = $submissionsgrid->getConfig()->getComponentByType('GridFieldDataColumns');
+
+        $summaryFields = $gridFieldDataColumns->getDisplayFields($submissionsgrid);
+
+        $this->assertContains('SummaryShow', array_keys($summaryFields), 'Summary field not showing displayed field');
+        $this->assertNotContains('SummaryHide', array_keys($summaryFields), 'Summary field showing displayed field');
+    }
+
+	
     public function testEmailRecipientPopup()
     {
         $this->logInWithPermission('ADMIN');

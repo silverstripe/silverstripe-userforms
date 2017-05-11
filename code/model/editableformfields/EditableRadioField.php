@@ -46,4 +46,8 @@ class EditableRadioField extends EditableMultipleOptionField
         $first = $forOnLoad ? ':first' : '';
         return "$(\"input[name='{$this->Name}']{$first}\")";
     }
+
+	public function isRadioField() {
+		return true;
+	}
 }

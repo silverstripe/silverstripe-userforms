@@ -33,50 +33,52 @@ class EditableMultipleOptionField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function($fields) {
+            $editableColumns = new GridFieldEditableColumns();
+            $editableColumns->setDisplayFields(array(
+                'Title' => array(
+                    'title' => _t('EditableMultipleOptionField.TITLE', 'Title'),
+                    'callback' => function ($record, $column, $grid) {
+                        return TextField::create($column);
+                    }
+                ),
+                'Value' => array(
+                    'title' => _t('EditableMultipleOptionField.VALUE', 'Value'),
+                    'callback' => function ($record, $column, $grid) {
+                        return TextField::create($column);
+                    }
+                ),
+                'Default' => array(
+                    'title' => _t('EditableMultipleOptionField.DEFAULT', 'Selected by default?'),
+                    'callback' => function ($record, $column, $grid) {
+                        return CheckboxField::create($column);
+                    }
+                )
+            ));
 
-        $editableColumns = new GridFieldEditableColumns();
-        $editableColumns->setDisplayFields(array(
-            'Title' => array(
-                'title' => _t('EditableMultipleOptionField.TITLE', 'Title'),
-                'callback' => function ($record, $column, $grid) {
-                    return TextField::create($column);
-                }
-            ),
-            'Value' => array(
-                'title' => _t('EditableMultipleOptionField.VALUE', 'Value'),
-                'callback' => function ($record, $column, $grid) {
-                    return TextField::create($column);
-                }
-            ),
-            'Default' => array(
-                'title' => _t('EditableMultipleOptionField.DEFAULT', 'Selected by default?'),
-                'callback' => function ($record, $column, $grid) {
-                    return CheckboxField::create($column);
-                }
-            )
-        ));
+            $optionsConfig = GridFieldConfig::create()
+                ->addComponents(
+                    new GridFieldToolbarHeader(),
+                    new GridFieldTitleHeader(),
+                    new GridFieldOrderableRows('Sort'),
+                    $editableColumns,
+                    new GridFieldButtonRow(),
+                    new GridFieldAddNewInlineButton(),
+                    new GridFieldDeleteAction()
+                );
 
-        $optionsConfig = GridFieldConfig::create()
-            ->addComponents(
-                new GridFieldToolbarHeader(),
-                new GridFieldTitleHeader(),
-                new GridFieldOrderableRows('Sort'),
-                $editableColumns,
-                new GridFieldButtonRow(),
-                new GridFieldAddNewInlineButton(),
-                new GridFieldDeleteAction()
+            $optionsGrid = GridField::create(
+                'Options',
+                _t('EditableFormField.CUSTOMOPTIONS', 'Options'),
+                $this->Options(),
+                $optionsConfig
             );
 
-        $optionsGrid = GridField::create(
-            'Options',
-            _t('EditableFormField.CUSTOMOPTIONS', 'Options'),
-            $this->Options(),
-            $optionsConfig
-        );
+            $fields->insertAfter(new Tab('Options', _t('EditableMultipleOptionField.OPTIONSTAB', 'Options')), 'Main');
+            $fields->addFieldToTab('Root.Options', $optionsGrid);
+        });
 
-        $fields->insertAfter(new Tab('Options', _t('EditableMultipleOptionField.OPTIONSTAB', 'Options')), 'Main');
-        $fields->addFieldToTab('Root.Options', $optionsGrid);
+        $fields = parent::getCMSFields();
 
         return $fields;
     }

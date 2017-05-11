@@ -37,7 +37,12 @@
     },
     "suggest": {
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
-        "silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access"
+        "silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access",
+        "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background"
     },
-    "extra": []
+    "extra": {
+        "branch-alias": {
+            "dev-4.x-dev": "4.4.x-dev"
+        }
+    }
 }

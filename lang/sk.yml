@@ -83,6 +83,7 @@ sk:
     NOTBLANK: Vyplnené
     NOTVALUE: 'Nie zadanú hodnotu'
     OPTIONS: Voľba/možnosť
+    PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
     PLURALNAME: 'Formulárové polia'
     REQUIRED: 'Je pole povinné/vyžadované?'
     REQUIRED_DESCRIPTION: 'Všimnite si prosím, že podmienené polia nemôžu byť vyžadované.'
@@ -142,7 +143,6 @@ sk:
   EditableTextField:
     NUMBERROWS: 'Počet riadkov'
     NUMBERROWS_DESCRIPTION: 'Políčka s viac ako jedným riadkom sú generované ako textarea.'
-    PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
     PLURALNAME: 'Textové polia'
     RANGE_TO: do
     SINGULARNAME: 'Textové pole'

@@ -18,6 +18,7 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.HIDE_OPTIONS": "Skryť možnosti",
     "UserForms.LEAVE_CONFIRMATION": "Máte neuložené zmeny!",
     "UserForms.REMOVED_OPTION": "Voľba/možnosť odstránená",
-    "UserForms.SHOW_OPTIONS": "Zobraziť možnosti"
+    "UserForms.SHOW_OPTIONS": "Zobraziť možnosti",
+    "UserForms.ERROR_CONTAINER_HEADER": "Opravte prosím nasledujúce chyby a skúste to znova:"
 });
 }

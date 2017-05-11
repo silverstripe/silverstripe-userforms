@@ -83,6 +83,7 @@ it:
     NOTBLANK: 'Non vuoto'
     NOTVALUE: 'Non valore'
     OPTIONS: Opzioni
+    PLACEHOLDER: Segnaposto
     PLURALNAME: 'Campi modulo modificabili'
     REQUIRED: 'Questo campo è obbligatorio?'
     REQUIRED_DESCRIPTION: 'Prego nota che i campi condizionali non possono essere obbligatori'
@@ -140,9 +141,10 @@ it:
     PLURALNAME: 'Gruppi di pulsanti a scelta singola'
     SINGULARNAME: 'Gruppo di pulsanti a scelta singola'
   EditableTextField:
+    AUTOCOMPLETE: 'completamento automatico'
+    AUTOCOMPLETE_DESCRIPTION: 'I browser supportati cercheranno di popolare automaticamente questo campo con l'informazione agli utenti, usare per impostare il valore popolata'
     NUMBERROWS: 'Numero di righe'
     NUMBERROWS_DESCRIPTION: 'Campi con più di una riga verranno generati come area testo'
-    PLACEHOLDER: Segnaposto
     PLURALNAME: 'Campi testo'
     RANGE_TO: a
     SINGULARNAME: 'Campo testo'

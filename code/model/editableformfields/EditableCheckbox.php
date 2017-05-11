@@ -14,6 +14,8 @@ class EditableCheckbox extends EditableFormField
 
     private static $plural_name = 'Checkboxes';
 
+    protected $jsEventHandler = 'click';
+
     private static $db = array(
         'CheckedDefault' => 'Boolean' // from CustomSettings
     );
@@ -61,4 +63,8 @@ class EditableCheckbox extends EditableFormField
 
         parent::migrateSettings($data);
     }
+
+	public function isCheckBoxField() {
+		return true;
+	}
 }
