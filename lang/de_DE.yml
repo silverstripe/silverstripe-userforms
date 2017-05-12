@@ -64,7 +64,6 @@ de_DE:
     NOTBLANK: 'Nicht leer'
     NOTVALUE: 'Kein Wert'
     OPTIONS: Optionen
-    PLACEHOLDER: Platzhalter
     PLURALNAME: 'Editierbare Formularfelder'
     REQUIRED: 'Pflichtfeld?'
     RIGHTTITLE: 'Titel rechts'
@@ -109,9 +108,8 @@ de_DE:
     PLURALNAME: Radio-Buttons
     SINGULARNAME: Radio-Button
   EditableTextField:
-    AUTOCOMPLETE: 'Automatisch vervollständigen'
-    AUTOCOMPLETE_DESCRIPTION: 'Unterstützte Browser versuchen, dieses Feld automatisch mit den Benutzerinformationen zu füllen, verwenden, um den gefüllten Wert festzulegen'
     NUMBERROWS: 'Anzahl der Zeilen'
+    PLACEHOLDER: Platzhalter
     PLURALNAME: Textfelder
     SINGULARNAME: Textfeld
     TEXTLENGTH: Textlänge
