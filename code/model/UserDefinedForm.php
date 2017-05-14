@@ -275,6 +275,7 @@ SQL;
 
         // Filter by rules
         $recipients = $recipients->filterByCallback(function ($recipient) use ($data, $form) {
+            /** @var UserDefinedForm_EmailRecipient $recipient */
             return $recipient->canSend($data, $form);
         });
 

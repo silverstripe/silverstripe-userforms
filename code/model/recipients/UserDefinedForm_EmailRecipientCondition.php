@@ -5,6 +5,11 @@
  * Declares a condition that determines whether an email can be sent to a given recipient
  *
  * @method UserDefinedForm_EmailRecipient Parent()
+ *
+ * @property Enum ConditionOption
+ * @property Varchar ConditionValue
+ *
+ * @method EditableFormField ConditionField
  */
 class UserDefinedForm_EmailRecipientCondition extends DataObject
 {
@@ -19,11 +24,15 @@ class UserDefinedForm_EmailRecipientCondition extends DataObject
         "IsBlank" => "Is blank",
         "IsNotBlank" => "Is not blank",
         "Equals" => "Equals",
-        "NotEquals" => "Doesn't equal"
+        "NotEquals" => "Doesn't equal",
+        "ValueLessThan" => "Less than",
+        "ValueLessThanEqual" => "Less than or equal",
+        "ValueGreaterThan" => "Greater than",
+        "ValueGreaterThanEqual" => "Greater than or equal"
     );
 
     private static $db = array(
-        'ConditionOption' => 'Enum("IsBlank,IsNotBlank,Equals,NotEquals")',
+        'ConditionOption' => 'Enum("IsBlank,IsNotBlank,Equals,NotEquals,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
         'ConditionValue' => 'Varchar'
     );
 
@@ -33,27 +42,55 @@ class UserDefinedForm_EmailRecipientCondition extends DataObject
     );
 
     /**
+     *
      * Determine if this rule matches the given condition
      *
-     * @param array $data
-     * @param Form $form
-     * @return bool
+     * @param $data
+     *
+     * @return bool|null
+     * @throws LogicException
      */
-    public function matches($data, $form)
+    public function matches($data)
     {
         $fieldName = $this->ConditionField()->Name;
         $fieldValue = isset($data[$fieldName]) ? $data[$fieldName] : null;
+        $conditionValue = $this->ConditionValue;
+        $result = null;
         switch ($this->ConditionOption) {
             case 'IsBlank':
-                return empty($fieldValue);
+                $result = empty($fieldValue);
+                break;
             case 'IsNotBlank':
-                return !empty($fieldValue);
+                $result = !empty($fieldValue);
+                break;
+            case 'ValueLessThan':
+                $result = ($fieldValue < $conditionValue);
+                break;
+            case 'ValueLessThanEqual':
+                $result = ($fieldValue <= $conditionValue);
+                break;
+            case 'ValueGreaterThan':
+                $result = ($fieldValue > $conditionValue);
+                break;
+            case 'ValueGreaterThanEqual':
+                $result = ($fieldValue >= $conditionValue);
+                break;
+            case 'NotEquals':
+            case 'Equals':
+                $result = is_array($fieldValue)
+                    ? in_array($conditionValue, $fieldValue)
+                    : $fieldValue == $conditionValue;
+
+                if ($this->ConditionOption == 'NotEquals') {
+                    $result = !($result);
+                }
+                break;
             default:
-                $matches = is_array($fieldValue)
-                    ? in_array($this->ConditionValue, $fieldValue)
-                    : $this->ConditionValue === (string) $fieldValue;
-                return ($this->ConditionOption === 'Equals') === (bool)$matches;
+                throw new LogicException("Unhandled rule {$this->ConditionOption}");
+                break;
         }
+
+        return $result;
     }
 
         /**
