@@ -157,7 +157,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
             $validEmailToFields->merge($multiOptionFields);
         } else {
             // To address cannot be unbound, so restrict to pre-defined lists
-        $validEmailToFields = $multiOptionFields;
+            $validEmailToFields = $multiOptionFields;
         }
 
         // Build fieldlist
@@ -383,7 +383,8 @@ class UserDefinedForm_EmailRecipient extends DataObject
         // Check all rules
         $isAnd = $this->CustomRulesCondition === 'And';
         foreach ($customRules as $customRule) {
-            $matches = $customRule->matches($data, $form);
+            /** @var UserDefinedForm_EmailRecipientCondition  $customRule */
+            $matches = $customRule->matches($data);
             if ($isAnd && !$matches) {
                 return false;
             }

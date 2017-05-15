@@ -347,6 +347,7 @@ class UserDefinedFormTest extends FunctionalTest
 
     public function testEmailRecipientFilters()
     {
+        /** @var UserDefinedForm $form */
         $form = $this->objFromFixture('UserDefinedForm', 'filtered-form-page');
 
         // Check unfiltered recipients
@@ -403,7 +404,6 @@ class UserDefinedFormTest extends FunctionalTest
             ),
             $result2
         );
-
 
         $result3 = $form->FilteredEmailRecipients(
             array(
