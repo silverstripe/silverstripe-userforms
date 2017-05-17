@@ -126,31 +126,30 @@ class EditableLiteralField extends EditableFormField
 
     public function getFormField()
     {
-        // Build label and css classes
-        $label = '';
-        $classes = $this->ExtraClass;
-        if (empty($this->Title) || $this->HideLabel) {
-            $classes .= " nolabel";
-        } else {
-            $label = "<label class='left'>{$this->EscapedTitle}</label>";
-        }
-
-        $field = new LiteralField(
-            "LiteralField[{$this->ID}]",
-            sprintf(
-                "<div id='%s' class='field text %s'>
-					%s
-					<div class='middleColumn literalFieldArea'>%s</div>".
-                "</div>",
-                Convert::raw2htmlname($this->Name),
-                Convert::raw2att($classes),
-                $label,
-                $this->dbObject('Content')->forTemplate()
-            )
+        $content = LiteralField::create(
+            "LiteralFieldContent-{$this->ID}]",
+            $this->dbObject('Content')->forTemplate()
         );
 
-        // When dealing with literal fields there is no further customisation that can be added at this point
+        $field = CompositeField::create($content)
+            ->setName($this->Name)
+            ->setID($this->Name)
+            ->setFieldHolderTemplate('UserFormsLiteralField_holder');
+
+        $this->doUpdateFormField($field);
+
         return $field;
+    }
+
+    protected function updateFormField($field)
+    {
+        parent::updateFormField($field);
+
+        if ($this->HideLabel) {
+            $this->ExtraClass .= ' nolabel';
+        } else {
+            $field->setTitle($this->Title);
+        }
     }
 
     public function showInReports()
