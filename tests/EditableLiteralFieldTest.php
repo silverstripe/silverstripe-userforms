@@ -38,9 +38,39 @@ class EditableLiteralFieldTest extends SapphireTest
             'Title' => 'Test label'
         ));
 
-        $this->assertContains('Test label', $field->getFormField()->Field());
+        $this->assertContains('Test label', $field->getFormField()->FieldHolder());
+        $this->assertEquals('Test label', $field->getFormField()->Title());
 
         $field->HideLabel = true;
-        $this->assertNotContains('Test label', $field->getFormField()->Field());
+        $this->assertNotContains('Test label', $field->getFormField()->FieldHolder());
+        $this->assertEmpty($field->getFormField()->Title());
+    }
+
+    public function testLiteralFieldHasUpdateFormFieldMethodCalled()
+    {
+        $field = $this->getMockBuilder('EditableLiteralField')
+            ->setMethods(array('doUpdateFormField'))
+            ->getMock();
+
+        $field->expects($this->once())->method('doUpdateFormField');
+
+        $field->getFormField();
+    }
+
+    /**
+     * LiteralFields do not allow field names, etc. Instead, the field is contained within a composite field. This
+     * test ensures that this structure is correct.
+     */
+    public function testLiteralFieldIsContainedWithinCompositeField()
+    {
+        $field = new EditableLiteralField;
+        $formField = $field->getFormField();
+
+        $this->assertInstanceOf('CompositeField', $formField, 'Literal field is contained within a composite field');
+        $this->assertInstanceOf(
+            'LiteralField',
+            $formField->FieldList()->first(),
+            'Actual literal field exists in composite field children'
+        );
     }
 }
