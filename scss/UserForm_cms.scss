@@ -140,6 +140,15 @@
 					color: #777;
 				}
 			}
+
+			.dropdown {
+				border: 1px solid #C1C7CC;
+				box-shadow: 0 0 1px #C1C7CC;
+				height: 26px;
+				color: #555;
+				background: #fdfdfd;
+				background-image: linear-gradient(#efefef, #ffffff 10%, #ffffff 90%, #efefef);
+			}
 		}
 
 		.stickyButtons {
