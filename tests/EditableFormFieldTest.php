@@ -205,12 +205,16 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertEquals(20, $attributes['data-rule-maxlength']);
     }
 
-	public function testFormatDisplayRules()
-	{
-		/** @var EditableCheckbox $checkbox */
-		$checkbox = $this->objFromFixture('EditableFormField', 'irdNumberField');
-		$displayRules = $checkbox->formatDisplayRules();
-		$this->assertNotNull($displayRules);
-		$this->assertCount(1, $displayRules['operations']);
-	}
+    public function testFormatDisplayRules()
+    {
+        $field = $this->objFromFixture('EditableFormField', 'irdNumberField');
+        $displayRules = $field->formatDisplayRules();
+        $this->assertNotNull($displayRules);
+        $this->assertCount(1, $displayRules['operations']);
+
+        // Field is initially visible, so the "view" method should be to hide it
+        $this->assertSame('addClass("hide")', $displayRules['view']);
+        // The opposite method should be to return it to its original state, i.e. show it again
+        $this->assertSame('removeClass("hide")', $displayRules['opposite']);
+    }
 }
