@@ -309,10 +309,7 @@ class EditableFormField extends DataObject
             },
             'FieldValue' => function ($record, $column, $grid) {
                 return TextField::create($column);
-            },
-            'ParentID' => function ($record, $column, $grid) use ($self) {
-                return HiddenField::create($column, '', $self->ID);
-                },
+            }
         ));
 
         // Custom rules
