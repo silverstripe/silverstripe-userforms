@@ -93,7 +93,7 @@ class EditableFileField extends EditableFormField
         );
 
         if ($this->MaxFileSizeMB > 0) {
-            $field->getValidator()->setAllowedMaxFileSize($this->MaxFileSizeMB * 1024);
+            $field->getValidator()->setAllowedMaxFileSize($this->MaxFileSizeMB * 1024 * 1024);
         } else {
             $field->getValidator()->setAllowedMaxFileSize(static::get_php_max_file_size());
         }
