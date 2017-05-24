@@ -22,7 +22,6 @@ use SilverStripe\Forms\SegmentField;
  */
 class EditableFormField extends DataObject
 {
-
     /**
      * Set to true to hide from class selector
      *
@@ -101,11 +100,9 @@ class EditableFormField extends DataObject
         'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
     );
 
-
     private static $defaults = array(
         'ShowOnLoad' => true,
     );
-
 
     /**
      * @config
@@ -190,7 +187,26 @@ class EditableFormField extends DataObject
                     _t('EditableFormField.TYPE', 'Type'),
                     $this->i18n_singular_name()
                 ),
-                CheckboxField::create('ShowInSummary', _t('EditableFormField.SHOWINSUMMARY', 'Show in summary gridfield')),
+                TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
+                TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
+                TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title'))
+            )
+        );
+        $fields->fieldByName('Root.Main')->setTitle(_t('SiteTree.TABMAIN', 'Main'));
+
+        $fields->addFieldsToTab(
+            'Root.Advanced',
+            array(
+                DropdownField::create('ShowInSummary', _t('EditableFormField.SHOWINSUMMARY', 'Summary Item'), array('No', 'Yes'))->setRightTitle(
+                    _t(
+                        'EditableFormField.SHOWINSUMMARY_RIGHTTITLE',
+                        'This will toggle the display of this fields value in the Grid Field that appears under the "Submissions" tab'
+                    )
+                ),
+                SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
+                    UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
+                    DisambiguationSegmentFieldModifier::create(),
+                ))->setPreview($this->Name),
                 LiteralField::create(
                     'MergeField',
                     _t(
@@ -203,7 +219,7 @@ class EditableFormField extends DataObject
                         '</div>'
                     )
                 ),
-                TextField::create('Title'),
+                TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
                 TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
                 TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
                 SegmentField::create('Name')->setModifiers(array(
@@ -224,7 +240,7 @@ class EditableFormField extends DataObject
                 }
             }
 
-            $fields->addFieldToTab('Root.Main',
+            $fields->addFieldToTab('Root.Advanced',
                 DropdownField::create(
                     'ExtraClass',
                     _t('EditableFormField.EXTRACLASS_TITLE', 'Extra Styling/Layout'),
@@ -235,7 +251,7 @@ class EditableFormField extends DataObject
                 ))
             );
         } else {
-            $fields->addFieldToTab('Root.Main',
+            $fields->addFieldToTab('Root.Advanced',
                 TextField::create(
                     'ExtraClass',
                     _t('EditableFormField.EXTRACLASS_Title', 'Extra CSS classes')
@@ -250,6 +266,10 @@ class EditableFormField extends DataObject
         $validationFields = $this->getFieldValidationOptions();
         if ($validationFields && $validationFields->count()) {
             $fields->addFieldsToTab('Root.Validation', $validationFields);
+
+            /** @var TabSet $tabSet */
+            $tabSet = $fields->fieldByName('Root.Validation');
+            $tabSet->setTitle(_t('EditableFormField.VALIDATION', 'Validation'));
         }
 
         // Add display rule fields
@@ -349,6 +369,9 @@ class EditableFormField extends DataObject
         );
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
@@ -463,7 +486,6 @@ class EditableFormField extends DataObject
      * Return whether a user can create an object of this type
      *
      * @param Member $member
-     * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
     public function canCreate($member = null)
@@ -571,6 +593,8 @@ class EditableFormField extends DataObject
      * Delete this field from a given stage
      *
      * Wrapper for the {@link Versioned} deleteFromStage function
+     *
+     * @param string $stage
      */
     public function doDeleteFromStage($stage)
     {
@@ -629,6 +653,8 @@ class EditableFormField extends DataObject
 
     /**
      * @deprecated since version 4.0
+     *
+     * @param array $settings
      */
     public function setSettings($settings = array())
     {
@@ -638,6 +664,8 @@ class EditableFormField extends DataObject
 
     /**
      * @deprecated since version 4.0
+     * @param string $key
+     * @param mixed $value
      */
     public function setSetting($key, $value)
     {
@@ -664,6 +692,8 @@ class EditableFormField extends DataObject
 
     /**
      * @deprecated since version 4.0
+     * @param string $setting
+     * @return mixed|string
      */
     public function getSetting($setting)
     {
@@ -685,7 +715,7 @@ class EditableFormField extends DataObject
      */
     public function getIcon()
     {
-        return USERFORMS_DIR . '/images/' . strtolower($this->class) . '.png';
+        return Controller::join_links(USERFORMS_DIR, 'images',strtolower($this->class) . '.png');
     }
 
     /**
@@ -736,6 +766,8 @@ class EditableFormField extends DataObject
         }
         // Check parent
         $form = $this->Parent();
+
+        /** @var FieldList $fields */
         if (!$form || !$form->exists() || !($fields = $form->Fields())) {
             return null;
         }
@@ -760,6 +792,9 @@ class EditableFormField extends DataObject
         return null;
     }
 
+    /**
+     * @return string
+     */
     public function getCMSTitle()
     {
         return $this->i18n_singular_name() . ' (' . $this->Title . ')';
@@ -767,6 +802,9 @@ class EditableFormField extends DataObject
 
     /**
      * @deprecated since version 4.0
+     * @param bool $field
+     *
+     * @return string
      */
     public function getFieldName($field = false)
     {
@@ -776,6 +814,9 @@ class EditableFormField extends DataObject
 
     /**
      * @deprecated since version 4.0
+     * @param $field
+     *
+     * @return string
      */
     public function getSettingName($field)
     {
@@ -794,7 +835,7 @@ class EditableFormField extends DataObject
     public function getFieldValidationOptions()
     {
         $fields = new FieldList(
-            CheckboxField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?'))
+            DropdownField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?'), array('No', 'Yes'))
                 ->setDescription(_t('EditableFormField.REQUIRED_DESCRIPTION', 'Please note that conditional fields can\'t be required')),
             TextField::create('CustomErrorMessage', _t('EditableFormField.CUSTOMERROR', 'Custom Error Message'))
         );
@@ -908,7 +949,10 @@ class EditableFormField extends DataObject
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
 
-        return DBField::create_field('Varchar', $errorMessage);
+        /** @var Varchar $field */
+        $field = DBField::create_field('Varchar', $errorMessage);
+
+        return $field;
     }
 
     /**
@@ -1003,7 +1047,7 @@ class EditableFormField extends DataObject
     /**
      * Get the list of classes that can be selected and used as data-values
      *
-     * @param $includeLiterals Set to false to exclude non-data fields
+     * @param bool $includeLiterals Set to false to exclude non-data fields
      * @return array
      */
     public function getEditableFieldClasses($includeLiterals = true)
