@@ -61,7 +61,7 @@ class EditableFileFieldTest extends SapphireTest
         $fileField->write();
 
         $formField = $fileField->getFormField();
-        $this->assertEquals($formField->getValidator()->getAllowedMaxFileSize(), 256);
+        $this->assertEquals($formField->getValidator()->getAllowedMaxFileSize(), 262144);
     }
 
 }
