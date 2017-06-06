@@ -772,6 +772,7 @@ JS
             $('{$target}').{$rule['opposite']};
         }
     });
+    $("{$target}").find('.hide').removeClass('hide');
 EOS;
         }
 
