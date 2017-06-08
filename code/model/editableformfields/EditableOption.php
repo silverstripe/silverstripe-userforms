@@ -80,7 +80,12 @@ class EditableOption extends DataObject
 		return Convert::raw2att($this->Title);
 	}
 
-    /**
+	public function getEscapedValue()
+	{
+	    return Convert::raw2att($this->Value);
+	}
+	
+	/**
      * @param Member $member
      * @return bool
      */

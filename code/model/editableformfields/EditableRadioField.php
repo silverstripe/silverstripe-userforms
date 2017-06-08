@@ -34,7 +34,7 @@ class EditableRadioField extends EditableMultipleOptionField
         // Set default item
         $defaultOption = $this->getDefaultOptions()->first();
         if ($defaultOption) {
-            $field->setValue($defaultOption->EscapedTitle);
+            $field->setValue($defaultOption->EscapedValue);
         }
         $this->doUpdateFormField($field);
         return $field;
