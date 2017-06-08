@@ -778,29 +778,22 @@ JS
             $conjunction = $rule['conjunction'];
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
-            $initialState = $rule['initialState'];
-            $view = $rule['view'];
-            $opposite = $rule['opposite'];
 
             $result .= <<<EOS
 \n
-    //Initial state
-    $('{$target}').{$initialState}();
-
     $('.userform').on('{$events}',
     "{$selectors}",
     function (){
-        if({$operations}) {
-            $('{$target}').{$view}();
+        if ({$operations}) {
+            $('{$target}').{$rule['view']};
         } else {
-            $('{$target}').{$opposite}();
+            $('{$target}').{$rule['opposite']};
         }
     });
+    $("{$target}").find('.hide').removeClass('hide');
 EOS;
-
         }
 
         return $result;
     }
-
 }

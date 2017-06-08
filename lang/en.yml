@@ -57,6 +57,7 @@ en:
     DEFAULT: 'Default value'
     DEFAULTTOTODAY: 'Default to Today?'
     DELETE: Delete
+    DISPLAYIF: 'Toggle visibility when'
     DISPLAY_RULES_DISABLED: 'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
     DRAG: 'Drag to rearrange order of fields'
     ENTERQUESTION: 'Enter Question'
@@ -73,6 +74,7 @@ en:
     GROUP: Group
     HIDE: Hide
     HIDETHISFIELD: 'Hide This Field'
+    INITIALVISIBILITY: 'Initial visibility'
     IS: Is
     LESSTHAN: 'Value Less Than'
     LESSTHANEQUAL: 'Value Less Than Or Equal'
@@ -91,6 +93,7 @@ en:
     REQUIRED_DESCRIPTION: 'Please note that conditional fields can''t be required'
     RIGHTTITLE: 'Right title'
     SHOW: Show
+    SHOWINSUMMARY: 'Show in summary gridfield'
     SHOWONLOAD: 'Initial visibility before processing these rules'
     SHOWONLOAD_TITLE: 'Show on load'
     SHOWOPTIONS: 'Show Options'
@@ -144,10 +147,11 @@ en:
     PLURALNAME: 'Radio Groups'
     SINGULARNAME: 'Radio Group'
   EditableTextField:
-    AUTOCOMPLETE: 'Autocomplete'
+    AUTOCOMPLETE: Autocomplete
     AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
+    PLACEHOLDER: Placeholder
     PLURALNAME: 'Text Fields'
     RANGE_TO: to
     SINGULARNAME: 'Text Field'

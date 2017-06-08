@@ -28,4 +28,15 @@ class EditableCustomRuleTest extends SapphireTest
         //Check for greater than sign
         $this->assertContains('>', $result2['operation']);
     }
+
+    /**
+     * Test that methods are returned for manipulating the presence of the "hide" CSS class depending
+     * on whether the field should be hidden or shown
+     */
+    public function testToggleDisplayText()
+    {
+        $rule1 = $this->objFromFixture('EditableCustomRule', 'rule1');
+        $this->assertSame('addClass("hide")', $rule1->toggleDisplayText('show'));
+        $this->assertSame('removeClass("hide")', $rule1->toggleDisplayText('hide'));
+    }
 }

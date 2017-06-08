@@ -106,8 +106,6 @@ es_ES:
     PLURALNAME: 'Opciones editables'
     SINGULARNAME: 'Opciones editables'
   EditableTextField:
-    AUTOCOMPLETE: 'Autocompletar'
-    AUTOCOMPLETE_DESCRIPTION: 'Los navegadores compatibles intentarán rellenar este campo automáticamente con la información de los usuarios, usarla para establecer el valor poblado'
     NUMBERROWS: 'Cantidad de filas'
     PLURALNAME: 'Campos de texto'
     SINGULARNAME: 'Campo de texto'
