@@ -309,10 +309,7 @@ class EditableFormField extends DataObject
             },
             'FieldValue' => function ($record, $column, $grid) {
                 return TextField::create($column);
-            },
-            'ParentID' => function ($record, $column, $grid) use ($self) {
-                return HiddenField::create($column, '', $self->ID);
-                },
+            }
         ));
 
         // Custom rules
@@ -1095,9 +1092,10 @@ class EditableFormField extends DataObject
             }
             $result['operations'][] = $expression['operation'];
 
-            //View/Show should read
+            // View/Show should read
+            $opposite = ($result['initialState'] === 'hide') ? 'show' : 'hide';
             $result['view'] = $rule->toggleDisplayText($result['initialState']);
-            $result['opposite'] = $rule->toggleDisplayText($result['view']);
+            $result['opposite'] = $rule->toggleDisplayText($opposite);
         }
 
         return (count($result['selectors'])) ? $result : null;

@@ -189,15 +189,21 @@ class EditableCustomRule extends DataObject
             case 'ValueNot':
                 if ($checkboxField) {
                     if ($formFieldWatch->isCheckBoxGroupField()) {
-                        $expression = sprintf("$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
-                            $fieldValue, $target);
+                        $expression = sprintf(
+                            "$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
+                            $fieldValue,
+                            $target
+                        );
                     } else {
                         $expression = "{$target}.prop('checked')";
                     }
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
-                    $expression = sprintf('%s.closest(".field, .control-group").find("input:checked").val() == "%s"',
-                        $target, $fieldValue);
+                    $expression = sprintf(
+                        '%s.closest(".field, .control-group").find("input:checked").val() == "%s"',
+                        $target,
+                        $fieldValue
+                    );
                 } else {
                     $expression = sprintf('%s.val() == "%s"', $target, $fieldValue);
                 }
@@ -211,8 +217,12 @@ class EditableCustomRule extends DataObject
             case 'ValueLessThanEqual':
             case 'ValueGreaterThan':
             case 'ValueGreaterThanEqual':
-                $expression = sprintf('%s.val() %s parseFloat("%s")', $target,
-                    $conditionOptions[$this->ConditionOption], $fieldValue);
+                $expression = sprintf(
+                    '%s.val() %s parseFloat("%s")',
+                    $target,
+                    $conditionOptions[$this->ConditionOption],
+                    $fieldValue
+                );
                 break;
             default:
                 throw new LogicException("Unhandled rule {$this->ConditionOption}");
@@ -228,14 +238,14 @@ class EditableCustomRule extends DataObject
     }
 
     /**
-     * Returns the opposite of the show/hide pairs of strings
+     * Returns the opposite visibility function for the value of the initial visibility field, e.g. show/hide. This
+     * will toggle the "hide" class either way, which is handled by CSS.
      *
      * @param string $text
-     *
      * @return string
      */
     public function toggleDisplayText($text)
     {
-        return (strtolower($text) === 'show') ? 'hide' : 'show';
+        return (strtolower($text) === 'hide') ? 'removeClass("hide")' : 'addClass("hide")';
     }
 }
