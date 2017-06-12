@@ -38,7 +38,7 @@ class EditableDropdown extends EditableMultipleOptionField
         // Set default
         $defaultOption = $this->getDefaultOptions()->first();
         if ($defaultOption) {
-            $field->setValue($defaultOption->EscapedValue);
+            $field->setValue($defaultOption->Value);
         }
         $this->doUpdateFormField($field);
         return $field;
