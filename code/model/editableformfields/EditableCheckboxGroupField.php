@@ -24,7 +24,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
         // Set the default checked items
         $defaultCheckedItems = $this->getDefaultOptions();
         if ($defaultCheckedItems->count()) {
-            $field->setDefaultItems($defaultCheckedItems->map('EscapedTitle')->keys());
+            $field->setDefaultItems($defaultCheckedItems->map('Value')->keys());
         }
 
         $this->doUpdateFormField($field);
