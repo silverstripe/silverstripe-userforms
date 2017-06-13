@@ -75,12 +75,16 @@ class EditableOption extends DataObject
 		return $this->canEdit($member);
 	}
 
+	/**
+	 * @deprecated 5.0 Use "$Title.XML" in templates instead
+	 * @return string
+	 */
     public function getEscapedTitle()
     {
 		return Convert::raw2att($this->Title);
 	}
 
-    /**
+	/**
      * @param Member $member
      * @return bool
      */
