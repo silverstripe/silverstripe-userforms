@@ -20,11 +20,19 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
      */
     public function preview()
     {
-        return $this->customise(new ArrayData(array(
+        // Enable theme for preview (may be needed for Shortcodes)
+        Config::nest();
+        Config::inst()->update('SSViewer', 'theme_enabled', true);
+
+        $content = $this->customise(new ArrayData(array(
             'Body' => $this->record->getEmailBodyContent(),
             'HideFormData' => $this->record->HideFormData,
             'Fields' => $this->getPreviewFieldData()
         )))->renderWith($this->record->EmailTemplate);
+
+        Config::unnest();
+
+        return $content;
     }
 
     /**
