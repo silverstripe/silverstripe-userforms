@@ -57,7 +57,23 @@ class SubmittedForm extends DataObject
 
         $this->beforeUpdateCMSFields(function ($fields) use ($self) {
             $fields->removeByName('Values');
-            $fields->dataFieldByName('SubmittedByID')->setDisabled(true);
+
+            //check to ensure there is a Member to extract an Email from else null value
+            if($self->SubmittedBy() && $self->SubmittedBy()->exists()){
+                $submitter =  $self->SubmittedBy()->Email;
+            } else {
+                $submitter = null;
+            }
+
+            //replace scaffolded field with readonly submitter
+            $fields->replaceField(
+                'SubmittedByID',
+                ReadonlyField::create(
+                    'Submitter',
+                    'Submitter',
+                    $submitter
+                )
+            );
 
             $values = new GridField(
                 'Values',

@@ -232,6 +232,7 @@ SQL;
 
             // attach every column to the print view form
             $columns['Created'] = 'Created';
+            $columns['SubmittedBy.Email'] = 'Submitter';
             $filter->setColumns($columns);
 
             // print configuration
