@@ -30,8 +30,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~3.1",
-        "silverstripe/cms": "~3.1",
+        "silverstripe/framework": "~3.2",
+        "silverstripe/cms": "~3.2",
         "silverstripe-australia/gridfieldextensions": "~1.1",
         "silverstripe/segment-field": "^1.0"
     },
