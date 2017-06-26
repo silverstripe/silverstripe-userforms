@@ -5,12 +5,11 @@
 (function ($) {
 	$(document).ready(function () {
 
+        var sendPlain = $('input[name="SendPlain"]');
 		var recipient = {
 			// Some fields are only visible when HTML email are being sent.
 			updateFormatSpecificFields: function () {
-				var sendPlainChecked = $('#SendPlain')
-					.find('input[type="checkbox"]')
-					.is(':checked');
+				var sendPlainChecked = sendPlain.is(':checked');
 
 				$(".field.toggle-html-only")[sendPlainChecked ? 'hide' : 'show']();
 				$(".field.toggle-plain-only")[sendPlainChecked ? 'show' : 'hide']();
@@ -27,7 +26,7 @@
 				}
 			});
 
-			$('#SendPlain').entwine({
+			sendPlain.entwine({
 				onchange: function () {
 					recipient.updateFormatSpecificFields();
 				}

@@ -261,10 +261,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
                 ->addExtraClass('toggle-html-only'),
             TextareaField::create('EmailBody', _t('UserDefinedForm.EMAILBODY', 'Body'))
                 ->addExtraClass('toggle-plain-only'),
-            LiteralField::create(
-                'EmailPreview',
-                '<div id="EmailPreview" class="field toggle-html-only">' . $preview . '</div>'
-            )
+            LiteralField::create('EmailPreview', $preview)
         ));
 
         $fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
