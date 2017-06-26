@@ -131,14 +131,13 @@ class UserDefinedForm extends Page
     /**
      * @return FieldList
      */
-     public function getCMSFields()
-     {
-         Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
+    public function getCMSFields()
+    {
+        Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
 
-         $self = $this;
+        $self = $this;
 
-         $this->beforeUpdateCMSFields(function ($fields) use ($self) {
-
+        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
             // define tabs
             $fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
             $fields->findOrMakeTab('Root.Recipients', _t('UserDefinedForm.RECIPIENTS', 'Recipients'));
@@ -180,12 +179,6 @@ class UserDefinedForm extends Page
 
 
             // view the submissions
-            $submissions = new GridField(
-                'Submissions',
-                _t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
-                 $self->Submissions()->sort('Created', 'DESC')
-            );
-
             // make sure a numeric not a empty string is checked against this int column for SQL server
             $parentID = (!empty($self->ID)) ? (int) $self->ID : 0;
 
@@ -245,6 +238,7 @@ SQL;
 
             // attach every column to the print view form
             $columns['Created'] = 'Created';
+            $columns['SubmittedBy.Email'] = 'Submitter';
             $filter->setColumns($columns);
 
             // print configuration
@@ -256,23 +250,33 @@ SQL;
             $export->setCsvHasHeader(true);
             $export->setExportColumns($columns);
 
-            $submissions->setConfig($config);
+            $submissions = GridField::create(
+                'Submissions',
+                _t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
+                $self->Submissions()->sort('Created', 'DESC'),
+                $config
+            );
             $fields->addFieldToTab('Root.Submissions', $submissions);
-            $fields->addFieldToTab('Root.FormOptions', new CheckboxField('DisableSaveSubmissions', _t('UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')));
-
+            $fields->addFieldToTab(
+                'Root.FormOptions',
+                CheckboxField::create(
+                    'DisableSaveSubmissions',
+                    _t('UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
+                )
+            );
         });
 
-         $fields = parent::getCMSFields();
+        $fields = parent::getCMSFields();
 
-         if ($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
-             $fields->addFieldToTab("Root.Main", new LiteralField("EmailRecipientsWarning",
+        if ($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
+            $fields->addFieldToTab("Root.Main", new LiteralField("EmailRecipientsWarning",
                 "<p class=\"message warning\">" . _t("UserDefinedForm.NORECIPIENTS",
                 "Warning: You have not configured any recipients. Form submissions may be missed.")
                 . "</p>"), "Title");
-         }
+        }
 
-         return $fields;
-     }
+        return $fields;
+    }
 
     /**
      * Allow overriding the EmailRecipients on a {@link DataExtension}
@@ -483,7 +487,7 @@ class UserDefinedForm_Controller extends Page_Controller
         }
         if ($watch) {
             $rules .= $this->buildWatchJS($watch);
-                }
+        }
 
         // Only add customScript if $default or $rules is defined
         if ($rules) {

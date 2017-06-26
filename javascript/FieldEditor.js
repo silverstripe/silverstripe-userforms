@@ -47,8 +47,8 @@
 				// Make sure gridfield buttons stick to top of page when user scrolls down
 				stickyHeaderInterval = setInterval(function () {
 					var offsetTop = fieldEditor.offset().top;
-					$buttonrow.width(self.width());
-					if (offsetTop > navHeight || offsetTop === 0) {	
+					$buttonrow.width('100%');
+					if (offsetTop > navHeight || offsetTop === 0) {
 						$buttonrow.removeClass('stickyButtons');
 					} else {
 						$buttonrow.addClass('stickyButtons');
