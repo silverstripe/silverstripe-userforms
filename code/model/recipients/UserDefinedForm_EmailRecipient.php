@@ -221,14 +221,17 @@ class UserDefinedForm_EmailRecipient extends DataObject
                     'The email address which the recipient is able to \'reply\' to.'
                 ))
         ));
-        
+
         $fields->fieldByName('Root.EmailDetails')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'Email Details'));
 
         // Only show the preview link if the recipient has been saved.
         if (!empty($this->EmailTemplate)) {
             $preview = sprintf(
                 '<p><a href="%s" target="_blank" class="ss-ui-button">%s</a></p><em>%s</em>',
-                "admin/pages/edit/EditForm/field/EmailRecipients/item/{$this->ID}/preview",
+                Controller::join_links(
+                    singleton('CMSPageEditController')->getEditForm()->FormAction(),
+                    "field/EmailRecipients/item/{$this->ID}/preview"
+                ),
                 _t('UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
                 _t('UserDefinedForm.PREVIEW_EMAIL_DESCRIPTION', 'Note: Unsaved changes will not appear in the preview.')
             );

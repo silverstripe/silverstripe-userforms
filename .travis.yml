@@ -1,4 +1,4 @@
-# See https://github.com/silverstripe-labs/silverstripe-travis-support for setup details
+# See https://github.com/silverstripe/silverstripe-travis-support for setup details
 
 sudo: false
 
@@ -14,9 +14,11 @@ matrix:
       env: DB=MYSQL CORE_RELEASE=3
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.5 SECUREASSETS=1
+    - php: 7.1
+      env: DB=MYSQL CORE_RELEASE=3.6
 
 before_script:
-  - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+  - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
   - "if [ \"$SECUREASSETS\" = \"\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss; fi"
   - "if [ \"$SECUREASSETS\" = \"1\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require silverstripe/secureassets; fi"
   - cd ~/builds/ss
