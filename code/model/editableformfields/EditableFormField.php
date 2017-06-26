@@ -1076,7 +1076,7 @@ class EditableFormField extends DataObject
         foreach ($this->EffectiveDisplayRules() as $rule) {
             // Get the field which is effected
             /** @var EditableFormField $formFieldWatch */
-            $formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
+            $formFieldWatch = DataObject::get_by_id('EditableFormField', $rule->ConditionFieldID);
             // Skip deleted fields
             if (! $formFieldWatch) {
                 continue;
