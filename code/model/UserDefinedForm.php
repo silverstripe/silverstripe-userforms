@@ -455,7 +455,7 @@ class UserDefinedForm_Controller extends Page_Controller
                 foreach ($field->EffectiveDisplayRules() as $rule) {
 
                     // Get the field which is effected
-                    $formFieldWatch = EditableFormField::get()->byId($rule->ConditionFieldID);
+                    $formFieldWatch = DataObject::get_by_id('EditableFormField', $rule->ConditionFieldID);
 
                     // Skip deleted fields
                     if (!$formFieldWatch) {
