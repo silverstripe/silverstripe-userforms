@@ -1,14 +1,6 @@
 /**
  * Animations
  */
-@keyframes rowSlide {
-  0% {
-    top: 20%;
-  }
-  100% {
-    top: 80%;
-  }
-}
 @keyframes flashBackground {
   0% {
     background-color: white;
@@ -41,10 +33,6 @@
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item .handle {
   min-height: 46px;
-}
-.cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.newField {
-  position: fixed;
-  animation: rowSlide .5s ease forwards;
 }
 .cms .uf-field-editor table.ss-gridfield-table .ss-gridfield-item.flashBackground {
   animation: flashBackground 2s linear;
