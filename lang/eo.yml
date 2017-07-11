@@ -191,7 +191,6 @@ eo:
     FORM: Formularo
     FROMADDRESS: 'Sendi retpoŝton de'
     FileUploadWarning: 'Dosieroj alŝutitaj per ĉi tiu kampo eble estos alireblaj se la ĝusta URL estas sciata.'
-    HIDEFIELDLABELS: 'Kaŝi kampajn etikedojn'
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
     NORECIPIENTS: 'Averto: Vi ne agordis ricevantojn. Eble mankos sendoj de formularoj.'
     ONCOMPLETELABEL: 'Vidigi je kompletigo'

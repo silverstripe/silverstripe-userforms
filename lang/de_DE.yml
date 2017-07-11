@@ -151,7 +151,6 @@ de_DE:
     FIELDS: Felder
     FORM: Formular
     FROMADDRESS: 'E-Mail versendet von'
-    HIDEFIELDLABELS: 'Feldbezeichnungen verbergen'
     HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
