@@ -1,5 +1,5 @@
 <div id="$Name" class="field<% if $extraClass %> $extraClass<% end_if %>">
-    <% if $Title %><label class="left">$Title</label><% end_if %>
+    <% if $Title %><p class="left">$Title</p><% end_if %>
     <div class="middleColumn">
         <% loop $FieldList %>
             $Field
