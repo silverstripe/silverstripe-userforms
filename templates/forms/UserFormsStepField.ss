@@ -1,15 +1,15 @@
-<fieldset id="$Name" class="form-step $extraClass" data-title="$Title">
+<div id="$Name" class="form-step $extraClass" data-title="$Title">
 	<% if $Form.DisplayErrorMessagesAtTop %>
-		<fieldset class="error-container" aria-hidden="true" style="display: none;">
+		<div class="error-container" aria-hidden="true" style="display: none;">
 			<div>
 				<h4></h4>
 				<ul class="error-list"></ul>
 			</div>
-		</fieldset>
+		</div>
 	<% end_if %>
 
 	<% loop $Children %>
 		$FieldHolder
 	<% end_loop %>
 
-</fieldset>
+</div>
