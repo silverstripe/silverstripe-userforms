@@ -75,7 +75,7 @@ class SubmittedForm extends DataObject
                 )
             );
 
-            $values = new GridField(
+            $values = GridField::create(
                 'Values',
                 'SubmittedFormField',
                 $self->Values()->sort('Created', 'ASC')
