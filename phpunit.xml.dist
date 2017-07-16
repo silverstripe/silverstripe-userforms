@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="framework/tests/bootstrap.php" colors="true">
+    <listeners>
+        <listener class="SS_TestListener" file="framework/dev/TestListener.php" />
+    </listeners>
+    <testsuites>
+        <testsuite name="userforms">
+            <directory>./userforms/tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">userforms/code/</directory>
+            <exclude>
+                <directory suffix=".php">userforms/tests/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
