@@ -446,4 +446,33 @@ class UserDefinedForm_EmailRecipient extends DataObject
 
         return $templates;
     }
+
+    /**
+     * Validate that valid email addresses are being used
+     *
+     * @return ValidationResult
+     */
+    public function validate() {
+        $result = parent::validate();
+        $checkEmail = array(
+            'EmailAddress' => 'EMAILADDRESSINVALID',
+            'EmailFrom' => 'EMAILFROMINVALID',
+            'EmailReplyTo' => 'EMAILREPLYTOINVALID',
+        );
+        foreach ($checkEmail as $check => $translation) {
+            if ($this->$check) {
+                //may be a comma separated list of emails
+                $addresses = explode(',', $this->$check);
+                foreach ($addresses as $address) {
+                    $trimAddress = trim($address);
+                    if ($trimAddress && !Email::is_valid_address($trimAddress)) {
+                        $error = _t("UserDefinedForm_EmailRecipient.$translation",
+                                "Invalid email address $trimAddress");
+                        $result->error($error . " ($trimAddress)");
+                    }
+                }
+            }
+        }
+        return $result;
+    }
 }
