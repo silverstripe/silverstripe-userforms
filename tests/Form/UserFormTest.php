@@ -1,5 +1,17 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Form;
+
+
+
+
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\UserForms\Form\UserForm;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 
 class UserFormTest extends SapphireTest
 {
@@ -11,7 +23,7 @@ class UserFormTest extends SapphireTest
      */
     public function testEmptyPages()
     {
-        $page = $this->objFromFixture('UserDefinedForm', 'empty-page');
+        $page = $this->objFromFixture(UserDefinedForm::class, 'empty-page');
         $this->assertEquals(5, $page->Fields()->count());
         $controller = ModelAsController::controller_for($page);
         $form = new UserForm($controller);

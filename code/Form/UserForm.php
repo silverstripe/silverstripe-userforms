@@ -1,5 +1,27 @@
 <?php
 
+namespace SilverStripe\UserForms\Form;
+
+
+
+
+
+
+
+
+use ResetFormAction;
+
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Control\Session;
+use SilverStripe\UserForms\FormField\UserFormsStepField;
+use SilverStripe\UserForms\FormField\UserFormsFieldList;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\RequiredFields;
+
+
+
 /**
  * @package userforms
  */
@@ -10,7 +32,7 @@ class UserForm extends Form
 	 * @param Controller $controller
 	 * @param string $name
 	 */
-    public function __construct(Controller $controller, $name = 'Form')
+    public function __construct(Controller $controller, $name = Form::class)
     {
 		$this->controller = $controller;
 		$this->setRedirectToFormOnValidationError(true);

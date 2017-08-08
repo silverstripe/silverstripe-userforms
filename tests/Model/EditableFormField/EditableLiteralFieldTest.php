@@ -1,5 +1,19 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+
+
+use HtmlEditorConfig;
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 /**
  * Tests the {@see EditableLiteralField} class
  */
@@ -48,7 +62,7 @@ class EditableLiteralFieldTest extends SapphireTest
 
     public function testLiteralFieldHasUpdateFormFieldMethodCalled()
     {
-        $field = $this->getMockBuilder('EditableLiteralField')
+        $field = $this->getMockBuilder(EditableLiteralField::class)
             ->setMethods(array('doUpdateFormField'))
             ->getMock();
 
@@ -66,9 +80,9 @@ class EditableLiteralFieldTest extends SapphireTest
         $field = new EditableLiteralField;
         $formField = $field->getFormField();
 
-        $this->assertInstanceOf('CompositeField', $formField, 'Literal field is contained within a composite field');
+        $this->assertInstanceOf(CompositeField::class, $formField, 'Literal field is contained within a composite field');
         $this->assertInstanceOf(
-            'LiteralField',
+            LiteralField::class,
             $formField->FieldList()->first(),
             'Actual literal field exists in composite field children'
         );

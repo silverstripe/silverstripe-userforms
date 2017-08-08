@@ -1,4 +1,11 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+use SilverStripe\Forms\CheckboxField;
+
+
 /**
  * EditableCheckbox
  *

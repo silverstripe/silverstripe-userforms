@@ -1,5 +1,12 @@
 <?php
 
+namespace SilverStripe\UserForms\FormField;
+
+
+use SilverStripe\Forms\CheckboxSetField;
+
+
+
 /**
  * @package userforms
  */

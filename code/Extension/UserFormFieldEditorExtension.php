@@ -1,5 +1,47 @@
 <?php
 
+namespace SilverStripe\UserForms\Extension;
+
+
+
+
+
+use GridFieldEditableColumns;
+
+
+
+
+
+
+
+use GridFieldOrderableRows;
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Tab;
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\ORM\DataExtension;
+
+
+
 /**
  * @package userforms
  */
@@ -10,7 +52,7 @@ class UserFormFieldEditorExtension extends DataExtension
      * @var array
      */
     private static $has_many = array(
-        'Fields' => 'EditableFormField'
+        'Fields' => EditableFormField::class
     );
 
     /**
@@ -42,7 +84,7 @@ class UserFormFieldEditorExtension extends DataExtension
         $this->createInitialFormStep(true);
 
         $editableColumns = new GridFieldEditableColumns();
-        $fieldClasses = singleton('EditableFormField')->getEditableFieldClasses();
+        $fieldClasses = singleton(EditableFormField::class)->getEditableFieldClasses();
         $editableColumns->setDisplayFields(array(
             'ClassName' => function ($record, $column, $grid) use ($fieldClasses) {
                 if ($record instanceof EditableFormField) {
@@ -60,12 +102,12 @@ class UserFormFieldEditorExtension extends DataExtension
             ->addComponents(
                 $editableColumns,
                 new GridFieldButtonRow(),
-                GridFieldAddClassesButton::create('EditableTextField')
+                GridFieldAddClassesButton::create(EditableTextField::class)
                     ->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
                     ->setButtonClass('ss-ui-action-constructive'),
-                GridFieldAddClassesButton::create('EditableFormStep')
+                GridFieldAddClassesButton::create(EditableFormStep::class)
                     ->setButtonName(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break')),
-                GridFieldAddClassesButton::create(array('EditableFieldGroup', 'EditableFieldGroupEnd'))
+                GridFieldAddClassesButton::create(array(EditableFieldGroup::class, EditableFieldGroupEnd::class))
                     ->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group')),
                 new GridFieldEditButton(),
                 new GridFieldDeleteAction(),
@@ -153,7 +195,7 @@ class UserFormFieldEditorExtension extends DataExtension
         }
 
         // fetch any orphaned live records
-        $live = Versioned::get_by_stage("EditableFormField", "Live")
+        $live = Versioned::get_by_stage(EditableFormField::class, "Live")
             ->filter(array(
                 'ParentID' => $original->ID,
             ));

@@ -1,5 +1,26 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Task;
+
+
+
+use SilverStripe\Core\Config\Config;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableNumericField;
+use SilverStripe\Security\Group;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading;
+use SilverStripe\Assets\Folder;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDateField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
+use SilverStripe\UserForms\Task\UserFormsUpgradeService;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 class UserFormsUpgradeServiceTest extends SapphireTest
 {
 
@@ -7,13 +28,13 @@ class UserFormsUpgradeServiceTest extends SapphireTest
 
     public function setUp()
     {
-        Config::inst()->update('UserDefinedForm', 'upgrade_on_build', false);
+        Config::inst()->update(UserDefinedForm::class, 'upgrade_on_build', false);
         parent::setUp();
 
         // Assign rules programatically
-        $field1 = $this->objFromFixture('EditableTextField', 'text1');
-        $field2 = $this->objFromFixture('EditableTextField', 'text2');
-        $field3 = $this->objFromFixture('EditableTextField', 'text3');
+        $field1 = $this->objFromFixture(EditableTextField::class, 'text1');
+        $field2 = $this->objFromFixture(EditableTextField::class, 'text2');
+        $field3 = $this->objFromFixture(EditableTextField::class, 'text3');
 
         $field3->CustomRules = serialize(array(
             array(
@@ -32,7 +53,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         $field3->write();
 
         // Assign settings programatically
-        $field4 = $this->objFromFixture('EditableTextField', 'text4');
+        $field4 = $this->objFromFixture(EditableTextField::class, 'text4');
         $field4->CustomSettings = serialize(array(
             'MinLength' => 20,
             'MaxLength' => 100,
@@ -44,7 +65,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $field4->write();
 
-        $numeric1 = $this->objFromFixture('EditableNumericField', 'numeric1');
+        $numeric1 = $this->objFromFixture(EditableNumericField::class, 'numeric1');
         $numeric1->CustomSettings = serialize(array(
             'RightTitle' => 'Number of %',
             'Default' => 1,
@@ -54,8 +75,8 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $numeric1->write();
 
-        $group1 = $this->objFromFixture('Group', 'group1');
-        $members1 = $this->objFromFixture('EditableMemberListField', 'members1');
+        $group1 = $this->objFromFixture(Group::class, 'group1');
+        $members1 = $this->objFromFixture(EditableMemberListField::class, 'members1');
         $members1->CustomSettings = serialize(array(
             'RightTitle' => 'Select group',
             'GroupID' => $group1->ID,
@@ -63,7 +84,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $members1->write();
 
-        $literal1 = $this->objFromFixture('EditableLiteralField', 'literal1');
+        $literal1 = $this->objFromFixture(EditableLiteralField::class, 'literal1');
         $literal1->CustomSettings = serialize(array(
             'HideFromReports' => 1,
             'RightTitle' => 'Literal',
@@ -72,7 +93,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $literal1->write();
 
-        $heading1 = $this->objFromFixture('EditableFormHeading', 'heading1');
+        $heading1 = $this->objFromFixture(EditableFormHeading::class, 'heading1');
         $heading1->CustomSettings = serialize(array(
             'RightTitle' => 'Right',
             'Level' => 3,
@@ -81,22 +102,22 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         ));
         $heading1->write();
 
-        $folder = $this->objFromFixture('Folder', 'folder1');
-        $file1 = $this->objFromFixture('EditableFileField', 'file1');
+        $folder = $this->objFromFixture(Folder::class, 'folder1');
+        $file1 = $this->objFromFixture(EditableFileField::class, 'file1');
         $file1->CustomSettings = serialize(array(
             'RightTitle' => 'File field',
             'Folder' => $folder->ID
         ));
         $file1->write();
 
-        $date1 = $this->objFromFixture('EditableDateField', 'date1');
+        $date1 = $this->objFromFixture(EditableDateField::class, 'date1');
         $date1->CustomSettings = serialize(array(
             'RightTitle' => 'Date field',
             'DefaultToToday' => '1'
         ));
         $date1->write();
 
-        $checkbox1 = $this->objFromFixture('EditableCheckbox', 'checkbox1');
+        $checkbox1 = $this->objFromFixture(EditableCheckbox::class, 'checkbox1');
         $checkbox1->CustomSettings = serialize(array(
             'Default' => true,
             'RightTitle' => 'Check this'
@@ -109,7 +130,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
      */
     protected function getService()
     {
-        return singleton('UserFormsUpgradeService');
+        return singleton(UserFormsUpgradeService::class);
     }
 
     /**
@@ -121,9 +142,9 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         $service->setQuiet(true);
         $service->run();
 
-        $field1 = $this->objFromFixture('EditableTextField', 'text1');
-        $field2 = $this->objFromFixture('EditableTextField', 'text2');
-        $field3 = $this->objFromFixture('EditableTextField', 'text3');
+        $field1 = $this->objFromFixture(EditableTextField::class, 'text1');
+        $field2 = $this->objFromFixture(EditableTextField::class, 'text2');
+        $field3 = $this->objFromFixture(EditableTextField::class, 'text3');
 
         $this->assertDOSEquals(array(
             array(
@@ -149,13 +170,13 @@ class UserFormsUpgradeServiceTest extends SapphireTest
         $service->setQuiet(true);
         $service->run();
 
-        $group1 = $this->objFromFixture('Group', 'group1');
-        $form = $this->objFromFixture('UserDefinedForm', 'form-with-settings');
-        $folder = $this->objFromFixture('Folder', 'folder1');
+        $group1 = $this->objFromFixture(Group::class, 'group1');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'form-with-settings');
+        $folder = $this->objFromFixture(Folder::class, 'folder1');
 
         $this->assertDOSEquals(array(
             array(
-                'ClassName' => 'EditableTextField',
+                'ClassName' => EditableTextField::class,
                 'Title' => 'Text with rule',
                 'MinLength' => 20,
                 'MaxLength' => 100,
@@ -166,7 +187,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
                 'Default' => 'Enter your text here',
             ),
             array(
-                'ClassName' => 'EditableNumericField',
+                'ClassName' => EditableNumericField::class,
                 'Title' => 'Numeric 1',
                 'RightTitle' => 'Number of %',
                 'Default' => 1,
@@ -175,14 +196,14 @@ class UserFormsUpgradeServiceTest extends SapphireTest
                 'ShowOnLoad' => true,
             ),
             array(
-                'ClassName' => 'EditableMemberListField',
+                'ClassName' => EditableMemberListField::class,
                 'Title' => 'Members 1',
                 'RightTitle' => 'Select group',
                 'GroupID' => $group1->ID,
                 'ShowOnLoad' => false,
             ),
             array(
-                'ClassName' => 'EditableLiteralField',
+                'ClassName' => EditableLiteralField::class,
                 'Title' => 'Literal 1',
                 'HideFromReports' => true,
                 'RightTitle' => 'Literal',
@@ -190,7 +211,7 @@ class UserFormsUpgradeServiceTest extends SapphireTest
                 'ShowOnLoad' => true,
             ),
             array(
-                'ClassName' => 'EditableFormHeading',
+                'ClassName' => EditableFormHeading::class,
                 'Title' => 'Heading 1',
                 'RightTitle' => 'Right',
                 'Level' => 3,
@@ -198,19 +219,19 @@ class UserFormsUpgradeServiceTest extends SapphireTest
                 'ShowOnLoad' => false,
             ),
             array(
-                'ClassName' => 'EditableFileField',
+                'ClassName' => EditableFileField::class,
                 'Title' => 'File 1',
                 'RightTitle' => 'File field',
                 'FolderID' => $folder->ID,
             ),
             array(
-                'ClassName' => 'EditableDateField',
+                'ClassName' => EditableDateField::class,
                 'Title' => 'Date 1',
                 'RightTitle' => 'Date field',
                 'DefaultToToday' => true,
             ),
             array(
-                'ClassName' => 'EditableCheckbox',
+                'ClassName' => EditableCheckbox::class,
                 'Title' => 'Checkbox 1',
                 'CheckedDefault' => true,
                 'RightTitle' => 'Check this',

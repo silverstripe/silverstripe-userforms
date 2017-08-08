@@ -1,5 +1,20 @@
 <?php
 
+namespace SilverStripe\UserForms\Model;
+
+
+
+
+
+use LogicException;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataObject;
+
+
+
 /**
  * A custom rule for showing / hiding an EditableFormField
  * based the value of another EditableFormField.
@@ -32,8 +47,8 @@ class EditableCustomRule extends DataObject
     );
 
     private static $has_one = array(
-        'Parent' => 'EditableFormField',
-        'ConditionField' => 'EditableFormField'
+        'Parent' => EditableFormField::class,
+        'ConditionField' => EditableFormField::class
     );
 
     /**

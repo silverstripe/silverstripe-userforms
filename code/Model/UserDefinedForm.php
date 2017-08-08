@@ -1,5 +1,73 @@
 <?php
 
+namespace SilverStripe\UserForms\Model;
+
+use Page;
+
+
+
+use HtmlEditorField;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use GridFieldBulkManager;
+
+
+
+
+
+
+
+use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient;
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
+use SilverStripe\ORM\DB;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldPageCount;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\UserForms\Task\UserFormsUpgradeService;
+use SilverStripe\UserForms\Extension\UserFormValidator;
+
+
+
 /**
  * @package userforms
  */
@@ -55,7 +123,7 @@ class UserDefinedForm extends Page
      * @var array
      */
     private static $extensions = array(
-        'UserFormFieldEditorExtension'
+        UserFormFieldEditorExtension::class
     );
 
     /**
@@ -86,8 +154,8 @@ class UserDefinedForm extends Page
      * @var array
      */
     private static $has_many = array(
-        "Submissions" => "SubmittedForm",
-        "EmailRecipients" => "UserDefinedForm_EmailRecipient"
+        "Submissions" => SubmittedForm::class,
+        "EmailRecipients" => UserDefinedForm_EmailRecipient::class
     );
 
     /**
@@ -156,7 +224,7 @@ class UserDefinedForm extends Page
 
             // Define config for email recipients
             $emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
-            $emailRecipientsConfig->getComponentByType('GridFieldAddNewButton')
+            $emailRecipientsConfig->getComponentByType(GridFieldAddNewButton::class)
                 ->setButtonName(
                     _t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
                 );
@@ -170,8 +238,8 @@ class UserDefinedForm extends Page
             );
             $emailRecipients
                 ->getConfig()
-                ->getComponentByType('GridFieldDetailForm')
-                ->setItemRequestClass('UserFormRecipientItemRequest');
+                ->getComponentByType(GridFieldDetailForm::class)
+                ->setItemRequestClass(UserFormRecipientItemRequest::class);
 
             $fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
             $fields->addFieldToTab('Root.Recipients', $emailRecipients);
@@ -223,7 +291,7 @@ SQL;
                 }
             }
 
-            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryarray);
+            $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields($summaryarray);
 
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
@@ -347,7 +415,7 @@ SQL;
 
         // Perform migrations
         Injector::inst()
-            ->create('UserFormsUpgradeService')
+            ->create(UserFormsUpgradeService::class)
             ->setQuiet(true)
             ->run();
 

@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\Forms\RequiredFields;
+
+
+
 class EditableFormFieldValidator extends RequiredFields
 {
 

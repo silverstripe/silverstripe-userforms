@@ -1,5 +1,20 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+
+
+
+
+
+
+use SilverStripe\Core\Config\Config;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\Assets\Filesystem;
+use SilverStripe\Assets\Folder;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 /**
  * Tests integration of EditableFileField with the securefiles module
  *
@@ -18,7 +33,7 @@ class SecureEditableFileFieldTest extends SapphireTest
             $this->skipTest = true;
             $this->markTestSkipped(get_class() . ' skipped unless running with securefiles');
         }
-        Config::inst()->update('EditableFileField', 'secure_folder_name', 'SecureEditableFileFieldTest/SecureUploads');
+        Config::inst()->update(EditableFileField::class, 'secure_folder_name', 'SecureEditableFileFieldTest/SecureUploads');
         $this->clearPath();
     }
 
@@ -54,7 +69,7 @@ class SecureEditableFileFieldTest extends SapphireTest
      */
     public function testCreateInsecure()
     {
-        Config::inst()->update('EditableFileField', 'disable_security', true);
+        Config::inst()->update(EditableFileField::class, 'disable_security', true);
 
         // Esure folder is created without a folder
         $field = new EditableFileField();
@@ -73,8 +88,8 @@ class SecureEditableFileFieldTest extends SapphireTest
         $this->assertEquals('Inherit', $field->Folder()->CanViewType);
 
         // Enabling security and re-saving will force this field to be made secure (but not changed)
-        Config::inst()->update('EditableFileField', 'disable_security', false);
-        singleton('EditableFileField')->requireDefaultRecords();
+        Config::inst()->update(EditableFileField::class, 'disable_security', false);
+        singleton(EditableFileField::class)->requireDefaultRecords();
 
         // Reload record from DB
         $field = EditableFileField::get()->byID($field->ID);

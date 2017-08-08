@@ -1,5 +1,29 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Dev\FunctionalTest;
+
+
+
 /**
  * @package userforms
  */
@@ -11,7 +35,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFormFieldPermissions()
     {
-        $text = $this->objFromFixture('EditableTextField', 'basic-text');
+        $text = $this->objFromFixture(EditableTextField::class, 'basic-text');
 
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($text->canCreate());
@@ -49,10 +73,10 @@ class EditableFormFieldTest extends FunctionalTest
     public function testCustomRules()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'custom-rules-form');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'custom-rules-form');
 
-        $checkbox = $form->Fields()->find('ClassName', 'EditableCheckbox');
-        $field = $form->Fields()->find('ClassName', 'EditableTextField');
+        $checkbox = $form->Fields()->find('ClassName', EditableCheckbox::class);
+        $field = $form->Fields()->find('ClassName', EditableTextField::class);
 
         $rules = $checkbox->DisplayRules();
 
@@ -78,7 +102,7 @@ class EditableFormFieldTest extends FunctionalTest
      */
     public function testEditableOptionEmptyValue()
     {
-        $option = $this->objFromFixture('EditableOption', 'option-1');
+        $option = $this->objFromFixture(EditableOption::class, 'option-1');
         $option->Value = '';
 
          // Disallow empty values
@@ -96,12 +120,12 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testEditableDropdownField()
     {
-        $dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
+        $dropdown = $this->objFromFixture(EditableDropdown::class, 'basic-dropdown');
 
         $field = $dropdown->getFormField();
 
 
-        $this->assertThat($field, $this->isInstanceOf('DropdownField'));
+        $this->assertThat($field, $this->isInstanceOf(DropdownField::class));
         $values = $field->getSource();
 
         $this->assertEquals(array('Option 1' => 'Option 1', 'Option 2' => 'Option 2'), $values);
@@ -109,11 +133,11 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testEditableRadioField()
     {
-        $radio = $this->objFromFixture('EditableRadioField', 'radio-field');
+        $radio = $this->objFromFixture(EditableRadioField::class, 'radio-field');
 
         $field = $radio->getFormField();
 
-        $this->assertThat($field, $this->isInstanceOf('OptionsetField'));
+        $this->assertThat($field, $this->isInstanceOf(OptionsetField::class));
         $values = $field->getSource();
 
         $this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);
@@ -121,7 +145,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testMultipleOptionDuplication()
     {
-        $dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
+        $dropdown = $this->objFromFixture(EditableDropdown::class, 'basic-dropdown');
 
         $clone = $dropdown->duplicate();
 
@@ -136,7 +160,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFileField()
     {
-        $fileField = $this->objFromFixture('EditableFileField', 'file-field');
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
         $formField = $fileField->getFormField();
 
         $this->assertContains('jpg', $formField->getValidator()->getAllowedExtensions());
@@ -145,8 +169,8 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFileFieldAllowedExtensionsBlacklist()
     {
-        Config::inst()->update('EditableFileField', 'allowed_extensions_blacklist', array('jpg'));
-        $fileField = $this->objFromFixture('EditableFileField', 'file-field');
+        Config::inst()->update(EditableFileField::class, 'allowed_extensions_blacklist', array('jpg'));
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
         $formField = $fileField->getFormField();
 
         $this->assertNotContains('jpg', $formField->getValidator()->getAllowedExtensions());
@@ -177,7 +201,7 @@ class EditableFormFieldTest extends FunctionalTest
     public function testLengthRange()
     {
         /** @var EditableTextField $textField */
-        $textField = $this->objFromFixture('EditableTextField', 'basic-text');
+        $textField = $this->objFromFixture(EditableTextField::class, 'basic-text');
 
         // Empty range
         /** @var TextField $formField */
@@ -207,7 +231,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFormatDisplayRules()
     {
-        $field = $this->objFromFixture('EditableFormField', 'irdNumberField');
+        $field = $this->objFromFixture(EditableFormField::class, 'irdNumberField');
         $displayRules = $field->formatDisplayRules();
         $this->assertNotNull($displayRules);
         $this->assertCount(1, $displayRules['operations']);

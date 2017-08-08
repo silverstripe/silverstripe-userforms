@@ -1,5 +1,15 @@
 <?php
 
+namespace SilverStripe\UserForms\Task;
+
+
+
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\UserForms\Task\UserFormsUpgradeService;
+use SilverStripe\Dev\BuildTask;
+
+
+
 /**
  * Assists with upgrade of userforms to 3.0
  *
@@ -14,7 +24,7 @@ class UserFormsUpgradeTask extends BuildTask
 
     public function run($request)
     {
-        $service = Injector::inst()->create('UserFormsUpgradeService');
+        $service = Injector::inst()->create(UserFormsUpgradeService::class);
         $service->log("Upgrading userforms module");
         $service->setQuiet(false)
             ->run();

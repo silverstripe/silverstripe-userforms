@@ -1,5 +1,15 @@
 <?php
 
+namespace SilverStripe\UserForms\Task;
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\ORM\DB;
+use SilverStripe\Dev\MigrationTask;
+
+
+
 /**
  * UserForms Column Clean Task
  *
@@ -15,7 +25,7 @@ class UserFormsColumnCleanTask extends MigrationTask
 
     protected $description = "Removes unused columns from EditableFormField for MySQL databases;";
 
-    protected $tables = array('EditableFormField');
+    protected $tables = array(EditableFormField::class);
 
     protected $keepColumns = array('ID');
 

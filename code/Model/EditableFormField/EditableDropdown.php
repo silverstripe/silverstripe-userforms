@@ -1,5 +1,18 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+
+
+
 /**
  * EditableDropdown
  *

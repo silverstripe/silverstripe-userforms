@@ -1,5 +1,46 @@
 <?php
 
+namespace SilverStripe\UserForms\Model;
+
+use PageController;
+
+
+
+
+
+use Object;
+
+
+
+
+
+
+
+
+
+
+
+use SilverStripe\View\Requirements;
+use SilverStripe\i18n\i18n;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\UserForms\Form\UserForm;
+use SilverStripe\Forms\Form;
+use SilverStripe\Control\Controller;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\Assets\Upload;
+use SilverStripe\Assets\File;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail;
+use SilverStripe\Control\HTTP;
+use SilverStripe\View\SSViewer;
+use SilverStripe\Control\Session;
+use SilverStripe\View\ArrayData;
+
+
+
 /**
  * Controller for the {@link UserDefinedForm} page type.
  *
@@ -96,7 +137,7 @@ class UserDefinedFormController extends PageController
     public function Form()
     {
         $form = UserForm::create($this, 'Form_' . $this->ID);
-        $form->setFormAction(Controller::join_links($this->Link(), 'Form'));
+        $form->setFormAction(Controller::join_links($this->Link(), Form::class));
         $this->generateConditionalJavascript();
         return $form;
     }
@@ -150,7 +191,7 @@ JS
      */
     public function process($data, $form)
     {
-        $submittedForm = Object::create('SubmittedForm');
+        $submittedForm = Object::create(SubmittedForm::class);
         $submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
         $submittedForm->ParentID = $this->ID;
 
@@ -182,7 +223,7 @@ JS
             }
 
             if (!empty($data[$field->Name])) {
-                if (in_array("EditableFileField", $field->getClassAncestry())) {
+                if (in_array(EditableFileField::class, $field->getClassAncestry())) {
                     if (!empty($_FILES[$field->Name]['name'])) {
                         $foldername = $field->getFormField()->getFolderName();
 

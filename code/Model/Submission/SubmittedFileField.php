@@ -1,5 +1,13 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\Submission;
+
+
+use SilverStripe\Assets\File;
+use SilverStripe\ORM\FieldType\DBField;
+
+
+
 /**
  * A file uploaded on a {@link UserDefinedForm} and attached to a single
  * {@link SubmittedForm}.
@@ -11,7 +19,7 @@ class SubmittedFileField extends SubmittedFormField
 {
 
     private static $has_one = array(
-        "UploadedFile" => "File"
+        "UploadedFile" => File::class
     );
 
     /**

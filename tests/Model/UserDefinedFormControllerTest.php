@@ -1,5 +1,33 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model;
+
+
+
+
+
+
+
+use ResetFormAction;
+
+
+use UserDefinedForm_Controller;
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\CSSContentParser;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\View\ArrayData;
+use SilverStripe\UserForms\Test\Model\UserDefinedFormControllerTest;
+use SilverStripe\Security\Member;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\Dev\TestOnly;
+
+
+
 /**
  * @package userforms
  */
@@ -21,12 +49,12 @@ class UserDefinedFormControllerTest extends FunctionalTest
         // load the form
         $this->get($form->URLSegment);
 
-        $field = $this->objFromFixture('EditableTextField', 'basic-text');
+        $field = $this->objFromFixture(EditableTextField::class, 'basic-text');
 
         $response = $this->submitForm('UserForm_Form_' . $form->ID, null, array($field->Name => 'Basic Value'));
 
         // should have a submitted form field now
-        $submitted = DataObject::get('SubmittedFormField', "\"Name\" = 'basic-text-name'");
+        $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic-text-name'");
         $this->assertDOSAllMatch(array('Name' => 'basic-text-name', 'Value' => 'Basic Value', 'Title' => 'Basic Text Field'), $submitted);
 
         // check emails
@@ -124,7 +152,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
     public function testForm()
     {
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $controller = new UserDefinedFormControllerTest_Controller($form);
 
@@ -134,7 +162,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
         $this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);
 
-        $requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
+        $requiredForm = $this->objFromFixture(UserDefinedForm::class, 'validation-form');
         $controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
@@ -145,7 +173,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
     public function testGetFormFields()
     {
         // generating the fieldset of fields
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $controller = new UserDefinedFormControllerTest_Controller($form);
 
@@ -156,7 +184,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($firstStep->getChildren()->Count(), 1);
 
         // custom error message on a form field
-        $requiredForm = $this->objFromFixture('UserDefinedForm', 'validation-form');
+        $requiredForm = $this->objFromFixture(UserDefinedForm::class, 'validation-form');
         $controller = new UserDefinedFormControllerTest_Controller($requiredForm);
 
         UserDefinedForm::config()->required_identifier = "*";
@@ -180,7 +208,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($firstStep->getChildren()->First()->RightTitle(), "Right Title");
 
         // test empty form
-        $emptyForm = $this->objFromFixture('UserDefinedForm', 'empty-form');
+        $emptyForm = $this->objFromFixture(UserDefinedForm::class, 'empty-form');
         $controller = new UserDefinedFormControllerTest_Controller($emptyForm);
 
         $this->assertFalse($controller->Form()->getFormFields()->exists());
@@ -189,7 +217,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
     public function testGetFormActions()
     {
         // generating the fieldset of actions
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $controller = new UserDefinedFormControllerTest_Controller($form);
         $actions = $controller->Form()->getFormActions();
@@ -201,7 +229,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($actions, $expected);
 
         // the custom popup should have a reset button and a custom text
-        $custom = $this->objFromFixture('UserDefinedForm', 'form-with-reset-and-custom-action');
+        $custom = $this->objFromFixture(UserDefinedForm::class, 'form-with-reset-and-custom-action');
         $controller = new UserDefinedFormControllerTest_Controller($custom);
         $actions = $controller->Form()->getFormActions();
 
@@ -223,7 +251,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check to see if $Form is replaced to inside the content
         $index = new ArrayData($controller->index());
-        $parser = new CSSContentParser($index->renderWith(array('UserDefinedFormControllerTest')));
+        $parser = new CSSContentParser($index->renderWith(array(UserDefinedFormControllerTest::class)));
 
         $this->checkTemplateIsCorrect($parser, $form);
     }
@@ -236,7 +264,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check to see if $Form is replaced to inside the content
         $index = new ArrayData($controller->index());
-        $parser = new CSSContentParser($index->renderWith(array('UserDefinedFormControllerTest')));
+        $parser = new CSSContentParser($index->renderWith(array(UserDefinedFormControllerTest::class)));
 
         $this->checkTemplateIsCorrect($parser, $form);
     }
@@ -248,7 +276,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
      */
     protected function setupFormFrontend($fixtureName = 'basic-form-page')
     {
-        $form = $this->objFromFixture('UserDefinedForm', $fixtureName);
+        $form = $this->objFromFixture(UserDefinedForm::class, $fixtureName);
         $this->logInWithPermission('ADMIN');
 
         $form->doPublish();

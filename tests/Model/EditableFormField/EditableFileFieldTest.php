@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 /**
  * @package userforms
  */
@@ -23,7 +32,7 @@ class EditableFileFieldTest extends SapphireTest
     {
         parent::setUp();
 
-        $editableFileField = singleton('EditableFileField');
+        $editableFileField = singleton(EditableFileField::class);
         $this->php_max_file_size = $editableFileField::get_php_max_file_size();
 
     }
@@ -33,7 +42,7 @@ class EditableFileFieldTest extends SapphireTest
      */
     public function testDefaultMaxFileSize()
     {
-        $fileField = $this->objFromFixture('EditableFileField', 'file-field');
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
         $formField = $fileField->getFormField();
 
         $this->assertEquals($this->php_max_file_size, $formField->getValidator()->getAllowedMaxFileSize());
@@ -45,8 +54,8 @@ class EditableFileFieldTest extends SapphireTest
     public function testValidateFileSizeFieldValue()
     {
 
-        $fileField = $this->objFromFixture('EditableFileField', 'file-field');
-        $this->setExpectedException('ValidationException');
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
+        $this->setExpectedException(ValidationException::class);
         $fileField->MaxFileSizeMB = $this->php_max_file_size * 2;
         $fileField->write();
     }
@@ -56,7 +65,7 @@ class EditableFileFieldTest extends SapphireTest
      */
     public function testUpdatedMaxFileSize()
     {
-        $fileField = $this->objFromFixture('EditableFileField', 'file-field');
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
         $fileField->MaxFileSizeMB = .25;
         $fileField->write();
 

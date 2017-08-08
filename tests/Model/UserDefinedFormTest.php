@@ -1,5 +1,41 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model;
+
+
+
+
+
+
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient;
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\ORM\DB;
+use SilverStripe\UserForms\Extension\UserFormValidator;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\Core\Convert;
+use SilverStripe\Dev\FunctionalTest;
+
+
+
 /**
  * @package userforms
  */
@@ -16,7 +52,7 @@ class UserDefinedFormTest extends FunctionalTest
 
         // @todo
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $form->SubmitButtonText = 'Button Text';
         $form->write();
@@ -28,19 +64,19 @@ class UserDefinedFormTest extends FunctionalTest
         $form->doPublish();
 
         // check published site
-        $updated = Versioned::get_one_by_stage("UserDefinedForm", "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
+        $updated = Versioned::get_one_by_stage(UserDefinedForm::class, "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
         $this->assertEquals($updated->SubmitButtonText, 'Updated Button Text');
 
         $form->doRollbackTo($origVersion);
 
-        $orignal = Versioned::get_one_by_stage("UserDefinedForm", "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
+        $orignal = Versioned::get_one_by_stage(UserDefinedForm::class, "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
         $this->assertEquals($orignal->SubmitButtonText, 'Button Text');
     }
 
     public function testGetCMSFields()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $fields = $form->getCMSFields();
 
@@ -54,14 +90,14 @@ class UserDefinedFormTest extends FunctionalTest
     public function testGetCMSFieldsShowInSummary()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'summary-rules-form');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'summary-rules-form');
 
         $fields = $form->getCMSFields();
 
-        $this->assertInstanceOf('GridField', $fields->dataFieldByName('Submissions'));
+        $this->assertInstanceOf(GridField::class, $fields->dataFieldByName('Submissions'));
 
         $submissionsgrid = $fields->dataFieldByName('Submissions');
-        $gridFieldDataColumns = $submissionsgrid->getConfig()->getComponentByType('GridFieldDataColumns');
+        $gridFieldDataColumns = $submissionsgrid->getConfig()->getComponentByType(GridFieldDataColumns::class);
 
         $summaryFields = $gridFieldDataColumns->getDisplayFields($submissionsgrid);
 
@@ -74,7 +110,7 @@ class UserDefinedFormTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $popup = new UserDefinedForm_EmailRecipient();
         $popup->FormID = $form->ID;
@@ -89,16 +125,16 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertTrue($fields->dataFieldByName('EmailBody') !== null);
 
         // add an email field, it should now add a or from X address picker
-        $email = $this->objFromFixture('EditableEmailField', 'email-field');
+        $email = $this->objFromFixture(EditableEmailField::class, 'email-field');
         $form->Fields()->add($email);
 
         $popup->write();
 
         $fields = $popup->getCMSFields();
-        $this->assertThat($fields->dataFieldByName('SendEmailToFieldID'), $this->isInstanceOf('DropdownField'));
+        $this->assertThat($fields->dataFieldByName('SendEmailToFieldID'), $this->isInstanceOf(DropdownField::class));
 
         // if the front end has checkboxs or dropdown they can select from that can also be used to send things
-        $dropdown = $this->objFromFixture('EditableDropdown', 'department-dropdown');
+        $dropdown = $this->objFromFixture(EditableDropdown::class, 'department-dropdown');
         $form->Fields()->add($dropdown);
 
         $fields = $popup->getCMSFields();
@@ -157,7 +193,7 @@ class UserDefinedFormTest extends FunctionalTest
 
     public function testCanEditAndDeleteRecipient()
     {
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $this->logInWithPermission('ADMIN');
         foreach ($form->EmailRecipients() as $recipient) {
@@ -179,30 +215,30 @@ class UserDefinedFormTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $form->write();
 
         $form->doPublish();
 
-        $live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
+        $live = Versioned::get_one_by_stage(UserDefinedForm::class, "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
 
         $this->assertNotNull($live);
         $this->assertEquals(2, $live->Fields()->Count()); // one page and one field
 
-        $dropdown = $this->objFromFixture('EditableDropdown', 'basic-dropdown');
+        $dropdown = $this->objFromFixture(EditableDropdown::class, 'basic-dropdown');
         $form->Fields()->add($dropdown);
 
-        $stage = Versioned::get_one_by_stage("UserDefinedForm", "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
+        $stage = Versioned::get_one_by_stage(UserDefinedForm::class, "Stage", "\"UserDefinedForm\".\"ID\" = $form->ID");
         $this->assertEquals(3, $stage->Fields()->Count());
 
         // should not have published the dropdown
-        $liveDropdown = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $dropdown->ID");
+        $liveDropdown = Versioned::get_one_by_stage(EditableFormField::class, "Live", "\"EditableFormField_Live\".\"ID\" = $dropdown->ID");
         $this->assertNull($liveDropdown);
 
         // when publishing it should have added it
         $form->doPublish();
 
-        $live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
+        $live = Versioned::get_one_by_stage(UserDefinedForm::class, "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
         $this->assertEquals(3, $live->Fields()->Count());
 
         // edit the title
@@ -210,12 +246,12 @@ class UserDefinedFormTest extends FunctionalTest
         $text->Title = 'Edited title';
         $text->write();
 
-        $liveText = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $text->ID");
+        $liveText = Versioned::get_one_by_stage(EditableFormField::class, "Live", "\"EditableFormField_Live\".\"ID\" = $text->ID");
         $this->assertFalse($liveText->Title == $text->Title);
 
         $form->doPublish();
 
-        $liveText = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $text->ID");
+        $liveText = Versioned::get_one_by_stage(EditableFormField::class, "Live", "\"EditableFormField_Live\".\"ID\" = $text->ID");
         $this->assertTrue($liveText->Title == $text->Title);
 
         // Add a display rule to the dropdown
@@ -226,37 +262,37 @@ class UserDefinedFormTest extends FunctionalTest
         $ruleID = $displayRule->ID;
 
         // Not live
-        $liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+        $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertEmpty($liveRule);
 
         // Publish form, it's now live
         $form->doPublish();
-        $liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+        $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertNotEmpty($liveRule);
 
         // Remove rule
         $displayRule->delete();
 
         // Live rule still exists
-        $liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+        $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertNotEmpty($liveRule);
 
         // Publish form, it should remove this rule
         $form->doPublish();
-        $liveRule = Versioned::get_one_by_stage("EditableCustomRule", "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+        $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, "Live", "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertEmpty($liveRule);
     }
 
     public function testUnpublishing()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $form->write();
         $this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
         $form->doPublish();
 
         // assert that it exists and has a field
-        $live = Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
+        $live = Versioned::get_one_by_stage(UserDefinedForm::class, "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
 
         $this->assertTrue(isset($live));
         $this->assertEquals(2, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
@@ -264,14 +300,14 @@ class UserDefinedFormTest extends FunctionalTest
         // unpublish
         $form->doUnpublish();
 
-        $this->assertNull(Versioned::get_one_by_stage("UserDefinedForm", "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID"));
+        $this->assertNull(Versioned::get_one_by_stage(UserDefinedForm::class, "Live", "\"UserDefinedForm_Live\".\"ID\" = $form->ID"));
         $this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
     }
 
     public function testDoRevertToLive()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $field = $form->Fields()->First();
 
         $field->Title = 'Title';
@@ -283,14 +319,14 @@ class UserDefinedFormTest extends FunctionalTest
         $field->write();
 
         // check that the published version is not updated
-        $live = Versioned::get_one_by_stage("EditableFormField", "Live", "\"EditableFormField_Live\".\"ID\" = $field->ID");
+        $live = Versioned::get_one_by_stage(EditableFormField::class, "Live", "\"EditableFormField_Live\".\"ID\" = $field->ID");
         $this->assertEquals('Title', $live->Title);
 
         // revert back to the live data
         $form->doRevertToLive();
         $form->flushCache();
 
-        $check = Versioned::get_one_by_stage("EditableFormField", "Stage", "\"EditableFormField\".\"ID\" = $field->ID");
+        $check = Versioned::get_one_by_stage(EditableFormField::class, "Stage", "\"EditableFormField\".\"ID\" = $field->ID");
 
         $this->assertEquals('Title', $check->Title);
     }
@@ -298,7 +334,7 @@ class UserDefinedFormTest extends FunctionalTest
     public function testDuplicatingForm()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $duplicate = $form->duplicate();
 
@@ -309,25 +345,25 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertEquals($form->Fields()->First()->Title, $duplicate->Fields()->First()->Title);
 
         // Test duplicate with group
-        $form2 = $this->objFromFixture('UserDefinedForm', 'page-with-group');
+        $form2 = $this->objFromFixture(UserDefinedForm::class, 'page-with-group');
         $form2Validator = new UserFormValidator();
-        $form2Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+        $form2Validator->setForm(new Form(new Controller(), Form::class, new FieldList(), new FieldList()));
         $this->assertTrue($form2Validator->php($form2->toMap()));
 
         // Check field groups exist
-        $form2GroupStart = $form2->Fields()->filter('ClassName', 'EditableFieldGroup')->first();
-        $form2GroupEnd = $form2->Fields()->filter('ClassName', 'EditableFieldGroupEnd')->first();
+        $form2GroupStart = $form2->Fields()->filter('ClassName', EditableFieldGroup::class)->first();
+        $form2GroupEnd = $form2->Fields()->filter('ClassName', EditableFieldGroupEnd::class)->first();
         $this->assertEquals($form2GroupEnd->ID, $form2GroupStart->EndID);
 
         // Duplicate this
         $form3 = $form2->duplicate();
         $form3Validator = new UserFormValidator();
-        $form3Validator->setForm(new Form(new Controller(), 'Form', new FieldList(), new FieldList()));
+        $form3Validator->setForm(new Form(new Controller(), Form::class, new FieldList(), new FieldList()));
         $this->assertTrue($form3Validator->php($form3->toMap()));
 
         // Check field groups exist
-        $form3GroupStart = $form3->Fields()->filter('ClassName', 'EditableFieldGroup')->first();
-        $form3GroupEnd = $form3->Fields()->filter('ClassName', 'EditableFieldGroupEnd')->first();
+        $form3GroupStart = $form3->Fields()->filter('ClassName', EditableFieldGroup::class)->first();
+        $form3GroupEnd = $form3->Fields()->filter('ClassName', EditableFieldGroupEnd::class)->first();
         $this->assertEquals($form3GroupEnd->ID, $form3GroupStart->EndID);
         $this->assertNotEquals($form2GroupEnd->ID, $form3GroupStart->EndID);
     }
@@ -335,7 +371,7 @@ class UserDefinedFormTest extends FunctionalTest
     public function testFormOptions()
     {
         $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
 
         $fields = $form->getFormOptions();
         $submit = $fields->fieldByName('SubmitButtonText');
@@ -348,7 +384,7 @@ class UserDefinedFormTest extends FunctionalTest
     public function testEmailRecipientFilters()
     {
         /** @var UserDefinedForm $form */
-        $form = $this->objFromFixture('UserDefinedForm', 'filtered-form-page');
+        $form = $this->objFromFixture(UserDefinedForm::class, 'filtered-form-page');
 
         // Check unfiltered recipients
         $result0 = $form
@@ -442,7 +478,7 @@ class UserDefinedFormTest extends FunctionalTest
     public function testIndex()
     {
         // Test that the $UserDefinedForm is stripped out
-        $page = $this->objFromFixture('UserDefinedForm', 'basic-form-page');
+        $page = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $page->publish('Stage', 'Live');
 
         $result = $this->get($page->Link());
@@ -461,7 +497,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->logInWithPermission('ADMIN');
 
         // test invalid email addresses fail validation
-        $recipient = $this->objFromFixture('UserDefinedForm_EmailRecipient',
+        $recipient = $this->objFromFixture(UserDefinedForm_EmailRecipient::class,
             'invalid-recipient-list');
         $result = $recipient->validate();
         $this->assertFalse($result->valid());
@@ -469,7 +505,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotContains('filtered2@example.com', $result->message());
 
         // test valid email addresses pass validation
-        $recipient = $this->objFromFixture('UserDefinedForm_EmailRecipient',
+        $recipient = $this->objFromFixture(UserDefinedForm_EmailRecipient::class,
             'valid-recipient-list');
         $result = $recipient->validate();
         $this->assertTrue($result->valid());

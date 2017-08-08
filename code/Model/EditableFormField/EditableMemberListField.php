@@ -1,4 +1,15 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+use SilverStripe\Security\Group;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Security\Member;
+
+
 /**
  * Creates an editable field that displays members in a given group
  *
@@ -13,7 +24,7 @@ class EditableMemberListField extends EditableFormField
     private static $plural_name = 'Member List Fields';
 
     private static $has_one = array(
-        'Group' => 'Group'
+        'Group' => Group::class
     );
 
     /**
@@ -30,7 +41,7 @@ class EditableMemberListField extends EditableFormField
             'Root.Main',
             DropdownField::create(
                 "GroupID",
-                _t('EditableFormField.GROUP', 'Group'),
+                _t('EditableFormField.GROUP', Group::class),
                 Group::get()->map()
             )->setEmptyString(' ')
         );

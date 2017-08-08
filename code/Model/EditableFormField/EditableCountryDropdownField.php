@@ -1,5 +1,13 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+use CountryDropdownField;
+
+use SilverStripe\UserForms\Model\EditableCustomRule;
+
+
+
 /**
  * A dropdown field which allows the user to select a country
  *

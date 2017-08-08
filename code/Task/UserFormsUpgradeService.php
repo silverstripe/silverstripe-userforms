@@ -1,5 +1,20 @@
 <?php
 
+namespace SilverStripe\UserForms\Task;
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\DB;
+
+
+
 /**
  * Service to support upgrade of userforms module
  */
@@ -16,7 +31,7 @@ class UserFormsUpgradeService
         $this->log("Upgrading formfield rules and custom settings");
 
         // List of rules that have been created in all stages
-        $fields = Versioned::get_including_deleted('EditableFormField');
+        $fields = Versioned::get_including_deleted(EditableFormField::class);
         foreach ($fields as $field) {
             $this->upgradeField($field);
         }
@@ -33,8 +48,8 @@ class UserFormsUpgradeService
 
         // Check versions this field exists on
         $filter = sprintf('"EditableFormField"."ID" = \'%d\' AND "Migrated" = 0', $field->ID);
-        $stageField = Versioned::get_one_by_stage('EditableFormField', 'Stage', $filter);
-        $liveField = Versioned::get_one_by_stage('EditableFormField', 'Live', $filter);
+        $stageField = Versioned::get_one_by_stage(EditableFormField::class, 'Stage', $filter);
+        $liveField = Versioned::get_one_by_stage(EditableFormField::class, 'Live', $filter);
 
         if ($stageField) {
             $this->upgradeFieldInStage($stageField, 'Stage');
@@ -171,7 +186,7 @@ class UserFormsUpgradeService
 
         // If live, search stage record for matching one
         if ($stage === 'Live') {
-            $list = Versioned::get_by_stage('EditableCustomRule', 'Stage')
+            $list = Versioned::get_by_stage(EditableCustomRule::class, 'Stage')
                 ->filter(array(
                     'ParentID' => $field->ID,
                     'ConditionFieldID' => $conditionField ? $conditionField->ID : 0,

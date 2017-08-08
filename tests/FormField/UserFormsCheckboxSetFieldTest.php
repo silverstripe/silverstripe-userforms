@@ -1,5 +1,16 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\FormField;
+
+
+
+
+use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 class UserFormsCheckboxSetFieldTest extends SapphireTest
 {
     public function testValidate() {

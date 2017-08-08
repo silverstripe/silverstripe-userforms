@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\UserForms\FormField;
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Forms\FieldList;
+
+
+
 /**
  * A list of formfields which allows for iterative processing of nested composite fields
  */

@@ -1,5 +1,13 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model;
+
+
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 /**
  * Class EditableCustomRulesTest
  */
@@ -10,7 +18,7 @@ class EditableCustomRuleTest extends SapphireTest
     public function testBuildExpression()
     {
         /** @var EditableCustomRule $rule1 */
-        $rule1 = $this->objFromFixture('EditableCustomRule', 'rule1');
+        $rule1 = $this->objFromFixture(EditableCustomRule::class, 'rule1');
         $result1 = $rule1->buildExpression();
 
         //Dropdowns expect change event
@@ -20,7 +28,7 @@ class EditableCustomRuleTest extends SapphireTest
         $this->assertContains('==', $result1['operation']);
 
         /** @var EditableCustomRule $rule2 */
-        $rule2 = $this->objFromFixture('EditableCustomRule', 'rule2');
+        $rule2 = $this->objFromFixture(EditableCustomRule::class, 'rule2');
         $result2 = $rule2->buildExpression();
         //TextField expect change event
         $this->assertEquals('keyup', $result2['event']);
@@ -35,7 +43,7 @@ class EditableCustomRuleTest extends SapphireTest
      */
     public function testToggleDisplayText()
     {
-        $rule1 = $this->objFromFixture('EditableCustomRule', 'rule1');
+        $rule1 = $this->objFromFixture(EditableCustomRule::class, 'rule1');
         $this->assertSame('addClass("hide")', $rule1->toggleDisplayText('show'));
         $this->assertSame('removeClass("hide")', $rule1->toggleDisplayText('hide'));
     }

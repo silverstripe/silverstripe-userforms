@@ -1,4 +1,13 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+
+
 /**
  * EditableRadioField
  *

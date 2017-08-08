@@ -1,5 +1,19 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\Core\Convert;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
+
+
 /**
  * Base Class for EditableOption Fields such as the ones used in
  * dropdown fields and in radio check box groups
@@ -21,7 +35,7 @@ class EditableOption extends DataObject
 	);
 
 	private static $has_one = array(
-		"Parent" => "EditableMultipleOptionField",
+		"Parent" => EditableMultipleOptionField::class,
 	);
 
 	private static $extensions = array(

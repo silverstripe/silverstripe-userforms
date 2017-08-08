@@ -1,6 +1,11 @@
 <?php
 
+namespace SilverStripe\UserForms\Modifier;
+
+
 use SilverStripe\Forms\SegmentFieldModifier\SlugSegmentFieldModifier;
+
+
 
 class UnderscoreSegmentFieldModifier extends SlugSegmentFieldModifier
 {

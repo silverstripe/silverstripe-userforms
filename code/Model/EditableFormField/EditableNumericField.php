@@ -1,4 +1,15 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\FieldGroup;
+
+
 /**
  * EditableNumericField
  *

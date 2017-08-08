@@ -1,5 +1,23 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\Recipient;
+
+
+
+
+
+
+use SilverStripe\Core\Config\Config;
+use SilverStripe\View\SSViewer;
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
+
+
+
 /**
  * Controller that handles requests to EmailRecipient's
  *
@@ -22,7 +40,7 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
     {
         // Enable theme for preview (may be needed for Shortcodes)
         Config::nest();
-        Config::inst()->update('SSViewer', 'theme_enabled', true);
+        Config::inst()->update(SSViewer::class, 'theme_enabled', true);
 
         $content = $this->customise(new ArrayData(array(
             'Body' => $this->record->getEmailBodyContent(),
@@ -44,8 +62,8 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
         $data = new ArrayList();
 
         $fields = $this->record->Form()->Fields()->filter(array(
-            'ClassName:not' => 'EditableLiteralField',
-            'ClassName:not' => 'EditableFormHeading'
+            'ClassName:not' => EditableLiteralField::class,
+            'ClassName:not' => EditableFormHeading::class
         ));
 
         foreach ($fields as $field) {

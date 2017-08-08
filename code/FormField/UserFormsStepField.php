@@ -1,5 +1,10 @@
 <?php
 
+namespace SilverStripe\UserForms\FormField;
+
+
+
+
 /**
  * Represents a page step in a form, which may contain form fields or other groups
  */

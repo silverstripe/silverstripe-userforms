@@ -1,4 +1,26 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\Submission;
+
+
+
+
+
+
+
+
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\ORM\DataObject;
+
+
 /**
  * Contents of an UserDefinedForm submission
  *
@@ -9,12 +31,12 @@ class SubmittedForm extends DataObject
 {
 
     private static $has_one = array(
-        "SubmittedBy" => "Member",
-        "Parent" => "UserDefinedForm",
+        "SubmittedBy" => Member::class,
+        "Parent" => UserDefinedForm::class,
     );
 
     private static $has_many = array(
-        "Values" => "SubmittedFormField"
+        "Values" => SubmittedFormField::class
     );
 
     private static $summary_fields = array(
@@ -77,7 +99,7 @@ class SubmittedForm extends DataObject
 
             $values = GridField::create(
                 'Values',
-                'SubmittedFormField',
+                SubmittedFormField::class,
                 $self->Values()->sort('Created', 'ASC')
             );
 

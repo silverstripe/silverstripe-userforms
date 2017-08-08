@@ -1,5 +1,35 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+use GridFieldEditableColumns;
+
+
+
+
+use GridFieldTitleHeader;
+use GridFieldOrderableRows;
+
+use GridFieldAddNewInlineButton;
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\ORM\Map;
+
+
+
 /**
  * Base class for multiple option fields such as {@link EditableDropdownField}
  * and radio sets.
@@ -25,7 +55,7 @@ class EditableMultipleOptionField extends EditableFormField
     private static $abstract = true;
 
     private static $has_many = array(
-        "Options" => "EditableOption"
+        "Options" => EditableOption::class
     );
 
     /**
@@ -118,7 +148,7 @@ class EditableMultipleOptionField extends EditableFormField
         }
 
         // remove any orphans from the "fromStage"
-        $options = Versioned::get_by_stage('EditableOption', $toStage)
+        $options = Versioned::get_by_stage(EditableOption::class, $toStage)
             ->filter('ParentID', $this->ID);
 
         if (!empty($seenIDs)) {
@@ -140,7 +170,7 @@ class EditableMultipleOptionField extends EditableFormField
     public function doDeleteFromStage($stage)
     {
         // Remove options
-        $options = Versioned::get_by_stage('EditableOption', $stage)
+        $options = Versioned::get_by_stage(EditableOption::class, $stage)
             ->filter('ParentID', $this->ID);
         foreach ($options as $option) {
             $option->deleteFromStage($stage);
@@ -208,7 +238,7 @@ class EditableMultipleOptionField extends EditableFormField
     {
         $optionSet = $this->Options();
         $optionMap = $optionSet->map('Value', 'Title');
-        if ($optionMap instanceof SS_Map) {
+        if ($optionMap instanceof Map) {
             return $optionMap->toArray();
         }
         return $optionMap;

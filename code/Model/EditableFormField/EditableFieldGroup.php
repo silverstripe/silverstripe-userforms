@@ -1,5 +1,17 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\UserForms\FormField\UserFormsGroupField;
+use SilverStripe\Core\Convert;
+
+
+
 /**
  * Specifies that this ends a group of fields
  */
@@ -7,7 +19,7 @@ class EditableFieldGroup extends EditableFormField
 {
 
     private static $has_one = array(
-        'End' => 'EditableFieldGroupEnd'
+        'End' => EditableFieldGroupEnd::class
     );
 
     /**

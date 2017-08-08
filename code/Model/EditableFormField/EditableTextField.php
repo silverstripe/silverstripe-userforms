@@ -1,4 +1,22 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+
+
+
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+
+
 /**
  * EditableTextField
  *
@@ -26,7 +44,7 @@ class EditableTextField extends EditableFormField
         'family-name' => 'Family name',
         'honorific-suffix' => 'Suffix (e.g Jr.)',
         'nickname' => 'Nickname',
-        'email' => 'Email',
+        'email' => Email::class,
         'organization-title' => 'Job title',
         'organization' => 'Organization',
         'street-address' => 'Street address',

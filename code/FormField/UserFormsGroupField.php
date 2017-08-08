@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\UserForms\FormField;
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+
+
+
 /**
  * Front end composite field for userforms
  */

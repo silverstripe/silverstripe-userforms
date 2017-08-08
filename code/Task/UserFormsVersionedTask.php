@@ -1,5 +1,15 @@
 <?php
 
+namespace SilverStripe\UserForms\Task;
+
+
+
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\Dev\MigrationTask;
+
+
+
 /**
  * UserForms Versioned Task
  *
@@ -23,7 +33,7 @@ class UserFormsVersionedTask extends MigrationTask
      */
     public function run($request)
     {
-        $forms = Versioned::get_by_stage('UserDefinedForm', 'Live');
+        $forms = Versioned::get_by_stage(UserDefinedForm::class, 'Live');
 
         if ($forms) {
             foreach ($forms as $form) {

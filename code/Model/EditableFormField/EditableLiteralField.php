@@ -1,5 +1,23 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+
+
+
+
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorSanitiser;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\CompositeField;
+
+
+
 /**
  * Editable Literal Field. A literal field is just a blank slate where
  * you can add your own HTML / Images / Flash
@@ -41,17 +59,17 @@ class EditableLiteralField extends EditableFormField
     );
 
     /**
-     * Returns the {@see HtmlEditorConfig} instance to use for sanitisation
+     * Returns the {@see HTMLEditorConfig} instance to use for sanitisation
      *
-     * @return HtmlEditorConfig
+     * @return HTMLEditorConfig
      */
     protected function getEditorConfig()
     {
         $editorConfig = $this->config()->editor_config;
         if ($editorConfig) {
-            return HtmlEditorConfig::get($editorConfig);
+            return HTMLEditorConfig::get($editorConfig);
         }
-        return HtmlEditorConfig::get_active();
+        return HTMLEditorConfig::get_active();
     }
 
     /**
@@ -63,13 +81,13 @@ class EditableLiteralField extends EditableFormField
     protected function sanitiseContent($content)
     {
         // Check if sanitisation is enabled
-        if (!HtmlEditorField::config()->sanitise_server_side) {
+        if (!HTMLEditorField::config()->sanitise_server_side) {
             return $content;
         }
 
         // Perform sanitisation
         $htmlValue = Injector::inst()->create('HTMLValue', $content);
-        $santiser = Injector::inst()->create('HtmlEditorSanitiser', $this->getEditorConfig());
+        $santiser = Injector::inst()->create(HTMLEditorSanitiser::class, $this->getEditorConfig());
         $santiser->sanitise($htmlValue);
         return $htmlValue->getContent();
     }

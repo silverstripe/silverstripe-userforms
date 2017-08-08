@@ -1,5 +1,13 @@
 <?php
 
+namespace SilverStripe\UserForms\Test\Model\Recipient;
+
+
+use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipientCondition;
+use SilverStripe\Dev\SapphireTest;
+
+
+
 /**
  * Class EditableCustomRulesTest
  */
@@ -12,7 +20,7 @@ class UserDefinedForm_EmailRecipientConditionTest extends SapphireTest
      */
     public function testMatches()
     {
-        $fixtureClass = 'UserDefinedForm_EmailRecipientCondition';
+        $fixtureClass = UserDefinedForm_EmailRecipientCondition::class;
         //Test Blank
         /** @var UserDefinedForm_EmailRecipientCondition $blankObj */
         $blankObj = $this->objFromFixture($fixtureClass, 'blankTest');

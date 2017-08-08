@@ -1,5 +1,16 @@
 <?php
 
+namespace SilverStripe\UserForms\FormField;
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\Forms\CompositeField;
+
+
+
 /**
  * Represents a composite field group, which may contain other groups
  */

@@ -1,5 +1,67 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\Recipient;
+
+
+
+
+
+
+
+use GridFieldAddNewInlineButton;
+
+use GridFieldEditableColumns;
+
+
+
+
+
+
+
+
+use Tabset;
+
+
+
+
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipientCondition;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\View\Requirements;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\Form;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Assets\FileFinder;
+use SilverStripe\ORM\DataObject;
+
+
+
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -24,14 +86,14 @@ class UserDefinedForm_EmailRecipient extends DataObject
     );
 
     private static $has_one = array(
-        'Form' => 'UserDefinedForm',
-        'SendEmailFromField' => 'EditableFormField',
-        'SendEmailToField' => 'EditableFormField',
-        'SendEmailSubjectField' => 'EditableFormField'
+        'Form' => UserDefinedForm::class,
+        'SendEmailFromField' => EditableFormField::class,
+        'SendEmailToField' => EditableFormField::class,
+        'SendEmailSubjectField' => EditableFormField::class
     );
 
     private static $has_many = array(
-        'CustomRules' => 'UserDefinedForm_EmailRecipientCondition'
+        'CustomRules' => UserDefinedForm_EmailRecipientCondition::class
     );
 
     private static $summary_fields = array(
@@ -55,7 +117,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $fields = parent::summaryFields();
         if (isset($fields['EmailAddress'])) {
-            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', 'Email');
+            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', Email::class);
         }
         if (isset($fields['EmailSubject'])) {
             $fields['EmailSubject'] = _t('UserDefinedForm.EMAILSUBJECT', 'Subject');
@@ -229,7 +291,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
             $preview = sprintf(
                 '<p><a href="%s" target="_blank" class="ss-ui-button">%s</a></p><em>%s</em>',
                 Controller::join_links(
-                    singleton('CMSPageEditController')->getEditForm()->FormAction(),
+                    singleton(CMSPageEditController::class)->getEditForm()->FormAction(),
                     "field/EmailRecipients/item/{$this->ID}/preview"
                 ),
                 _t('UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
@@ -323,8 +385,8 @@ class UserDefinedForm_EmailRecipient extends DataObject
     protected function getCanCreateContext($args)
     {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if (isset($args[1]['Form'])) {
-            return $args[1]['Form'];
+        if (isset($args[1][Form::class])) {
+            return $args[1][Form::class];
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
@@ -433,7 +495,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $templates = array();
 
-        $finder = new SS_FileFinder();
+        $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
         $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->email_template_directory);

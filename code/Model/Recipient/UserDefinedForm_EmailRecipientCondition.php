@@ -1,5 +1,19 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\Recipient;
+
+
+use LogicException;
+
+
+use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\ORM\DataObject;
+
+
+
 
 /**
  * Declares a condition that determines whether an email can be sent to a given recipient
@@ -37,8 +51,8 @@ class UserDefinedForm_EmailRecipientCondition extends DataObject
     );
 
     private static $has_one = array(
-        'Parent' => 'UserDefinedForm_EmailRecipient',
-        'ConditionField' => 'EditableFormField'
+        'Parent' => UserDefinedForm_EmailRecipient::class,
+        'ConditionField' => EditableFormField::class
     );
 
     /**

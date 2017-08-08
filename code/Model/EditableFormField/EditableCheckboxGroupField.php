@@ -1,4 +1,13 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
+
+use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+
+
 /**
  * EditableCheckboxGroup
  *

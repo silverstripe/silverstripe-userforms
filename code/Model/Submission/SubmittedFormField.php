@@ -1,4 +1,12 @@
 <?php
+
+namespace SilverStripe\UserForms\Model\Submission;
+
+
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\ORM\DataObject;
+
+
 /**
  * Data received from a UserDefinedForm submission
  *
@@ -15,7 +23,7 @@ class SubmittedFormField extends DataObject
     );
 
     private static $has_one = array(
-        "Parent" => "SubmittedForm"
+        "Parent" => SubmittedForm::class
     );
 
     private static $summary_fields = array(

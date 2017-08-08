@@ -1,6 +1,78 @@
 <?php
 
+namespace SilverStripe\UserForms\Model\EditableFormField;
+
+
 use SilverStripe\Forms\SegmentField;
+
+
+
+
+
+
+
+
+
+
+
+use GridFieldEditableColumns;
+
+
+
+
+use GridFieldAddNewInlineButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier;
+use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Control\Controller;
+use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
+use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\Dev\Deprecation;
+use SilverStripe\Core\Convert;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataObject;
+
+
 
 /**
  * Represents the base class of a editable form field
@@ -112,7 +184,7 @@ class EditableFormField extends DataObject
      * @var array
      */
     private static $has_one = array(
-        "Parent" => "UserDefinedForm",
+        "Parent" => UserDefinedForm::class,
     );
 
     /**
@@ -305,7 +377,7 @@ class EditableFormField extends DataObject
                         ))->map('ID', 'Title'));
             },
             'ConditionOption' => function ($record, $column, $grid) {
-                $options = Config::inst()->get('EditableCustomRule', 'condition_options');
+                $options = Config::inst()->get(EditableCustomRule::class, 'condition_options');
 
                 return DropdownField::create($column, '', $options);
             },
@@ -431,7 +503,7 @@ class EditableFormField extends DataObject
                 $parent = $controller->getRecord($controller->currentPageID());
                 // Only allow this behaviour on pages using UserFormFieldEditorExtension, such
                 // as UserDefinedForm page type.
-                if ($parent && $parent->hasExtension('UserFormFieldEditorExtension')) {
+                if ($parent && $parent->hasExtension(UserFormFieldEditorExtension::class)) {
                     return $parent->canEdit($member);
                 }
             }
@@ -554,7 +626,7 @@ class EditableFormField extends DataObject
         }
 
         // remove any orphans from the "fromStage"
-        $rules = Versioned::get_by_stage('EditableCustomRule', $toStage)
+        $rules = Versioned::get_by_stage(EditableCustomRule::class, $toStage)
             ->filter('ParentID', $this->ID);
 
         if (!empty($seenRuleIDs)) {
@@ -574,7 +646,7 @@ class EditableFormField extends DataObject
     public function doDeleteFromStage($stage)
     {
         // Remove custom rules in this stage
-        $rules = Versioned::get_by_stage('EditableCustomRule', $stage)
+        $rules = Versioned::get_by_stage(EditableCustomRule::class, $stage)
             ->filter('ParentID', $this->ID);
         foreach ($rules as $rule) {
             $rule->deleteFromStage($stage);
@@ -611,8 +683,8 @@ class EditableFormField extends DataObject
             return false;
         }
 
-        $stageVersion = Versioned::get_versionnumber_by_stage('EditableFormField', 'Stage', $this->ID);
-        $liveVersion = Versioned::get_versionnumber_by_stage('EditableFormField', 'Live', $this->ID);
+        $stageVersion = Versioned::get_versionnumber_by_stage(EditableFormField::class, 'Stage', $this->ID);
+        $liveVersion = Versioned::get_versionnumber_by_stage(EditableFormField::class, 'Live', $this->ID);
 
         return ($stageVersion && $stageVersion != $liveVersion);
     }
@@ -742,14 +814,14 @@ class EditableFormField extends DataObject
         $prior = 0; // Number of prior group at this level
         $stack = array(); // Current stack of nested groups, where the top level = the page
         foreach ($fields->map('ID', 'ClassName') as $id => $className) {
-            if ($className === 'EditableFormStep') {
+            if ($className === EditableFormStep::class) {
                 $priorPage = empty($stack) ? $prior : $stack[0];
                 $stack = array($priorPage + 1);
                 $prior = 0;
-            } elseif ($className === 'EditableFieldGroup') {
+            } elseif ($className === EditableFieldGroup::class) {
                 $stack[] = $prior + 1;
                 $prior = 0;
-            } elseif ($className === 'EditableFieldGroupEnd') {
+            } elseif ($className === EditableFieldGroupEnd::class) {
                 $prior = array_pop($stack);
             }
             if ($id == $this->ID) {
@@ -1007,7 +1079,7 @@ class EditableFormField extends DataObject
      */
     public function getEditableFieldClasses($includeLiterals = true)
     {
-        $classes = ClassInfo::getValidSubClasses('EditableFormField');
+        $classes = ClassInfo::getValidSubClasses(EditableFormField::class);
 
         // Remove classes we don't want to display in the dropdown.
         $editableFieldClasses = array();
@@ -1078,7 +1150,7 @@ class EditableFormField extends DataObject
         foreach ($this->EffectiveDisplayRules() as $rule) {
             // Get the field which is effected
             /** @var EditableFormField $formFieldWatch */
-            $formFieldWatch = DataObject::get_by_id('EditableFormField', $rule->ConditionFieldID);
+            $formFieldWatch = DataObject::get_by_id(EditableFormField::class, $rule->ConditionFieldID);
             // Skip deleted fields
             if (! $formFieldWatch) {
                 continue;

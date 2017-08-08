@@ -1,5 +1,21 @@
 <?php
 
+namespace SilverStripe\UserForms\Extension;
+
+
+
+
+
+
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\ORM\DB;
+use SilverStripe\Assets\Folder;
+use SilverStripe\Security\Group;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataExtension;
+
+
+
 /**
  * Provides additional file security for uploaded files when the securefiles module is installed
  *
@@ -110,7 +126,7 @@ class SecureEditableFileField extends DataExtension
      */
     protected function findAdminGroup()
     {
-        singleton('Group')->requireDefaultRecords();
+        singleton(Group::class)->requireDefaultRecords();
         return Permission::get_groups_by_permission('ADMIN')->First();
     }
 

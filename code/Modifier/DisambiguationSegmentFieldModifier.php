@@ -1,6 +1,14 @@
 <?php
 
+namespace SilverStripe\UserForms\Modifier;
+
+
 use SilverStripe\Forms\SegmentFieldModifier\AbstractSegmentFieldModifier;
+
+use EditableformField;
+use SilverStripe\Forms\Form;
+
+
 
 class DisambiguationSegmentFieldModifier extends AbstractSegmentFieldModifier
 {
