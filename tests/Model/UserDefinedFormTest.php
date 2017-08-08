@@ -50,8 +50,8 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertTrue($fields->dataFieldByName('OnCompleteMessage') != null);
     }
 
-	
-    public function testGetCMSFieldsShowInSummary() 
+
+    public function testGetCMSFieldsShowInSummary()
     {
         $this->logInWithPermission('ADMIN');
         $form = $this->objFromFixture('UserDefinedForm', 'summary-rules-form');
@@ -69,7 +69,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotContains('SummaryHide', array_keys($summaryFields), 'Summary field showing displayed field');
     }
 
-	
+
     public function testEmailRecipientPopup()
     {
         $this->logInWithPermission('ADMIN');

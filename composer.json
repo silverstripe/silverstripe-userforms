@@ -30,10 +30,14 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~3.2",
-        "silverstripe/cms": "~3.2",
-        "symbiote/silverstripe-gridfieldextensions": "~1.4",
-        "silverstripe/segment-field": "^1.0"
+        "silverstripe/framework": "^4@dev",
+        "silverstripe/cms": "^4@dev",
+        "symbiote/silverstripe-gridfieldextensions": "^3@dev",
+        "silverstripe/segment-field": "^2@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "squizlabs/php_codesniffer": "*"
     },
     "suggest": {
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
@@ -44,5 +48,7 @@
         "branch-alias": {
             "dev-master": "5.0.x-dev"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }

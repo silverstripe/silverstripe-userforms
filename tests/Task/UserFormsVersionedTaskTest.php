@@ -1,7 +1,7 @@
 <?php
 
 
-class UserFormsVersionedTest extends SapphireTest
+class UserFormsVersionedTaskTest extends SapphireTest
 {
     protected static $fixture_file = 'UserDefinedFormTest.yml';
 
