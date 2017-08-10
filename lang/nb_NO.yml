@@ -13,28 +13,21 @@ nb_NO:
     SHOWTHISFIELD: 'Vis dette feltet'
     VALUE: Verdi
     WHEN: Når
-  EditableCheckbox:
-    PLURALNAME: Avkrysningsbokser
-    SINGULARNAME: 'Avkrysningsboks felt'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Avkrysningsboks grupper'
-    SINGULARNAME: 'Avkrysningsboks gruppe'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Land nedfellsmenyer'
-    SINGULARNAME: 'Land nedfellsmeny'
-  EditableDateField:
-    PLURALNAME: Datofelter
-    SINGULARNAME: Datofelt
-  EditableDropdown:
-    PLURALNAME: Nedfellsmeny
-    SINGULARNAME: 'Nedfellsmeny felt'
-  EditableEmailField:
-    PLURALNAME: 'Epost felt'
-    SINGULARNAME: 'Epost felt'
-  EditableFileField:
-    PLURALNAME: Filopplastingsfelter
-    SINGULARNAME: Filopplastingsfelt
-  EditableFormField:
+  FieldEditor:
+    ADD: 'Legg til'
+    SELECTAFIELD: 'Velg et felt'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Sider
+    SINGULARNAME: Side
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%er er påkrevd'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrer innsendte...'
+    WHEREVALUEIS: 'hvor verdi er...'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: 'Legg til'
     ADDLabel: 'Legt til alternativ'
     ADDRULE: 'Legg til regel'
@@ -72,56 +65,69 @@ nb_NO:
     VALIDATION: Validering
     VALUE: Verdi
     WHEN: Når
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Avkrysningsbokser
+    SINGULARNAME: 'Avkrysningsboks felt'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Avkrysningsboks grupper'
+    SINGULARNAME: 'Avkrysningsboks gruppe'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Land nedfellsmenyer'
+    SINGULARNAME: 'Land nedfellsmeny'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Datofelter
+    SINGULARNAME: Datofelt
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Nedfellsmeny
+    SINGULARNAME: 'Nedfellsmeny felt'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Epost felt'
+    SINGULARNAME: 'Epost felt'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: Filopplastingsfelter
+    SINGULARNAME: Filopplastingsfelt
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Velg overskrift nivå'
     PLURALNAME: Overskrifter
     SINGULARNAME: Overskrift
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Skjul fra rapporter?'
     PLURALNAME: 'HTML blokker'
     SINGULARNAME: 'HTML blokk'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Medlemliste felt'
     SINGULARNAME: 'Medlemliste felt'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Redigerbare flervalgfelt'
     SINGULARNAME: 'Redigerbare flervalgfelt'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Fjern alternativ'
     DRAG: 'Dra for endre rekkefølge på alternativene'
     LOCKED: 'Disse feltene kan ikke endres'
     PLURALNAME: 'Redigerbart alternativer'
     SINGULARNAME: 'Redigerbart alternativ'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiofelt
     SINGULARNAME: Radiofelt
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Antall rader'
     PLURALNAME: Tekstfelt
     SINGULARNAME: Tekstfelt
     TEXTLENGTH: 'Tekst lengde'
-  FieldEditor:
-    ADD: 'Legg til'
-    SELECTAFIELD: 'Velg et felt'
-  Form:
-    FIELDISREQUIRED: '%er er påkrevd'
-  GridField:
-    Filter: Filter
-    ResetFilter: Reset
-  SiteTree:
-    PLURALNAME: Sider
-    SINGULARNAME: Side
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'Bruker definert e-post mottakere'
+    SINGULARNAME: 'Bruker definert e-post mottaker'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Last ned fil'
     PLURALNAME: 'Sendte fil felter'
     SINGULARNAME: 'Sendte fil felt'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Sendte skjema'
     SINGULARNAME: 'Sendte skjema'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Sendt skjema felter'
     SINGULARNAME: 'Sendt skjema felt'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
     CONFIGURATION: Konfigurasjon
     DESCRIPTION: 'Legg til konfigurerbart skjema'
@@ -147,9 +153,3 @@ nb_NO:
     SUBMISSIONS: Innsendte
     SUBMITBUTTON: Send
     TEXTONSUBMIT: 'Tekst på "send" knapp'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Bruker definert e-post mottakere'
-    SINGULARNAME: 'Bruker definert e-post mottaker'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrer innsendte...'
-    WHEREVALUEIS: 'hvor verdi er...'

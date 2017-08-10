@@ -13,39 +13,39 @@ en:
     SHOWTHISFIELD: 'Show This Field'
     VALUE: Value
     WHEN: When
-  EditableCheckbox:
-    PLURALNAME: Checkboxes
-    SINGULARNAME: 'Checkbox Field'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
-    SINGULARNAME: 'Checkbox Group'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Country Dropdowns'
-    SINGULARNAME: 'Country Dropdown'
-  EditableCustomRule:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Select upload folder'
+  FieldEditor:
+    ADD: Add
+    SELECTAFIELD: 'Select a Field'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Pages
+    SINGULARNAME: Page
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s is required'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Add Field'
+    ADD_FIELD_GROUP: 'Add Field Group'
+    ADD_PAGE_BREAK: 'Add Page Break'
+    FORMFIELDS: 'Form Fields'
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
+    NO_PAGE: 'Field ''{name}'' found before any pages'
+    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
+    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filter Submissions..'
+    FROM: From
+    TILL: Till
+    WHEREVALUEIS: 'where value is..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Editable Custom Rules'
     SINGULARNAME: 'Editable Custom Rule'
-  EditableDateField:
-    PLURALNAME: 'Date Fields'
-    SINGULARNAME: 'Date Field'
-  EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Field'
-  EditableEmailField:
-    PLURALNAME: 'Email Fields'
-    SINGULARNAME: 'Email Field'
-  EditableFieldGroup:
-    PLURALNAME: 'Editable Field Groups'
-    SINGULARNAME: 'Editable Field Group'
-  EditableFieldGroupEnd:
-    FIELD_GROUP_END: '{group} end'
-    FIELD_GROUP_START: 'Group {group}'
-    PLURALNAME: 'Editable Field Group Ends'
-    SINGULARNAME: 'Editable Field Group End'
-  EditableFileField:
-    PLURALNAME: 'File Upload Fields'
-    SINGULARNAME: 'File Upload Field'
-  EditableFormField:
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Add
     ADDLabel: 'Add option'
     ADDRULE: 'Add Rule'
@@ -82,8 +82,8 @@ en:
     MAXVALUE: 'Max Value'
     MERGEFIELDNAME: 'Merge field'
     MINVALUE: 'Min Value'
+    NAME: Name
     'NO': 'No'
-    NAME: 'Name'
     NOTBLANK: 'Not Blank'
     NOTVALUE: 'Not Value'
     OPTIONS: Options
@@ -105,48 +105,75 @@ en:
     VALUE: Value
     WHEN: When
     'YES': 'Yes'
-  EditableFormFieldValidator:
-    REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Country Dropdowns'
+    SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Editable Field Groups'
+    SINGULARNAME: 'Editable Field Group'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: '{group} end'
+    FIELD_GROUP_START: 'Group {group}'
+    PLURALNAME: 'Editable Field Group Ends'
+    SINGULARNAME: 'Editable Field Group End'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
     SINGULARNAME: Heading
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Page Breaks'
     SINGULARNAME: 'Page Break'
     STEP_TITLE: 'Page {page}'
     TITLE_FIRST: 'First Page'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Hide from reports?'
     HIDELABEL: 'Hide ''Title'' label on frontend?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Selected by default?'
     OPTIONSTAB: Options
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     TITLE: Title
     VALUE: Value
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeric Fields'
     RANGE: 'Allowed numeric range'
     RANGE_TO: to
     SINGULARNAME: 'Numeric Field'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Radio Groups'
     SINGULARNAME: 'Radio Group'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     AUTOCOMPLETE: Autocomplete
     AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
     NUMBERROWS: 'Number of rows'
@@ -156,30 +183,31 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Select upload folder'
-  FieldEditor:
-    ADD: Add
-    SELECTAFIELD: 'Select a Field'
-  Form:
-    FIELDISREQUIRED: '%s is required'
-  GridField:
-    Filter: Filter
-    ResetFilter: Reset
-  SiteTree:
-    PLURALNAME: Pages
-    SINGULARNAME: Page
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
+    EMAILADDRESSINVALID: '"EmailAddress" is not valid'
+    EMAILCONTENTTAB: 'Email Content'
+    EMAILDETAILSTAB: 'Email Details'
+    EMAILFROMINVALID: '"Email From" is not valid'
+    EMAILREPLYTOINVALID: '"Email Reply To" is not valid'
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'User Defined Form Email Recipient Conditions'
+    SINGULARNAME: 'User Defined Form Email Recipient Condition'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Submitted Forms'
     SINGULARNAME: 'Submitted Form'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
@@ -230,31 +258,3 @@ en:
     TYPEREPLY: 'Type reply address'
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
-  UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Custom Rules'
-    EMAILCONTENTTAB: 'Email Content'
-    EMAILDETAILSTAB: 'Email Details'
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'
-    EMAILADDRESSINVALID: '"EmailAddress" is not valid'
-    EMAILFROMINVALID: '"Email From" is not valid'
-    EMAILREPLYTOINVALID: '"Email Reply To" is not valid'
-  UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'User Defined Form Email Recipient Conditions'
-    SINGULARNAME: 'User Defined Form Email Recipient Condition'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Add Field'
-    ADD_FIELD_GROUP: 'Add Field Group'
-    ADD_PAGE_BREAK: 'Add Page Break'
-    FORMFIELDS: 'Form Fields'
-  UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
-    NO_PAGE: 'Field ''{name}'' found before any pages'
-    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
-    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filter Submissions..'
-    FROM: From
-    TILL: Till
-    WHEREVALUEIS: 'where value is..'

@@ -9,7 +9,10 @@ id:
     NOTBLANK: 'Tidak Kosong'
     VALUE: Nilai
     WHEN: Ketika
-  EditableFormField:
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Halaman
+    SINGULARNAME: Halaman
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Tambah
     ADDLabel: 'Tambah pilihan'
     BLANK: Kosong
@@ -21,6 +24,3 @@ id:
     MINVALUE: 'Nilai Min'
     SHOW: Tampilkan
     VALIDATION: Validasi
-  SiteTree:
-    PLURALNAME: Halaman
-    SINGULARNAME: Halaman

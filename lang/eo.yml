@@ -13,39 +13,39 @@ eo:
     SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
     VALUE: Valoro
     WHEN: Kiam
-  EditableCheckbox:
-    PLURALNAME: Markobutonoj
-    SINGULARNAME: 'Markobutona kampo'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Markobutonaj grupoj'
-    SINGULARNAME: 'Markobutona grupo'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Landaj fallistoj'
-    SINGULARNAME: 'Landa fallisto'
-  EditableCustomRule:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
+  FieldEditor:
+    ADD: Aldoni
+    SELECTAFIELD: 'Elekti kampon'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Paĝoj
+    SINGULARNAME: Paĝo
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s estas nepra'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filtri
+    ResetFilter: Restartigi
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Aldoni kampon'
+    ADD_FIELD_GROUP: 'Aldoni kampogrupon'
+    ADD_PAGE_BREAK: 'Aldoni paĝosalton'
+    FORMFIELDS: 'Formularaj kampoj'
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
+    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ iuj paĝoj'
+    UNEXPECTED_BREAK: 'Neatendita paĝosalto ''{name}'' en ingita kampo ''{group}'''
+    UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
+    WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
+    FROM: De
+    TILL: Ĝis
+    WHEREVALUEIS: 'kie valoro estas..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Redakteblaj propraj reguloj'
     SINGULARNAME: 'Redaktebla propra regulo'
-  EditableDateField:
-    PLURALNAME: 'Kampoj por dato'
-    SINGULARNAME: 'Kampo por dato'
-  EditableDropdown:
-    PLURALNAME: Fallistoj
-    SINGULARNAME: 'Fallista kampo'
-  EditableEmailField:
-    PLURALNAME: 'Kampoj por retpoŝto'
-    SINGULARNAME: 'Kampo por retpoŝto'
-  EditableFieldGroup:
-    PLURALNAME: 'Redakteblaj kampaj grupoj'
-    SINGULARNAME: 'Redaktebla kampa grupo'
-  EditableFieldGroupEnd:
-    FIELD_GROUP_END: 'fino de {group}'
-    FIELD_GROUP_START: 'Grupo {group}'
-    PLURALNAME: 'Redakteblaj kampaj grupoj finas'
-    SINGULARNAME: 'Redaktebla kampa grupo finas'
-  EditableFileField:
-    PLURALNAME: 'Kampoj por dosiera alŝuto'
-    SINGULARNAME: 'Kampo por dosiera alŝuto'
-  EditableFormField:
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Aldoni
     ADDLabel: 'Aldoni agordon'
     ADDRULE: 'Aldoni regulon'
@@ -98,48 +98,75 @@ eo:
     VALUE: Valoro
     WHEN: Kiam
     'YES': Jes
-  EditableFormFieldValidator:
-    REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Markobutonoj
+    SINGULARNAME: 'Markobutona kampo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Markobutonaj grupoj'
+    SINGULARNAME: 'Markobutona grupo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Landaj fallistoj'
+    SINGULARNAME: 'Landa fallisto'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Kampoj por dato'
+    SINGULARNAME: 'Kampo por dato'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Fallistoj
+    SINGULARNAME: 'Fallista kampo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Kampoj por retpoŝto'
+    SINGULARNAME: 'Kampo por retpoŝto'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Redakteblaj kampaj grupoj'
+    SINGULARNAME: 'Redaktebla kampa grupo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'fino de {group}'
+    FIELD_GROUP_START: 'Grupo {group}'
+    PLURALNAME: 'Redakteblaj kampaj grupoj finas'
+    SINGULARNAME: 'Redaktebla kampa grupo finas'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Kampoj por dosiera alŝuto'
+    SINGULARNAME: 'Kampo por dosiera alŝuto'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'
     PLURALNAME: Titoloj
     SINGULARNAME: Titolo
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Paĝosaltoj
     SINGULARNAME: Paĝosalto
     STEP_TITLE: 'Paĝo {page}'
     TITLE_FIRST: 'Unua paĝo'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
     HIDELABEL: 'Ĉu kaŝi etikedon ''Titolo'' en fasado?'
     PLURALNAME: HTML-blokoj
     SINGULARNAME: HTML-bloko
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Kampoj por membrolisto'
     SINGULARNAME: 'Kampo por membrolisto'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Elektita apriore?'
     OPTIONSTAB: Agordoj
     PLURALNAME: 'Redakteblaj plureblaj kampoj'
     SINGULARNAME: 'Redaktebla plurebla kampo'
     TITLE: Titolo
     VALUE: Valoro
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeraj kampoj'
     RANGE: 'Ebla numera amplekso'
     RANGE_TO: 'al '
     SINGULARNAME: 'Numera kampo'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Forigi ĉi tiun agordon'
     DRAG: 'Ŝovi por rearanĝi ordon de agordoj'
     LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
     PLURALNAME: 'Redakteblaj agordoj'
     SINGULARNAME: 'Redaktebla agordo'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Radiobutonaj kampoj'
     SINGULARNAME: 'Radiobutona kampo'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLACEHOLDER: Lokokupilo
@@ -147,30 +174,28 @@ eo:
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Longo de teksto'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
-  FieldEditor:
-    ADD: Aldoni
-    SELECTAFIELD: 'Elekti kampon'
-  Form:
-    FIELDISREQUIRED: '%s estas nepra'
-  GridField:
-    Filter: Filtri
-    ResetFilter: Restartigi
-  SiteTree:
-    PLURALNAME: Paĝoj
-    SINGULARNAME: Paĝo
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Propraj reguloj'
+    EMAILCONTENTTAB: 'Retpoŝta enhavo'
+    EMAILDETAILSTAB: 'Retpoŝtaj detaloj'
+    PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
+    SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'Retpoŝtaj ricevontaj kondiĉoj de propra formularo'
+    SINGULARNAME: 'Retpoŝta ricevonta kondiĉo de propra formularo'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Elŝuti dosieron'
     PLURALNAME: 'Senditaj dosieraj kampoj'
     SINGULARNAME: 'Sendita dosiera kampo'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Senditaj formularoj'
     SINGULARNAME: 'Sendita formularo'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Senditaj formularaj kampoj'
     SINGULARNAME: 'Sendita formulara kampo'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
     CLEARBUTTON: Vakigi
     CONFIGURATION: Agordaro
@@ -221,28 +246,3 @@ eo:
     TYPEREPLY: 'Tajpi respondan adreson'
     TYPESUBJECT: 'Tajpi temon'
     TYPETO: 'Tajpi al-adreson'
-  UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Propraj reguloj'
-    EMAILCONTENTTAB: 'Retpoŝta enhavo'
-    EMAILDETAILSTAB: 'Retpoŝtaj detaloj'
-    PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
-    SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
-  UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'Retpoŝtaj ricevontaj kondiĉoj de propra formularo'
-    SINGULARNAME: 'Retpoŝta ricevonta kondiĉo de propra formularo'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Aldoni kampon'
-    ADD_FIELD_GROUP: 'Aldoni kampogrupon'
-    ADD_PAGE_BREAK: 'Aldoni paĝosalton'
-    FORMFIELDS: 'Formularaj kampoj'
-  UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
-    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ iuj paĝoj'
-    UNEXPECTED_BREAK: 'Neatendita paĝosalto ''{name}'' en ingita kampo ''{group}'''
-    UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
-    WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
-    FROM: De
-    TILL: Ĝis
-    WHEREVALUEIS: 'kie valoro estas..'

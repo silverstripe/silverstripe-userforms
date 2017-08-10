@@ -13,28 +13,21 @@ ar:
     SHOWTHISFIELD: 'إظهار هذا الحقل'
     VALUE: 'القيمة'
     WHEN: 'عندما'
-  EditableCheckbox:
-    PLURALNAME: 'مربعات لوضع إشارة'
-    SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
-    SINGULARNAME: 'مجموعة مربعات لوضع إشارة'
-  EditableCountryDropdownField:
-    PLURALNAME: 'القائمة المنسدلة للروابط البلاد'
-    SINGULARNAME: 'القائمة المنسدلة للروابط البلاد'
-  EditableDateField:
-    PLURALNAME: 'حقول التاريخ'
-    SINGULARNAME: 'حقل التاريخ'
-  EditableDropdown:
-    PLURALNAME: 'القائمات المنسدلة للروابط'
-    SINGULARNAME: 'حقل القائمة المنسدلة'
-  EditableEmailField:
-    PLURALNAME: 'حقول البريد الإلكتروني'
-    SINGULARNAME: 'خانة البريد الإلكتروني'
-  EditableFileField:
-    PLURALNAME: 'حقول تحميل الملف'
-    SINGULARNAME: 'حقل تحميل الملف'
-  EditableFormField:
+  FieldEditor:
+    ADD: أضف
+    SELECTAFIELD: 'اختر حقل'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: صفحات
+    SINGULARNAME: صفحة
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s ضروري'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: تصفية
+    ResetFilter: 'إعادة تعيين'
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'تصفية التقديمات..'
+    WHEREVALUEIS: 'حيث القيمة هي..'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: إضافة
     ADDRULE: 'إضافة قاعدة'
     BLANK: فراغ
@@ -71,56 +64,69 @@ ar:
     VALIDATION: 'المصادقة'
     VALUE: 'القيمة'
     WHEN: 'عندما'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'مربعات لوضع إشارة'
+    SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
+    SINGULARNAME: 'مجموعة مربعات لوضع إشارة'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'القائمة المنسدلة للروابط البلاد'
+    SINGULARNAME: 'القائمة المنسدلة للروابط البلاد'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'حقول التاريخ'
+    SINGULARNAME: 'حقل التاريخ'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: 'القائمات المنسدلة للروابط'
+    SINGULARNAME: 'حقل القائمة المنسدلة'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'حقول البريد الإلكتروني'
+    SINGULARNAME: 'خانة البريد الإلكتروني'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'حقول تحميل الملف'
+    SINGULARNAME: 'حقل تحميل الملف'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'حدد مستوى العنوان'
     PLURALNAME: عناوين
     SINGULARNAME: عنوان
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'إخقاء تقارير النموذج؟'
     PLURALNAME: 'بلوكات HTML'
     SINGULARNAME: 'بلوك HTML'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'حقول قائمة الأعضاء'
     SINGULARNAME: 'حقل قائمة الأعضاء'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
     SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'احذف هذا الخيار'
     DRAG: 'اسحب لإعادة ترتيب الخيارات'
     LOCKED: 'لا يمكن تعديل هذه الحقول'
     PLURALNAME: 'الخيارات القابلة للتحرير'
     SINGULARNAME: 'خيار قابل للتحرير'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'حقول حلقية radio'
     SINGULARNAME: 'حقل حلقي Radio'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'عدد الصفوف'
     PLURALNAME: 'حقول نصية'
     SINGULARNAME: 'حقل نصي'
     TEXTLENGTH: 'طول النص'
-  FieldEditor:
-    ADD: أضف
-    SELECTAFIELD: 'اختر حقل'
-  Form:
-    FIELDISREQUIRED: '%s ضروري'
-  GridField:
-    Filter: تصفية
-    ResetFilter: 'إعادة تعيين'
-  SiteTree:
-    PLURALNAME: صفحات
-    SINGULARNAME: صفحة
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
+    SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'تحميل الملف'
     PLURALNAME: 'حقول الملف التي قدمت'
     SINGULARNAME: 'حقل الملف الذي قدّم'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'الاستمارات التي قدّمت'
     SINGULARNAME: 'الاستمارة التي قدّمت'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'حقول الاستمارة التي تمّ تقديمها'
     SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
     CONFIGURATION: 'مواصفات'
     DESCRIPTION: 'يضيف استمارة مخصصة.'
@@ -146,9 +152,3 @@ ar:
     SUBMISSIONS: 'التقديمات'
     SUBMITBUTTON: 'تقديم'
     TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
-    SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'تصفية التقديمات..'
-    WHEREVALUEIS: 'حيث القيمة هي..'

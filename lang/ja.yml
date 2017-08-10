@@ -1,15 +1,18 @@
 ja:
-  EditableEmailField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: メールフィールド
     SINGULARNAME: メールフィールド
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'レポートから隠しますか?'
     PLURALNAME: HTMLブロック
     SINGULARNAME: HTMLブロック
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 編集可能なマルチオプションフィールド
     SINGULARNAME: 編集可能なマルチオプションフィールド
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'ユーザー定義フォームのメール受信者'
+    SINGULARNAME: 'ユーザー定義フォームのメール受信者'
+  SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: メール
     EMAILBODY: ボディ
     EMAILFROM: '送信者'
@@ -29,6 +32,3 @@ ja:
     SINGULARNAME: 'ユーザー定義フォーム'
     SUBMITBUTTON: 送信
     TEXTONSUBMIT: '送信ボタンのテキスト:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'ユーザー定義フォームのメール受信者'
-    SINGULARNAME: 'ユーザー定義フォームのメール受信者'

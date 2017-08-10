@@ -13,28 +13,23 @@ sv:
     SHOWTHISFIELD: 'Visa detta fält'
     VALUE: Värde
     WHEN: När
-  EditableCheckbox:
-    PLURALNAME: Kryssrutor
-    SINGULARNAME: Kryssrutefält
-  EditableCheckboxGroupField:
-    PLURALNAME: Kryssrutegrupper
-    SINGULARNAME: Kryssrutegrupp
-  EditableCountryDropdownField:
-    PLURALNAME: 'Rullgardinsmenyer för länder'
-    SINGULARNAME: 'Rullgardinsmeny för länder'
-  EditableDateField:
-    PLURALNAME: Datumfält
-    SINGULARNAME: Datumfält
-  EditableDropdown:
-    PLURALNAME: Rullgardinsmenyer
-    SINGULARNAME: Rullgardinsmenyfält
-  EditableEmailField:
-    PLURALNAME: E-postfält
-    SINGULARNAME: E-postfält
-  EditableFileField:
-    PLURALNAME: Filuppladdningsfält
-    SINGULARNAME: Filuppladdningsfält
-  EditableFormField:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
+  FieldEditor:
+    ADD: 'Lägg till'
+    SELECTAFIELD: 'Välj ett fält'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Sidor
+    SINGULARNAME: Sida
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s är obligatoriskt'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Rensa
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrera inskickade svar'
+    WHEREVALUEIS: 'när värdet är..'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: 'Lägg till'
     ADDLabel: 'Lägg till alternativ'
     ADDRULE: 'Lägg till regel'
@@ -75,63 +70,74 @@ sv:
     VALIDATION: Validering
     VALUE: Värde
     WHEN: När
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Kryssrutor
+    SINGULARNAME: Kryssrutefält
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: Kryssrutegrupper
+    SINGULARNAME: Kryssrutegrupp
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Rullgardinsmenyer för länder'
+    SINGULARNAME: 'Rullgardinsmeny för länder'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Datumfält
+    SINGULARNAME: Datumfält
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Rullgardinsmenyer
+    SINGULARNAME: Rullgardinsmenyfält
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: E-postfält
+    SINGULARNAME: E-postfält
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: Filuppladdningsfält
+    SINGULARNAME: Filuppladdningsfält
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Välj rubrikstorlek'
     PLURALNAME: Rubriker
     SINGULARNAME: Rubrik
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_TITLE: 'Sida {page}'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Göm från rapport?'
     PLURALNAME: HTML-block
     SINGULARNAME: HTML-block
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: Medlemsfält
     SINGULARNAME: Medlemsfält
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Redigeringsbart multialternativfält'
     SINGULARNAME: 'Redigeringsbart multialternativfält'
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeriska fält'
     SINGULARNAME: 'Numeriskt fält'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Radera alternativ'
     DRAG: 'Dra och släpp för att ordna om alternativ'
     LOCKED: 'Dessa fält kan inte modifieras'
     PLURALNAME: 'Redigeringsbara alternativ'
     SINGULARNAME: 'Redigeringsbart alternativ'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiofält
     SINGULARNAME: Radiofält
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Antal rader'
     PLURALNAME: Textfält
     SINGULARNAME: Textfält
     TEXTLENGTH: Textlängd
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
-  FieldEditor:
-    ADD: 'Lägg till'
-    SELECTAFIELD: 'Välj ett fält'
-  Form:
-    FIELDISREQUIRED: '%s är obligatoriskt'
-  GridField:
-    Filter: Filter
-    ResetFilter: Rensa
-  SiteTree:
-    PLURALNAME: Sidor
-    SINGULARNAME: Sida
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'Mottagare av formulär'
+    SINGULARNAME: 'Mottagare av formulär'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Ladda ner fil'
     PLURALNAME: 'Inskickade filfält'
     SINGULARNAME: 'Inskickat filfält'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Inskickade formulär'
     SINGULARNAME: 'Inskickat formulär'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Inskickade formulärfält'
     SINGULARNAME: 'Inskickat formulärfält'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
     CLEARBUTTON: Rensa
     CONFIGURATION: Konfiguration
@@ -162,9 +168,3 @@ sv:
     SUBMITBUTTON: Skicka
     TEXTONCLEAR: 'Text på Rensa-knapp:'
     TEXTONSUBMIT: 'Text på Skicka-knapp:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Mottagare av formulär'
-    SINGULARNAME: 'Mottagare av formulär'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrera inskickade svar'
-    WHEREVALUEIS: 'när värdet är..'

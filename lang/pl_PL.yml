@@ -13,28 +13,23 @@ pl_PL:
     SHOWTHISFIELD: 'Show This Field'
     VALUE: Value
     WHEN: When
-  EditableCheckbox:
-    PLURALNAME: Checkboxes
-    SINGULARNAME: 'Checkbox Field'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
-    SINGULARNAME: 'Checkbox Group'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Country Dropdowns'
-    SINGULARNAME: 'Country Dropdown'
-  EditableDateField:
-    PLURALNAME: 'Pola daty'
-    SINGULARNAME: 'Pole daty'
-  EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Field'
-  EditableEmailField:
-    PLURALNAME: 'Email Fields'
-    SINGULARNAME: 'Email Field'
-  EditableFileField:
-    PLURALNAME: 'Pola przesyłania plików'
-    SINGULARNAME: 'Pole przesyłania pliku'
-  EditableFormField:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
+  FieldEditor:
+    ADD: Dodaj
+    SELECTAFIELD: 'Wybierz pole'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Strony
+    SINGULARNAME: Strona
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s is required'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Resetuj
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Zgłoszenia filtrów ..'
+    WHEREVALUEIS: 'których wartość jest ..'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Add
     ADDLabel: 'Dodaj opcję'
     ADDRULE: 'Add Rule'
@@ -76,61 +71,72 @@ pl_PL:
     VALUE: Value
     WHEN: When
     'YES': Tak
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Country Dropdowns'
+    SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Pola daty'
+    SINGULARNAME: 'Pole daty'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Pola przesyłania plików'
+    SINGULARNAME: 'Pole przesyłania pliku'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Wybierzpoziom nagłówka'
     PLURALNAME: Nagłówki
     SINGULARNAME: Nagłówek
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Pola numeryczne'
     SINGULARNAME: 'Pole numeryczne'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
     PLURALNAME: 'Edytowalne opcje'
     SINGULARNAME: 'Edytowalna opcja'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Pola wyboru'
     SINGULARNAME: 'Pole wyboru'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Liczba wierszy'
     PLURALNAME: 'Pola tekstowe'
     SINGULARNAME: 'Pole tekstowe'
     TEXTLENGTH: 'Długość tekstu'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
-  FieldEditor:
-    ADD: Dodaj
-    SELECTAFIELD: 'Wybierz pole'
-  Form:
-    FIELDISREQUIRED: '%s is required'
-  GridField:
-    Filter: Filter
-    ResetFilter: Resetuj
-  SiteTree:
-    PLURALNAME: Strony
-    SINGULARNAME: Strona
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Submitted Forms'
     SINGULARNAME: 'Submitted Form'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Dodaj e-mail odbiorcy'
     CLEARBUTTON: Czyść
     CONFIGURATION: Ustawienia
@@ -161,9 +167,3 @@ pl_PL:
     SUBMITBUTTON: Submit
     TEXTONCLEAR: 'Tekst na przycisku czyść: '
     TEXTONSUBMIT: 'Napis na przycisku ''submit'':'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Zgłoszenia filtrów ..'
-    WHEREVALUEIS: 'których wartość jest ..'

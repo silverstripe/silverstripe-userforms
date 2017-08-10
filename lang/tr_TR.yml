@@ -13,13 +13,9 @@ tr_TR:
     SHOWTHISFIELD: 'Show This Field'
     VALUE: Value
     WHEN: When
-  EditableCountryDropdownField:
-    PLURALNAME: 'Country Dropdowns'
-    SINGULARNAME: 'Country Dropdown'
-  EditableEmailField:
-    PLURALNAME: 'Email Fields'
-    SINGULARNAME: 'Email Field'
-  EditableFormField:
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s is required'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Add
     ADDRULE: 'Add Rule'
     BLANK: Blank
@@ -46,33 +42,40 @@ tr_TR:
     VALIDATION: Validation
     VALUE: Value
     WHEN: When
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Country Dropdowns'
+    SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
-  Form:
-    FIELDISREQUIRED: '%s is required'
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Submitted Forms'
     SINGULARNAME: 'Submitted Form'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
@@ -92,6 +95,3 @@ tr_TR:
     SUBMISSIONS: Gönderiler
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Gönder düğmesi üzerindeki yazı:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'

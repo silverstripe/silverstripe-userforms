@@ -1,15 +1,18 @@
 en_GB:
-  EditableEmailField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Email Fields'
     SINGULARNAME: 'Email Field'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'User Defined Form Email Recipients'
+    SINGULARNAME: 'User Defined Form Email Recipient'
+  SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
@@ -28,6 +31,3 @@ en_GB:
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'
