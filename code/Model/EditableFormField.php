@@ -375,8 +375,8 @@ class EditableFormField extends DataObject
             DropdownField::create('DisplayRulesConjunction',
                 _t(__CLASS__.'.DISPLAYIF', 'Toggle visibility when'),
                 [
-                    'Or'  => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
-                    'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true'),
+                    'Or'  => _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIFOR', 'Any conditions are true'),
+                    'And' => _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIFAND', 'All conditions are true'),
                 ]
             ),
             GridField::create(

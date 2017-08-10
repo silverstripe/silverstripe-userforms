@@ -89,7 +89,7 @@ class EditableMultipleOptionField extends EditableFormField
 
             $optionsGrid = GridField::create(
                 'Options',
-                _t('EditableFormField.CUSTOMOPTIONS', 'Options'),
+                _t('SilverStripe\\UserForms\\Model\\EditableFormField.CUSTOMOPTIONS', 'Options'),
                 $this->Options(),
                 $optionsConfig
             );

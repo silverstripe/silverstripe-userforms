@@ -79,7 +79,7 @@ class EditableFormStep extends EditableFormField
             ?: '';
 
         return _t(
-            'EditableFormStep.STEP_TITLE',
+            __CLASS__.'.STEP_TITLE',
             'Page {page}',
             ['page' => $title]
         );

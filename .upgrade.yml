@@ -11,7 +11,6 @@ mappings:
   UserFormsFieldList: SilverStripe\UserForms\FormField\UserFormsFieldList
   UserFormsGroupField: SilverStripe\UserForms\FormField\UserFormsGroupField
   UserFormsStepField: SilverStripe\UserForms\FormField\UserFormsStepField
-  UserformsTreeDropdownField: SilverStripe\UserForms\FormField\UserformsTreeDropdownField
   EditableCustomRule: SilverStripe\UserForms\Model\EditableCustomRule
   UserDefinedForm: SilverStripe\UserForms\Model\UserDefinedForm
   UserDefinedFormController: SilverStripe\UserForms\Model\UserDefinedFormController
@@ -19,14 +18,14 @@ mappings:
   EditableCheckboxGroupField: SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField
   EditableCountryDropdownField: SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField
   EditableDateField: SilverStripe\UserForms\Model\EditableFormField\EditableDateField
-  EditableDateField_FormField: SilverStripe\UserForms\Model\EditableFormField\EditableDateField_FormField
+  EditableDateField_FormField: SilverStripe\UserForms\Model\EditableFormField\EditableDateField\FormField
   EditableDropdown: SilverStripe\UserForms\Model\EditableFormField\EditableDropdown
   EditableEmailField: SilverStripe\UserForms\Model\EditableFormField\EditableEmailField
   EditableFieldGroup: SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup
   EditableFieldGroupEnd: SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd
   EditableFileField: SilverStripe\UserForms\Model\EditableFormField\EditableFileField
-  EditableFormField: SilverStripe\UserForms\Model\EditableFormField\EditableFormField
-  EditableFormFieldValidator: SilverStripe\UserForms\Model\EditableFormField\EditableFormFieldValidator
+  EditableFormField: SilverStripe\UserForms\Model\EditableFormField
+  EditableFormFieldValidator: SilverStripe\UserForms\Model\EditableFormField\Validator
   EditableFormHeading: SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading
   EditableFormStep: SilverStripe\UserForms\Model\EditableFormField\EditableFormStep
   EditableLiteralField: SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField
@@ -36,8 +35,8 @@ mappings:
   EditableOption: SilverStripe\UserForms\Model\EditableFormField\EditableOption
   EditableRadioField: SilverStripe\UserForms\Model\EditableFormField\EditableRadioField
   EditableTextField: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
-  UserDefinedForm_EmailRecipient: SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient
-  UserDefinedForm_EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipientCondition
+  UserDefinedForm_EmailRecipient: SilverStripe\UserForms\Model\Recipient\EmailRecipient
+  UserDefinedForm_EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition
   UserFormRecipientEmail: SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail
   UserFormRecipientItemRequest: SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest
   SubmittedFileField: SilverStripe\UserForms\Model\Submission\SubmittedFileField

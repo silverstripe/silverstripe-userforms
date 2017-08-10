@@ -74,7 +74,7 @@ class EditableLiteralField extends EditableFormField
     protected function sanitiseContent($content)
     {
         // Check if sanitisation is enabled
-        if (!HTMLEditorField::config()->get('sanitise_server_side') {
+        if (!HTMLEditorField::config()->get('sanitise_server_side')) {
             return $content;
         }
 
