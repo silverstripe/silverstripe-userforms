@@ -2,25 +2,19 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\Core\Convert;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\UserForms\FormField\UserFormsGroupField;
-use SilverStripe\Core\Convert;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 
 /**
  * Specifies that this ends a group of fields
  */
 class EditableFieldGroup extends EditableFormField
 {
-
-    private static $has_one = array(
+    private static $has_one = [
         'End' => EditableFieldGroupEnd::class
-    );
+    ];
 
     /**
      * Disable selection of group class
@@ -37,10 +31,12 @@ class EditableFieldGroup extends EditableFormField
      */
     private static $literal = true;
 
+    private static $table_name = 'EditableFieldGroup';
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));
+        $fields->removeByName(['MergeField', 'Default', 'Validation', 'DisplayRules']);
         return $fields;
     }
 
@@ -51,17 +47,15 @@ class EditableFieldGroup extends EditableFormField
             ?: 'group';
 
         return _t(
-            'EditableFieldGroupEnd.FIELD_GROUP_START',
+            'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd.FIELD_GROUP_START',
             'Group {group}',
-            array(
-                'group' => $title
-            )
+            ['group' => $title]
         );
     }
 
     public function getInlineClassnameField($column, $fieldClasses)
     {
-        return new LabelField($column, $this->CMSTitle);
+        return LabelField::create($column, $this->CMSTitle);
     }
 
     public function showInReports()

@@ -2,18 +2,13 @@
 
 namespace SilverStripe\UserForms\Model;
 
-
-
-
-
 use LogicException;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use Silverstripe\Versioned\Versioned;
 
 /**
  * A custom rule for showing / hiding an EditableFormField
@@ -28,28 +23,27 @@ use SilverStripe\ORM\DataObject;
  */
 class EditableCustomRule extends DataObject
 {
+    private static $condition_options = [
+        'IsBlank' => 'Is blank',
+        'IsNotBlank' => 'Is not blank',
+        'HasValue' => 'Equals',
+        'ValueNot' => 'Doesn\'t equal',
+        'ValueLessThan' => 'Less than',
+        'ValueLessThanEqual' => 'Less than or equal',
+        'ValueGreaterThan' => 'Greater than',
+        'ValueGreaterThanEqual' => 'Greater than or equal'
+    ];
 
-    private static $condition_options = array(
-        "IsBlank" => "Is blank",
-        "IsNotBlank" => "Is not blank",
-        "HasValue" => "Equals",
-        "ValueNot" => "Doesn't equal",
-        "ValueLessThan" => "Less than",
-        "ValueLessThanEqual" => "Less than or equal",
-        "ValueGreaterThan" => "Greater than",
-        "ValueGreaterThanEqual" => "Greater than or equal"
-    );
-
-    private static $db = array(
+    private static $db = [
         'Display' => 'Enum("Show,Hide")',
         'ConditionOption' => 'Enum("IsBlank,IsNotBlank,HasValue,ValueNot,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
         'FieldValue' => 'Varchar(255)'
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'Parent' => EditableFormField::class,
         'ConditionField' => EditableFormField::class
-    );
+    ];
 
     /**
      * Built in extensions required
@@ -57,9 +51,11 @@ class EditableCustomRule extends DataObject
      * @config
      * @var array
      */
-    private static $extensions = array(
-        "Versioned('Stage', 'Live')"
-    );
+    private static $extensions = [
+        Versioned::class . "('Stage', 'Live')"
+    ];
+
+    private static $table_name = 'EditableCustomRule';
 
     /**
      * Publish this custom rule to the live site
@@ -184,12 +180,13 @@ class EditableCustomRule extends DataObject
         $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
         $fieldValue = Convert::raw2js($this->FieldValue);
 
-        $conditionOptions = array(
+        $conditionOptions = [
             'ValueLessThan'         => '<',
             'ValueLessThanEqual'    => '<=',
             'ValueGreaterThan'      => '>',
             'ValueGreaterThanEqual' => '>='
-        );
+        ];
+
         // and what should we evaluate
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
@@ -244,10 +241,10 @@ class EditableCustomRule extends DataObject
                 break;
         }
 
-        $result = array(
+        $result = [
             'operation' => $expression,
             'event'     => $action,
-        );
+        ];
 
         return $result;
     }

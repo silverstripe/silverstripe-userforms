@@ -2,58 +2,53 @@
 
 namespace SilverStripe\UserForms\Model\Recipient;
 
-
 use LogicException;
-
-
-use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Control\Controller;
 use SilverStripe\ORM\DataObject;
-
-
-
+use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 
 /**
  * Declares a condition that determines whether an email can be sent to a given recipient
  *
- * @method UserDefinedForm_EmailRecipient Parent()
+ * @method EmailRecipient Parent()
  *
  * @property Enum ConditionOption
  * @property Varchar ConditionValue
  *
  * @method EditableFormField ConditionField
  */
-class UserDefinedForm_EmailRecipientCondition extends DataObject
+class EmailRecipientCondition extends DataObject
 {
-
     /**
      * List of options
      *
      * @config
      * @var array
      */
-    private static $condition_options = array(
-        "IsBlank" => "Is blank",
-        "IsNotBlank" => "Is not blank",
-        "Equals" => "Equals",
-        "NotEquals" => "Doesn't equal",
-        "ValueLessThan" => "Less than",
-        "ValueLessThanEqual" => "Less than or equal",
-        "ValueGreaterThan" => "Greater than",
-        "ValueGreaterThanEqual" => "Greater than or equal"
-    );
+    private static $condition_options = [
+        'IsBlank' => 'Is blank',
+        'IsNotBlank' => 'Is not blank',
+        'Equals' => 'Equals',
+        'NotEquals' => "Doesn't equal",
+        'ValueLessThan' => 'Less than',
+        'ValueLessThanEqual' => 'Less than or equal',
+        'ValueGreaterThan' => 'Greater than',
+        'ValueGreaterThanEqual' => 'Greater than or equal'
+    ];
 
-    private static $db = array(
+    private static $db = [
         'ConditionOption' => 'Enum("IsBlank,IsNotBlank,Equals,NotEquals,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
         'ConditionValue' => 'Varchar'
-    );
+    ];
 
-    private static $has_one = array(
-        'Parent' => UserDefinedForm_EmailRecipient::class,
+    private static $has_one = [
+        'Parent' => EmailRecipient::class,
         'ConditionField' => EditableFormField::class
-    );
+    ];
+
+    private static $table_name = 'UserDefinedForm_EmailRecipientCondition';
 
     /**
      *

@@ -2,18 +2,14 @@
 
 namespace SilverStripe\UserForms\FormField;
 
-
-
-
 /**
  * Represents a page step in a form, which may contain form fields or other groups
  */
 class UserFormsStepField extends UserFormsCompositeField
 {
-
-    private static $casting = array(
+    private static $casting = [
         'StepNumber' => 'Int'
-    );
+    ];
 
     /**
      * Numeric index (1 based) of this step
@@ -24,7 +20,7 @@ class UserFormsStepField extends UserFormsCompositeField
      */
     protected $number = null;
 
-    public function FieldHolder($properties = array())
+    public function FieldHolder($properties = [])
     {
         return $this->Field($properties);
     }

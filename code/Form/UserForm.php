@@ -2,32 +2,21 @@
 
 namespace SilverStripe\UserForms\Form;
 
-
-
-
-
-
-
-
 use ResetFormAction;
-
 use SilverStripe\Control\Controller;
-use SilverStripe\Forms\Form;
-use SilverStripe\Forms\FieldList;
 use SilverStripe\Control\Session;
-use SilverStripe\UserForms\FormField\UserFormsStepField;
-use SilverStripe\UserForms\FormField\UserFormsFieldList;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\RequiredFields;
-
-
+use SilverStripe\UserForms\FormField\UserFormsStepField;
+use SilverStripe\UserForms\FormField\UserFormsFieldList;
 
 /**
  * @package userforms
  */
 class UserForm extends Form
 {
-
 	/**
 	 * @param Controller $controller
 	 * @param string $name
@@ -145,8 +134,8 @@ class UserForm extends Form
 	 */
     public function getFormActions()
     {
-		$submitText = ($this->controller->SubmitButtonText) ? $this->controller->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
-		$clearText = ($this->controller->ClearButtonText) ? $this->controller->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
+		$submitText = ($this->controller->SubmitButtonText) ? $this->controller->SubmitButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
+		$clearText = ($this->controller->ClearButtonText) ? $this->controller->ClearButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
 
 		$actions = new FieldList(
 			new FormAction("process", $submitText)

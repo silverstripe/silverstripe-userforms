@@ -2,32 +2,18 @@
 
 namespace SilverStripe\UserForms\Form;
 
-
-
-
-
-
-
-
-
-
-
-
-
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\CompositeField;
-use SilverStripe\Forms\FieldGroup;
-use SilverStripe\Forms\DateField;
-use SilverStripe\Forms\GridField\GridField_FormAction;
-use SilverStripe\View\ArrayData;
-use SilverStripe\ORM\SS_List;
 use SilverStripe\Core\Convert;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\DateField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
-
-
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\SS_List;
+use SilverStripe\View\ArrayData;
 
 /**
  * Extension to the build in SilverStripe {@link GridField} to allow for
@@ -38,7 +24,6 @@ use SilverStripe\Forms\GridField\GridFieldFilterHeader;
  */
 class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 {
-
     /**
      * A map of name => value of columns from all submissions
      * @var array
@@ -69,7 +54,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
     public function getHTMLFragments($gridField)
     {
-        $fields = new ArrayList();
+        $fields = ArrayList::create();
         $state = $gridField->State->UserFormsGridField;
 
         $selectedField = $state->filter;
@@ -77,13 +62,13 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
         // show dropdown of all the fields available from the submitted form fields
         // that have been saved. Takes the titles from the currently live form.
-        $columnField = new DropdownField('FieldNameFilter', '');
+        $columnField = DropdownField::create('FieldNameFilter', '');
         $columnField->setSource($this->columns);
-        $columnField->setEmptyString(_t('UserFormsGridFieldFilterHeader.FILTERSUBMISSIONS', 'Filter Submissions..'));
+        $columnField->setEmptyString(_t(__CLASS__.'.FILTERSUBMISSIONS', 'Filter Submissions..'));
         $columnField->setHasEmptyDefault(true);
         $columnField->setValue($selectedField);
 
-        $valueField = new TextField('FieldValue', '', $selectedValue);
+        $valueField = TextField::create('FieldValue', '', $selectedValue);
 
         $columnField->addExtraClass('ss-gridfield-sort');
         $columnField->addExtraClass('no-change-track');
@@ -92,17 +77,17 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $valueField->addExtraClass('no-change-track');
         $valueField->setAttribute(
             'placeholder',
-            _t('UserFormsGridFieldFilterHeader.WHEREVALUEIS', 'where value is..'
+            _t(__CLASS__.'.WHEREVALUEIS', 'where value is..'
         ));
 
-        $fields->push(new FieldGroup(new CompositeField(
+        $fields->push(FieldGroup::create(CompositeField::create(
             $columnField,
             $valueField
         )));
 
-        $fields->push(new FieldGroup(new CompositeField(
-            $start = new DateField('StartFilter', _t('UserFormsGridFieldFilterHeader.FROM', 'From')),
-            $end = new DateField('EndFilter', _t('UserFormsGridFieldFilterHeader.TILL', 'Till'))
+        $fields->push(FieldGroup::create(CompositeField::create(
+            $start = DateField::create('StartFilter', _t(__CLASS__.'.FROM', 'From')),
+            $end = DateField::create('EndFilter', _t(__CLASS__.'.TILL', 'Till'))
         )));
 
         foreach (array($start, $end) as $date) {
@@ -116,7 +101,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $start->setValue($state->start);
 
 
-        $fields->push($actions = new FieldGroup(
+        $fields->push($actions = FieldGroup::create(
             GridField_FormAction::create($gridField, 'filter', false, 'filter', null)
                 ->addExtraClass('ss-gridfield-button-filter')
                 ->setAttribute('title', _t('GridField.Filter', "Filter"))
@@ -131,7 +116,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $actions->addExtraClass('filter-buttons');
         $actions->addExtraClass('no-change-track');
 
-        $forTemplate = new ArrayData(array(
+        $forTemplate = ArrayData::create(array(
             'Fields' => $fields
         ));
 

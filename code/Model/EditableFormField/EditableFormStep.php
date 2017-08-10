@@ -2,11 +2,9 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-use SilverStripe\UserForms\FormField\UserFormsStepField;
 use SilverStripe\Forms\LabelField;
-
+use SilverStripe\UserForms\FormField\UserFormsStepField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * A step in multi-page user form
@@ -15,7 +13,6 @@ use SilverStripe\Forms\LabelField;
  */
 class EditableFormStep extends EditableFormField
 {
-
     private static $singular_name = 'Page Break';
 
     private static $plural_name = 'Page Breaks';
@@ -28,6 +25,8 @@ class EditableFormStep extends EditableFormField
      */
     private static $hidden = true;
 
+    private static $table_name = 'EditableFormStep';
+
     /**
      * @return FieldList
      */
@@ -35,7 +34,7 @@ class EditableFormStep extends EditableFormField
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName(array('MergeField', 'Default', 'Validation', 'RightTitle'));
+        $fields->removeByName(['MergeField', 'Default', 'Validation', 'RightTitle']);
 
         return $fields;
     }
@@ -70,10 +69,7 @@ class EditableFormStep extends EditableFormField
 
     public function getInlineClassnameField($column, $fieldClasses)
     {
-        return new LabelField(
-            $column,
-            $this->CMSTitle
-        );
+        return LabelField::create($column, $this->CMSTitle);
     }
 
     public function getCMSTitle()
@@ -85,9 +81,7 @@ class EditableFormStep extends EditableFormField
         return _t(
             'EditableFormStep.STEP_TITLE',
             'Page {page}',
-            array(
-                'page' => $title
-            )
+            ['page' => $title]
         );
     }
 

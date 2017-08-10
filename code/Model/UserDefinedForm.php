@@ -3,78 +3,48 @@
 namespace SilverStripe\UserForms\Model;
 
 use Page;
+use Colymba\BulkManager\BulkManager;
+use SilverStripe\Core\Injector\Injector;
 
-
-
-use HtmlEditorField;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-use GridFieldBulkManager;
-
-
-
-
-
-
-
-use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
-use SilverStripe\UserForms\Model\Submission\SubmittedForm;
-use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipient;
-use SilverStripe\View\Requirements;
-use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
-use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldDetailForm;
-use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
-use SilverStripe\ORM\DB;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
-use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPageCount;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
-use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LabelField;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\UserForms\Task\UserFormsUpgradeService;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DB;
+use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
-
-
+use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
+use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\UserForms\Task\UserFormsUpgradeService;
+use SilverStripe\View\Requirements;
 
 /**
  * @package userforms
  */
-
 class UserDefinedForm extends Page
 {
-
     /**
      * @var string
      */
@@ -117,54 +87,56 @@ class UserDefinedForm extends Page
      */
     private static $block_default_userforms_js = false;
 
+    private static $table_name = 'UserDefinedForm';
+
     /**
      * Built in extensions required by this page
      * @config
      * @var array
      */
-    private static $extensions = array(
+    private static $extensions = [
         UserFormFieldEditorExtension::class
-    );
+    ];
 
     /**
      * @var array Fields on the user defined form page.
      */
-    private static $db = array(
-        "SubmitButtonText" => "Varchar",
-        "ClearButtonText" => "Varchar",
-        "OnCompleteMessage" => "HTMLText",
-        "ShowClearButton" => "Boolean",
+    private static $db = [
+        'SubmitButtonText' => 'Varchar',
+        'ClearButtonText' => 'Varchar',
+        'OnCompleteMessage' => 'HTMLText',
+        'ShowClearButton' => 'Boolean',
         'DisableSaveSubmissions' => 'Boolean',
         'EnableLiveValidation' => 'Boolean',
         'DisplayErrorMessagesAtTop' => 'Boolean',
         'DisableAuthenicatedFinishAction' => 'Boolean',
         'DisableCsrfSecurityToken' => 'Boolean'
-    );
+    ];
 
     /**
      * @var array Default values of variables when this page is created
      */
-    private static $defaults = array(
+    private static $defaults = [
         'Content' => '$UserDefinedForm',
         'DisableSaveSubmissions' => 0,
         'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
-    );
+    ];
 
     /**
      * @var array
      */
-    private static $has_many = array(
-        "Submissions" => SubmittedForm::class,
-        "EmailRecipients" => UserDefinedForm_EmailRecipient::class
-    );
+    private static $has_many = [
+        'Submissions' => SubmittedForm::class,
+        'EmailRecipients' => EmailRecipient::class
+    ];
 
     /**
      * @var array
      * @config
      */
-    private static $casting = array(
+    private static $casting = [
         'ErrorContainerID' => 'Text'
-    );
+    ];
 
     /**
      * Error container selector which matches the element for grouped messages
@@ -194,7 +166,7 @@ class UserDefinedForm extends Page
      * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
      * @var array
      */
-    protected $fieldsFromTo = array();
+    protected $fieldsFromTo = [];
 
     /**
      * @return FieldList
@@ -203,18 +175,16 @@ class UserDefinedForm extends Page
     {
         Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
 
-        $self = $this;
-
-        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
+        $this->beforeUpdateCMSFields(function ($fields) {
             // define tabs
-            $fields->findOrMakeTab('Root.FormOptions', _t('UserDefinedForm.CONFIGURATION', 'Configuration'));
-            $fields->findOrMakeTab('Root.Recipients', _t('UserDefinedForm.RECIPIENTS', 'Recipients'));
-            $fields->findOrMakeTab('Root.Submissions', _t('UserDefinedForm.SUBMISSIONS', 'Submissions'));
+            $fields->findOrMakeTab('Root.FormOptions', _t(__CLASS__.'.CONFIGURATION', 'Configuration'));
+            $fields->findOrMakeTab('Root.Recipients', _t(__CLASS__.'.RECIPIENTS', 'Recipients'));
+            $fields->findOrMakeTab('Root.Submissions', _t(__CLASS__.'.SUBMISSIONS', 'Submissions'));
 
             // text to show on complete
-            $onCompleteFieldSet = new CompositeField(
-                $label = new LabelField('OnCompleteMessageLabel', _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
-                $editor = new HtmlEditorField('OnCompleteMessage', '', _t('UserDefinedForm.ONCOMPLETEMESSAGE', $self->OnCompleteMessage))
+            $onCompleteFieldSet = CompositeField::create(
+                $label = LabelField::create('OnCompleteMessageLabel', _t(__CLASS__.'.ONCOMPLETELABEL', 'Show on completion')),
+                $editor = HTMLEditorField::create('OnCompleteMessage', '', _t(__CLASS__.'.ONCOMPLETEMESSAGE', $self->OnCompleteMessage))
             );
 
             $onCompleteFieldSet->addExtraClass('field');
@@ -226,13 +196,13 @@ class UserDefinedForm extends Page
             $emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
             $emailRecipientsConfig->getComponentByType(GridFieldAddNewButton::class)
                 ->setButtonName(
-                    _t('UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
+                    _t(__CLASS__.'.ADDEMAILRECIPIENT', 'Add Email Recipient')
                 );
 
             // who do we email on submission
-            $emailRecipients = new GridField(
+            $emailRecipients = GridField::create(
                 'EmailRecipients',
-                _t('UserDefinedForm.EMAILRECIPIENTS', 'Email Recipients'),
+                _t(__CLASS__.'.EMAILRECIPIENTS', 'Email Recipients'),
                 $self->EmailRecipients(),
                 $emailRecipientsConfig
             );
@@ -265,7 +235,7 @@ SQL;
                 $columns[$name] = trim(strtr($title, '.', ' '));
             }
 
-            $config = new GridFieldConfig();
+            $config = GridFieldConfig::create();
             $config->addComponent(new GridFieldToolbarHeader());
             $config->addComponent($sort = new GridFieldSortableHeader());
             $config->addComponent($filter = new UserFormsGridFieldFilterHeader());
@@ -285,7 +255,7 @@ SQL;
                 'Created' => 'Created',
                 'LastEdited' => 'Last Edited'
             );
-            foreach(EditableFormField::get()->filter(array("ParentID" => $parentID)) as $eff) {
+            foreach(EditableFormField::get()->filter(array('ParentID' => $parentID)) as $eff) {
                 if($eff->ShowInSummary) {
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
@@ -296,8 +266,8 @@ SQL;
             /**
              * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
              */
-            if (class_exists('GridFieldBulkManager')) {
-                $config->addComponent(new GridFieldBulkManager());
+            if (class_exists(BulkManager::class)) {
+                $config->addComponent(new BulkManager);
             }
 
             $sort->setThrowExceptionOnBadDataType(false);
@@ -320,7 +290,7 @@ SQL;
 
             $submissions = GridField::create(
                 'Submissions',
-                _t('UserDefinedForm.SUBMISSIONS', 'Submissions'),
+                _t(__CLASS__.'.SUBMISSIONS', 'Submissions'),
                 $self->Submissions()->sort('Created', 'DESC'),
                 $config
             );
@@ -329,7 +299,7 @@ SQL;
                 'Root.FormOptions',
                 CheckboxField::create(
                     'DisableSaveSubmissions',
-                    _t('UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
+                    _t(__CLASS__.'.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
                 )
             );
         });
@@ -337,10 +307,10 @@ SQL;
         $fields = parent::getCMSFields();
 
         if ($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
-            $fields->addFieldToTab("Root.Main", new LiteralField("EmailRecipientsWarning",
-                "<p class=\"message warning\">" . _t("UserDefinedForm.NORECIPIENTS",
-                "Warning: You have not configured any recipients. Form submissions may be missed.")
-                . "</p>"), "Title");
+            $fields->addFieldToTab('Root.Main', LiteralField::create('EmailRecipientsWarning',
+                '<p class="message warning">' . _t(__CLASS__.'.NORECIPIENTS',
+                'Warning: You have not configured any recipients. Form submissions may be missed.')
+                . '</p>'), 'Title');
         }
 
         return $fields;
@@ -356,11 +326,11 @@ SQL;
      */
     public function FilteredEmailRecipients($data = null, $form = null)
     {
-        $recipients = new ArrayList($this->EmailRecipients()->toArray());
+        $recipients = ArrayList::create($this->EmailRecipients()->toArray());
 
         // Filter by rules
         $recipients = $recipients->filterByCallback(function ($recipient) use ($data, $form) {
-            /** @var UserDefinedForm_EmailRecipient $recipient */
+            /** @var EmailRecipient $recipient */
             return $recipient->canSend($data, $form);
         });
 
@@ -377,17 +347,17 @@ SQL;
      */
     public function getFormOptions()
     {
-        $submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('UserDefinedForm.SUBMITBUTTON', 'Submit');
-        $clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t('UserDefinedForm.CLEARBUTTON', 'Clear');
+        $submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t(__CLASS__.'.SUBMITBUTTON', 'Submit');
+        $clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t(__CLASS__.'.CLEARBUTTON', 'Clear');
 
-        $options = new FieldList(
-            new TextField("SubmitButtonText", _t('UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $submit),
-            new TextField("ClearButtonText", _t('UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
-            new CheckboxField("ShowClearButton", _t('UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
-            new CheckboxField("EnableLiveValidation", _t('UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
-            new CheckboxField("DisplayErrorMessagesAtTop", _t('UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
-            new CheckboxField('DisableCsrfSecurityToken', _t('UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
-            new CheckboxField('DisableAuthenicatedFinishAction', _t('UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
+        $options = FieldList::create(
+            TextField::create('SubmitButtonText', _t(__CLASS__.'.TEXTONSUBMIT', 'Text on submit button:'), $submit),
+            TextField::create('ClearButtonText', _t(__CLASS__.'.TEXTONCLEAR', 'Text on clear button:'), $clear),
+            CheckboxField::create('ShowClearButton', _t(__CLASS__.'.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
+            CheckboxField::create('EnableLiveValidation', _t(__CLASS__.'.ENABLELIVEVALIDATION', 'Enable live validation')),
+            CheckboxField::create('DisplayErrorMessagesAtTop', _t(__CLASS__.'.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
+            CheckboxField::create('DisableCsrfSecurityToken', _t(__CLASS__.'.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
+            CheckboxField::create('DisableAuthenicatedFinishAction', _t(__CLASS__.'.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
         );
 
         $this->extend('updateFormOptions', $options);
@@ -402,14 +372,14 @@ SQL;
      */
     public function getErrorContainerID()
     {
-        return $this->config()->error_container_id;
+        return $this->config()->get('error_container_id');
     }
 
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
 
-        if (!$this->config()->upgrade_on_build) {
+        if (!$this->config()->get('upgrade_on_build')) {
             return;
         }
 
@@ -428,6 +398,6 @@ SQL;
      */
     public function getCMSValidator()
     {
-        return new UserFormValidator();
+        return UserFormValidator::create();
     }
 }

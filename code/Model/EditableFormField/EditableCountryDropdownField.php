@@ -2,11 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use CountryDropdownField;
-
+use CountryDropdownField; // @todo
 use SilverStripe\UserForms\Model\EditableCustomRule;
-
-
 
 /**
  * A dropdown field which allows the user to select a country
@@ -15,10 +12,11 @@ use SilverStripe\UserForms\Model\EditableCustomRule;
  */
 class EditableCountryDropdownField extends EditableFormField
 {
-
     private static $singular_name = 'Country Dropdown';
 
     private static $plural_name = 'Country Dropdowns';
+
+    private static $table_name = 'EditableCountryDropdownField';
 
     /**
      * @return FieldList

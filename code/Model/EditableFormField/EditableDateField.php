@@ -2,15 +2,11 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\FieldType\DBDatetime;
-use SilverStripe\Forms\DateField;
-
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDateField\FormField;
 
 /**
  * EditableDateField
@@ -19,19 +15,19 @@ use SilverStripe\Forms\DateField;
  *
  * @package userforms
  */
-
 class EditableDateField extends EditableFormField
 {
-
     private static $singular_name = 'Date Field';
 
     private static $plural_name = 'Date Fields';
 
     private static $has_placeholder = true;
 
-    private static $db = array(
+    private static $db = [
         'DefaultToToday' => 'Boolean' // From customsettings
-    );
+    ];
+
+    private static $table_name = 'EditableDateField';
 
     /**
      * @return FieldList
@@ -43,7 +39,7 @@ class EditableDateField extends EditableFormField
                 'Root.Main',
                 CheckboxField::create(
                     'DefaultToToday',
-                    _t('EditableFormField.DEFAULTTOTODAY', 'Default to Today?')
+                    _t('SilverStripe\\UserForms\\Model\\EditableFormField.DEFAULTTOTODAY', 'Default to Today?')
                 ),
                 'RightTitle'
             );
@@ -62,7 +58,7 @@ class EditableDateField extends EditableFormField
             ? DBDatetime::now()->Format('Y-m-d')
             : $this->Default;
 
-        $field = EditableDateField_FormField::create($this->Name, $this->EscapedTitle, $defaultValue)
+        $field = FormField::create($this->Name, $this->EscapedTitle, $defaultValue)
             ->setConfig('showcalendar', true)
             ->setFieldHolderTemplate('UserFormsField_holder')
             ->setTemplate('UserFormsField');
@@ -70,17 +66,5 @@ class EditableDateField extends EditableFormField
         $this->doUpdateFormField($field);
 
         return $field;
-    }
-}
-
-/**
-  * @package userforms
- */
-class EditableDateField_FormField extends DateField
-{
-
-    public function Type()
-    {
-        return "date-alt text";
     }
 }

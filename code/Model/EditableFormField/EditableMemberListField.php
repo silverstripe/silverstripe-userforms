@@ -2,30 +2,27 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-use SilverStripe\Security\Group;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Security\Group;
 use SilverStripe\Security\Member;
-
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Creates an editable field that displays members in a given group
  *
  * @package userforms
  */
-
 class EditableMemberListField extends EditableFormField
 {
-
     private static $singular_name = 'Member List Field';
 
     private static $plural_name = 'Member List Fields';
 
-    private static $has_one = array(
+    private static $has_one = [
         'Group' => Group::class
-    );
+    ];
+
+    private static $table_name = 'EditableMemberListField';
 
     /**
      * @return FieldList
@@ -40,8 +37,8 @@ class EditableMemberListField extends EditableFormField
         $fields->addFieldToTab(
             'Root.Main',
             DropdownField::create(
-                "GroupID",
-                _t('EditableFormField.GROUP', Group::class),
+                'GroupID',
+                _t('SilverStripe\\UserForms\\Model\\EditableFormField.GROUP', Group::class),
                 Group::get()->map()
             )->setEmptyString(' ')
         );
@@ -56,7 +53,7 @@ class EditableMemberListField extends EditableFormField
         }
 
         $members = Member::map_in_groups($this->GroupID);
-        $field = new DropdownField($this->Name, $this->EscapedTitle, $members);
+        $field = DropdownField::create($this->Name, $this->EscapedTitle, $members);
         $this->doUpdateFormField($field);
         return $field;
     }
@@ -66,7 +63,7 @@ class EditableMemberListField extends EditableFormField
         if (isset($data[$this->Name])) {
             $memberID = $data[$this->Name];
             $member = Member::get()->byID($memberID);
-            return $member ? $member->getName() : "";
+            return $member ? $member->getName() : '';
         }
 
         return false;

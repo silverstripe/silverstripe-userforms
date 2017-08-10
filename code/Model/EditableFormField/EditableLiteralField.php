@@ -2,21 +2,14 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-
-
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorSanitiser;
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\CompositeField;
-
-
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Editable Literal Field. A literal field is just a blank slate where
@@ -24,13 +17,13 @@ use SilverStripe\Forms\CompositeField;
  *
  * @package userforms
  */
-
 class EditableLiteralField extends EditableFormField
 {
-
     private static $singular_name = 'HTML Block';
 
     private static $plural_name = 'HTML Blocks';
+
+    private static $table_name = 'EditableLiteralField';
 
     /**
      * Mark as literal only
@@ -48,15 +41,15 @@ class EditableLiteralField extends EditableFormField
      */
     private static $editor_config = null;
 
-    private static $db = array(
+    private static $db = [
         'Content' => 'HTMLText', // From CustomSettings
         'HideFromReports' => 'Boolean(0)', // from CustomSettings
         'HideLabel' => 'Boolean(0)'
-    );
+    ];
 
-    private static $defaults = array(
+    private static $defaults = [
         'HideFromReports' => false
-    );
+    ];
 
     /**
      * Returns the {@see HTMLEditorConfig} instance to use for sanitisation
@@ -65,7 +58,7 @@ class EditableLiteralField extends EditableFormField
      */
     protected function getEditorConfig()
     {
-        $editorConfig = $this->config()->editor_config;
+        $editorConfig = $this->config()->get('editor_config');
         if ($editorConfig) {
             return HTMLEditorConfig::get($editorConfig);
         }
@@ -81,7 +74,7 @@ class EditableLiteralField extends EditableFormField
     protected function sanitiseContent($content)
     {
         // Check if sanitisation is enabled
-        if (!HTMLEditorField::config()->sanitise_server_side) {
+        if (!HTMLEditorField::config()->get('sanitise_server_side') {
             return $content;
         }
 
@@ -123,21 +116,21 @@ class EditableLiteralField extends EditableFormField
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName(array('Default', 'Validation', 'RightTitle'));
+        $fields->removeByName(['Default', 'Validation', 'RightTitle']);
 
-        $fields->addFieldsToTab('Root.Main', array(
-            HTMLEditorField::create('Content', _t('EditableLiteralField.CONTENT', 'HTML'))
+        $fields->addFieldsToTab('Root.Main', [
+            HTMLEditorField::create('Content', _t(__CLASS__.'.CONTENT', 'HTML'))
                 ->setRows(4)
                 ->setColumns(20),
             CheckboxField::create(
                 'HideFromReports',
-                _t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?')
+                _t(__CLASS__.'.HIDEFROMREPORT', 'Hide from reports?')
             ),
             CheckboxField::create(
                 'HideLabel',
-                _t('EditableLiteralField.HIDELABEL', "Hide 'Title' label on frontend?")
+                _t(__CLASS__.'.HIDELABEL', "Hide 'Title' label on frontend?")
             )
-        ));
+        ]);
 
         return $fields;
     }
@@ -172,6 +165,6 @@ class EditableLiteralField extends EditableFormField
 
     public function showInReports()
     {
-        return ! $this->HideFromReports;
+        return !$this->HideFromReports;
     }
 }

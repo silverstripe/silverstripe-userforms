@@ -2,21 +2,14 @@
 
 namespace SilverStripe\UserForms\Model\Recipient;
 
-
-
-
-
-
 use SilverStripe\Core\Config\Config;
-use SilverStripe\View\SSViewer;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading;
-use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
-
-
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\SSViewer;
 
 /**
  * Controller that handles requests to EmailRecipient's
@@ -25,13 +18,12 @@ use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
  */
 class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
 {
-
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'edit',
         'view',
         'ItemEditForm',
         'preview'
-    );
+    ];
 
     /**
      * Renders a preview of the recipient email.
@@ -40,13 +32,13 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
     {
         // Enable theme for preview (may be needed for Shortcodes)
         Config::nest();
-        Config::inst()->update(SSViewer::class, 'theme_enabled', true);
+        Config::modify()->set(SSViewer::class, 'theme_enabled', true);
 
-        $content = $this->customise(new ArrayData(array(
+        $content = $this->customise(ArrayData::create([
             'Body' => $this->record->getEmailBodyContent(),
             'HideFormData' => $this->record->HideFormData,
             'Fields' => $this->getPreviewFieldData()
-        )))->renderWith($this->record->EmailTemplate);
+        ]))->renderWith($this->record->EmailTemplate);
 
         Config::unnest();
 
@@ -55,24 +47,25 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
 
     /**
      * Get some placeholder field values to display in the preview
+     *
      * @return ArrayList
      */
-    private function getPreviewFieldData()
+    protected function getPreviewFieldData()
     {
-        $data = new ArrayList();
+        $data = ArrayList::create();
 
-        $fields = $this->record->Form()->Fields()->filter(array(
+        $fields = $this->record->Form()->Fields()->filter([
             'ClassName:not' => EditableLiteralField::class,
             'ClassName:not' => EditableFormHeading::class
-        ));
+        ]);
 
         foreach ($fields as $field) {
-            $data->push(new ArrayData(array(
+            $data->push(ArrayData::create([
                 'Name' => $field->dbObject('Name'),
                 'Title' => $field->dbObject('Title'),
                 'Value' => DBField::create_field('Varchar', '$' . $field->Name),
                 'FormattedValue' => DBField::create_field('Varchar', '$' . $field->Name)
-            )));
+            ]));
         }
 
         return $data;

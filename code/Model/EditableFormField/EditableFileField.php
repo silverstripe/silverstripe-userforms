@@ -2,23 +2,15 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-
-
-
+use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
-use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
-use SilverStripe\Forms\FileField;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Assets\File;
+use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
-
-
 
 /**
  * Allows a user to add a field that can be used to upload a file.
@@ -32,22 +24,24 @@ class EditableFileField extends EditableFormField
 
     private static $plural_names = 'File Fields';
 
-    private static $db = array(
+    private static $db = [
         'MaxFileSizeMB' => 'Float',
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'Folder' => Folder::class // From CustomFields
-    );
+    ];
+
+    private static $table_name = 'EditableFileField';
 
     /**
      * Further limit uploadable file extensions in addition to the restrictions
      * imposed by the File.allowed_extensions global configuration.
      * @config
      */
-    private static $allowed_extensions_blacklist = array(
+    private static $allowed_extensions_blacklist = [
         'htm', 'html', 'xhtml', 'swf', 'xml'
-    );
+    ];
 
     /**
      * @return FieldList
@@ -65,14 +59,17 @@ class EditableFileField extends EditableFormField
             )
         );
 
-        $fields->addFieldToTab("Root.Main", new LiteralField(
-            "FileUploadWarning",
-            "<p class=\"message notice\">"
-            . _t(
-                "UserDefinedForm.FileUploadWarning",
-                "Files uploaded through this field could be publicly accessible if the exact URL is known"
-            ) . "</p>"
-        ), "Type");
+        $fields->addFieldToTab(
+            "Root.Main",
+            LiteralField::create(
+                'FileUploadWarning',
+                '<p class="message notice">' . _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.FileUploadWarning',
+                    'Files uploaded through this field could be publicly accessible if the exact URL is known'
+                ) . '</p>'
+            ),
+            'Type'
+        );
 
         $fields->addFieldToTab(
             'Root.Main',
@@ -114,7 +111,7 @@ class EditableFileField extends EditableFormField
             array_diff(
             // filter out '' since this would be a regex problem on JS end
                 array_filter(Config::inst()->get(File::class, 'allowed_extensions')),
-                $this->config()->allowed_extensions_blacklist
+                $this->config()->get('allowed_extensions_blacklist')
             )
         );
 
@@ -150,7 +147,7 @@ class EditableFileField extends EditableFormField
 
     public function getSubmittedFormField()
     {
-        return new SubmittedFileField();
+        return SubmittedFileField::create();
     }
 
 

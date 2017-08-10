@@ -3,93 +3,71 @@
 namespace SilverStripe\UserForms\Model;
 
 use PageController;
-
-
-
-
-
-use Object;
-
-
-
-
-
-
-
-
-
-
-
-use SilverStripe\View\Requirements;
-use SilverStripe\i18n\i18n;
-use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\UserForms\Form\UserForm;
-use SilverStripe\Forms\Form;
-use SilverStripe\Control\Controller;
-use SilverStripe\UserForms\Model\Submission\SubmittedForm;
-use SilverStripe\Security\Member;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\Assets\Upload;
 use SilverStripe\Assets\File;
-use SilverStripe\ORM\ValidationException;
-use SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail;
+use SilverStripe\Assets\Upload;
+use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTP;
-use SilverStripe\View\SSViewer;
-use SilverStripe\Control\Session;
+use SilverStripe\Forms\Form;
+use SilverStripe\i18n\i18n;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Form\UserForm;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\View\ArrayData;
-
-
+use SilverStripe\View\Requirements;
+use SilverStripe\View\SSViewer;
 
 /**
  * Controller for the {@link UserDefinedForm} page type.
  *
  * @package userforms
  */
-
 class UserDefinedFormController extends PageController
 {
-
     private static $finished_anchor = '#uff';
 
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'index',
         'ping',
         'Form',
         'finished'
-    );
+    ];
 
-    public function init()
+    protected function init()
     {
         parent::init();
 
         $page = $this->data();
 
         // load the css
-        if (!$page->config()->block_default_userforms_css) {
+        if (!$page->config()->get('block_default_userforms_css')) {
             Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
         }
 
         // load the jquery
-        if (!$page->config()->block_default_userforms_js) {
-        $lang = i18n::get_lang_from_locale(i18n::get_locale());
-        Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-        Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
-        Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
-        Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+        if (!$page->config()->get('block_default_userforms_js')) {
+            $lang = i18n::get_lang_from_locale(i18n::get_locale());
+            Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
+            Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
+            Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
 
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
-        );
-        Requirements::javascript(
-            USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-        );
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+            );
+            Requirements::javascript(
+                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
+            );
 
-        // Bind a confirmation message when navigating away from a partially completed form.
-        if ($page::config()->enable_are_you_sure) {
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+            // Bind a confirmation message when navigating away from a partially completed form.
+            if ($page::config()->get('enable_are_you_sure')) {
+                Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+            }
         }
-    }
     }
 
     /**
@@ -105,17 +83,17 @@ class UserDefinedFormController extends PageController
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
                 $content = preg_replace('/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i', $form->forTemplate(), $this->Content);
-                return array(
+                return [
                     'Content' => DBField::create_field('HTMLText', $content),
-                    'Form' => ""
-                );
+                    'Form' => ''
+                ];
             }
         }
 
-        return array(
+        return [
             'Content' => DBField::create_field('HTMLText', $this->Content),
             'Form' => $this->Form()
-        );
+        ];
     }
 
     /**
@@ -149,10 +127,10 @@ class UserDefinedFormController extends PageController
      */
     public function generateConditionalJavascript()
     {
-        $default = "";
-        $rules = "";
+        $default = '';
+        $rules = '';
 
-        $watch = array();
+        $watch = [];
 
         if ($this->Fields()) {
             /** @var EditableFormField $field */
@@ -191,7 +169,7 @@ JS
      */
     public function process($data, $form)
     {
-        $submittedForm = Object::create(SubmittedForm::class);
+        $submittedForm = SubmittedForm::create();
         $submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
         $submittedForm->ParentID = $this->ID;
 
@@ -201,7 +179,7 @@ JS
         }
 
         $attachments = array();
-        $submittedFields = new ArrayList();
+        $submittedFields = ArrayList::create();
 
         foreach ($this->Fields() as $field) {
             if (!$field->showInReports()) {
@@ -228,8 +206,8 @@ JS
                         $foldername = $field->getFormField()->getFolderName();
 
                         // create the file from post data
-                        $upload = new Upload();
-                        $file = new File();
+                        $upload = Upload::create();
+                        $file = File::create();
                         $file->ShowInSearch = 0;
                         try {
                             $upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
@@ -244,7 +222,7 @@ JS
                         $submittedField->UploadedFileID = $file->ID;
 
                         // attach a file only if lower than 1MB
-                        if ($file->getAbsoluteSize() < 1024*1024*1) {
+                        if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
                             $attachments[] = $file;
                         }
                     }
@@ -260,28 +238,30 @@ JS
             $submittedFields->push($submittedField);
         }
 
-        $emailData = array(
-            "Sender" => Member::currentUser(),
-            "Fields" => $submittedFields
-        );
+        $emailData = [
+            'Sender' => Member::currentUser(),
+            'Fields' => $submittedFields
+        ];
 
         $this->extend('updateEmailData', $emailData, $attachments);
 
         // email users on submit.
         if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
             foreach ($recipients as $recipient) {
-                $email = new UserFormRecipientEmail($submittedFields);
+                $email = UserFormRecipientEmail::create($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments) {
                     foreach ($attachments as $file) {
-                        if ($file->ID != 0) {
-                            $email->attachFile(
-                                $file->Filename,
-                                $file->Filename,
-                                HTTP::get_mime_type($file->Filename)
-                            );
+                        if (!$file->ID != 0) {
+                            continue;
                         }
+
+                        $email->attachFile(
+                            $file->Filename,
+                            $file->Filename,
+                            HTTP::get_mime_type($file->Filename)
+                        );
                     }
                 }
 
@@ -334,7 +314,7 @@ JS
                     $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
                     if (isset($emailData['Fields']) && !$recipient->HideFormData) {
                         foreach ($emailData['Fields'] as $Field) {
-                            $body .= $Field->Title .': '. $Field->Value ." \n";
+                            $body .= $Field->Title . ': ' . $Field->Value . " \n";
                         }
                     }
 
@@ -348,8 +328,9 @@ JS
 
         $submittedForm->extend('updateAfterProcess');
 
-        Session::clear("FormInfo.{$form->FormName()}.errors");
-        Session::clear("FormInfo.{$form->FormName()}.data");
+        $session = $this->getRequest()->getSession();
+        $session->clear("FormInfo.{$form->FormName()}.errors");
+        $session->clear("FormInfo.{$form->FormName()}.data");
 
         $referrer = (isset($data['Referrer'])) ? '?referrer=' . urlencode($data['Referrer']) : "";
 
@@ -357,24 +338,24 @@ JS
         // the finished method directly.
         if (!$this->DisableAuthenicatedFinishAction) {
             if (isset($data['SecurityID'])) {
-                Session::set('FormProcessed', $data['SecurityID']);
+                $session->set('FormProcessed', $data['SecurityID']);
             } else {
                 // if the form has had tokens disabled we still need to set FormProcessed
                 // to allow us to get through the finshed method
                 if (!$this->Form()->getSecurityToken()->isEnabled()) {
                     $randNum = rand(1, 1000);
                     $randHash = md5($randNum);
-                    Session::set('FormProcessed', $randHash);
-                    Session::set('FormProcessedNum', $randNum);
+                    $session->set('FormProcessed', $randHash);
+                    $session->set('FormProcessedNum', $randNum);
                 }
             }
         }
 
         if (!$this->DisableSaveSubmissions) {
-            Session::set('userformssubmission'. $this->ID, $submittedForm->ID);
+            $session->set('userformssubmission'. $this->ID, $submittedForm->ID);
         }
 
-        return $this->redirect($this->Link('finished') . $referrer . $this->config()->finished_anchor);
+        return $this->redirect($this->Link('finished') . $referrer . $this->config()->get('finished_anchor'));
     }
 
     /**
@@ -385,7 +366,7 @@ JS
      */
     protected function getMergeFieldsMap($fields = array())
     {
-        $data = new ArrayData(array());
+        $data = ArrayData::create([]);
 
         foreach ($fields as $field) {
             $data->setField($field->Name, DBField::create_field('Text', $field->Value));
@@ -402,7 +383,7 @@ JS
      */
     public function finished()
     {
-        $submission = Session::get('userformssubmission'. $this->ID);
+        $submission = $this->getRequest()->getSession()->get('userformssubmission'. $this->ID);
 
         if ($submission) {
             $submission = SubmittedForm::get()->byId($submission);
@@ -411,36 +392,36 @@ JS
         $referrer = isset($_GET['referrer']) ? urldecode($_GET['referrer']) : null;
 
         if (!$this->DisableAuthenicatedFinishAction) {
-            $formProcessed = Session::get('FormProcessed');
+            $formProcessed = $this->getRequest()->getSession()->get('FormProcessed');
 
             if (!isset($formProcessed)) {
                 return $this->redirect($this->Link() . $referrer);
             } else {
-                $securityID = Session::get('SecurityID');
+                $securityID = $this->getRequest()->getSession()->get('SecurityID');
                 // make sure the session matches the SecurityID and is not left over from another form
                 if ($formProcessed != $securityID) {
                     // they may have disabled tokens on the form
-                    $securityID = md5(Session::get('FormProcessedNum'));
+                    $securityID = md5($this->getRequest()->getSession()->get('FormProcessedNum'));
                     if ($formProcessed != $securityID) {
                         return $this->redirect($this->Link() . $referrer);
                     }
                 }
             }
 
-            Session::clear('FormProcessed');
+            $this->getRequest()->getSession()->clear('FormProcessed');
         }
 
-        $data = array(
-                'Submission' => $submission,
-                'Link' => $referrer
-        );
+        $data = [
+            'Submission' => $submission,
+            'Link' => $referrer
+        ];
 
         $this->extend('updateReceivedFormSubmissionData', $data);
 
-        return $this->customise(array(
+        return $this->customise([
             'Content' => $this->customise($data)->renderWith('ReceivedFormSubmission'),
             'Form' => '',
-        ));
+        ]);
     }
 
     /**

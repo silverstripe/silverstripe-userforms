@@ -2,37 +2,35 @@
 
 namespace SilverStripe\UserForms\Model\Submission;
 
-
-use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\ORM\DataObject;
-
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 
 /**
  * Data received from a UserDefinedForm submission
  *
  * @package userforms
  */
-
 class SubmittedFormField extends DataObject
 {
+    private static $db = [
+        'Name' => 'Varchar',
+        'Value' => 'Text',
+        'Title' => 'Varchar(255)'
+    ];
 
-    private static $db = array(
-        "Name" => "Varchar",
-        "Value" => "Text",
-        "Title" => "Varchar(255)"
-    );
+    private static $has_one = [
+        'Parent' => SubmittedForm::class
+    ];
 
-    private static $has_one = array(
-        "Parent" => SubmittedForm::class
-    );
-
-    private static $summary_fields = array(
+    private static $summary_fields = [
         'Title' => 'Title',
         'FormattedValue' => 'Value'
-    );
+    ];
+
+    private static $table_name = 'SubmittedFormField';
 
     /**
-     * @param Member
+     * @param Member $member
      *
      * @return boolean
      */
@@ -42,7 +40,7 @@ class SubmittedFormField extends DataObject
     }
 
     /**
-     * @param Member
+     * @param Member $member
      *
      * @return boolean
      */
@@ -52,7 +50,7 @@ class SubmittedFormField extends DataObject
     }
 
     /**
-     * @param Member
+     * @param Member $member
      *
      * @return boolean
      */
@@ -62,7 +60,7 @@ class SubmittedFormField extends DataObject
     }
 
     /**
-     * @param Member
+     * @param Member $member
      *
      * @return boolean
      */
@@ -106,8 +104,8 @@ class SubmittedFormField extends DataObject
      */
     public function getEditableField()
     {
-        return $this->Parent()->Parent()->Fields()->filter(array(
+        return $this->Parent()->Parent()->Fields()->filter([
             'Name' => $this->Name
-        ))->First();
+        ])->First();
     }
 }

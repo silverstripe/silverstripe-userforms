@@ -2,9 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
 use SilverStripe\Forms\EmailField;
-
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * EditableEmailField
@@ -16,12 +15,13 @@ use SilverStripe\Forms\EmailField;
 
 class EditableEmailField extends EditableFormField
 {
-
     private static $singular_name = 'Email Field';
 
     private static $plural_name = 'Email Fields';
 
     private static $has_placeholder = true;
+
+    private static $table_name = 'EditableEmailField';
 
     public function getSetsOwnError()
     {

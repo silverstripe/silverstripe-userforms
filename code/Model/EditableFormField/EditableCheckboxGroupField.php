@@ -2,11 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
 use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
-
 
 /**
  * EditableCheckboxGroup
@@ -18,18 +15,19 @@ use SilverStripe\UserForms\Model\EditableCustomRule;
 
 class EditableCheckboxGroupField extends EditableMultipleOptionField
 {
+    private static $singular_name = 'Checkbox Group';
 
-    private static $singular_name = "Checkbox Group";
-
-    private static $plural_name = "Checkbox Groups";
+    private static $plural_name = 'Checkbox Groups';
 
     protected $jsEventHandler = 'click';
 
+    private static $table_name = 'EditableCheckboxGroupField';
+
     public function getFormField()
     {
-        $field = UserFormsCheckboxSetField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap())
-            ->setFieldHolderTemplate('UserFormsMultipleOptionField_holder')
-            ->setTemplate('UserFormsCheckboxSetField');
+        $field = UserFormsCheckboxSetField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+        $field->setFieldHolderTemplate('UserFormsMultipleOptionField_holder');
+        $field->setTemplate('UserFormsCheckboxSetField');
 
         // Set the default checked items
         $defaultCheckedItems = $this->getDefaultOptions();
@@ -48,13 +46,13 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
 
         if ($entries) {
             if (!is_array($data[$this->Name])) {
-                $entries = array($data[$this->Name]);
+                $entries = [$data[$this->Name]];
             }
             foreach ($entries as $selected => $value) {
                 if (!$result) {
                     $result = $value;
                 } else {
-                    $result .= ", " . $value;
+                    $result .= ', ' . $value;
                 }
             }
         }

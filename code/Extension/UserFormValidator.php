@@ -2,19 +2,11 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\Forms\RequiredFields;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\Forms\RequiredFields;
-
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 
 class UserFormValidator extends RequiredFields
 {
@@ -46,7 +38,7 @@ class UserFormValidator extends RequiredFields
                 $this->validationError(
                     'FormFields',
                     _t(
-                        "UserFormValidator.UNEXPECTED_BREAK",
+                        __CLASS__.".UNEXPECTED_BREAK",
                         "Unexpected page break '{name}' inside nested field '{group}'",
                         array(
                             'name' => $field->CMSTitle,
@@ -63,7 +55,7 @@ class UserFormValidator extends RequiredFields
                 $this->validationError(
                     'FormFields',
                     _t(
-                        "UserFormValidator.NO_PAGE",
+                        __CLASS__.".NO_PAGE",
                         "Field '{name}' found before any pages",
                         array(
                             'name' => $field->CMSTitle
@@ -89,7 +81,7 @@ class UserFormValidator extends RequiredFields
                     $this->validationError(
                         'FormFields',
                         _t(
-                            "UserFormValidator.UNEXPECTED_GROUP_END",
+                            __CLASS__.".UNEXPECTED_GROUP_END",
                             "'{name}' found without a matching group",
                             array(
                                 'name' => $field->CMSTitle
@@ -105,7 +97,7 @@ class UserFormValidator extends RequiredFields
                     $this->validationError(
                         'FormFields',
                         _t(
-                            "UserFormValidator.WRONG_GROUP_END",
+                            __CLASS__.".WRONG_GROUP_END",
                             "'{name}' found closes the wrong group '{group}'",
                             array(
                                 'name' => $field->CMSTitle,
@@ -126,7 +118,7 @@ class UserFormValidator extends RequiredFields
                 $this->validationError(
                     'FormFields',
                     _t(
-                        "UserFormValidator.CONDITIONAL_REQUIRED",
+                        __CLASS__.".CONDITIONAL_REQUIRED",
                         "Required field '{name}' cannot be placed within a conditional page",
                         array(
                             'name' => $field->CMSTitle

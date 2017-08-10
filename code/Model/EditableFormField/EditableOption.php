@@ -2,17 +2,12 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
-use SilverStripe\Core\Convert;
-use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\Versioned\Versioned;
 
 /**
  * Base Class for EditableOption Fields such as the ones used in
@@ -23,31 +18,32 @@ use SilverStripe\ORM\DataObject;
  */
 class EditableOption extends DataObject
 {
+	private static $default_sort = 'Sort';
 
-	private static $default_sort = "Sort";
+	private static $db = [
+		'Name' => 'Varchar(255)',
+		'Title' => 'Varchar(255)',
+		'Default' => 'Boolean',
+        'Sort' => 'Int',
+        'Value' => 'Varchar(255)',
+	];
 
-	private static $db = array(
-		"Name" => "Varchar(255)",
-		"Title" => "Varchar(255)",
-		"Default" => "Boolean",
-        "Sort" => "Int",
-        "Value" => "Varchar(255)",
-	);
+	private static $has_one = [
+		'Parent' => EditableMultipleOptionField::class,
+	];
 
-	private static $has_one = array(
-		"Parent" => EditableMultipleOptionField::class,
-	);
+	private static $extensions = [
+		Versioned::class . "('Stage', 'Live')"
+	];
 
-	private static $extensions = array(
-		"Versioned('Stage', 'Live')"
-	);
-
-	private static $summary_fields = array(
+	private static $summary_fields = [
 		'Title',
 		'Default'
-	);
+	];
 
     protected static $allow_empty_values = false;
+
+    private static $table_name = 'EditableOption';
 
 	/**
      * Returns whether to allow empty values or not.

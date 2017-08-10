@@ -2,9 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
 use SilverStripe\Forms\CheckboxField;
-
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * EditableCheckbox
@@ -16,16 +15,17 @@ use SilverStripe\Forms\CheckboxField;
 
 class EditableCheckbox extends EditableFormField
 {
-
     private static $singular_name = 'Checkbox Field';
 
     private static $plural_name = 'Checkboxes';
 
     protected $jsEventHandler = 'click';
 
-    private static $db = array(
+    private static $db = [
         'CheckedDefault' => 'Boolean' // from CustomSettings
-    );
+    ];
+
+    private static $table_name = 'EditableCheckbox';
 
     /**
      * @return FieldList
@@ -36,7 +36,7 @@ class EditableCheckbox extends EditableFormField
 
         $fields->replaceField('Default', CheckboxField::create(
             "CheckedDefault",
-            _t('EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?')
+            _t('SilverStripe\\UserForms\\Model\\EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?')
         ));
 
         return $fields;
@@ -57,7 +57,9 @@ class EditableCheckbox extends EditableFormField
     {
         $value = (isset($data[$this->Name])) ? $data[$this->Name] : false;
 
-        return ($value) ? _t('EditableFormField.YES', 'Yes') : _t('EditableFormField.NO', 'No');
+        return ($value)
+            ? _t('SilverStripe\\UserForms\\Model\\EditableFormField.YES', 'Yes')
+            : _t('SilverStripe\\UserForms\\Model\\EditableFormField.NO', 'No');
     }
 
     public function migrateSettings($data)

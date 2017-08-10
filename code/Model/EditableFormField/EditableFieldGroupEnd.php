@@ -2,24 +2,20 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
-use SilverStripe\Security\Group;
-use SilverStripe\Forms\LabelField;
 use SilverStripe\Forms\HiddenField;
-
-
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Security\Group;
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 
 /**
  * Specifies that this ends a group of fields
  */
 class EditableFieldGroupEnd extends EditableFormField
 {
-
-    private static $belongs_to = array(
+    private static $belongs_to = [
         'Group' => EditableFieldGroup::class
-    );
+    ];
 
     /**
      * Disable selection of group class
@@ -37,28 +33,30 @@ class EditableFieldGroupEnd extends EditableFormField
      */
     private static $literal = true;
 
+    private static $table_name = 'EditableFieldGroupEnd';
+
     public function getCMSTitle()
     {
         $group = $this->Group();
         return _t(
-            'EditableFieldGroupEnd.FIELD_GROUP_END',
+            __CLASS__.'.FIELD_GROUP_END',
             '{group} end',
-            array(
+            [
                 'group' => ($group && $group->exists()) ? $group->CMSTitle : Group::class
-            )
+            ]
         );
     }
 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->removeByName(array('MergeField', 'Default', 'Validation', 'DisplayRules'));
+        $fields->removeByName(['MergeField', 'Default', 'Validation', 'DisplayRules']);
         return $fields;
     }
 
     public function getInlineClassnameField($column, $fieldClasses)
     {
-        return new LabelField($column, $this->CMSTitle);
+        return LabelField::create($column, $this->CMSTitle);
     }
 
     public function getInlineTitleField($column)
@@ -85,10 +83,10 @@ class EditableFieldGroupEnd extends EditableFormField
         $group = $this->Group();
         if (!($group && $group->exists()) && $this->ParentID) {
             $group = EditableFieldGroup::get()
-                ->filter(array(
+                ->filter([
                     'ParentID' => $this->ParentID,
                     'Sort:LessThanOrEqual' => $this->Sort
-                ))
+                ])
                 ->where('"EditableFieldGroup"."EndID" IS NULL OR "EditableFieldGroup"."EndID" = 0')
                 ->sort('"Sort" DESC')
                 ->first();

@@ -2,11 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\Submission;
 
-
 use SilverStripe\Assets\File;
 use SilverStripe\ORM\FieldType\DBField;
-
-
 
 /**
  * A file uploaded on a {@link UserDefinedForm} and attached to a single
@@ -17,10 +14,11 @@ use SilverStripe\ORM\FieldType\DBField;
 
 class SubmittedFileField extends SubmittedFormField
 {
+    private static $has_one = [
+        'UploadedFile' => File::class
+    ];
 
-    private static $has_one = array(
-        "UploadedFile" => File::class
-    );
+    private static $table_name = 'SubmittedFileField';
 
     /**
      * Return the value of this field for inclusion into things such as
@@ -32,7 +30,7 @@ class SubmittedFileField extends SubmittedFormField
     {
         $name = $this->getFileName();
         $link = $this->getLink();
-        $title = _t('SubmittedFileField.DOWNLOADFILE', 'Download File');
+        $title = _t(__CLASS__.'.DOWNLOADFILE', 'Download File');
 
         if ($link) {
             return DBField::create_field('HTMLText', sprintf(
@@ -51,7 +49,7 @@ class SubmittedFileField extends SubmittedFormField
      */
     public function getExportValue()
     {
-        return ($link = $this->getLink()) ? $link : "";
+        return ($link = $this->getLink()) ? $link : '';
     }
 
     /**

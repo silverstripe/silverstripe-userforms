@@ -2,20 +2,14 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-
-
 use SilverStripe\Control\Email\Email;
-use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
-
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * EditableTextField
@@ -27,14 +21,14 @@ use SilverStripe\Forms\TextField;
 
 class EditableTextField extends EditableFormField
 {
-
     private static $singular_name = 'Text Field';
 
     private static $plural_name = 'Text Fields';
 
     private static $has_placeholder = true;
 
-    private static $autocomplete_options = array(
+    /** @skipUpgrade */
+    private static $autocomplete_options = [
         'off' => 'Off',
         'on' => 'On',
         'name' => 'Full name',
@@ -44,7 +38,7 @@ class EditableTextField extends EditableFormField
         'family-name' => 'Family name',
         'honorific-suffix' => 'Suffix (e.g Jr.)',
         'nickname' => 'Nickname',
-        'email' => Email::class,
+        'email' => 'Email',
         'organization-title' => 'Job title',
         'organization' => 'Organization',
         'street-address' => 'Street address',
@@ -62,50 +56,46 @@ class EditableTextField extends EditableFormField
         'sex' => 'Gender identity',
         'tel' => 'Telephone number',
         'url' => 'Home page'
-      );
+    ];
 
     protected $jsEventHandler = 'keyup';
 
-    private static $db = array(
+    private static $db = [
         'MinLength' => 'Int',
         'MaxLength' => 'Int',
         'Rows' => 'Int(1)',
         'Autocomplete' => 'Varchar(255)'
-    );
+    ];
 
-    private static $defaults = array(
+    private static $defaults = [
         'Rows' => 1
-    );
+    ];
+
+    private static $table_name = 'EditableTextField';
 
     public function getCMSFields()
     {
-        // PHP 5.3 compat
-        $self = $this;
-
-        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
-            $fields->addFieldToTab(
+        $this->beforeUpdateCMSFields(function ($fields) {
+            $fields->addFieldsToTab(
                 'Root.Main',
-                NumericField::create(
-                    'Rows',
-                    _t('EditableTextField.NUMBERROWS', 'Number of rows')
-                )->setDescription(_t(
-                    'EditableTextField.NUMBERROWS_DESCRIPTION',
-                    'Fields with more than one row will be generated as a textarea'
-                ))
+                [
+                    NumericField::create(
+                        'Rows',
+                        _t(__CLASS__.'.NUMBERROWS', 'Number of rows')
+                    )->setDescription(_t(
+                        __CLASS__.'.NUMBERROWS_DESCRIPTION',
+                        'Fields with more than one row will be generated as a textarea'
+                    )),
+                    DropdownField::create(
+                        'Autocomplete',
+                        _t(__CLASS__.'.AUTOCOMPLETE', 'Autocomplete'),
+                        $this->config()->get('autocomplete_options')
+                    )->setDescription(_t(
+                        __CLASS__.'.AUTOCOMPLETE_DESCRIPTION',
+                        'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
+                    ))
+                ]
             );
-
-            $fields->addFieldToTab(
-                'Root.Main',
-                DropdownField::create(
-                    'Autocomplete',
-                    _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete'),
-                    $self->config()->get('autocomplete_options')
-                  )->setDescription(_t(
-                      'EditableTextField.AUTOCOMPLETE_DESCRIPTION',
-                      'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
-                  ))
-            );
-
         });
 
         return parent::getCMSFields();
@@ -118,16 +108,16 @@ class EditableTextField extends EditableFormField
     {
         $fields = parent::getFieldValidationOptions();
 
-        $fields->merge(array(
+        $fields->merge([
             FieldGroup::create(
-                _t('EditableTextField.TEXTLENGTH', 'Allowed text length'),
-                array(
+                _t(__CLASS__.'.TEXTLENGTH', 'Allowed text length'),
+                [
                     NumericField::create('MinLength', false),
-                    LiteralField::create('RangeLength', _t("EditableTextField.RANGE_TO", "to")),
+                    LiteralField::create('RangeLength', _t(__CLASS__.".RANGE_TO", "to")),
                     NumericField::create('MaxLength', false)
-                )
+                ]
             )
-        ));
+        ]);
 
         return $fields;
     }

@@ -2,40 +2,36 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\HeaderField;
 use SilverStripe\Core\Convert;
-
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Allows an editor to insert a generic heading into a field
  *
  * @package userforms
  */
-
 class EditableFormHeading extends EditableFormField
 {
-
     private static $singular_name = 'Heading';
 
     private static $plural_name = 'Headings';
 
     private static $literal = true;
 
-    private static $db = array(
+    private static $db = [
         'Level' => 'Int(3)', // From CustomSettings
         'HideFromReports' => 'Boolean(0)' // from CustomSettings
-    );
+    ];
 
-    private static $defaults = array(
+    private static $defaults = [
         'Level' => 3,
         'HideFromReports' => false
-    );
+    ];
+
+    private static $table_name = 'EditableFormHeading';
 
     /**
      * @return FieldList
@@ -44,28 +40,28 @@ class EditableFormHeading extends EditableFormField
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName(array('Default', 'Validation', 'RightTitle'));
+        $fields->removeByName(['Default', 'Validation', 'RightTitle']);
 
-        $levels = array(
+        $levels = [
             '1' => '1',
             '2' => '2',
             '3' => '3',
             '4' => '4',
             '5' => '5',
             '6' => '6'
-        );
+        ];
 
-        $fields->addFieldsToTab('Root.Main', array(
+        $fields->addFieldsToTab('Root.Main', [
             DropdownField::create(
                 'Level',
-                _t('EditableFormHeading.LEVEL', 'Select Heading Level'),
+                _t(__CLASS__.'.LEVEL', 'Select Heading Level'),
                 $levels
             ),
             CheckboxField::create(
                 'HideFromReports',
-                _t('EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?')
+                _t('SilverStripe\\UserForms\\Model\\EditableFormField\\EditableLiteralField.HIDEFROMREPORT', 'Hide from reports?')
             )
-        ));
+        ]);
 
         return $fields;
     }

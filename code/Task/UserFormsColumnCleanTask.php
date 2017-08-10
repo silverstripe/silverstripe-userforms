@@ -2,13 +2,10 @@
 
 namespace SilverStripe\UserForms\Task;
 
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\ORM\DB;
 use SilverStripe\Dev\MigrationTask;
-
-
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 
 /**
  * UserForms Column Clean Task
@@ -20,24 +17,24 @@ use SilverStripe\Dev\MigrationTask;
 
 class UserFormsColumnCleanTask extends MigrationTask
 {
+    protected $title = 'UserForms EditableFormField Column Clean task';
 
-    protected $title = "UserForms EditableFormField Column Clean task";
+    protected $description = 'Removes unused columns from EditableFormField for MySQL databases;';
 
-    protected $description = "Removes unused columns from EditableFormField for MySQL databases;";
+    protected $tables = [EditableFormField::class];
 
-    protected $tables = array(EditableFormField::class);
-
-    protected $keepColumns = array('ID');
+    protected $keepColumns = ['ID'];
 
     /**
      * Publish the existing forms.
-     *
      */
     public function run($request)
     {
+        /** @var \SilverStripe\ORM\DataObjectSchema $schema */
+        $schema = DataObject::getSchema();
+
         foreach ($this->tables as $db) {
-            $obj = new $db();
-            $columns = $obj->database_fields($db);
+            $columns = $schema->databaseFields($db);
             $query = "SHOW COLUMNS FROM $db";
             $liveColumns = DB::query($query)->column();
             $backedUp = 0;

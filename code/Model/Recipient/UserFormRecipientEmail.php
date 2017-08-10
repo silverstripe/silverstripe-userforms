@@ -2,11 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\Recipient;
 
-
 use SilverStripe\Control\Email\Email;
-
-
-
 
 /**
  * Email that gets sent to the people listed in the Email Recipients when a
@@ -17,8 +13,7 @@ use SilverStripe\Control\Email\Email;
 
 class UserFormRecipientEmail extends Email
 {
-
-    protected $ss_template = "SubmittedFormEmail";
+    protected $ss_template = 'SubmittedFormEmail';
 
     protected $data;
 

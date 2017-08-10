@@ -2,13 +2,10 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-use SilverStripe\Forms\NumericField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\FieldGroup;
-
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * EditableNumericField
@@ -27,10 +24,12 @@ class EditableNumericField extends EditableFormField
 
     private static $has_placeholder = true;
 
-    private static $db = array(
+    private static $db = [
         'MinValue' => 'Int',
         'MaxValue' => 'Int'
-    );
+    ];
+
+    private static $table_name = 'EditableNumericField';
 
     public function getSetsOwnError()
     {
@@ -56,12 +55,12 @@ class EditableNumericField extends EditableFormField
     {
         $fields = parent::getFieldValidationOptions();
         $fields->push(FieldGroup::create(
-            _t("EditableNumericField.RANGE", "Allowed numeric range"),
-            array(
-                new NumericField('MinValue', false),
-                new LiteralField('RangeValue', _t("EditableNumericField.RANGE_TO", "to")),
-                new NumericField('MaxValue', false)
-            )
+            _t(__CLASS__.'.RANGE', 'Allowed numeric range'),
+            [
+                NumericField::create('MinValue', false),
+                LiteralField::create('RangeValue', _t(__CLASS__.'.RANGE_TO', 'to')),
+                NumericField::create('MaxValue', false)
+            ]
         ));
         return $fields;
     }

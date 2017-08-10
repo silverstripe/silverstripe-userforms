@@ -2,26 +2,17 @@
 
 namespace SilverStripe\UserForms\Form;
 
-use Object;
-
-
-
-
-
-use SilverStripe\Forms\GridField\GridField_FormAction;
-use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Control\HTTPResponse_Exception;
-use SilverStripe\Forms\GridField\GridField_HTMLProvider;
+use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
-
-
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Forms\GridField\GridField_HTMLProvider;
 
 /**
  * A button which allows objects to be created with a specified classname(s)
  */
-class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider, GridField_ActionProvider
+class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_ActionProvider
 {
-
     /**
      * Name of fragment to insert into
      *
@@ -186,7 +177,7 @@ class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider
         if (!$buttonName) {
             // provide a default button name, can be changed by calling {@link setButtonName()} on this component
             $objectName = $singleton->i18n_singular_name();
-            $buttonName = _t('GridField.Add', 'Add {name}', array('name' => $objectName));
+            $buttonName = _t('SilverStripe\\Forms\\GridField\\GridField.Add', 'Add {name}', array('name' => $objectName));
         }
 
         $addAction = new GridField_FormAction(

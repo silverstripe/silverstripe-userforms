@@ -2,19 +2,14 @@
 
 namespace SilverStripe\UserForms\FormField;
 
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 
 /**
  * Front end composite field for userforms
  */
 class UserFormsGroupField extends UserFormsCompositeField
 {
-
     public function __construct($children = null)
     {
         parent::__construct($children);

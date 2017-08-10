@@ -2,16 +2,11 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\UserForms\Model\EditableCustomRule;
 
-
-
-class EditableFormFieldValidator extends RequiredFields
+class Validator extends RequiredFields
 {
-
     /**
      *
      * @var EditableFormField
@@ -64,8 +59,8 @@ class EditableFormFieldValidator extends RequiredFields
         $this->validationError(
             'Required_Error',
             _t(
-                "EditableFormFieldValidator.REQUIRED_ERROR",
-                "Form fields cannot be required and have conditional display rules."
+                __CLASS__.'.REQUIRED_ERROR',
+                'Form fields cannot be required and have conditional display rules.'
             ),
             'error'
         );

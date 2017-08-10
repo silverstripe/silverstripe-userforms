@@ -2,77 +2,44 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-use SilverStripe\Forms\SegmentField;
-
-
-
-
-
-
-
-
-
-
-
-use GridFieldEditableColumns;
-
-
-
-
-use GridFieldAddNewInlineButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\Forms\TabSet;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier;
-use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\LabelField;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\UserForms\Model\EditableCustomRule;
-use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldDeleteAction;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\ORM\ValidationException;
-use SilverStripe\Control\Controller;
-use SilverStripe\CMS\Controllers\CMSPageEditController;
-use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\CMS\Controllers\CMSMain;
-use SilverStripe\Versioned\Versioned;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\Dev\Deprecation;
-use SilverStripe\Core\Convert;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
-use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Convert;
+use SilverStripe\Dev\Deprecation;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\SegmentField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
-
-
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
+use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
+use SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier;
+use SilverStripe\Versioned\Versioned;
+use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 
 /**
  * Represents the base class of a editable form field
@@ -94,7 +61,6 @@ use SilverStripe\ORM\DataObject;
  */
 class EditableFormField extends DataObject
 {
-
     /**
      * Set to true to hide from class selector
      *
@@ -132,7 +98,7 @@ class EditableFormField extends DataObject
      *
      * @var array
      */
-    public static $allowed_css = array();
+    public static $allowed_css = [];
 
     /**
      * Set this to true to enable placeholder field for any given class
@@ -145,47 +111,49 @@ class EditableFormField extends DataObject
      * @config
      * @var array
      */
-    private static $summary_fields = array(
+    private static $summary_fields = [
         'Title'
-    );
+    ];
 
     /**
      * @config
      * @var array
      */
-    private static $db = array(
-        "Name" => "Varchar",
-        "Title" => "Varchar(255)",
-        "Default" => "Varchar(255)",
-        "Sort" => "Int",
-        "Required" => "Boolean",
-        "CustomErrorMessage" => "Varchar(255)",
+    private static $db = [
+        'Name' => 'Varchar',
+        'Title' => 'Varchar(255)',
+        'Default' => 'Varchar(255)',
+        'Sort' => 'Int',
+        'Required' => 'Boolean',
+        'CustomErrorMessage' => 'Varchar(255)',
 
-        "CustomRules" => "Text", // @deprecated from 2.0
-        "CustomSettings" => "Text", // @deprecated from 2.0
-        "Migrated" => "Boolean", // set to true when migrated
+        'CustomRules' => 'Text', // @deprecated from 2.0
+        'CustomSettings' => 'Text', // @deprecated from 2.0
+        'Migrated' => 'Boolean', // set to true when migrated
 
-        "ExtraClass" => "Text", // from CustomSettings
-        "RightTitle" => "Varchar(255)", // from CustomSettings
-        "ShowOnLoad" => "Boolean(1)", // from CustomSettings
-        "ShowInSummary" => "Boolean",
-        "Placeholder" => "Varchar(255)",
+        'ExtraClass' => 'Text', // from CustomSettings
+        'RightTitle' => 'Varchar(255)', // from CustomSettings
+        'ShowOnLoad' => 'Boolean(1)', // from CustomSettings
+        'ShowInSummary' => 'Boolean',
+        'Placeholder' => 'Varchar(255)',
         'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
-    );
+    ];
+
+    private static $table_name = 'EditableFormField';
 
 
-    private static $defaults = array(
+    private static $defaults = [
         'ShowOnLoad' => true,
-    );
+    ];
 
 
     /**
      * @config
      * @var array
      */
-    private static $has_one = array(
-        "Parent" => UserDefinedForm::class,
-    );
+    private static $has_one = [
+        'Parent' => UserDefinedForm::class,
+    ];
 
     /**
      * Built in extensions required
@@ -193,17 +161,17 @@ class EditableFormField extends DataObject
      * @config
      * @var array
      */
-    private static $extensions = array(
-        "Versioned('Stage', 'Live')"
-    );
+    private static $extensions = [
+        Versioned::class . "('Stage', 'Live')"
+    ];
 
     /**
      * @config
      * @var array
      */
-    private static $has_many = array(
-        "DisplayRules" => "EditableCustomRule.Parent" // from CustomRules
-    );
+    private static $has_many = [
+        'DisplayRules' => EditableCustomRule::class . '.Parent'
+    ];
 
     /**
      * @var bool
@@ -251,44 +219,44 @@ class EditableFormField extends DataObject
      */
     public function getCMSFields()
     {
-        $fields = new FieldList(new TabSet('Root'));
+        $fields = FieldList::create(TabSet::create('Root'));
 
         // Main tab
         $fields->addFieldsToTab(
             'Root.Main',
-            array(
+            [
                 ReadonlyField::create(
                     'Type',
-                    _t('EditableFormField.TYPE', 'Type'),
+                    _t(__CLASS__.'.TYPE', 'Type'),
                     $this->i18n_singular_name()
                 ),
-                CheckboxField::create('ShowInSummary', _t('EditableFormField.SHOWINSUMMARY', 'Show in summary gridfield')),
+                CheckboxField::create('ShowInSummary', _t(__CLASS__.'.SHOWINSUMMARY', 'Show in summary gridfield')),
                 LiteralField::create(
                     'MergeField',
                     _t(
-                        'EditableFormField.MERGEFIELDNAME',
+                        __CLASS__.'.MERGEFIELDNAME',
                         '<div class="field readonly">' .
-                            '<label class="left">' . _t('EditableFormField.MERGEFIELDNAME', 'Merge field') . '</label>' .
+                            '<label class="left">' . _t(__CLASS__.'.MERGEFIELDNAME', 'Merge field') . '</label>' .
                             '<div class="middleColumn">' .
                                 '<span class="readonly">$' . $this->Name . '</span>' .
                             '</div>' .
                         '</div>'
                     )
                 ),
-                TextField::create('Title', _t('EditableFormField.TITLE', 'Title')),
-                TextField::create('Default', _t('EditableFormField.DEFAULT', 'Default value')),
-                TextField::create('RightTitle', _t('EditableFormField.RIGHTTITLE', 'Right title')),
-                SegmentField::create('Name', _t('EditableFormField.NAME', 'Name'))->setModifiers(array(
+                TextField::create('Title', _t(__CLASS__.'.TITLE', 'Title')),
+                TextField::create('Default', _t(__CLASS__.'.DEFAULT', 'Default value')),
+                TextField::create('RightTitle', _t(__CLASS__.'.RIGHTTITLE', 'Right title')),
+                SegmentField::create('Name', _t(__CLASS__.'.NAME', 'Name'))->setModifiers([
                     UnderscoreSegmentFieldModifier::create()->setDefault('FieldName'),
                     DisambiguationSegmentFieldModifier::create(),
-                ))->setPreview($this->Name)
-            )
+                ])->setPreview($this->Name)
+            ]
         );
-        $fields->fieldByName('Root.Main')->setTitle(_t('SiteTree.TABMAIN', 'Main'));
+        $fields->fieldByName('Root.Main')->setTitle(_t('SilverStripe\\CMS\\Model\\SiteTree.TABMAIN', 'Main'));
 
         // Custom settings
         if (!empty(self::$allowed_css)) {
-            $cssList = array();
+            $cssList = [];
             foreach (self::$allowed_css as $k => $v) {
                 if (!is_array($v)) {
                     $cssList[$k]=$v;
@@ -300,10 +268,10 @@ class EditableFormField extends DataObject
             $fields->addFieldToTab('Root.Main',
                 DropdownField::create(
                     'ExtraClass',
-                    _t('EditableFormField.EXTRACLASS_TITLE', 'Extra Styling/Layout'),
+                    _t(__CLASS__.'.EXTRACLASS_TITLE', 'Extra Styling/Layout'),
                     $cssList
                 )->setDescription(_t(
-                    'EditableFormField.EXTRACLASS_SELECT',
+                    __CLASS__.'.EXTRACLASS_SELECT',
                     'Select from the list of allowed styles'
                 ))
             );
@@ -311,9 +279,9 @@ class EditableFormField extends DataObject
             $fields->addFieldToTab('Root.Main',
                 TextField::create(
                     'ExtraClass',
-                    _t('EditableFormField.EXTRACLASS_Title', 'Extra CSS classes')
+                    _t(__CLASS__.'.EXTRACLASS_Title', 'Extra CSS classes')
                 )->setDescription(_t(
-                    'EditableFormField.EXTRACLASS_MULTIPLE',
+                    __CLASS__.'.EXTRACLASS_MULTIPLE',
                     'Separate each CSS class with a single space'
                 ))
             );
@@ -323,7 +291,7 @@ class EditableFormField extends DataObject
         $validationFields = $this->getFieldValidationOptions();
         if ($validationFields && $validationFields->count()) {
             $fields->addFieldsToTab('Root.Validation', $validationFields);
-            $fields->fieldByName('Root.Validation')->setTitle(_t('EditableFormField.VALIDATION', 'Validation'));
+            $fields->fieldByName('Root.Validation')->setTitle(_t(__CLASS__.'.VALIDATION', 'Validation'));
         }
 
         // Add display rule fields
@@ -338,7 +306,7 @@ class EditableFormField extends DataObject
                 'Root.Main',
                 TextField::create(
                     'Placeholder',
-                    _t('EditableFormField.PLACEHOLDER', 'Placeholder')
+                    _t(__CLASS__.'.PLACEHOLDER', 'Placeholder')
                 )
             );
         }
@@ -360,21 +328,21 @@ class EditableFormField extends DataObject
             return new FieldList(
                 LabelField::create(
                     _t(
-                    'EditableFormField.DISPLAY_RULES_DISABLED',
+                    __CLASS__.'.DISPLAY_RULES_DISABLED',
                     'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'))
                   ->addExtraClass('message warning'));
         }
-        $self = $this;
+
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
-        $editableColumns->setDisplayFields(array(
-            'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses, $self) {
-                    return DropdownField::create($column, '', EditableFormField::get()->filter(array(
-                            'ParentID' => $self->ParentID,
+        $editableColumns->setDisplayFields([
+            'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses) {
+                    return DropdownField::create($column, '', EditableFormField::get()->filter([
+                            'ParentID' => $this->ParentID,
                             'ClassName' => $allowedClasses,
-                        ))->exclude(array(
-                            'ID' => $self->ID,
-                        ))->map('ID', 'Title'));
+                        ])->exclude([
+                            'ID' => $this->ID,
+                        ])->map('ID', 'Title'));
             },
             'ConditionOption' => function ($record, $column, $grid) {
                 $options = Config::inst()->get(EditableCustomRule::class, 'condition_options');
@@ -384,7 +352,7 @@ class EditableFormField extends DataObject
             'FieldValue' => function ($record, $column, $grid) {
                 return TextField::create($column);
             }
-        ));
+        ]);
 
         // Custom rules
         $customRulesConfig = GridFieldConfig::create()
@@ -398,22 +366,22 @@ class EditableFormField extends DataObject
 
         return new FieldList(
             DropdownField::create('ShowOnLoad',
-                _t('EditableFormField.INITIALVISIBILITY', 'Initial visibility'),
-                array(
+                _t(__CLASS__.'.INITIALVISIBILITY', 'Initial visibility'),
+                [
                     1 => 'Show',
                     0 => 'Hide',
-                )
+                ]
             ),
             DropdownField::create('DisplayRulesConjunction',
-                _t('EditableFormField.DISPLAYIF', 'Toggle visibility when'),
-                array(
+                _t(__CLASS__.'.DISPLAYIF', 'Toggle visibility when'),
+                [
                     'Or'  => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
                     'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true'),
-                )
+                ]
             ),
             GridField::create(
                 'DisplayRules',
-                _t('EditableFormField.CUSTOMRULES', 'Custom Rules'),
+                _t(__CLASS__.'.CUSTOMRULES', 'Custom Rules'),
                 $this->DisplayRules(),
                 $customRulesConfig
             )
@@ -616,7 +584,7 @@ class EditableFormField extends DataObject
      */
     protected function publishRules($fromStage, $toStage, $createNewVersion)
     {
-        $seenRuleIDs = array();
+        $seenRuleIDs = [];
 
         // Don't forget to publish the related custom rules...
         foreach ($this->DisplayRules() as $rule) {
@@ -812,7 +780,7 @@ class EditableFormField extends DataObject
         }
 
         $prior = 0; // Number of prior group at this level
-        $stack = array(); // Current stack of nested groups, where the top level = the page
+        $stack = []; // Current stack of nested groups, where the top level = the page
         foreach ($fields->map('ID', 'ClassName') as $id => $className) {
             if ($className === EditableFormStep::class) {
                 $priorPage = empty($stack) ? $prior : $stack[0];
@@ -865,9 +833,9 @@ class EditableFormField extends DataObject
     public function getFieldValidationOptions()
     {
         $fields = new FieldList(
-            CheckboxField::create('Required', _t('EditableFormField.REQUIRED', 'Is this field Required?'))
-                ->setDescription(_t('EditableFormField.REQUIRED_DESCRIPTION', 'Please note that conditional fields can\'t be required')),
-            TextField::create('CustomErrorMessage', _t('EditableFormField.CUSTOMERROR', 'Custom Error Message'))
+            CheckboxField::create('Required', _t(__CLASS__.'.REQUIRED', 'Is this field Required?'))
+                ->setDescription(_t(__CLASS__.'.REQUIRED_DESCRIPTION', 'Please note that conditional fields can\'t be required')),
+            TextField::create('CustomErrorMessage', _t(__CLASS__.'.CUSTOMERROR', 'Custom Error Message'))
         );
 
         $this->extend('updateFieldValidationOptions', $fields);
@@ -951,7 +919,7 @@ class EditableFormField extends DataObject
      */
     public function getSubmittedFormField()
     {
-        return new SubmittedFormField();
+        return SubmittedFormField::create();
     }
 
 
@@ -974,7 +942,7 @@ class EditableFormField extends DataObject
     public function getErrorMessage()
     {
         $title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
-        $standard = sprintf(_t('Form.FIELDISREQUIRED', '%s is required').'.', $title);
+        $standard = sprintf(_t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '%s is required').'.', $title);
 
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
@@ -1025,8 +993,8 @@ class EditableFormField extends DataObject
     public function getInlineTitleField($column)
     {
         return TextField::create($column, false)
-            ->setAttribute('placeholder', _t('EditableFormField.TITLE', 'Title'))
-            ->setAttribute('data-placeholder', _t('EditableFormField.TITLE', 'Title'));
+            ->setAttribute('placeholder', _t(__CLASS__.'.TITLE', 'Title'))
+            ->setAttribute('data-placeholder', _t(__CLASS__.'.TITLE', 'Title'));
     }
 
     /**
@@ -1082,7 +1050,7 @@ class EditableFormField extends DataObject
         $classes = ClassInfo::getValidSubClasses(EditableFormField::class);
 
         // Remove classes we don't want to display in the dropdown.
-        $editableFieldClasses = array();
+        $editableFieldClasses = [];
         foreach ($classes as $class) {
             // Skip abstract / hidden classes
             if (Config::inst()->get($class, 'abstract', Config::UNINHERITED) || Config::inst()->get($class, 'hidden')
@@ -1123,7 +1091,7 @@ class EditableFormField extends DataObject
     public function EffectiveDisplayRules()
     {
         if ($this->Required) {
-            return new ArrayList();
+            return ArrayList::create();
         }
         return $this->DisplayRules();
     }
@@ -1135,16 +1103,17 @@ class EditableFormField extends DataObject
     public function formatDisplayRules()
     {
         $holderSelector = $this->getSelectorOnly();
-        $result = array(
+        $result = [
             'targetFieldID' => $holderSelector,
             'conjunction'   => $this->DisplayRulesConjunctionNice(),
-            'selectors'     => array(),
-            'events'        => array(),
-            'operations'    => array(),
+            'selectors'     => [],
+            'events'        => [],
+            'operations'    => [],
             'initialState'  => $this->ShowOnLoadNice(),
-            'view'          => array(),
-            'opposite'      => array(),
-        );
+            'view'          => [],
+            'opposite'      => [],
+        ];
+
         // Check for field dependencies / default
         /** @var EditableCustomRule $rule */
         foreach ($this->EffectiveDisplayRules() as $rule) {

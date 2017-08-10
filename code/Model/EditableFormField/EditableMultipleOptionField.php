@@ -2,33 +2,22 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use GridFieldEditableColumns;
-
-
-
-
-use GridFieldTitleHeader;
-use GridFieldOrderableRows;
-
-use GridFieldAddNewInlineButton;
-
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
-use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\Tab;
-use SilverStripe\Versioned\Versioned;
 use SilverStripe\ORM\Map;
-
-
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
+use SilverStripe\Versioned\Versioned;
+use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
 /**
  * Base class for multiple option fields such as {@link EditableDropdownField}
@@ -45,7 +34,6 @@ use SilverStripe\ORM\Map;
 
 class EditableMultipleOptionField extends EditableFormField
 {
-
     /**
      * Define this field as abstract (not inherited)
      *
@@ -54,9 +42,11 @@ class EditableMultipleOptionField extends EditableFormField
      */
     private static $abstract = true;
 
-    private static $has_many = array(
-        "Options" => EditableOption::class
-    );
+    private static $has_many = [
+        'Options' => EditableOption::class
+    ];
+
+    private static $table_name = 'EditableMultipleOptionField';
 
     /**
      * @return FieldList
@@ -65,26 +55,26 @@ class EditableMultipleOptionField extends EditableFormField
     {
         $this->beforeUpdateCMSFields(function($fields) {
             $editableColumns = new GridFieldEditableColumns();
-            $editableColumns->setDisplayFields(array(
-                'Title' => array(
-                    'title' => _t('EditableMultipleOptionField.TITLE', 'Title'),
+            $editableColumns->setDisplayFields([
+                'Title' => [
+                    'title' => _t(__CLASS__.'.TITLE', 'Title'),
                     'callback' => function ($record, $column, $grid) {
                         return TextField::create($column);
                     }
-                ),
-                'Value' => array(
-                    'title' => _t('EditableMultipleOptionField.VALUE', 'Value'),
+                ],
+                'Value' => [
+                    'title' => _t(__CLASS__.'.VALUE', 'Value'),
                     'callback' => function ($record, $column, $grid) {
                         return TextField::create($column);
                     }
-                ),
-                'Default' => array(
-                    'title' => _t('EditableMultipleOptionField.DEFAULT', 'Selected by default?'),
+                ],
+                'Default' => [
+                    'title' => _t(__CLASS__.'.DEFAULT', 'Selected by default?'),
                     'callback' => function ($record, $column, $grid) {
                         return CheckboxField::create($column);
                     }
-                )
-            ));
+                ]
+            ]);
 
             $optionsConfig = GridFieldConfig::create()
                 ->addComponents(
@@ -104,7 +94,7 @@ class EditableMultipleOptionField extends EditableFormField
                 $optionsConfig
             );
 
-            $fields->insertAfter(new Tab('Options', _t('EditableMultipleOptionField.OPTIONSTAB', 'Options')), 'Main');
+            $fields->insertAfter(Tab::create('Options', _t(__CLASS__.'.OPTIONSTAB', 'Options')), 'Main');
             $fields->addFieldToTab('Root.Options', $optionsGrid);
         });
 
@@ -139,7 +129,7 @@ class EditableMultipleOptionField extends EditableFormField
      */
     protected function publishOptions($fromStage, $toStage, $createNewVersion)
     {
-        $seenIDs = array();
+        $seenIDs = [];
 
         // Publish all options
         foreach ($this->Options() as $option) {

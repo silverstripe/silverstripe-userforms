@@ -2,66 +2,38 @@
 
 namespace SilverStripe\UserForms\Model\Recipient;
 
-
-
-
-
-
-
-use GridFieldAddNewInlineButton;
-
-use GridFieldEditableColumns;
-
-
-
-
-
-
-
-
-use Tabset;
-
-
-
-
-
-
-
-
-
-
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
-use SilverStripe\UserForms\Model\Recipient\UserDefinedForm_EmailRecipientCondition;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\Control\Session;
-use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldDeleteAction;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\View\Requirements;
-use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Assets\FileFinder;
+use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Control\Session;
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
-use SilverStripe\CMS\Controllers\CMSMain;
-use SilverStripe\Assets\FileFinder;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
-
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\View\Requirements;
+use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -69,10 +41,9 @@ use SilverStripe\ORM\DataObject;
  *
  * @package userforms
  */
-class UserDefinedForm_EmailRecipient extends DataObject
+class EmailRecipient extends DataObject
 {
-
-    private static $db = array(
+    private static $db = [
         'EmailAddress' => 'Varchar(200)',
         'EmailSubject' => 'Varchar(200)',
         'EmailFrom' => 'Varchar(200)',
@@ -83,24 +54,26 @@ class UserDefinedForm_EmailRecipient extends DataObject
         'SendPlain' => 'Boolean',
         'HideFormData' => 'Boolean',
         'CustomRulesCondition' => 'Enum("And,Or")'
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'Form' => UserDefinedForm::class,
         'SendEmailFromField' => EditableFormField::class,
         'SendEmailToField' => EditableFormField::class,
         'SendEmailSubjectField' => EditableFormField::class
-    );
+    ];
 
-    private static $has_many = array(
-        'CustomRules' => UserDefinedForm_EmailRecipientCondition::class
-    );
+    private static $has_many = [
+        'CustomRules' => EmailRecipientCondition::class
+    ];
 
-    private static $summary_fields = array(
+    private static $summary_fields = [
         'EmailAddress',
         'EmailSubject',
         'EmailFrom'
-    );
+    ];
+
+    private static $table_name = 'UserDefinedForm_EmailRecipient';
 
     /**
      * Setting this to true will allow you to select "risky" fields as
@@ -117,13 +90,13 @@ class UserDefinedForm_EmailRecipient extends DataObject
     {
         $fields = parent::summaryFields();
         if (isset($fields['EmailAddress'])) {
-            $fields['EmailAddress'] = _t('UserDefinedForm.EMAILADDRESS', Email::class);
+            $fields['EmailAddress'] = _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILADDRESS', Email::class);
         }
         if (isset($fields['EmailSubject'])) {
-            $fields['EmailSubject'] = _t('UserDefinedForm.EMAILSUBJECT', 'Subject');
+            $fields['EmailSubject'] = _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILSUBJECT', 'Subject');
         }
         if (isset($fields['EmailFrom'])) {
-            $fields['EmailFrom'] = _t('UserDefinedForm.EMAILFROM', 'From');
+            $fields['EmailFrom'] = _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILFROM', 'From');
         }
         return $fields;
     }
@@ -175,7 +148,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
                 return DropdownField::create($column, false, $formFields->map('ID', 'Title'));
             },
             'ConditionOption' => function ($record, $column, $grid) {
-                $options = UserDefinedForm_EmailRecipientCondition::config()->condition_options;
+                $options = EmailRecipientCondition::config()->condition_options;
                 return DropdownField::create($column, false, $options);
             },
             'ConditionValue' => function ($record, $column, $grid) {
@@ -213,7 +186,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
 
 
         // Check valid email-recipient fields
-        if ($this->config()->allow_unbound_recipient_fields) {
+        if ($this->config()->get('allow_unbound_recipient_fields')) {
             // To address can only be email fields or multi option fields
             $validEmailToFields = ArrayList::create($validEmailFromFields->toArray());
             $validEmailToFields->merge($multiOptionFields);
@@ -226,40 +199,55 @@ class UserDefinedForm_EmailRecipient extends DataObject
         $fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
 
         // Configuration fields
-        $fields->addFieldsToTab('Root.EmailDetails', array(
+        $fields->addFieldsToTab('Root.EmailDetails', [
             // Subject
             FieldGroup::create(
-                TextField::create('EmailSubject', _t('UserDefinedForm.TYPESUBJECT', 'Type subject'))
+                TextField::create(
+                    'EmailSubject',
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.TYPESUBJECT', 'Type subject')
+                )
                     ->setAttribute('style', 'min-width: 400px;'),
                 DropdownField::create(
                     'SendEmailSubjectFieldID',
-                    _t('UserDefinedForm.SELECTAFIELDTOSETSUBJECT', '.. or select a field to use as the subject'),
+                    _t(
+                        'SilverStripe\\UserForms\\Model\\UserDefinedForm.SELECTAFIELDTOSETSUBJECT',
+                        '.. or select a field to use as the subject'
+                    ),
                     $validSubjectFields->map('ID', 'Title')
                 )->setEmptyString('')
             )
-                ->setTitle(_t('UserDefinedForm.EMAILSUBJECT', 'Email subject')),
+                ->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILSUBJECT', 'Email subject')),
 
             // To
             FieldGroup::create(
-                TextField::create('EmailAddress', _t('UserDefinedForm.TYPETO', 'Type to address'))
+                TextField::create(
+                    'EmailAddress',
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.TYPETO', 'Type to address')
+                )
                     ->setAttribute('style', 'min-width: 400px;'),
                 DropdownField::create(
                     'SendEmailToFieldID',
-                    _t('UserDefinedForm.ORSELECTAFIELDTOUSEASTO', '.. or select a field to use as the to address'),
+                    _t(
+                        'SilverStripe\\UserForms\\Model\\UserDefinedForm.ORSELECTAFIELDTOUSEASTO',
+                        '.. or select a field to use as the to address'
+                    ),
                     $validEmailToFields->map('ID', 'Title')
                 )->setEmptyString(' ')
             )
-                ->setTitle(_t('UserDefinedForm.SENDEMAILTO', 'Send email to'))
+                ->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDEMAILTO', 'Send email to'))
                 ->setDescription(_t(
-                    'UserDefinedForm.SENDEMAILTO_DESCRIPTION',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDEMAILTO_DESCRIPTION',
                     'You may enter multiple email addresses as a comma separated list.'
                 )),
 
 
             // From
-            TextField::create('EmailFrom', _t('UserDefinedForm.FROMADDRESS', 'Send email from'))
+            TextField::create(
+                'EmailFrom',
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.FROMADDRESS', 'Send email from')
+            )
                 ->setDescription(_t(
-                    'UserDefinedForm.EmailFromContent',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.EmailFromContent',
                     "The from address allows you to set who the email comes from. On most servers this ".
                     "will need to be set to an email address on the same domain name as your site. ".
                     "For example on yoursite.com the from address may need to be something@yoursite.com. ".
@@ -269,22 +257,31 @@ class UserDefinedForm_EmailRecipient extends DataObject
 
             // Reply-To
             FieldGroup::create(
-                TextField::create('EmailReplyTo', _t('UserDefinedForm.TYPEREPLY', 'Type reply address'))
+                TextField::create('EmailReplyTo', _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.TYPEREPLY',
+                    'Type reply address'
+                ))
                     ->setAttribute('style', 'min-width: 400px;'),
                 DropdownField::create(
                     'SendEmailFromFieldID',
-                    _t('UserDefinedForm.ORSELECTAFIELDTOUSEASFROM', '.. or select a field to use as reply to address'),
+                    _t(
+                        'SilverStripe\\UserForms\\Model\\UserDefinedForm.ORSELECTAFIELDTOUSEASFROM',
+                        '.. or select a field to use as reply to address'
+                    ),
                     $validEmailFromFields->map('ID', 'Title')
                 )->setEmptyString(' ')
             )
-                ->setTitle(_t('UserDefinedForm.REPLYADDRESS', 'Email for reply to'))
+                ->setTitle(_t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.REPLYADDRESS',
+                    'Email for reply to'
+                ))
                 ->setDescription(_t(
-                    'UserDefinedForm.REPLYADDRESS_DESCRIPTION',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.REPLYADDRESS_DESCRIPTION',
                     'The email address which the recipient is able to \'reply\' to.'
                 ))
-        ));
+        ]);
 
-        $fields->fieldByName('Root.EmailDetails')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILDETAILSTAB', 'Email Details'));
+        $fields->fieldByName('Root.EmailDetails')->setTitle(_t(__CLASS.'.EMAILDETAILSTAB', 'Email Details'));
 
         // Only show the preview link if the recipient has been saved.
         if (!empty($this->EmailTemplate)) {
@@ -294,64 +291,79 @@ class UserDefinedForm_EmailRecipient extends DataObject
                     singleton(CMSPageEditController::class)->getEditForm()->FormAction(),
                     "field/EmailRecipients/item/{$this->ID}/preview"
                 ),
-                _t('UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
-                _t('UserDefinedForm.PREVIEW_EMAIL_DESCRIPTION', 'Note: Unsaved changes will not appear in the preview.')
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
+                _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL_DESCRIPTION',
+                    'Note: Unsaved changes will not appear in the preview.'
+                )
             );
         } else {
             $preview = sprintf(
                 '<em>%s</em>',
                 _t(
-                    'UserDefinedForm.PREVIEW_EMAIL_UNAVAILABLE',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL_UNAVAILABLE',
                     'You can preview this email once you have saved the Recipient.'
                 )
             );
         }
 
         // Email templates
-        $fields->addFieldsToTab('Root.EmailContent', array(
-            CheckboxField::create('HideFormData', _t('UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')),
+        $fields->addFieldsToTab('Root.EmailContent', [
+            CheckboxField::create(
+                'HideFormData',
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')
+            ),
             CheckboxField::create(
                 'SendPlain',
-                _t('UserDefinedForm.SENDPLAIN', 'Send email as plain text? (HTML will be stripped)')
+                _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDPLAIN',
+                    'Send email as plain text? (HTML will be stripped)'
+                )
             ),
             DropdownField::create(
                 'EmailTemplate',
-                _t('UserDefinedForm.EMAILTEMPLATE', 'Email template'),
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template'),
                 $this->getEmailTemplateDropdownValues()
             )->addExtraClass('toggle-html-only'),
-            HTMLEditorField::create('EmailBodyHtml', _t('UserDefinedForm.EMAILBODYHTML', 'Body'))
+            HTMLEditorField::create(
+                'EmailBodyHtml',
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILBODYHTML', 'Body')
+            )
                 ->addExtraClass('toggle-html-only'),
-            TextareaField::create('EmailBody', _t('UserDefinedForm.EMAILBODY', 'Body'))
+            TextareaField::create(
+                'EmailBody',
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILBODY', 'Body')
+            )
                 ->addExtraClass('toggle-plain-only'),
             LiteralField::create('EmailPreview', $preview)
         ));
 
-        $fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
+        $fields->fieldByName('Root.EmailContent')->setTitle(_t(__CLASS.'.EMAILCONTENTTAB', 'Email Content'));
 
         // Custom rules for sending this field
-        $grid = new GridField(
-            "CustomRules",
-            _t('EditableFormField.CUSTOMRULES', 'Custom Rules'),
+        $grid = GridField::create(
+            'CustomRules',
+            _t('SilverStripe\\UserForms\\Model\\EditableFormField.CUSTOMRULES', 'Custom Rules'),
             $this->CustomRules(),
             $this->getRulesConfig()
         );
         $grid->setDescription(_t(
-            'UserDefinedForm.RulesDescription',
+            'SilverStripe\\UserForms\\Model\\UserDefinedForm.RulesDescription',
             'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
         ));
-        $fields->addFieldsToTab('Root.CustomRules', array(
-            new DropdownField(
+        $fields->addFieldsToTab('Root.CustomRules', [
+            DropdownField::create(
                 'CustomRulesCondition',
-                _t('UserDefinedForm.SENDIF', 'Send condition'),
-                array(
-                    'Or' => _t('UserDefinedForm.SENDIFOR', 'Any conditions are true'),
-                    'And' => _t('UserDefinedForm.SENDIFAND', 'All conditions are true')
-                )
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIF', 'Send condition'),
+                [
+                    'Or' => _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIFOR', 'Any conditions are true'),
+                    'And' => _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIFAND', 'All conditions are true')
+                ]
             ),
             $grid
-        ));
+        ]);
 
-        $fields->fieldByName('Root.CustomRules')->setTitle(_t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'Custom Rules'));
+        $fields->fieldByName('Root.CustomRules')->setTitle(_t(__CLASS.'.CUSTOMRULESTAB', 'Custom Rules'));
 
         $this->extend('updateCMSFields', $fields);
         return $fields;
@@ -445,7 +457,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
         // Check all rules
         $isAnd = $this->CustomRulesCondition === 'And';
         foreach ($customRules as $customRule) {
-            /** @var UserDefinedForm_EmailRecipientCondition  $customRule */
+            /** @var EmailRecipientCondition  $customRule */
             $matches = $customRule->matches($data);
             if ($isAnd && !$matches) {
                 return false;
@@ -493,12 +505,12 @@ class UserDefinedForm_EmailRecipient extends DataObject
      */
     public function getEmailTemplateDropdownValues()
     {
-        $templates = array();
+        $templates = [];
 
         $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
-        $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->email_template_directory);
+        $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->get('email_template_directory'));
 
         foreach ($found as $key => $value) {
             $template = pathinfo($value);
@@ -516,11 +528,11 @@ class UserDefinedForm_EmailRecipient extends DataObject
      */
     public function validate() {
         $result = parent::validate();
-        $checkEmail = array(
+        $checkEmail = [
             'EmailAddress' => 'EMAILADDRESSINVALID',
             'EmailFrom' => 'EMAILFROMINVALID',
             'EmailReplyTo' => 'EMAILREPLYTOINVALID',
-        );
+        ];
         foreach ($checkEmail as $check => $translation) {
             if ($this->$check) {
                 //may be a comma separated list of emails
@@ -528,7 +540,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
                 foreach ($addresses as $address) {
                     $trimAddress = trim($address);
                     if ($trimAddress && !Email::is_valid_address($trimAddress)) {
-                        $error = _t("UserDefinedForm_EmailRecipient.$translation",
+                        $error = _t(__CLASS.".$translation",
                                 "Invalid email address $trimAddress");
                         $result->error($error . " ($trimAddress)");
                     }

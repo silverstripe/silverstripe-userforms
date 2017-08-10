@@ -2,16 +2,10 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-
-
-
-
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
-
-
 
 /**
  * EditableDropdown
@@ -25,7 +19,6 @@ use SilverStripe\UserForms\Model\EditableCustomRule;
  */
 class EditableDropdown extends EditableMultipleOptionField
 {
-
     private static $singular_name = 'Dropdown Field';
 
     private static $plural_name = 'Dropdowns';
@@ -34,6 +27,8 @@ class EditableDropdown extends EditableMultipleOptionField
         'UseEmptyString' => 'Boolean',
         'EmptyString' => 'Varchar(255)',
     );
+
+    private static $table_name = 'EditableDropdown';
 
     /**
      * @return FieldList

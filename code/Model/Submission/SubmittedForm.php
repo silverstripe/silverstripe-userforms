@@ -2,47 +2,39 @@
 
 namespace SilverStripe\UserForms\Model\Submission;
 
-
-
-
-
-
-
-
-use SilverStripe\Security\Member;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
-use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
-
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 
 /**
  * Contents of an UserDefinedForm submission
  *
  * @package userforms
  */
-
 class SubmittedForm extends DataObject
 {
+    private static $has_one = [
+        'SubmittedBy' => Member::class,
+        'Parent' => UserDefinedForm::class,
+    ];
 
-    private static $has_one = array(
-        "SubmittedBy" => Member::class,
-        "Parent" => UserDefinedForm::class,
-    );
+    private static $has_many = [
+        'Values' => SubmittedFormField::class
+    ];
 
-    private static $has_many = array(
-        "Values" => SubmittedFormField::class
-    );
-
-    private static $summary_fields = array(
+    private static $summary_fields = [
         'ID',
         'Created'
-    );
+    ];
+
+    private static $table_name = 'SubmittedForm';
 
     /**
      * Returns the value of a relation or, in the case of this form, the value
@@ -75,14 +67,12 @@ class SubmittedForm extends DataObject
      */
     public function getCMSFields()
     {
-        $self = $this;
-
-        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
+        $this->beforeUpdateCMSFields(function ($fields) {
             $fields->removeByName('Values');
 
             //check to ensure there is a Member to extract an Email from else null value
-            if($self->SubmittedBy() && $self->SubmittedBy()->exists()){
-                $submitter =  $self->SubmittedBy()->Email;
+            if($this->SubmittedBy() && $this->SubmittedBy()->exists()){
+                $submitter = $this->SubmittedBy()->Email;
             } else {
                 $submitter = null;
             }
@@ -100,7 +90,7 @@ class SubmittedForm extends DataObject
             $values = GridField::create(
                 'Values',
                 SubmittedFormField::class,
-                $self->Values()->sort('Created', 'ASC')
+                $this->Values()->sort('Created', 'ASC')
             );
 
             $exportColumns = array(

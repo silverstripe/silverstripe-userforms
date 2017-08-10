@@ -2,45 +2,26 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-
-
-
-
-use GridFieldEditableColumns;
-
-
-
-
-
-
-
-use GridFieldOrderableRows;
-
-
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Tab;
-use SilverStripe\View\Requirements;
-use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\ORM\DataExtension;
-
-
+use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\Versioned\Versioned;
+use SilverStripe\View\Requirements;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 /**
  * @package userforms
@@ -64,7 +45,7 @@ class UserFormFieldEditorExtension extends DataExtension
     {
         $fieldEditor = $this->getFieldEditorGrid();
 
-        $fields->insertAfter(new Tab('FormFields', _t('UserFormFieldEditorExtension.FORMFIELDS', 'Form Fields')), 'Main');
+        $fields->insertAfter(new Tab('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')), 'Main');
         $fields->addFieldToTab('Root.FormFields', $fieldEditor);
 
         return $fields;
@@ -103,12 +84,12 @@ class UserFormFieldEditorExtension extends DataExtension
                 $editableColumns,
                 new GridFieldButtonRow(),
                 GridFieldAddClassesButton::create(EditableTextField::class)
-                    ->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD', 'Add Field'))
+                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
                     ->setButtonClass('ss-ui-action-constructive'),
                 GridFieldAddClassesButton::create(EditableFormStep::class)
-                    ->setButtonName(_t('UserFormFieldEditorExtension.ADD_PAGE_BREAK', 'Add Page Break')),
+                    ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break')),
                 GridFieldAddClassesButton::create(array(EditableFieldGroup::class, EditableFieldGroupEnd::class))
-                    ->setButtonName(_t('UserFormFieldEditorExtension.ADD_FIELD_GROUP', 'Add Field Group')),
+                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group')),
                 new GridFieldEditButton(),
                 new GridFieldDeleteAction(),
                 new GridFieldToolbarHeader(),
@@ -118,7 +99,7 @@ class UserFormFieldEditorExtension extends DataExtension
 
         $fieldEditor = GridField::create(
             'Fields',
-            _t('UserDefinedForm.FIELDS', 'Fields'),
+            _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.FIELDS', 'Fields'),
             $fields,
             $config
         )->addExtraClass('uf-field-editor');
@@ -162,7 +143,7 @@ class UserFormFieldEditorExtension extends DataExtension
 
         // Add step
         $step = EditableFormStep::create();
-        $step->Title = _t('EditableFormStep.TITLE_FIRST', 'First Page');
+        $step->Title = _t('SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep.TITLE_FIRST', 'First Page');
         $step->Sort = 1;
         $step->write();
         $fields->add($step);
@@ -190,7 +171,7 @@ class UserFormFieldEditorExtension extends DataExtension
         foreach ($this->owner->Fields() as $field) {
             // store any IDs of fields we publish so we don't unpublish them
             $seenIDs[] = $field->ID;
-            $field->doPublish('Stage', 'Live');
+            $field->publishRecursive();
             $field->destroy();
         }
 
@@ -296,7 +277,7 @@ class UserFormFieldEditorExtension extends DataExtension
     public function onAfterRevertToLive($page)
     {
         foreach ($page->Fields() as $field) {
-            $field->publish('Live', 'Stage', false);
+            $field->copyVersionToStage('Live', 'Stage', false);
             $field->writeWithoutVersion();
         }
     }

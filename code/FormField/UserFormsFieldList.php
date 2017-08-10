@@ -2,19 +2,14 @@
 
 namespace SilverStripe\UserForms\FormField;
 
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\Forms\FieldList;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 
 /**
  * A list of formfields which allows for iterative processing of nested composite fields
  */
 class UserFormsFieldList extends FieldList implements UserFormsFieldContainer
 {
-
     public function processNext(EditableFormField $field)
     {
         $formField = $field->getFormField();

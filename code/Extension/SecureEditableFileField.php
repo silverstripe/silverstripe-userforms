@@ -2,19 +2,12 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\ORM\DB;
 use SilverStripe\Assets\Folder;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DB;
 use SilverStripe\Security\Group;
 use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataExtension;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 
 /**
  * Provides additional file security for uploaded files when the securefiles module is installed
