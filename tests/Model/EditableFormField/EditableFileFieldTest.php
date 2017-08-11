@@ -2,23 +2,16 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\ORM\ValidationException;
 use SilverStripe\Dev\SapphireTest;
-
-
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 
 /**
  * @package userforms
  */
 class EditableFileFieldTest extends SapphireTest
 {
-
-    /**
-     * @var string
-     */
-    public static $fixture_file = 'userforms/tests/EditableFormFieldTest.yml';
+    protected static $fixture_file = '../EditableFormFieldTest.yml';
 
     /**
      * @var
@@ -28,13 +21,12 @@ class EditableFileFieldTest extends SapphireTest
     /**
      * Hold the server default max file size upload limit for later
      */
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
         $editableFileField = singleton(EditableFileField::class);
         $this->php_max_file_size = $editableFileField::get_php_max_file_size();
-
     }
 
     /**

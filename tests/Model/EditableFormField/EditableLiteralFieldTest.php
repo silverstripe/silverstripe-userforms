@@ -2,28 +2,22 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
-
-use HtmlEditorConfig;
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Forms\CompositeField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Dev\SapphireTest;
-
-
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 
 /**
  * Tests the {@see EditableLiteralField} class
  */
 class EditableLiteralFieldTest extends SapphireTest
 {
-
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
-        HtmlEditorConfig::set_active('cms');
+        HTMLEditorConfig::set_active('cms');
     }
 
     /**
@@ -36,21 +30,21 @@ class EditableLiteralFieldTest extends SapphireTest
         $field = new EditableLiteralField();
 
         // Test with sanitisation enabled
-        Config::inst()->update('HtmlEditorField', 'sanitise_server_side', true);
+        Config::modify()->update('HtmlEditorField', 'sanitise_server_side', true);
         $field->setContent($rawContent);
         $this->assertEquals($safeContent, $field->getContent());
 
         // Test with sanitisation disabled
-        Config::inst()->remove('HtmlEditorField', 'sanitise_server_side');
+        Config::modify()->remove('HtmlEditorField', 'sanitise_server_side');
         $field->setContent($rawContent);
         $this->assertEquals($rawContent, $field->getContent());
     }
 
     public function testHideLabel()
     {
-        $field = new EditableLiteralField(array(
+        $field = new EditableLiteralField([
             'Title' => 'Test label'
-        ));
+        ]);
 
         $this->assertContains('Test label', $field->getFormField()->FieldHolder());
         $this->assertEquals('Test label', $field->getFormField()->Title());
@@ -80,7 +74,11 @@ class EditableLiteralFieldTest extends SapphireTest
         $field = new EditableLiteralField;
         $formField = $field->getFormField();
 
-        $this->assertInstanceOf(CompositeField::class, $formField, 'Literal field is contained within a composite field');
+        $this->assertInstanceOf(
+            CompositeField::class,
+            $formField,
+            'Literal field is contained within a composite field'
+        );
         $this->assertInstanceOf(
             LiteralField::class,
             $formField->FieldList()->first(),

@@ -2,36 +2,26 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
-
-
-
-
-
-
-use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\Security\Member;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
-use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
-use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
-use SilverStripe\Forms\OptionsetField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\Dev\FunctionalTest;
-
-
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
+use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Model\UserDefinedForm;
 
 /**
  * @package userforms
  */
-
 class EditableFormFieldTest extends FunctionalTest
 {
-
-    public static $fixture_file = 'userforms/tests/EditableFormFieldTest.yml';
+    protected static $fixture_file = 'EditableFormFieldTest.yml';
 
     public function testFormFieldPermissions()
     {
@@ -54,7 +44,7 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertTrue($text->canDelete());
 
         $member = Member::currentUser();
-        $member->logout();
+        $member->logOut();
 
         $this->logInWithPermission('SITETREE_VIEW_ALL');
         $this->assertFalse($text->canCreate());
@@ -105,15 +95,15 @@ class EditableFormFieldTest extends FunctionalTest
         $option = $this->objFromFixture(EditableOption::class, 'option-1');
         $option->Value = '';
 
-         // Disallow empty values
-         EditableOption::set_allow_empty_values(false);
+        // Disallow empty values
+        EditableOption::set_allow_empty_values(false);
         $this->assertEquals($option->Title, $option->Value);
 
         $option->Value = 'test';
         $this->assertEquals('test', $option->Value);
 
-         // Allow empty values
-         EditableOption::set_allow_empty_values(true);
+        // Allow empty values
+        EditableOption::set_allow_empty_values(true);
         $option->Value = '';
         $this->assertEquals('', $option->Value);
     }
@@ -124,11 +114,10 @@ class EditableFormFieldTest extends FunctionalTest
 
         $field = $dropdown->getFormField();
 
-
         $this->assertThat($field, $this->isInstanceOf(DropdownField::class));
         $values = $field->getSource();
 
-        $this->assertEquals(array('Option 1' => 'Option 1', 'Option 2' => 'Option 2'), $values);
+        $this->assertEquals(['Option 1' => 'Option 1', 'Option 2' => 'Option 2'], $values);
     }
 
     public function testEditableRadioField()
@@ -140,7 +129,7 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertThat($field, $this->isInstanceOf(OptionsetField::class));
         $values = $field->getSource();
 
-        $this->assertEquals(array('Option 5' => 'Option 5', 'Option 6' => 'Option 6'), $values);
+        $this->assertEquals(['Option 5' => 'Option 5', 'Option 6' => 'Option 6'], $values);
     }
 
     public function testMultipleOptionDuplication()
@@ -169,7 +158,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFileFieldAllowedExtensionsBlacklist()
     {
-        Config::inst()->update(EditableFileField::class, 'allowed_extensions_blacklist', array('jpg'));
+        Config::modify()->merge(EditableFileField::class, 'allowed_extensions_blacklist', ['jpg']);
         $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
         $formField = $fileField->getFormField();
 

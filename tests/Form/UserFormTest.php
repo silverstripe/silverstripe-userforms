@@ -2,20 +2,13 @@
 
 namespace SilverStripe\UserForms\Test\Form;
 
-
-
-
-use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\CMS\Controllers\ModelAsController;
-use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\Dev\SapphireTest;
-
-
-
+use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Form\UserForm;
 
 class UserFormTest extends SapphireTest
 {
-
     protected static $fixture_file = 'UserDefinedFormTest.yml';
 
     /**

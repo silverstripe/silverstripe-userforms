@@ -2,30 +2,23 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
-
-
-
-
-
-use SilverStripe\Core\Config\Config;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\Assets\Filesystem;
 use SilverStripe\Assets\Folder;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
-
-
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 
 /**
  * Tests integration of EditableFileField with the securefiles module
  *
+ * @todo
  * @author dmooyman
  */
 class SecureEditableFileFieldTest extends SapphireTest
 {
-
     protected $usesDatabase = true;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -33,11 +26,11 @@ class SecureEditableFileFieldTest extends SapphireTest
             $this->skipTest = true;
             $this->markTestSkipped(get_class() . ' skipped unless running with securefiles');
         }
-        Config::inst()->update(EditableFileField::class, 'secure_folder_name', 'SecureEditableFileFieldTest/SecureUploads');
+        Config::modify()->set(EditableFileField::class, 'secure_folder_name', 'SecureEditableFileFieldTest/SecureUploads');
         $this->clearPath();
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         $this->clearPath();
         parent::tearDown();
@@ -69,7 +62,7 @@ class SecureEditableFileFieldTest extends SapphireTest
      */
     public function testCreateInsecure()
     {
-        Config::inst()->update(EditableFileField::class, 'disable_security', true);
+        Config::modify()->set(EditableFileField::class, 'disable_security', true);
 
         // Esure folder is created without a folder
         $field = new EditableFileField();
@@ -88,7 +81,7 @@ class SecureEditableFileFieldTest extends SapphireTest
         $this->assertEquals('Inherit', $field->Folder()->CanViewType);
 
         // Enabling security and re-saving will force this field to be made secure (but not changed)
-        Config::inst()->update(EditableFileField::class, 'disable_security', false);
+        Config::modify()->set(EditableFileField::class, 'disable_security', false);
         singleton(EditableFileField::class)->requireDefaultRecords();
 
         // Reload record from DB

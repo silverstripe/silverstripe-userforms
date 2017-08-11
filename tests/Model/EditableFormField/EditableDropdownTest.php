@@ -2,25 +2,15 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
-
-
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\Dev\SapphireTest;
-
-
 
 /**
  * Tests the {@see EditableDropdown} class
  */
 class EditableDropdownTest extends SapphireTest
 {
-
-    public static $fixture_file = 'userforms/tests/EditableFormFieldTest.yml';
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
+    protected static $fixture_file = '../EditableFormFieldTest.yml';
 
     /**
      * Tests that the field sets the empty string if set
@@ -45,7 +35,5 @@ class EditableDropdownTest extends SapphireTest
         $alternateDropdown->UseEmptyString = true;
         $alternateDropdown->write();
         $this->assertEquals($formField->getEmptyString(), '');
-
     }
-
 }
