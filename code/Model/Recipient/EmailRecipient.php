@@ -26,7 +26,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;
@@ -376,7 +376,7 @@ class EmailRecipient extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         // Check parent page
         $parent = $this->getCanCreateContext(func_get_args());

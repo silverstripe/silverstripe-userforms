@@ -16,7 +16,7 @@ use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
@@ -50,7 +50,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form->doPublish();
 
         // check published site
-        $updated = Versioned::get_one_by_stage(UserDefinedForm::class, 'Stage', \"UserDefinedForm\".\"ID\" = $form->ID");
+        $updated = Versioned::get_one_by_stage(UserDefinedForm::class, 'Stage', "\"UserDefinedForm\".\"ID\" = $form->ID");
         $this->assertEquals($updated->SubmitButtonText, 'Updated Button Text');
 
         $form->doRollbackTo($origVersion);

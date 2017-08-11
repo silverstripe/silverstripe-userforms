@@ -3,7 +3,7 @@
 namespace SilverStripe\UserForms\FormField;
 
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Front end composite field for userforms

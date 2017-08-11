@@ -10,7 +10,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;

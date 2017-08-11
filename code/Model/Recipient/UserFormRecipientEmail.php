@@ -26,10 +26,13 @@ class UserFormRecipientEmail extends Email
      * Set the "Reply-To" header with an email address rather than append as
      * {@link Email::replyTo} does.
      *
-     * @param string $email The email address to set the "Reply-To" header to
+     * @param string|array $address
+     * @param string|null $name
+     * @return $this
      */
-    public function setReplyTo($email)
+    public function setReplyTo($address, $name = null)
     {
         $this->customHeaders['Reply-To'] = $email;
+        return $this;
     }
 }

@@ -3,7 +3,7 @@
 namespace SilverStripe\UserForms\FormField;
 
 use SilverStripe\Forms\FieldList;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * A list of formfields which allows for iterative processing of nested composite fields

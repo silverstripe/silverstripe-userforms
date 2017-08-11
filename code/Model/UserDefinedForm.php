@@ -5,7 +5,6 @@ namespace SilverStripe\UserForms\Model;
 use Page;
 use Colymba\BulkManager\BulkManager;
 use SilverStripe\Core\Injector\Injector;
-
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -33,7 +32,6 @@ use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;

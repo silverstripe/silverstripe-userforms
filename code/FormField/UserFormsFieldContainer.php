@@ -2,7 +2,7 @@
 
 namespace SilverStripe\UserForms\FormField;
 
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Represents a field container which can iteratively process nested fields, converting it into a fieldset

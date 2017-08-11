@@ -7,7 +7,7 @@ use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use Silverstripe\Versioned\Versioned;
 
 /**
@@ -112,7 +112,7 @@ class EditableCustomRule extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         // Check parent page
         $parent = $this->getCanCreateContext(func_get_args());

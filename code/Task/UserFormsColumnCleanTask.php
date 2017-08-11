@@ -5,7 +5,7 @@ namespace SilverStripe\UserForms\Task;
 use SilverStripe\Dev\MigrationTask;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * UserForms Column Clean Task

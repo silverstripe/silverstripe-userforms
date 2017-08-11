@@ -110,7 +110,7 @@ class EditableOption extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
 	 * @return bool
 	 */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
 		// Check parent page
         $parent = $this->getCanCreateContext(func_get_args());

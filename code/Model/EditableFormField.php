@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Model\EditableFormField;
+namespace SilverStripe\UserForms\Model;
 
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
@@ -32,7 +32,6 @@ use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
@@ -505,7 +504,7 @@ class EditableFormField extends DataObject
      * @param array $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         // Check parent page
         $parent = $this->getCanCreateContext(func_get_args());

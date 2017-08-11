@@ -194,7 +194,7 @@ class EditableMultipleOptionField extends EditableFormField
      *
      * @return DataObject
      */
-    public function duplicate($doWrite = true)
+    public function duplicate($doWrite = true, $manyMany = 'many_many')
     {
         $clonedNode = parent::duplicate();
 

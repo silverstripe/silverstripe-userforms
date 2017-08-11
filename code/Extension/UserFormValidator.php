@@ -5,7 +5,7 @@ namespace SilverStripe\UserForms\Extension;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 
 class UserFormValidator extends RequiredFields

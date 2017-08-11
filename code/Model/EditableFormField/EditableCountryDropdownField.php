@@ -4,6 +4,7 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use CountryDropdownField; // @todo
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * A dropdown field which allows the user to select a country
