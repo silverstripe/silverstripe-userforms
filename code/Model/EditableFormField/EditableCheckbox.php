@@ -73,7 +73,8 @@ class EditableCheckbox extends EditableFormField
         parent::migrateSettings($data);
     }
 
-	public function isCheckBoxField() {
-		return true;
-	}
+    public function isCheckBoxField()
+    {
+        return true;
+    }
 }

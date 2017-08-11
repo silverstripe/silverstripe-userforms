@@ -8,7 +8,8 @@ use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
 
 class UserFormsCheckboxSetFieldTest extends SapphireTest
 {
-    public function testValidate() {
+    public function testValidate()
+    {
         $field = new UserFormsCheckboxSetField('Field', 'My field', ['One' => 'One', 'Two' => 'Two']);
         $validator = new RequiredFields();
 

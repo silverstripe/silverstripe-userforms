@@ -153,7 +153,7 @@ class UserDefinedFormController extends PageController
                     });
                 })(jQuery);
 JS
-, 'UserFormsConditional');
+            , 'UserFormsConditional');
         }
     }
 

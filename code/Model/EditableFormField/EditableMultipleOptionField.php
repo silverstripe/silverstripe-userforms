@@ -53,7 +53,7 @@ class EditableMultipleOptionField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $this->beforeUpdateCMSFields(function($fields) {
+        $this->beforeUpdateCMSFields(function ($fields) {
             $editableColumns = new GridFieldEditableColumns();
             $editableColumns->setDisplayFields([
                 'Title' => [

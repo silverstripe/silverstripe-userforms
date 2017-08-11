@@ -55,7 +55,8 @@ class EditableRadioField extends EditableMultipleOptionField
         return "$(\"input[name='{$this->Name}']{$first}\")";
     }
 
-	public function isRadioField() {
-		return true;
-	}
+    public function isRadioField()
+    {
+        return true;
+    }
 }

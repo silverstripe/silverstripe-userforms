@@ -526,7 +526,8 @@ class EmailRecipient extends DataObject
      *
      * @return ValidationResult
      */
-    public function validate() {
+    public function validate()
+    {
         $result = parent::validate();
         $checkEmail = [
             'EmailAddress' => 'EMAILADDRESSINVALID',
@@ -540,8 +541,10 @@ class EmailRecipient extends DataObject
                 foreach ($addresses as $address) {
                     $trimAddress = trim($address);
                     if ($trimAddress && !Email::is_valid_address($trimAddress)) {
-                        $error = _t(__CLASS.".$translation",
-                                "Invalid email address $trimAddress");
+                        $error = _t(
+                            __CLASS.".$translation",
+                            "Invalid email address $trimAddress"
+                        );
                         $result->error($error . " ($trimAddress)");
                     }
                 }

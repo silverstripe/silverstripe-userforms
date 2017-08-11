@@ -264,7 +264,8 @@ class EditableFormField extends DataObject
                 }
             }
 
-            $fields->addFieldToTab('Root.Main',
+            $fields->addFieldToTab(
+                'Root.Main',
                 DropdownField::create(
                     'ExtraClass',
                     _t(__CLASS__.'.EXTRACLASS_TITLE', 'Extra Styling/Layout'),
@@ -275,7 +276,8 @@ class EditableFormField extends DataObject
                 ))
             );
         } else {
-            $fields->addFieldToTab('Root.Main',
+            $fields->addFieldToTab(
+                'Root.Main',
                 TextField::create(
                     'ExtraClass',
                     _t(__CLASS__.'.EXTRACLASS_Title', 'Extra CSS classes')
@@ -327,9 +329,12 @@ class EditableFormField extends DataObject
             return new FieldList(
                 LabelField::create(
                     _t(
-                    __CLASS__.'.DISPLAY_RULES_DISABLED',
-                    'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'))
-                  ->addExtraClass('message warning'));
+                        __CLASS__.'.DISPLAY_RULES_DISABLED',
+                        'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
+                    )
+                )
+                ->addExtraClass('message warning')
+            );
         }
 
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
@@ -364,14 +369,16 @@ class EditableFormField extends DataObject
             );
 
         return new FieldList(
-            DropdownField::create('ShowOnLoad',
+            DropdownField::create(
+                'ShowOnLoad',
                 _t(__CLASS__.'.INITIALVISIBILITY', 'Initial visibility'),
                 [
                     1 => 'Show',
                     0 => 'Hide',
                 ]
             ),
-            DropdownField::create('DisplayRulesConjunction',
+            DropdownField::create(
+                'DisplayRulesConjunction',
                 _t(__CLASS__.'.DISPLAYIF', 'Toggle visibility when'),
                 [
                     'Or'  => _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SENDIFOR', 'Any conditions are true'),

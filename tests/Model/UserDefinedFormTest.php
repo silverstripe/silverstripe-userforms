@@ -394,7 +394,8 @@ class UserDefinedFormTest extends FunctionalTest
                 'street' => 'Anything',
                 'city' => 'Matches Not Equals',
                 'colours' => ['Red'] // matches 2
-            ], null
+            ],
+            null
         )
             ->sort('EmailAddress')
             ->column('EmailAddress');
@@ -414,7 +415,8 @@ class UserDefinedFormTest extends FunctionalTest
                 'street' => 'Matches Equals',
                 'city' => 'Anything',
                 'colours' => ['Red', 'Blue'] // matches 2
-            ], null
+            ],
+            null
         )
             ->sort('EmailAddress')
             ->column('EmailAddress');
@@ -434,7 +436,8 @@ class UserDefinedFormTest extends FunctionalTest
                 'street' => 'Matches Equals',
                 'city' => 'Anything',
                 'colours' => ['Blue']
-            ], null
+            ],
+            null
         )->column('EmailAddress');
         $this->assertEquals(
             [
@@ -451,7 +454,8 @@ class UserDefinedFormTest extends FunctionalTest
                 'street' => 'Wrong value for this field',
                 'city' => '',
                 'colours' => ['Blue', 'Green']
-            ], null
+            ],
+            null
         )->column('EmailAddress');
         $this->assertEquals(
             ['unfiltered@example.com'],
@@ -481,16 +485,20 @@ class UserDefinedFormTest extends FunctionalTest
         $this->logInWithPermission('ADMIN');
 
         // test invalid email addresses fail validation
-        $recipient = $this->objFromFixture(EmailRecipient::class,
-            'invalid-recipient-list');
+        $recipient = $this->objFromFixture(
+            EmailRecipient::class,
+            'invalid-recipient-list'
+        );
         $result = $recipient->validate();
         $this->assertFalse($result->valid());
         $this->assertContains('filtered.example.com', $result->message());
         $this->assertNotContains('filtered2@example.com', $result->message());
 
         // test valid email addresses pass validation
-        $recipient = $this->objFromFixture(EmailRecipient::class,
-            'valid-recipient-list');
+        $recipient = $this->objFromFixture(
+            EmailRecipient::class,
+            'valid-recipient-list'
+        );
         $result = $recipient->validate();
         $this->assertTrue($result->valid());
         $this->assertEmpty($result->message());

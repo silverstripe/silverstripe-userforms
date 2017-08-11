@@ -18,34 +18,34 @@ use SilverStripe\Versioned\Versioned;
  */
 class EditableOption extends DataObject
 {
-	private static $default_sort = 'Sort';
+    private static $default_sort = 'Sort';
 
-	private static $db = [
-		'Name' => 'Varchar(255)',
-		'Title' => 'Varchar(255)',
-		'Default' => 'Boolean',
+    private static $db = [
+        'Name' => 'Varchar(255)',
+        'Title' => 'Varchar(255)',
+        'Default' => 'Boolean',
         'Sort' => 'Int',
         'Value' => 'Varchar(255)',
-	];
+    ];
 
-	private static $has_one = [
-		'Parent' => EditableMultipleOptionField::class,
-	];
+    private static $has_one = [
+        'Parent' => EditableMultipleOptionField::class,
+    ];
 
-	private static $extensions = [
-		Versioned::class . "('Stage', 'Live')"
-	];
+    private static $extensions = [
+        Versioned::class . "('Stage', 'Live')"
+    ];
 
-	private static $summary_fields = [
-		'Title',
-		'Default'
-	];
+    private static $summary_fields = [
+        'Title',
+        'Default'
+    ];
 
     protected static $allow_empty_values = false;
 
     private static $table_name = 'EditableOption';
 
-	/**
+    /**
      * Returns whether to allow empty values or not.
      *
      * @return boolean
@@ -66,61 +66,61 @@ class EditableOption extends DataObject
     }
 
     /**
-	 * @param Member $member
-	 *
-	 * @return boolean
-	 */
+     * @param Member $member
+     *
+     * @return boolean
+     */
     public function canEdit($member = null)
     {
-		return $this->Parent()->canEdit($member);
-	}
+        return $this->Parent()->canEdit($member);
+    }
 
-	/**
-	 * @param Member $member
-	 *
-	 * @return boolean
-	 */
+    /**
+     * @param Member $member
+     *
+     * @return boolean
+     */
     public function canDelete($member = null)
     {
-		return $this->canEdit($member);
-	}
+        return $this->canEdit($member);
+    }
 
-	/**
-	 * @deprecated 5.0 Use "$Title.XML" in templates instead
-	 * @return string
-	 */
+    /**
+     * @deprecated 5.0 Use "$Title.XML" in templates instead
+     * @return string
+     */
     public function getEscapedTitle()
     {
-		return Convert::raw2att($this->Title);
-	}
+        return Convert::raw2att($this->Title);
+    }
 
-	/**
+    /**
      * @param Member $member
      * @return bool
      */
     public function canView($member = null)
     {
-		return $this->Parent()->canView($member);
-	}
+        return $this->Parent()->canView($member);
+    }
 
-	/**
-	 * Return whether a user can create an object of this type
-	 *
+    /**
+     * Return whether a user can create an object of this type
+     *
      * @param Member $member
      * @param array $context Virtual parameter to allow context to be passed in to check
-	 * @return bool
-	 */
+     * @return bool
+     */
     public function canCreate($member = null, $context = [])
     {
-		// Check parent page
+        // Check parent page
         $parent = $this->getCanCreateContext(func_get_args());
-        if($parent) {
+        if ($parent) {
             return $parent->canEdit($member);
         }
 
         // Fall back to secure admin permissions
         return parent::canCreate($member);
-	}
+    }
 
     /**
      * Helper method to check the parent for this object
@@ -131,11 +131,11 @@ class EditableOption extends DataObject
     protected function getCanCreateContext($args)
     {
         // Inspect second parameter to canCreate for a 'Parent' context
-        if(isset($args[1]['Parent'])) {
+        if (isset($args[1]['Parent'])) {
             return $args[1]['Parent'];
         }
         // Hack in currently edited page if context is missing
-        if(Controller::has_curr() && Controller::curr() instanceof CMSMain) {
+        if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
             return Controller::curr()->currentPage();
         }
 

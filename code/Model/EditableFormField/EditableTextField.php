@@ -166,6 +166,5 @@ class EditableTextField extends EditableFormField
         if ($this->Autocomplete) {
             $field->setAttribute('autocomplete', $this->Autocomplete);
         }
-
     }
 }

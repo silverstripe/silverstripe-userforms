@@ -77,8 +77,8 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $valueField->addExtraClass('no-change-track');
         $valueField->setAttribute(
             'placeholder',
-            _t(__CLASS__.'.WHEREVALUEIS', 'where value is..'
-        ));
+            _t(__CLASS__.'.WHEREVALUEIS', 'where value is..')
+        );
 
         $fields->push(FieldGroup::create(CompositeField::create(
             $columnField,
@@ -110,8 +110,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
                 ->addExtraClass('ss-gridfield-button-close')
                 ->setAttribute('title', _t('SilverStripe\\Forms\\GridField\\GridField.ResetFilter', "Reset"))
                 ->setAttribute('id', 'action_reset_' . $gridField->getModelClass() . '_' . $columnField)
-            )
-        );
+        ));
 
         $actions->addExtraClass('filter-buttons');
         $actions->addExtraClass('no-change-track');
@@ -132,14 +131,14 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
         if ($filter = $state->UserFormsGridField->toArray()) {
             if (isset($filter['filter']) && $filter['filter'] && isset($filter['value']) && $filter['value']) {
-                $dataList = $dataList->where(sprintf("
+                $dataList = $dataList->where(sprintf(
+                    "
 					SELECT COUNT(*) FROM SubmittedFormField
 					WHERE (
 						ParentID = SubmittedForm.ID AND
 						Name = '%s' AND
 						Value LIKE '%s'
 					) > 0",
-
                     Convert::raw2sql($filter['filter']),
                     Convert::raw2sql($filter['value'])
                 ));

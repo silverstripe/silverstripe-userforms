@@ -17,49 +17,49 @@ use SilverStripe\UserForms\FormField\UserFormsFieldList;
  */
 class UserForm extends Form
 {
-	/**
-	 * @param Controller $controller
-	 * @param string $name
-	 */
+    /**
+     * @param Controller $controller
+     * @param string $name
+     */
     public function __construct(Controller $controller, $name = Form::class)
     {
-		$this->controller = $controller;
-		$this->setRedirectToFormOnValidationError(true);
+        $this->controller = $controller;
+        $this->setRedirectToFormOnValidationError(true);
 
-		parent::__construct(
-			$controller,
-			$name,
-			new FieldList(),
-			new FieldList()
-		);
+        parent::__construct(
+            $controller,
+            $name,
+            new FieldList(),
+            new FieldList()
+        );
 
-		$this->setFields($fields = $this->getFormFields());
-		$fields->setForm($this);
-		$this->setActions($actions = $this->getFormActions());
-		$actions->setForm($this);
-		$this->setValidator($this->getRequiredFields());
+        $this->setFields($fields = $this->getFormFields());
+        $fields->setForm($this);
+        $this->setActions($actions = $this->getFormActions());
+        $actions->setForm($this);
+        $this->setValidator($this->getRequiredFields());
 
         // This needs to be re-evaluated since fields have been assigned
         $this->setupFormErrors();
 
-		// Number each page
-		$stepNumber = 1;
-		foreach($this->getSteps() as $step) {
-			$step->setStepNumber($stepNumber++);
-		}
+        // Number each page
+        $stepNumber = 1;
+        foreach ($this->getSteps() as $step) {
+            $step->setStepNumber($stepNumber++);
+        }
 
-		if($controller->DisableCsrfSecurityToken) {
-			$this->disableSecurityToken();
-		}
+        if ($controller->DisableCsrfSecurityToken) {
+            $this->disableSecurityToken();
+        }
 
-		$data = Session::get("FormInfo.{$this->FormName()}.data");
+        $data = Session::get("FormInfo.{$this->FormName()}.data");
 
-		if(is_array($data)) {
-			$this->loadDataFrom($data);
-		}
+        if (is_array($data)) {
+            $this->loadDataFrom($data);
+        }
 
-		$this->extend('updateForm');
-	}
+        $this->extend('updateForm');
+    }
 
     public function setupFormErrors()
     {
@@ -71,125 +71,125 @@ class UserForm extends Form
         return $this;
     }
 
-	/**
-	 * Used for partial caching in the template.
-	 *
-	 * @return string
-	 */
+    /**
+     * Used for partial caching in the template.
+     *
+     * @return string
+     */
     public function getLastEdited()
     {
-		return $this->controller->LastEdited;
-	}
+        return $this->controller->LastEdited;
+    }
 
-	/**
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
     public function getDisplayErrorMessagesAtTop()
     {
-		return (bool)$this->controller->DisplayErrorMessagesAtTop;
-	}
+        return (bool)$this->controller->DisplayErrorMessagesAtTop;
+    }
 
-	/**
-	 * Return the fieldlist, filtered to only contain steps
-	 *
-	 * @return ArrayList
-	 */
+    /**
+     * Return the fieldlist, filtered to only contain steps
+     *
+     * @return ArrayList
+     */
     public function getSteps()
     {
-		return $this->Fields()->filterByCallback(function($field) {
-			return $field instanceof UserFormsStepField;
-		});
-	}
+        return $this->Fields()->filterByCallback(function ($field) {
+            return $field instanceof UserFormsStepField;
+        });
+    }
 
-	/**
-	 * Get the form fields for the form on this page. Can modify this FieldSet
-	 * by using {@link updateFormFields()} on an {@link Extension} subclass which
-	 * is applied to this controller.
-	 *
-	 * This will be a list of top level composite steps
-	 *
-	 * @return FieldList
-	 */
+    /**
+     * Get the form fields for the form on this page. Can modify this FieldSet
+     * by using {@link updateFormFields()} on an {@link Extension} subclass which
+     * is applied to this controller.
+     *
+     * This will be a list of top level composite steps
+     *
+     * @return FieldList
+     */
     public function getFormFields()
     {
-		$fields = new UserFormsFieldList();
-		$target = $fields;
-		foreach ($this->controller->Fields() as $field) {
-			$target = $target->processNext($field);
-		}
-		$fields->clearEmptySteps();
-		$this->extend('updateFormFields', $fields);
+        $fields = new UserFormsFieldList();
+        $target = $fields;
+        foreach ($this->controller->Fields() as $field) {
+            $target = $target->processNext($field);
+        }
+        $fields->clearEmptySteps();
+        $this->extend('updateFormFields', $fields);
         $fields->setForm($this);
-		return $fields;
-	}
+        return $fields;
+    }
 
-	/**
-	 * Generate the form actions for the UserDefinedForm. You
-	 * can manipulate these by using {@link updateFormActions()} on
-	 * a decorator.
-	 *
-	 * @todo Make form actions editable via their own field editor.
-	 *
-	 * @return FieldList
-	 */
+    /**
+     * Generate the form actions for the UserDefinedForm. You
+     * can manipulate these by using {@link updateFormActions()} on
+     * a decorator.
+     *
+     * @todo Make form actions editable via their own field editor.
+     *
+     * @return FieldList
+     */
     public function getFormActions()
     {
-		$submitText = ($this->controller->SubmitButtonText) ? $this->controller->SubmitButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
-		$clearText = ($this->controller->ClearButtonText) ? $this->controller->ClearButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
+        $submitText = ($this->controller->SubmitButtonText) ? $this->controller->SubmitButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
+        $clearText = ($this->controller->ClearButtonText) ? $this->controller->ClearButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
 
-		$actions = new FieldList(
-			new FormAction("process", $submitText)
-		);
+        $actions = new FieldList(
+            new FormAction("process", $submitText)
+        );
 
-		if($this->controller->ShowClearButton) {
-			$actions->push(new ResetFormAction("clearForm", $clearText));
-		}
+        if ($this->controller->ShowClearButton) {
+            $actions->push(new ResetFormAction("clearForm", $clearText));
+        }
 
-		$this->extend('updateFormActions', $actions);
+        $this->extend('updateFormActions', $actions);
         $actions->setForm($this);
-		return $actions;
-	}
+        return $actions;
+    }
 
-	/**
-	 * Get the required form fields for this form.
-	 *
-	 * @return RequiredFields
-	 */
+    /**
+     * Get the required form fields for this form.
+     *
+     * @return RequiredFields
+     */
     public function getRequiredFields()
     {
-		// Generate required field validator
-		$requiredNames = $this
+        // Generate required field validator
+        $requiredNames = $this
             ->getController()
-			->Fields()
-			->filter('Required', true)
-			->column('Name');
-		$required = new RequiredFields($requiredNames);
-		$this->extend('updateRequiredFields', $required);
+            ->Fields()
+            ->filter('Required', true)
+            ->column('Name');
+        $required = new RequiredFields($requiredNames);
+        $this->extend('updateRequiredFields', $required);
         $required->setForm($this);
-		return $required;
-	}
+        return $required;
+    }
 
-	/**
-	 * Override some we can add UserForm specific attributes to the form.
-	 *
-	 * @return array
-	 */
+    /**
+     * Override some we can add UserForm specific attributes to the form.
+     *
+     * @return array
+     */
     public function getAttributes()
     {
-		$attrs = parent::getAttributes();
+        $attrs = parent::getAttributes();
 
-		$attrs['class'] = $attrs['class'] . ' userform';
-		$attrs['data-livevalidation'] = (bool)$this->controller->EnableLiveValidation;
-		$attrs['data-toperrors'] = (bool)$this->controller->DisplayErrorMessagesAtTop;
+        $attrs['class'] = $attrs['class'] . ' userform';
+        $attrs['data-livevalidation'] = (bool)$this->controller->EnableLiveValidation;
+        $attrs['data-toperrors'] = (bool)$this->controller->DisplayErrorMessagesAtTop;
 
-		return $attrs;
-	}
+        return $attrs;
+    }
 
     /**
      * @return string
      */
-    public function getButtonText() {
+    public function getButtonText()
+    {
         return $this->config()->get('button_text');
     }
-
 }

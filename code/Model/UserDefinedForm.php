@@ -253,8 +253,8 @@ SQL;
                 'Created' => 'Created',
                 'LastEdited' => 'Last Edited'
             );
-            foreach(EditableFormField::get()->filter(array('ParentID' => $parentID)) as $eff) {
-                if($eff->ShowInSummary) {
+            foreach (EditableFormField::get()->filter(array('ParentID' => $parentID)) as $eff) {
+                if ($eff->ShowInSummary) {
                     $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
                 }
             }
@@ -305,10 +305,14 @@ SQL;
         $fields = parent::getCMSFields();
 
         if ($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
-            $fields->addFieldToTab('Root.Main', LiteralField::create('EmailRecipientsWarning',
-                '<p class="message warning">' . _t(__CLASS__.'.NORECIPIENTS',
-                'Warning: You have not configured any recipients. Form submissions may be missed.')
-                . '</p>'), 'Title');
+            $fields->addFieldToTab('Root.Main', LiteralField::create(
+                'EmailRecipientsWarning',
+                '<p class="message warning">' . _t(
+                    __CLASS__.'.NORECIPIENTS',
+                    'Warning: You have not configured any recipients. Form submissions may be missed.'
+                )
+                . '</p>'
+            ), 'Title');
         }
 
         return $fields;

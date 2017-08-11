@@ -35,7 +35,9 @@ class SubmittedFileField extends SubmittedFormField
         if ($link) {
             return DBField::create_field('HTMLText', sprintf(
                 '%s - <a href="%s" target="_blank">%s</a>',
-                $name, $link, $title
+                $name,
+                $link,
+                $title
             ));
         }
 

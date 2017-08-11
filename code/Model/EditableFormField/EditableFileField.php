@@ -59,17 +59,14 @@ class EditableFileField extends EditableFormField
             )
         );
 
-        $fields->addFieldToTab(
-            "Root.Main",
-            LiteralField::create(
-                'FileUploadWarning',
-                '<p class="message notice">' . _t(
-                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.FileUploadWarning',
-                    'Files uploaded through this field could be publicly accessible if the exact URL is known'
-                ) . '</p>'
-            ),
-            'Type'
-        );
+        $fields->addFieldToTab("Root.Main", LiteralField::create(
+            'FileUploadWarning',
+            '<p class="message notice">' . _t(
+                'SilverStripe\\UserForms\\Model\\UserDefinedForm.FileUploadWarning',
+                'Files uploaded through this field could be publicly accessible if the exact URL is known'
+            )
+            . '</p>'
+        ), 'Type');
 
         $fields->addFieldToTab(
             'Root.Main',
@@ -109,7 +106,7 @@ class EditableFileField extends EditableFormField
 
         $field->getValidator()->setAllowedExtensions(
             array_diff(
-            // filter out '' since this would be a regex problem on JS end
+                // filter out '' since this would be a regex problem on JS end
                 array_filter(Config::inst()->get(File::class, 'allowed_extensions')),
                 $this->config()->get('allowed_extensions_blacklist')
             )
@@ -176,5 +173,4 @@ class EditableFileField extends EditableFormField
     {
         return round(static::get_php_max_file_size() / 1024.0, 1);
     }
-
 }

@@ -71,7 +71,7 @@ class SubmittedForm extends DataObject
             $fields->removeByName('Values');
 
             //check to ensure there is a Member to extract an Email from else null value
-            if($this->SubmittedBy() && $this->SubmittedBy()->exists()){
+            if ($this->SubmittedBy() && $this->SubmittedBy()->exists()) {
                 $submitter = $this->SubmittedBy()->Email;
             } else {
                 $submitter = null;
