@@ -7,6 +7,7 @@ use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTP;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\ArrayList;
@@ -43,29 +44,37 @@ class UserDefinedFormController extends PageController
 
         $page = $this->data();
 
+        $userforms = ModuleLoader::getModule('silverstripe/userforms');
+        $admin = ModuleLoader::getModule('silverstripe/admin');
         // load the css
         if (!$page->config()->get('block_default_userforms_css')) {
-            Requirements::css(USERFORMS_DIR . '/css/UserForm.css');
+            Requirements::css($userforms->getRelativeResourcePath('css/UserForm.css'));
         }
 
         // load the jquery
         if (!$page->config()->get('block_default_userforms_js')) {
-            $lang = i18n::get_lang_from_locale(i18n::get_locale());
-            Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-            Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery-validate/jquery.validate.min.js');
-            Requirements::add_i18n_javascript(USERFORMS_DIR . '/javascript/lang');
-            Requirements::javascript(USERFORMS_DIR . '/javascript/UserForm.js');
+            $lang = i18n::getData()->languageName(i18n::get_locale());
 
+            Requirements::javascript($admin->getRelativeResourcePath('thirdparty/jquery/jquery.js'));
             Requirements::javascript(
-                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/messages_{$lang}.min.js"
+                $userforms->getRelativeResourcePath('thirdparty/jquery-validate/jquery.validate.min.js')
             );
-            Requirements::javascript(
-                USERFORMS_DIR . "/thirdparty/jquery-validate/localization/methods_{$lang}.min.js"
-            );
+            Requirements::add_i18n_javascript($userforms->getRelativeResourcePath('javascript/lang'));
+            Requirements::javascript($userforms->getRelativeResourcePath('javascript/UserForm.js'));
+
+            // @todo implement the $lang correctly
+            // Requirements::javascript(
+            //     $userforms->getRelativeResourcePath("thirdparty/jquery-validate/localization/messages_{$lang}.min.js")
+            // );
+            // Requirements::javascript(
+            //     $userforms->getRelativeResourcePath("thirdparty/jquery-validate/localization/methods_{$lang}.min.js")
+            // );
 
             // Bind a confirmation message when navigating away from a partially completed form.
             if ($page::config()->get('enable_are_you_sure')) {
-                Requirements::javascript(USERFORMS_DIR . '/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js');
+                Requirements::javascript(
+                    $userforms->getRelativeResourcePath('thirdparty/jquery.are-you-sure/jquery.are-you-sure.js')
+                );
             }
         }
     }
@@ -82,7 +91,11 @@ class UserDefinedFormController extends PageController
         if ($this->Content && $form = $this->Form()) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
-                $content = preg_replace('/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i', $form->forTemplate(), $this->Content);
+                $content = preg_replace(
+                    '/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i',
+                    $form->forTemplate(),
+                    $this->Content
+                );
                 return [
                     'Content' => DBField::create_field('HTMLText', $content),
                     'Form' => ''

@@ -14,8 +14,8 @@ SilverStripe\UserForms\Model\EditableCustomRule:
     Display: Show
     ConditionOption: HasValue
     FieldValue: NZ
-    ConditionField: =>EditableFormField.countryTextField
-    Parent: =>EditableFormField.irdNumberField
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField.countryTextField
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField.irdNumberField
   rule-1:
     Display: Hide
     ConditionOption: HasValue

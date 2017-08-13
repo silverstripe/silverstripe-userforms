@@ -144,7 +144,7 @@ class EditableLiteralField extends EditableFormField
 
         $field = CompositeField::create($content)
             ->setName($this->Name)
-            ->setID($this->Name)
+            // ->setID($this->Name) // @todo
             ->setFieldHolderTemplate('UserFormsLiteralField_holder');
 
         $this->doUpdateFormField($field);

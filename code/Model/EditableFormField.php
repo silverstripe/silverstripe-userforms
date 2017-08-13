@@ -8,6 +8,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Dev\Deprecation;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
@@ -422,8 +423,9 @@ class EditableFormField extends DataObject
     protected function generateName()
     {
         do {
-            // Generate a new random name after this class
-            $class = get_class($this);
+            // Generate a new random name after this class (handles namespaces)
+            $classNamePieces = explode('\\', __CLASS__);
+            $class = array_pop($classNamePieces);
             $entropy = substr(sha1(uniqid()), 0, 5);
             $name = "{$class}_{$entropy}";
 
@@ -730,7 +732,8 @@ class EditableFormField extends DataObject
      */
     public function getIcon()
     {
-        return USERFORMS_DIR . '/images/' . strtolower($this->class) . '.png';
+        return ModuleLoader::getModule('silverstripe/userforms')
+            ->getRelativeResourcePath('images/' . strtolower($this->class) . '.png');
     }
 
     /**

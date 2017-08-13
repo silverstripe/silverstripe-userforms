@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Test\Model;
 
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Dev\TestOnly;
@@ -227,7 +228,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $actions = $controller->Form()->getFormActions();
 
         $expected = new FieldList(new FormAction('process', 'Custom Button'));
-        $expected->push(new ResetFormAction("clearForm", "Clear"));
+        $expected->push(FormAction::create('clearForm', 'Clear')->setAttribute('type', 'reset'));
         $expected->setForm($controller->Form());
 
         $this->assertEquals($actions, $expected);
@@ -237,8 +238,9 @@ class UserDefinedFormControllerTest extends FunctionalTest
     {
         $form = $this->setupFormFrontend();
 
+        $this->logInWithPermission('ADMIN');
         $form->Content = 'This is some content without a form nested between it';
-        $form->doPublish();
+        $form->publishRecursive();
 
         $controller = new UserDefinedFormController($form);
 
@@ -272,7 +274,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $form = $this->objFromFixture(UserDefinedForm::class, $fixtureName);
         $this->logInWithPermission('ADMIN');
 
-        $form->doPublish();
+        $form->publishRecursive();
 
         $member = Member::currentUser();
         $member->logOut();

@@ -48,7 +48,6 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
      */
     public function __construct($classes, $targetFragment = 'buttons-before-left')
     {
-        parent::__construct();
         $this->setClasses($classes);
         $this->setFragment($targetFragment);
     }

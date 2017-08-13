@@ -4,7 +4,7 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
 SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
   ageField:
     Name: Age
-SilverStripe\UserForms\Model\EditableFormField\EmailRecipientCondition:
+SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
   blankTest:
     ConditionOption: IsBlank
     ConditionValue: null

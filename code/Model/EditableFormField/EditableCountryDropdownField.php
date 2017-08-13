@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
+use SilverStripe\Core\Manifest\ModuleLoader;
 use CountryDropdownField; // @todo
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -52,7 +53,8 @@ class EditableCountryDropdownField extends EditableFormField
 
     public function getIcon()
     {
-        return USERFORMS_DIR . '/images/editabledropdown.png';
+        return ModuleLoader::getModule('silverstripe/userforms')
+            ->getRelativeResourcePath('images/editabledropdown.png');
     }
 
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)

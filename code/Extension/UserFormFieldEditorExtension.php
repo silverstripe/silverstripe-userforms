@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Extension;
 
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridField;
@@ -28,7 +29,6 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  */
 class UserFormFieldEditorExtension extends DataExtension
 {
-
     /**
      * @var array
      */
@@ -58,7 +58,8 @@ class UserFormFieldEditorExtension extends DataExtension
      */
     public function getFieldEditorGrid()
     {
-        Requirements::javascript(USERFORMS_DIR . '/javascript/FieldEditor.js');
+        $module = ModuleLoader::getModule('silverstripe/userforms');
+        Requirements::javascript($module->getRelativeResourcePath('javascript/FieldEditor.js'));
 
         $fields = $this->owner->Fields();
 
@@ -66,7 +67,7 @@ class UserFormFieldEditorExtension extends DataExtension
 
         $editableColumns = new GridFieldEditableColumns();
         $fieldClasses = singleton(EditableFormField::class)->getEditableFieldClasses();
-        $editableColumns->setDisplayFields(array(
+        $editableColumns->setDisplayFields([
             'ClassName' => function ($record, $column, $grid) use ($fieldClasses) {
                 if ($record instanceof EditableFormField) {
                     return $record->getInlineClassnameField($column, $fieldClasses);
@@ -77,18 +78,18 @@ class UserFormFieldEditorExtension extends DataExtension
                     return $record->getInlineTitleField($column);
                 }
             }
-        ));
+        ]);
 
         $config = GridFieldConfig::create()
             ->addComponents(
                 $editableColumns,
                 new GridFieldButtonRow(),
-                GridFieldAddClassesButton::create(EditableTextField::class)
+                (new GridFieldAddClassesButton(EditableTextField::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
                     ->setButtonClass('ss-ui-action-constructive'),
-                GridFieldAddClassesButton::create(EditableFormStep::class)
+                (new GridFieldAddClassesButton(EditableFormStep::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break')),
-                GridFieldAddClassesButton::create(array(EditableFieldGroup::class, EditableFieldGroupEnd::class))
+                (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group')),
                 new GridFieldEditButton(),
                 new GridFieldDeleteAction(),
@@ -165,6 +166,10 @@ class UserFormFieldEditorExtension extends DataExtension
      */
     public function onAfterPublish($original)
     {
+        if (!$original) {
+            return;
+        }
+
         // store IDs of fields we've published
         $seenIDs = array();
 
@@ -177,14 +182,14 @@ class UserFormFieldEditorExtension extends DataExtension
 
         // fetch any orphaned live records
         $live = Versioned::get_by_stage(EditableFormField::class, "Live")
-            ->filter(array(
+            ->filter([
                 'ParentID' => $original->ID,
-            ));
+            ]);
 
         if (!empty($seenIDs)) {
-            $live = $live->exclude(array(
+            $live = $live->exclude([
                 'ID' => $seenIDs,
-            ));
+            ]);
         }
 
         // delete orphaned records

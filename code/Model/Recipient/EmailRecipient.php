@@ -8,6 +8,7 @@ use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\Session;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
@@ -164,7 +165,9 @@ class EmailRecipient extends DataObject
      */
     public function getCMSFields()
     {
-        Requirements::javascript(USERFORMS_DIR . '/javascript/Recipient.js');
+        Requirements::javascript(
+            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('javascript/Recipient.js')
+        );
 
         // Determine optional field values
         $form = $this->getFormParent();
@@ -281,7 +284,7 @@ class EmailRecipient extends DataObject
                 ))
         ]);
 
-        $fields->fieldByName('Root.EmailDetails')->setTitle(_t(__CLASS.'.EMAILDETAILSTAB', 'Email Details'));
+        $fields->fieldByName('Root.EmailDetails')->setTitle(_t(__CLASS__.'.EMAILDETAILSTAB', 'Email Details'));
 
         // Only show the preview link if the recipient has been saved.
         if (!empty($this->EmailTemplate)) {
@@ -338,7 +341,7 @@ class EmailRecipient extends DataObject
             LiteralField::create('EmailPreview', $preview)
         ));
 
-        $fields->fieldByName('Root.EmailContent')->setTitle(_t(__CLASS.'.EMAILCONTENTTAB', 'Email Content'));
+        $fields->fieldByName('Root.EmailContent')->setTitle(_t(__CLASS__.'.EMAILCONTENTTAB', 'Email Content'));
 
         // Custom rules for sending this field
         $grid = GridField::create(
@@ -363,7 +366,7 @@ class EmailRecipient extends DataObject
             $grid
         ]);
 
-        $fields->fieldByName('Root.CustomRules')->setTitle(_t(__CLASS.'.CUSTOMRULESTAB', 'Custom Rules'));
+        $fields->fieldByName('Root.CustomRules')->setTitle(_t(__CLASS__.'.CUSTOMRULESTAB', 'Custom Rules'));
 
         $this->extend('updateCMSFields', $fields);
         return $fields;
@@ -542,7 +545,7 @@ class EmailRecipient extends DataObject
                     $trimAddress = trim($address);
                     if ($trimAddress && !Email::is_valid_address($trimAddress)) {
                         $error = _t(
-                            __CLASS.".$translation",
+                            __CLASS__.".$translation",
                             "Invalid email address $trimAddress"
                         );
                         $result->error($error . " ($trimAddress)");

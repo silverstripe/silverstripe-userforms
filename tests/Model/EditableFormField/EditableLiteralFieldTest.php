@@ -6,6 +6,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 
@@ -17,7 +18,8 @@ class EditableLiteralFieldTest extends SapphireTest
     protected function setUp()
     {
         parent::setUp();
-        HTMLEditorConfig::set_active('cms');
+        $cmsConfig = HTMLEditorConfig::get('cms');
+        HTMLEditorConfig::set_active($cmsConfig);
     }
 
     /**
@@ -30,12 +32,12 @@ class EditableLiteralFieldTest extends SapphireTest
         $field = new EditableLiteralField();
 
         // Test with sanitisation enabled
-        Config::modify()->update('HtmlEditorField', 'sanitise_server_side', true);
+        Config::modify()->set(HTMLEditorField::class, 'sanitise_server_side', true);
         $field->setContent($rawContent);
         $this->assertEquals($safeContent, $field->getContent());
 
         // Test with sanitisation disabled
-        Config::modify()->remove('HtmlEditorField', 'sanitise_server_side');
+        Config::modify()->remove(HTMLEditorField::class, 'sanitise_server_side');
         $field->setContent($rawContent);
         $this->assertEquals($rawContent, $field->getContent());
     }

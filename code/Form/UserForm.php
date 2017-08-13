@@ -40,7 +40,7 @@ class UserForm extends Form
         $this->setValidator($this->getRequiredFields());
 
         // This needs to be re-evaluated since fields have been assigned
-        $this->setupFormErrors();
+        $this->restoreFormState();
 
         // Number each page
         $stepNumber = 1;
@@ -52,7 +52,7 @@ class UserForm extends Form
             $this->disableSecurityToken();
         }
 
-        $data = Session::get("FormInfo.{$this->FormName()}.data");
+        $data = $this->getRequest()->getSession()->get("FormInfo.{$this->FormName()}.data");
 
         if (is_array($data)) {
             $this->loadDataFrom($data);
@@ -61,11 +61,11 @@ class UserForm extends Form
         $this->extend('updateForm');
     }
 
-    public function setupFormErrors()
+    public function restoreFormState()
     {
-        // Suppress setupFormErrors if fields haven't been bootstrapped
+        // Suppress restoreFormState if fields haven't been bootstrapped
         if ($this->fields && $this->fields->exists()) {
-            return parent::setupFormErrors();
+            return parent::restoreFormState();
         }
 
         return $this;
@@ -134,15 +134,17 @@ class UserForm extends Form
      */
     public function getFormActions()
     {
-        $submitText = ($this->controller->SubmitButtonText) ? $this->controller->SubmitButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
-        $clearText = ($this->controller->ClearButtonText) ? $this->controller->ClearButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
+        $submitText = ($this->controller->SubmitButtonText)
+            ? $this->controller->SubmitButtonText
+            : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
+        $clearText = ($this->controller->ClearButtonText)
+            ? $this->controller->ClearButtonText
+            : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
 
-        $actions = new FieldList(
-            new FormAction("process", $submitText)
-        );
+        $actions = FieldList::create(FormAction::create('process', $submitText));
 
         if ($this->controller->ShowClearButton) {
-            $actions->push(new ResetFormAction("clearForm", $clearText));
+            $actions->push(FormAction::create('clearForm', $clearText)->setAttribute('type', 'reset'));
         }
 
         $this->extend('updateFormActions', $actions);

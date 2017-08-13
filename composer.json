@@ -39,6 +39,12 @@
         "phpunit/phpunit": "^5.7",
         "squizlabs/php_codesniffer": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "SilverStripe\\UserForms\\": "code/",
+            "SilverStripe\\UserForms\\Test\\": "tests/"
+        }
+    },
     "suggest": {
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
         "silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access",

@@ -282,7 +282,7 @@ SilverStripe\UserForms\Model\UserDefinedForm:
   filtered-form-page:
     Title: 'Page with filtered recipients'
     Fields: =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form5step1,=>SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField.checkbox-group, =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.your-name-field, =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.street-field, =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.city-field
-    EmailRecipients: =>EmailRecipient.unfiltered-recipient-1, =>EmailRecipient.filtered-recipient-1, =>EmailRecipient.filtered-recipient-2
+    EmailRecipients: =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.unfiltered-recipient-1, =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.filtered-recipient-1, =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.filtered-recipient-2
 
   empty-page:
     Title: 'Page with empty step'

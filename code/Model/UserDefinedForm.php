@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Model;
 use Page;
 use Colymba\BulkManager\BulkManager;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -171,7 +172,9 @@ class UserDefinedForm extends Page
      */
     public function getCMSFields()
     {
-        Requirements::css(USERFORMS_DIR . '/css/UserForm_cms.css');
+        Requirements::css(
+            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('css/UserForms_cms.css')
+        );
 
         $this->beforeUpdateCMSFields(function ($fields) {
             // define tabs
@@ -181,8 +184,15 @@ class UserDefinedForm extends Page
 
             // text to show on complete
             $onCompleteFieldSet = CompositeField::create(
-                $label = LabelField::create('OnCompleteMessageLabel', _t(__CLASS__.'.ONCOMPLETELABEL', 'Show on completion')),
-                $editor = HTMLEditorField::create('OnCompleteMessage', '', _t(__CLASS__.'.ONCOMPLETEMESSAGE', $self->OnCompleteMessage))
+                $label = LabelField::create(
+                    'OnCompleteMessageLabel',
+                    _t(__CLASS__.'.ONCOMPLETELABEL', 'Show on completion')
+                ),
+                $editor = HTMLEditorField::create(
+                    'OnCompleteMessage',
+                    '',
+                    _t(__CLASS__.'.ONCOMPLETEMESSAGE', $this->OnCompleteMessage)
+                )
             );
 
             $onCompleteFieldSet->addExtraClass('field');
@@ -201,7 +211,7 @@ class UserDefinedForm extends Page
             $emailRecipients = GridField::create(
                 'EmailRecipients',
                 _t(__CLASS__.'.EMAILRECIPIENTS', 'Email Recipients'),
-                $self->EmailRecipients(),
+                $this->EmailRecipients(),
                 $emailRecipientsConfig
             );
             $emailRecipients
@@ -211,12 +221,12 @@ class UserDefinedForm extends Page
 
             $fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
             $fields->addFieldToTab('Root.Recipients', $emailRecipients);
-            $fields->addFieldsToTab('Root.FormOptions', $self->getFormOptions());
+            $fields->addFieldsToTab('Root.FormOptions', $this->getFormOptions());
 
 
             // view the submissions
             // make sure a numeric not a empty string is checked against this int column for SQL server
-            $parentID = (!empty($self->ID)) ? (int) $self->ID : 0;
+            $parentID = (!empty($this->ID)) ? (int) $this->ID : 0;
 
             // get a list of all field names and values used for print and export CSV views of the GridField below.
             $columnSQL = <<<SQL
@@ -289,7 +299,7 @@ SQL;
             $submissions = GridField::create(
                 'Submissions',
                 _t(__CLASS__.'.SUBMISSIONS', 'Submissions'),
-                $self->Submissions()->sort('Created', 'DESC'),
+                $this->Submissions()->sort('Created', 'DESC'),
                 $config
             );
             $fields->addFieldToTab('Root.Submissions', $submissions);
@@ -375,23 +385,6 @@ SQL;
     public function getErrorContainerID()
     {
         return $this->config()->get('error_container_id');
-    }
-
-    public function requireDefaultRecords()
-    {
-        parent::requireDefaultRecords();
-
-        if (!$this->config()->get('upgrade_on_build')) {
-            return;
-        }
-
-        // Perform migrations
-        Injector::inst()
-            ->create(UserFormsUpgradeService::class)
-            ->setQuiet(true)
-            ->run();
-
-        DB::alteration_message('Migrated userforms', 'changed');
     }
 
 

@@ -9,7 +9,7 @@ use SilverStripe\UserForms\Form\UserForm;
 
 class UserFormTest extends SapphireTest
 {
-    protected static $fixture_file = 'UserDefinedFormTest.yml';
+    protected static $fixture_file = 'userforms/tests/Model/UserDefinedFormTest.yml';
 
     /**
      * Tests that a form will not generate empty pages
