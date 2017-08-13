@@ -1,0 +1,31 @@
+---
+Name: userformslegacy
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    EditableCheckbox: SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox
+    EditableCheckboxGroupField: SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField
+    EditableCountryDropdownField: SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField
+    EditableDateField: SilverStripe\UserForms\Model\EditableFormField\EditableDateField
+    EditableDropdown: SilverStripe\UserForms\Model\EditableFormField\EditableDropdown
+    EditableEmailField: SilverStripe\UserForms\Model\EditableFormField\EditableEmailField
+    EditableFieldGroup: SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup
+    EditableFieldGroupEnd: SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd
+    EditableFileField: SilverStripe\UserForms\Model\EditableFormField\EditableFileField
+    EditableFormHeading: SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading
+    EditableFormStep: SilverStripe\UserForms\Model\EditableFormField\EditableFormStep
+    EditableLiteralField: SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField
+    EditableMemberListField: SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField
+    EditableMultipleOptionField: SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField
+    EditableNumericField: SilverStripe\UserForms\Model\EditableFormField\EditableNumericField
+    EditableOption: SilverStripe\UserForms\Model\EditableFormField\EditableOption
+    EditableRadioField: SilverStripe\UserForms\Model\EditableFormField\EditableRadioField
+    EditableTextField: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
+    EmailRecipient: SilverStripe\UserForms\Model\Recipient\EmailRecipient
+    EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition
+    SubmittedFileField: SilverStripe\UserForms\Model\Submission\SubmittedFileField
+    SubmittedForm: SilverStripe\UserForms\Model\Submission\SubmittedForm
+    SubmittedFormField: SilverStripe\UserForms\Model\Submission\SubmittedFormField
+    EditableCustomRule: SilverStripe\UserForms\Model\EditableCustomRule
+    EditableFormField: SilverStripe\UserForms\Model\EditableFormField
+    UserDefinedForm: SilverStripe\UserForms\Model\UserDefinedForm
