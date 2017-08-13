@@ -548,7 +548,7 @@ class EmailRecipient extends DataObject
                             __CLASS__.".$translation",
                             "Invalid email address $trimAddress"
                         );
-                        $result->error($error . " ($trimAddress)");
+                        $result->addError($error . " ($trimAddress)");
                     }
                 }
             }

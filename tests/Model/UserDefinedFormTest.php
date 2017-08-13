@@ -306,6 +306,7 @@ class UserDefinedFormTest extends FunctionalTest
 
         // check that the published version is not updated
         $live = Versioned::get_one_by_stage(EditableFormField::class, 'Live', "\"EditableFormField_Live\".\"ID\" = $field->ID");
+        $this->assertInstanceOf(EditableFormField::class, $live);
         $this->assertEquals('Title', $live->Title);
 
         // revert back to the live data
@@ -490,9 +491,9 @@ class UserDefinedFormTest extends FunctionalTest
             'invalid-recipient-list'
         );
         $result = $recipient->validate();
-        $this->assertFalse($result->valid());
-        $this->assertContains('filtered.example.com', $result->message());
-        $this->assertNotContains('filtered2@example.com', $result->message());
+        $this->assertFalse($result->isValid());
+        $this->assertContains('filtered.example.com', $result->getMessages());
+        $this->assertNotContains('filtered2@example.com', $result->getMessages());
 
         // test valid email addresses pass validation
         $recipient = $this->objFromFixture(
@@ -500,7 +501,7 @@ class UserDefinedFormTest extends FunctionalTest
             'valid-recipient-list'
         );
         $result = $recipient->validate();
-        $this->assertTrue($result->valid());
-        $this->assertEmpty($result->message());
+        $this->assertTrue($result->isValid());
+        $this->assertEmpty($result->getMessages());
     }
 }
