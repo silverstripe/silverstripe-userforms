@@ -59,7 +59,6 @@ class EditableDateField extends EditableFormField
             : $this->Default;
 
         $field = FormField::create($this->Name, $this->EscapedTitle, $defaultValue)
-            ->setConfig('showcalendar', true)
             ->setFieldHolderTemplate('UserFormsField_holder')
             ->setTemplate('UserFormsField');
 

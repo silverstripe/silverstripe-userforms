@@ -11,7 +11,6 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
  */
 abstract class UserFormsCompositeField extends CompositeField implements UserFormsFieldContainer
 {
-
     /**
      * Parent field
      *
@@ -38,10 +37,11 @@ abstract class UserFormsCompositeField extends CompositeField implements UserFor
         }
 
         // Skip over fields that don't generate formfields
-        $formField = $field->getFormField();
-        if (!$formField) {
+        if (get_class($field) === EditableFormField::class || !$field->getFormField()) {
             return $this;
         }
+        /** @var EditableFormField $formField */
+        $formField = $field->getFormField();
 
         // Save this field
         $this->push($formField);

@@ -91,9 +91,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         )));
 
         foreach (array($start, $end) as $date) {
-            $date->setConfig('showcalendar', true);
-            $date->setConfig('dateformat', 'y-mm-dd');
-            $date->setConfig('datavalueformat', 'y-mm-dd');
+            $date->setDateFormat('y-mm-dd');
             $date->addExtraClass('no-change-track');
         }
 
@@ -121,7 +119,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
 
         return array(
-            'header' => $forTemplate->renderWith('GridFieldFilterHeader_Row')
+            'header' => $forTemplate->renderWith(GridFieldFilterHeader::class . '_Row')
         );
     }
 

@@ -173,7 +173,7 @@ class UserDefinedForm extends Page
     public function getCMSFields()
     {
         Requirements::css(
-            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('css/UserForms_cms.css')
+            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('css/UserForm_cms.css')
         );
 
         $this->beforeUpdateCMSFields(function ($fields) {

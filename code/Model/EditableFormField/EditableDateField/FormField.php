@@ -11,6 +11,6 @@ class FormField extends DateField
 {
     public function Type()
     {
-        return "date-alt text";
+        return 'date-alt text';
     }
 }

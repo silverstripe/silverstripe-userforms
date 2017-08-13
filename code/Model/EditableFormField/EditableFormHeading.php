@@ -68,7 +68,7 @@ class EditableFormHeading extends EditableFormField
 
     public function getFormField()
     {
-        $labelField = HeaderField::create($this->EscapedTitle)
+        $labelField = HeaderField::create('userforms-header', $this->EscapedTitle)
             ->setHeadingLevel($this->Level);
         $labelField->addExtraClass('FormHeading');
         $labelField->setAttribute('data-id', $this->Name);
