@@ -12,6 +12,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\ORM\DB;
 use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
@@ -29,6 +30,10 @@ use SilverStripe\Versioned\Versioned;
 class UserDefinedFormTest extends FunctionalTest
 {
     protected static $fixture_file = 'UserDefinedFormTest.yml';
+
+    protected static $required_extensions = [
+        UserDefinedForm::class => [UserFormFieldEditorExtension::class],
+    ];
 
     public function testRollbackToVersion()
     {
@@ -492,8 +497,9 @@ class UserDefinedFormTest extends FunctionalTest
         );
         $result = $recipient->validate();
         $this->assertFalse($result->isValid());
-        $this->assertContains('filtered.example.com', $result->getMessages());
-        $this->assertNotContains('filtered2@example.com', $result->getMessages());
+        $this->assertNotEmpty($result->getMessages());
+        $this->assertContains('filtered.example.com', $result->getMessages()[0]['message']);
+        $this->assertNotContains('filtered2@example.com', $result->getMessages()[0]['message']);
 
         // test valid email addresses pass validation
         $recipient = $this->objFromFixture(

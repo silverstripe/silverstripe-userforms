@@ -24,6 +24,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
 {
     protected static $fixture_file = 'UserDefinedFormTest.yml';
 
+    protected static $use_draft_site = true;
+
     public function testProcess()
     {
         $form = $this->setupFormFrontend();
@@ -56,7 +58,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $email = $this->findEmail('test@example.com', 'no-reply@example.com', 'Email Subject');
 
         // assert that the email has the field title and the value html email
-        $parser = new CSSContentParser($email['content']);
+        $parser = new CSSContentParser($email['Content']);
         $title = $parser->getBySelector('strong');
 
         $this->assertEquals('Basic Text Field', (string) $title[0], 'Email contains the field name');
@@ -68,13 +70,13 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
         $nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
-        $this->assertContains('Basic Text Field: Basic Value', $nohtml['content'], 'Email contains no html');
+        $this->assertContains('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
 
         // no data
         $this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');
         $nodata = $this->findEmail('nodata@example.com', 'no-reply@example.com', 'Email Subject');
 
-        $parser = new CSSContentParser($nodata['content']);
+        $parser = new CSSContentParser($nodata['Content']);
         $list = $parser->getBySelector('dl');
 
         $this->assertFalse(isset($list[0]), 'Email contains no fields');

@@ -37,7 +37,6 @@ mappings:
   EditableTextField: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
   UserDefinedForm_EmailRecipient: SilverStripe\UserForms\Model\Recipient\EmailRecipient
   UserDefinedForm_EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition
-  UserFormRecipientEmail: SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail
   UserFormRecipientItemRequest: SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest
   SubmittedFileField: SilverStripe\UserForms\Model\Submission\SubmittedFileField
   SubmittedForm: SilverStripe\UserForms\Model\Submission\SubmittedForm

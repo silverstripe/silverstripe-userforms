@@ -424,7 +424,7 @@ class EditableFormField extends DataObject
     {
         do {
             // Generate a new random name after this class (handles namespaces)
-            $classNamePieces = explode('\\', __CLASS__);
+            $classNamePieces = explode('\\', static::class);
             $class = array_pop($classNamePieces);
             $entropy = substr(sha1(uniqid()), 0, 5);
             $name = "{$class}_{$entropy}";
@@ -951,7 +951,7 @@ class EditableFormField extends DataObject
     public function getErrorMessage()
     {
         $title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
-        $standard = sprintf(_t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '%s is required').'.', $title);
+        $standard = _t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '{field} is required.', ['field' => $title]);
 
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
@@ -1062,7 +1062,8 @@ class EditableFormField extends DataObject
         $editableFieldClasses = [];
         foreach ($classes as $class) {
             // Skip abstract / hidden classes
-            if (Config::inst()->get($class, 'abstract', Config::UNINHERITED) || Config::inst()->get($class, 'hidden')
+            if (Config::inst()->get($class, 'abstract', Config::UNINHERITED)
+                || Config::inst()->get($class, 'hidden')
             ) {
                 continue;
             }
@@ -1136,10 +1137,10 @@ class EditableFormField extends DataObject
             $fieldToWatch = $formFieldWatch->getSelectorFieldOnly();
 
             $expression = $rule->buildExpression();
-            if (! in_array($fieldToWatch, $result['selectors'])) {
+            if (!in_array($fieldToWatch, $result['selectors'])) {
                 $result['selectors'][] = $fieldToWatch;
             }
-            if (! in_array($expression['event'], $result['events'])) {
+            if (!in_array($expression['event'], $result['events'])) {
                 $result['events'][] = $expression['event'];
             }
             $result['operations'][] = $expression['operation'];

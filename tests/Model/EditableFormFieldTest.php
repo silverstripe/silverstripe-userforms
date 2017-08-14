@@ -2,11 +2,13 @@
 
 namespace SilverStripe\UserForms\Test\Model\EditableFormField;
 
+use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Security\Member;
+use SilverStripe\Security\IdentityStore;
 use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
@@ -43,8 +45,7 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertTrue($text->canEdit());
         $this->assertTrue($text->canDelete());
 
-        $member = Member::currentUser();
-        $member->logOut();
+        Injector::inst()->get(IdentityStore::class)->logOut(Controller::curr()->getRequest());
 
         $this->logInWithPermission('SITETREE_VIEW_ALL');
         $this->assertFalse($text->canCreate());

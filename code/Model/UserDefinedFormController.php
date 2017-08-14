@@ -6,6 +6,7 @@ use PageController;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTP;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
@@ -13,10 +14,9 @@ use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
-use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\UserForms\Model\Recipient\UserFormRecipientEmail;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
@@ -184,7 +184,7 @@ JS
     public function process($data, $form)
     {
         $submittedForm = SubmittedForm::create();
-        $submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
+        $submittedForm->SubmittedByID = Security::getCurrentUser() ? Security::getCurrentUser()->ID : 0;
         $submittedForm->ParentID = $this->ID;
 
         // if saving is not disabled save now to generate the ID
@@ -253,7 +253,7 @@ JS
         }
 
         $emailData = [
-            'Sender' => Member::currentUser(),
+            'Sender' => Security::getCurrentUser(),
             'Fields' => $submittedFields
         ];
 
@@ -262,7 +262,10 @@ JS
         // email users on submit.
         if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
             foreach ($recipients as $recipient) {
-                $email = UserFormRecipientEmail::create($submittedFields);
+                $email = Email::create()
+                    ->setHTMLTemplate('email/SubmittedFormEmail.ss')
+                    ->setPlainTemplate('email/SubmittedFormEmail.ss');
+
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments) {
@@ -282,11 +285,14 @@ JS
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
-                    $email->setTemplate($recipient->EmailTemplate);
+                    $email->setHTMLTemplate($recipient->EmailTemplate);
                 }
 
-                $email->populateTemplate($recipient);
-                $email->populateTemplate($emailData);
+                $email->setData($recipient);
+                foreach ($emailData as $key => $value) {
+                    $email->addData($key, $value);
+                }
+
                 $email->setFrom($recipient->EmailFrom);
                 $email->setBody($parsedBody);
                 $email->setTo($recipient->EmailAddress);
@@ -378,7 +384,7 @@ JS
      * @param ArrayList fields
      * @return ArrayData
      */
-    protected function getMergeFieldsMap($fields = array())
+    protected function getMergeFieldsMap($fields = [])
     {
         $data = ArrayData::create([]);
 
