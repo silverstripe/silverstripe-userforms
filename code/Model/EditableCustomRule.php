@@ -165,7 +165,9 @@ class EditableCustomRule extends DataObject
 
     /**
      * Substitutes configured rule logic with it's JS equivalents and returns them as array elements
+     *
      * @return array
+     * @throws LogicException If the provided condition option was not able to be handled
      */
     public function buildExpression()
     {

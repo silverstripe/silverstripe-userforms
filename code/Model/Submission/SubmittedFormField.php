@@ -31,7 +31,7 @@ class SubmittedFormField extends DataObject
 
     /**
      * @param Member $member
-     *
+     * @param array $context
      * @return boolean
      */
     public function canCreate($member = null, $context = [])

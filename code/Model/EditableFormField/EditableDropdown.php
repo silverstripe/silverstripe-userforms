@@ -60,8 +60,8 @@ class EditableDropdown extends EditableMultipleOptionField
     public function getFormField()
     {
         $field = DropdownField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap())
-            ->setFieldHolderTemplate('UserFormsField_holder')
-            ->setTemplate('UserFormsDropdownField');
+            ->setFieldHolderTemplate(EditableFormField::class . '_holder')
+            ->setTemplate(__CLASS__);
 
         if ($this->UseEmptyString) {
             $field->setEmptyString(($this->EmptyString) ? $this->EmptyString : '');

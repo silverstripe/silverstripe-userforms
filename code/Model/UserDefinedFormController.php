@@ -433,7 +433,7 @@ JS
         $this->extend('updateReceivedFormSubmissionData', $data);
 
         return $this->customise([
-            'Content' => $this->customise($data)->renderWith('ReceivedFormSubmission'),
+            'Content' => $this->customise($data)->renderWith(__CLASS__ . '_ReceivedFormSubmission'),
             'Form' => '',
         ]);
     }

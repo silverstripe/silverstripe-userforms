@@ -113,9 +113,9 @@ class EditableMultipleOptionField extends EditableFormField
      * @param string $toStage
      * @param bool $createNewVersion
      */
-    public function doPublish($fromStage, $toStage, $createNewVersion = false)
+    public function copyVersionToStage($fromStage, $toStage, $createNewVersion = false)
     {
-        parent::doPublish($fromStage, $toStage, $createNewVersion);
+        parent::copyVersionToStage($fromStage, $toStage, $createNewVersion);
         $this->publishOptions($fromStage, $toStage, $createNewVersion);
     }
 
@@ -134,7 +134,7 @@ class EditableMultipleOptionField extends EditableFormField
         // Publish all options
         foreach ($this->Options() as $option) {
             $seenIDs[] = $option->ID;
-            $option->publish($fromStage, $toStage, $createNewVersion);
+            $option->copyVersionToStage($fromStage, $toStage, $createNewVersion);
         }
 
         // remove any orphans from the "fromStage"

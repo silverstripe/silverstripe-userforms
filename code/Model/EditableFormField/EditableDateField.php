@@ -60,7 +60,7 @@ class EditableDateField extends EditableFormField
 
         $field = FormField::create($this->Name, $this->EscapedTitle, $defaultValue)
             ->setFieldHolderTemplate('UserFormsField_holder')
-            ->setTemplate('UserFormsField');
+            ->setTemplate(EditableFormField::class);
 
         $this->doUpdateFormField($field);
 

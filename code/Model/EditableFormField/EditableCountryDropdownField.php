@@ -6,6 +6,7 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\i18n\i18n;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableDropdownField;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
@@ -38,7 +39,7 @@ class EditableCountryDropdownField extends EditableFormField
         $field = DropdownField::create($this->Name, $this->EscapedTitle)
             ->setSource(i18n::getData()->getCountries())
             ->setFieldHolderTemplate('UserFormsField_holder')
-            ->setTemplate('UserFormsDropdownField');
+            ->setTemplate(EditableDropdownField::class);
 
         $this->doUpdateFormField($field);
 

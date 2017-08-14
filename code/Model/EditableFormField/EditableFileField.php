@@ -99,10 +99,10 @@ class EditableFileField extends EditableFormField
     {
         $field = FileField::create($this->Name, $this->EscapedTitle)
             ->setFieldHolderTemplate('UserFormsField_holder')
-            ->setTemplate('UserFormsFileField');
+            ->setTemplate(__CLASS__);
 
         $field->setFieldHolderTemplate('UserFormsField_holder')
-            ->setTemplate('UserFormsFileField');
+            ->setTemplate(__CLASS__);
 
         $field->getValidator()->setAllowedExtensions(
             array_diff(

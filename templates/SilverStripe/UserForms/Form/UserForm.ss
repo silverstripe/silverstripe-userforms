@@ -1,7 +1,7 @@
 <form $AttributesHTML>
 
-<% include UserFormProgress %>
-<% include UserFormStepErrors %>
+<% include SilverStripe\\UserForms\\Form\\UserFormProgress %>
+<% include SilverStripe\\UserForms\\Form\\UserFormStepErrors %>
 
 <% if $Message %>
 	<p id="{$FormName}_error" class="message $MessageType">$Message</p>
@@ -21,9 +21,9 @@
 <% end_if %>
 
 <% if $Steps.Count > 1 %>
-	<% include UserFormStepNav %>
+	<% include SilverStripe\\UserForms\\Form\\UserFormStepNav %>
 <% else %>
-	<% include UserFormActionNav %>
+	<% include SilverStripe\\UserForms\\Form\\UserFormActionNav %>
 <% end_if %>
 
 </form>

@@ -2,7 +2,7 @@
 	<% if $Tag == 'fieldset' && $Legend %>
 		<legend>$Legend</legend>
 	<% end_if %>
-	
+
 	<div class="middleColumn">
 	<% loop $FieldList %>
 		<% if $ColumnCount %>
