@@ -129,6 +129,10 @@ class UserDefinedForm extends Page
         'EmailRecipients' => EmailRecipient::class
     ];
 
+    private static $cascade_deletes = [
+        'EmailRecipients',
+    ];
+
     /**
      * @var array
      * @config
@@ -159,6 +163,8 @@ class UserDefinedForm extends Page
      * @config
      */
     private static $recipients_warning_enabled = false;
+
+    private static $non_live_permissions = ['SITETREE_VIEW_ALL'];
 
     /**
      * Temporary storage of field ids when the form is duplicated.

@@ -58,27 +58,6 @@ class EditableCustomRule extends DataObject
     private static $table_name = 'EditableCustomRule';
 
     /**
-     * Publish this custom rule to the live site
-     *
-     * Wrapper for the {@link Versioned} publish function
-     */
-    public function doPublish($fromStage, $toStage, $createNewVersion = false)
-    {
-        $this->publish($fromStage, $toStage, $createNewVersion);
-    }
-
-    /**
-     * Delete this custom rule from a given stage
-     *
-     * Wrapper for the {@link Versioned} deleteFromStage function
-     */
-    public function doDeleteFromStage($stage)
-    {
-        $this->deleteFromStage($stage);
-    }
-
-
-    /**
      * @param Member $member
      * @return bool
      */

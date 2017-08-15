@@ -14,9 +14,9 @@ use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
-use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\Versioned\Versioned;
@@ -35,6 +35,14 @@ class UserFormFieldEditorExtension extends DataExtension
     private static $has_many = array(
         'Fields' => EditableFormField::class
     );
+
+    private static $owns = [
+        'Fields'
+    ];
+
+    private static $cascade_deletes = [
+        'Fields'
+    ];
 
     /**
      * Adds the field editor to the page.
@@ -159,31 +167,23 @@ class UserFormFieldEditorExtension extends DataExtension
     }
 
     /**
-     * @see SiteTree::doPublish
-     * @param Page $original
-     *
-     * @return void
+     * Remove any orphaned child records on publish
      */
-    public function onAfterPublish($original)
+    public function onAfterPublish()
     {
-        if (!$original) {
-            return;
-        }
-
         // store IDs of fields we've published
-        $seenIDs = array();
-
+        $seenIDs = [];
         foreach ($this->owner->Fields() as $field) {
             // store any IDs of fields we publish so we don't unpublish them
             $seenIDs[] = $field->ID;
-            $field->publishRecursive();
+            $field->doPublish(Versioned::DRAFT, Versioned::LIVE);
             $field->destroy();
         }
 
         // fetch any orphaned live records
-        $live = Versioned::get_by_stage(EditableFormField::class, "Live")
+        $live = Versioned::get_by_stage(EditableFormField::class, Versioned::LIVE)
             ->filter([
-                'ParentID' => $original->ID,
+                'ParentID' => $this->owner->ID,
             ]);
 
         if (!empty($seenIDs)) {
@@ -194,35 +194,34 @@ class UserFormFieldEditorExtension extends DataExtension
 
         // delete orphaned records
         foreach ($live as $field) {
-            $field->doDeleteFromStage('Live');
+            $field->deleteFromStage(Versioned::LIVE);
             $field->destroy();
         }
     }
 
     /**
-     * @see SiteTree::doUnpublish
-     * @param Page $page
-     *
-     * @return void
+     * Remove all fields from the live stage when unpublishing the page
      */
-    public function onAfterUnpublish($page)
+    public function onAfterUnpublish()
     {
-        foreach ($page->Fields() as $field) {
-            $field->doDeleteFromStage('Live');
+        foreach ($this->owner->Fields() as $field) {
+            $field->deleteFromStage(Versioned::LIVE);
         }
     }
 
     /**
-     * @see SiteTree::duplicate
-     * @param DataObject $newPage
+     * When duplicating a UserDefinedForm, duplicate all of its fields and display rules
      *
+     * @see DataObject::duplicate
+     * @param DataObject $newPage
+     * @param bool $doWrite
+     * @param string $manyMany
      * @return DataObject
      */
-    public function onAfterDuplicate($newPage)
+    public function onAfterDuplicate($newPage, $doWrite, $manyMany)
     {
-        // List of EditableFieldGroups, where the
-        // key of the array is the ID of the old end group
-        $fieldGroups = array();
+        // List of EditableFieldGroups, where the key of the array is the ID of the old end group
+        $fieldGroups = [];
         foreach ($this->owner->Fields() as $field) {
             $newField = $field->duplicate(false);
             $newField->ParentID = $newPage->ID;
@@ -254,35 +253,29 @@ class UserFormFieldEditorExtension extends DataExtension
     }
 
     /**
-     * @see SiteTree::getIsModifiedOnStage
-     * @param boolean $isModified
+     * Checks child fields to see if any are modified in draft as well. The owner of this extension will still
+     * use the Versioned method to determine its own status.
      *
-     * @return boolean
+     * @see Versioned::isModifiedOnDraft
+     *
+     * @return boolean|null
      */
-    public function getIsModifiedOnStage($isModified)
+    public function isModifiedOnDraft()
     {
-        if (!$isModified) {
-            foreach ($this->owner->Fields() as $field) {
-                if ($field->getIsModifiedOnStage()) {
-                    $isModified = true;
-                    break;
-                }
+        foreach ($this->owner->Fields() as $field) {
+            if ($field->isModifiedOnDraft()) {
+                return true;
             }
         }
-
-        return $isModified;
     }
 
     /**
-     * @see SiteTree::doRevertToLive
-     * @param Page $page
-     *
-     * @return void
+     * @see Versioned::doRevertToLive
      */
-    public function onAfterRevertToLive($page)
+    public function onAfterRevertToLive()
     {
-        foreach ($page->Fields() as $field) {
-            $field->copyVersionToStage('Live', 'Stage', false);
+        foreach ($this->owner->Fields() as $field) {
+            $field->copyVersionToStage(Versioned::LIVE, Versioned::STAGE, false);
             $field->writeWithoutVersion();
         }
     }

@@ -15,9 +15,9 @@ use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
-use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
@@ -47,12 +47,12 @@ class UserDefinedFormTest extends FunctionalTest
 
         $form->SubmitButtonText = 'Button Text';
         $form->write();
-        $form->doPublish();
+        $form->publishSingle();
         $origVersion = $form->Version;
 
         $form->SubmitButtonText = 'Updated Button Text';
         $form->write();
-        $form->doPublish();
+        $form->publishSingle();
 
         // check published site
         $updated = Versioned::get_one_by_stage(UserDefinedForm::class, 'Stage', "\"UserDefinedForm\".\"ID\" = $form->ID");
@@ -209,7 +209,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $form->write();
 
-        $form->doPublish();
+        $form->publishSingle();
 
         $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
 
@@ -227,7 +227,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNull($liveDropdown);
 
         // when publishing it should have added it
-        $form->doPublish();
+        $form->publishSingle();
 
         $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
         $this->assertEquals(3, $live->Fields()->Count());
@@ -240,7 +240,7 @@ class UserDefinedFormTest extends FunctionalTest
         $liveText = Versioned::get_one_by_stage(EditableFormField::class, 'Live', "\"EditableFormField_Live\".\"ID\" = $text->ID");
         $this->assertFalse($liveText->Title == $text->Title);
 
-        $form->doPublish();
+        $form->publishSingle();
 
         $liveText = Versioned::get_one_by_stage(EditableFormField::class, 'Live', "\"EditableFormField_Live\".\"ID\" = $text->ID");
         $this->assertTrue($liveText->Title == $text->Title);
@@ -257,7 +257,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertEmpty($liveRule);
 
         // Publish form, it's now live
-        $form->doPublish();
+        $form->publishSingle();
         $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, 'Live', "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertNotEmpty($liveRule);
 
@@ -269,7 +269,7 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotEmpty($liveRule);
 
         // Publish form, it should remove this rule
-        $form->doPublish();
+        $form->publishSingle();
         $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, 'Live', "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
         $this->assertEmpty($liveRule);
     }
@@ -280,7 +280,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $form->write();
         $this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
-        $form->doPublish();
+        $form->publishSingle();
 
         // assert that it exists and has a field
         $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
@@ -304,7 +304,7 @@ class UserDefinedFormTest extends FunctionalTest
         $field->Title = 'Title';
         $field->write();
 
-        $form->doPublish();
+        $form->publishSingle();
 
         $field->Title = 'Edited title';
         $field->write();
@@ -331,7 +331,6 @@ class UserDefinedFormTest extends FunctionalTest
         $duplicate = $form->duplicate();
 
         $this->assertEquals($form->Fields()->Count(), $duplicate->Fields()->Count());
-        $this->assertEquals($form->EmailRecipients()->Count(), $form->EmailRecipients()->Count());
 
         // can't compare object since the dates/ids change
         $this->assertEquals($form->Fields()->First()->Title, $duplicate->Fields()->First()->Title);

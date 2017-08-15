@@ -29,6 +29,10 @@ class SubmittedForm extends DataObject
         'Values' => SubmittedFormField::class
     ];
 
+    private static $cascade_deletes = [
+        'Values',
+    ];
+
     private static $summary_fields = [
         'ID',
         'Created'

@@ -14,7 +14,15 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 class EditableFieldGroup extends EditableFormField
 {
     private static $has_one = [
-        'End' => EditableFieldGroupEnd::class
+        'End' => EditableFieldGroupEnd::class,
+    ];
+
+    private static $owns = [
+        'End',
+    ];
+
+    private static $cascade_deletes = [
+        'End',
     ];
 
     /**
@@ -84,24 +92,6 @@ class EditableFieldGroup extends EditableFormField
         // if this field has an extra class
         if ($this->ExtraClass) {
             $field->addExtraClass($this->ExtraClass);
-        }
-    }
-
-    protected function onBeforeDelete()
-    {
-        parent::onBeforeDelete();
-
-        // Ensures EndID is lazy-loaded for onAfterDelete
-        $this->EndID;
-    }
-
-    protected function onAfterDelete()
-    {
-        parent::onAfterDelete();
-
-        // Delete end
-        if (($end = $this->End()) && $end->exists()) {
-            $end->delete();
         }
     }
 }

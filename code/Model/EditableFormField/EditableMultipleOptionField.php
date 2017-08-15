@@ -43,7 +43,15 @@ class EditableMultipleOptionField extends EditableFormField
     private static $abstract = true;
 
     private static $has_many = [
-        'Options' => EditableOption::class
+        'Options' => EditableOption::class,
+    ];
+
+    private static $owns = [
+        'Options',
+    ];
+
+    private static $cascade_deletes = [
+        'Options',
     ];
 
     private static $table_name = 'EditableMultipleOptionField';
@@ -104,99 +112,14 @@ class EditableMultipleOptionField extends EditableFormField
     }
 
     /**
-     * Publishing Versioning support.
-     *
-     * When publishing it needs to handle copying across / publishing
-     * each of the individual field options
-     *
-     * @param string $fromStage
-     * @param string $toStage
-     * @param bool $createNewVersion
-     */
-    public function copyVersionToStage($fromStage, $toStage, $createNewVersion = false)
-    {
-        parent::copyVersionToStage($fromStage, $toStage, $createNewVersion);
-        $this->publishOptions($fromStage, $toStage, $createNewVersion);
-    }
-
-
-    /**
-     * Publish list options
-     *
-     * @param string $fromStage
-     * @param string $toStage
-     * @param bool $createNewVersion
-     */
-    protected function publishOptions($fromStage, $toStage, $createNewVersion)
-    {
-        $seenIDs = [];
-
-        // Publish all options
-        foreach ($this->Options() as $option) {
-            $seenIDs[] = $option->ID;
-            $option->copyVersionToStage($fromStage, $toStage, $createNewVersion);
-        }
-
-        // remove any orphans from the "fromStage"
-        $options = Versioned::get_by_stage(EditableOption::class, $toStage)
-            ->filter('ParentID', $this->ID);
-
-        if (!empty($seenIDs)) {
-            $options = $options->exclude('ID', $seenIDs);
-        }
-
-        foreach ($options as $rule) {
-            $rule->deleteFromStage($toStage);
-        }
-    }
-
-    /**
-     * Unpublishing Versioning support
-     *
-     * When unpublishing the field it has to remove all options attached
-     *
-     * @return void
-     */
-    public function doDeleteFromStage($stage)
-    {
-        // Remove options
-        $options = Versioned::get_by_stage(EditableOption::class, $stage)
-            ->filter('ParentID', $this->ID);
-        foreach ($options as $option) {
-            $option->deleteFromStage($stage);
-        }
-
-        parent::doDeleteFromStage($stage);
-    }
-
-    /**
-     * Deletes all the options attached to this field before deleting the
-     * field. Keeps stray options from floating around
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        $options = $this->Options();
-
-        if ($options) {
-            foreach ($options as $option) {
-                $option->delete();
-            }
-        }
-
-        parent::delete();
-    }
-
-    /**
      * Duplicate a pages content. We need to make sure all the fields attached
      * to that page go with it
      *
-     * @return DataObject
+     * {@inheritDoc}
      */
     public function duplicate($doWrite = true, $manyMany = 'many_many')
     {
-        $clonedNode = parent::duplicate();
+        $clonedNode = parent::duplicate($doWrite, $manyMany);
 
         foreach ($this->Options() as $field) {
             $newField = $field->duplicate(false);

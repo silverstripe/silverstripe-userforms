@@ -98,14 +98,4 @@ class EditableFieldGroupEnd extends EditableFormField
             }
         }
     }
-
-    protected function onAfterDelete()
-    {
-        parent::onAfterDelete();
-
-        // Delete group
-        if (($group = $this->Group()) && $group->exists()) {
-            $group->delete();
-        }
-    }
 }

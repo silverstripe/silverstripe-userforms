@@ -173,6 +173,14 @@ class EditableFormField extends DataObject
         'DisplayRules' => EditableCustomRule::class . '.Parent'
     ];
 
+    private static $owns = [
+        'DisplayRules',
+    ];
+
+    private static $cascade_deletes = [
+        'DisplayRules',
+    ];
+
     /**
      * @var bool
      */
@@ -198,10 +206,12 @@ class EditableFormField extends DataObject
      * Set the visibility of an individual form field
      *
      * @param bool
+     * @return $this
      */
     public function setReadonly($readonly = true)
     {
         $this->readonly = $readonly;
+        return $this;
     }
 
     /**
@@ -547,92 +557,6 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * Check if can publish
-     *
-     * @param Member $member
-     * @return bool
-     */
-    public function canPublish($member = null)
-    {
-        return $this->canEdit($member);
-    }
-
-    /**
-     * Check if can unpublish
-     *
-     * @param Member $member
-     * @return bool
-     */
-    public function canUnpublish($member = null)
-    {
-        return $this->canDelete($member);
-    }
-
-    /**
-     * Publish this Form Field to the live site
-     *
-     * Wrapper for the {@link Versioned} publish function
-     *
-     * @param string $fromStage
-     * @param string $toStage
-     * @param bool $createNewVersion
-     */
-    public function doPublish($fromStage, $toStage, $createNewVersion = false)
-    {
-        $this->publish($fromStage, $toStage, $createNewVersion);
-        $this->publishRules($fromStage, $toStage, $createNewVersion);
-    }
-
-    /**
-     * Publish all field rules
-     *
-     * @param string $fromStage
-     * @param string $toStage
-     * @param bool $createNewVersion
-     */
-    protected function publishRules($fromStage, $toStage, $createNewVersion)
-    {
-        $seenRuleIDs = [];
-
-        // Don't forget to publish the related custom rules...
-        foreach ($this->DisplayRules() as $rule) {
-            $seenRuleIDs[] = $rule->ID;
-            $rule->doPublish($fromStage, $toStage, $createNewVersion);
-            $rule->destroy();
-        }
-
-        // remove any orphans from the "fromStage"
-        $rules = Versioned::get_by_stage(EditableCustomRule::class, $toStage)
-            ->filter('ParentID', $this->ID);
-
-        if (!empty($seenRuleIDs)) {
-            $rules = $rules->exclude('ID', $seenRuleIDs);
-        }
-
-        foreach ($rules as $rule) {
-            $rule->deleteFromStage($toStage);
-        }
-    }
-
-    /**
-     * Delete this field from a given stage
-     *
-     * Wrapper for the {@link Versioned} deleteFromStage function
-     */
-    public function doDeleteFromStage($stage)
-    {
-        // Remove custom rules in this stage
-        $rules = Versioned::get_by_stage(EditableCustomRule::class, $stage)
-            ->filter('ParentID', $this->ID);
-        foreach ($rules as $rule) {
-            $rule->deleteFromStage($stage);
-        }
-
-        // Remove record
-        $this->deleteFromStage($stage);
-    }
-
-    /**
      * checks whether record is new, copied from SiteTree
      */
     public function isNew()
@@ -646,23 +570,6 @@ class EditableFormField extends DataObject
         }
 
         return stripos($this->ID, 'new') === 0;
-    }
-
-    /**
-     * checks if records is changed on stage
-     * @return boolean
-     */
-    public function getIsModifiedOnStage()
-    {
-        // new unsaved fields could be never be published
-        if ($this->isNew()) {
-            return false;
-        }
-
-        $stageVersion = Versioned::get_versionnumber_by_stage(EditableFormField::class, 'Stage', $this->ID);
-        $liveVersion = Versioned::get_versionnumber_by_stage(EditableFormField::class, 'Live', $this->ID);
-
-        return ($stageVersion && $stageVersion != $liveVersion);
     }
 
     /**

@@ -1,18 +1,15 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+namespace SilverStripe\UserForms\Test\Model;
 
-use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Security\IdentityStore;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
@@ -30,6 +27,7 @@ class EditableFormFieldTest extends FunctionalTest
         $text = $this->objFromFixture(EditableTextField::class, 'basic-text');
 
         $this->logInWithPermission('ADMIN');
+
         $this->assertTrue($text->canCreate());
         $this->assertTrue($text->canView());
         $this->assertTrue($text->canEdit());
@@ -45,9 +43,9 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertTrue($text->canEdit());
         $this->assertTrue($text->canDelete());
 
-        Injector::inst()->get(IdentityStore::class)->logOut(Controller::curr()->getRequest());
-
+        $this->logOut();
         $this->logInWithPermission('SITETREE_VIEW_ALL');
+
         $this->assertFalse($text->canCreate());
 
         $text->setReadonly(false);
@@ -139,12 +137,12 @@ class EditableFormFieldTest extends FunctionalTest
 
         $clone = $dropdown->duplicate();
 
-        $this->assertEquals($clone->Options()->Count(), $dropdown->Options()->Count());
+        $this->assertEquals($dropdown->Options()->Count(), $clone->Options()->Count());
 
         foreach ($clone->Options() as $option) {
-            $orginal = $dropdown->Options()->find('Title', $option->Title);
+            $original = $dropdown->Options()->find('Title', $option->Title);
 
-            $this->assertEquals($orginal->Sort, $option->Sort);
+            $this->assertEquals($original->Sort, $option->Sort);
         }
     }
 
@@ -221,7 +219,7 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testFormatDisplayRules()
     {
-        $field = $this->objFromFixture(EditableFormField::class, 'irdNumberField');
+        $field = $this->objFromFixture(EditableTextField::class, 'irdNumberField');
         $displayRules = $field->formatDisplayRules();
         $this->assertNotNull($displayRules);
         $this->assertCount(1, $displayRules['operations']);

@@ -1,25 +1,40 @@
-SilverStripe\UserForms\Model\EditableFormField:
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  basic-text:
+    Name: basic-text-name
+    Title: Basic Text Field
+
+  basic-text-2:
+    Name: basic-text-name
+    Title: Basic Text Field
+
+  required-text:
+    Name: required-text-field
+    Title: Required Text Field
+    CustomErrorMessage: Custom Error Message
+    Required: true
+
   irdNumberField:
-    ClassName: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
     Name: IRDNumber
     Title: "Enter your IRD Number"
+
   countryTextField:
-    ClassName: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
     Name: CountryTextSelection
     Title: "Enter your country (2 digit prefix)"
     DisplayRulesConjunction: And
     ShowOnLoad: false
+
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:
     Display: Show
     ConditionOption: HasValue
     FieldValue: NZ
-    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField.countryTextField
-    Parent: =>SilverStripe\UserForms\Model\EditableFormField.irdNumberField
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.countryTextField
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.irdNumberField
   rule-1:
     Display: Hide
     ConditionOption: HasValue
     FieldValue: 6
+
 SilverStripe\UserForms\Model\EditableFormField\EditableOption:
   option-1:
     Name: Option1
@@ -78,21 +93,6 @@ SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     EmailSubject: Email Subject
     EmailFrom: no-reply@example.com
     HideFormData: true
-
-SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-  basic-text:
-    Name: basic-text-name
-    Title: Basic Text Field
-
-  basic-text-2:
-    Name: basic-text-name
-    Title: Basic Text Field
-
-  required-text:
-    Name: required-text-field
-    Title: Required Text Field
-    CustomErrorMessage: Custom Error Message
-    Required: true
 
 SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
   basic-dropdown:

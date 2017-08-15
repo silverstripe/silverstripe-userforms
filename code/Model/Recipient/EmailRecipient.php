@@ -65,7 +65,15 @@ class EmailRecipient extends DataObject
     ];
 
     private static $has_many = [
-        'CustomRules' => EmailRecipientCondition::class
+        'CustomRules' => EmailRecipientCondition::class,
+    ];
+
+    private static $owns = [
+        'CustomRules',
+    ];
+
+    private static $cascade_deetes = [
+        'CustomRules',
     ];
 
     private static $summary_fields = [
