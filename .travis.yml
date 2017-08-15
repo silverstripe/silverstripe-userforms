@@ -20,7 +20,7 @@ before_script:
 
   # Install composer dependencies
   - composer install --prefer-dist
-  - composer require --prefer-dist --no-update silverstripe/framework:4.0.x-dev silverstripe/cms:4.0.x-dev silverstripe/admin:1.0.x-dev silverstripe/versioned:1.0.x-dev
+  - composer require --prefer-dist --no-update silverstripe/framework:4.0.x-dev silverstripe/cms:4.0.x-dev silverstripe/admin:1.0.x-dev silverstripe/versioned:1.0.x-dev silverstripe-themes/simple:~3.2
   - composer update
 
 script:

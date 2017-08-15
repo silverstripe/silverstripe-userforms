@@ -15,16 +15,23 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Model\UserDefinedFormController;
 use SilverStripe\View\ArrayData;
+use SilverStripe\View\SSViewer;
 
 /**
  * @package userforms
  */
-
 class UserDefinedFormControllerTest extends FunctionalTest
 {
     protected static $fixture_file = 'UserDefinedFormTest.yml';
 
     protected static $use_draft_site = true;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        Config::modify()->set(SSViewer::class, 'themes', ['simple', '$default']);
+    }
 
     public function testProcess()
     {

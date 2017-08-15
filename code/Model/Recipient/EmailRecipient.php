@@ -521,7 +521,12 @@ class EmailRecipient extends DataObject
         $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
-        $found = $finder->find(BASE_PATH . '/' . UserDefinedForm::config()->get('email_template_directory'));
+        $templateDirectory = UserDefinedForm::config()->get('email_template_directory');
+        // Handle cases where "userforms" might not be the base module directory, e.g. in a Travis build
+        if (!file_exists($templateDirectory) && substr($templateDirectory, 0, 10) === 'userforms/') {
+            $templateDirectory = substr($templateDirectory, 10);
+        }
+        $found = $finder->find(BASE_PATH . '/' . $templateDirectory);
 
         foreach ($found as $key => $value) {
             $template = pathinfo($value);
