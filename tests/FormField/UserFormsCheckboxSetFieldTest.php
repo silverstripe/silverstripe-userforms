@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\FormField;
+namespace SilverStripe\UserForms\Tests\FormField;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\RequiredFields;

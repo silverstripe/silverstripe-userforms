@@ -16,7 +16,7 @@ matrix:
 before_script:
   # Init PHP
   - phpenv rehash
-  - phpenv config-rm xdebug.ini
+  - phpenv config-rm xdebug.ini || true
 
   # Install composer dependencies
   - composer install --prefer-dist

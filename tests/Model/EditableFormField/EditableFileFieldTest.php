@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\ORM\ValidationException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Form;
+namespace SilverStripe\UserForms\Tests\Form;
 
 use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\Dev\SapphireTest;

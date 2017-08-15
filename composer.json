@@ -42,7 +42,7 @@
     "autoload": {
         "psr-4": {
             "SilverStripe\\UserForms\\": "code/",
-            "SilverStripe\\UserForms\\Test\\": "tests/"
+            "SilverStripe\\UserForms\\Tests\\": "tests/"
         }
     },
     "suggest": {

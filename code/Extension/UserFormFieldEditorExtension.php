@@ -275,7 +275,7 @@ class UserFormFieldEditorExtension extends DataExtension
     public function onAfterRevertToLive()
     {
         foreach ($this->owner->Fields() as $field) {
-            $field->copyVersionToStage(Versioned::LIVE, Versioned::STAGE, false);
+            $field->copyVersionToStage(Versioned::LIVE, Versioned::DRAFT, false);
             $field->writeWithoutVersion();
         }
     }

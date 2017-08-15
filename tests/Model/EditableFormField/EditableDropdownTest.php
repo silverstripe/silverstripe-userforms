@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Model\EditableFormField;
+namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\Dev\SapphireTest;

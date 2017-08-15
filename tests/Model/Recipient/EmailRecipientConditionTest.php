@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Model\Recipient;
+namespace SilverStripe\UserForms\Tests\Model\Recipient;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;

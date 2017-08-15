@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Test\Model;
+namespace SilverStripe\UserForms\Tests\Model;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;

@@ -44,20 +44,14 @@ mappings:
   DisambiguationSegmentFieldModifier: SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier
   UnderscoreSegmentFieldModifier: SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier
   UserFormsColumnCleanTask: SilverStripe\UserForms\Task\UserFormsColumnCleanTask
-  UserFormsUpgradeService: SilverStripe\UserForms\Task\UserFormsUpgradeService
-  UserFormsUpgradeTask: SilverStripe\UserForms\Task\UserFormsUpgradeTask
-  UserFormsVersionedTask: SilverStripe\UserForms\Task\UserFormsVersionedTask
-  UserFormTest: SilverStripe\UserForms\Test\Form\UserFormTest
-  UserFormsCheckboxSetFieldTest: SilverStripe\UserForms\Test\FormField\UserFormsCheckboxSetFieldTest
-  EditableCustomRuleTest: SilverStripe\UserForms\Test\Model\EditableCustomRuleTest
-  UserDefinedFormControllerTest: SilverStripe\UserForms\Test\Model\UserDefinedFormControllerTest
-  UserDefinedFormControllerTest_Controller: SilverStripe\UserForms\Test\Model\UserDefinedFormControllerTest_Controller
-  UserDefinedFormTest: SilverStripe\UserForms\Test\Model\UserDefinedFormTest
-  EditableDropdownTest: SilverStripe\UserForms\Test\Model\EditableFormField\EditableDropdownTest
-  EditableFileFieldTest: SilverStripe\UserForms\Test\Model\EditableFormField\EditableFileFieldTest
-  EditableFormFieldTest: SilverStripe\UserForms\Test\Model\EditableFormField\EditableFormFieldTest
-  EditableLiteralFieldTest: SilverStripe\UserForms\Test\Model\EditableFormField\EditableLiteralFieldTest
-  SecureEditableFileFieldTest: SilverStripe\UserForms\Test\Model\EditableFormField\SecureEditableFileFieldTest
-  UserDefinedForm_EmailRecipientConditionTest: SilverStripe\UserForms\Test\Model\Recipient\UserDefinedForm_EmailRecipientConditionTest
-  UserFormsUpgradeServiceTest: SilverStripe\UserForms\Test\Task\UserFormsUpgradeServiceTest
-  UserFormsVersionedTaskTest: SilverStripe\UserForms\Test\Task\UserFormsVersionedTaskTest
+  UserFormTest: SilverStripe\UserForms\Tests\Form\UserFormTest
+  UserFormsCheckboxSetFieldTest: SilverStripe\UserForms\Tests\FormField\UserFormsCheckboxSetFieldTest
+  EditableCustomRuleTest: SilverStripe\UserForms\Tests\Model\EditableCustomRuleTest
+  UserDefinedFormControllerTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormControllerTest
+  UserDefinedFormTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormTest
+  EditableDropdownTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableDropdownTest
+  EditableFileFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableFileFieldTest
+  EditableFormFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormFieldTest
+  EditableLiteralFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableLiteralFieldTest
+  SecureEditableFileFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\SecureEditableFileFieldTest
+  UserDefinedForm_EmailRecipientConditionTest: SilverStripe\UserForms\Tests\Model\Recipient\EmailRecipientConditionTest
