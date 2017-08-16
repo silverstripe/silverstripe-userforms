@@ -213,19 +213,19 @@ class UserFormFieldEditorExtension extends DataExtension
      * When duplicating a UserDefinedForm, duplicate all of its fields and display rules
      *
      * @see DataObject::duplicate
-     * @param DataObject $newPage
+     * @param DataObject $oldPage
      * @param bool $doWrite
      * @param string $manyMany
      * @return DataObject
      */
-    public function onAfterDuplicate($newPage, $doWrite, $manyMany)
+    public function onAfterDuplicate($oldPage, $doWrite, $manyMany)
     {
         // List of EditableFieldGroups, where the key of the array is the ID of the old end group
         $fieldGroups = [];
-        foreach ($this->owner->Fields() as $field) {
+        foreach ($oldPage->Fields() as $field) {
             $newField = $field->duplicate(false);
-            $newField->ParentID = $newPage->ID;
-            $newField->ParentClass = $newPage->ClassName;
+            $newField->ParentID = $this->owner->ID;
+            $newField->ParentClass = $this->owner->ClassName;
             $newField->Version = 0;
             $newField->write();
 
@@ -248,8 +248,6 @@ class UserFormFieldEditorExtension extends DataExtension
                 $newRule->write();
             }
         }
-
-        return $newPage;
     }
 
     /**
