@@ -16,7 +16,8 @@ matrix:
 before_script:
   # Init PHP
   - phpenv rehash
-  - phpenv config-rm xdebug.ini || true
+  - phpenv config-rm xdebug.ini
+  - echo 'memory_limit = 2048M' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
   # Install composer dependencies
   - composer install --prefer-dist

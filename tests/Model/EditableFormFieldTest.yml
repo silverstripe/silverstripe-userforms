@@ -98,12 +98,16 @@ SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
   basic-dropdown:
     Name: basic-dropdown
     Title: Basic Dropdown Field
-    Options: =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-1, =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-2
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-2
 
   department-dropdown:
     Name: department
     Title: Department
-    Options: =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-1, =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-2
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-2
 
 SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
   checkbox-1:
@@ -123,7 +127,9 @@ SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
   checkbox-group:
     Name: check-box-group
     Title: Check box group
-    Options: =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-3, =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-4
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-3
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-4
 
 SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
   email-field:
@@ -134,7 +140,9 @@ SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
   radio-field:
     Name: radio-option
     Title: Radio Option
-    Options: =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-5, =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-6
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-5
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-6
 
 SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
   file-field:
@@ -145,7 +153,10 @@ SilverStripe\UserForms\Model\UserDefinedForm:
   basic-form-page:
     Title: User Defined Form
     Fields: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
-    EmailRecipients: =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1, =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-html, =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
+    EmailRecipients:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-html
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
 
   form-with-reset-and-custom-action:
     Title: Form with Reset Action
@@ -158,6 +169,8 @@ SilverStripe\UserForms\Model\UserDefinedForm:
 
   custom-rules-form:
     Title: Custom Rules Form
-    Fields: =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox.checkbox-with-rule, =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox.checkbox-with-rule
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
   empty-form:
     Title: Empty Form
