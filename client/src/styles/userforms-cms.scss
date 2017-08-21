@@ -2,11 +2,6 @@
  * Animations
  */
 
-@keyframes rowSlide {
-	0% {top: 20%;}
-	100% {top: 80%;}
-}
-
 @keyframes flashBackground {
 	0% {background-color: white;}
 	10% {background-color: #dcfedd;}
@@ -42,11 +37,6 @@
 
 				.handle {
 					min-height: 46px;
-				}
-
-				&.newField {
-					position: fixed;
-					animation: rowSlide .5s ease forwards;
 				}
 
 				&.flashBackground {

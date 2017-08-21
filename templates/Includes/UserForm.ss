@@ -1,5 +1,5 @@
 <form $AttributesHTML>
-	
+
 <% include UserFormProgress %>
 <% include UserFormStepErrors %>
 
@@ -9,13 +9,16 @@
 	<p id="{$FormName}_error" class="message $MessageType" aria-hidden="true" style="display: none;"></p>
 <% end_if %>
 
-<fieldset>
-	<% if $Legend %><legend>$Legend</legend><% end_if %>
-	<% loop $Fields %>
-		$FieldHolder
-	<% end_loop %>
-	<div class="clear"><!-- --></div>
-</fieldset>
+<% if $Legend %>
+    <fieldset>
+        <legend>$Legend</legend>
+        <% include UserFormFields %>
+    </fieldset>
+<% else %>
+    <div class="userform-fields">
+        <% include UserFormFields %>
+    </div>
+<% end_if %>
 
 <% if $Steps.Count > 1 %>
 	<% include UserFormStepNav %>
