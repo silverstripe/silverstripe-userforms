@@ -81,9 +81,14 @@ class SubmittedForm extends DataObject
                 $self->Values()->sort('Created', 'ASC')
             );
 
+            $exportColumns = array(
+                'Title' => 'Title',
+                'ExportValue' => 'Value'
+            );
+
             $config = new GridFieldConfig();
             $config->addComponent(new GridFieldDataColumns());
-            $config->addComponent(new GridFieldExportButton());
+            $config->addComponent(new GridFieldExportButton('after', $exportColumns));
             $config->addComponent(new GridFieldPrintButton());
             $values->setConfig($config);
 
