@@ -1,156 +1,151 @@
-/**
- * Animations
- */
+// Animations
 
-@keyframes flashBackground {
-	0% {background-color: white;}
-	10% {background-color: #dcfedd;}
-	70% {background-color: #dcfedd;}
+@keyframes flash-background {
+  0% {background-color: $body-bg;}
+  10% {background-color: $green-bg;}
+  70% {background-color: $green-bg;}
 }
 
-/**
- * Styles for cms
- */
+.uf-field-editor {
+  padding-bottom: 0;
 
-.cms {
-	.uf-field-editor {
-		padding-bottom: 0;
+  // Row styles
+  table.ss-gridfield-table {
+    // Standard rows
+    .ss-gridfield-item {
+      height: $height-base;
 
-		// Row styles
-		table.ss-gridfield-table {
-			// Standard rows
-			.ss-gridfield-item {
-				height: 46px;
+      &,
+      &:hover {
+        background: $body-bg;
+      }
 
-				&, &:hover {
-					background: white;
-				}
+      td {
+        border-right-width: 0;
+        border-top: 1px solid $gray-light;
 
-				td {
-					border-right-width: 0;
-					border-top: 1px solid #EEE;
+        &:last-child {
+          border-right-width: 1px;
+        }
+      }
 
-					&:last-child {
-						border-right-width: 1px;
-					}
-				}
+      .handle {
+        min-height: $height-base;
+      }
 
-				.handle {
-					min-height: 46px;
-				}
+      &.flash-background {
+        animation: flash-background 2s linear;
+      }
 
-				&.flashBackground {
-					animation: flashBackground 2s linear;
-				}
+      &.ui-sortable-placeholder {
+        height: $placeholder-height;
+      }
+    }
 
-				&.ui-sortable-placeholder {
-					height: 50px;
-				}
-			}
+    .ss-gridfield-item.infieldgroup {
+      &,
+      &:hover {
+        background: $blue-light;
+      }
 
-			.ss-gridfield-item.inFieldGroup {
-				&, &:hover {
-					background: #f2f9fd;
-				}
+      td {
+        border-bottom: 0;
+        border-top: 1px solid $gray-light;
+      }
 
-				td {
-					border-bottom: 0;
-					border-top: 1px solid #eee;
-				}
+      .col-reorder,
+      .handle {
+        background: $blue;
+        border-top: 0;
+      }
 
-				.col-reorder, .handle {
-					background: #BEE0F8;
-					border-top: 0;
-				}
+      &.infieldgroup-level-2 {
+        .col-reorder,
+        .handle {
+          background: $blue-dark;
+          border-top: 0;
+        }
+      }
 
-				&.inFieldGroup-level-2 {
-					.col-reorder, .handle {
-						background: #99CEF4;
-						border-top: 0;
-					}
-				}
+      &.infieldgroup-level-3 {
+        .col-reorder,
+        .handle {
+          background: $blue-darker;
+          border-top: 0;
+        }
+      }
+    }
 
-				&.inFieldGroup-level-3 {
-					.col-reorder, .handle {
-						background: #89BEF4;
-						border-top: 0;
-					}
-				}
-			}
+    .ss-gridfield-item[data-class="EditableFormStep"] {
+      &,
+      &:hover {
+        background: $gray-bg;
+      }
 
-			.ss-gridfield-item[data-class='EditableFormStep'] {
-				&, &:hover {
-					background: #dae2e7;
-				}
+      label {
+        font-weight: bold;
+        color: $gray-base;
+        font-size: 1.1em;
+      }
 
-				label {
-					font-weight: bold;
-					color: black;
-					font-size: 1.1em;
-				}
+      td {
+        border-top: 1px solid $gray;
+      }
 
-				td {
-					border-top: 1px solid #a6b6c1;
-				}
+      + .ss-gridfield-item td {
+        border-top: 1px solid $gray-bg;
+      }
 
-				+ .ss-gridfield-item td {
-					border-top: 1px solid #dae2e7;
-				}
+      + .ss-gridfield-item[data-class="EditableFieldGroup"] td {
+        border-top: 1px solid $blue-base;
+      }
+    }
 
-				+ .ss-gridfield-item[data-class='EditableFieldGroup'] td {
-					border-top: 1px solid #a8d7f5;
-				}
-			}
+    .ss-gridfield-item[data-class="EditableFieldGroup"] {
+      td {
+        border-top: 1px solid $blue-base;
+      }
 
-			.ss-gridfield-item[data-class='EditableFieldGroup'] {
-				td {
-					border-top: 1px solid #a8d7f5;
-				}
+      label {
+        font-weight: bold;
+        color: $gray-darker;
+      }
+    }
 
-				label {
-					font-weight: bold;
-					color: #444;
-				}
-			}
+    .ss-gridfield-item[data-class="EditableFieldGroupEnd"] {
+      td {
+        border-bottom: 1px solid $blue-base;
+      }
 
-			.ss-gridfield-item[data-class='EditableFieldGroupEnd'] {
-				td {
-					border-bottom: 1px solid #a8d7f5;
-				}
+      + .ss-gridfield-item[data-class="EditableFieldGroupEnd"] {
+        border-top: 0;
+      }
 
-				+ .ss-gridfield-item[data-class='EditableFieldGroupEnd'] {
-					border-top: 0;
-				}
+      .col-buttons .action {
+        display: none;
+      }
 
-				.col-buttons .action{
-					display: none;
-				}
+      label {
+        color: $gray-dark;
+      }
+    }
+  }
 
-				label {
-					color: #777;
-				}
-			}
-		}
+  .sticky-buttons {
+    position: fixed;
+    top: $height-top;
+    z-index: 2;
+    background: $gray-light;
+    box-shadow: 0 $padding-base $padding-xs -$padding-base-horizontal $gray-light;
+    padding: $padding-base;
+    margin-left: -$padding-base;
 
-		.stickyButtons {
-			position: fixed;
-			top: 40px;
-			z-index: 2;
-			background: #E6EAED;
-			box-shadow: 0 12px 4px -8px #999;
-			padding: 12px;
-			margin-left: -12px;
+    & button.action {
+      margin-bottom: 0;
+    }
 
-			& button.action {
-				margin-bottom: 0;
-			}
-
-			~ .ss-gridfield-table {
-				margin-top: 40px;
-			}
-		}
-	}
+    ~ .ss-gridfield-table {
+      margin-top: $height-top;
+    }
+  }
 }
-
-
-

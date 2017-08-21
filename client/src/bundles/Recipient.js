@@ -2,32 +2,32 @@
  * Email recipient behaviour.
  */
 
-(function($) {
-    $.entwine('ss', function($) {
-        var recipient = {
-            // Some fields are only visible when HTML email are being sent.
-            updateFormatSpecificFields: function () {
-                var sendPlainChecked = $('input[name="SendPlain"]').is(':checked');
+import $ from 'jquery';
 
-                $('.field.toggle-html-only')[sendPlainChecked ? 'hide' : 'show']();
-                $('.field.toggle-plain-only')[sendPlainChecked ? 'show' : 'hide']();
-            }
-        };
+$.entwine('ss', () => {
+  const recipient = {
+    // Some fields are only visible when HTML email are being sent.
+    updateFormatSpecificFields: () => {
+      const sendPlainChecked = $('input[name="SendPlain"]').is(':checked');
 
-        $('#Form_ItemEditForm .EmailRecipientForm').entwine({
-            onmatch: function () {
-                recipient.updateFormatSpecificFields();
-            },
+      $('.field.toggle-html-only')[sendPlainChecked ? 'hide' : 'show']();
+      $('.field.toggle-plain-only')[sendPlainChecked ? 'show' : 'hide']();
+    },
+  };
 
-            onunmatch: function () {
-                this._super();
-            }
-        });
+  $('#Form_ItemEditForm .EmailRecipientForm').entwine({
+    onmatch: () => {
+      recipient.updateFormatSpecificFields();
+    },
 
-        $('#Form_ItemEditForm .EmailRecipientForm input[name="SendPlain"]').entwine({
-            onchange: function () {
-                recipient.updateFormatSpecificFields();
-            }
-        });
-    });
-}(jQuery));
+    onunmatch: () => {
+      this._super();
+    },
+  });
+
+  $('#Form_ItemEditForm .EmailRecipientForm input[name="SendPlain"]').entwine({
+    onchange: () => {
+      recipient.updateFormatSpecificFields();
+    },
+  });
+});

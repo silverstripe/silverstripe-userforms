@@ -2,107 +2,106 @@
  * form builder behaviour.
  */
 
- (function($) {
-	$.entwine('ss', function($) {
-		var stickyHeaderInterval;
+import $ from 'jquery';
 
-		$(".uf-field-editor tbody").entwine({
-			onmatch: function() {
-				var i,
-					thisLevel,
-					depth = 0,
-					$buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('stickyButtons'),
-					navHeight = $('.cms-content-header.north').height() + parseInt($('.stickyButtons').css('padding-top'), 10),
-					fieldEditor = $('.uf-field-editor'),
-					self = this;
+$.entwine('ss', () => {
+  let stickyHeaderInterval = null;
 
-				this._super();
+  $('.uf-field-editor tbody').entwine({
+    onmatch: () => {
+      let i = 0;
+      let thisLevel = 0;
+      let depth = 0;
+      const $buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('sticky-buttons');
+      const navHeight = $('.cms-content-header.north').height()
+        + parseInt($('.sticky-buttons').css('padding-top'), 10);
+      const fieldEditor = $('.uf-field-editor');
 
-				// Loop through all rows and set necessary styles
-				this.find('.ss-gridfield-item').each(function() {
-					switch($(this).data('class')) {
-						case 'EditableFormStep': {
-							depth = 0;
-							return;
-						}
-						case 'EditableFieldGroup': {
-							thisLevel = ++depth;
-							break;
-						}
-						case 'EditableFieldGroupEnd': {
-							thisLevel = depth--;
-							break;
-						}
-						default: {
-							thisLevel = depth;
-						}
-					}
+      this._super();
 
-					$(this).toggleClass('inFieldGroup', thisLevel > 0);
-					for(i = 1; i <= 5; i++) {
-						$(this).toggleClass('inFieldGroup-level-'+i, thisLevel >= i);
-					}
-				});
+      // Loop through all rows and set necessary styles
+      this.find('.ss-gridfield-item').each(() => {
+        switch ($(this).data('class')) {
+          case 'EditableFormStep': {
+            depth = 0;
+            return;
+          }
+          case 'EditableFieldGroup': {
+            thisLevel = ++depth;
+            break;
+          }
+          case 'EditableFieldGroupEnd': {
+            thisLevel = depth--;
+            break;
+          }
+          default: {
+            thisLevel = depth;
+          }
+        }
 
-				// Make sure gridfield buttons stick to top of page when user scrolls down
-				stickyHeaderInterval = setInterval(function () {
-					var offsetTop = fieldEditor.offset().top;
-					$buttonrow.width('100%');
-					if (offsetTop > navHeight || offsetTop === 0) {
-						$buttonrow.removeClass('stickyButtons');
-					} else {
-						$buttonrow.addClass('stickyButtons');
-					};
-				}, 300);
-			},
-			onunmatch: function () {
-				this._super();
+        $(this).toggleClass('infieldgroup', thisLevel > 0);
+        for (i = 1; i <= 5; i++) {
+          $(this).toggleClass(`infieldgroup-level-${i}`, thisLevel >= i);
+        }
+      });
 
-				clearInterval(stickyHeaderInterval);
-			}
-		});
+      // Make sure gridfield buttons stick to top of page when user scrolls down
+      stickyHeaderInterval = setInterval(() => {
+        const offsetTop = fieldEditor.offset().top;
+        $buttonrow.width('100%');
+        if (offsetTop > navHeight || offsetTop === 0) {
+          $buttonrow.removeClass('sticky-buttons');
+        } else {
+          $buttonrow.addClass('sticky-buttons');
+        }
+      }, 300);
+    },
+    onunmatch: () => {
+      this._super();
 
-		// When new fields are added..
-		$('.uf-field-editor .ss-gridfield-buttonrow .action').entwine({
-			onclick: function (e) {
-				this._super(e);
+      clearInterval(stickyHeaderInterval);
+    },
+  });
 
-				this.trigger('addnewinline');
-			}
-		});
+  // When new fields are added.
+  $('.uf-field-editor .ss-gridfield-buttonrow .action').entwine({
+    onclick: (e) => {
+      this._super(e);
 
-		$('.uf-field-editor').entwine({
-			onmatch: function () {
-				var self = this;
+      this.trigger('addnewinline');
+    },
+  });
 
-				this._super();
+  $('.uf-field-editor').entwine({
+    onmatch: () => {
+      this._super();
 
-				// When the 'Add field' button is clicked set a one time listener.
-				// When the GridField is reloaded focus on the newly added field.
-				this.on('addnewinline', function () {
-					self.one('reload', function () {
-						//If fieldgroup, focus on the start marker
-						var $newField = self.find('.ss-gridfield-item').last(), $groupEnd;
-						if ($newField.attr('data-class') === 'EditableFieldGroupEnd') {
-							$groupEnd = $newField;
-							$groupEnd.prev().find('.col-Title input').focus();
-							$newField = $groupEnd.add($groupEnd.prev());
-							$groupEnd.css('visibility', 'hidden');
-						} else {
-							$newField.find('.col-Title input').focus();
-						}
+      // When the 'Add field' button is clicked set a one time listener.
+      // When the GridField is reloaded focus on the newly added field.
+      this.on('addnewinline', () => {
+        this.one('reload', () => {
+          // If fieldgroup, focus on the start marker
+          let $newField = this.find('.ss-gridfield-item').last();
+          let $groupEnd = null;
+          if ($newField.attr('data-class') === 'EditableFieldGroupEnd') {
+            $groupEnd = $newField;
+            $groupEnd.prev().find('.col-Title input').focus();
+            $newField = $groupEnd.add($groupEnd.prev());
+            $groupEnd.css('visibility', 'hidden');
+          } else {
+            $newField.find('.col-Title input').focus();
+          }
 
-						$newField.addClass('flashBackground');
-						$(".cms-content-fields").scrollTop($(".cms-content-fields")[0].scrollHeight);
-						if($groupEnd) {
-							$groupEnd.css('visibility', 'visible');
-						}
-					});
-				});
-			},
-			onummatch: function () {
-				this._super();
-			}
-		});
-	});
-}(jQuery));
+          $newField.addClass('flashBackground');
+          $('.cms-content-fields').scrollTop($('.cms-content-fields')[0].scrollHeight);
+          if ($groupEnd) {
+            $groupEnd.css('visibility', 'visible');
+          }
+        });
+      });
+    },
+    onummatch: () => {
+      this._super();
+    },
+  });
+});

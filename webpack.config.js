@@ -54,8 +54,8 @@ const config = [
   {
     name: 'css',
     entry: {
-      userforms: `${PATHS.SRC}/styles/userforms.scss`,
-      'userforms-cms': `${PATHS.SRC}/styles/userforms-cms.scss`,
+      userforms: `${PATHS.SRC}/styles/bundle.scss`,
+      'userforms-cms': `${PATHS.SRC}/styles/bundle-cms.scss`,
     },
     output: {
       path: PATHS.DIST,
