@@ -261,12 +261,9 @@ class UserDefinedForm_EmailRecipient extends DataObject
                 ->addExtraClass('toggle-html-only'),
             TextareaField::create('EmailBody', _t('UserDefinedForm.EMAILBODY', 'Body'))
                 ->addExtraClass('toggle-plain-only'),
-            LiteralField::create(
-                'EmailPreview',
-                '<div id="EmailPreview" class="field toggle-html-only">' . $preview . '</div>'
-            )
+            LiteralField::create('EmailPreview', $preview)
         ));
-        
+
         $fields->fieldByName('Root.EmailContent')->setTitle(_t('UserDefinedForm_EmailRecipient.EMAILCONTENTTAB', 'Email Content'));
 
         // Custom rules for sending this field
@@ -291,7 +288,7 @@ class UserDefinedForm_EmailRecipient extends DataObject
             ),
             $grid
         ));
-        
+
         $fields->fieldByName('Root.CustomRules')->setTitle(_t('UserDefinedForm_EmailRecipient.CUSTOMRULESTAB', 'Custom Rules'));
 
         $this->extend('updateCMSFields', $fields);
@@ -420,7 +417,10 @@ class UserDefinedForm_EmailRecipient extends DataObject
      */
     public function getEmailBodyContent()
     {
-        return $this->SendPlain ? $this->EmailBody : $this->EmailBodyHtml;
+        if ($this->SendPlain) {
+            return DBField::create_field('HTMLText', $this->EmailBody)->NoHTML();
+        }
+        return DBField::create_field('HTMLText', $this->EmailBodyHtml)->RAW();
     }
 
     /**
