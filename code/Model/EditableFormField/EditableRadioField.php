@@ -37,7 +37,7 @@ class EditableRadioField extends EditableMultipleOptionField
     {
         $field = OptionsetField::create($this->Name, $this->EscapedTitle, $this->getOptionsMap())
             ->setFieldHolderTemplate(EditableMultipleOptionField::class . '_holder')
-            ->setTemplate('UserFormsOptionSetField'); // @todo
+            ->setTemplate('SilverStripe\\UserForms\\FormField\\UserFormsOptionSetField');
 
         // Set default item
         $defaultOption = $this->getDefaultOptions()->first();

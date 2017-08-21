@@ -347,7 +347,7 @@ class EmailRecipient extends DataObject
             )
                 ->addExtraClass('toggle-plain-only'),
             LiteralField::create('EmailPreview', $preview)
-        ));
+        ]);
 
         $fields->fieldByName('Root.EmailContent')->setTitle(_t(__CLASS__.'.EMAILCONTENTTAB', 'Email Content'));
 
