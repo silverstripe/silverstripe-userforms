@@ -4,6 +4,8 @@ sudo: false
 
 language: php
 
+dist: precise
+
 matrix:
   include:
     - php: 5.3

@@ -8,8 +8,8 @@
 
 		$(".uf-field-editor tbody").entwine({
 			onmatch: function() {
-				var i, 
-					thisLevel, 
+				var i,
+					thisLevel,
 					depth = 0,
 					$buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('stickyButtons'),
 					navHeight = $('.cms-content-header.north').height() + parseInt($('.stickyButtons').css('padding-top'), 10),
@@ -17,7 +17,7 @@
 					self = this;
 
 				this._super();
-				
+
 				// Loop through all rows and set necessary styles
 				this.find('.ss-gridfield-item').each(function() {
 					switch($(this).data('class')) {
@@ -37,7 +37,7 @@
 							thisLevel = depth;
 						}
 					}
-					
+
 					$(this).toggleClass('inFieldGroup', thisLevel > 0);
 					for(i = 1; i <= 5; i++) {
 						$(this).toggleClass('inFieldGroup-level-'+i, thisLevel >= i);
@@ -76,7 +76,7 @@
 				var self = this;
 
 				this._super();
-					
+
 				// When the 'Add field' button is clicked set a one time listener.
 				// When the GridField is reloaded focus on the newly added field.
 				this.on('addnewinline', function () {
@@ -92,19 +92,11 @@
 							$newField.find('.col-Title input').focus();
 						}
 
-						// animate the row positioning (add the first class)
-						if (document.createElement('div').style.animationName !== void 0) {
-							$newField.addClass('newField');
+						$newField.addClass('flashBackground');
+						$(".cms-content-fields").scrollTop($(".cms-content-fields")[0].scrollHeight);
+						if($groupEnd) {
+							$groupEnd.css('visibility', 'visible');
 						}
-
-						// Once the animation has completed
-						setTimeout(function () {
-							$newField.removeClass('newField').addClass('flashBackground');
-							$(".cms-content-fields").scrollTop($(".cms-content-fields")[0].scrollHeight);
-							if($groupEnd) {
-								$groupEnd.css('visibility', 'visible');
-							}
-						}, 500);
 					});
 				});
 			},
