@@ -61,7 +61,10 @@ class EditableTextField extends EditableFormField
 
     public function getCMSFields()
     {
-        $this->beforeUpdateCMSFields(function ($fields) {
+        // PHP 5.3 compat
+        $self = $this;
+
+        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
             $fields->addFieldToTab(
                 'Root.Main',
                 NumericField::create(
@@ -78,7 +81,7 @@ class EditableTextField extends EditableFormField
                 DropdownField::create(
                     'Autocomplete',
                     _t('EditableTextField.AUTOCOMPLETE', 'Autocomplete'),
-                    $this->config()->get('autocomplete_options')
+                    $self->config()->get('autocomplete_options')
                   )->setDescription(_t(
                       'EditableTextField.AUTOCOMPLETE_DESCRIPTION',
                       'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
