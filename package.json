@@ -6,7 +6,7 @@
     "build": "yarn && NODE_ENV=production webpack -p --bail --progress",
     "watch": "yarn && NODE_ENV=development webpack --watch --progress",
     "css": "WEBPACK_CHILD=css npm run build",
-    "lint": "eslint client/src && sass-lint -v"
+    "lint": "eslint client/src; sass-lint -v"
   },
   "repository": {
     "type": "git",
