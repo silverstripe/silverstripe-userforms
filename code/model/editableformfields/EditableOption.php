@@ -160,7 +160,7 @@ class EditableOption extends DataObject
     public function getValue()
     {
         $value = $this->getField('Value');
-        if (empty($value) && !self::allow_empty_values()) {
+        if (is_null($value) && !self::allow_empty_values()) {
             return $this->Title;
         }
         return $value;
