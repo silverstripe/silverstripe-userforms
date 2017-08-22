@@ -1,17 +1,23 @@
 <?php
 
+namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
+
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+
 class EditableTextFieldTest extends SapphireTest
 {
     public function testGetCmsFields()
     {
-        Config::inst()->remove('EditableTextField', 'autocomplete_options');
-        Config::inst()->update('EditableTextField', 'autocomplete_options', array('foo' => 'foo'));
+        Config::modify()->set(EditableTextField::class, 'autocomplete_options', ['foo' => 'foo']);
 
         $field = new EditableTextField;
         $result = $field->getCMSFields();
 
         $autocompleteField = $result->fieldByName('Root.Main.Autocomplete');
-        $this->assertInstanceOf('DropdownField', $autocompleteField);
-        $this->assertEquals(array('foo' => 'foo'), $autocompleteField->getSource());
+        $this->assertInstanceOf(DropdownField::class, $autocompleteField);
+        $this->assertEquals(['foo' => 'foo'], $autocompleteField->getSource());
     }
 }

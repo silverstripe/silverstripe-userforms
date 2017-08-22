@@ -12,11 +12,11 @@
 <% if $Legend %>
     <fieldset>
         <legend>$Legend</legend>
-        <% include UserFormFields %>
+        <% include SilverStripe\\UserForms\\Form\\UserFormFields %>
     </fieldset>
 <% else %>
     <div class="userform-fields">
-        <% include UserFormFields %>
+        <% include SilverStripe\\UserForms\\Form\\UserFormFields %>
     </div>
 <% end_if %>
 

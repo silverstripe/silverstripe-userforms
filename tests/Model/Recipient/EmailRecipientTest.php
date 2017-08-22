@@ -1,14 +1,20 @@
 <?php
 
-class UserDefinedForm_EmailRecipientTest extends SapphireTest
+namespace SilverStripe\UserForms\Tests\Model\Recipient;
+
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
+
+class EmailRecipientTest extends SapphireTest
 {
-    protected static $fixture_file = 'UserDefinedForm_EmailRecipientTest.yml';
+    protected static $fixture_file = 'EmailRecipientTest.yml';
 
     public function testShortcodesAreRenderedInEmailPreviewContent()
     {
-        $page = $this->objFromFixture('SiteTree', 'about_us');
+        $page = $this->objFromFixture(SiteTree::class, 'about_us');
 
-        $recipient = UserDefinedForm_EmailRecipient::create();
+        $recipient = EmailRecipient::create();
         $recipient->SendPlain = false;
         $recipient->EmailBodyHtml = '<p>Some email content. About us: [sitetree_link,id=' . $page->ID . '].</p>';
 

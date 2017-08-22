@@ -26,6 +26,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
@@ -504,7 +505,7 @@ class EmailRecipient extends DataObject
     public function getEmailBodyContent()
     {
         if ($this->SendPlain) {
-            return DBField::create_field('HTMLText', $this->EmailBody)->NoHTML();
+            return DBField::create_field('HTMLText', $this->EmailBody)->Plain();
         }
         return DBField::create_field('HTMLText', $this->EmailBodyHtml)->RAW();
     }
