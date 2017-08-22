@@ -76,16 +76,20 @@ class UserFormFieldEditorExtension extends DataExtension
         $editableColumns = new GridFieldEditableColumns();
         $fieldClasses = singleton(EditableFormField::class)->getEditableFieldClasses();
         $editableColumns->setDisplayFields([
-            'ClassName' => function ($record, $column, $grid) use ($fieldClasses) {
-                if ($record instanceof EditableFormField) {
-                    return $record->getInlineClassnameField($column, $fieldClasses);
+            'ClassName' => [
+                'callback' => function ($record, $column, $grid) use ($fieldClasses) {
+                    if ($record instanceof EditableFormField) {
+                        return $record->getInlineClassnameField($column, $fieldClasses);
+                    }
                 }
-            },
-            'Title' => function ($record, $column, $grid) {
-                if ($record instanceof EditableFormField) {
-                    return $record->getInlineTitleField($column);
+            ],
+            'Title' => [
+                'callback' => function ($record, $column, $grid) {
+                    if ($record instanceof EditableFormField) {
+                        return $record->getInlineTitleField($column);
+                    }
                 }
-            }
+            ]
         ]);
 
         $config = GridFieldConfig::create()

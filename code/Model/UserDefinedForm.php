@@ -47,7 +47,7 @@ class UserDefinedForm extends Page
     /**
      * @var string
      */
-    private static $icon = 'userforms/images/sitetree_icon.png';
+    private static $icon = 'userforms/client/dist/images/sitetree_icon.png';
 
     /**
      * @var string
