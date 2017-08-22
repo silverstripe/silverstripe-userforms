@@ -175,7 +175,7 @@ class EmailRecipient extends DataObject
     public function getCMSFields()
     {
         Requirements::javascript(
-            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('javascript/Recipient.js')
+            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('client/dist/js/userforms-cms.js')
         );
 
         // Determine optional field values

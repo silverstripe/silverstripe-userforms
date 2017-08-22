@@ -58,7 +58,7 @@ class UserDefinedFormController extends PageController
             Requirements::javascript(
                 $userforms->getRelativeResourcePath('client/thirdparty/jquery-validate/jquery.validate.min.js')
             );
-            Requirements::add_i18n_javascript($userforms->getRelativeResourcePath('javascript/lang'));
+            Requirements::add_i18n_javascript($userforms->getRelativeResourcePath('client/lang'));
             Requirements::javascript($userforms->getRelativeResourcePath('client/dist/js/userforms.js'));
 
             $this->addUserFormsValidatei18n($userforms);

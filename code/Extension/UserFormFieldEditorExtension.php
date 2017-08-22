@@ -67,7 +67,7 @@ class UserFormFieldEditorExtension extends DataExtension
     public function getFieldEditorGrid()
     {
         $module = ModuleLoader::getModule('silverstripe/userforms');
-        Requirements::javascript($module->getRelativeResourcePath('javascript/FieldEditor.js'));
+        Requirements::javascript($module->getRelativeResourcePath('client/dist/js/userforms-cms.js'));
 
         $fields = $this->owner->Fields();
 
