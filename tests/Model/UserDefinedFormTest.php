@@ -160,7 +160,7 @@ class UserDefinedFormTest extends FunctionalTest
     {
         $recipient = new EmailRecipient();
 
-        $defaultValues = ['SubmittedFormEmail' => 'SubmittedFormEmail'];
+        $defaultValues = ['email/SubmittedFormEmail' => 'SubmittedFormEmail'];
 
         $this->assertEquals($recipient->getEmailTemplateDropdownValues(), $defaultValues);
     }

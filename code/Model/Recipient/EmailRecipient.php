@@ -499,7 +499,7 @@ class EmailRecipient extends DataObject
     {
         $t = ($template ? $template : $this->EmailTemplate);
 
-        return in_array($t, $this->getEmailTemplateDropdownValues());
+        return array_key_exists($t, $this->getEmailTemplateDropdownValues());
     }
 
     /**
@@ -543,10 +543,13 @@ class EmailRecipient extends DataObject
                 strlen(BASE_PATH) + 1
             );
 
-            $defaultPrefix = 'userforms/templates/';
-            // Remove default userforms folder if it's provided
-            if (substr($templatePath, 0, strlen($defaultPrefix)) === $defaultPrefix) {
-                $templatePath = substr($templatePath, strlen($defaultPrefix));
+            $defaultPrefixes = ['userforms/templates/', 'templates/'];
+            foreach ($defaultPrefixes as $defaultPrefix) {
+                // Remove default userforms folder if it's provided
+                if (substr($templatePath, 0, strlen($defaultPrefix)) === $defaultPrefix) {
+                    $templatePath = substr($templatePath, strlen($defaultPrefix));
+                    break;
+                }
             }
             $templates[$templatePath] = $template['filename'];
         }
