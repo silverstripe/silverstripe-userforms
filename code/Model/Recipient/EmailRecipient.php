@@ -303,7 +303,7 @@ class EmailRecipient extends DataObject
                 ->setSession(Controller::curr()->getRequest()->getSession());
 
             $preview = sprintf(
-                '<p><a href="%s" target="_blank" class="ss-ui-button">%s</a></p><em>%s</em>',
+                '<p><a href="%s" target="_blank" class="btn btn-outline-secondary">%s</a></p><em>%s</em>',
                 Controller::join_links(
                     $pageEditController->getEditForm()->FormAction(),
                     "field/EmailRecipients/item/{$this->ID}/preview"
