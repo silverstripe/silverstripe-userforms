@@ -1,16 +1,8 @@
-// Animations
-
-@keyframes flash-background {
-  0% {background-color: $body-bg;}
-  10% {background-color: $green-bg;}
-  70% {background-color: $green-bg;}
-}
-
 .uf-field-editor {
   padding-bottom: 0;
 
   // Row styles
-  table.ss-gridfield-table {
+  .grid-field__table {
     // Standard rows
     .ss-gridfield-item {
       height: $height-base;
@@ -39,6 +31,19 @@
 
       &.ui-sortable-placeholder {
         height: $placeholder-height;
+      }
+
+      .form-group {
+        padding: 0;
+
+        &:after {
+          border-bottom: 0;
+        }
+
+        .form__field-label {
+          flex: auto;
+          max-width: 100%;
+        }
       }
     }
 
@@ -76,10 +81,10 @@
       }
     }
 
-    .ss-gridfield-item[data-class="EditableFormStep"] {
+    .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep"] {
       &,
       &:hover {
-        background: $gray-bg;
+        background: $background-main;
       }
 
       label {
@@ -93,40 +98,35 @@
       }
 
       + .ss-gridfield-item td {
-        border-top: 1px solid $gray-bg;
+        border-top: 1px solid $background-main;
       }
 
-      + .ss-gridfield-item[data-class="EditableFieldGroup"] td {
+      + .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup"] td {
         border-top: 1px solid $blue-base;
       }
     }
 
-    .ss-gridfield-item[data-class="EditableFieldGroup"] {
+    .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup"] {
       td {
         border-top: 1px solid $blue-base;
       }
 
-      label {
+      .form__field-label {
         font-weight: bold;
-        color: $gray-darker;
       }
     }
 
-    .ss-gridfield-item[data-class="EditableFieldGroupEnd"] {
+    .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd"] {
       td {
         border-bottom: 1px solid $blue-base;
       }
 
-      + .ss-gridfield-item[data-class="EditableFieldGroupEnd"] {
+      + .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd"] {
         border-top: 0;
       }
 
       .col-buttons .action {
         display: none;
-      }
-
-      label {
-        color: $gray-dark;
       }
     }
   }
@@ -135,8 +135,9 @@
     position: fixed;
     top: $height-top;
     z-index: 2;
-    background: $gray-light;
-    box-shadow: 0 $padding-base $padding-xs -$padding-base-horizontal $gray-light;
+    background: $background-main;
+    border-bottom: 1px solid $border-color-light;
+    // box-shadow: 0 $padding-base $padding-xs -$padding-base-horizontal $gray-light;
     padding: $padding-base;
     margin-left: -$padding-base;
 
