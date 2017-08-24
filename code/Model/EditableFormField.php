@@ -126,14 +126,9 @@ class EditableFormField extends DataObject
         'Sort' => 'Int',
         'Required' => 'Boolean',
         'CustomErrorMessage' => 'Varchar(255)',
-
-        'CustomRules' => 'Text', // @deprecated from 2.0
-        'CustomSettings' => 'Text', // @deprecated from 2.0
-        'Migrated' => 'Boolean', // set to true when migrated
-
-        'ExtraClass' => 'Text', // from CustomSettings
-        'RightTitle' => 'Varchar(255)', // from CustomSettings
-        'ShowOnLoad' => 'Boolean(1)', // from CustomSettings
+        'ExtraClass' => 'Text',
+        'RightTitle' => 'Varchar(255)',
+        'ShowOnLoad' => 'Boolean(1)',
         'ShowInSummary' => 'Boolean',
         'Placeholder' => 'Varchar(255)',
         'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
@@ -992,11 +987,11 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * @return EditableFormFieldValidator
+     * @return EditableFormField\Validator
      */
     public function getCMSValidator()
     {
-        return EditableFormFieldValidator::create()
+        return EditableFormField\Validator::create()
             ->setRecord($this);
     }
 

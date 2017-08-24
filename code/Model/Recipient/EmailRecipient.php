@@ -297,10 +297,15 @@ class EmailRecipient extends DataObject
 
         // Only show the preview link if the recipient has been saved.
         if (!empty($this->EmailTemplate)) {
+            $pageEditController = singleton(CMSPageEditController::class);
+            $pageEditController
+                ->getRequest()
+                ->setSession(Controller::curr()->getRequest()->getSession());
+
             $preview = sprintf(
                 '<p><a href="%s" target="_blank" class="ss-ui-button">%s</a></p><em>%s</em>',
                 Controller::join_links(
-                    singleton(CMSPageEditController::class)->getEditForm()->FormAction(),
+                    $pageEditController->getEditForm()->FormAction(),
                     "field/EmailRecipients/item/{$this->ID}/preview"
                 ),
                 _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
@@ -507,7 +512,7 @@ class EmailRecipient extends DataObject
         if ($this->SendPlain) {
             return DBField::create_field('HTMLText', $this->EmailBody)->Plain();
         }
-        return DBField::create_field('HTMLText', $this->EmailBodyHtml)->RAW();
+        return DBField::create_field('HTMLText', $this->EmailBodyHtml);
     }
 
     /**
@@ -524,15 +529,26 @@ class EmailRecipient extends DataObject
 
         $templateDirectory = UserDefinedForm::config()->get('email_template_directory');
         // Handle cases where "userforms" might not be the base module directory, e.g. in a Travis build
-        if (!file_exists($templateDirectory) && substr($templateDirectory, 0, 10) === 'userforms/') {
+        if (!file_exists(BASE_PATH . DIRECTORY_SEPARATOR . $templateDirectory)
+            && substr($templateDirectory, 0, 10) === 'userforms/'
+        ) {
             $templateDirectory = substr($templateDirectory, 10);
         }
-        $found = $finder->find(BASE_PATH . '/' . $templateDirectory);
+        $found = $finder->find(BASE_PATH . DIRECTORY_SEPARATOR . $templateDirectory);
 
         foreach ($found as $key => $value) {
             $template = pathinfo($value);
+            $templatePath = substr(
+                $template['dirname'] . DIRECTORY_SEPARATOR . $template['filename'],
+                strlen(BASE_PATH) + 1
+            );
 
-            $templates[$template['filename']] = $template['filename'];
+            $defaultPrefix = 'userforms/templates/';
+            // Remove default userforms folder if it's provided
+            if (substr($templatePath, 0, strlen($defaultPrefix)) === $defaultPrefix) {
+                $templatePath = substr($templatePath, strlen($defaultPrefix));
+            }
+            $templates[$templatePath] = $template['filename'];
         }
 
         return $templates;

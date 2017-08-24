@@ -176,17 +176,17 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
         if (!$buttonName) {
             // provide a default button name, can be changed by calling {@link setButtonName()} on this component
             $objectName = $singleton->i18n_singular_name();
-            $buttonName = _t('SilverStripe\\Forms\\GridField\\GridField.Add', 'Add {name}', array('name' => $objectName));
+            $buttonName = _t('SilverStripe\\Forms\\GridField\\GridField.Add', 'Add {name}', ['name' => $objectName]);
         }
 
-        $addAction = new GridField_FormAction(
+        $addAction = GridField_FormAction::create(
             $grid,
             $this->getAction(),
             $buttonName,
             $this->getAction(),
             array()
         );
-        $addAction->setAttribute('data-icon', 'add');
+        $addAction->addExtraClass('font-icon-plus btn btn-primary');
 
         if ($this->getButtonClass()) {
             $addAction->addExtraClass($this->getButtonClass());
