@@ -57,6 +57,7 @@ fi_FI:
     DEFAULT: Oletusarvo
     DEFAULTTOTODAY: 'Oletus ''Tänään''?'
     DELETE: Poista
+    DISPLAYIF: 'Vaihda näkyvyys kun'
     DISPLAY_RULES_DISABLED: 'Näyttösäännöt ei ole päällä vaadituille kentille. Ole hyvä ja poista valinta "Onko tämä kenttä pakollinen?" kohdasta "Validointi" kytkeäksesi ne päälle.'
     DRAG: 'Raahaa muuttaaksesi kenttien järjestystä'
     ENTERQUESTION: 'Lisää kysymys'
@@ -73,6 +74,7 @@ fi_FI:
     GROUP: Ryhmä
     HIDE: Piilota
     HIDETHISFIELD: 'Piilota tämä kenttä'
+    INITIALVISIBILITY: 'Oletus näkyvyys'
     IS: 'On'
     LESSTHAN: 'Arvo on pienempi kuin'
     LESSTHANEQUAL: 'Arvo on pienempi tai yhtä suuri kuin'
@@ -83,11 +85,13 @@ fi_FI:
     NOTBLANK: 'Ei ole tyhjä'
     NOTVALUE: 'Ei ole sama kuin'
     OPTIONS: Valinnat
+    PLACEHOLDER: Opastusteksti
     PLURALNAME: 'Muokattavat lomakekentät'
     REQUIRED: 'Onko tämä kenttä pakollinen?'
     REQUIRED_DESCRIPTION: 'Huomioithan, että ehdolliset kentät eivät voi olla pakollisia'
     RIGHTTITLE: 'Oikea otsikko'
     SHOW: Näytä
+    SHOWINSUMMARY: 'Näytä yhteenvedossa'
     SHOWONLOAD: 'Oletusnäkyvyys ennen näiden sääntöjen suorittamista'
     SHOWOPTIONS: 'Näytä asetukset'
     SHOWTHISFIELD: 'Näytä tämä kenttä'
@@ -140,6 +144,8 @@ fi_FI:
     PLURALNAME: Radiopainikkeet
     SINGULARNAME: Radiopainike
   EditableTextField:
+    AUTOCOMPLETE: Automaattitäydennys
+    AUTOCOMPLETE_DESCRIPTION: 'Tuetut selaimet yrittävät täydentää kentän automaattisesti käyttäjän omilla tiedoilla, valitse asettaaksesi käytettävät arvot'
     NUMBERROWS: 'Rivien määrä'
     NUMBERROWS_DESCRIPTION: 'Kenttät, joissa on enemmän kuin yksi rivi, luodaan tekstialueena.'
     PLACEHOLDER: Opastusteksti
