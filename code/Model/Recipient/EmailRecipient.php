@@ -2,12 +2,12 @@
 
 namespace SilverStripe\UserForms\Model\Recipient;
 
+use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\FileFinder;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
-use SilverStripe\Control\Session;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
@@ -118,9 +118,12 @@ class EmailRecipient extends DataObject
      */
     protected function getFormParent()
     {
+        // LeftAndMain::sessionNamespace is protected. @todo replace this with a non-deprecated equivalent.
+        $sessionNamespace = $this->config()->get('session_namespace') ?: LeftAndMain::class;
+
         $formID = $this->FormID
             ? $this->FormID
-            : Session::get('CMSMain.currentPage');
+            : Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
         return UserDefinedForm::get()->byID($formID);
     }
 
