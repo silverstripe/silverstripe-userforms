@@ -212,11 +212,11 @@ class UserFormFieldEditorExtension extends DataExtension
     /**
      * When duplicating a UserDefinedForm, duplicate all of its fields and display rules
      *
-     * @see DataObject::duplicate
-     * @param DataObject $oldPage
+     * @see \SilverStripe\ORM\DataObject::duplicate
+     * @param \SilverStripe\ORM\DataObject $oldPage
      * @param bool $doWrite
      * @param string $manyMany
-     * @return DataObject
+     * @return \SilverStripe\ORM\DataObject
      */
     public function onAfterDuplicate($oldPage, $doWrite, $manyMany)
     {

@@ -54,10 +54,13 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
     {
         $data = ArrayList::create();
 
-        $fields = $this->record->Form()->Fields()->filter([
-            'ClassName:not' => EditableLiteralField::class,
-            'ClassName:not' => EditableFormHeading::class
-        ]);
+        $fields = $this->record->Form()->Fields()->filter(
+            'ClassName:not',
+            [
+                EditableLiteralField::class,
+                EditableFormHeading::class,
+            ]
+        );
 
         foreach ($fields as $field) {
             $data->push(ArrayData::create([

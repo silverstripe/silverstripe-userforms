@@ -142,7 +142,7 @@ class UserDefinedFormController extends PageController
      * Get the form for the page. Form can be modified by calling {@link updateForm()}
      * on a UserDefinedForm extension.
      *
-     * @return Forms
+     * @return Form
      */
     public function Form()
     {
@@ -198,7 +198,7 @@ JS
      * @param array $data
      * @param Form $form
      *
-     * @return Redirection
+     * @return \SilverStripe\Control\HTTPResponse
      */
     public function process($data, $form)
     {
@@ -400,7 +400,7 @@ JS
     /**
      * Allows the use of field values in email body.
      *
-     * @param ArrayList fields
+     * @param ArrayList $fields
      * @return ArrayData
      */
     protected function getMergeFieldsMap($fields = [])

@@ -36,7 +36,6 @@ use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
-use SilverStripe\UserForms\Task\UserFormsUpgradeService;
 use SilverStripe\View\Requirements;
 
 /**

@@ -6,7 +6,6 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\UserForms\FormField\UserFormsGroupField;
 use SilverStripe\UserForms\Model\EditableFormField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 
 /**
  * Specifies that this ends a group of fields

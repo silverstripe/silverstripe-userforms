@@ -7,7 +7,6 @@ use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\UserForms\Model\EditableFormField;
 use Silverstripe\Versioned\Versioned;
 
 /**

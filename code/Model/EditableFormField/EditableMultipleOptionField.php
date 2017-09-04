@@ -12,7 +12,6 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\Tab;
 use SilverStripe\ORM\Map;
 use SilverStripe\UserForms\Model\EditableFormField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\Versioned\Versioned;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -57,7 +56,7 @@ class EditableMultipleOptionField extends EditableFormField
     private static $table_name = 'EditableMultipleOptionField';
 
     /**
-     * @return FieldList
+     * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
     {
@@ -133,7 +132,7 @@ class EditableMultipleOptionField extends EditableFormField
 
     /**
      * Return whether or not this field has addable options such as a
-     * {@link EditableDropdownField} or {@link EditableRadioField}
+     * {@link EditableDropdown} or {@link EditableRadioField}
      *
      * @return bool
      */
@@ -160,7 +159,7 @@ class EditableMultipleOptionField extends EditableFormField
     /**
      * Returns all default options
      *
-     * @return SS_List
+     * @return \SilverStripe\ORM\SS_List
      */
     protected function getDefaultOptions()
     {

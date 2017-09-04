@@ -92,7 +92,7 @@ class UserForm extends Form
     /**
      * Return the fieldlist, filtered to only contain steps
      *
-     * @return ArrayList
+     * @return \SilverStripe\ORM\ArrayList
      */
     public function getSteps()
     {
