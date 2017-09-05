@@ -13,39 +13,39 @@ fi_FI:
     SHOWTHISFIELD: 'Näytä tämä kenttä'
     VALUE: 'On sama kuin'
     WHEN: Kun
-  EditableCheckbox:
-    PLURALNAME: Valintaruudut
-    SINGULARNAME: Valintaruutukenttä
-  EditableCheckboxGroupField:
-    PLURALNAME: Valintaruutu-ryhmät
-    SINGULARNAME: Valintaruutu-ryhmä
-  EditableCountryDropdownField:
-    PLURALNAME: Maavalikot
-    SINGULARNAME: Maavalikko
-  EditableCustomRule:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
+  FieldEditor:
+    ADD: Lisää
+    SELECTAFIELD: 'Valitse kenttä'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Sivut
+    SINGULARNAME: Sivu
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s vaaditaan'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Suodin
+    ResetFilter: Nollaa
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Lisää kenttä'
+    ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
+    ADD_PAGE_BREAK: 'Lisää sivunvaihto'
+    FORMFIELDS: Lomakekentät
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
+    NO_PAGE: 'Kenttä ''{name}'' löydetty ennen yhtään sivua'
+    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
+    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Suodata lomakkeella lähetettyjä...'
+    FROM: Lähettäjä
+    TILL: Asti
+    WHEREVALUEIS: 'jonka arvo on...'
+  SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Muokattavat mukautetut säännöt'
     SINGULARNAME: 'Muokattava mukautettu sääntö'
-  EditableDateField:
-    PLURALNAME: Päivämääräkentät
-    SINGULARNAME: Päivämääräkenttä
-  EditableDropdown:
-    PLURALNAME: Pudotusvalikot
-    SINGULARNAME: Pudotusvalikko
-  EditableEmailField:
-    PLURALNAME: Sähköpostikentät
-    SINGULARNAME: Sähköpostikenttä
-  EditableFieldGroup:
-    PLURALNAME: 'Muokattavat kenttäryhmät'
-    SINGULARNAME: 'Muokattava kenttäryhmä'
-  EditableFieldGroupEnd:
-    FIELD_GROUP_END: '{group} loppu'
-    FIELD_GROUP_START: 'Ryhmä {ryhmä}'
-    PLURALNAME: 'Muokattavien kenttäryhmien loppu'
-    SINGULARNAME: 'Muokattavan kenttäryhmän loppu'
-  EditableFileField:
-    PLURALNAME: Tiedostonlähettämiskentät
-    SINGULARNAME: Tiedostonlähettämiskenttä
-  EditableFormField:
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Lisää
     ADDLabel: 'Lisää valinta'
     ADDRULE: 'Lisää sääntö'
@@ -98,48 +98,75 @@ fi_FI:
     VALUE: 'On sama kuin'
     WHEN: Kun
     'YES': Kyllä
-  EditableFormFieldValidator:
-    REQUIRED_ERROR: 'Lomakekentät eivät voi olla pakollisia ja sisältää ehdollisia näyttösääntöjä'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Valintaruudut
+    SINGULARNAME: Valintaruutukenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: Valintaruutu-ryhmät
+    SINGULARNAME: Valintaruutu-ryhmä
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: Maavalikot
+    SINGULARNAME: Maavalikko
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Päivämääräkentät
+    SINGULARNAME: Päivämääräkenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Pudotusvalikot
+    SINGULARNAME: Pudotusvalikko
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: Sähköpostikentät
+    SINGULARNAME: Sähköpostikenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Muokattavat kenttäryhmät'
+    SINGULARNAME: 'Muokattava kenttäryhmä'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: '{group} loppu'
+    FIELD_GROUP_START: 'Ryhmä {ryhmä}'
+    PLURALNAME: 'Muokattavien kenttäryhmien loppu'
+    SINGULARNAME: 'Muokattavan kenttäryhmän loppu'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: Tiedostonlähettämiskentät
+    SINGULARNAME: Tiedostonlähettämiskenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Valitse otsikkotaso'
     PLURALNAME: Otsikot
     SINGULARNAME: Otsikko
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Sivuvaihdot
     SINGULARNAME: Sivunvaihto
     STEP_TITLE: 'Sivu {page}'
     TITLE_FIRST: 'Ensimmäinen sivu'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Piilota raporteista?'
     HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
     PLURALNAME: HTML-alueet
     SINGULARNAME: HTML-alue
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: Jäsenlistakentät
     SINGULARNAME: Jäsenlistakenttä
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
     OPTIONSTAB: Valinnat
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
     TITLE: Otsikko
     VALUE: Arvo
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeeriset kentät'
     RANGE: 'Sallittu numeerinen väli'
     RANGE_TO: –
     SINGULARNAME: 'Numeerinen kenttä'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Poista tämä valinta'
     DRAG: 'Raahaa muuttaaksesi valintojen järjestystä'
     LOCKED: 'Näitä kenttiä ei voi muokata'
     PLURALNAME: 'Muokattavat vaihtoehdot'
     SINGULARNAME: 'Muokattava vaihtoehto'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiopainikkeet
     SINGULARNAME: Radiopainike
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Rivien määrä'
     NUMBERROWS_DESCRIPTION: 'Kenttät, joissa on enemmän kuin yksi rivi, luodaan tekstialueena.'
     PLACEHOLDER: Opastusteksti
@@ -147,30 +174,28 @@ fi_FI:
     RANGE_TO: –
     SINGULARNAME: Tekstikenttä
     TEXTLENGTH: 'Tekstin pituus'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
-  FieldEditor:
-    ADD: Lisää
-    SELECTAFIELD: 'Valitse kenttä'
-  Form:
-    FIELDISREQUIRED: '%s vaaditaan'
-  GridField:
-    Filter: Suodin
-    ResetFilter: Nollaa
-  SiteTree:
-    PLURALNAME: Sivut
-    SINGULARNAME: Sivu
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'Lomakekentät eivät voi olla pakollisia ja sisältää ehdollisia näyttösääntöjä'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Mukautetut säännöt'
+    EMAILCONTENTTAB: 'Sähköpostin sisältö'
+    EMAILDETAILSTAB: 'Sähköpostin tiedot'
+    PLURALNAME: 'Lomakkeen vastaanottosähköpostit'
+    SINGULARNAME: 'Lomakkeen vastaanottosähköposti'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'User Defined Form sähköpostien vastaanoton säännöt'
+    SINGULARNAME: 'User Defined Form sähköpostin vastaanoton sääntö'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Lataa tiedosto'
     PLURALNAME: 'Lähetetyt tiedostokentät'
     SINGULARNAME: 'Lähetetty tiedostokenttä'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Lähetetyt lomakkeet'
     SINGULARNAME: 'Lähetetty lomake'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Lähetetyt lomakekentät'
     SINGULARNAME: 'Lähetetty lomakekenttä'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
     CLEARBUTTON: Tyhjennä
     CONFIGURATION: Asetukset
@@ -221,28 +246,3 @@ fi_FI:
     TYPEREPLY: 'Kirjoita vastausosoite'
     TYPESUBJECT: 'Kirjoita otsikko'
     TYPETO: 'Kirjoita vastaanottajan osoite'
-  UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Mukautetut säännöt'
-    EMAILCONTENTTAB: 'Sähköpostin sisältö'
-    EMAILDETAILSTAB: 'Sähköpostin tiedot'
-    PLURALNAME: 'Lomakkeen vastaanottosähköpostit'
-    SINGULARNAME: 'Lomakkeen vastaanottosähköposti'
-  UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'User Defined Form sähköpostien vastaanoton säännöt'
-    SINGULARNAME: 'User Defined Form sähköpostin vastaanoton sääntö'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Lisää kenttä'
-    ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
-    ADD_PAGE_BREAK: 'Lisää sivunvaihto'
-    FORMFIELDS: Lomakekentät
-  UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
-    NO_PAGE: 'Kenttä ''{name}'' löydetty ennen yhtään sivua'
-    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
-    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Suodata lomakkeella lähetettyjä...'
-    FROM: Lähettäjä
-    TILL: Asti
-    WHEREVALUEIS: 'jonka arvo on...'

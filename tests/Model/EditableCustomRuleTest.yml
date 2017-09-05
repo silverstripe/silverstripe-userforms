@@ -1,0 +1,30 @@
+SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+  countryDropdown:
+    Name: CountrySelection
+    Title: "Choose your country"
+    DisplayRulesConjunction: And
+    ShowOnLoad: false
+
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  irdNumberField:
+    Name: IRDNumber
+    Title: "Enter your IRD Number"
+  countryTextField:
+    Name: CountryTextSelection
+    Title: "Enter your country (2 digit prefix)"
+    DisplayRulesConjunction: And
+    ShowOnLoad: false
+
+SilverStripe\UserForms\Model\EditableCustomRule:
+  rule1:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: NZ
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField.countryDropdown
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.irdNumberField
+  rule2:
+    Display: Show
+    ConditionOption: ValueGreaterThan
+    FieldValue: 1
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.countryTextField
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.irdNumberField

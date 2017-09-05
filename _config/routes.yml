@@ -2,6 +2,6 @@
 Name: userformsroutes
 After: framework/routes#coreroutes
 ---
-Director:
+SilverStripe\Control\Director:
   rules:
-    'UserDefinedForm_Controller//$Action' : 'UserDefinedForm_Controller'
+    UserDefinedFormController//$Action: SilverStripe\UserForms\Model\UserDefinedFormController

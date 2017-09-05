@@ -1,0 +1,4 @@
+SilverStripe\CMS\Model\SiteTree:
+  about_us:
+    Title: About Us
+    URLSegment: about-us

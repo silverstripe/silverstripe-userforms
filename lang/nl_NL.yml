@@ -13,28 +13,23 @@ nl_NL:
     SHOWTHISFIELD: 'Toon dit veld'
     VALUE: Waarde
     WHEN: Wanneer
-  EditableCheckbox:
-    PLURALNAME: Selectievakjes
-    SINGULARNAME: Selectievakje
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Groepen van selectievakjes'
-    SINGULARNAME: 'Groep van selectievakje'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Vervolgkeuzelijsten van landen'
-    SINGULARNAME: 'Vervolgkeuzelijst van landen'
-  EditableDateField:
-    PLURALNAME: Datumvelden
-    SINGULARNAME: Datumveld
-  EditableDropdown:
-    PLURALNAME: Vervolgkeuzelijsten
-    SINGULARNAME: 'Vervolgkeuzelijst veld'
-  EditableEmailField:
-    PLURALNAME: 'Email velden'
-    SINGULARNAME: 'Email veld'
-  EditableFileField:
-    PLURALNAME: 'Velden voor bestand uploaden'
-    SINGULARNAME: 'Veld voor bestand uploaden'
-  EditableFormField:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
+  FieldEditor:
+    ADD: Toevoegen
+    SELECTAFIELD: 'Kies een veld'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Paginas
+    SINGULARNAME: Pagina
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s is verplicht'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Herstel
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Inzendingen filteren'
+    WHEREVALUEIS: 'waar waarde is...'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Toevoegen
     ADDLabel: 'Optie toevoegen'
     ADDRULE: 'Regel toevoegen'
@@ -72,61 +67,72 @@ nl_NL:
     VALIDATION: Validatie
     VALUE: Waarde
     WHEN: Wanneer
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Selectievakjes
+    SINGULARNAME: Selectievakje
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Groepen van selectievakjes'
+    SINGULARNAME: 'Groep van selectievakje'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Vervolgkeuzelijsten van landen'
+    SINGULARNAME: 'Vervolgkeuzelijst van landen'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Datumvelden
+    SINGULARNAME: Datumveld
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Vervolgkeuzelijsten
+    SINGULARNAME: 'Vervolgkeuzelijst veld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Email velden'
+    SINGULARNAME: 'Email veld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Velden voor bestand uploaden'
+    SINGULARNAME: 'Veld voor bestand uploaden'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kies grootte van kopje'
     PLURALNAME: Kopjes
     SINGULARNAME: Kopje
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Verberg van rapporten?'
     PLURALNAME: 'HTML Blokken'
     SINGULARNAME: 'HTML Blok'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ledenlijst velden'
     SINGULARNAME: 'Ledenlijst veld'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Bewerkbare meerdere optie velden'
     SINGULARNAME: 'Bewerkbare meerdere optie veld'
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numerieke velden'
     SINGULARNAME: 'Numerieke veld'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Verwijder optie'
     DRAG: 'Sleep om volgorde van de opties te herschikken'
     LOCKED: 'Deze velden zijn niet aanpasbaar'
     PLURALNAME: 'Bewerkbare opties'
     SINGULARNAME: 'Bewerkbare optie'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Keuzerondje velden'
     SINGULARNAME: 'Keuzerondje veld'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Aantal rijen'
     PLURALNAME: 'Tekst velden'
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
-  FieldEditor:
-    ADD: Toevoegen
-    SELECTAFIELD: 'Kies een veld'
-  Form:
-    FIELDISREQUIRED: '%s is verplicht'
-  GridField:
-    Filter: Filter
-    ResetFilter: Herstel
-  SiteTree:
-    PLURALNAME: Paginas
-    SINGULARNAME: Pagina
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'Email Ontvangers'
+    SINGULARNAME: 'Email Ontvanger'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
     PLURALNAME: 'Ingediende bestandsvelden'
     SINGULARNAME: 'Ingediende bestandsveld'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Ingediende formulieren'
     SINGULARNAME: 'Ingediende formulier'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Ingediende formvelden'
     SINGULARNAME: 'Ingediende formveld'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
     CLEARBUTTON: Herstellen
     CONFIGURATION: Instellingen
@@ -154,9 +160,3 @@ nl_NL:
     SUBMITBUTTON: Verzenden
     TEXTONCLEAR: 'Tekst op herstel button:'
     TEXTONSUBMIT: 'Tekst op Verzend-button'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Email Ontvangers'
-    SINGULARNAME: 'Email Ontvanger'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Inzendingen filteren'
-    WHEREVALUEIS: 'waar waarde is...'

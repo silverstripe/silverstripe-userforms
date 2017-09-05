@@ -1,0 +1,39 @@
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  nameField:
+    Name: Name
+SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+  ageField:
+    Name: Age
+SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+  blankTest:
+    ConditionOption: IsBlank
+    ConditionValue: null
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.nameField
+  isNotBlankTest:
+    ConditionOption: IsNotBlank
+    ConditionValue: null
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.nameField
+  equalsTest:
+    ConditionOption: Equals
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField
+  notEqualsTest:
+    ConditionOption: NotEquals
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField
+  valueLessThanTest:
+    ConditionOption: ValueLessThan
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField
+  valueLessThanEqualTest:
+    ConditionOption: ValueLessThanEqual
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField
+  valueGreaterThanTest:
+    ConditionOption: ValueGreaterThan
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField
+  valueGreaterThanEqualTest:
+    ConditionOption: ValueGreaterThanEqual
+    ConditionValue: 18
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableNumericField.ageField

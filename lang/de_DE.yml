@@ -13,28 +13,28 @@ de_DE:
     SHOWTHISFIELD: 'Feld anzeigen'
     VALUE: Wert
     WHEN: Wann
-  EditableCheckbox:
-    PLURALNAME: Checkboxen
-    SINGULARNAME: 'Checkbox Feld'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Gruppen'
-    SINGULARNAME: 'Checkbox Gruppe'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Länder Dropdowns'
-    SINGULARNAME: 'Länder Dropdown'
-  EditableDateField:
-    PLURALNAME: Datumsfelder
-    SINGULARNAME: Datumsfeld
-  EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Feld'
-  EditableEmailField:
-    PLURALNAME: 'E-Mail Felder'
-    SINGULARNAME: 'E-Mail Feld'
-  EditableFileField:
-    PLURALNAME: 'Dateiupload Felder'
-    SINGULARNAME: 'Dateiupload Feld'
-  EditableFormField:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
+  FieldEditor:
+    ADD: Hinzufügen
+    SELECTAFIELD: 'Feld auswählen'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Seiten
+    SINGULARNAME: Seite
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s ist ein Pflichtfeld'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Zurücksetzen
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Feld hinzufügen'
+    ADD_FIELD_GROUP: 'Gruppe hinzufügen'
+    ADD_PAGE_BREAK: 'Seite hinzufügen'
+    FORMFIELDS: Formularfelder
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Einreichungen filtern...'
+    WHEREVALUEIS: 'nach Wert...'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Hinzufügen
     ADDLabel: 'Option hinzufügen'
     ADDRULE: 'Regel hinzufügen'
@@ -76,67 +76,78 @@ de_DE:
     VALIDATION: Validierung
     VALUE: Wert
     WHEN: Wann
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxen
+    SINGULARNAME: 'Checkbox Feld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Gruppen'
+    SINGULARNAME: 'Checkbox Gruppe'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Länder Dropdowns'
+    SINGULARNAME: 'Länder Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Datumsfelder
+    SINGULARNAME: Datumsfeld
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Feld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'E-Mail Felder'
+    SINGULARNAME: 'E-Mail Feld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Dateiupload Felder'
+    SINGULARNAME: 'Dateiupload Feld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Überschriftsebene auswählen'
     PLURALNAME: Überschriften
     SINGULARNAME: Überschrift
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Seiten
     SINGULARNAME: Seiten
     STEP_TITLE: 'Seite {page}'
     TITLE_FIRST: 'Erste Seite'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
     PLURALNAME: 'HTML Blöcke'
     SINGULARNAME: 'HTML Block'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Felder'
     SINGULARNAME: 'Member List Feld'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editierbare Multi-Option Felder'
     SINGULARNAME: 'Editierbares Multi-Option Feld'
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: Zahlenfelder
     SINGULARNAME: Zahlenfeld
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Option entfernen'
     DRAG: 'Ziehen um Optionen neu zu ordnen'
     LOCKED: 'Diese Felder können nicht verändert werden'
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radio-Buttons
     SINGULARNAME: Radio-Button
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Anzahl der Zeilen'
     PLACEHOLDER: Platzhalter
     PLURALNAME: Textfelder
     SINGULARNAME: Textfeld
     TEXTLENGTH: Textlänge
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
-  FieldEditor:
-    ADD: Hinzufügen
-    SELECTAFIELD: 'Feld auswählen'
-  Form:
-    FIELDISREQUIRED: '%s ist ein Pflichtfeld'
-  GridField:
-    Filter: Filter
-    ResetFilter: Zurücksetzen
-  SiteTree:
-    PLURALNAME: Seiten
-    SINGULARNAME: Seite
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'Anpassbares Formular E-Mail Empfänger'
+    SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Datei herunterladen'
     PLURALNAME: 'Abgesendete Dateifelder'
     SINGULARNAME: 'Abgesendetes Dateifeld'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Abgesendete Formulare'
     SINGULARNAME: 'Abgesendetes Formular'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Abgesendete Formularfelder'
     SINGULARNAME: 'Abgesendetes Formularfeld'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'E-Mail Empfänger hinzufügen'
     CLEARBUTTON: Löschen
     CONFIGURATION: Konfiguration
@@ -166,14 +177,3 @@ de_DE:
     SUBMITBUTTON: Senden
     TEXTONCLEAR: 'Text auf der Löschen-Schaltfläche:'
     TEXTONSUBMIT: 'Text auf der Einreich-Schaltfläche:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Anpassbares Formular E-Mail Empfänger'
-    SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Feld hinzufügen'
-    ADD_FIELD_GROUP: 'Gruppe hinzufügen'
-    ADD_PAGE_BREAK: 'Seite hinzufügen'
-    FORMFIELDS: Formularfelder
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Einreichungen filtern...'
-    WHEREVALUEIS: 'nach Wert...'

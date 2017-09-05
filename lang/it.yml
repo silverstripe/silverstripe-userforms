@@ -13,39 +13,39 @@ it:
     SHOWTHISFIELD: 'Mostra questo campo'
     VALUE: Valore
     WHEN: Quando
-  EditableCheckbox:
-    PLURALNAME: 'Caselle di controllo'
-    SINGULARNAME: 'Campo casella di controllo'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Gruppi di caselle di controllo'
-    SINGULARNAME: 'Gruppo di caselle di controllo'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Menù a tendina Nazioni'
-    SINGULARNAME: 'Menù a tendina Nazioni'
-  EditableCustomRule:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
+  FieldEditor:
+    ADD: Aggiungi
+    SELECTAFIELD: 'Seleziona un campo'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Pagine
+    SINGULARNAME: Pagina
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s è richiesto'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filtro
+    ResetFilter: Reset
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Aggiungi campo'
+    ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
+    ADD_PAGE_BREAK: 'Aggiungi interruzione di pagina'
+    FORMFIELDS: 'Campi del modulo'
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Il campo richiesto ''{name}'' non può essere posizionato all''interno di una pagina condizionale'
+    NO_PAGE: 'Il campo ''{name}'' è stato trovato prima di una qualunque pagina'
+    UNEXPECTED_BREAK: 'Interruzione di pagina ''{name}'' inattesa all''interno del campo nidificato ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' trovato senza un gruppo corrispondente'
+    WRONG_GROUP_END: '''{name}'' trovato chiude il gruppo sbagliato ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtra invii..'
+    FROM: Da
+    TILL: 'Fino a'
+    WHEREVALUEIS: 'dove il valore è..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
     SINGULARNAME: 'Regola personalizzata modificabile'
-  EditableDateField:
-    PLURALNAME: 'Campi date'
-    SINGULARNAME: 'Campo data'
-  EditableDropdown:
-    PLURALNAME: 'Menù a tendina'
-    SINGULARNAME: 'Campo menù a tendina'
-  EditableEmailField:
-    PLURALNAME: 'Campi e-mail'
-    SINGULARNAME: 'Campo e-mail'
-  EditableFieldGroup:
-    PLURALNAME: 'Gruppi di campi modificabili'
-    SINGULARNAME: 'Gruppo di campi modificabili'
-  EditableFieldGroupEnd:
-    FIELD_GROUP_END: 'fine {group}'
-    FIELD_GROUP_START: 'Gruppo {group}'
-    PLURALNAME: 'Fine dei gruppi di campi modificabili'
-    SINGULARNAME: 'Fine del gruppo di campi modificabili'
-  EditableFileField:
-    PLURALNAME: 'Campi di caricamento file'
-    SINGULARNAME: 'Campo di caricamento file'
-  EditableFormField:
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Aggiungi
     ADDLabel: 'Aggiungi opzione'
     ADDRULE: 'Aggiungi regola'
@@ -98,48 +98,75 @@ it:
     VALUE: Valore
     WHEN: Quando
     'YES': Si
-  EditableFormFieldValidator:
-    REQUIRED_ERROR: 'I campi dei form non possono essere obbligatori e avere regole di visualizzazione condizionali.'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Caselle di controllo'
+    SINGULARNAME: 'Campo casella di controllo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Gruppi di caselle di controllo'
+    SINGULARNAME: 'Gruppo di caselle di controllo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Menù a tendina Nazioni'
+    SINGULARNAME: 'Menù a tendina Nazioni'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Campi date'
+    SINGULARNAME: 'Campo data'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: 'Menù a tendina'
+    SINGULARNAME: 'Campo menù a tendina'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Campi e-mail'
+    SINGULARNAME: 'Campo e-mail'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Gruppi di campi modificabili'
+    SINGULARNAME: 'Gruppo di campi modificabili'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'fine {group}'
+    FIELD_GROUP_START: 'Gruppo {group}'
+    PLURALNAME: 'Fine dei gruppi di campi modificabili'
+    SINGULARNAME: 'Fine del gruppo di campi modificabili'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Campi di caricamento file'
+    SINGULARNAME: 'Campo di caricamento file'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Seleziona livello di intestazione'
     PLURALNAME: Intestazioni
     SINGULARNAME: Intestazione
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Interruzioni di pagina'
     SINGULARNAME: 'Interruzione di pagina'
     STEP_TITLE: 'Pagina {page}'
     TITLE_FIRST: 'Prima pagina'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Nascondi dai rapporti?'
     HIDELABEL: 'Nascondi etichetta ''Titolo'' dal frontend?'
     PLURALNAME: 'Blocchi HTML'
     SINGULARNAME: 'Blocco HTML'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Campi lista membri'
     SINGULARNAME: 'Campo lista membri'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Selezionato di default?'
     OPTIONSTAB: Opzioni
     PLURALNAME: 'Campi a opzione multipla editabili'
     SINGULARNAME: 'Campo a opzione multipla editabili'
     TITLE: Titolo
     VALUE: Valore
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campi numerici'
     RANGE: 'Intervallo numerico ammesso'
     RANGE_TO: 'fino a'
     SINGULARNAME: 'Campo numerico'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Rimuovi questa opzione'
     DRAG: 'Trascina per modificare l''ordine delle opzioni'
     LOCKED: 'Questi campi non possono essere modificati'
     PLURALNAME: 'Opzioni modificabili'
     SINGULARNAME: 'Opzione modificabile'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Gruppi di pulsanti a scelta singola'
     SINGULARNAME: 'Gruppo di pulsanti a scelta singola'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Numero di righe'
     NUMBERROWS_DESCRIPTION: 'Campi con più di una riga verranno generati come area testo'
     PLACEHOLDER: Segnaposto
@@ -147,30 +174,28 @@ it:
     RANGE_TO: a
     SINGULARNAME: 'Campo testo'
     TEXTLENGTH: 'Lunghezza testo consentita'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
-  FieldEditor:
-    ADD: Aggiungi
-    SELECTAFIELD: 'Seleziona un campo'
-  Form:
-    FIELDISREQUIRED: '%s è richiesto'
-  GridField:
-    Filter: Filtro
-    ResetFilter: Reset
-  SiteTree:
-    PLURALNAME: Pagine
-    SINGULARNAME: Pagina
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'I campi dei form non possono essere obbligatori e avere regole di visualizzazione condizionali.'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Regole personalizzate'
+    EMAILCONTENTTAB: 'Contenuto dell''e-mail'
+    EMAILDETAILSTAB: 'Dettagli dell''e-mail'
+    PLURALNAME: 'Destinatari e-mail del modulo definito dall''utente'
+    SINGULARNAME: 'Destinatario e-mail del modulo definito dall''utente'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'Condizioni per il destinatario del modulo definito dall''utente'
+    SINGULARNAME: 'Condizione per il destinatario del modulo definito dall''utente'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Scarica file'
     PLURALNAME: 'Campi file inviati'
     SINGULARNAME: 'Campo file inviati'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Moduli inviati'
     SINGULARNAME: 'Modulo inviato'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Campi moduli inviati'
     SINGULARNAME: 'Campo modulo inviato'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
@@ -221,28 +246,3 @@ it:
     TYPEREPLY: 'Inserisci l''e-mail di risposta'
     TYPESUBJECT: 'Inserisci l''oggetto'
     TYPETO: 'Inserisci l''e-mail destinatario'
-  UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Regole personalizzate'
-    EMAILCONTENTTAB: 'Contenuto dell''e-mail'
-    EMAILDETAILSTAB: 'Dettagli dell''e-mail'
-    PLURALNAME: 'Destinatari e-mail del modulo definito dall''utente'
-    SINGULARNAME: 'Destinatario e-mail del modulo definito dall''utente'
-  UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'Condizioni per il destinatario del modulo definito dall''utente'
-    SINGULARNAME: 'Condizione per il destinatario del modulo definito dall''utente'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Aggiungi campo'
-    ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
-    ADD_PAGE_BREAK: 'Aggiungi interruzione di pagina'
-    FORMFIELDS: 'Campi del modulo'
-  UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Il campo richiesto ''{name}'' non può essere posizionato all''interno di una pagina condizionale'
-    NO_PAGE: 'Il campo ''{name}'' è stato trovato prima di una qualunque pagina'
-    UNEXPECTED_BREAK: 'Interruzione di pagina ''{name}'' inattesa all''interno del campo nidificato ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' trovato senza un gruppo corrispondente'
-    WRONG_GROUP_END: '''{name}'' trovato chiude il gruppo sbagliato ''{group}'''
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtra invii..'
-    FROM: Da
-    TILL: 'Fino a'
-    WHEREVALUEIS: 'dove il valore è..'

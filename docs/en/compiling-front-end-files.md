@@ -22,7 +22,7 @@ $ gem install compass
 
 ## Compile assets
 
-Make your changes to `scss/UserForms.scss` or `scss/UserForms_cms.scss`. Then navigate to the `userforms` folder and run:
+Make your changes to `scss/UserForm.scss` or `scss/UserForm_cms.scss`. Then navigate to the `userforms` folder and run:
 
 ```sh
 $ compass compile

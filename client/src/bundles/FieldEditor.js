@@ -2,35 +2,33 @@
  * form builder behaviour.
  */
 
-import $ from 'jquery';
-
-$.entwine('ss', () => {
+window.jQuery.entwine('ss', ($) => {
   let stickyHeaderInterval = null;
 
-  $('.uf-field-editor tbody').entwine({
-    onmatch: () => {
+  $('.uf-field-editor .ss-gridfield-items').entwine({
+    onmatch() {
       let i = 0;
       let thisLevel = 0;
       let depth = 0;
       const $buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('sticky-buttons');
-      const navHeight = $('.cms-content-header.north').height()
+      const navHeight = $('.cms-content-header.north').first().height()
         + parseInt($('.sticky-buttons').css('padding-top'), 10);
       const fieldEditor = $('.uf-field-editor');
 
       this._super();
 
       // Loop through all rows and set necessary styles
-      this.find('.ss-gridfield-item').each(() => {
-        switch ($(this).data('class')) {
-          case 'EditableFormStep': {
+      this.find('.ss-gridfield-item').each((i, el) => {
+        switch ($(el).data('class')) {
+          case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep': {
             depth = 0;
             return;
           }
-          case 'EditableFieldGroup': {
+          case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup': {
             thisLevel = ++depth;
             break;
           }
-          case 'EditableFieldGroupEnd': {
+          case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd': {
             thisLevel = depth--;
             break;
           }
@@ -39,9 +37,9 @@ $.entwine('ss', () => {
           }
         }
 
-        $(this).toggleClass('infieldgroup', thisLevel > 0);
+        $(el).toggleClass('infieldgroup', thisLevel > 0);
         for (i = 1; i <= 5; i++) {
-          $(this).toggleClass(`infieldgroup-level-${i}`, thisLevel >= i);
+          $(el).toggleClass(`infieldgroup-level-${i}`, thisLevel >= i);
         }
       });
 
@@ -56,7 +54,7 @@ $.entwine('ss', () => {
         }
       }, 300);
     },
-    onunmatch: () => {
+    onunmatch() {
       this._super();
 
       clearInterval(stickyHeaderInterval);
@@ -65,7 +63,7 @@ $.entwine('ss', () => {
 
   // When new fields are added.
   $('.uf-field-editor .ss-gridfield-buttonrow .action').entwine({
-    onclick: (e) => {
+    onclick(e) {
       this._super(e);
 
       this.trigger('addnewinline');
@@ -73,7 +71,7 @@ $.entwine('ss', () => {
   });
 
   $('.uf-field-editor').entwine({
-    onmatch: () => {
+    onmatch() {
       this._super();
 
       // When the 'Add field' button is clicked set a one time listener.
@@ -83,7 +81,7 @@ $.entwine('ss', () => {
           // If fieldgroup, focus on the start marker
           let $newField = this.find('.ss-gridfield-item').last();
           let $groupEnd = null;
-          if ($newField.attr('data-class') === 'EditableFieldGroupEnd') {
+          if ($newField.attr('data-class') === 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd') {
             $groupEnd = $newField;
             $groupEnd.prev().find('.col-Title input').focus();
             $newField = $groupEnd.add($groupEnd.prev());
@@ -100,7 +98,7 @@ $.entwine('ss', () => {
         });
       });
     },
-    onummatch: () => {
+    onummatch() {
       this._super();
     },
   });

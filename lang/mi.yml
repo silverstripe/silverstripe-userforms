@@ -13,28 +13,21 @@ mi:
     SHOWTHISFIELD: 'Whakaaturia Tēnei Āpure'
     VALUE: Uara
     WHEN: Ina
-  EditableCheckbox:
-    PLURALNAME: 'Ngā Pouakataki'
-    SINGULARNAME: 'Āpure Pouakataki'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Ngā Rōpū Pouakataki'
-    SINGULARNAME: 'Rōpū Pouakataki'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Ngā Takaiho Whenua'
-    SINGULARNAME: 'Takaiho Whenua'
-  EditableDateField:
-    PLURALNAME: 'Ngā Āpure Rā'
-    SINGULARNAME: 'Āpure Rā'
-  EditableDropdown:
-    PLURALNAME: 'Ngā Takaiho'
-    SINGULARNAME: 'Āpure Takaiho'
-  EditableEmailField:
-    PLURALNAME: 'Ngā Āpure Īmēra'
-    SINGULARNAME: 'Āpure Īmēra'
-  EditableFileField:
-    PLURALNAME: 'Ngā Āpure Tukuatu Kōnae'
-    SINGULARNAME: 'Āpure Tukuatu Kōnae'
-  EditableFormField:
+  FieldEditor:
+    ADD: Tāpiri
+    SELECTAFIELD: 'Tīpakohia tētahi Āpure'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: 'Ngā Whārangi'
+    SINGULARNAME: Whārangi
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: 'Kei te hiahiatia te %s'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Tātari
+    ResetFilter: 'Tautuhi Anō'
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
+    WHEREVALUEIS: 'ko te uara ko...'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Tāpiri
     ADDRULE: 'Tāpiri Ture'
     BLANK: Pātea
@@ -71,56 +64,69 @@ mi:
     VALIDATION: Manatokonga
     VALUE: Uara
     WHEN: Ina
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Ngā Pouakataki'
+    SINGULARNAME: 'Āpure Pouakataki'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Ngā Rōpū Pouakataki'
+    SINGULARNAME: 'Rōpū Pouakataki'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Ngā Takaiho Whenua'
+    SINGULARNAME: 'Takaiho Whenua'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Ngā Āpure Rā'
+    SINGULARNAME: 'Āpure Rā'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: 'Ngā Takaiho'
+    SINGULARNAME: 'Āpure Takaiho'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Ngā Āpure Īmēra'
+    SINGULARNAME: 'Āpure Īmēra'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Ngā Āpure Tukuatu Kōnae'
+    SINGULARNAME: 'Āpure Tukuatu Kōnae'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kōwhiri Taumata Pane'
     PLURALNAME: 'Ngā Pane'
     SINGULARNAME: Pane
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
     PLURALNAME: 'Ngā Poraka HTML'
     SINGULARNAME: 'Poraka HTML'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ngā Āpure Rārangi Mema'
     SINGULARNAME: 'Āpure Rārangi Mema'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Ngā Āpure Kōwhiringa Maha Whakatika'
     SINGULARNAME: 'Āpure Kōwhiringa Maha Whakatika'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Tangohia tēnei kōwhiringa'
     DRAG: 'Tōia hei hurinaha i te raupapa kōwhiringa'
     LOCKED: 'Kāore e taea te whakakē ēnei āpure'
     PLURALNAME: 'Ngā Kōwhiringa Whakatika'
     SINGULARNAME: 'Kōwhiringa Whakatika'
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Ngā āpure irirangi'
     SINGULARNAME: 'Āpure irirangi'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Maha kapa'
     PLURALNAME: 'Ngā Āpure Tuhinga'
     SINGULARNAME: 'Āpure Tuhinga'
     TEXTLENGTH: 'Roa tuhinga'
-  FieldEditor:
-    ADD: Tāpiri
-    SELECTAFIELD: 'Tīpakohia tētahi Āpure'
-  Form:
-    FIELDISREQUIRED: 'Kei te hiahiatia te %s'
-  GridField:
-    Filter: Tātari
-    ResetFilter: 'Tautuhi Anō'
-  SiteTree:
-    PLURALNAME: 'Ngā Whārangi'
-    SINGULARNAME: Whārangi
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    PLURALNAME: 'Ngā Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
+    SINGULARNAME: 'Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Tikiake Kōnae'
     PLURALNAME: 'Ngā Āpure Kōnae Kua Tukuna'
     SINGULARNAME: 'Āpure Kōnae Kua Tukuna'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Ngā Puka Kua Tukuna'
     SINGULARNAME: 'Puka Kua Tukuna'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Ngā Āpure Puka Kua Tukuna'
     SINGULARNAME: 'Āpure Puka Kua Tukuna'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
     CONFIGURATION: Whirihoranga
     DESCRIPTION: 'Ka tāpiri i te puka ka taea te whakarite.'
@@ -146,9 +152,3 @@ mi:
     SUBMISSIONS: 'Ngā Tukunga'
     SUBMITBUTTON: Tuku
     TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
-  UserDefinedForm_EmailRecipient:
-    PLURALNAME: 'Ngā Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
-    SINGULARNAME: 'Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
-    WHEREVALUEIS: 'ko te uara ko...'

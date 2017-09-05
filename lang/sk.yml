@@ -13,39 +13,39 @@ sk:
     SHOWTHISFIELD: 'Zobraziť toto pole'
     VALUE: 'Zadanú hodnotu'
     WHEN: 'ak pole'
-  EditableCheckbox:
-    PLURALNAME: 'Zaškrtávacie polia (checkbox)'
-    SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
-  EditableCheckboxGroupField:
-    PLURALNAME: 'Skupiny zaškrtávacích polí'
-    SINGULARNAME: 'Skupina zaškrtávacích polí'
-  EditableCountryDropdownField:
-    PLURALNAME: 'Rozbaľovacie polia (výber krajiny)'
-    SINGULARNAME: 'Rozbaľovacie pole (výber krajiny)'
-  EditableCustomRule:
+  EditableUploadField:
+    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
+  FieldEditor:
+    ADD: Pridať
+    SELECTAFIELD: 'Vyberte pole'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Stránky
+    SINGULARNAME: Stránka
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '%s je vyžadované'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+    ResetFilter: Reset
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Pridať políčko'
+    ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
+    ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
+    FORMFIELDS: Formulár
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
+    NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
+    UNEXPECTED_BREAK: 'Neočakávaný zlom strany ''{name}'' vnútri obaľovacej skupiny ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' nájdený bez odpovedajúcho začiatku'
+    WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrovať ...'
+    FROM: Od
+    TILL: Do
+    WHEREVALUEIS: 'kde hodnota je ...'
+  SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Vlastné pravidlá'
     SINGULARNAME: 'Vlastne pravidlo'
-  EditableDateField:
-    PLURALNAME: 'Dátumové polia'
-    SINGULARNAME: 'Dátumové pole'
-  EditableDropdown:
-    PLURALNAME: 'Rozbaľovacie polia'
-    SINGULARNAME: 'Rozbaľovacie pole'
-  EditableEmailField:
-    PLURALNAME: 'E-mailové polia'
-    SINGULARNAME: 'E-mailové pole'
-  EditableFieldGroup:
-    PLURALNAME: 'Skupiny polí'
-    SINGULARNAME: 'Skupina polí'
-  EditableFieldGroupEnd:
-    FIELD_GROUP_END: 'Koniec {group}'
-    FIELD_GROUP_START: 'Skupina {group}'
-    PLURALNAME: 'Konce skupiny polí'
-    SINGULARNAME: 'Koniec skupiny polí'
-  EditableFileField:
-    PLURALNAME: 'Polia pre nahratie súboru'
-    SINGULARNAME: 'Pole pre nahratie súboru'
-  EditableFormField:
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: Pridať
     ADDLabel: 'Pridať voľbu/možnosť'
     ADDRULE: 'Pridať pravidlo'
@@ -98,48 +98,75 @@ sk:
     VALUE: 'Zadanú hodnotu'
     WHEN: 'ak pole'
     'YES': Áno
-  EditableFormFieldValidator:
-    REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
-  EditableFormHeading:
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Zaškrtávacie polia (checkbox)'
+    SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Skupiny zaškrtávacích polí'
+    SINGULARNAME: 'Skupina zaškrtávacích polí'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    PLURALNAME: 'Rozbaľovacie polia (výber krajiny)'
+    SINGULARNAME: 'Rozbaľovacie pole (výber krajiny)'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Dátumové polia'
+    SINGULARNAME: 'Dátumové pole'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: 'Rozbaľovacie polia'
+    SINGULARNAME: 'Rozbaľovacie pole'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'E-mailové polia'
+    SINGULARNAME: 'E-mailové pole'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Skupiny polí'
+    SINGULARNAME: 'Skupina polí'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'Koniec {group}'
+    FIELD_GROUP_START: 'Skupina {group}'
+    PLURALNAME: 'Konce skupiny polí'
+    SINGULARNAME: 'Koniec skupiny polí'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Polia pre nahratie súboru'
+    SINGULARNAME: 'Pole pre nahratie súboru'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Úroveň nadpisu'
     PLURALNAME: Nadpisy
     SINGULARNAME: Nadpis
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Zlomy strán'
     SINGULARNAME: 'Zlom strany'
     STEP_TITLE: 'Strana {page}'
     TITLE_FIRST: 'Prvá strana'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Skryť z reportu?'
     HIDELABEL: 'Skryť ''Názov'' na FrontEnd-e?'
     PLURALNAME: 'HTML bloky'
     SINGULARNAME: 'HTML blok'
-  EditableMemberListField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Polia zoznamu členov'
     SINGULARNAME: 'Pole zoznamu členov'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Vybrané v predvolenom režime?'
     OPTIONSTAB: Možnosti
     PLURALNAME: 'Polia s viacerými možnosťami'
     SINGULARNAME: 'Pole s viacerými možnosťami'
     TITLE: Názov
     VALUE: Hodnota
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numerické/číselné polia'
     RANGE: 'Povolený rozsah'
     RANGE_TO: do
     SINGULARNAME: 'Numerické/číselné pole'
-  EditableOption:
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     DELETE: 'Odstráň túto možnosť'
     DRAG: 'Ťahaním preskupiť poradie polí'
     LOCKED: 'Tieto polia nie je možné meniť'
     PLURALNAME: Možnosti
     SINGULARNAME: Možnosť
-  EditableRadioField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Prepínacie polia (radio)'
     SINGULARNAME: 'Prepínacie pole (radio)'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Počet riadkov'
     NUMBERROWS_DESCRIPTION: 'Políčka s viac ako jedným riadkom sú generované ako textarea.'
     PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
@@ -147,30 +174,28 @@ sk:
     RANGE_TO: do
     SINGULARNAME: 'Textové pole'
     TEXTLENGTH: 'Povolená dĺžka textu'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
-  FieldEditor:
-    ADD: Pridať
-    SELECTAFIELD: 'Vyberte pole'
-  Form:
-    FIELDISREQUIRED: '%s je vyžadované'
-  GridField:
-    Filter: Filter
-    ResetFilter: Reset
-  SiteTree:
-    PLURALNAME: Stránky
-    SINGULARNAME: Stránka
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Vlastné pravidlá'
+    EMAILCONTENTTAB: 'Obsah e-mailu'
+    EMAILDETAILSTAB: 'Detaily e-mailu'
+    PLURALNAME: 'Užívateľom definovaný formulár - príjemcovia e-mailu'
+    SINGULARNAME: 'Užívateľom definovaný formulár - príjemca e-mailu'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'Užívateľom definovaný formulár - podmienky príjemcu e-mailu'
+    SINGULARNAME: 'Užívateľom definovaný formulár - podmienka príjemcu e-mailu'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Stiahnuť súbor'
     PLURALNAME: 'Pole s odoslanými súbormi'
     SINGULARNAME: 'Pole s odoslaným súborom'
-  SubmittedForm:
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Odoslané formuláre'
     SINGULARNAME: 'Odoslaný formulár'
-  SubmittedFormField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Odoslané formulárové polia'
     SINGULARNAME: 'Odoslané formulárove pole'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Pridať príjemcu'
     CLEARBUTTON: Vyčistiť
     CONFIGURATION: Konfigurácia
@@ -221,28 +246,3 @@ sk:
     TYPEREPLY: 'Napíšte adresu'
     TYPESUBJECT: 'Napíšte predmet'
     TYPETO: 'Napíšte adresu'
-  UserDefinedForm_EmailRecipient:
-    CUSTOMRULESTAB: 'Vlastné pravidlá'
-    EMAILCONTENTTAB: 'Obsah e-mailu'
-    EMAILDETAILSTAB: 'Detaily e-mailu'
-    PLURALNAME: 'Užívateľom definovaný formulár - príjemcovia e-mailu'
-    SINGULARNAME: 'Užívateľom definovaný formulár - príjemca e-mailu'
-  UserDefinedForm_EmailRecipientCondition:
-    PLURALNAME: 'Užívateľom definovaný formulár - podmienky príjemcu e-mailu'
-    SINGULARNAME: 'Užívateľom definovaný formulár - podmienka príjemcu e-mailu'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'Pridať políčko'
-    ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
-    ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
-    FORMFIELDS: Formulár
-  UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
-    NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
-    UNEXPECTED_BREAK: 'Neočakávaný zlom strany ''{name}'' vnútri obaľovacej skupiny ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' nájdený bez odpovedajúcho začiatku'
-    WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
-  UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrovať ...'
-    FROM: Od
-    TILL: Do
-    WHEREVALUEIS: 'kde hodnota je ...'

@@ -1,13 +1,20 @@
 fa_IR:
   CustomRule:
     DELETE: حذف
-  EditableDateField:
-    PLURALNAME: 'فیلدهای تاریخ'
-    SINGULARNAME: 'فیلد تاریخ'
-  EditableEmailField:
-    PLURALNAME: 'فیلدهای ایمیل'
-    SINGULARNAME: 'فیلد ایمیل'
-  EditableFormField:
+  FieldEditor:
+    ADD: افزودن
+    SELECTAFIELD: 'انتخاب یک فیلد'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: صفحات
+    SINGULARNAME: صفحه
+  SilverStripe\Forms\GridField\GridField:
+    Filter: پالایش
+    ResetFilter: 'از نو'
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'افزودن فیلد'
+    ADD_FIELD_GROUP: 'افزودن فیلد گروهی'
+    FORMFIELDS: 'فیلدهای فرم'
+  SilverStripe\UserForms\Model\EditableFormField:
     ADD: افزودن
     DEFAULTTOTODAY: 'تاریخ پیش فرض به امروز؟'
     DELETE: حذف
@@ -18,32 +25,29 @@ fa_IR:
     RIGHTTITLE: 'عنوان سمت راست'
     TITLE: عنوان
     'YES': بله
-  EditableFormStep:
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'فیلدهای تاریخ'
+    SINGULARNAME: 'فیلد تاریخ'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'فیلدهای ایمیل'
+    SINGULARNAME: 'فیلد ایمیل'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     TITLE_FIRST: 'صفحه نخست'
-  EditableLiteralField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     PLURALNAME: 'بلوک های HTML'
     SINGULARNAME: 'بلوک HTML'
-  EditableMultipleOptionField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'انتخاب به عنوان پیش فرض؟'
-  EditableNumericField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'فیلد عددی'
     RANGE_TO: به
     SINGULARNAME: 'فیلد عددی'
-  EditableTextField:
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'تعداد سطر ها'
     RANGE_TO: به
-  FieldEditor:
-    ADD: افزودن
-    SELECTAFIELD: 'انتخاب یک فیلد'
-  GridField:
-    Filter: پالایش
-    ResetFilter: 'از نو'
-  SiteTree:
-    PLURALNAME: صفحات
-    SINGULARNAME: صفحه
-  SubmittedFileField:
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'دانلود فایل'
-  UserDefinedForm:
+  SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: پاک‌کردن
     DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
     EMAILADDRESS: 'ایمیل'
@@ -59,7 +63,3 @@ fa_IR:
     SUBMITBUTTON: 'ثبت کردن'
     TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
     TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
-  UserFormFieldEditorExtension:
-    ADD_FIELD: 'افزودن فیلد'
-    ADD_FIELD_GROUP: 'افزودن فیلد گروهی'
-    FORMFIELDS: 'فیلدهای فرم'

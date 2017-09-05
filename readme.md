@@ -3,9 +3,9 @@
 UserForms enables CMS users to create dynamic forms via a drag and drop interface
 and without getting involved in any PHP code.
 
-[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://travis-ci.org/silverstripe/silverstripe-userforms)
-[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe/silverstripe-userforms.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms)
+[![Build Status](https://travis-ci.org/silverstripe/silverstripe-userforms.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-userforms)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/?branch=master)
+[![codecov](https://codecov.io/gh/silverstripe/silverstripe-userforms/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-userforms)
 [![Version](http://img.shields.io/packagist/v/silverstripe/userforms.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-userforms)
 [![License](http://img.shields.io/packagist/l/silverstripe/userforms.svg?style=flat-square)](LICENSE.md)
 ![helpfulrobot](https://helpfulrobot.io/silverstripe/userforms/badge)
