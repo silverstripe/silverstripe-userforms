@@ -33,7 +33,8 @@
         "silverstripe/framework": "^4@dev",
         "silverstripe/cms": "^4@dev",
         "symbiote/silverstripe-gridfieldextensions": "^3@dev",
-        "silverstripe/segment-field": "^2@dev"
+        "silverstripe/segment-field": "^2@dev",
+        "silverstripe/versioned": "^1@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",
