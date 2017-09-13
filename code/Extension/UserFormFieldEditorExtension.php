@@ -94,21 +94,25 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldButtonRow(),
                 (new GridFieldAddClassesButton(EditableTextField::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
-                    ->setButtonClass('ss-ui-action-constructive'),
+                    ->setButtonClass('btn-primary'),
                 (new GridFieldAddClassesButton(EditableFormStep::class))
-                    ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break')),
+                    ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break'))
+                    ->setButtonClass('btn-secondary'),
                 (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
-                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group')),
-                new GridFieldEditButton(),
+                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group'))
+                    ->setButtonClass('btn-secondary'),
+                $editButton = new GridFieldEditButton(),
                 new GridFieldDeleteAction(),
                 new GridFieldToolbarHeader(),
                 new GridFieldOrderableRows('Sort'),
                 new GridFieldDetailForm()
             );
 
+        $editButton->removeExtraClass('grid-field__icon-action--hidden-on-hover');
+
         $fieldEditor = GridField::create(
             'Fields',
-            _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.FIELDS', 'Fields'),
+            '',
             $fields,
             $config
         )->addExtraClass('uf-field-editor');

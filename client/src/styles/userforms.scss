@@ -4,13 +4,13 @@
   .progress {
     position: relative;
     height: 1em;
-    background: $gray-lighter;
+    background: $gray-200;
   }
 
   .progress-bar {
     position: absolute;
     height: 1em;
-    background: $gray-progress-bg;
+    background: $gray-650;
   }
 
   .step-buttons {
@@ -51,20 +51,20 @@
   max-width: 100%;
 
   .field label.right {
-    color: $gray-dark-label;
+    color: $gray-800;
   }
 }
 
 .userformsgroup {
-  border: 1px solid $gray-light-border;
-  border-radius: $padding-xs;
-  padding: $padding-base-horizontal;
-  margin-top: $padding-base;
-  margin-bottom: $padding-base;
+  border: 1px solid $gray-300;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 
   > legend {
-    padding-left: $padding-xs;
-    padding-right: $padding-xs;
+    padding-left: 4px;
+    padding-right: 4px;
     border: 0;
     width: auto;
   }
@@ -80,6 +80,6 @@
 }
 
 .userform .left {
-  margin-bottom: $padding-sm;
+  margin-bottom: 5px;
   font-weight: bold;
 }
