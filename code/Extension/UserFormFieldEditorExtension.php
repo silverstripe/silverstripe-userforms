@@ -108,8 +108,6 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldDetailForm()
             );
 
-        $editButton->removeExtraClass('grid-field__icon-action--hidden-on-hover');
-
         $fieldEditor = GridField::create(
             'Fields',
             '',
