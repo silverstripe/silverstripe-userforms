@@ -147,18 +147,6 @@ class EditableFileField extends EditableFormField
         return SubmittedFileField::create();
     }
 
-
-    public function migrateSettings($data)
-    {
-        // Migrate 'Folder' setting to 'FolderID'
-        if (isset($data[Folder::class])) {
-            $this->FolderID = $data[Folder::class];
-            unset($data[Folder::class]);
-        }
-
-        parent::migrateSettings($data);
-    }
-
     /**
      * @return float
      */
