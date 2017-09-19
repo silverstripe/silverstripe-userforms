@@ -1,6 +1,6 @@
 # UserForms
 
-UserForms enables CMS users to create dynamic forms via a drag and drop interface 
+UserForms enables CMS users to create dynamic forms via a drag and drop interface
 and without getting involved in any PHP code.
 
 ## Maintainer Contact
@@ -28,11 +28,12 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
  * [Troubleshooting](troubleshooting)
  * [User Documentation](userguide/index.md)
  * [Compiling Front-End Files](compiling-front-end-files.md)
+ * [Upgrading to SilverStripe 4](upgrading.md)
 
 ## Thanks
 
-I would like to thank everyone who has contributed to the module, bugfixers, 
+I would like to thank everyone who has contributed to the module, bugfixers,
 testers, clients who use the module and everyone that submits new features.
 
-A big thanks goes out to [Jan Düsedau](http://eformation.de) for drawing 
+A big thanks goes out to [Jan Düsedau](http://eformation.de) for drawing
 the custom icon set for the form fields.

@@ -9,7 +9,6 @@ use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Manifest\ModuleLoader;
-use SilverStripe\Dev\Deprecation;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -568,36 +567,6 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * @deprecated since version 4.0
-     */
-    public function getSettings()
-    {
-        Deprecation::notice('4.0', 'getSettings is deprecated');
-        return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
-    }
-
-    /**
-     * @deprecated since version 4.0
-     */
-    public function setSettings($settings = array())
-    {
-        Deprecation::notice('4.0', 'setSettings is deprecated');
-        $this->CustomSettings = serialize($settings);
-    }
-
-    /**
-     * @deprecated since version 4.0
-     */
-    public function setSetting($key, $value)
-    {
-        Deprecation::notice('4.0', "setSetting({$key}) is deprecated");
-        $settings = $this->getSettings();
-        $settings[$key] = $value;
-
-        $this->setSettings($settings);
-    }
-
-    /**
      * Set the allowed css classes for the extraClass custom setting
      *
      * @param array $allowed The permissible CSS classes to add
@@ -609,22 +578,6 @@ class EditableFormField extends DataObject
                 self::$allowed_css[$k] = (!is_null($v)) ? $v : $k;
             }
         }
-    }
-
-    /**
-     * @deprecated since version 4.0
-     */
-    public function getSetting($setting)
-    {
-        Deprecation::notice("4.0", "getSetting({$setting}) is deprecated");
-
-        $settings = $this->getSettings();
-        if (isset($settings) && count($settings) > 0) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            }
-        }
-        return '';
     }
 
     /**
@@ -713,26 +666,6 @@ class EditableFormField extends DataObject
     public function getCMSTitle()
     {
         return $this->i18n_singular_name() . ' (' . $this->Title . ')';
-    }
-
-    /**
-     * @deprecated since version 4.0
-     */
-    public function getFieldName($field = false)
-    {
-        Deprecation::notice('4.0', "getFieldName({$field}) is deprecated");
-        return ($field) ? "Fields[".$this->ID."][".$field."]" : "Fields[".$this->ID."]";
-    }
-
-    /**
-     * @deprecated since version 4.0
-     */
-    public function getSettingName($field)
-    {
-        Deprecation::notice('4.0', "getSettingName({$field}) is deprecated");
-        $name = $this->getFieldName('CustomSettings');
-
-        return $name . '[' . $field .']';
     }
 
     /**
