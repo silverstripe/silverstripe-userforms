@@ -237,15 +237,14 @@ class EditableFormField extends DataObject
                 CheckboxField::create('ShowInSummary', _t(__CLASS__.'.SHOWINSUMMARY', 'Show in summary gridfield')),
                 LiteralField::create(
                     'MergeField',
-                    _t(
-                        __CLASS__.'.MERGEFIELDNAME',
-                        '<div class="field readonly">' .
-                            '<label class="left">' . _t(__CLASS__.'.MERGEFIELDNAME', 'Merge field') . '</label>' .
-                            '<div class="middleColumn">' .
-                                '<span class="readonly">$' . $this->Name . '</span>' .
-                            '</div>' .
-                        '</div>'
-                    )
+                    '<div class="form-group field readonly">' .
+                        '<label class="left form__field-label" for="Form_ItemEditForm_MergeField">'
+                            . _t(__CLASS__.'.MERGEFIELDNAME', 'Merge field')
+                        . '</label>'
+                        . '<div class="form__field-holder">'
+                            . '<span class="readonly" id="Form_ItemEditForm_MergeField">$' . $this->Name . '</span>'
+                        . '</div>'
+                    . '</div>'
                 ),
                 TextField::create('Title', _t(__CLASS__.'.TITLE', 'Title')),
                 TextField::create('Default', _t(__CLASS__.'.DEFAULT', 'Default value')),
