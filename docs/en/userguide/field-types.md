@@ -1,6 +1,6 @@
 # Field types
 
-## Checkbox Field 
+## Checkbox Field
 
 Selecting a checkbox field adds a single checkbox to a form, along with a place to
 store a label for that checkbox. This is useful for getting information that has a
@@ -39,7 +39,7 @@ need to click on the "Show options" link to add user-selectable options.
 ## Email Field
 
 Selecting an Email field adds a textbox where an email address can be entered. Using the Email
-field, instead of a normal text field, to store email addresses, allows you to use that email
+field to store email addresses instead of a normal text field allows you to use that email
 address in many automated tasks. For example, it allows the CMS to send reply email
 automatically when a form is filled out.
 
@@ -55,6 +55,8 @@ is selected it will upload by default to the "Uploads" folder.
 Only certain file extensions are considered safe for upload,
 e.g. webserver script files will be denied but images will be allowed.
 The webserver environment also imposes a limit on file size by default.
+
+You can set any permissions requirements on the upload folder by finding it in the "Files" area, clicking on it to edit and going to the "Permissions" tab.
 
 ## Heading
 
@@ -112,7 +114,7 @@ to determine the size and the number of rows in a text field.
 
 **Put another way, if you'd like to create a question that...**
 
-* Has a yes or no answer - use [Checkbox Field](#checkbox-field). 
+* Has a yes or no answer - use [Checkbox Field](#checkbox-field).
 * Has multiple possible answers, from a list of choices - use [Checkbox Group](#checkbox-group).
 * Has one answer, from a list of choices - use [Dropdown Field](#dropdown-field) (for short answers) or
   [Radio Field](#radio-field) (for longer answers).

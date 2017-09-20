@@ -1,29 +1,23 @@
-# Compiling Front-End Files
+# Compiling front-end files
 
-UserForms stylesheets are written in SASS, so to make changes you'll need to have Compass installed.
+UserForms stylesheets are written in SASS and JavaScript follows ES6 syntax. Both are compiled with Webpack into distributable, minified files.
 
-## Debian/Ubuntu
+To get started, you will first need NodeJS, NPM, Webpack and Yarn installed. For more information on this process, [see "Build Tooling" in the SilverStripe documentation](https://docs.silverstripe.org/en/4/contributing/build_tooling/).
+
+## Watching for changes
+
+As you make changes to SASS or JavaScript, you can ask Yarn to watch and rebuild the deltas as their are saved:
 
 ```sh
-$ apt-get update
-$ apt-get install ruby
-$ gem install compass
+yarn watch
 ```
 
-## OSX
+This will not minify the dist files.
 
-[Install homebrew](http://brew.sh). Then:
+## Compile assets for production
 
-```sh
-$ brew update
-$ brew install ruby
-$ gem install compass
-```
-
-## Compile assets
-
-Make your changes to `scss/UserForm.scss` or `scss/UserForm_cms.scss`. Then navigate to the `userforms` folder and run:
+When you're happy with your changes and are ready to make a pull request you should run a "build" command to compile and minify everything:
 
 ```sh
-$ compass compile
+yarn build
 ```

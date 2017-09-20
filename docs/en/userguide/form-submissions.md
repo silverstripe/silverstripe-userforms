@@ -55,18 +55,18 @@ You can check this if you do not wish for the email recipient to see the form su
 You can check this if you want to remove all of the HTML from the email, this means the email
 will have no custom styling and the recipient will only see the plain text.
 
-If `Send email as plain text?` is unselected, several additional options for HTML editing are displayed.
+If "Send email as plain text?" is unselected, several additional options for HTML editing are displayed.
 
-If sending as HTML, there is the option to preview the HTML that is sent in the editor. Additionally, a HTML
+If sending as HTML, there is the option to preview the HTML that is sent in the editor. Additionally an HTML
 template can be selected to provide a standard formatted email to contain the editable HTML content.
 
-The list of available templates can be controlled by specifying the folder for these template files in yaml config.
+The list of available templates can be controlled by specifying the folder for these template files in YAML config.
 
 
-	:::yaml
-	UserDefinedForm:
-	  email_template_directory: mysite/templates/useremails/
-
+```yaml
+UserDefinedForm:
+  email_template_directory: mysite/templates/useremails/
+```
 
 ### Custom Rules
 
@@ -85,7 +85,3 @@ This decides whether to send the email based on two options
 * Select the field which you want the custom rule to apply to
 * Select the condition the field must follow
 * enter for the condition (the 'is blank' and 'is not blank' conditions do not require any text)
-
-
-
-
