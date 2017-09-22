@@ -18,6 +18,12 @@ use SilverStripe\UserForms\FormField\UserFormsFieldList;
 class UserForm extends Form
 {
     /**
+     * @config
+     * @var string
+     */
+    private static $button_text = '';
+
+    /**
      * @param Controller $controller
      * @param string $name
      */
