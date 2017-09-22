@@ -5,7 +5,7 @@
  */
 
 class UserDefinedForm extends Page {
-	
+
 	/**
 	 * @var string
 	 */
@@ -370,7 +370,9 @@ class UserDefinedForm_Controller extends Page_Controller {
 		if($this->Content && $form = $this->Form()) {
 			$hasLocation = stristr($this->Content, '$UserDefinedForm');
 			if($hasLocation) {
-				$content = preg_replace('/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i', $form->forTemplate(), $this->Content);
+				/** @see Requirements_Backend::escapeReplacement */
+				$formEscapedForRegex = addcslashes($form->forTemplate(), '\\$');
+				$content = preg_replace('/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i', $formEscapedForRegex, $this->Content);
 				return array(
 					'Content' => DBField::create_field('HTMLText', $content),
 					'Form' => ""
@@ -688,7 +690,7 @@ JS
 			foreach($recipients as $recipient) {
 				$email = new UserFormRecipientEmail($submittedFields);
 				$mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-	
+
 				if($attachments) {
 					foreach($attachments as $file) {
 						if($file->ID != 0) {
@@ -700,7 +702,7 @@ JS
 						}
 					}
 				}
-				
+
 				$parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
 				if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
