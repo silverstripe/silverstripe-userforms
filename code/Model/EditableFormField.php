@@ -795,28 +795,6 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * Invoked by UserFormUpgradeService to migrate settings specific to this field from CustomSettings
-     * to the field proper
-     *
-     * @param array $data Unserialised data
-     */
-    public function migrateSettings($data)
-    {
-        // Map 'Show' / 'Hide' to boolean
-        if (isset($data['ShowOnLoad'])) {
-            $this->ShowOnLoad = $data['ShowOnLoad'] === '' || ($data['ShowOnLoad'] && $data['ShowOnLoad'] !== 'Hide');
-            unset($data['ShowOnLoad']);
-        }
-
-        // Migrate all other settings
-        foreach ($data as $key => $value) {
-            if ($this->hasField($key)) {
-                $this->setField($key, $value);
-            }
-        }
-    }
-
-    /**
      * Get the formfield to use when editing this inline in gridfield
      *
      * @param string $column name of column

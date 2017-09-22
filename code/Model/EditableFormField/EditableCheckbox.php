@@ -62,17 +62,6 @@ class EditableCheckbox extends EditableFormField
             : _t('SilverStripe\\UserForms\\Model\\EditableFormField.NO', 'No');
     }
 
-    public function migrateSettings($data)
-    {
-        // Migrate 'Default' setting to 'CheckedDefault'
-        if (isset($data['Default'])) {
-            $this->CheckedDefault = (bool)$data['Default'];
-            unset($data['Default']);
-        }
-
-        parent::migrateSettings($data);
-    }
-
     public function isCheckBoxField()
     {
         return true;
