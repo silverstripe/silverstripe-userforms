@@ -32,7 +32,7 @@
     "require": {
         "silverstripe/framework": "~3.1",
         "silverstripe/cms": "~3.1",
-        "silverstripe-australia/gridfieldextensions": "~1.1",
+        "symbiote/silverstripe-gridfieldextensions": "~1.1",
         "silverstripe/segment-field": "^1.0"
     },
     "suggest": {
