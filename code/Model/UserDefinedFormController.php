@@ -110,9 +110,11 @@ class UserDefinedFormController extends PageController
         if ($this->Content && $form = $this->Form()) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
+                /** @see Requirements_Backend::escapeReplacement */
+                $formEscapedForRegex = addcslashes($form->forTemplate(), '\\$');
                 $content = preg_replace(
                     '/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i',
-                    $form->forTemplate(),
+                    $formEscapedForRegex,
                     $this->Content
                 );
                 return [
