@@ -57,6 +57,7 @@ eo:
     DEFAULT: 'Apriora valoro'
     DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
     DELETE: Forigi
+    DISPLAYIF: 'Baskuligi videblecon kiam'
     DISPLAY_RULES_DISABLED: 'Vidigaj reguloj ne estas enŝaltitaj por bezonataj kampoj. Por reaktivigi ĝin, bonvolu malmarki "Ĉu ĉi tiu kampo estas bezonata?" sub "Validigo".'
     DRAG: 'Ŝovi por rearanĝi kampojn'
     ENTERQUESTION: 'Enigi demandon'
@@ -73,6 +74,7 @@ eo:
     GROUP: Grupo
     HIDE: Kaŝi
     HIDETHISFIELD: 'Kaŝi ĉi tiun kampon'
+    INITIALVISIBILITY: 'Komenca videbleco'
     IS: Estas
     LESSTHAN: 'Valoro malpli ol'
     LESSTHANEQUAL: 'Valoro malpli ol aŭ egala al'
@@ -83,11 +85,13 @@ eo:
     NOTBLANK: 'Ne vaka'
     NOTVALUE: 'Ne valoro'
     OPTIONS: Agordoj
+    PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Redakteblaj formularaj kampoj'
     REQUIRED: 'Ĉu ĉi tiu kampo estas nepra?'
     REQUIRED_DESCRIPTION: 'Bonvolu noti ke kondiĉaj kampoj ne povas esti nepraj'
     RIGHTTITLE: 'Dekstra titolo'
     SHOW: Vidigi
+    SHOWINSUMMARY: 'Vidigi en resuma kadrokampo'
     SHOWONLOAD: 'Komenca videbleco antaŭ ol trakti ĉi tiujn regulojn'
     SHOWOPTIONS: 'Vidigi agordojn'
     SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
@@ -140,6 +144,8 @@ eo:
     PLURALNAME: 'Radiobutonaj kampoj'
     SINGULARNAME: 'Radiobutona kampo'
   EditableTextField:
+    AUTOCOMPLETE: 'Aŭtomate kompletigi'
+    AUTOCOMPLETE_DESCRIPTION: 'Subtenataj TTT-legiloj provos aŭtomate plenigi ĉi tiun kampon per uzantinformo, uzu ĝin por agordi la enan valoron'
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLACEHOLDER: Lokokupilo
