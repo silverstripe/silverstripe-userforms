@@ -724,7 +724,7 @@ $(document).ready(() => {
 
     // Make sure the form doesn't expire on the user. Pings every 3 mins.
     setInterval(() => {
-      $.ajax({ url: 'UserDefinedForm_Controller/ping' });
+      $.ajax({ url: 'UserDefinedFormController/ping' });
     }, 180 * 1000);
 
     // Bind a confirmation message when navigating away from a partially completed form.
