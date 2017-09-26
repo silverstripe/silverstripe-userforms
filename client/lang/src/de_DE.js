@@ -6,6 +6,7 @@
     "UserForms.ADDING_OPTION": "Füge Option hinzu",
     "UserForms.ADDING_RULE": "Füge Regel hinzu",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Alle Einsendungen werden dauerhaft gelöscht. Wirklich fortfahren?",
+    "UserForms.ERROR_CONTAINER_HEADER": "Bitte korrigieren Sie die Fehler und senden das Formular erneut:",
     "UserForms.ERROR_CREATING_FIELD": "Fehler beim erstellen des Feldes",
     "UserForms.ERROR_CREATING_OPTION": "Fehler beim erstellen der Option",
     "UserForms.HIDE_OPTIONS": "Optionen verbergen",
