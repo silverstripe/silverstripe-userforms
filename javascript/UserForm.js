@@ -84,9 +84,9 @@ jQuery(function ($) {
 			error.addClass('message');
 
 			if (element.is(':radio') || element.parents('.checkboxset').length > 0) {
-				error.insertAfter(element.closest('ul'));
+				error.appendTo(element.closest('.middleColumn'));
 			} else if (element.parents('.checkbox').length > 0) {
-				error.insertAfter(element.next('label'));
+				error.appendTo(element.closest('.field'));
 			} else {
 				error.insertAfter(element);
 			}
