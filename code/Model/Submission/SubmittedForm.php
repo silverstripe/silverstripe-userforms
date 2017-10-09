@@ -9,20 +9,16 @@ use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
 use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 
-/**
- * Contents of an UserDefinedForm submission
- *
- * @package userforms
- */
 class SubmittedForm extends DataObject
 {
     private static $has_one = [
         'SubmittedBy' => Member::class,
-        'Parent' => UserDefinedForm::class,
+        'Parent' => DataObject::class,
     ];
 
     private static $has_many = [
@@ -39,6 +35,14 @@ class SubmittedForm extends DataObject
     ];
 
     private static $table_name = 'SubmittedForm';
+
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
+        // make sure to migrate the class across (prior to v5.x)
+        DB::query("UPDATE SubmittedForm SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+    }
 
     /**
      * Returns the value of a relation or, in the case of this form, the value

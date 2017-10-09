@@ -25,6 +25,7 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
@@ -36,6 +37,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
 use SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier;
+use SilverStripe\UserForms\UserForm;
 use SilverStripe\Versioned\Versioned;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -146,7 +148,7 @@ class EditableFormField extends DataObject
      * @var array
      */
     private static $has_one = [
-        'Parent' => UserDefinedForm::class,
+        'Parent' => DataObject::class,
     ];
 
     /**
@@ -319,6 +321,17 @@ class EditableFormField extends DataObject
         $this->extend('updateCMSFields', $fields);
 
         return $fields;
+    }
+
+
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
+        // make sure to migrate the class across (prior to v5.x)
+        DB::query("UPDATE EditableFormField SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+        DB::query("UPDATE EditableFormField_Live SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+        DB::query("UPDATE EditableFormField_Versions SET ParentClass = 'Page' WHERE ParentClass IS NULL");
     }
 
     /**
