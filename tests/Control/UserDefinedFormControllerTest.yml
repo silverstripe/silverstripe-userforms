@@ -1,0 +1,340 @@
+SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+  form1step1:
+    Title: 'Step 1'
+  form3step1:
+    Title: 'Step 1'
+  form4step1:
+    Title: 'Step 1'
+  form5step1:
+    Title: 'Step 1'
+  form6step1:
+    Title: 'Step 1'
+  form6step2:
+    Title: 'Step 2'
+  form6step3:
+    Title: 'Step 2'
+  form7step1:
+    Title: 'Step 1'
+
+SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+  option-1:
+    Name: Option1
+    Title: Option 1
+
+  option-2:
+    Name: Option2
+    Title: Option 2
+
+  department-1:
+    Name: dept1
+    Title: sales@example.com
+
+  department-2:
+    Name: dept2
+    Title: accounts@example.com
+
+  option-3:
+    Name: Option3
+    Title: Option 3
+
+  option-4:
+    Name: Option4
+    Title: Option 4
+
+  option-5:
+    Name: Option5
+    Title: Option 5
+
+  option-6:
+    Name: Option6
+    Title: Option 6
+
+  option-7:
+    Name: Option7
+    Title: Red
+
+  option-8:
+    Name: Option8
+    Title: Blue
+
+  option-9:
+    Name: Option9
+    Title: Green
+
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  basic-text:
+    Name: basic-text-name
+    Title: Basic Text Field
+
+  basic-text-2:
+    Name: basic-text-name
+    Title: Basic Text Field
+
+  your-name-field:
+    Name: your-name
+    Title: Name
+
+  address-field:
+    Name: address
+    Title: Address
+
+  street-field:
+    Name: street
+    Title: Street
+
+  city-field:
+    Name: city
+    Title: City
+
+  required-text:
+    Name: required-text-field
+    Title: Required Text Field
+    CustomErrorMessage: Custom Error Message
+    Required: true
+
+  field-1:
+    Name: Field1
+
+  field-2:
+    Name: Field2
+
+  some-field:
+    Name: SomeField
+
+  another-required:
+    Name: required-text
+    Title: Required Text Field
+    Required: true
+    CustomErrorMessage: 'This field is required'
+
+  summary-show:
+    Name: SummaryShow
+    Title: Summary Text Field
+    ShowInSummary: true
+
+  summary-hide:
+    Name: SummaryHide
+    Title: Summary Text Field
+    ShowInSummary: false
+
+SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+  basic-dropdown:
+    Name: basic-dropdown
+    Title: Basic Dropdown Field
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-2
+
+  department-dropdown:
+    Name: department
+    Title: Department
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.department-2
+
+SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+  checkbox-1:
+    Name: checkbox-1
+    Title: Checkbox 1
+
+  checkbox-2:
+    Name: checkbox-1
+    Title: Checkbox 1
+
+SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+  checkbox-group:
+    Name: check-box-group
+    Title: Check box group
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-3
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-4
+
+  colour-checkbox-group:
+    Name: colours
+    Title: 'Select Colours'
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-7
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-8
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-9
+
+SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+  email-field:
+    Name: email-field
+    Title: Email
+
+  another-email-field:
+    Name: required-email
+    Title: Enter your email
+    CustomErrorMessage: 'That email is not valid'
+
+SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
+  radio-field:
+    Name: radio-option
+    Title: Radio Option
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-5
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-6
+
+SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+  group1end:
+    Name: group1end
+
+SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+  group1start:
+    Name: group1start
+    End: =>SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd.group1end
+
+SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+# filtered recipient 1
+  blank-rule:
+    ConditionOption: IsBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.your-name-field
+  not-blank-rule:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.address-field
+  equals-rule:
+    ConditionOption: Equals
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.street-field
+    ConditionValue: 'Matches Equals'
+  not-equals-rule:
+    ConditionOption: NotEquals
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.city-field
+    ConditionValue: 'Matches Not Equals'
+# filtered recipient 2
+  group-equals-rule:
+    ConditionOption: Equals
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField.colour-checkbox-group
+    ConditionValue: Red
+  group-not-equals-rule:
+    ConditionOption: NotEquals
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField.colour-checkbox-group
+    ConditionValue: Blue
+
+
+SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+  recipient-1:
+    EmailAddress: test@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+  no-html:
+    EmailAddress: nohtml@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    SendPlain: true
+
+  no-data:
+    EmailAddress: nodata@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    HideFormData: true
+
+  unfiltered-recipient-1:
+    EmailAddress: unfiltered@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+  filtered-recipient-1:
+    EmailAddress: filtered1@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    CustomRules:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.blank-rule
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.not-blank-rule
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.equals-rule
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.not-equals-rule
+    CustomRulesCondition: 'And'
+
+  filtered-recipient-2:
+    EmailAddress: filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    CustomRules:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.group-equals-rule
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition.group-not-equals-rule
+    CustomRulesCondition: 'Or'
+
+  valid-recipient-list:
+    EmailAddress: filtered@example.com, filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+  invalid-recipient-list:
+    EmailAddress: filtered.example.com, filtered2@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+SilverStripe\UserForms\Model\UserDefinedForm:
+  basic-form-page:
+    Content: '<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>'
+    Title: User Defined Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form1step1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    EmailRecipients:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-html
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
+
+  page-with-group:
+    Content: 'Page with group'
+    Title: 'page with group'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form7step1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup.group1start
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.some-field
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd.group1end
+
+  form-with-reset-and-custom-action:
+    Title: Form with Reset Action
+    SubmitButtonText: Custom Button
+    ShowClearButton: true
+
+  validation-form:
+    Title: Validation Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form3step1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.required-text
+
+  custom-rules-form:
+    Title: Custom Rules Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox.checkbox-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+
+  summary-rules-form:
+    Title: Summary Fields Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.summary-show
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.summary-hide
+
+  empty-form:
+    Title: Empty Form
+
+  filtered-form-page:
+    Title: 'Page with filtered recipients'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form5step1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField.checkbox-group
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.your-name-field
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.street-field
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.city-field
+    EmailRecipients:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.unfiltered-recipient-1
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.filtered-recipient-1
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.filtered-recipient-2
+
+  empty-page:
+    Title: 'Page with empty step'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form6step1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.field-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form6step2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.field-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFormStep.form6step3
+
+  email-form:
+    Title: 'Page with email field'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableEmailField.another-email-field
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.another-required

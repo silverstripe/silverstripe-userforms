@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Tests\Model;
+namespace SilverStripe\UserForms\Tests\Control;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
@@ -22,7 +22,7 @@ use SilverStripe\View\SSViewer;
  */
 class UserDefinedFormControllerTest extends FunctionalTest
 {
-    protected static $fixture_file = 'UserDefinedFormTest.yml';
+    protected static $fixture_file = 'UserDefinedFormControllerTest.yml';
 
     protected static $use_draft_site = true;
 

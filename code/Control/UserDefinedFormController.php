@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Model;
+namespace SilverStripe\UserForms\Control;
 
 use PageController;
 use SilverStripe\Assets\File;
