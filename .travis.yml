@@ -20,9 +20,9 @@ before_script:
   - echo 'memory_limit = 2048M' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
   # Install composer dependencies
-  - composer install --prefer-dist
-  - composer require --prefer-dist --no-update silverstripe/recipe-cms:1.0.x-dev silverstripe-themes/simple:~3.2
-  - composer update
+  - composer validate
+  - composer require --no-update silverstripe/recipe-cms:1.0.x-dev silverstripe-themes/simple:~3.2
+  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:
   - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit; fi
