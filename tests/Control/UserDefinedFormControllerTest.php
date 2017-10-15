@@ -22,7 +22,7 @@ use SilverStripe\View\SSViewer;
  */
 class UserDefinedFormControllerTest extends FunctionalTest
 {
-    protected static $fixture_file = 'UserDefinedFormControllerTest.yml';
+    protected static $fixture_file = '../UserFormsTest.yml';
 
     protected static $use_draft_site = true;
 

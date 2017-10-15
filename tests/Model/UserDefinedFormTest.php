@@ -29,7 +29,7 @@ use SilverStripe\Versioned\Versioned;
  */
 class UserDefinedFormTest extends FunctionalTest
 {
-    protected static $fixture_file = 'UserDefinedFormTest.yml';
+    protected static $fixture_file = '../UserFormsTest.yml';
 
     protected static $required_extensions = [
         UserDefinedForm::class => [UserFormFieldEditorExtension::class],
