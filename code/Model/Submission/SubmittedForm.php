@@ -142,10 +142,16 @@ class SubmittedForm extends DataObject
     public function canView($member = null)
     {
         $extended = $this->extendedCan(__FUNCTION__, $member);
+
         if ($extended !== null) {
             return $extended;
         }
-        return $this->Parent()->canView();
+
+        if ($this->Parent()) {
+            return $this->Parent()->canView($member);
+        }
+
+        return parent::canView($member);
     }
 
     /**
@@ -156,10 +162,16 @@ class SubmittedForm extends DataObject
     public function canEdit($member = null)
     {
         $extended = $this->extendedCan(__FUNCTION__, $member);
+
         if ($extended !== null) {
             return $extended;
         }
-        return $this->Parent()->canEdit();
+
+        if ($this->Parent()) {
+            return $this->Parent()->canEdit($member);
+        }
+
+        return parent::canEdit($member);
     }
 
     /**
@@ -170,15 +182,21 @@ class SubmittedForm extends DataObject
     public function canDelete($member = null)
     {
         $extended = $this->extendedCan(__FUNCTION__, $member);
+
         if ($extended !== null) {
             return $extended;
         }
-        return $this->Parent()->canDelete();
+
+        if ($this->Parent()) {
+            return $this->Parent()->canDelete($member);
+        }
+
+        return parent::canDelete($member);
     }
 
     /**
-     * Before we delete this form make sure we delete all the
-     * field values so that we don't leave old data round
+     * Before we delete this form make sure we delete all the field values so
+     * that we don't leave old data round.
      *
      * @return void
      */
