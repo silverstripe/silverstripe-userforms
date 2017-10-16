@@ -446,7 +446,11 @@ class EmailRecipient extends DataObject
      */
     public function canView($member = null)
     {
-        return $this->Form()->canView($member);
+        if ($form = $this->Form()) {
+            return $form->canView($member);
+        }
+
+        return parent::canView($member);
     }
 
     /**
@@ -456,7 +460,11 @@ class EmailRecipient extends DataObject
      */
     public function canEdit($member = null)
     {
-        return $this->Form()->canEdit($member);
+        if ($form = $this->Form()) {
+            return $form->canEdit($member);
+        }
+
+        return parent::canEdit($member);
     }
 
     /**
@@ -469,7 +477,7 @@ class EmailRecipient extends DataObject
         return $this->canEdit($member);
     }
 
-    /*
+    /**
      * Determine if this recipient may receive notifications for this submission
      *
      * @param array $data

@@ -39,14 +39,14 @@ use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
 
 /**
- * Defines the user defined functionality to be applied to any
- * {@link DataObject}
+ * Defines the user defined functionality to be applied to any {@link DataObject}
  *
  */
-trait UserForm {
-
+trait UserForm
+{
     /**
-     * Built in extensions required by this page
+     * Built in extensions required by this page.
+     *
      * @config
      * @var array
      */
