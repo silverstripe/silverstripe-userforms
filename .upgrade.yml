@@ -47,7 +47,7 @@ mappings:
   UserFormTest: SilverStripe\UserForms\Tests\Form\UserFormTest
   UserFormsCheckboxSetFieldTest: SilverStripe\UserForms\Tests\FormField\UserFormsCheckboxSetFieldTest
   EditableCustomRuleTest: SilverStripe\UserForms\Tests\Model\EditableCustomRuleTest
-  UserDefinedFormControllerTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormControllerTest
+  UserDefinedFormControllerTest: SilverStripe\UserForms\Tests\Control\UserDefinedFormControllerTest
   UserDefinedFormTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormTest
   EditableDropdownTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableDropdownTest
   EditableFileFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableFileFieldTest

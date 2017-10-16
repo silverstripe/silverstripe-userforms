@@ -13,7 +13,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\UserDefinedFormController;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 
