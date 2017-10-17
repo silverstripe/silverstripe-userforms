@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\UserForms\Tests\Model;
+namespace SilverStripe\UserForms\Tests\Control;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
@@ -13,7 +13,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\UserDefinedFormController;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 
@@ -22,7 +22,7 @@ use SilverStripe\View\SSViewer;
  */
 class UserDefinedFormControllerTest extends FunctionalTest
 {
-    protected static $fixture_file = 'UserDefinedFormTest.yml';
+    protected static $fixture_file = '../UserFormsTest.yml';
 
     protected static $use_draft_site = true;
 

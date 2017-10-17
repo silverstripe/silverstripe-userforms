@@ -13,7 +13,7 @@ mappings:
   UserFormsStepField: SilverStripe\UserForms\FormField\UserFormsStepField
   EditableCustomRule: SilverStripe\UserForms\Model\EditableCustomRule
   UserDefinedForm: SilverStripe\UserForms\Model\UserDefinedForm
-  UserDefinedFormController: SilverStripe\UserForms\Model\UserDefinedFormController
+  UserDefinedFormController: SilverStripe\UserForms\Control\UserDefinedFormController
   EditableCheckbox: SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox
   EditableCheckboxGroupField: SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField
   EditableCountryDropdownField: SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField
@@ -47,7 +47,7 @@ mappings:
   UserFormTest: SilverStripe\UserForms\Tests\Form\UserFormTest
   UserFormsCheckboxSetFieldTest: SilverStripe\UserForms\Tests\FormField\UserFormsCheckboxSetFieldTest
   EditableCustomRuleTest: SilverStripe\UserForms\Tests\Model\EditableCustomRuleTest
-  UserDefinedFormControllerTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormControllerTest
+  UserDefinedFormControllerTest: SilverStripe\UserForms\Tests\Control\UserDefinedFormControllerTest
   UserDefinedFormTest: SilverStripe\UserForms\Tests\Model\UserDefinedFormTest
   EditableDropdownTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableDropdownTest
   EditableFileFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableFileFieldTest

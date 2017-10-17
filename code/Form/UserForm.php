@@ -40,6 +40,7 @@ class UserForm extends Form
         );
 
         $this->setFields($fields = $this->getFormFields());
+
         $fields->setForm($this);
         $this->setActions($actions = $this->getFormActions());
         $actions->setForm($this);
@@ -120,6 +121,7 @@ class UserForm extends Form
     {
         $fields = new UserFormsFieldList();
         $target = $fields;
+
         foreach ($this->controller->Fields() as $field) {
             $target = $target->processNext($field);
         }

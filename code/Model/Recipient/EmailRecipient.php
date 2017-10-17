@@ -26,6 +26,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -33,6 +34,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\UserForm;
 use SilverStripe\View\Requirements;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -59,7 +61,7 @@ class EmailRecipient extends DataObject
     ];
 
     private static $has_one = [
-        'Form' => UserDefinedForm::class,
+        'Form' => DataObject::class,
         'SendEmailFromField' => EditableFormField::class,
         'SendEmailToField' => EditableFormField::class,
         'SendEmailSubjectField' => EditableFormField::class
@@ -95,6 +97,14 @@ class EmailRecipient extends DataObject
      * @var bool
      */
     private static $allow_unbound_recipient_fields = false;
+
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
+        // make sure to migrate the class across (prior to v5.x)
+        DB::query("UPDATE UserDefinedForm_EmailRecipient SET FormClass = 'Page' WHERE FormClass IS NULL");
+    }
 
     public function summaryFields()
     {
@@ -436,7 +446,11 @@ class EmailRecipient extends DataObject
      */
     public function canView($member = null)
     {
-        return $this->Form()->canView($member);
+        if ($form = $this->Form()) {
+            return $form->canView($member);
+        }
+
+        return parent::canView($member);
     }
 
     /**
@@ -446,7 +460,11 @@ class EmailRecipient extends DataObject
      */
     public function canEdit($member = null)
     {
-        return $this->Form()->canEdit($member);
+        if ($form = $this->Form()) {
+            return $form->canEdit($member);
+        }
+
+        return parent::canEdit($member);
     }
 
     /**
@@ -459,7 +477,7 @@ class EmailRecipient extends DataObject
         return $this->canEdit($member);
     }
 
-    /*
+    /**
      * Determine if this recipient may receive notifications for this submission
      *
      * @param array $data
