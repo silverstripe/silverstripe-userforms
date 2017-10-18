@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Model;
 use Page;
 
 use SilverStripe\UserForms\UserForm;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 
 /**
  * @package userforms
@@ -27,4 +28,9 @@ class UserDefinedForm extends Page
      * @var string
      */
     private static $table_name = 'UserDefinedForm';
+
+    public function getControllerName()
+    {
+        return UserDefinedFormController::class;
+    }
 }
