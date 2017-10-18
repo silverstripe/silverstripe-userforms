@@ -8,7 +8,6 @@ use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTP;
-use SilverStripe\Core\Manifest\Module;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
@@ -45,28 +44,26 @@ class UserDefinedFormController extends PageController
 
         $page = $this->data();
 
-        $userforms = ModuleLoader::getModule('silverstripe/userforms');
-        $admin = ModuleLoader::getModule('silverstripe/admin');
         // load the css
         if (!$page->config()->get('block_default_userforms_css')) {
-            Requirements::css($userforms->getRelativeResourcePath('client/dist/styles/userforms.css'));
+            Requirements::css('silverstripe/userforms:client/dist/styles/userforms.css');
         }
 
         // load the jquery
         if (!$page->config()->get('block_default_userforms_js')) {
             Requirements::javascript('//code.jquery.com/jquery-1.7.2.min.js');
             Requirements::javascript(
-                $userforms->getRelativeResourcePath('client/thirdparty/jquery-validate/jquery.validate.min.js')
+                'silverstripe/userforms:client/thirdparty/jquery-validate/jquery.validate.min.js'
             );
-            Requirements::add_i18n_javascript($userforms->getRelativeResourcePath('client/lang'));
-            Requirements::javascript($userforms->getRelativeResourcePath('client/dist/js/userforms.js'));
+            Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
+            Requirements::javascript('silverstripe/userforms:client/dist/js/userforms.js');
 
-            $this->addUserFormsValidatei18n($userforms);
+            $this->addUserFormsValidatei18n();
 
             // Bind a confirmation message when navigating away from a partially completed form.
             if ($page::config()->get('enable_are_you_sure')) {
                 Requirements::javascript(
-                    $userforms->getRelativeResourcePath('client/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js')
+                    'silverstripe/userforms:client/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js'
                 );
             }
         }
@@ -76,11 +73,11 @@ class UserDefinedFormController extends PageController
      * Add the necessary jQuery validate i18n translation files, either by locale or by langauge,
      * e.g. 'en_NZ' or 'en'. This adds "methods_abc.min.js" as well as "messages_abc.min.js" from the
      * jQuery validate thirdparty library.
-     *
-     * @param Module $module
      */
-    protected function addUserFormsValidatei18n(Module $module)
+    protected function addUserFormsValidatei18n()
     {
+        $module = ModuleLoader::getModule('silverstripe/userforms');
+
         $candidates = [
             i18n::getData()->langFromLocale(i18n::config()->get('default_locale')),
             i18n::config()->get('default_locale'),
@@ -91,8 +88,10 @@ class UserDefinedFormController extends PageController
         foreach ($candidates as $candidate) {
             foreach (['messages', 'methods'] as $candidateType) {
                 $localisationCandidate = "client/thirdparty/jquery-validate/localization/{$candidateType}_{$candidate}.min.js";
-                if ($module->hasResource($localisationCandidate)) {
-                    Requirements::javascript($module->getRelativeResourcePath($localisationCandidate));
+
+                $resource = $module->getResource($localisationCandidate);
+                if ($resource->exists()) {
+                    Requirements::javascript($resource->getRelativePath());
                 }
             }
         }

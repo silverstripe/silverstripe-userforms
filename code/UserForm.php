@@ -4,7 +4,6 @@ namespace SilverStripe\UserForms;
 
 use Colymba\BulkManager\BulkManager;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -167,10 +166,7 @@ trait UserForm
      */
     public function getCMSFields()
     {
-        Requirements::css(
-            ModuleLoader::getModule('silverstripe/userforms')
-                ->getRelativeResourcePath('client/dist/styles/userforms-cms.css')
-        );
+        Requirements::css('silverstripe/userforms:client/dist/styles/userforms-cms.css');
 
         $this->beforeUpdateCMSFields(function ($fields) {
 
