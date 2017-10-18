@@ -2,7 +2,6 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridField;
@@ -66,8 +65,7 @@ class UserFormFieldEditorExtension extends DataExtension
      */
     public function getFieldEditorGrid()
     {
-        $module = ModuleLoader::getModule('silverstripe/userforms');
-        Requirements::javascript($module->getRelativeResourcePath('client/dist/js/userforms-cms.js'));
+        Requirements::javascript('silverstripe/userforms:client/dist/js/userforms-cms.js');
 
         $fields = $this->owner->Fields();
 

@@ -8,7 +8,6 @@ use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
-use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
@@ -187,9 +186,7 @@ class EmailRecipient extends DataObject
      */
     public function getCMSFields()
     {
-        Requirements::javascript(
-            ModuleLoader::getModule('silverstripe/userforms')->getRelativeResourcePath('client/dist/js/userforms-cms.js')
-        );
+        Requirements::javascript('silverstripe/userforms:client/dist/js/userforms-cms.js');
 
         // Determine optional field values
         $form = $this->getFormParent();

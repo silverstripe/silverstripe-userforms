@@ -1,7 +1,7 @@
 {
     "name": "silverstripe/userforms",
     "description": "UserForms enables CMS users to create dynamic forms via a drag and drop interface and without getting involved in any PHP code",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "keywords": [
         "silverstripe",
         "userforms"
@@ -48,13 +48,18 @@
     },
     "suggest": {
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
-        "silverstripe/secureassets": "Enables files uploaded via userforms to be secured from public access",
         "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "5.0.x-dev"
-        }
+        },
+        "expose": [
+            "client/dist",
+            "client/lang",
+            "client/thirdparty",
+            "images"
+        ]
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
