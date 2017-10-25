@@ -34,11 +34,12 @@ class EditableMemberListField extends EditableFormField
         $fields->removeByName('Default');
         $fields->removeByName('Validation');
 
+        /** @skipUpgrade */
         $fields->addFieldToTab(
             'Root.Main',
             DropdownField::create(
                 'GroupID',
-                _t('SilverStripe\\UserForms\\Model\\EditableFormField.GROUP', Group::class),
+                _t('SilverStripe\\UserForms\\Model\\EditableFormField.GROUP', 'Group'),
                 Group::get()->map()
             )->setEmptyString(' ')
         );
