@@ -1,5 +1,4 @@
 const Path = require('path');
-const webpack = require('webpack');
 // Import the core config
 const webpackConfig = require('@silverstripe/webpack-config');
 const {
