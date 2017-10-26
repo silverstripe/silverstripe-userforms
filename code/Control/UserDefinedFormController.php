@@ -205,6 +205,7 @@ JS
     {
         $submittedForm = SubmittedForm::create();
         $submittedForm->SubmittedByID = Security::getCurrentUser() ? Security::getCurrentUser()->ID : 0;
+        $submittedForm->ParentClass = get_class($this->data());
         $submittedForm->ParentID = $this->ID;
 
         // if saving is not disabled save now to generate the ID
