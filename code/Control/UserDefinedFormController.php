@@ -166,9 +166,9 @@ class UserDefinedFormController extends PageController
 
         $watch = [];
 
-        if ($this->Fields()) {
+        if ($this->data()->Fields()) {
             /** @var EditableFormField $field */
-            foreach ($this->Fields() as $field) {
+            foreach ($this->data()->Fields() as $field) {
                 if ($result = $field->formatDisplayRules()) {
                     $watch[] = $result;
                 }
@@ -216,7 +216,7 @@ JS
         $attachments = array();
         $submittedFields = ArrayList::create();
 
-        foreach ($this->Fields() as $field) {
+        foreach ($this->data()->Fields() as $field) {
             if (!$field->showInReports()) {
                 continue;
             }

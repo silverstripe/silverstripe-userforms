@@ -122,7 +122,7 @@ class UserForm extends Form
         $fields = new UserFormsFieldList();
         $target = $fields;
 
-        foreach ($this->controller->Fields() as $field) {
+        foreach ($this->controller->data()->Fields() as $field) {
             $target = $target->processNext($field);
         }
         $fields->clearEmptySteps();
@@ -170,6 +170,7 @@ class UserForm extends Form
         // Generate required field validator
         $requiredNames = $this
             ->getController()
+            ->data()
             ->Fields()
             ->filter('Required', true)
             ->column('Name');
