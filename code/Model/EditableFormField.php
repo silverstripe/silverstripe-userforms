@@ -599,8 +599,17 @@ class EditableFormField extends DataObject
      */
     public function getIcon()
     {
-        return ModuleLoader::getModule('silverstripe/userforms')
-            ->getRelativeResourcePath('images/' . strtolower($this->class) . '.png');
+        $classNamespaces = explode("\\", static::class);
+        $shortClass = end($classNamespaces);
+
+        $resource = ModuleLoader::getModule('silverstripe/userforms')
+            ->getResource('images/' . strtolower($shortClass) . '.png');
+
+        if (!$resource->exists()) {
+            return '';
+        }
+
+        return $resource->getURL();
     }
 
     /**

@@ -55,8 +55,13 @@ class EditableCountryDropdownField extends EditableFormField
 
     public function getIcon()
     {
-        return ModuleLoader::getModule('silverstripe/userforms')
-            ->getRelativeResourcePath('images/editabledropdown.png');
+        $resource = ModuleLoader::getModule('silverstripe/userforms')->getResource('images/editabledropdown.png');
+
+        if (!$resource->exists()) {
+            return '';
+        }
+
+        return $resource->getURL();
     }
 
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)

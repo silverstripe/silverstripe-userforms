@@ -229,4 +229,11 @@ class EditableFormFieldTest extends FunctionalTest
         // The opposite method should be to return it to its original state, i.e. show it again
         $this->assertSame('removeClass("hide")', $displayRules['opposite']);
     }
+
+    public function testGetIcon()
+    {
+        $field = new EditableTextField;
+
+        $this->assertContains('/images/editabletextfield.png', $field->getIcon());
+    }
 }
