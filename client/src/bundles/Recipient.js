@@ -2,9 +2,9 @@
  * Email recipient behaviour.
  */
 
-import $ from 'jquery';
+import jQuery from 'jquery';
 
-$.entwine('ss', () => {
+jQuery.entwine('ss', ($) => {
   const recipient = {
     // Some fields are only visible when HTML email are being sent.
     updateFormatSpecificFields: () => {

@@ -2,9 +2,10 @@
  * @file Manages the multi-step navigation.
  */
 
-import $ from 'jquery';
+import jQuery from 'jquery';
+import i18n from 'i18n';
 
-$(document).ready(() => {
+jQuery(document).ready(($) => {
   // A reference to the UserForm instance.
   let userform = null;
 
@@ -17,14 +18,14 @@ $(document).ready(() => {
      * @func show
      * @desc Show the form step. Looks after aria attributes too.
      */
-    show: () => {
+    show() {
       this.$el.attr('aria-hidden', false).show();
     },
     /**
      * @func hide
      * @desc Hide the form step. Looks after aria attributes too.
      */
-    hide: () => {
+    hide() {
       this.$el.attr('aria-hidden', true).hide();
     },
   };
@@ -40,7 +41,7 @@ $(document).ready(() => {
     this.$el = element instanceof $ ? element : $(element);
 
     // Set the error container's heading.
-    this.$el.find('h4').text(window.ss.i18n._t('UserForms.ERROR_CONTAINER_HEADER',
+    this.$el.find('h4').text(i18n._t('UserForms.ERROR_CONTAINER_HEADER',
       'Please correct the following errors and try again:'));
 
     return this;
@@ -51,15 +52,15 @@ $(document).ready(() => {
    * @return boolean
    * @desc Checks if the error container has any error messages.
    */
-  ErrorContainer.prototype.hasErrors = () => (
-    this.$el.find('.error-list').children().length > 0
-  );
+  ErrorContainer.prototype.hasErrors = function hasErrors() {
+    return this.$el.find('.error-list').children().length > 0;
+  };
 
   /**
    * @func removeErrorMessage
    * @desc Removes an error message from the error container.
    */
-  ErrorContainer.prototype.removeErrorMessage = (fieldId) => {
+  ErrorContainer.prototype.removeErrorMessage = function removeErrorMessage(fieldId) {
     this.$el.find(`#${fieldId}-top-error`).remove();
 
     // If there are no more error then hide the container.
@@ -73,7 +74,7 @@ $(document).ready(() => {
    * @param {object} step - FormStep instance.
    * @desc Adds a link to a form step as an error message.
    */
-  ErrorContainer.prototype.addStepLink = (step) => {
+  ErrorContainer.prototype.addStepLink = function addStepLink(step) {
     const itemID = `${step.$el.attr('id')}-error-link`;
     let $itemElement = this.$el.find(`#${itemID}`);
     const stepID = step.$el.attr('id');
@@ -99,7 +100,7 @@ $(document).ready(() => {
    * @param {object} step - FormStep instance.
    * @desc Removes a step link from the error container.
    */
-  ErrorContainer.prototype.removeStepLink = (fieldId) => {
+  ErrorContainer.prototype.removeStepLink = function removeStepLink(fieldId) {
     const stepID = $(`#${fieldId}`).closest('.form-step').attr('id');
 
     this.$el.find(`#${stepID}-error-link`).remove();
@@ -116,7 +117,7 @@ $(document).ready(() => {
    * @param {object} message - The error message to display (html escaped).
    * @desc Update an error message (displayed at the top of the form).
    */
-  ErrorContainer.prototype.updateErrorMessage = ($input, message) => {
+  ErrorContainer.prototype.updateErrorMessage = function updateErrorMessage($input, message) {
     const inputID = $input.attr('id');
     let anchor = `#${inputID}`;
     const elementID = `${inputID}-top-error`;
@@ -148,8 +149,8 @@ $(document).ready(() => {
       messageElement
         .attr('id', elementID)
         .find('a')
-          .attr('href', location.pathname + location.search + anchor)
-          .html(message);
+        .attr('href', location.pathname + location.search + anchor)
+        .html(message);
 
       this.$el.find('ul').append(messageElement);
 
@@ -231,9 +232,9 @@ $(document).ready(() => {
    * @returns {Boolean}
    */
   // Because the element itself could be visible but 0 height, so check visibility of button
-  FormStep.prototype.conditionallyHidden = () => (
-    !this.$elButton.find('button').is(':visible')
-  );
+  FormStep.prototype.conditionallyHidden = function conditionallyHidden() {
+    return !this.$elButton.find('button').is(':visible');
+  };
 
   /**
    * @func ProgressBar
@@ -306,7 +307,7 @@ $(document).ready(() => {
    * @param {number} stepID - Zero based index of the new step.
    * @desc Update the progress element to show a new step.
    */
-  ProgressBar.prototype.update = (stepID) => {
+  ProgressBar.prototype.update = function update(stepID) {
     const $newStepElement = $($('.form-step')[stepID]);
     let stepNumber = 0;
     let barWidth = stepID / (this.$buttons.length - 1) * 100;
@@ -401,7 +402,7 @@ $(document).ready(() => {
    * @param {number} stepID - Zero based ID of the current step.
    * @desc Updates the form actions element to reflect the current state of the page.
    */
-  FormActions.prototype.update = () => {
+  FormActions.prototype.update = function update() {
     const numberOfSteps = userform.steps.length;
     const stepID = userform.currentStep ? userform.currentStep.id : 0;
     let i = null;
@@ -549,7 +550,7 @@ $(document).ready(() => {
    * @param {object} step - An instance of FormStep.
    * @desc Adds a step to the UserForm.
    */
-  UserForm.prototype.addStep = (step) => {
+  UserForm.prototype.addStep = function addStep(step) {
     // Make sure we're dealing with a form step.
     if (!step instanceof FormStep) {
       return;
@@ -566,7 +567,7 @@ $(document).ready(() => {
    * @param {object} step - An instance of FormStep.
    * @desc Sets the step the user is currently on.
    */
-  UserForm.prototype.setCurrentStep = (step) => {
+  UserForm.prototype.setCurrentStep = function setCurrentStep(step) {
     // Make sure we're dealing with a form step.
     if (!(step instanceof FormStep)) {
       return;
@@ -586,7 +587,7 @@ $(document).ready(() => {
    * @param {boolean} [direction] - Defaults to forward (true).
    * @desc Jumps to a specific form step.
    */
-  UserForm.prototype.jumpToStep = (stepNumber, direction) => {
+  UserForm.prototype.jumpToStep = function jumpToStep(stepNumber, direction) {
     const targetStep = this.steps[stepNumber];
     let isValid = false;
     const forward = direction === void 0 ? true : direction;
@@ -632,7 +633,7 @@ $(document).ready(() => {
    * @func UserForm.nextStep
    * @desc Advances the form to the next step.
    */
-  UserForm.prototype.nextStep = () => {
+  UserForm.prototype.nextStep = function nextStep() {
     this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
   };
 
@@ -640,7 +641,7 @@ $(document).ready(() => {
    * @func UserForm.prevStep
    * @desc Goes back one step (not bound to browser history).
    */
-  UserForm.prototype.prevStep = () => {
+  UserForm.prototype.prevStep = function prevStep() {
     this.jumpToStep(this.steps.indexOf(this.currentStep) - 1, false);
   };
 
@@ -731,7 +732,7 @@ $(document).ready(() => {
     const form = $('form.userform');
     if (typeof form.areYouSure !== 'undefined') {
       form.areYouSure({
-        message: window.ss.i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!'),
+        message: i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!'),
       });
     }
   }
