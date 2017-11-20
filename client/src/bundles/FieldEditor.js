@@ -2,12 +2,13 @@
  * form builder behaviour.
  */
 
-window.jQuery.entwine('ss', ($) => {
+import jQuery from 'jquery';
+
+jQuery.entwine('ss', ($) => {
   let stickyHeaderInterval = null;
 
   $('.uf-field-editor .ss-gridfield-items').entwine({
     onmatch() {
-      let i = 0;
       let thisLevel = 0;
       let depth = 0;
       const $buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('sticky-buttons');
@@ -18,7 +19,7 @@ window.jQuery.entwine('ss', ($) => {
       this._super();
 
       // Loop through all rows and set necessary styles
-      this.find('.ss-gridfield-item').each((i, el) => {
+      this.find('.ss-gridfield-item').each((index, el) => {
         switch ($(el).data('class')) {
           case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep': {
             depth = 0;
@@ -38,7 +39,7 @@ window.jQuery.entwine('ss', ($) => {
         }
 
         $(el).toggleClass('infieldgroup', thisLevel > 0);
-        for (i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 5; i++) {
           $(el).toggleClass(`infieldgroup-level-${i}`, thisLevel >= i);
         }
       });
@@ -81,7 +82,8 @@ window.jQuery.entwine('ss', ($) => {
           // If fieldgroup, focus on the start marker
           let $newField = this.find('.ss-gridfield-item').last();
           let $groupEnd = null;
-          if ($newField.attr('data-class') === 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd') {
+          const fqcn = 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd';
+          if ($newField.attr('data-class') === fqcn) {
             $groupEnd = $newField;
             $groupEnd.prev().find('.col-Title input').focus();
             $newField = $groupEnd.add($groupEnd.prev());

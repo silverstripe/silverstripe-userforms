@@ -55,6 +55,7 @@ class UserDefinedFormController extends PageController
             Requirements::javascript(
                 'silverstripe/userforms:client/thirdparty/jquery-validate/jquery.validate.min.js'
             );
+            Requirements::javascript('silverstripe/admin:client/dist/js/i18n.js');
             Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
             Requirements::javascript('silverstripe/userforms:client/dist/js/userforms.js');
 
