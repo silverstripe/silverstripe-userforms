@@ -182,11 +182,13 @@ class UserDefinedFormController extends PageController
         // Only add customScript if $default or $rules is defined
         if ($rules) {
             Requirements::customScript(<<<JS
-                (function($) {
+                function initUDFRules() {
+                    if (!window.jQuery) return setTimeout(initUDFRules, 50);
                     $(document).ready(function() {
                         {$rules}
                     });
-                })(jQuery);
+                };
+                initUDFRules();
 JS
             , 'UserFormsConditional');
         }
