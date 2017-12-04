@@ -158,16 +158,22 @@ class UserDefinedFormTest extends FunctionalTest
 
     public function testGetEmailTemplateDropdownValues()
     {
+        $page = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $recipient = new EmailRecipient();
+        $recipient->FormID = $page->ID;
 
-        $defaultValues = ['email/SubmittedFormEmail' => 'SubmittedFormEmail'];
+        $result = $recipient->getEmailTemplateDropdownValues();
 
-        $this->assertEquals($recipient->getEmailTemplateDropdownValues(), $defaultValues);
+        // Installation path can be as a project when testing in Travis, so check partial match
+        $this->assertContains('templates/email/SubmittedFormEmail', key($result));
+        $this->assertSame('SubmittedFormEmail', current($result));
     }
 
     public function testEmailTemplateExists()
     {
+        $page = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $recipient = new EmailRecipient();
+        $recipient->FormID = $page->ID;
 
         // Set the default template
         $recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues()));
@@ -192,10 +198,9 @@ class UserDefinedFormTest extends FunctionalTest
             $this->assertTrue($recipient->canDelete());
         }
 
-        $member = Member::currentUser();
-        $member->logOut();
-
+        $this->logOut();
         $this->logInWithPermission('SITETREE_VIEW_ALL');
+
         foreach ($form->EmailRecipients() as $recipient) {
             $this->assertFalse($recipient->canEdit());
             $this->assertFalse($recipient->canDelete());

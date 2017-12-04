@@ -369,7 +369,8 @@ class EmailRecipient extends DataObject
             $fields->insertBefore(
                 DropdownField::create(
                     'EmailTemplate',
-                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template')
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template'),
+                    $templates
                 )->addExtraClass('toggle-html-only'),
                 'EmailBodyHtml'
             );
@@ -527,7 +528,7 @@ class EmailRecipient extends DataObject
     {
         $t = ($template ? $template : $this->EmailTemplate);
 
-        return array_key_exists($t, $this->getEmailTemplateDropdownValues());
+        return array_key_exists($t, (array) $this->getEmailTemplateDropdownValues());
     }
 
     /**
