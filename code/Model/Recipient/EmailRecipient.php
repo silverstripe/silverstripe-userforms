@@ -37,6 +37,8 @@ use SilverStripe\UserForms\UserForm;
 use SilverStripe\View\Requirements;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
+use SilverStripe\Core\Config\Config;
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -348,11 +350,6 @@ class EmailRecipient extends DataObject
                     'Send email as plain text? (HTML will be stripped)'
                 )
             ),
-            DropdownField::create(
-                'EmailTemplate',
-                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template'),
-                $this->getEmailTemplateDropdownValues()
-            )->addExtraClass('toggle-html-only'),
             HTMLEditorField::create(
                 'EmailBodyHtml',
                 _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILBODYHTML', 'Body')
@@ -365,6 +362,19 @@ class EmailRecipient extends DataObject
                 ->addExtraClass('toggle-plain-only'),
             LiteralField::create('EmailPreview', $preview)
         ]);
+
+        $templates = $this->getEmailTemplateDropdownValues();
+
+        if ($templates) {
+            $fields->insertBefore(
+                DropdownField::create(
+                    'EmailTemplate',
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template'),
+                    $templates
+                )->addExtraClass('toggle-html-only'),
+                'EmailBodyHtml'
+            );
+        }
 
         $fields->fieldByName('Root.EmailContent')->setTitle(_t(__CLASS__.'.EMAILCONTENTTAB', 'Email Content'));
 
@@ -518,7 +528,7 @@ class EmailRecipient extends DataObject
     {
         $t = ($template ? $template : $this->EmailTemplate);
 
-        return array_key_exists($t, $this->getEmailTemplateDropdownValues());
+        return array_key_exists($t, (array) $this->getEmailTemplateDropdownValues());
     }
 
     /**
@@ -546,13 +556,20 @@ class EmailRecipient extends DataObject
         $finder = new FileFinder();
         $finder->setOption('name_regex', '/^.*\.ss$/');
 
-        $templateDirectory = UserDefinedForm::config()->get('email_template_directory');
-        // Handle cases where "userforms" might not be the base module directory, e.g. in a Travis build
-        if (!file_exists(BASE_PATH . DIRECTORY_SEPARATOR . $templateDirectory)
-            && substr($templateDirectory, 0, 10) === 'userforms/'
-        ) {
-            $templateDirectory = substr($templateDirectory, 10);
+        $parent = $this->getFormParent();
+
+        if (!$parent) {
+            return [];
         }
+
+        $templateDirectory = ModuleResourceLoader::resourcePath(
+            $parent->config()->get('email_template_directory')
+        );
+
+        if (!$templateDirectory) {
+            return [];
+        }
+
         $found = $finder->find(BASE_PATH . DIRECTORY_SEPARATOR . $templateDirectory);
 
         foreach ($found as $key => $value) {
@@ -562,14 +579,6 @@ class EmailRecipient extends DataObject
                 strlen(BASE_PATH) + 1
             );
 
-            $defaultPrefixes = ['userforms/templates/', 'templates/'];
-            foreach ($defaultPrefixes as $defaultPrefix) {
-                // Remove default userforms folder if it's provided
-                if (substr($templatePath, 0, strlen($defaultPrefix)) === $defaultPrefix) {
-                    $templatePath = substr($templatePath, strlen($defaultPrefix));
-                    break;
-                }
-            }
             $templates[$templatePath] = $template['filename'];
         }
 

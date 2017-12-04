@@ -36,6 +36,7 @@ use SilverStripe\UserForms\Model\Recipient\UserFormRecipientItemRequest;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
+use SilverStripe\Core\Config\Configurable;
 
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
@@ -43,6 +44,8 @@ use SilverStripe\View\Requirements;
  */
 trait UserForm
 {
+    use Configurable;
+
     /**
      * Built in extensions required by this page.
      *
@@ -61,7 +64,7 @@ trait UserForm
     /**
      * @var string
      */
-    private static $email_template_directory = 'userforms/templates/email/';
+    private static $email_template_directory = 'silverstripe/userforms:templates/email/';
 
     /**
      * Should this module automatically upgrade on dev/build?
