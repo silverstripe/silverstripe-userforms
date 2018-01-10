@@ -180,7 +180,7 @@ jQuery(document).ready(($) => {
     this.$el = element instanceof $ ? element : $(element);
 
     // Find button for this step
-    this.$elButton = $(`.step-button-wrapper[data-for='${this.$el.prop('id')}]`);
+    this.$elButton = $(`.step-button-wrapper[data-for='${this.$el.prop('id')}']`);
 
     // Has the step been viewed by the user?
     this.viewed = false;
