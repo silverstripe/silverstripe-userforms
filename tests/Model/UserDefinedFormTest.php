@@ -11,13 +11,12 @@ use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\ORM\DB;
-use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
@@ -165,7 +164,7 @@ class UserDefinedFormTest extends FunctionalTest
         $result = $recipient->getEmailTemplateDropdownValues();
 
         // Installation path can be as a project when testing in Travis, so check partial match
-        $this->assertContains('templates/email/SubmittedFormEmail', key($result));
+        $this->assertContains('email/SubmittedFormEmail', key($result));
         $this->assertSame('SubmittedFormEmail', current($result));
     }
 

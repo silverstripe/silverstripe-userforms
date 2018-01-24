@@ -8,6 +8,7 @@ use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTP;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
@@ -200,7 +201,7 @@ JS
      * @param array $data
      * @param Form $form
      *
-     * @return \SilverStripe\Control\HTTPResponse
+     * @return HTTPResponse
      */
     public function process($data, $form)
     {
@@ -214,7 +215,7 @@ JS
             $submittedForm->write();
         }
 
-        $attachments = array();
+        $attachments = [];
         $submittedFields = ArrayList::create();
 
         foreach ($this->data()->Fields() as $field) {

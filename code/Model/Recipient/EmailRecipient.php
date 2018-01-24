@@ -6,8 +6,11 @@ use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\FileFinder;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
+use SilverStripe\Core\Manifest\ModuleResource;
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
@@ -27,18 +30,14 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\UserForm;
 use SilverStripe\View\Requirements;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
-use SilverStripe\Core\Manifest\ModuleResourceLoader;
-use SilverStripe\Core\Config\Config;
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -447,11 +446,6 @@ class EmailRecipient extends DataObject
         return null;
     }
 
-    /**
-     * @param Member
-     *
-     * @return boolean
-     */
     public function canView($member = null)
     {
         if ($form = $this->Form()) {
@@ -461,11 +455,6 @@ class EmailRecipient extends DataObject
         return parent::canView($member);
     }
 
-    /**
-     * @param Member
-     *
-     * @return boolean
-     */
     public function canEdit($member = null)
     {
         if ($form = $this->Form()) {
@@ -562,9 +551,8 @@ class EmailRecipient extends DataObject
             return [];
         }
 
-        $templateDirectory = ModuleResourceLoader::resourcePath(
-            $parent->config()->get('email_template_directory')
-        );
+        $emailTemplateDirectory = $parent->config()->get('email_template_directory');
+        $templateDirectory = ModuleResourceLoader::resourcePath($emailTemplateDirectory);
 
         if (!$templateDirectory) {
             return [];
@@ -574,10 +562,21 @@ class EmailRecipient extends DataObject
 
         foreach ($found as $key => $value) {
             $template = pathinfo($value);
-            $templatePath = substr(
-                $template['dirname'] . DIRECTORY_SEPARATOR . $template['filename'],
-                strlen(BASE_PATH) + 1
-            );
+            $absoluteFilename = $template['dirname'] . DIRECTORY_SEPARATOR . $template['filename'];
+
+            // Optionally remove vendor/ path prefixes
+            $resource = ModuleResourceLoader::singleton()->resolveResource($emailTemplateDirectory);
+            if ($resource instanceof ModuleResource && $resource->getModule()) {
+                $prefixToStrip = $resource->getModule()->getPath();
+            } else {
+                $prefixToStrip = BASE_PATH;
+            }
+            $templatePath = substr($absoluteFilename, strlen($prefixToStrip) + 1);
+
+            // Optionally remove "templates/" prefixes
+            if (substr($templatePath, 0, 10)) {
+                $templatePath = substr($templatePath, 10);
+            }
 
             $templates[$templatePath] = $template['filename'];
         }

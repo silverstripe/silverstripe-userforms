@@ -4,8 +4,10 @@ namespace SilverStripe\UserForms\Model\Recipient;
 
 use LogicException;
 use SilverStripe\CMS\Controllers\CMSMain;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\EditableFormField;
 
@@ -142,31 +144,16 @@ class EmailRecipientCondition extends DataObject
         return null;
     }
 
-    /**
-     * @param Member
-     *
-     * @return boolean
-     */
     public function canView($member = null)
     {
         return $this->Parent()->canView($member);
     }
 
-    /**
-     * @param Member
-     *
-     * @return boolean
-     */
     public function canEdit($member = null)
     {
         return $this->Parent()->canEdit($member);
     }
 
-    /**
-     * @param Member
-     *
-     * @return boolean
-     */
     public function canDelete($member = null)
     {
         return $this->canEdit($member);
