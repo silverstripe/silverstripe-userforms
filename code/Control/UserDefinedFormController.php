@@ -7,7 +7,6 @@ use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
-use SilverStripe\Control\HTTP;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
@@ -293,14 +292,15 @@ JS
 
                 if ($attachments) {
                     foreach ($attachments as $file) {
-                        if (!$file->ID != 0) {
+                        /** @var File $file */
+                        if ((int) $file->ID === 0) {
                             continue;
                         }
 
-                        $email->attachFile(
-                            $file->Filename,
-                            $file->Filename,
-                            HTTP::get_mime_type($file->Filename)
+                        $email->addAttachmentFromData(
+                            $file->getString(),
+                            $file->getFilename(),
+                            $file->getMimeType()
                         );
                     }
                 }
