@@ -8,6 +8,7 @@ use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
@@ -105,7 +106,7 @@ class UserDefinedFormController extends PageController
      *
      * @return array
      */
-    public function index()
+    public function index(HTTPRequest $request = null)
     {
         if ($this->Content && $form = $this->Form()) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
