@@ -1,4 +1,5 @@
-$Body
+<%-- Note: content is already escaped in UserDefinedFormController::process --%>
+$Body.RAW
 
 <% if not $HideFormData %>
 	<dl>
