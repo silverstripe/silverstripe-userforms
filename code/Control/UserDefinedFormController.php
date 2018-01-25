@@ -105,7 +105,7 @@ class UserDefinedFormController extends PageController
      *
      * @return array
      */
-    public function index()
+    public function index(HTTPRequest $request)
     {
         if ($this->Content && $form = $this->Form()) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
