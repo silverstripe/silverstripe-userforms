@@ -277,7 +277,9 @@ JS
 
         $emailData = [
             'Sender' => Security::getCurrentUser(),
-            'Fields' => $submittedFields
+            'HideFormData' => false,
+            'Fields' => $submittedFields,
+            'Body' => '',
         ];
 
         $this->extend('updateEmailData', $emailData, $attachments);
@@ -286,9 +288,10 @@ JS
         if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
             foreach ($recipients as $recipient) {
                 $email = Email::create()
-                    ->setHTMLTemplate('email/SubmittedFormEmail.ss')
-                    ->setPlainTemplate('email/SubmittedFormEmail.ss');
+                    ->setHTMLTemplate('email/SubmittedFormEmail')
+                    ->setPlainTemplate('email/SubmittedFormEmail');
 
+                // Merge fields are used for CMS authors to reference specific form fields in email content
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments) {
@@ -306,19 +309,21 @@ JS
                     }
                 }
 
-                $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
-
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
                     $email->setHTMLTemplate($recipient->EmailTemplate);
                 }
 
-                $email->setData($recipient);
+                // Add specific template data for the current recipient
+                $emailData['HideFormData'] =  (bool) $recipient->HideFormData;
+                // Include any parsed merge field references from the CMS editor - this is already escaped
+                $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
+
+                // Push the template data to the Email's data
                 foreach ($emailData as $key => $value) {
                     $email->addData($key, $value);
                 }
 
                 $email->setFrom($recipient->EmailFrom);
-                $email->setBody($parsedBody);
                 $email->setTo($recipient->EmailAddress);
                 $email->setSubject($recipient->EmailSubject);
 
@@ -354,11 +359,11 @@ JS
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
 
-                if ($recipient->SendPlain) {
+                if ((bool)$recipient->SendPlain) {
                     $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
-                    if (isset($emailData['Fields']) && !$recipient->HideFormData) {
-                        foreach ($emailData['Fields'] as $Field) {
-                            $body .= $Field->Title . ': ' . $Field->Value . " \n";
+                    if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
+                        foreach ($emailData['Fields'] as $field) {
+                            $body .= $field->Title . ': ' . $field->Value . " \n";
                         }
                     }
 

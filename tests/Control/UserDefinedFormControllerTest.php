@@ -5,15 +5,13 @@ namespace SilverStripe\UserForms\Tests\Control;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
-use SilverStripe\Dev\TestOnly;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 
@@ -30,7 +28,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
     {
         parent::setUp();
 
-        Config::modify()->set(SSViewer::class, 'themes', ['simple', '$default']);
+        Config::modify()->merge(SSViewer::class, 'themes', ['simple', '$default']);
     }
 
     public function testProcess()
@@ -51,7 +49,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // should have a submitted form field now
         $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic-text-name'");
-        $this->assertDOSAllMatch(
+        $this->assertListAllMatch(
             [
                 'Name' => 'basic-text-name',
                 'Value' => 'Basic Value',
@@ -86,7 +84,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $parser = new CSSContentParser($nodata['Content']);
         $list = $parser->getBySelector('dl');
 
-        $this->assertFalse(isset($list[0]), 'Email contains no fields');
+        $this->assertEmpty($list, 'Email contains no fields');
 
         // check to see if the user was redirected (301)
         $this->assertEquals($response->getStatusCode(), 302);
@@ -281,12 +279,10 @@ class UserDefinedFormControllerTest extends FunctionalTest
     protected function setupFormFrontend($fixtureName = 'basic-form-page')
     {
         $form = $this->objFromFixture(UserDefinedForm::class, $fixtureName);
-        $this->logInWithPermission('ADMIN');
 
-        $form->publishRecursive();
-
-        $member = Member::currentUser();
-        $member->logOut();
+        $this->actWithPermission('ADMIN', function () use ($form) {
+            $form->publishRecursive();
+        });
 
         return $form;
     }
