@@ -323,12 +323,12 @@ JS
                     $email->addData($key, $value);
                 }
 
-                $email->setFrom($recipient->EmailFrom);
-                $email->setTo($recipient->EmailAddress);
+                $email->setFrom(explode(',', $recipient->EmailFrom));
+                $email->setTo(explode(',', $recipient->EmailAddress));
                 $email->setSubject($recipient->EmailSubject);
 
                 if ($recipient->EmailReplyTo) {
-                    $email->setReplyTo($recipient->EmailReplyTo);
+                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
                 }
 
                 // check to see if they are a dynamic reply to. eg based on a email field a user selected
@@ -336,7 +336,7 @@ JS
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
-                        $email->setReplyTo($submittedFormField->Value);
+                        $email->setReplyTo(explode(',', $submittedFormField->Value));
                     }
                 }
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
@@ -344,7 +344,7 @@ JS
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
-                        $email->setTo($submittedFormField->Value);
+                        $email->setTo(explode(',', $submittedFormField->Value));
                     }
                 }
 

@@ -264,6 +264,11 @@ SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     EmailSubject: Email Subject
     EmailFrom: no-reply@example.com
 
+  multiple-email-list:
+    EmailAddress: test1@example.com, test2@example.com
+    EmailSubject: Test Email
+    EmailFrom: test3@example.com, test4@example.com
+
 SilverStripe\UserForms\Model\UserDefinedForm:
   basic-form-page:
     Content: '<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>'
@@ -275,6 +280,7 @@ SilverStripe\UserForms\Model\UserDefinedForm:
       - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1
       - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-html
       - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.multiple-email-list
 
   page-with-group:
     Content: 'Page with group'
