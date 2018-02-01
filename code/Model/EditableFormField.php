@@ -343,14 +343,14 @@ class EditableFormField extends DataObject
     {
         // Check display rules
         if ($this->Required) {
-            return new FieldList(
-                LabelField::create(
-                    _t(
+            return FieldList::create(
+                LiteralField::create(
+                    'DisplayRulesNotEnabled',
+                    '<div class="alert alert-warning">' . _t(
                         __CLASS__.'.DISPLAY_RULES_DISABLED',
                         'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
-                    )
+                    ) . '</div>'
                 )
-                ->addExtraClass('message warning')
             );
         }
 
