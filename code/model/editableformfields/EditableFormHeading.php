@@ -74,9 +74,14 @@ class EditableFormHeading extends EditableFormField
             // Since this field expects raw html, safely escape the user data prior
             $field->setRightTitle(Convert::raw2xml($this->RightTitle));
         }
+
         // if this field has an extra class
         if ($this->ExtraClass) {
             $field->addExtraClass($this->ExtraClass);
+        }
+
+        if (!$this->ShowOnLoad) {
+            $field->addExtraClass($this->ShowOnLoadNice());
         }
     }
 
@@ -93,6 +98,11 @@ class EditableFormHeading extends EditableFormField
     public function getSelectorHolder()
     {
         return "$(\":header[data-id='{$this->Name}']\")";
+    }
+
+    public function getSelectorOnly()
+    {
+        return "[data-id={$this->Name}]";
     }
 
     public function getLevel()
