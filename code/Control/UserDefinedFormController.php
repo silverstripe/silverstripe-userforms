@@ -165,12 +165,14 @@ class UserDefinedFormController extends PageController
     {
         $default = '';
         $rules = '';
+        $form = $this->data();
+        $formFields = $form->Fields();
 
         $watch = [];
 
-        if ($this->data()->Fields()) {
+        if ($formFields) {
             /** @var EditableFormField $field */
-            foreach ($this->data()->Fields() as $field) {
+            foreach ($formFields as $field) {
                 if ($result = $field->formatDisplayRules()) {
                     $watch[] = $result;
                 }
@@ -189,7 +191,7 @@ class UserDefinedFormController extends PageController
                     });
                 })(jQuery);
 JS
-            , 'UserFormsConditional');
+            , 'UserFormsConditional-' . $form->ID);
         }
     }
 
