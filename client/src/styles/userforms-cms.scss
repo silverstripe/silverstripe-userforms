@@ -67,7 +67,7 @@
     .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep"] {
       &,
       &:hover {
-        background: $gray-650;
+        background: $gray-600;
         color: $white;
       }
 
@@ -79,7 +79,7 @@
       }
 
       + .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup"] td {
-         border-top: 3px solid $gray-200;
+        border-top: 3px solid $gray-200;
       }
 
       .grid-field__icon-action {
@@ -89,7 +89,7 @@
 
         &:hover {
           &:before {
-            color: $gray-650;
+            color: $gray-600;
           }
         }
       }
@@ -97,7 +97,7 @@
 
     .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup"] {
       td {
-         border-top: 3px solid $gray-200;
+        border-top: 3px solid $gray-200;
       }
 
       .form__field-label {
@@ -113,7 +113,7 @@
       }
 
       + .ss-gridfield-item[data-class="SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd"] {
-          border-top: 0;
+        border-top: 0;
       }
 
       .col-buttons .action {
@@ -140,4 +140,3 @@
     }
   }
 }
-

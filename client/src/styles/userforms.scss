@@ -10,7 +10,7 @@
   .progress-bar {
     position: absolute;
     height: 1em;
-    background: $gray-650;
+    background: $gray-600;
   }
 
   .step-buttons {
@@ -49,6 +49,10 @@
   clear: both;
   width: 100%;
   max-width: 100%;
+
+  .hide {
+    display: none;
+  }
 
   .field label.right {
     color: $gray-800;

@@ -649,8 +649,8 @@ jQuery(document).ready(($) => {
    * @func main
    * @desc Bootstraps the front-end.
    */
-  function main() {
-    const $userform = $('.userform');
+  function main(index, userformElement) {
+    const $userform = $(userformElement);
 
     // If there's no userform, do nothing.
     if ($userform.length === 0) {
@@ -737,5 +737,5 @@ jQuery(document).ready(($) => {
     }
   }
 
-  main();
+  $('.userform').each(main);
 });
