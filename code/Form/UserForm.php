@@ -222,7 +222,7 @@ class UserForm extends Form
 
         foreach ($this->getController()->data()->EmailRecipients() as $recipient) {
             foreach ($recipientFieldsMap as $textField => $dynamicFormField) {
-                if (empty($recipient->$textField) && $recipient->getComponent($dynamicFormField)) {
+                if (empty($recipient->$textField) && $recipient->getComponent($dynamicFormField)->exists()) {
                     $requiredFields[] = $recipient->getComponent($dynamicFormField)->Name;
                 }
             }

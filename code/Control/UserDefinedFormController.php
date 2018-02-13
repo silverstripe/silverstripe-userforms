@@ -346,6 +346,8 @@ JS
 
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
                         $email->setTo(explode(',', $submittedFormField->Value));
+                    } else {
+                        $email->setTo(explode(',', $recipient->EmailAddress));
                     }
                 } else {
                     $email->setTo(explode(',', $recipient->EmailAddress));
@@ -357,6 +359,8 @@ JS
 
                     if ($submittedFormField && trim($submittedFormField->Value)) {
                         $email->setSubject($submittedFormField->Value);
+                    } else {
+                        $email->setSubject($recipient->EmailSubject);
                     }
                 } else {
                     $email->setSubject($recipient->EmailSubject);

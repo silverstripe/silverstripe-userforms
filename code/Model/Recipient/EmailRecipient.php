@@ -615,7 +615,7 @@ class EmailRecipient extends DataObject
         }
 
         // if there is no from address and no fallback, you'll have errors if this isn't defined
-        if (!$this->EmailFrom && empty(Email::getSendAllEmailsFrom()) && empty(Email::config()->get('admin)_email'))) {
+        if (!$this->EmailFrom && empty(Email::getSendAllEmailsFrom()) && empty(Email::config()->get('admin_email'))) {
             $result->addError(_t(__CLASS__.".EMAILFROMREQUIRED", '"Email From" address is required'));
         }
         return $result;
