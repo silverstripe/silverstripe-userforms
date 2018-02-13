@@ -174,6 +174,7 @@ class UserForm extends Form
             ->Fields()
             ->filter('Required', true)
             ->column('Name');
+        $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());
         $required = new RequiredFields($requiredNames);
         $this->extend('updateRequiredFields', $required);
         $required->setForm($this);
@@ -202,5 +203,31 @@ class UserForm extends Form
     public function getButtonText()
     {
         return $this->config()->get('button_text');
+    }
+
+    /**
+     * Push fields into the RequiredFields array if they are used by any Email recipients.
+     * Ignore if there is a backup i.e. the plain string field is set
+     *
+     * @return array required fields names
+     */
+    protected function getEmailRecipientRequiredFields()
+    {
+        $requiredFields = [];
+        $recipientFieldsMap = [
+            'EmailAddress' => 'SendEmailToField',
+            'EmailSubject' => 'SendEmailSubjectField',
+            'EmailReplyTo' => 'SendEmailFromField'
+        ];
+
+        foreach ($this->getController()->data()->EmailRecipients() as $recipient) {
+            foreach ($recipientFieldsMap as $textField => $dynamicFormField) {
+                if (empty($recipient->$textField) && $recipient->getComponent($dynamicFormField)) {
+                    $requiredFields[] = $recipient->getComponent($dynamicFormField)->Name;
+                }
+            }
+        }
+
+        return $requiredFields;
     }
 }

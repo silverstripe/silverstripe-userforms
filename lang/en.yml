@@ -191,6 +191,7 @@ en:
     EMAILCONTENTTAB: 'Email Content'
     EMAILDETAILSTAB: 'Email Details'
     EMAILFROMINVALID: '"Email From" is not valid'
+    EMAILFROMREQUIRED: '"Email From" address is required'
     EMAILREPLYTOINVALID: '"Email Reply To" is not valid'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'

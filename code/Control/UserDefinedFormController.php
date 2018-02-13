@@ -163,7 +163,6 @@ class UserDefinedFormController extends PageController
      */
     public function generateConditionalJavascript()
     {
-        $default = '';
         $rules = '';
         $form = $this->data();
         $formFields = $form->Fields();
@@ -325,14 +324,6 @@ JS
                     $email->addData($key, $value);
                 }
 
-                $email->setFrom(explode(',', $recipient->EmailFrom));
-                $email->setTo(explode(',', $recipient->EmailAddress));
-                $email->setSubject($recipient->EmailSubject);
-
-                if ($recipient->EmailReplyTo) {
-                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
-                }
-
                 // check to see if they are a dynamic reply to. eg based on a email field a user selected
                 if ($recipient->SendEmailFromField()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
@@ -340,7 +331,15 @@ JS
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
                         $email->setReplyTo(explode(',', $submittedFormField->Value));
                     }
+                } elseif ($recipient->EmailReplyTo) {
+                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
                 }
+
+                // check for a specified from; otherwise fall back to server defaults
+                if ($recipient->EmailFrom) {
+                    $email->setFrom(explode(',', $recipient->EmailFrom));
+                }
+
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
                 if ($recipient->SendEmailToField()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
@@ -348,6 +347,8 @@ JS
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
                         $email->setTo(explode(',', $submittedFormField->Value));
                     }
+                } else {
+                    $email->setTo(explode(',', $recipient->EmailAddress));
                 }
 
                 // check to see if there is a dynamic subject
@@ -357,6 +358,8 @@ JS
                     if ($submittedFormField && trim($submittedFormField->Value)) {
                         $email->setSubject($submittedFormField->Value);
                     }
+                } else {
+                    $email->setSubject($recipient->EmailSubject);
                 }
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
