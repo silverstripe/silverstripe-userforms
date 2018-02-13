@@ -61,7 +61,7 @@ class EmailRecipient extends DataObject
     ];
 
     private static $has_one = [
-        'Form' => DataObject::class,
+        'Form' => UserDefinedForm::class,
         'SendEmailFromField' => EditableFormField::class,
         'SendEmailToField' => EditableFormField::class,
         'SendEmailSubjectField' => EditableFormField::class
@@ -125,12 +125,12 @@ class EmailRecipient extends DataObject
     /**
      * Get instance of UserDefinedForm when editing in getCMSFields
      *
-     * @return UserDefinedFrom
+     * @return UserDefinedForm
      */
     protected function getFormParent()
     {
         // LeftAndMain::sessionNamespace is protected. @todo replace this with a non-deprecated equivalent.
-        $sessionNamespace = $this->config()->get('session_namespace') ?: LeftAndMain::class;
+        $sessionNamespace = $this->config()->get('session_namespace') ?: CMSMain::class;
 
         $formID = $this->FormID
             ? $this->FormID
@@ -448,16 +448,15 @@ class EmailRecipient extends DataObject
 
     public function canView($member = null)
     {
-        if ($form = $this->Form()) {
+        if ($form = $this->getFormParent()) {
             return $form->canView($member);
         }
-
         return parent::canView($member);
     }
 
     public function canEdit($member = null)
     {
-        if ($form = $this->Form()) {
+        if ($form = $this->getFormParent()) {
             return $form->canEdit($member);
         }
 
