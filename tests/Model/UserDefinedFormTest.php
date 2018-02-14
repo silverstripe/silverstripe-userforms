@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Tests\Model;
 
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Email\Email;
 use SilverStripe\Core\Convert;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\DropdownField;
@@ -33,6 +34,12 @@ class UserDefinedFormTest extends FunctionalTest
     protected static $required_extensions = [
         UserDefinedForm::class => [UserFormFieldEditorExtension::class],
     ];
+
+    protected function setUp()
+    {
+        parent::setUp();
+        Email::config()->update('admin_email', 'no-reply@example.com');
+    }
 
     public function testRollbackToVersion()
     {
@@ -70,10 +77,10 @@ class UserDefinedFormTest extends FunctionalTest
 
         $fields = $form->getCMSFields();
 
-        $this->assertTrue($fields->dataFieldByName('Fields') !== null);
-        $this->assertTrue($fields->dataFieldByName('EmailRecipients') != null);
-        $this->assertTrue($fields->dataFieldByName('Submissions') != null);
-        $this->assertTrue($fields->dataFieldByName('OnCompleteMessage') != null);
+        $this->assertNotNull($fields->dataFieldByName('Fields'));
+        $this->assertNotNull($fields->dataFieldByName('EmailRecipients'));
+        $this->assertNotNull($fields->dataFieldByName('Submissions'));
+        $this->assertNotNull($fields->dataFieldByName('OnCompleteMessage'));
     }
 
 
@@ -107,12 +114,12 @@ class UserDefinedFormTest extends FunctionalTest
 
         $fields = $popup->getCMSFields();
 
-        $this->assertTrue($fields->dataFieldByName('EmailSubject') !== null);
-        $this->assertTrue($fields->dataFieldByName('EmailFrom') !== null);
-        $this->assertTrue($fields->dataFieldByName('EmailAddress') !== null);
-        $this->assertTrue($fields->dataFieldByName('HideFormData') !== null);
-        $this->assertTrue($fields->dataFieldByName('SendPlain') !== null);
-        $this->assertTrue($fields->dataFieldByName('EmailBody') !== null);
+        $this->assertNotNull($fields->dataFieldByName('EmailSubject'));
+        $this->assertNotNull($fields->dataFieldByName('EmailFrom'));
+        $this->assertNotNull($fields->dataFieldByName('EmailAddress'));
+        $this->assertNotNull($fields->dataFieldByName('HideFormData'));
+        $this->assertNotNull($fields->dataFieldByName('SendPlain'));
+        $this->assertNotNull($fields->dataFieldByName('EmailBody'));
 
         // add an email field, it should now add a or from X address picker
         $email = $this->objFromFixture(EditableEmailField::class, 'email-field');
