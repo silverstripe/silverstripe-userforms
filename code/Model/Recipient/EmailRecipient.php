@@ -61,7 +61,7 @@ class EmailRecipient extends DataObject
     ];
 
     private static $has_one = [
-        'Form' => UserDefinedForm::class,
+        'Form' => DataObject::class,
         'SendEmailFromField' => EditableFormField::class,
         'SendEmailToField' => EditableFormField::class,
         'SendEmailSubjectField' => EditableFormField::class
