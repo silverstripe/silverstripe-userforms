@@ -221,6 +221,7 @@ en:
     EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILRECIPIENTS: 'Email Recipients'
+    EMAIL_RECIPIENT_UNSAVED_FORM: 'You will be able to select from valid form fields after saving this record.'
     EMAILSUBJECT: 'Email subject'
     EMAILTEMPLATE: 'Email template'
     ENABLELIVEVALIDATION: 'Enable live validation'
