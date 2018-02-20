@@ -31,11 +31,13 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\UserForm;
 use SilverStripe\View\Requirements;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -126,7 +128,7 @@ class EmailRecipient extends DataObject
     /**
      * Get instance of UserForm when editing in getCMSFields
      *
-     * @return UserDefinedForm
+     * @return UserDefinedForm|UserForm
      */
     protected function getFormParent()
     {
@@ -197,6 +199,10 @@ class EmailRecipient extends DataObject
         // Build fieldlist
         $fields = FieldList::create(Tabset::create('Root')->addExtraClass('EmailRecipientForm'));
 
+        if (!$this->getFormParent()) {
+            $fields->addFieldToTab('Root.EmailDetails', $this->getUnsavedFormLiteralField());
+        }
+
         // Configuration fields
         $fields->addFieldsToTab('Root.EmailDetails', [
             $this->getSubjectCMSFields(),
@@ -204,6 +210,7 @@ class EmailRecipient extends DataObject
             $this->getEmailFromCMSFields(),
             $this->getEmailReplyToCMSFields(),
         ]);
+
         $fields->fieldByName('Root.EmailDetails')->setTitle(_t(__CLASS__ . '.EMAILDETAILSTAB', 'Email Details'));
 
         // Only show the preview link if the recipient has been saved.
@@ -227,7 +234,7 @@ class EmailRecipient extends DataObject
             );
         } else {
             $preview = sprintf(
-                '<em>%s</em>',
+                '<p class="alert alert-warning">%s</p>',
                 _t(
                     'SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL_UNAVAILABLE',
                     'You can preview this email once you have saved the Recipient.'
@@ -285,8 +292,10 @@ class EmailRecipient extends DataObject
         );
         $grid->setDescription(_t(
             'SilverStripe\\UserForms\\Model\\UserDefinedForm.RulesDescription',
-            'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this receipient will receive notifications for every submission.'
+            'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, '
+            . 'this recipient will receive notifications for every submission.'
         ));
+
         $fields->addFieldsToTab('Root.CustomRules', [
             DropdownField::create(
                 'CustomRulesCondition',
@@ -305,7 +314,7 @@ class EmailRecipient extends DataObject
             $grid
         ]);
 
-            $fields->fieldByName('Root.CustomRules')->setTitle(_t(__CLASS__ . '.CUSTOMRULESTAB', 'Custom Rules'));
+        $fields->fieldByName('Root.CustomRules')->setTitle(_t(__CLASS__ . '.CUSTOMRULESTAB', 'Custom Rules'));
 
         $this->extend('updateCMSFields', $fields);
         return $fields;
@@ -688,7 +697,7 @@ class EmailRecipient extends DataObject
      */
     protected function getValidEmailToFields()
     {
-        if ($this->getFormParent()) {
+        if (!$this->getFormParent()) {
             return null;
         }
 
@@ -702,5 +711,19 @@ class EmailRecipient extends DataObject
             // To address cannot be unbound, so restrict to pre-defined lists
             return $this->getMultiOptionFields();
         }
+    }
+
+    protected function getUnsavedFormLiteralField()
+    {
+        return LiteralField::create(
+            'UnsavedFormMessage',
+            sprintf(
+                '<p class="alert alert-warning">%s</p>',
+                _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAIL_RECIPIENT_UNSAVED_FORM',
+                    'You will be able to select from valid form fields after saving this record.'
+                )
+            )
+        );
     }
 }
