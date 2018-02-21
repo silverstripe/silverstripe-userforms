@@ -6,7 +6,7 @@
 
 class UserDefinedForm extends Page
 {
-    
+
     /**
      * @var string
      */
@@ -713,7 +713,7 @@ JS
             foreach ($recipients as $recipient) {
                 $email = new UserFormRecipientEmail($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-    
+
                 if ($attachments) {
                     foreach ($attachments as $file) {
                         if ($file->ID != 0) {
@@ -725,7 +725,7 @@ JS
                         }
                     }
                 }
-                
+
                 $parsedBody = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
