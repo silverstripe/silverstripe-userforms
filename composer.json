@@ -32,7 +32,7 @@
     "require": {
         "silverstripe/cms": "^4.0",
         "symbiote/silverstripe-gridfieldextensions": "^3.1",
-        "silverstripe/segment-field": "^2.0",
+        "silverstripe/segment-field": "2.1.1@stable",
         "silverstripe/versioned": "^1.0"
     },
     "require-dev": {
