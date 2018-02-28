@@ -118,6 +118,11 @@ class EditableMultipleOptionField extends EditableFormField
      */
     public function duplicate($doWrite = true, $manyMany = 'many_many')
     {
+        // Versioned 1.0 has a bug where [] will result in _all_ relations being duplicated
+        if ($manyMany === 'many_many' && !$this->manyMany()) {
+            $manyMany = null;
+        }
+
         $clonedNode = parent::duplicate($doWrite, $manyMany);
 
         foreach ($this->Options() as $field) {

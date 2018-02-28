@@ -137,7 +137,11 @@ class EditableFormFieldTest extends FunctionalTest
 
         $clone = $dropdown->duplicate();
 
-        $this->assertEquals($dropdown->Options()->Count(), $clone->Options()->Count());
+        $this->assertEquals(
+            $dropdown->Options()->Count(),
+            $clone->Options()->Count(),
+            "The duplicate should have contain same number of options"
+        );
 
         foreach ($clone->Options() as $option) {
             $original = $dropdown->Options()->find('Title', $option->Title);

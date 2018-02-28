@@ -124,6 +124,8 @@ trait UserForm
         'EmailRecipients',
     ];
 
+    private static $cascade_duplicates = false;
+
     /**
      * @var array
      * @config
