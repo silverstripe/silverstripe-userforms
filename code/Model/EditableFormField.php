@@ -177,6 +177,8 @@ class EditableFormField extends DataObject
         'DisplayRules',
     ];
 
+    private static $cascade_duplicates = false;
+
     /**
      * @var bool
      */
