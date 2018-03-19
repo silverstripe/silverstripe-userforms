@@ -111,6 +111,7 @@ class UserDefinedFormTest extends FunctionalTest
 
         $popup = new EmailRecipient();
         $popup->FormID = $form->ID;
+        $popup->FormClass = UserDefinedForm::class;
 
         $fields = $popup->getCMSFields();
 
@@ -167,6 +168,7 @@ class UserDefinedFormTest extends FunctionalTest
         $page = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $recipient = new EmailRecipient();
         $recipient->FormID = $page->ID;
+        $recipient->FormClass = UserDefinedForm::class;
 
         $result = $recipient->getEmailTemplateDropdownValues();
 
@@ -180,6 +182,7 @@ class UserDefinedFormTest extends FunctionalTest
         $page = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
         $recipient = new EmailRecipient();
         $recipient->FormID = $page->ID;
+        $recipient->FormClass = UserDefinedForm::class;
 
         // Set the default template
         $recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues()));
