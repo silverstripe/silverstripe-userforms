@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
@@ -104,32 +105,26 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // Post with no fields
         $this->get($form->URLSegment);
+        /** @var HTTPResponse $response */
         $response = $this->submitForm('UserForm_Form_' . $form->ID, null, []);
-        $this->assertPartialMatchBySelector(
-            '.field .message',
-            ['This field is required']
-        );
+        $this->assertContains('This field is required', $response->getBody());
 
         // Post with all fields, but invalid email
         $this->get($form->URLSegment);
-        $this->submitForm('UserForm_Form_' . $form->ID, null, [
+        /** @var HTTPResponse $response */
+        $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [
             'required-email' => 'invalid',
             'required-text' => 'bob'
         ]);
-        $this->assertPartialMatchBySelector(
-            '.field .message',
-            ['Please enter an email address']
-        );
+        $this->assertContains('Please enter an email address', $response->getBody());
 
         // Post with only required
         $this->get($form->URLSegment);
-        $this->submitForm('UserForm_Form_' . $form->ID, null, [
+        /** @var HTTPResponse $response */
+        $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [
             'required-text' => 'bob'
         ]);
-        $this->assertPartialMatchBySelector(
-            'p',
-            ["Thanks, we've received your submission."]
-        );
+        $this->assertContains("Thanks, we've received your submission.", $response->getBody());
     }
 
     public function testFinished()

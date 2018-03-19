@@ -128,17 +128,24 @@ class EmailRecipient extends DataObject
     /**
      * Get instance of UserForm when editing in getCMSFields
      *
-     * @return UserDefinedForm|UserForm
+     * @return UserDefinedForm|UserForm|null
      */
     protected function getFormParent()
     {
+        // If polymorphic relationship is actually defined, use it
+        if ($this->FormID && $this->FormClass) {
+            $formClass = $this->FormClass;
+            return $formClass::get()->byID($this->FormID);
+        }
+
+        // Revert to checking for a form from the session
         // LeftAndMain::sessionNamespace is protected. @todo replace this with a non-deprecated equivalent.
         $sessionNamespace = $this->config()->get('session_namespace') ?: CMSMain::class;
 
-        $formID = $this->FormID ?: Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
-        $formClass = $this->FormClass ?: UserDefinedForm::class;
-
-        return $formClass::get()->byID($formID);
+        $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
+        if ($formID) {
+            return UserDefinedForm::get()->byID($formID);
+        }
     }
 
     public function getTitle()
