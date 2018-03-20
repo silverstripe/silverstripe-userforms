@@ -12,12 +12,12 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\LabelField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\SegmentField;
@@ -29,15 +29,12 @@ use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
 use SilverStripe\UserForms\Modifier\UnderscoreSegmentFieldModifier;
-use SilverStripe\UserForms\UserForm;
 use SilverStripe\Versioned\Versioned;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -136,7 +133,6 @@ class EditableFormField extends DataObject
     ];
 
     private static $table_name = 'EditableFormField';
-
 
     private static $defaults = [
         'ShowOnLoad' => true,
@@ -745,8 +741,7 @@ class EditableFormField extends DataObject
 
         // set the right title on this field
         if ($this->RightTitle) {
-            // Since this field expects raw html, safely escape the user data prior
-            $field->setRightTitle(Convert::raw2xml($this->RightTitle));
+            $field->setRightTitle($this->RightTitle);
         }
 
         // if this field is required add some
