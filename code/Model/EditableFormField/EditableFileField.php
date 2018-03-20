@@ -61,7 +61,7 @@ class EditableFileField extends EditableFormField
 
         $fields->addFieldToTab("Root.Main", LiteralField::create(
             'FileUploadWarning',
-            '<p class="message notice">' . _t(
+            '<p class="alert alert-info">' . _t(
                 'SilverStripe\\UserForms\\Model\\UserDefinedForm.FileUploadWarning',
                 'Files uploaded through this field could be publicly accessible if the exact URL is known'
             )
