@@ -284,10 +284,14 @@ jQuery(document).ready(($) => {
     // Spaces out the steps below progress bar evenly
     this.$jsAlign.each((index, button) => {
       const $button = $(button);
-      const leftPercent = (100 / (self.$jsAlign.length - 1) * `${index}%`);
+      const leftPercent = 100 / (self.$jsAlign.length - 1) * index;
+      const leftPercentCssValue = `${leftPercent}%`;
       const buttonOffset = -1 * ($button.innerWidth() / 2);
 
-      $button.css({ left: leftPercent, marginLeft: buttonOffset });
+      $button.css({
+        left: leftPercentCssValue,
+        marginLeft: buttonOffset,
+      });
 
       // First and last buttons are kept within userform-progress container
       if (index === self.$jsAlign.length - 1) {
@@ -707,10 +711,8 @@ jQuery(document).ready(($) => {
     userform.setCurrentStep(userform.steps[0]);
 
     // Initialise actions and progressbar
-    // @todo Commented out because they appear unused - are they expected to be exported to the
-    //       global scope? Check this works on the frontend
-    // const progressBar = new ProgressBar($('#userform-progress'));
-    // const formActions = new FormActions($('#step-navigation'));
+    const progressBar = new ProgressBar($('#userform-progress'));
+    const formActions = new FormActions($('#step-navigation'));
 
     // Enable jQuery UI datepickers
     $(document).on('click', 'input.text[data-showcalendar]', () => {
