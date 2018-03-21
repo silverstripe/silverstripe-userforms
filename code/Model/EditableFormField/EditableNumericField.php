@@ -41,7 +41,7 @@ class EditableNumericField extends EditableFormField
      */
     public function getFormField()
     {
-        $field = NumericField::create($this->Name, $this->EscapedTitle, $this->Default)
+        $field = NumericField::create($this->Name, $this->Title, $this->Default)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableFormField::class)
             ->addExtraClass('number');

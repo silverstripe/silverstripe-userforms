@@ -2,11 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\CMS\Controllers\CMSMain;
-use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\Versioned\Versioned;
 
 /**
@@ -66,12 +63,12 @@ class EditableOption extends DataObject
     }
 
     /**
-     * @deprecated 5.0 Use "$Title.XML" in templates instead
+     * @deprecated 5.0..6.0 Use "$Title" in templates instead
      * @return string
      */
     public function getEscapedTitle()
     {
-        return Convert::raw2att($this->Title);
+        return Convert::raw2xml($this->Title);
     }
 
     /**

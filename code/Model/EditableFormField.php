@@ -635,6 +635,8 @@ class EditableFormField extends DataObject
     /**
      * Returns the Title for rendering in the front-end (with XML values escaped)
      *
+     * @deprecated 5.0..6.0 XML is automatically escaped in templates from SS 4 onwards. Please use $Title directly.
+     *
      * @return string
      */
     public function getEscapedTitle()
