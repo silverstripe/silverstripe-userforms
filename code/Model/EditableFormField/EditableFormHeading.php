@@ -68,7 +68,7 @@ class EditableFormHeading extends EditableFormField
 
     public function getFormField()
     {
-        $labelField = HeaderField::create('userforms-header', $this->EscapedTitle)
+        $labelField = HeaderField::create('userforms-header', $this->Title)
             ->setHeadingLevel($this->Level);
         $labelField->addExtraClass('FormHeading');
         $labelField->setAttribute('data-id', $this->Name);
@@ -80,8 +80,7 @@ class EditableFormHeading extends EditableFormField
     {
         // set the right title on this field
         if ($this->RightTitle) {
-            // Since this field expects raw html, safely escape the user data prior
-            $field->setRightTitle(Convert::raw2xml($this->RightTitle));
+            $field->setRightTitle($this->RightTitle);
         }
 
         // if this field has an extra class

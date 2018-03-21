@@ -30,8 +30,8 @@ class EditableEmailField extends EditableFormField
 
     public function getFormField()
     {
-        $field = EmailField::create($this->Name, $this->EscapedTitle, $this->Default)
-            ->setFieldHolderTemplate('UserFormsField_holder')
+        $field = EmailField::create($this->Name, $this->Title, $this->Default)
+            ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableFormField::class);
 
         $this->doUpdateFormField($field);

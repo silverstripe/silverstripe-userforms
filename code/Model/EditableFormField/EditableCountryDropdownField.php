@@ -35,7 +35,7 @@ class EditableCountryDropdownField extends EditableFormField
 
     public function getFormField()
     {
-        $field = DropdownField::create($this->Name, $this->EscapedTitle)
+        $field = DropdownField::create($this->Name, $this->Title)
             ->setSource(i18n::getData()->getCountries())
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableDropdown::class);

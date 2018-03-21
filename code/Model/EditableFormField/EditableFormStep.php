@@ -46,7 +46,7 @@ class EditableFormStep extends EditableFormField
     {
         $field = UserFormsStepField::create()
             ->setName($this->Name)
-            ->setTitle($this->EscapedTitle);
+            ->setTitle($this->Title);
         $this->doUpdateFormField($field);
         return $field;
     }
