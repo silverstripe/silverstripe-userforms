@@ -91,6 +91,13 @@ class EmailRecipient extends DataObject
     private static $table_name = 'UserDefinedForm_EmailRecipient';
 
     /**
+     * Disable versioned GridField to ensure that it doesn't interfere with {@link UserFormRecipientItemRequest}
+     *
+     * {@inheritDoc}
+     */
+    private static $versioned_gridfield_extensions = false;
+
+    /**
      * Setting this to true will allow you to select "risky" fields as
      * email recipient, such as free-text entry fields.
      *
