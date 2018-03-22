@@ -159,6 +159,6 @@ class EditableFileField extends EditableFormField
 
     public function getPHPMaxFileSizeMB()
     {
-        return round(static::get_php_max_file_size() / 1024.0, 1);
+        return round(static::get_php_max_file_size() / 1024 / 1024, 1);
     }
 }
