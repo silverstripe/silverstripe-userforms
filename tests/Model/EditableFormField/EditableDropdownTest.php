@@ -44,4 +44,14 @@ class EditableDropdownTest extends SapphireTest
         $field->Name = 'EditableFormField_123456';
         $this->assertEmpty($field->getFormField()->Title());
     }
+
+    public function testDuplicate()
+    {
+        /** @var EditableDropdown $dropdown */
+        $dropdown = $this->objFromFixture(EditableDropdown::class, 'basic-dropdown');
+        $this->assertCount(2, $dropdown->Options());
+
+        $duplicatedDropdown = $dropdown->duplicate();
+        $this->assertSame($dropdown->Options()->count(), $duplicatedDropdown->Options()->count());
+    }
 }

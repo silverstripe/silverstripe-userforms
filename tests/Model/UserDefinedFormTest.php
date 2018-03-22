@@ -375,6 +375,32 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotEquals($form2GroupEnd->ID, $form3GroupStart->EndID);
     }
 
+    public function testDuplicateFormDuplicatesRecursively()
+    {
+        $this->logInWithPermission('ADMIN');
+        /** @var UserDefinedForm $form */
+        $form = $this->objFromFixture(UserDefinedForm::class, 'form-with-multioptions');
+
+        $this->assertCount(2, $form->Fields(), 'Fixtured page has one field plus one form step');
+        $this->assertCount(
+            2,
+            $form->Fields()->Last()->Options(),
+            'Fixtured multiple option field has two options'
+        );
+
+        $newForm = $form->duplicate();
+        $this->assertEquals(
+            $form->Fields()->count(),
+            $newForm->Fields()->count(),
+            'Duplicated page has same number of fields'
+        );
+        $this->assertEquals(
+            $form->Fields()->Last()->Options()->count(),
+            $newForm->Fields()->Last()->Options()->count(),
+            'Duplicated dropdown field from duplicated form has duplicated options'
+        );
+    }
+
     public function testFormOptions()
     {
         $this->logInWithPermission('ADMIN');
