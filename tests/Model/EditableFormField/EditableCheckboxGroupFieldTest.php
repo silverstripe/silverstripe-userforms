@@ -18,4 +18,12 @@ class EditableCheckboxGroupFieldTest extends SapphireTest
         $checkboxGroup = $this->objFromFixture(EditableCheckboxGroupField::class, 'checkbox-group');
         $this->assertSame(UserFormsCheckboxSetField::class, $checkboxGroup->getFormField()->getTemplate());
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableCheckboxGroupField $field */
+        $field = EditableCheckboxGroupField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }

@@ -36,4 +36,12 @@ class EditableDropdownTest extends SapphireTest
         $alternateDropdown->write();
         $this->assertEquals($formField->getEmptyString(), '');
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableDropdown $field */
+        $field = EditableDropdown::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }

@@ -87,4 +87,12 @@ class EditableLiteralFieldTest extends SapphireTest
             'Actual literal field exists in composite field children'
         );
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableLiteralField $field */
+        $field = EditableLiteralField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }

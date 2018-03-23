@@ -20,4 +20,12 @@ class EditableTextFieldTest extends SapphireTest
         $this->assertInstanceOf(DropdownField::class, $autocompleteField);
         $this->assertEquals(['foo' => 'foo'], $autocompleteField->getSource());
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableTextField $field */
+        $field = EditableTextField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }

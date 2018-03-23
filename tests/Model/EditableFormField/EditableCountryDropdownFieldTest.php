@@ -13,4 +13,12 @@ class EditableCountryDropdownFieldTest extends SapphireTest
 
         $this->assertContains('/images/editabledropdown.png', $field->getIcon());
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableCountryDropdownField $field */
+        $field = EditableCountryDropdownField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }
