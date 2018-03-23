@@ -58,7 +58,7 @@ class EditableDateField extends EditableFormField
             ? DBDatetime::now()->Format('Y-m-d')
             : $this->Default;
 
-        $field = FormField::create($this->Name, $this->Title, $defaultValue)
+        $field = FormField::create($this->Name, $this->Title ?: false, $defaultValue)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableFormField::class);
 

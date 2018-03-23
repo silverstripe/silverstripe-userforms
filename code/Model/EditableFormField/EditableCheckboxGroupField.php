@@ -25,7 +25,7 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
 
     public function getFormField()
     {
-        $field = UserFormsCheckboxSetField::create($this->Name, $this->Title, $this->getOptionsMap())
+        $field = UserFormsCheckboxSetField::create($this->Name, $this->Title ?: false, $this->getOptionsMap())
             ->setFieldHolderTemplate(EditableMultipleOptionField::class . '_holder')
             ->setTemplate(UserFormsCheckboxSetField::class);
 

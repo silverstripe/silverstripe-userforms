@@ -97,7 +97,7 @@ class EditableFileField extends EditableFormField
 
     public function getFormField()
     {
-        $field = FileField::create($this->Name, $this->Title)
+        $field = FileField::create($this->Name, $this->Title ?: false)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__);
 

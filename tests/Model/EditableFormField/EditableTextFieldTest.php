@@ -26,6 +26,10 @@ class EditableTextFieldTest extends SapphireTest
         /** @var EditableTextField $field */
         $field = EditableTextField::create();
         $field->Name = 'EditableFormField_123456';
+        $field->Rows = 1;
+        $this->assertEmpty($field->getFormField()->Title());
+
+        $field->Rows = 3;
         $this->assertEmpty($field->getFormField()->Title());
     }
 }

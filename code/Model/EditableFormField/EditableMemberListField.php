@@ -54,7 +54,7 @@ class EditableMemberListField extends EditableFormField
         }
 
         $members = Member::map_in_groups($this->GroupID);
-        $field = DropdownField::create($this->Name, $this->Title, $members);
+        $field = DropdownField::create($this->Name, $this->Title ?: false, $members);
         $this->doUpdateFormField($field);
         return $field;
     }

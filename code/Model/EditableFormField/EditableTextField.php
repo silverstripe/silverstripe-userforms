@@ -128,12 +128,12 @@ class EditableTextField extends EditableFormField
     public function getFormField()
     {
         if ($this->Rows > 1) {
-            $field = TextareaField::create($this->Name, $this->Title, $this->Default)
+            $field = TextareaField::create($this->Name, $this->Title ?: false, $this->Default)
                 ->setFieldHolderTemplate(EditableFormField::class . '_holder')
                 ->setTemplate(str_replace('EditableTextField', 'EditableTextareaField', __CLASS__))
                 ->setRows($this->Rows);
         } else {
-            $field = TextField::create($this->Name, $this->Title, $this->Default)
+            $field = TextField::create($this->Name, $this->Title ?: false, $this->Default)
                 ->setFieldHolderTemplate(EditableFormField::class . '_holder')
                 ->setTemplate(EditableFormField::class);
         }
