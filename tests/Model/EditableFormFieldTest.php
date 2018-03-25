@@ -86,9 +86,6 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertEquals(0, $checkbox->EffectiveDisplayRules()->count());
     }
 
-    /**
-     * @covers EditableOption::getValue
-     */
     public function testEditableOptionEmptyValue()
     {
         $option = $this->objFromFixture(EditableOption::class, 'option-1');
