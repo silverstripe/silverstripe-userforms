@@ -3,8 +3,6 @@
 namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 
 class EditableRadioFieldTest extends SapphireTest
@@ -21,5 +19,13 @@ class EditableRadioFieldTest extends SapphireTest
             'SilverStripe\\UserForms\\FormField\\UserFormsOptionSetField',
             $radio->getFormField()->getTemplate()
         );
+    }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableRadioField $field */
+        $field = EditableRadioField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
     }
 }

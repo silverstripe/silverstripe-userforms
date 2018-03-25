@@ -64,4 +64,12 @@ class EditableFileFieldTest extends SapphireTest
         $formField = $fileField->getFormField();
         $this->assertEquals($formField->getValidator()->getAllowedMaxFileSize(), 262144);
     }
+
+    public function testAllowEmptyTitle()
+    {
+        /** @var EditableFileField $field */
+        $field = EditableFileField::create();
+        $field->Name = 'EditableFormField_123456';
+        $this->assertEmpty($field->getFormField()->Title());
+    }
 }
