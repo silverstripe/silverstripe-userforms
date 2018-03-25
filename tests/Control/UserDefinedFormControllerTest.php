@@ -89,7 +89,9 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check to see if the user was redirected (301)
         $this->assertEquals($response->getStatusCode(), 302);
-        $this->assertStringEndsWith('finished#uff', $response->getHeader('Location'));
+        $location = $response->getHeader('Location');
+        $this->assertContains('finished', $location);
+        $this->assertStringEndsWith('#uff', $location);
 
         // check that multiple email addresses are supported in to and from
         $this->assertEmailSent(
