@@ -225,6 +225,7 @@ class UserFormFieldEditorExtension extends DataExtension
         // List of EditableFieldGroups, where the key of the array is the ID of the old end group
         $fieldGroups = [];
         foreach ($oldPage->Fields() as $field) {
+            /** @var EditableFormField $newField */
             $newField = $field->duplicate(false);
             $newField->ParentID = $this->owner->ID;
             $newField->ParentClass = $this->owner->ClassName;

@@ -344,3 +344,8 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableEmailField.another-email-field
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.another-required
+
+  form-with-multioptions:
+    Title: Form with MultipleOption fields
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableDropdown.basic-dropdown

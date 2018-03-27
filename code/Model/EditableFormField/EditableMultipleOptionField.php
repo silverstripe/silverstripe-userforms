@@ -123,9 +123,10 @@ class EditableMultipleOptionField extends EditableFormField
             $manyMany = null;
         }
 
-        $clonedNode = parent::duplicate($doWrite, $manyMany);
+        $clonedNode = parent::duplicate(true, $manyMany);
 
         foreach ($this->Options() as $field) {
+            /** @var EditableOption $newField */
             $newField = $field->duplicate(false);
             $newField->ParentID = $clonedNode->ID;
             $newField->Version = 0;
