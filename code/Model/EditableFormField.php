@@ -806,7 +806,7 @@ class EditableFormField extends DataObject
     public function getErrorMessage()
     {
         $title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
-        $standard = _t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '{field} is required.', ['field' => $title]);
+        $standard = _t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '{name} is required.', ['name' => $title]);
 
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
