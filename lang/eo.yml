@@ -24,7 +24,7 @@ eo:
   SilverStripe\Forms\Form:
     FIELDISREQUIRED: '%s estas nepra'
   SilverStripe\Forms\GridField\GridField:
-    Filter: Filtri
+    Filter: Filtrilo
     ResetFilter: Restartigi
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aldoni kampon'
@@ -33,7 +33,7 @@ eo:
     FORMFIELDS: 'Formularaj kampoj'
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
-    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ iuj paĝoj'
+    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ eventualaj paĝoj'
     UNEXPECTED_BREAK: 'Neatendita paĝosalto ''{name}'' en ingita kampo ''{group}'''
     UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
     WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
@@ -46,17 +46,18 @@ eo:
     PLURALNAME: 'Redakteblaj propraj reguloj'
     SINGULARNAME: 'Redaktebla propra regulo'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Aldoni
-    ADDLabel: 'Aldoni agordon'
+    ADD: Enmeti
+    ADDLabel: 'Aldoni eblon'
     ADDRULE: 'Aldoni regulon'
     BLANK: Vaka
     CHECKEDBYDEFAULT: 'Ĉu kontrolita apriore?'
     CUSTOMERROR: 'Propra mesaĝo pri eraro'
-    CUSTOMOPTIONS: Agordoj
+    CUSTOMOPTIONS: Ebloj
     CUSTOMRULES: 'Propraj reguloj'
     DEFAULT: 'Apriora valoro'
     DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
     DELETE: Forigi
+    DISPLAYIF: 'Baskuligi videblecon kiam'
     DISPLAY_RULES_DISABLED: 'Vidigaj reguloj ne estas enŝaltitaj por bezonataj kampoj. Por reaktivigi ĝin, bonvolu malmarki "Ĉu ĉi tiu kampo estas bezonata?" sub "Validigo".'
     DRAG: 'Ŝovi por rearanĝi kampojn'
     ENTERQUESTION: 'Enigi demandon'
@@ -64,8 +65,8 @@ eo:
     EXTRACLASSB: 'Ekstra css-klaso - apartigi opojn per spaceto'
     EXTRACLASS_MULTIPLE: 'Disigi ĉiun CSS-klason per unu spaceto'
     EXTRACLASS_SELECT: 'Elekti el la listo de eblaj stiloj'
-    EXTRACLASS_TITLE: 'Ekstra fasonado/aranĝado'
-    EXTRACLASS_Title: 'Ekstraj CDD-klasoj'
+    EXTRACLASS_TITLE: 'Ekstra stilado/aranĝado'
+    EXTRACLASS_Title: 'Ekstraj CSS-klasoj'
     FIELDCONFIGURATION: 'Agordi kampon'
     FIELDONDEFAULT: 'Kampo al apriora'
     GREATERTHAN: 'Valoro pli ol'
@@ -73,23 +74,29 @@ eo:
     GROUP: Grupo
     HIDE: Kaŝi
     HIDETHISFIELD: 'Kaŝi ĉi tiun kampon'
+    INITIALVISIBILITY: 'Komenca videbleco'
     IS: Estas
     LESSTHAN: 'Valoro malpli ol'
     LESSTHANEQUAL: 'Valoro malpli ol aŭ egala al'
     LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
     MAXVALUE: 'Maks valoro'
+    MERGEFIELDNAME: 'Kunfandi kapon'
     MINVALUE: 'Min valoro'
+    NAME: Nomo
     'NO': Ne
     NOTBLANK: 'Ne vaka'
     NOTVALUE: 'Ne valoro'
-    OPTIONS: Agordoj
+    OPTIONS: Ebloj
+    PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Redakteblaj formularaj kampoj'
     REQUIRED: 'Ĉu ĉi tiu kampo estas nepra?'
     REQUIRED_DESCRIPTION: 'Bonvolu noti ke kondiĉaj kampoj ne povas esti nepraj'
     RIGHTTITLE: 'Dekstra titolo'
     SHOW: Vidigi
+    SHOWINSUMMARY: 'Vidigi en resuma kadrokampo'
     SHOWONLOAD: 'Komenca videbleco antaŭ ol trakti ĉi tiujn regulojn'
-    SHOWOPTIONS: 'Vidigi agordojn'
+    SHOWONLOAD_TITLE: 'Vidigi ŝargante'
+    SHOWOPTIONS: 'Vidigi eblojn'
     SHOWTHISFIELD: 'Vidigi ĉi tiun kampon'
     SINGULARNAME: 'Redaktebla formulara kampo'
     TITLE: Titolo
@@ -122,8 +129,8 @@ eo:
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_END: 'fino de {group}'
     FIELD_GROUP_START: 'Grupo {group}'
-    PLURALNAME: 'Redakteblaj kampaj grupoj finas'
-    SINGULARNAME: 'Redaktebla kampa grupo finas'
+    PLURALNAME: 'Finaĵoj de redakteblaj kampaj grupoj'
+    SINGULARNAME: 'Finaĵo de redakteblaj kampaj grupoj'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Kampoj por dosiera alŝuto'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
@@ -134,7 +141,7 @@ eo:
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Paĝosaltoj
     SINGULARNAME: Paĝosalto
-    STEP_TITLE: 'Paĝo {page}'
+    STEP_TITLE: 'Paĝo {paĝo}'
     TITLE_FIRST: 'Unua paĝo'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
@@ -147,7 +154,7 @@ eo:
     SINGULARNAME: 'Kampo por membrolisto'
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Elektita apriore?'
-    OPTIONSTAB: Agordoj
+    OPTIONSTAB: Ebloj
     PLURALNAME: 'Redakteblaj plureblaj kampoj'
     SINGULARNAME: 'Redaktebla plurebla kampo'
     TITLE: Titolo
@@ -155,52 +162,57 @@ eo:
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeraj kampoj'
     RANGE: 'Ebla numera amplekso'
-    RANGE_TO: 'al '
+    RANGE_TO: al
     SINGULARNAME: 'Numera kampo'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Forigi ĉi tiun agordon'
+    DELETE: 'Forigi ĉi tiun eblon'
     DRAG: 'Ŝovi por rearanĝi ordon de agordoj'
     LOCKED: 'Ne eblas ŝanĝi ĉi tiujn kampojn'
-    PLURALNAME: 'Redakteblaj agordoj'
-    SINGULARNAME: 'Redaktebla agordo'
+    PLURALNAME: 'Redakteblaj ebloj'
+    SINGULARNAME: 'Redaktebla eblo'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
-    PLURALNAME: 'Radiobutonaj kampoj'
-    SINGULARNAME: 'Radiobutona kampo'
+    PLURALNAME: 'Radiobutonaj grupoj'
+    SINGULARNAME: 'Radiobutona grupo'
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: 'Aŭtomate kompletigi'
+    AUTOCOMPLETE_DESCRIPTION: 'Subtenataj TTT-legiloj provos aŭtomate plenigi ĉi tiun kampon per uzantinformo, uzu ĝin por agordi la enan valoron'
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Tekstaj kampoj'
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
-    TEXTLENGTH: 'Longo de teksto'
+    TEXTLENGTH: 'Permesata longo de teksto'
   SilverStripe\UserForms\Model\EditableFormField\Validator:
     REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Propraj reguloj'
+    EMAILADDRESSINVALID: '"EmailAddress" ne estas valida'
     EMAILCONTENTTAB: 'Retpoŝta enhavo'
     EMAILDETAILSTAB: 'Retpoŝtaj detaloj'
-    PLURALNAME: 'Propra formularo por retpoŝtaj ricevontoj'
-    SINGULARNAME: 'Propra formularo por retpoŝta ricevonto'
+    EMAILFROMINVALID: '"Retpoŝto de" ne estas valida'
+    EMAILREPLYTOINVALID: '"Retpoŝta respondo al" ne estas valida'
+    PLURALNAME: 'Retpoŝtaj ricevontoj de propra formularo'
+    SINGULARNAME: 'Retpoŝta ricevonto de propra formularo'
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
-    PLURALNAME: 'Retpoŝtaj ricevontaj kondiĉoj de propra formularo'
-    SINGULARNAME: 'Retpoŝta ricevonta kondiĉo de propra formularo'
+    PLURALNAME: 'Kondiĉoj por uzantoj ricevontaj propran formularon'
+    SINGULARNAME: 'Kondiĉo por uzantoj ricevontaj propran formularon'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Elŝuti dosieron'
-    PLURALNAME: 'Senditaj dosieraj kampoj'
-    SINGULARNAME: 'Sendita dosiera kampo'
+    PLURALNAME: 'Kampoj de sendita dosiero'
+    SINGULARNAME: 'Kampo de sendita dosiero'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Senditaj formularoj'
     SINGULARNAME: 'Sendita formularo'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
-    PLURALNAME: 'Senditaj formularaj kampoj'
-    SINGULARNAME: 'Sendita formulara kampo'
+    PLURALNAME: 'Kampoj de sendita formularo'
+    SINGULARNAME: 'Kampo de sendita formularo'
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
     CLEARBUTTON: Vakigi
     CONFIGURATION: Agordaro
     DESCRIPTION: 'Aldonas adapteblan formularon'
-    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentikigon je fina ago'
+    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentigon de kompletiga ago'
     DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
     DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
     EMAILADDRESS: Retpoŝto
@@ -211,7 +223,7 @@ eo:
     EMAILSUBJECT: 'Temo de retpoŝto'
     EMAILTEMPLATE: 'Retpoŝta ŝablono'
     ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
-    EmailFromContent: 'La de-adreso ebligas agordi de kiu la retpoŝto iros. Ĉe plejmultaj serviloj tio devas agordiĝi al retadreso de la sama domajna nomo kiel via retejo. Ekzemple, ĉe viaretejo.com la de-adreso eble devas esti en la formo io@viaretejo.com. Tamen, iu ajn adreso validos kiel la respondu-al-adreso.'
+    EmailFromContent: 'La de-adreso estas kie vi povas agordi de kie venas la retpoŝto. Ĉe plejmultaj serviloj tio devus esti retpoŝta adreso ĉe la sama domajno kiel via retejo. Ekzemple, ĉe viareto.com, la de-adreso eble devus esti iuloko@viareto.com. Tamen vi povas agordi la de-adreson al iu ajn adreso.'
     FIELDS: Kampoj
     FORM: Formularo
     FROMADDRESS: 'Sendi retpoŝton de'
@@ -223,11 +235,11 @@ eo:
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
     PLURALNAME: 'Bazaj paĝoj'
     PREVIEW_EMAIL: 'Antaŭvidi retpoŝton'
-    PREVIEW_EMAIL_DESCRIPTION: 'Notu: nekonservitaj mesaĝoj ne vidiĝos en la antaŭvido.'
+    PREVIEW_EMAIL_DESCRIPTION: 'Notu: nekonservitaj ŝanĝoj ne vidiĝos en la antaŭvido.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Konservinte la ricevonton vi povos antaŭvidi la retpoŝton.'
     RECIPIENTS: Ricevontoj
     REPLYADDRESS: 'Retpoŝto al kiu respondi'
-    REPLYADDRESS_DESCRIPTION: 'La retpoŝta adreso al kiu la ricevonto povos respondi.'
+    REPLYADDRESS_DESCRIPTION: 'La retpoŝta adreso al kiu la ricevonto povos ''respondi''.'
     RulesDescription: 'Retpoŝtoj sendiĝos al la ricevonto nur se la propraj reguloj estas plenumitaj. Se neniu regulo estas agordita, tiu ricevonto ricevos atentigon por ĉiu sendo.'
     SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
     SELECTAFIELDTOSETSUBJECT: '.. aŭ elekti kampon uzotan kiel la temon'
@@ -235,13 +247,13 @@ eo:
     SENDEMAILTO_DESCRIPTION: 'Vi povas enigi plurajn retadresojn kiel komodisigitan liston.'
     SENDIF: 'Senda kondiĉo'
     SENDIFAND: 'Ĉiuj kondiĉoj estas veraj'
-    SENDIFOR: 'Iuj kondiĉoj estas veraj'
-    SENDPLAIN: 'Ĉu sendi retpoŝton kiel simplan tekston? (HTML foriĝos) '
-    SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
-    SINGULARNAME: 'Propre difinita formularo'
-    SUBMISSIONS: Sendaĵoj
+    SENDIFOR: 'Ajnaj kondiĉoj estas veraj'
+    SENDPLAIN: 'Ĉu sendi retpoŝton kiel platan tekston? (HTML estu forigita)'
+    SHOWCLEARFORM: 'Vidigi butonon vakigi formularon'
+    SINGULARNAME: 'Formularo agordita de uzanto'
+    SUBMISSIONS: Sendoj
     SUBMITBUTTON: Sendi
-    TEXTONCLEAR: 'Teksto sur vakiga butono:'
+    TEXTONCLEAR: 'Teksto sur vakiga butono'
     TEXTONSUBMIT: 'Teksto sur senda butono:'
     TYPEREPLY: 'Tajpi respondan adreson'
     TYPESUBJECT: 'Tajpi temon'
