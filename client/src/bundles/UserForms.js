@@ -472,8 +472,8 @@ jQuery(document).ready(($) => {
     this.$el.validate(this.validationOptions);
 
     // Ensure checkbox groups are validated correctly
-    $('.optionset.requiredField input').each(() => {
-      $(this).rules('add', {
+    $('.optionset.requiredField input').each((a, field) => {
+      $(field).rules('add', {
         required: true,
       });
     });
