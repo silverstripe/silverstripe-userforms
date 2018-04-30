@@ -22,13 +22,17 @@ class EditableCountryDropdownField extends EditableFormField
     private static $table_name = 'EditableCountryDropdownField';
 
     /**
-     * @return FieldList
+     * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName('Default');
+        $fields->replaceField(
+            'Default',
+            DropdownField::create('Default', _t(__CLASS__ . '.DEFAULT', 'Default value'))
+            ->setSource(i18n::getData()->getCountries())
+        );
 
         return $fields;
     }
@@ -39,6 +43,11 @@ class EditableCountryDropdownField extends EditableFormField
             ->setSource(i18n::getData()->getCountries())
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableDropdown::class);
+
+        // Set default
+        if ($this->Default) {
+            $field->setValue($this->Default);
+        }
 
         $this->doUpdateFormField($field);
 
