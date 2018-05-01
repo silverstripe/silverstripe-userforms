@@ -3,13 +3,18 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\i18n\i18n;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * A dropdown field which allows the user to select a country
+ *
+ * @property bool $UseEmptyString
+ * @property string $EmptyString
  *
  * @package userforms
  */
@@ -18,6 +23,11 @@ class EditableCountryDropdownField extends EditableFormField
     private static $singular_name = 'Country Dropdown';
 
     private static $plural_name = 'Country Dropdowns';
+
+    private static $db = array(
+        'UseEmptyString' => 'Boolean',
+        'EmptyString' => 'Varchar(255)',
+    );
 
     private static $table_name = 'EditableCountryDropdownField';
 
@@ -28,10 +38,25 @@ class EditableCountryDropdownField extends EditableFormField
     {
         $fields = parent::getCMSFields();
 
-        $fields->replaceField(
-            'Default',
+        $fields->removeByName('Default');
+        $fields->addFieldToTab(
+            'Root.Main',
             DropdownField::create('Default', _t(__CLASS__ . '.DEFAULT', 'Default value'))
-            ->setSource(i18n::getData()->getCountries())
+                         ->setSource(i18n::getData()->getCountries())
+                         ->setHasEmptyDefault(true)
+                         ->setEmptyString('---')
+        );
+
+        $fields->addFieldToTab(
+            'Root.Main',
+            CheckboxField::create('UseEmptyString')
+                         ->setTitle('Set default empty string')
+        );
+
+        $fields->addFieldToTab(
+            'Root.Main',
+            TextField::create('EmptyString')
+                     ->setTitle('Empty String')
         );
 
         return $fields;
@@ -43,6 +68,11 @@ class EditableCountryDropdownField extends EditableFormField
             ->setSource(i18n::getData()->getCountries())
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(EditableDropdown::class);
+
+        // Empty string
+        if ($this->UseEmptyString) {
+            $field->setEmptyString($this->EmptyString ?: '');
+        }
 
         // Set default
         if ($this->Default) {
