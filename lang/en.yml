@@ -89,11 +89,14 @@ en:
       other: '{count} Checkbox Groups'
     SINGULARNAME: 'Checkbox Group'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Default value'
+    EMPTY_STRING: 'Empty String'
     PLURALNAME: 'Country Dropdowns'
     PLURALS:
       one: 'A Country Dropdown'
       other: '{count} Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
+    USE_EMPTY_STRING: 'Set default empty string'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Date Fields'
     PLURALS:

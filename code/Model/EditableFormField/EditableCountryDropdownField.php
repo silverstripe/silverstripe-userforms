@@ -49,14 +49,12 @@ class EditableCountryDropdownField extends EditableFormField
 
         $fields->addFieldToTab(
             'Root.Main',
-            CheckboxField::create('UseEmptyString')
-                         ->setTitle('Set default empty string')
+            CheckboxField::create('UseEmptyString', _t(__CLASS__ . '.USE_EMPTY_STRING', 'Set default empty string'))
         );
 
         $fields->addFieldToTab(
             'Root.Main',
-            TextField::create('EmptyString')
-                     ->setTitle('Empty String')
+            TextField::create('EmptyString', _t(__CLASS__ . '.EMPTY_STRING', 'Empty String'))
         );
 
         return $fields;
