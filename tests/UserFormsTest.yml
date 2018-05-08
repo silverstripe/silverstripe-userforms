@@ -61,6 +61,26 @@ SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     Name: Option9
     Title: Green
 
+  option-y:
+    Name: option-y
+    Title: Yes
+    Value: Y
+
+  option-n:
+    Name: option-n
+    Title: No
+    Value: N
+
+  option-y-2:
+    Name: option-y-2
+    Title: Yes
+    Value: Y
+
+  option-n-2:
+    Name: option-n-2
+    Title: No
+    Value: N
+
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   basic-text:
     Name: basic_text_name
@@ -91,6 +111,38 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     Title: Required Text Field
     CustomErrorMessage: Custom Error Message
     Required: true
+
+  required-text-2:
+    Name: required-text-field-2
+    Title: Required Text Field 2
+    Required: true
+
+  required-text-3:
+    Name: required-text-field-3
+    Title: Required Text Field 3
+    Required: true
+
+  conditional-required-text:
+    Name: conditional-required-text
+    Title: Conditional Required Text Field
+    CustomErrorMessage: Custom Error Message
+    Required: true
+    DisplayRulesConjunction: Or
+    ShowOnLoad: false
+
+  conditional-required-text-2:
+    Name: conditional-required-text-2
+    Title: Conditional Required Text Field 2
+    Required: true
+    DisplayRulesConjunction: Or
+    ShowOnLoad: false
+
+  conditional-required-text-3:
+    Name: conditional-required-text-3
+    Title: Conditional Required Text Field 3
+    Required: true
+    DisplayRulesConjunction: Or
+    ShowOnLoad: false
 
   field-1:
     Name: Field1
@@ -141,6 +193,14 @@ SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     Name: checkbox-1
     Title: Checkbox 1
 
+  checkbox-3:
+    Name: checkbox-3
+    Title: Checkbox 3
+
+  checkbox-4:
+    Name: checkbox-4
+    Title: Checkbox 4
+
 SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
   checkbox-group:
     Name: check-box-group
@@ -174,6 +234,18 @@ SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     Options:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-5
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-6
+  radio-field-2:
+    Name: radio-option-2
+    Title: Radio Option 2
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-n
+  radio-field-3:
+    Name: radio-option-2
+    Title: Radio Option 3
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-n-2
 
 SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
   group1end:
@@ -308,6 +380,21 @@ SilverStripe\UserForms\Model\UserDefinedForm:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox.checkbox-2
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
 
+  required-custom-rules-form:
+    Title: Required Custom Rules Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.required-text-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableRadioField.radio-field-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text
+
+  required-nested-custom-rules-form:
+    Title: Required Nested Custom Rules Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.required-text-3
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableRadioField.radio-field-3
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-3
+
   summary-rules-form:
     Title: Summary Fields Form
     Fields:
@@ -349,3 +436,23 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Title: Form with MultipleOption fields
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableDropdown.basic-dropdown
+
+SilverStripe\UserForms\Model\EditableCustomRule:
+  rule1:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: 'Y'
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableRadioField.radio-field-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text
+  rule2:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: 'Y'
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableRadioField.radio-field-3
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-2
+  rule3:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: 'Show more'
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-3

@@ -60,4 +60,24 @@ class EditableCustomRuleTest extends SapphireTest
         $this->assertSame('userform.field.show', $rule1->toggleDisplayEvent('show', true));
         $this->assertSame('userform.field.hide', $rule1->toggleDisplayEvent('hide', true));
     }
+
+    /**
+     * Test that methods are returned for manipulating the presence of the "hide" CSS class depending
+     * on whether the field should be hidden or shown
+     */
+    public function testValidateAgainstFormData()
+    {
+        $rule1 = $this->objFromFixture(EditableCustomRule::class, 'rule1');
+
+        $this->assertFalse($rule1->validateAgainstFormData([]));
+        $this->assertFalse($rule1->validateAgainstFormData(['CountrySelection' => 'AU']));
+        $this->assertTrue($rule1->validateAgainstFormData(['CountrySelection' => 'NZ']));
+
+        $rule2 = $this->objFromFixture(EditableCustomRule::class, 'rule2');
+
+        $this->assertFalse($rule2->validateAgainstFormData([]));
+        $this->assertFalse($rule2->validateAgainstFormData(['CountryTextSelection' => 0]));
+        $this->assertFalse($rule2->validateAgainstFormData(['CountryTextSelection' => 1]));
+        $this->assertTrue($rule2->validateAgainstFormData(['CountryTextSelection' => 2]));
+    }
 }

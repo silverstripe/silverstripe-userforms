@@ -72,7 +72,6 @@ class EditableFormFieldTest extends FunctionalTest
         // form has 2 fields - a checkbox and a text field
         // it has 1 rule - when ticked the checkbox hides the text field
         $this->assertEquals(1, $rules->Count());
-        $this->assertEquals($rules, $checkbox->EffectiveDisplayRules());
 
         $checkboxRule = $rules->First();
         $checkboxRule->ConditionFieldID = $field->ID;
@@ -80,10 +79,6 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertEquals($checkboxRule->Display, 'Hide');
         $this->assertEquals($checkboxRule->ConditionOption, 'HasValue');
         $this->assertEquals($checkboxRule->FieldValue, '6');
-
-        // If field is required then all custom rules are disabled
-        $checkbox->Required = true;
-        $this->assertEquals(0, $checkbox->EffectiveDisplayRules()->count());
     }
 
     public function testEditableOptionEmptyValue()

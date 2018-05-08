@@ -352,19 +352,6 @@ class EditableFormField extends DataObject
      */
     protected function getDisplayRuleFields()
     {
-        // Check display rules
-        if ($this->Required) {
-            return FieldList::create(
-                LiteralField::create(
-                    'DisplayRulesNotEnabled',
-                    '<div class="alert alert-warning">' . _t(
-                        __CLASS__.'.DISPLAY_RULES_DISABLED',
-                        'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
-                    ) . '</div>'
-                )
-            );
-        }
-
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields([
@@ -940,19 +927,6 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * Determine effective display rules for this field.
-     *
-     * @return SS_List
-     */
-    public function EffectiveDisplayRules()
-    {
-        if ($this->Required) {
-            return ArrayList::create();
-        }
-        return $this->DisplayRules();
-    }
-
-    /**
      * Extracts info from DisplayRules into array so UserDefinedForm->buildWatchJS can run through it.
      * @return array|null
      */
@@ -972,7 +946,7 @@ class EditableFormField extends DataObject
 
         // Check for field dependencies / default
         /** @var EditableCustomRule $rule */
-        foreach ($this->EffectiveDisplayRules() as $rule) {
+        foreach ($this->DisplayRules() as $rule) {
             // Get the field which is effected
             /** @var EditableFormField $formFieldWatch */
             $formFieldWatch = DataObject::get_by_id(EditableFormField::class, $rule->ConditionFieldID);

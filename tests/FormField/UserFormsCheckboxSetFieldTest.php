@@ -3,7 +3,7 @@
 namespace SilverStripe\UserForms\Tests\FormField;
 
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\UserForms\Form\UserFormsRequiredFields;
 use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
 
 class UserFormsCheckboxSetFieldTest extends SapphireTest
@@ -11,7 +11,7 @@ class UserFormsCheckboxSetFieldTest extends SapphireTest
     public function testValidate()
     {
         $field = new UserFormsCheckboxSetField('Field', 'My field', ['One' => 'One', 'Two' => 'Two']);
-        $validator = new RequiredFields();
+        $validator = new UserFormsRequiredFields();
 
         // String values
         $field->setValue('One');

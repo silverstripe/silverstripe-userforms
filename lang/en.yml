@@ -54,7 +54,6 @@ en:
     DEFAULT: 'Default value'
     DEFAULTTOTODAY: 'Default to Today?'
     DISPLAYIF: 'Toggle visibility when'
-    DISPLAY_RULES_DISABLED: 'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
     EXTRACLASS_MULTIPLE: 'Separate each CSS class with a single space'
     EXTRACLASS_SELECT: 'Select from the list of allowed styles'
     EXTRACLASS_TITLE: 'Extra Styling/Layout'
@@ -213,8 +212,6 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
-  SilverStripe\UserForms\Model\EditableFormField\Validator:
-    REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Custom Rules'
     EMAILCONTENTTAB: 'Email Content'
