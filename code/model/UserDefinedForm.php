@@ -133,7 +133,7 @@ class UserDefinedForm extends Page
             // text to show on complete
             $onCompleteFieldSet = new CompositeField(
                 $label = new LabelField('OnCompleteMessageLabel', _t('UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')),
-                $editor = new HtmlEditorField('OnCompleteMessage', '', _t('UserDefinedForm.ONCOMPLETEMESSAGE', $self->OnCompleteMessage))
+                $editor = new HtmlEditorField('OnCompleteMessage', '', $self->OnCompleteMessage)
             );
 
             $onCompleteFieldSet->addExtraClass('field');
