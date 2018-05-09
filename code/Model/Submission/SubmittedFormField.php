@@ -27,6 +27,10 @@ class SubmittedFormField extends DataObject
         'FormattedValue' => 'Value'
     ];
 
+    private static $casting = [
+        'FormattedValue' => 'HTMLFragment'
+    ];
+
     private static $table_name = 'SubmittedFormField';
 
     /**
