@@ -196,7 +196,7 @@ trait UserForm
                 $editor = HTMLEditorField::create(
                     'OnCompleteMessage',
                     '',
-                    _t(__CLASS__.'.ONCOMPLETEMESSAGE', $this->OnCompleteMessage)
+                    $this->OnCompleteMessage
                 )
             );
 
