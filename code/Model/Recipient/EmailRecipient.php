@@ -723,7 +723,7 @@ class EmailRecipient extends DataObject
             return $validEmailToFields;
         } else {
             // To address cannot be unbound, so restrict to pre-defined lists
-            return $this->getMultiOptionFields();
+            return $this->getValidEmailFromFields();
         }
     }
 
