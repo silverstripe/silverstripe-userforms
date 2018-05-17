@@ -30,9 +30,9 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~3.2",
-        "silverstripe/cms": "~3.2",
-        "symbiote/silverstripe-gridfieldextensions": "~2.0",
+        "silverstripe/framework": "^3.4.2",
+        "silverstripe/cms": "^3.4.2",
+        "symbiote/silverstripe-gridfieldextensions": "^2.0",
         "silverstripe/segment-field": "^1.0"
     },
     "suggest": {
