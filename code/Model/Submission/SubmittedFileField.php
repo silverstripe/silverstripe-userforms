@@ -26,7 +26,7 @@ class SubmittedFileField extends SubmittedFormField
      *
      * @return string
      */
-    public function getFormattedValue()
+    public function getCleanValue()
     {
         $name = $this->getFileName();
         $link = $this->getLink();

@@ -66,7 +66,7 @@ class SubmittedForm extends DataObject
         ))->first();
 
         if ($formField) {
-            return $formField->getFormattedValue();
+            return $formField->getCleanValue();
         }
     }
 

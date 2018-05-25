@@ -24,11 +24,11 @@ class SubmittedFormField extends DataObject
 
     private static $summary_fields = [
         'Title' => 'Title',
-        'FormattedValue' => 'Value'
+        'CleanValue' => 'Value'
     ];
 
     private static $casting = [
-        'FormattedValue' => 'HTMLFragment'
+        'CleanValue' => 'HTMLFragment'
     ];
 
     private static $table_name = 'SubmittedFormField';
@@ -74,11 +74,11 @@ class SubmittedFormField extends DataObject
     }
 
     /**
-     * Generate a formatted value for the reports and email notifications.
+     * Generate a clean value for the reports and email notifications.
      *
      * @return string
      */
-    public function getFormattedValue()
+    public function getCleanValue()
     {
         return $this->dbObject('Value')->RAW();
     }

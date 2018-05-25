@@ -67,7 +67,7 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
                 'Name' => $field->dbObject('Name'),
                 'Title' => $field->dbObject('Title'),
                 'Value' => DBField::create_field('Varchar', '$' . $field->Name),
-                'FormattedValue' => DBField::create_field('Varchar', '$' . $field->Name)
+                'CleanValue' => DBField::create_field('Varchar', '$' . $field->Name)
             ]));
         }
 
