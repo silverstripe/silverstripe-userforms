@@ -21,8 +21,6 @@ en:
   SilverStripe\CMS\Model\SiteTree:
     PLURALNAME: Pages
     SINGULARNAME: Page
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{field} is required'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Reset
