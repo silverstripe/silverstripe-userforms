@@ -3,8 +3,6 @@ en:
     SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is required.'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
