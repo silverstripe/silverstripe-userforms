@@ -25,6 +25,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
     protected static $use_draft_site = true;
 
+    protected static $disable_themes = true;
+
     protected function setUp()
     {
         parent::setUp();
