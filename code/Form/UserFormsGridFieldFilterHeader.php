@@ -12,6 +12,7 @@ use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\FieldType\DBDate;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\View\ArrayData;
 
@@ -91,22 +92,28 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         )));
 
         foreach (array($start, $end) as $date) {
-            $date->setDateFormat('y-mm-dd');
+            $date->setDateFormat(DBDate::ISO_DATE);
             $date->addExtraClass('no-change-track');
         }
 
-        $end->setValue($state->end);
-        $start->setValue($state->start);
+        if ($state->end) {
+            $end->setValue($state->end);
+        }
+        if ($state->start) {
+            $start->setValue($state->start);
+        }
 
 
         $fields->push($actions = FieldGroup::create(
             GridField_FormAction::create($gridField, 'filter', false, 'filter', null)
-                ->addExtraClass('ss-gridfield-button-filter')
-                ->setAttribute('title', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', "Filter"))
+                ->addExtraClass('ss-gridfield-button-filter btn btn-primary')
+                ->setTitle(_t(__CLASS__.'.FILTER', "Filter"))
+                ->setAttribute('title', _t(__CLASS__.'.FILTER', "Filter"))
                 ->setAttribute('id', 'action_filter_' . $gridField->getModelClass() . '_' . $columnField),
             GridField_FormAction::create($gridField, 'reset', false, 'reset', null)
-                ->addExtraClass('ss-gridfield-button-close')
-                ->setAttribute('title', _t('SilverStripe\\Forms\\GridField\\GridField.ResetFilter', "Reset"))
+                ->addExtraClass('ss-gridfield-button-close btn btn-primary')
+                ->setTitle(_t(__CLASS__.'.RESET', "Reset"))
+                ->setAttribute('title', _t(__CLASS__.'.RESET', "Reset"))
                 ->setAttribute('id', 'action_reset_' . $gridField->getModelClass() . '_' . $columnField)
         ));
 
