@@ -36,6 +36,8 @@ en:
     FROM: From
     TILL: Till
     WHEREVALUEIS: 'where value is..'
+    RESET: Reset
+    FILTER: Filter
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Editable Custom Rules'
     PLURALS:
