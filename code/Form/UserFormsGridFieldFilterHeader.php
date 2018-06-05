@@ -9,6 +9,7 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
@@ -111,7 +112,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
                 ->setAttribute('title', _t(__CLASS__.'.FILTER', "Filter"))
                 ->setAttribute('id', 'action_filter_' . $gridField->getModelClass() . '_' . $columnField),
             GridField_FormAction::create($gridField, 'reset', false, 'reset', null)
-                ->addExtraClass('ss-gridfield-button-close btn btn-primary')
+                ->addExtraClass('ss-gridfield-button-close btn ')
                 ->setTitle(_t(__CLASS__.'.RESET', "Reset"))
                 ->setAttribute('title', _t(__CLASS__.'.RESET', "Reset"))
                 ->setAttribute('id', 'action_reset_' . $gridField->getModelClass() . '_' . $columnField)
@@ -120,13 +121,17 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $actions->addExtraClass('filter-buttons');
         $actions->addExtraClass('no-change-track');
 
+        $colSpan = 2 + count($gridField->getConfig()->getComponentByType(GridFieldDataColumns::class)
+            ->getDisplayFields($gridField));
+
         $forTemplate = ArrayData::create(array(
-            'Fields' => $fields
+            'Fields'    => $fields,
+            'ColSpan'   => $colSpan
         ));
 
 
         return array(
-            'header' => $forTemplate->renderWith(GridFieldFilterHeader::class . '_Row')
+            'header' => $forTemplate->renderWith(UserFormsGridFieldFilterHeader::class . '_Row')
         );
     }
 
@@ -164,4 +169,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
         return $dataList;
     }
+
+
+
 }
