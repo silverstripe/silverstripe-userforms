@@ -169,7 +169,4 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 
         return $dataList;
     }
-
-
-
 }
