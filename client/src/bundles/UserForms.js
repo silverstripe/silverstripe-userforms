@@ -254,7 +254,8 @@ jQuery(document).ready(($) => {
     this.$buttons.each((i, stepButton) => {
       $(stepButton).on('click', (e) => {
         e.preventDefault();
-        self.$el.trigger('userform.progress.changestep', [parseInt($(this).data('step'), 10)]);
+        const stepNumber = parseInt($(e.target).data('step'), 10);
+        self.$el.trigger('userform.progress.changestep', stepNumber);
       });
     });
 
@@ -300,8 +301,6 @@ jQuery(document).ready(($) => {
         $button.css({ marginLeft: 0 });
       }
     });
-
-    this.update(0);
 
     return this;
   }
@@ -395,8 +394,6 @@ jQuery(document).ready(($) => {
     userform.$el.on('userform.form.changestep userform.form.conditionalstep', () => {
       self.update();
     });
-
-    this.update();
 
     return this;
   }
@@ -712,7 +709,10 @@ jQuery(document).ready(($) => {
 
     // Initialise actions and progressbar
     const progressBar = new ProgressBar($('#userform-progress'));
+    progressBar.update(0);
+
     const formActions = new FormActions($('#step-navigation'));
+    formActions.update();
 
     // Enable jQuery UI datepickers
     $(document).on('click', 'input.text[data-showcalendar]', () => {
