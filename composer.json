@@ -50,9 +50,6 @@
         "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "5.2.x-dev"
-        },
         "expose": [
             "client/dist",
             "client/lang",
