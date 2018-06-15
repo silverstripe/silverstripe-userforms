@@ -6,6 +6,7 @@ and without getting involved in any PHP code.
 [![Build Status](https://travis-ci.org/silverstripe/silverstripe-userforms.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-userforms)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/?branch=master)
 [![codecov](https://codecov.io/gh/silverstripe/silverstripe-userforms/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-userforms)
+[![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 [![Version](http://img.shields.io/packagist/v/silverstripe/userforms.svg?style=flat)](https://packagist.org/packages/silverstripe/silverstripe-userforms)
 [![License](http://img.shields.io/packagist/l/silverstripe/userforms.svg?style=flat)](LICENSE.md)
 
