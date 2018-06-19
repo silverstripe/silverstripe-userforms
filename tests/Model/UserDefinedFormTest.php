@@ -297,7 +297,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form->publishRecursive();
 
         // assert that it exists and has a field
-        $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
+        $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID", false);
 
         $this->assertTrue(isset($live));
         $this->assertEquals(2, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
@@ -305,7 +305,7 @@ class UserDefinedFormTest extends FunctionalTest
         // unpublish
         $form->doUnpublish();
 
-        $this->assertNull(Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID"));
+        $this->assertNull(Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID", false));
         $this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
     }
 
