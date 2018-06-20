@@ -140,3 +140,25 @@
     }
   }
 }
+
+
+
+.cms .grid-field__table .grid-field__uf-filter-header {
+  padding: 0;
+
+  .form__fieldgroup-label {
+    color: $white;
+  }
+
+  .ss-gridfield-button-filter:not(.trigger) {
+    background-color: $brand-success;
+  }
+
+  .ss-gridfield-button-filter:not(.trigger):hover {
+    background-color: $brand-success;
+  }
+
+  table {
+    width: 100%;
+  }
+}
