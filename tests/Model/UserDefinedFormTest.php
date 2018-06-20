@@ -29,6 +29,8 @@ use SilverStripe\Versioned\Versioned;
  */
 class UserDefinedFormTest extends FunctionalTest
 {
+    protected $usesTransactions = false;
+
     protected static $fixture_file = '../UserFormsTest.yml';
 
     protected static $required_extensions = [
