@@ -1,5 +1,5 @@
 <% if $Actions %>
-<nav class="Actions">
+<nav class="btn-toolbar">
 	<% loop $Actions %>
 		$Field
 	<% end_loop %>
