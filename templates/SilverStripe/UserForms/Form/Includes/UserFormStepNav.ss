@@ -16,7 +16,7 @@
 		</li>
 
 		<% if $Actions %>
-		<li class="step-button-wrapper Actions">
+		<li class="step-button-wrapper btn-toolbar">
 		<% loop $Actions %>
 			$Field
 		<% end_loop %>
