@@ -257,7 +257,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $controller = new UserDefinedFormController($form);
 
-        // check to see if $Form is replaced to inside the content
+        // check to see if $Form is placed in the template
         $index = new ArrayData($controller->index());
         $parser = new CSSContentParser($index->renderWith(__CLASS__));
 
@@ -273,6 +273,22 @@ class UserDefinedFormControllerTest extends FunctionalTest
         // check to see if $Form is replaced to inside the content
         $index = new ArrayData($controller->index());
         $parser = new CSSContentParser($index->renderWith(__CLASS__));
+
+        $this->checkTemplateIsCorrect($parser, $form);
+    }
+
+    public function testRenderingIntoTemplateWithDisabledInterpolation()
+    {
+        $form = $this->setupFormFrontend();
+
+        $controller = new UserDefinedFormController($form);
+        $controller->config()->set('disable_form_content_interpolation', true);
+        // check to see if $Form is replaced to inside the content
+        $index = new ArrayData($controller->index());
+        $html = $index->renderWith(__CLASS__);
+        $parser = new CSSContentParser($html);
+
+        $this->assertContains('$UserDefinedForm', $html);
 
         $this->checkTemplateIsCorrect($parser, $form);
     }

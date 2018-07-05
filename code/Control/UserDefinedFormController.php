@@ -108,6 +108,9 @@ class UserDefinedFormController extends PageController
      */
     public function index(HTTPRequest $request = null)
     {
+        if ($this->config()->disable_form_content_interpolation) {
+            return [];
+        }
         if ($this->Content && $form = $this->Form()) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
