@@ -288,9 +288,13 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $html = $index->renderWith(__CLASS__);
         $parser = new CSSContentParser($html);
 
-        $this->assertContains('$UserDefinedForm', $html);
+        // Assert no Content has been rendered
+        $this->assertNotContains('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
+        // And no form
+        $this->assertArrayNotHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
+        // check for the input
+        $this->assertArrayNotHasKey(0, $parser->getBySelector('input.text'));
 
-        $this->checkTemplateIsCorrect($parser, $form);
     }
     /**
      * Publish a form for use on the frontend
