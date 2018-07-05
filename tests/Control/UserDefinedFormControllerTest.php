@@ -292,8 +292,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertArrayNotHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
         // check for the input
         $this->assertArrayNotHasKey(0, $parser->getBySelector('input.text'));
-
     }
+
     /**
      * Publish a form for use on the frontend
      *
