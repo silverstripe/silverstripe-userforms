@@ -282,18 +282,18 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $form = $this->setupFormFrontend();
 
         $controller = new UserDefinedFormController($form);
-        $controller->config()->set('disable_form_content_interpolation', true);
+        $controller->config()->set('disable_form_content_shortcode', true);
         // check to see if $Form is replaced to inside the content
         $index = new ArrayData($controller->index());
         $html = $index->renderWith(__CLASS__);
         $parser = new CSSContentParser($html);
 
-        // Assert no Content has been rendered
-        $this->assertNotContains('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
-        // And no form
-        $this->assertArrayNotHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
+        // Assert Content has been rendered with the shortcode in place
+        $this->assertContains('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
+        // And the form in the $From area
+        $this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
         // check for the input
-        $this->assertArrayNotHasKey(0, $parser->getBySelector('input.text'));
+        $this->assertArrayHasKey(0, $parser->getBySelector('input.text'));
     }
 
     /**
