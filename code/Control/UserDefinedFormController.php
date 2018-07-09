@@ -104,14 +104,12 @@ class UserDefinedFormController extends PageController
      * where the form should be rendered into. If it does not exist
      * then default back to $Form.
      *
-     * @return array|Object
+     * @return array
      */
     public function index(HTTPRequest $request = null)
     {
-        if ($this->config()->disable_form_content_interpolation) {
-            return $this;
-        }
-        if ($this->Content && $form = $this->Form()) {
+        $form = $this->Form();
+        if ($this->Content && $form && !$this->config()->disable_form_content_shortcode) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
                 /** @see Requirements_Backend::escapeReplacement */
