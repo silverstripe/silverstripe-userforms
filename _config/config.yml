@@ -1,0 +1,5 @@
+---
+Name: userformsconfig
+---
+SilverStripe\UserForms\Control\UserDefinedFormController:
+  disable_form_content_shortcode: false

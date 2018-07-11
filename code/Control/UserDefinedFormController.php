@@ -108,7 +108,8 @@ class UserDefinedFormController extends PageController
      */
     public function index(HTTPRequest $request = null)
     {
-        if ($this->Content && $form = $this->Form()) {
+        $form = $this->Form();
+        if ($this->Content && $form && !$this->config()->disable_form_content_shortcode) {
             $hasLocation = stristr($this->Content, '$UserDefinedForm');
             if ($hasLocation) {
                 /** @see Requirements_Backend::escapeReplacement */
