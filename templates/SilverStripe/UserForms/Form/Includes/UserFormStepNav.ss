@@ -1,5 +1,5 @@
 <nav id="step-navigation" class="step-navigation">
-	<ul class="step-buttons Actions">
+	<ul class="step-buttons">
 		<%--
 			If JavaScript is disabled multi-step forms are displayed as a single page
 			so the 'prev' and 'next' button are not used. These buttons are made visible via JavaScript.
@@ -12,7 +12,7 @@
 		</li>
 
 		<% if $Actions %>
-		<li class="step-button-wrapper btn-toolbar">
+		<li class="step-button-wrapper btn-toolbar Actions">
 		<% loop $Actions %>
 			$Field
 		<% end_loop %>
