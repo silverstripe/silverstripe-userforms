@@ -75,14 +75,12 @@ class SubmittedFormField extends DataObject
 
     /**
      * Generate a formatted value for the reports and email notifications.
-     * Converts new lines (which are stored in the database text field) as
-     * <brs> so they will output as newlines in the reports
      *
      * @return string
      */
     public function getFormattedValue()
     {
-        return nl2br($this->dbObject('Value')->ATT());
+        return $this->dbObject('Value')->RAW();
     }
 
     /**
