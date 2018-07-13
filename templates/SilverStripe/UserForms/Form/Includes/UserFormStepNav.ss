@@ -1,5 +1,5 @@
 <nav id="step-navigation" class="step-navigation">
-	<ul class="step-buttons">
+	<ul class="step-buttons Actions">
 		<%--
 			If JavaScript is disabled multi-step forms are displayed as a single page
 			so the 'prev' and 'next' button are not used. These buttons are made visible via JavaScript.
