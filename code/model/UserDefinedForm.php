@@ -499,7 +499,7 @@ JS
      */
     public function process($data, $form)
     {
-        $submittedForm = Object::create('SubmittedForm');
+        $submittedForm = SubmittedForm::create();
         $submittedForm->SubmittedByID = ($id = Member::currentUserID()) ? $id : 0;
         $submittedForm->ParentID = $this->ID;
 
