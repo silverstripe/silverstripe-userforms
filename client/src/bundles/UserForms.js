@@ -425,7 +425,7 @@ jQuery(document).ready(($) => {
       this.$el.find('.step-button-next')[stepID >= i ? 'hide' : 'show']();
 
       // Update the "Actions".
-      this.$el.find('.Actions')[stepID >= i ? 'show' : 'hide']();
+      this.$el.find('.btn-toolbar')[stepID >= i ? 'show' : 'hide']();
 
       // Stop processing last step
       break;
