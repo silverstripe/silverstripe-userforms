@@ -4,12 +4,8 @@ sudo: false
 
 language: php
 
-dist: precise
-
 matrix:
   include:
-    - php: 5.3
-      env: DB=MYSQL CORE_RELEASE=3.4
     - php: 5.4
       env: DB=MYSQL CORE_RELEASE=3.5
     - php: 5.6
@@ -18,6 +14,8 @@ matrix:
       env: DB=MYSQL CORE_RELEASE=3.5 SECUREASSETS=1
     - php: 7.1
       env: DB=MYSQL CORE_RELEASE=3.6
+    - php: 7.2
+      env: DB=MYSQL CORE_RELEASE=3.7
 
 before_script:
   - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
