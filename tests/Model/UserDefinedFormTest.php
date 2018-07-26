@@ -29,6 +29,8 @@ use SilverStripe\Versioned\Versioned;
  */
 class UserDefinedFormTest extends FunctionalTest
 {
+    protected $usesTransactions = false;
+
     protected static $fixture_file = '../UserFormsTest.yml';
 
     protected static $required_extensions = [
@@ -283,12 +285,9 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotEmpty($liveRule);
 
         // Publish form, it should remove this rule
-        /**
-         * @todo Currently failing, revisit once https://github.com/silverstripe/silverstripe-versioned/issues/34 is resolved
-         */
-        // $form->publishRecursive();
-        // $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, 'Live', "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
-        // $this->assertEmpty($liveRule);
+         $form->publishRecursive();
+         $liveRule = Versioned::get_one_by_stage(EditableCustomRule::class, 'Live', "\"EditableCustomRule_Live\".\"ID\" = $ruleID");
+         $this->assertEmpty($liveRule);
     }
 
     public function testUnpublishing()
@@ -300,7 +299,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form->publishRecursive();
 
         // assert that it exists and has a field
-        $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID");
+        $live = Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID", false);
 
         $this->assertTrue(isset($live));
         $this->assertEquals(2, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
@@ -308,7 +307,7 @@ class UserDefinedFormTest extends FunctionalTest
         // unpublish
         $form->doUnpublish();
 
-        $this->assertNull(Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID"));
+        $this->assertNull(Versioned::get_one_by_stage(UserDefinedForm::class, 'Live', "\"UserDefinedForm_Live\".\"ID\" = $form->ID", false));
         $this->assertEquals(0, DB::query("SELECT COUNT(*) FROM \"EditableFormField_Live\"")->value());
     }
 

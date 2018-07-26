@@ -125,7 +125,7 @@
   .sticky-buttons {
     position: fixed;
     top: 73px;
-    z-index: 2;
+    z-index: 1;
     background: $body-bg;
     border-bottom: 1px solid $border-color-light;
     padding: 12px;
@@ -140,8 +140,6 @@
     }
   }
 }
-
-
 
 .cms .grid-field__table .grid-field__uf-filter-header {
   padding: 0;
@@ -161,4 +159,10 @@
   table {
     width: 100%;
   }
+}
+
+// The preview's Z-index needs to be higher than the .sticky-buttons one, so the form's toolbar won't extend into the
+// preview area
+.cms-preview {
+  z-index: 2;
 }
