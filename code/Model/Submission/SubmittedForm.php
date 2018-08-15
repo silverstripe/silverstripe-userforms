@@ -89,7 +89,7 @@ class SubmittedForm extends DataObject
             //replace scaffolded field with readonly submitter
             $fields->replaceField(
                 'SubmittedByID',
-                ReadonlyField::create('Submitter', 'Submitter', $submitter)
+                ReadonlyField::create('Submitter', _t(__CLASS__ . '.SUBMITTER', 'Submitter'), $submitter)
                     ->addExtraClass('form-field--no-divider')
             );
 
