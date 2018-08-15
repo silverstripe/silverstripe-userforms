@@ -3,7 +3,9 @@
 namespace SilverStripe\UserForms\Model\Submission;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Security\Member;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Data received from a UserDefinedForm submission
@@ -25,10 +27,6 @@ class SubmittedFormField extends DataObject
     private static $summary_fields = [
         'Title' => 'Title',
         'FormattedValue' => 'Value'
-    ];
-
-    private static $casting = [
-        'FormattedValue' => 'HTMLFragment'
     ];
 
     private static $table_name = 'SubmittedFormField';
@@ -76,20 +74,20 @@ class SubmittedFormField extends DataObject
     /**
      * Generate a formatted value for the reports and email notifications.
      * Converts new lines (which are stored in the database text field) as
-     * <brs> so they will output as newlines in the reports
+     * <brs> so they will output as newlines in the reports.
      *
-     * @return string
+     * @return DBField
      */
     public function getFormattedValue()
     {
-        return nl2br($this->dbObject('Value')->ATT());
+        return $this->dbObject('Value');
     }
 
     /**
      * Return the value of this submitted form field suitable for inclusion
      * into the CSV
      *
-     * @return Text
+     * @return DBField
      */
     public function getExportValue()
     {
