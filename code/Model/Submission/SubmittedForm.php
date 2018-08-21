@@ -42,7 +42,7 @@ class SubmittedForm extends DataObject
         parent::requireDefaultRecords();
 
         // make sure to migrate the class across (prior to v5.x)
-        DB::query("UPDATE SubmittedForm SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+        DB::query("UPDATE \"SubmittedForm\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
     }
 
     /**
