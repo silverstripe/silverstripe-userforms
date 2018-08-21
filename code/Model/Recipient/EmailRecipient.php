@@ -113,7 +113,7 @@ class EmailRecipient extends DataObject
         parent::requireDefaultRecords();
 
         // make sure to migrate the class across (prior to v5.x)
-        DB::query("UPDATE UserDefinedForm_EmailRecipient SET FormClass = 'Page' WHERE FormClass IS NULL");
+        DB::query("UPDATE \"UserDefinedForm_EmailRecipient\" SET \"FormClass\" = 'Page' WHERE \"FormClass\" IS NULL");
     }
 
     public function summaryFields()
