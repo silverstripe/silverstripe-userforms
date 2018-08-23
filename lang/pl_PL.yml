@@ -22,7 +22,7 @@ pl_PL:
     PLURALNAME: Strony
     SINGULARNAME: Strona
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s is required'
+    FIELDISREQUIRED: '{name} is required'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Resetuj

@@ -22,7 +22,7 @@ sk:
     PLURALNAME: Stránky
     SINGULARNAME: Stránka
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s je vyžadované'
+    FIELDISREQUIRED: '{name} je vyžadované'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Reset
