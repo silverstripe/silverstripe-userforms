@@ -20,7 +20,7 @@ zh:
     PLURALNAME: 页面
     SINGULARNAME: 页面
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s 是必须的'
+    FIELDISREQUIRED: '{name} 是必须的'
   SilverStripe\Forms\GridField\GridField:
     Filter: 筛选器
     ResetFilter: 重设

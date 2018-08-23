@@ -22,7 +22,7 @@ eo:
     PLURALNAME: Paĝoj
     SINGULARNAME: Paĝo
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s estas nepra'
+    FIELDISREQUIRED: '{name} estas nepra'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filtrilo
     ResetFilter: Restartigi
