@@ -3,6 +3,8 @@ en:
     SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '{name} is required.'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
@@ -236,6 +238,7 @@ en:
       one: 'A Submitted Form'
       other: '{count} Submitted Forms'
     SINGULARNAME: 'Submitted Form'
+    SUBMITTER: Submitter
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     PLURALS:

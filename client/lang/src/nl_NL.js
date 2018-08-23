@@ -6,6 +6,7 @@
     "UserForms.ADDING_OPTION": "Nieuwe optie toevoegen",
     "UserForms.ADDING_RULE": "Regel toevoegen",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Alle inzendingen zullen permanent worden verwijderd. Doorgaan?",
+    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Fout bij het maken optie",
     "UserForms.ERROR_CREATING_OPTION": "Fout bij het maken optie",
     "UserForms.HIDE_OPTIONS": "Verberg opties",
