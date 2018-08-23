@@ -327,9 +327,9 @@ class EditableFormField extends DataObject
         parent::requireDefaultRecords();
 
         // make sure to migrate the class across (prior to v5.x)
-        DB::query("UPDATE EditableFormField SET ParentClass = 'Page' WHERE ParentClass IS NULL");
-        DB::query("UPDATE EditableFormField_Live SET ParentClass = 'Page' WHERE ParentClass IS NULL");
-        DB::query("UPDATE EditableFormField_Versions SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+        DB::query("UPDATE \"EditableFormField\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
+        DB::query("UPDATE \"EditableFormField_Live\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
+        DB::query("UPDATE \"EditableFormField_Versions\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
     }
 
     /**

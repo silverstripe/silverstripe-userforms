@@ -2,17 +2,18 @@
 
 namespace SilverStripe\UserForms\Model\Submission;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\Security\Member;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 
 class SubmittedForm extends DataObject
 {
@@ -41,7 +42,7 @@ class SubmittedForm extends DataObject
         parent::requireDefaultRecords();
 
         // make sure to migrate the class across (prior to v5.x)
-        DB::query("UPDATE SubmittedForm SET ParentClass = 'Page' WHERE ParentClass IS NULL");
+        DB::query("UPDATE \"SubmittedForm\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
     }
 
     /**
@@ -75,7 +76,7 @@ class SubmittedForm extends DataObject
      */
     public function getCMSFields()
     {
-        $this->beforeUpdateCMSFields(function ($fields) {
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
             $fields->removeByName('Values');
 
             //check to ensure there is a Member to extract an Email from else null value
@@ -88,11 +89,8 @@ class SubmittedForm extends DataObject
             //replace scaffolded field with readonly submitter
             $fields->replaceField(
                 'SubmittedByID',
-                ReadonlyField::create(
-                    'Submitter',
-                    'Submitter',
-                    $submitter
-                )
+                ReadonlyField::create('Submitter', _t(__CLASS__ . '.SUBMITTER', 'Submitter'), $submitter)
+                    ->addExtraClass('form-field--no-divider')
             );
 
             $values = GridField::create(
@@ -106,10 +104,11 @@ class SubmittedForm extends DataObject
                 'ExportValue' => 'Value'
             );
 
-            $config = new GridFieldConfig();
+            $config = GridFieldConfig::create();
             $config->addComponent(new GridFieldDataColumns());
-            $config->addComponent(new GridFieldExportButton('after', $exportColumns));
-            $config->addComponent(new GridFieldPrintButton());
+            $config->addComponent(new GridFieldButtonRow('after'));
+            $config->addComponent(new GridFieldExportButton('buttons-after-left', $exportColumns));
+            $config->addComponent(new GridFieldPrintButton('buttons-after-left'));
             $values->setConfig($config);
 
             $fields->addFieldToTab('Root.Main', $values);

@@ -6,6 +6,7 @@
     "UserForms.ADDING_OPTION": "Legger til alternativ",
     "UserForms.ADDING_RULE": "Legger til regel",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Alle innsendinger vil bli permanent fjernet. Vil du forsette?",
+    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "En feil skjedde ved opprettelse felt",
     "UserForms.ERROR_CREATING_OPTION": "En feil skjedde ved opprettelse av alternativ",
     "UserForms.HIDE_OPTIONS": "Skjul alternativer",

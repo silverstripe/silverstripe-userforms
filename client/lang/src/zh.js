@@ -6,6 +6,7 @@
     "UserForms.ADDING_OPTION": "正在添加选项",
     "UserForms.ADDING_RULE": "正在添加规则",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "所有提交将被永久删除。要继续吗？",
+    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "创建字段时发生错误",
     "UserForms.ERROR_CREATING_OPTION": "创建选项时发生错误",
     "UserForms.HIDE_OPTIONS": "隐藏选项",
