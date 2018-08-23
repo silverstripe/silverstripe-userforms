@@ -20,7 +20,7 @@ mi:
     PLURALNAME: 'Ngā Whārangi'
     SINGULARNAME: Whārangi
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: 'Kei te hiahiatia te %s'
+    FIELDISREQUIRED: 'Kei te hiahiatia te {name}'
   SilverStripe\Forms\GridField\GridField:
     Filter: Tātari
     ResetFilter: 'Tautuhi Anō'

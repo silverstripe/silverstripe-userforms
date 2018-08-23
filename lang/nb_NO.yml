@@ -20,7 +20,7 @@ nb_NO:
     PLURALNAME: Sider
     SINGULARNAME: Side
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%er er påkrevd'
+    FIELDISREQUIRED: '{name} er påkrevd'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Reset
