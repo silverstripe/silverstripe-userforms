@@ -27,6 +27,7 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
@@ -801,12 +802,12 @@ class EditableFormField extends DataObject
      * Return the error message for this field. Either uses the custom
      * one (if provided) or the default SilverStripe message
      *
-     * @return Varchar
+     * @return DBVarchar
      */
     public function getErrorMessage()
     {
         $title = strip_tags("'". ($this->Title ? $this->Title : $this->Name) . "'");
-        $standard = _t('SilverStripe\\Forms\\Form.FIELDISREQUIRED', '{name} is required.', ['name' => $title]);
+        $standard = _t(__CLASS__ . '.FIELDISREQUIRED', '{name} is required', ['name' => $title]);
 
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
