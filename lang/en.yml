@@ -148,6 +148,8 @@ en:
       one: 'A Page Break'
       other: '{count} Page Breaks'
     SINGULARNAME: 'Page Break'
+    STEP_NEXT: Next
+    STEP_PREV: Prev
     STEP_TITLE: 'Page {page}'
     TITLE_FIRST: 'First Page'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
