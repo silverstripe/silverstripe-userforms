@@ -55,7 +55,7 @@ class EditableDateField extends EditableFormField
     public function getFormField()
     {
         $defaultValue = $this->DefaultToToday
-            ? DBDatetime::now()->Format('Y-m-d')
+            ? DBDatetime::now()->Format('yyyy-MM-dd')
             : $this->Default;
 
         $field = FormField::create($this->Name, $this->Title ?: false, $defaultValue)
