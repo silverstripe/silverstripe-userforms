@@ -234,12 +234,17 @@ class EmailRecipient extends DataObject
                 ->getRequest()
                 ->setSession(Controller::curr()->getRequest()->getSession());
 
+            // If used in a regular page context, will have "/edit" on the end, if used in a trait context
+            // it won't. Strip that off in case.
+            $currentUrl = Controller::curr()->getRequest()->getURL();
+            if (substr($currentUrl, -5) === '/edit') {
+                $currentUrl = substr($currentUrl, 0, strlen($currentUrl) - 5);
+            }
+            $previewUrl = Controller::join_links($currentUrl, 'preview');
+
             $preview = sprintf(
                 '<p><a href="%s" target="_blank" class="btn btn-outline-secondary">%s</a></p><em>%s</em>',
-                Controller::join_links(
-                    $pageEditController->getEditForm()->FormAction(),
-                    "field/EmailRecipients/item/{$this->ID}/preview"
-                ),
+                $previewUrl,
                 _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL', 'Preview email'),
                 _t(
                     'SilverStripe\\UserForms\\Model\\UserDefinedForm.PREVIEW_EMAIL_DESCRIPTION',

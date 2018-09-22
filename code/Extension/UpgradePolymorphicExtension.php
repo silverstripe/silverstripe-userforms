@@ -71,6 +71,11 @@ class UpgradePolymorphicExtension extends DataExtension
                         continue;
                     }
 
+                    // Don't rewrite class values when an existing value is set and is an instance of UserDefinedForm
+                    if ($relationshipObject instanceof UserDefinedForm) {
+                        continue;
+                    }
+
                     $entry->$fieldName = $this->defaultReplacement;
                     try {
                         $entry->write();

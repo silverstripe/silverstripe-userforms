@@ -3,8 +3,6 @@ en:
     SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is required.'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
@@ -57,6 +55,7 @@ en:
     EXTRACLASS_SELECT: 'Select from the list of allowed styles'
     EXTRACLASS_TITLE: 'Extra Styling/Layout'
     EXTRACLASS_Title: 'Extra CSS classes'
+    FIELDISREQUIRED: '{name} is required'
     GROUP: Group
     INITIALVISIBILITY: 'Initial visibility'
     MERGEFIELDNAME: 'Merge field'
@@ -148,6 +147,8 @@ en:
       one: 'A Page Break'
       other: '{count} Page Breaks'
     SINGULARNAME: 'Page Break'
+    STEP_NEXT: Next
+    STEP_PREV: Prev
     STEP_TITLE: 'Page {page}'
     TITLE_FIRST: 'First Page'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:

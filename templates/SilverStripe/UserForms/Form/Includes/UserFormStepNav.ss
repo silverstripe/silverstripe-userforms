@@ -5,10 +5,14 @@
 			so the 'prev' and 'next' button are not used. These buttons are made visible via JavaScript.
 		--%>
 		<li class="step-button-wrapper" aria-hidden="true" style="display:none;">
-			<button class="step-button-prev">Prev</button>
+			<button class="step-button-prev">
+                <%t SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep.STEP_PREV "Prev" %>
+            </button>
 		</li>
 		<li class="step-button-wrapper" aria-hidden="true" style="display:none;">
-			<button class="step-button-next">Next</button>
+			<button class="step-button-next">
+                <%t SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFormStep.STEP_NEXT "Next" %>
+            </button>
 		</li>
 
 		<% if $Actions %>
