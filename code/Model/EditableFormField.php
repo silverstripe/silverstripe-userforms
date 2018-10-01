@@ -772,7 +772,7 @@ class EditableFormField extends DataObject
         }
 
         // if this field has a placeholder
-        if (strlen($this->Placeholder >= 0)) {
+        if (strlen($this->Placeholder) >= 0) {
             $field->setAttribute('placeholder', $this->Placeholder);
         }
     }
