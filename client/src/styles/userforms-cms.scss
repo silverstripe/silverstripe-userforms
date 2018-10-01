@@ -125,7 +125,7 @@
   .sticky-buttons {
     position: fixed;
     top: 73px;
-    z-index: 1;
+    z-index: 2;
     background: $body-bg;
     border-bottom: 1px solid $border-color-light;
     padding: 12px;
@@ -141,8 +141,24 @@
   }
 }
 
-// The preview's Z-index needs to be higher than the .sticky-buttons one, so the form's toolbar won't extend into the
-// preview area
-.cms-preview {
-  z-index: 2;
+
+
+.cms .grid-field__table .grid-field__uf-filter-header {
+  padding: 0;
+
+  .form__fieldgroup-label {
+    color: $white;
+  }
+
+  .ss-gridfield-button-filter:not(.trigger) {
+    background-color: $brand-success;
+  }
+
+  .ss-gridfield-button-filter:not(.trigger):hover {
+    background-color: $brand-success;
+  }
+
+  table {
+    width: 100%;
+  }
 }

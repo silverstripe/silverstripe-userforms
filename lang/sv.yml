@@ -22,7 +22,7 @@ sv:
     PLURALNAME: Sidor
     SINGULARNAME: Sida
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s är obligatoriskt'
+    FIELDISREQUIRED: '{name} är obligatoriskt'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Rensa

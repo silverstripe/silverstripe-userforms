@@ -257,7 +257,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $controller = new UserDefinedFormController($form);
 
-        // check to see if $Form is replaced to inside the content
+        // check to see if $Form is placed in the template
         $index = new ArrayData($controller->index());
         $parser = new CSSContentParser($index->renderWith(__CLASS__));
 
@@ -276,6 +276,26 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $this->checkTemplateIsCorrect($parser, $form);
     }
+
+    public function testRenderingIntoTemplateWithDisabledInterpolation()
+    {
+        $form = $this->setupFormFrontend();
+
+        $controller = new UserDefinedFormController($form);
+        $controller->config()->set('disable_form_content_shortcode', true);
+        // check to see if $Form is replaced to inside the content
+        $index = new ArrayData($controller->index());
+        $html = $index->renderWith(__CLASS__);
+        $parser = new CSSContentParser($html);
+
+        // Assert Content has been rendered with the shortcode in place
+        $this->assertContains('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
+        // And the form in the $From area
+        $this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
+        // check for the input
+        $this->assertArrayHasKey(0, $parser->getBySelector('input.text'));
+    }
+
     /**
      * Publish a form for use on the frontend
      *

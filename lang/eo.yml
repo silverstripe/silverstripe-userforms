@@ -1,6 +1,17 @@
 eo:
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
+  FieldEditor:
+    ADD: Aldoni
+    SELECTAFIELD: 'Elekti kampon'
+  SilverStripe\CMS\Model\SiteTree:
+    PLURALNAME: Paĝoj
+    SINGULARNAME: Paĝo
+  SilverStripe\Forms\Form:
+    FIELDISREQUIRED: '{name} estas nepra'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filtrilo
+    ResetFilter: Restartigi
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aldoni kampon'
     ADD_FIELD_GROUP: 'Aldoni kampogrupon'

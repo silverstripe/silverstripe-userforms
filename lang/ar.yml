@@ -20,7 +20,7 @@ ar:
     PLURALNAME: صفحات
     SINGULARNAME: صفحة
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s ضروري'
+    FIELDISREQUIRED: '{name} ضروري'
   SilverStripe\Forms\GridField\GridField:
     Filter: تصفية
     ResetFilter: 'إعادة تعيين'

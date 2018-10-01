@@ -22,7 +22,7 @@ de_DE:
     PLURALNAME: Seiten
     SINGULARNAME: Seite
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s ist ein Pflichtfeld'
+    FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Zurücksetzen

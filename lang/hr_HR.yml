@@ -17,7 +17,7 @@ hr_HR:
     ADD: Dodaj
     SELECTAFIELD: 'Select a Field'
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s is required'
+    FIELDISREQUIRED: '{name} is required'
   SilverStripe\UserForms\Model\EditableFormField:
     ADD: Add
     ADDRULE: 'Add Rule'

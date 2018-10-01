@@ -22,7 +22,7 @@ nl_NL:
     PLURALNAME: Paginas
     SINGULARNAME: Pagina
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s is verplicht'
+    FIELDISREQUIRED: '{name} is verplicht'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filter
     ResetFilter: Herstel

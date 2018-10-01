@@ -22,7 +22,7 @@ es_ES:
     PLURALNAME: Páginas
     SINGULARNAME: Página
   SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '%s es requerido'
+    FIELDISREQUIRED: '{name} es requerido'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filtro
     ResetFilter: Restablecer
