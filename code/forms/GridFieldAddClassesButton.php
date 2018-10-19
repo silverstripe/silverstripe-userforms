@@ -3,7 +3,7 @@
 /**
  * A button which allows objects to be created with a specified classname(s)
  */
-class GridFieldAddClassesButton extends Object implements GridField_HTMLProvider, GridField_ActionProvider {
+class GridFieldAddClassesButton extends SS_Object implements GridField_HTMLProvider, GridField_ActionProvider {
 
 	/**
 	 * Name of fragment to insert into
