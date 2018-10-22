@@ -25,7 +25,7 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
 ## Documentation
 
  * [Installation instructions](installation.md)
- * [Troubleshooting](troubleshooting)
+ * [Troubleshooting](troubleshooting.md)
  * [User Documentation](userguide/index.md)
  * [Compiling Front-End Files](compiling-front-end-files.md)
  * [Upgrading to SilverStripe 4](upgrading.md)
