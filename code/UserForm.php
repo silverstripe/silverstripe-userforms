@@ -97,6 +97,7 @@ trait UserForm
         'OnCompleteMessage' => 'HTMLText',
         'ShowClearButton' => 'Boolean',
         'DisableSaveSubmissions' => 'Boolean',
+        'DisableSaveSubmissionSession' => 'Boolean',
         'EnableLiveValidation' => 'Boolean',
         'DisplayErrorMessagesAtTop' => 'Boolean',
         'DisableAuthenicatedFinishAction' => 'Boolean',
@@ -109,6 +110,7 @@ trait UserForm
     private static $defaults = [
         'Content' => '$UserDefinedForm',
         'DisableSaveSubmissions' => 0,
+        'DisableSaveSubmissionSession' => 0,
         'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
     ];
 
@@ -315,6 +317,14 @@ SQL;
                 CheckboxField::create(
                     'DisableSaveSubmissions',
                     _t(__CLASS__.'.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
+                )
+            );
+
+            $fields->addFieldToTab(
+                'Root.FormOptions',
+                CheckboxField::create(
+                    'DisableSaveSubmissionSession',
+                    _t(__CLASS__.'.SAVESUBMISSIONSESSION', 'Disable Saving Submission references in a Session')
                 )
             );
         });

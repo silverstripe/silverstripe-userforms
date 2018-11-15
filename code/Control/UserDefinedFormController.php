@@ -410,7 +410,7 @@ JS
             }
         }
 
-        if (!$this->DisableSaveSubmissions) {
+        if (!$this->DisableSaveSubmissions && !$this->DisableSaveSubmissionSession) {
             $session->set('userformssubmission'. $this->ID, $submittedForm->ID);
         }
 

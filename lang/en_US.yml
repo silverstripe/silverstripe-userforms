@@ -27,6 +27,7 @@ en_US:
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     REPLYADDRESS: 'Email for reply to'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SAVESUBMISSIONSESSION: 'Disable Saving Submission references in a Session'
     SENDEMAILTO: 'Send email to'
     SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
