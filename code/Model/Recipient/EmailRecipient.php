@@ -506,8 +506,8 @@ class EmailRecipient extends DataObject
             $templatePath = substr($absoluteFilename, strlen($prefixToStrip) + 1);
 
             // Optionally remove "templates/" prefixes
-            if (substr($templatePath, 0, 10)) {
-                $templatePath = substr($templatePath, 10);
+            if (preg_match('/(?<=templates\/).*$/', $templatePath, $matches)) {
+                $templatePath = $matches[0];
             }
 
             $templates[$templatePath] = $template['filename'];
