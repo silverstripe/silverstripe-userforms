@@ -12,7 +12,7 @@
  */
 $.extend($.validator.methods, {
 	date: function(value, element) {
-		return this.optional(element) || /^\d\d?[\.\/\-]\d\d?[\.\/\-]\d\d\d?\d?$/.test(value);
+		return this.optional(element) || /^[\d]{1,4}\-[0-1][0-9]\-[0-3][0-9]?$/.test(value);
 	}
 });
 
