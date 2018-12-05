@@ -537,6 +537,7 @@ JS
 
                         // create the file from post data
                         $upload = new Upload();
+                        $upload->setReplaceFile(false);
                         $file = new File();
                         $file->ShowInSearch = 0;
                         try {
@@ -552,7 +553,7 @@ JS
                         $submittedField->UploadedFileID = $file->ID;
 
                         // attach a file only if lower than 1MB
-                        if ($file->getAbsoluteSize() < 1024*1024*1) {
+                        if ($file->getAbsoluteSize() < 1024*1024*Config::inst()->get('EditableFileField', 'attachment_max_file_size')) {
                             $attachments[] = $file;
                         }
                     }

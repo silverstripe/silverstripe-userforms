@@ -12,6 +12,8 @@ class EditableFileField extends EditableFormField
 
     private static $plural_names = 'File Fields';
 
+    private static $attachment_max_file_size = 1;
+
     private static $db = array(
         'MaxFileSizeMB' => 'Float',
     );
