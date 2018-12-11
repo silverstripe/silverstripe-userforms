@@ -51,6 +51,7 @@ de_DE:
     EXTRACLASS_MULTIPLE: 'Mehrere CSS Klassen mit Leerzeichen trennen'
     EXTRACLASS_TITLE: 'Extra CSS Klassen'
     FIELDCONFIGURATION: 'Feld Konfiguration'
+    FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
     FIELDONDEFAULT: 'Standard Feld'
     GREATERTHAN: 'Wert größer als'
     GREATERTHANEQUAL: 'Wert größer oder gleich'

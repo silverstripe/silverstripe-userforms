@@ -67,6 +67,7 @@ it:
     EXTRACLASS_TITLE: 'Stile/Layout extra'
     EXTRACLASS_Title: 'Classi CSS extra'
     FIELDCONFIGURATION: 'Configurazione campo'
+    FIELDISREQUIRED: '{name} è richiesto'
     FIELDONDEFAULT: 'Campo su default'
     GREATERTHAN: 'Valore maggiore di'
     GREATERTHANEQUAL: 'Valore maggiore o uguale a'

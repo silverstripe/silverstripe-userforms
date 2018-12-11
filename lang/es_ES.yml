@@ -48,6 +48,7 @@ es_ES:
     EXTRACLASSA: 'Estilo/disposición adicional'
     EXTRACLASSB: 'Clase CSS adicional - separar varias con un espacio'
     FIELDCONFIGURATION: 'Configuración del campo'
+    FIELDISREQUIRED: '{name} es requerido'
     FIELDONDEFAULT: 'Campo por defecto'
     GREATERTHAN: 'Valor más grande que'
     GREATERTHANEQUAL: 'Valor más grande o igual que'
