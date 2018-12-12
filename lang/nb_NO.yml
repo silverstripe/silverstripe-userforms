@@ -42,6 +42,7 @@ nb_NO:
     EXTRACLASSA: 'Ekstra stil/utsende?'
     EXTRACLASSB: 'Ekstra CSS klasse - separate multipler med et mellomrom'
     FIELDCONFIGURATION: 'Felt konfigurering'
+    FIELDISREQUIRED: '{name} er påkrevd'
     FIELDONDEFAULT: 'Valgt som standard?'
     GREATERTHAN: 'Verdi større enn'
     GREATERTHANEQUAL: 'Verdi større enn eller lik'

@@ -41,6 +41,7 @@ mi:
     EXTRACLASSA: 'Kāhua Tāpiri/Tahora'
     EXTRACLASSB: 'Tauaha css Anō - whakawehea ngā taurea ki te mokowā'
     FIELDCONFIGURATION: 'Whirihoranga Āpure'
+    FIELDISREQUIRED: 'Kei te hiahiatia te {name}'
     FIELDONDEFAULT: 'Āpure Taunoa'
     GREATERTHAN: 'Uara Nui Ake I'
     GREATERTHANEQUAL: 'Uara Nui Ake Ōrite Rānei '

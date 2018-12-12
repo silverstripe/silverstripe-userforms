@@ -41,6 +41,7 @@ ar:
     EXTRACLASSA: 'تصميم/تخطيط إضافي'
     EXTRACLASSB: 'فئة إضافية من صفحات الأنماط التعاقبية CSS - افصل بين المتعددة بفضاء'
     FIELDCONFIGURATION: 'مواصفات الحقل'
+    FIELDISREQUIRED: '{name} ضروري'
     FIELDONDEFAULT: 'القيمة المبدئية للحقل'
     GREATERTHAN: 'القيمة أكبر من'
     GREATERTHANEQUAL: 'القيمة أكبر من أو تساوي'

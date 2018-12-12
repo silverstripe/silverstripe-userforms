@@ -44,6 +44,7 @@ sv:
     EXTRACLASSA: 'Extra stilar/layout'
     EXTRACLASSB: 'Extra CSS-klasser - separera med mellanrum'
     FIELDCONFIGURATION: Fältkonfiguration
+    FIELDISREQUIRED: '{name} är obligatoriskt'
     FIELDONDEFAULT: 'Fält som standard'
     GREATERTHAN: 'Värde större än'
     GREATERTHANEQUAL: 'Värde större än eller lika med'
