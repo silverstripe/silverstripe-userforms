@@ -41,6 +41,7 @@ zh:
     EXTRACLASSA: 额外的造型/布局
     EXTRACLASSB: '额外的 css 类别 - 用空格来分开多项'
     FIELDCONFIGURATION: 字段配置
+    FIELDISREQUIRED: '{name} 是必须的'
     FIELDONDEFAULT: 默认字段
     GREATERTHAN: 值大于
     GREATERTHANEQUAL: 值大于或等于

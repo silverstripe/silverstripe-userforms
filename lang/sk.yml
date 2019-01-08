@@ -67,6 +67,7 @@ sk:
     EXTRACLASS_TITLE: 'Extra úprava/vzhľad'
     EXTRACLASS_Title: 'Extra CSS triedy'
     FIELDCONFIGURATION: 'Konfigurácia poľa'
+    FIELDISREQUIRED: '{name} je vyžadované'
     FIELDONDEFAULT: 'Pole v predvolenom režime'
     GREATERTHAN: 'Hodnotu väčšiu ako'
     GREATERTHANEQUAL: 'Hodnotu väčšiu alebo rovnú ako'
