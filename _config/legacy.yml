@@ -21,8 +21,8 @@ SilverStripe\ORM\DatabaseAdmin:
     EditableOption: SilverStripe\UserForms\Model\EditableFormField\EditableOption
     EditableRadioField: SilverStripe\UserForms\Model\EditableFormField\EditableRadioField
     EditableTextField: SilverStripe\UserForms\Model\EditableFormField\EditableTextField
-    EmailRecipient: SilverStripe\UserForms\Model\Recipient\EmailRecipient
-    EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition
+    UserDefinedForm_EmailRecipient: SilverStripe\UserForms\Model\Recipient\EmailRecipient
+    UserDefinedForm_EmailRecipientCondition: SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition
     SubmittedFileField: SilverStripe\UserForms\Model\Submission\SubmittedFileField
     SubmittedForm: SilverStripe\UserForms\Model\Submission\SubmittedForm
     SubmittedFormField: SilverStripe\UserForms\Model\Submission\SubmittedFormField
