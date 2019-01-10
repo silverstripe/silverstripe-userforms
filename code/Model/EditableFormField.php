@@ -757,7 +757,7 @@ class EditableFormField extends DataObject
 
             if ($identifier = UserDefinedForm::config()->required_identifier) {
                 $title = $field->Title() . " <span class='required-identifier'>". $identifier . "</span>";
-                $field->setTitle($title);
+                $field->setTitle(DBField::create_field('HTMLText', $title));
             }
         }
 
