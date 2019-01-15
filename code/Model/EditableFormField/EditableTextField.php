@@ -102,6 +102,21 @@ class EditableTextField extends EditableFormField
     }
 
     /**
+     * @return ValidationResult
+     */
+    public function validate()
+    {
+        $result = parent::validate();
+
+        if ($this->MinLength > $this->MaxLength) {
+            $result->addError("Minimum length should be less than the Maximum length.");
+        }
+
+        return $result;
+    }
+
+
+    /**
      * @return FieldList
      */
     public function getFieldValidationOptions()
@@ -115,6 +130,7 @@ class EditableTextField extends EditableFormField
                     NumericField::create('MinLength', false),
                     LiteralField::create('RangeLength', _t(__CLASS__.".RANGE_TO", "to")),
                     NumericField::create('MaxLength', false)
+
                 ]
             )
         ]);
