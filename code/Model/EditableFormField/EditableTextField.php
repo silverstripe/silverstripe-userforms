@@ -110,9 +110,9 @@ class EditableTextField extends EditableFormField
 
         if ($this->MinLength > $this->MaxLength) {
             $result->addError(_t(
-              __CLASS__ . 'MINMAXLENGTHCHECK',
-             'Minimum length should be less than the Maximum length.'
-           ));
+                __CLASS__ . 'MINMAXLENGTHCHECK',
+                'Minimum length should be less than the Maximum length.'
+            ));
         }
 
         return $result;
