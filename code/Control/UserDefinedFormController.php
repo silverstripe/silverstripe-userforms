@@ -290,7 +290,7 @@ JS
         if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
             foreach ($recipients as $recipient) {
                 $email = Email::create()
-                    ->setHTMLTemplate('email/SubmittedFormEmailHtml')
+                    ->setHTMLTemplate('email/SubmittedFormEmail')
                     ->setPlainTemplate('email/SubmittedFormEmailPlain');
 
                 // Merge fields are used for CMS authors to reference specific form fields in email content
