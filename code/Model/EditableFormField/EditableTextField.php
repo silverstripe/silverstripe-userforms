@@ -109,12 +109,14 @@ class EditableTextField extends EditableFormField
         $result = parent::validate();
 
         if ($this->MinLength > $this->MaxLength) {
-            $result->addError(_t(__CLASS__.'MINMAXLENGTHCHECK', 'Minimum length should be less than the Maximum length.' ));
+            $result->addError(_t(
+              __CLASS__ . 'MINMAXLENGTHCHECK',
+             'Minimum length should be less than the Maximum length.'
+           ));
         }
 
         return $result;
     }
-
 
     /**
      * @return FieldList
