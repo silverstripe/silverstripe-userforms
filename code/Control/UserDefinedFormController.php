@@ -326,7 +326,7 @@ JS
                 }
 
                 // check to see if they are a dynamic reply to. eg based on a email field a user selected
-                if ($recipient->SendEmailFromField()) {
+                if ($recipient->SendEmailFromField() && $recipient->SendEmailFromField()->exists()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
@@ -342,7 +342,7 @@ JS
                 }
 
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
-                if ($recipient->SendEmailToField()) {
+                if ($recipient->SendEmailToField() && $recipient->SendEmailToField()->exists()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 
                     if ($submittedFormField && is_string($submittedFormField->Value)) {
@@ -355,7 +355,7 @@ JS
                 }
 
                 // check to see if there is a dynamic subject
-                if ($recipient->SendEmailSubjectField()) {
+                if ($recipient->SendEmailSubjectField() && $recipient->SendEmailSubjectField()->exists()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
 
                     if ($submittedFormField && trim($submittedFormField->Value)) {
