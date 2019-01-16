@@ -175,8 +175,8 @@ class UserDefinedFormTest extends FunctionalTest
         $result = $recipient->getEmailTemplateDropdownValues();
 
         // Installation path can be as a project when testing in Travis, so check partial match
-        $this->assertContains('email' . DIRECTORY_SEPARATOR . 'SubmittedFormEmail', key($result));
-        $this->assertSame('SubmittedFormEmail', current($result));
+        $this->assertContains('email' . DIRECTORY_SEPARATOR . 'SubmittedFormEmailHtml', key($result));
+        $this->assertSame('SubmittedFormEmailHtml', current($result));
     }
 
     public function testEmailTemplateExists()
