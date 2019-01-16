@@ -86,7 +86,10 @@ class EditableNumericField extends EditableFormField
     {
         $result = parent::validate();
         if ($this->MinValue > $this->MaxValue) {
-            $result->addError("Minimum length should be less than the Maximum length.");
+            $result->addError(
+
+                _t(__CLASS__ . '.ORDER_WARNING', 'Minimum length should be less than the maximum length.')
+            );
         }
         return $result;
     }
