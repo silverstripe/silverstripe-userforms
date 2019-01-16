@@ -82,4 +82,12 @@ class EditableNumericField extends EditableFormField
             $field->setAttribute('data-rule-max', $this->MaxValue);
         }
     }
+    public function validate()
+    {
+        $result = parent::validate();
+        if ($this->MinValue > $this->MaxValue) {
+            $result->addError("Minimum length should be less than the Maximum length.");
+        }
+        return $result;
+    }
 }
