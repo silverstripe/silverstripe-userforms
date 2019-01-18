@@ -6,9 +6,6 @@ import jQuery from 'jquery';
 import i18n from 'i18n';
 
 jQuery(document).ready(($) => {
-  // A reference to the UserForm instance.
-  let userform = null;
-
   // Settings that come from the CMS.
   const CONSTANTS = {};
 
@@ -75,6 +72,7 @@ jQuery(document).ready(($) => {
    * @desc Adds a link to a form step as an error message.
    */
   ErrorContainer.prototype.addStepLink = function addStepLink(step) {
+    const userform = this.$el.closest('.userform').data('inst');
     const itemID = `${step.$el.attr('id')}-error-link`;
     let $itemElement = this.$el.find(`#${itemID}`);
     const stepID = step.$el.attr('id');
@@ -179,6 +177,8 @@ jQuery(document).ready(($) => {
 
     this.$el = element instanceof $ ? element : $(element);
 
+    const userform = this.$el.closest('.userform').data('inst');
+
     // Find button for this step
     this.$elButton = $(`.step-button-wrapper[data-for='${this.$el.prop('id')}']`);
 
@@ -249,6 +249,7 @@ jQuery(document).ready(($) => {
     this.$el = element instanceof $ ? element : $(element);
     this.$buttons = this.$el.find('.step-button-jump');
     this.$jsAlign = this.$el.find('.js-align');
+    const userform = this.$el.closest('.userform').data('inst');
 
     // Update the progress bar when 'step' buttons are clicked.
     this.$buttons.each((i, stepButton) => {
@@ -311,7 +312,7 @@ jQuery(document).ready(($) => {
    * @desc Update the progress element to show a new step.
    */
   ProgressBar.prototype.update = function update(stepID) {
-    const $newStepElement = $($('.form-step')[stepID]);
+    const $newStepElement = $(this.$el.find('.form-step')[stepID]);
     let stepNumber = 0;
     let barWidth = stepID / (this.$buttons.length - 1) * 100;
 
@@ -371,6 +372,7 @@ jQuery(document).ready(($) => {
     const self = this;
 
     this.$el = element instanceof $ ? element : $(element);
+    this.userformInstance = this.$el.closest('.userform').data('inst');
 
     this.$prevButton = this.$el.find('.step-button-prev');
     this.$nextButton = this.$el.find('.step-button-next');
@@ -391,7 +393,7 @@ jQuery(document).ready(($) => {
 
     // Listen for changes to the current form step, or conditional pages,
     // so we can show hide buttons appropriately.
-    userform.$el.on('userform.form.changestep userform.form.conditionalstep', () => {
+    this.userformInstance.$el.on('userform.form.changestep userform.form.conditionalstep', () => {
       self.update();
     });
 
@@ -404,8 +406,8 @@ jQuery(document).ready(($) => {
    * @desc Updates the form actions element to reflect the current state of the page.
    */
   FormActions.prototype.update = function update() {
-    const numberOfSteps = userform.steps.length;
-    const stepID = userform.currentStep ? userform.currentStep.id : 0;
+    const numberOfSteps = this.userformInstance.steps.length;
+    const stepID = this.userformInstance.currentStep ? this.userformInstance.currentStep.id : 0;
     let i = null;
     let lastStep = null;
 
@@ -414,7 +416,7 @@ jQuery(document).ready(($) => {
 
     // Find last step, skipping hidden ones
     for (i = numberOfSteps - 1; i >= 0; i--) {
-      lastStep = userform.steps[i];
+      lastStep = this.userformInstance.steps[i];
 
       // Skip if step is hidden
       if (lastStep.conditionallyHidden()) {
@@ -457,7 +459,7 @@ jQuery(document).ready(($) => {
     });
 
     // Listen for events triggered by the progress bar.
-    $('#userform-progress').on('userform.progress.changestep', (e, stepNumber) => {
+    this.$el.find('.userform-progress').on('userform.progress.changestep', (e, stepNumber) => {
       self.jumpToStep(stepNumber - 1);
     });
 
@@ -469,7 +471,7 @@ jQuery(document).ready(($) => {
     this.$el.validate(this.validationOptions);
 
     // Ensure checkbox groups are validated correctly
-    $('.optionset.requiredField input').each((a, field) => {
+    this.$el.find('.optionset.requiredField input').each((a, field) => {
       $(field).rules('add', {
         required: true,
       });
@@ -507,6 +509,7 @@ jQuery(document).ready(($) => {
     // So when the final step is submitted we have to also check all previous steps are valid.
     submitHandler: (form) => {
       let isValid = true;
+      const userform = this.$el.data('inst');
 
       // Validate the current step
       if (userform.currentStep) {
@@ -532,6 +535,7 @@ jQuery(document).ready(($) => {
     },
     // When a field becomes valid.
     success: (error) => {
+      const userform = $(error).closest('.userform').data('inst');
       const errorId = $(error).attr('id');
       const fieldId = errorId.substr(0, errorId.indexOf('-error')).replace(/[\\[\\]]/, '');
 
@@ -541,7 +545,7 @@ jQuery(document).ready(($) => {
 
       error.remove();
 
-      // Pass the field's ID with the event.
+      // Pass the field's ID with the event
       userform.$el.trigger('userform.form.valid', [fieldId]);
     },
   };
@@ -553,7 +557,7 @@ jQuery(document).ready(($) => {
    */
   UserForm.prototype.addStep = function addStep(step) {
     // Make sure we're dealing with a form step.
-    if (!step instanceof FormStep) {
+    if (!(step instanceof FormStep)) {
       return;
     }
 
@@ -680,13 +684,14 @@ jQuery(document).ready(($) => {
     }
 
     // Display all the things that are hidden when JavaScript is disabled.
-    $('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
+    $userform.find('.userform-progress, .step-navigation').attr('aria-hidden', false).show();
 
     // Extend classes with common functionality.
     $.extend(FormStep.prototype, commonMixin);
     $.extend(ErrorContainer.prototype, commonMixin);
 
-    userform = new UserForm($userform);
+    const userform = new UserForm($userform);
+    $userform.data('inst', userform);
 
     // Conditionally hide field labels and use HTML5 placeholder instead.
     if (CONSTANTS.HIDE_FIELD_LABELS) {
@@ -708,11 +713,17 @@ jQuery(document).ready(($) => {
     userform.setCurrentStep(userform.steps[0]);
 
     // Initialise actions and progressbar
-    const progressBar = new ProgressBar($('#userform-progress'));
-    progressBar.update(0);
+    const $progressEl = $userform.find('.userform-progress');
+    if ($progressEl.length) {
+      const progressBar = new ProgressBar($progressEl);
+      progressBar.update(0);
+    }
 
-    const formActions = new FormActions($('#step-navigation'));
-    formActions.update();
+    const $formActionsEl = $userform.find('.step-navigation');
+    if ($formActionsEl.length) {
+      const formActions = new FormActions($formActionsEl);
+      formActions.update();
+    }
 
     // Enable jQuery UI datepickers
     $(document).on('click', 'input.text[data-showcalendar]', () => {
@@ -731,9 +742,8 @@ jQuery(document).ready(($) => {
     }, 180 * 1000);
 
     // Bind a confirmation message when navigating away from a partially completed form.
-    const form = $('form.userform');
-    if (typeof form.areYouSure !== 'undefined') {
-      form.areYouSure({
+    if (typeof $userform.areYouSure !== 'undefined') {
+      $userform.areYouSure({
         message: i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!'),
       });
     }
