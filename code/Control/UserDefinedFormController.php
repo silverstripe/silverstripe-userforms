@@ -364,10 +364,10 @@ JS
                     if ($submittedFormField && trim($submittedFormField->Value)) {
                         $email->setSubject($submittedFormField->Value);
                     } else {
-                        $email->setSubject($recipient->EmailSubject);
+                        $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
                     }
                 } else {
-                    $email->setSubject($recipient->EmailSubject);
+                    $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
                 }
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
