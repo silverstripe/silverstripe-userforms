@@ -63,11 +63,11 @@ SilverStripe\UserForms\Model\EditableFormField\EditableOption:
 
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   basic-text:
-    Name: basic-text-name
+    Name: basic_text_name
     Title: Basic Text Field
 
   basic-text-2:
-    Name: basic-text-name
+    Name: basic_text_name
     Title: Basic Text Field
 
   your-name-field:

@@ -11,6 +11,7 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\View\ArrayData;
@@ -51,10 +52,10 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [$field->Name => 'Basic Value']);
 
         // should have a submitted form field now
-        $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic-text-name'");
+        $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic_text_name'");
         $this->assertListAllMatch(
             [
-                'Name' => 'basic-text-name',
+                'Name' => 'basic_text_name',
                 'Value' => 'Basic Value',
                 'Title' => 'Basic Text Field'
             ],
@@ -331,5 +332,39 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertArrayHasKey(0, $action);
 
         $this->assertEquals((string) $action[0]['value'], "Submit", "Submit button has default text");
+    }
+
+
+    public function testRecipientSubjectMergeFields()
+    {
+        $form = $this->setupFormFrontend();
+
+        $recipient = $this->objFromFixture(EmailRecipient::class, 'recipient-1');
+        $recipient->EmailSubject = 'Email Subject: $basic_text_name';
+        $recipient->write();
+
+        $this->autoFollowRedirection = false;
+        $this->clearEmails();
+
+        // load the form
+        $this->get($form->URLSegment);
+
+        $field = $this->objFromFixture(EditableTextField::class, 'basic-text');
+
+        $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [$field->Name => 'Basic Value']);
+
+        // should have a submitted form field now
+        $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic_text_name'");
+        $this->assertListAllMatch(
+            [
+                'Name' => 'basic_text_name',
+                'Value' => 'Basic Value',
+                'Title' => 'Basic Text Field'
+            ],
+            $submitted
+        );
+
+        // check emails
+        $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject: Basic Value');
     }
 }
