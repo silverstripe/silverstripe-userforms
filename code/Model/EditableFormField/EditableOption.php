@@ -2,7 +2,6 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
@@ -134,11 +133,12 @@ class EditableOption extends DataObject
      */
     public function canCreate($member = null, $context = [])
     {
-        // Check parent page
-        $parent = $this->getCanCreateContext(func_get_args());
+        // Check parent object
+        $parent = $this->Parent();
         if ($parent) {
-            return $parent->canEdit($member);
+            return $parent->canCreate($member);
         }
+
         // Fall back to secure admin permissions
         return parent::canCreate($member);
     }
@@ -158,25 +158,5 @@ class EditableOption extends DataObject
     public function canUnpublish($member = null)
     {
         return $this->canDelete($member);
-    }
-
-    /**
-     * Helper method to check the parent for this object
-     *
-     * @param array $args List of arguments passed to canCreate
-     * @return DataObject Some parent dataobject to inherit permissions from
-     */
-    protected function getCanCreateContext($args)
-    {
-        // Inspect second parameter to canCreate for a 'Parent' context
-        if (isset($args[1]['Parent'])) {
-            return $args[1]['Parent'];
-        }
-        // Hack in currently edited page if context is missing
-        if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
-            return Controller::curr()->currentPage();
-        }
-        // No page being edited
-        return null;
     }
 }
