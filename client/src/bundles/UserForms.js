@@ -509,7 +509,7 @@ jQuery(document).ready(($) => {
     // So when the final step is submitted we have to also check all previous steps are valid.
     submitHandler: (form) => {
       let isValid = true;
-      const userform = this.$el.data('inst');
+      const userform = $(form).closest('.userform').data('inst');
 
       // Validate the current step
       if (userform.currentStep) {
