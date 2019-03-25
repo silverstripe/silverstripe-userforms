@@ -24,10 +24,12 @@ use SilverStripe\Forms\SegmentField;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
@@ -965,9 +967,10 @@ class EditableFormField extends DataObject
             /** @var EditableFormField $formFieldWatch */
             $formFieldWatch = DataObject::get_by_id(EditableFormField::class, $rule->ConditionFieldID);
             // Skip deleted fields
-            if (! $formFieldWatch) {
+            if (!$formFieldWatch) {
                 continue;
             }
+
             $fieldToWatch = $formFieldWatch->getSelectorFieldOnly();
 
             $expression = $rule->buildExpression();
@@ -980,9 +983,11 @@ class EditableFormField extends DataObject
             $result['operations'][] = $expression['operation'];
 
             // View/Show should read
-            $opposite = ($result['initialState'] === 'hide') ? 'show' : 'hide';
             $result['view'] = $rule->toggleDisplayText($result['initialState']);
-            $result['opposite'] = $rule->toggleDisplayText($opposite);
+            $result['opposite'] = $rule->toggleDisplayText($result['initialState'], true);
+            $result['holder'] = $this->getSelectorHolder();
+            $result['holder_event'] = $rule->toggleDisplayEvent($result['initialState']);
+            $result['holder_event_opposite'] = $rule->toggleDisplayEvent($result['initialState'], true);
         }
 
         return (count($result['selectors'])) ? $result : null;
