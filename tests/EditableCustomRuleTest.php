@@ -35,8 +35,21 @@ class EditableCustomRuleTest extends SapphireTest
      */
     public function testToggleDisplayText()
     {
+        /** @var EditableCustomRule $rule1 */
         $rule1 = $this->objFromFixture('EditableCustomRule', 'rule1');
         $this->assertSame('addClass("hide")', $rule1->toggleDisplayText('show'));
         $this->assertSame('removeClass("hide")', $rule1->toggleDisplayText('hide'));
+        $this->assertSame('removeClass("hide")', $rule1->toggleDisplayText('show', true));
+        $this->assertSame('addClass("hide")', $rule1->toggleDisplayText('hide', true));
+    }
+
+    public function testToggleDisplayEvent()
+    {
+        /** @var EditableCustomRule $rule1 */
+        $rule1 = $this->objFromFixture('EditableCustomRule', 'rule1');
+        $this->assertSame('userform.field.hide', $rule1->toggleDisplayEvent('show'));
+        $this->assertSame('userform.field.show', $rule1->toggleDisplayEvent('hide'));
+        $this->assertSame('userform.field.show', $rule1->toggleDisplayEvent('show', true));
+        $this->assertSame('userform.field.hide', $rule1->toggleDisplayEvent('hide', true));
     }
 }

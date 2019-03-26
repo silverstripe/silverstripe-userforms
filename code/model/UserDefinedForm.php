@@ -767,6 +767,7 @@ JS
             $conjunction = $rule['conjunction'];
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
+            $holder = $rule['holder'];
 
             $result .= <<<EOS
 \n
@@ -775,8 +776,10 @@ JS
     function (){
         if ({$operations}) {
             $('{$target}').{$rule['view']};
+            {$holder}.{$rule['view']}.trigger('{$rule['holder_event']}');
         } else {
             $('{$target}').{$rule['opposite']};
+            {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
         }
     });
     $("{$target}").find('.hide').removeClass('hide');

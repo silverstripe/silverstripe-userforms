@@ -241,11 +241,33 @@ class EditableCustomRule extends DataObject
      * Returns the opposite visibility function for the value of the initial visibility field, e.g. show/hide. This
      * will toggle the "hide" class either way, which is handled by CSS.
      *
-     * @param string $text
+     * @param string $initialState
+     * @param boolean $invert
      * @return string
      */
-    public function toggleDisplayText($text)
+    public function toggleDisplayText($initialState, $invert = false)
     {
-        return (strtolower($text) === 'hide') ? 'removeClass("hide")' : 'addClass("hide")';
+        $action = strtolower($initialState) === 'hide' ? 'removeClass' : 'addClass';
+        if ($invert) {
+            $action = $action === 'removeClass' ? 'addClass' : 'removeClass';
+        }
+        return sprintf('%s("hide")', $action);
+    }
+
+    /**
+     * Returns an event name to be dispatched when the field is changed. Matches up with the visibility classes
+     * added or removed in `toggleDisplayText()`.
+     *
+     * @param string $initialState
+     * @param bool $invert
+     * @return string
+     */
+    public function toggleDisplayEvent($initialState, $invert = false)
+    {
+        $action = strtolower($initialState) === 'hide' ? 'show' : 'hide';
+        if ($invert) {
+            $action = $action === 'hide' ? 'show' : 'hide';
+        }
+        return sprintf('userform.field.%s', $action);
     }
 }

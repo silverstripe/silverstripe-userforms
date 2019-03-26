@@ -8,8 +8,6 @@ dist: precise
 
 matrix:
   include:
-    - php: 5.3
-      env: DB=MYSQL CORE_RELEASE=3.4
     - php: 5.4
       env: DB=MYSQL CORE_RELEASE=3.5
     - php: 5.6
