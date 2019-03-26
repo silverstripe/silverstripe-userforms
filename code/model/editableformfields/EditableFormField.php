@@ -1093,9 +1093,11 @@ class EditableFormField extends DataObject
             $result['operations'][] = $expression['operation'];
 
             // View/Show should read
-            $opposite = ($result['initialState'] === 'hide') ? 'show' : 'hide';
             $result['view'] = $rule->toggleDisplayText($result['initialState']);
-            $result['opposite'] = $rule->toggleDisplayText($opposite);
+            $result['opposite'] = $rule->toggleDisplayText($result['initialState'], true);
+            $result['holder'] = $this->getSelectorHolder();
+            $result['holder_event'] = $rule->toggleDisplayEvent($result['initialState']);
+            $result['holder_event_opposite'] = $rule->toggleDisplayEvent($result['initialState'], true);
         }
 
         return (count($result['selectors'])) ? $result : null;
