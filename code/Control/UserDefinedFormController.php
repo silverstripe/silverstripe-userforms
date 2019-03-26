@@ -17,6 +17,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Form\UserForm;
+use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\View\ArrayData;
@@ -166,6 +167,9 @@ class UserDefinedFormController extends PageController
     {
         $rules = '';
         $form = $this->data();
+        if (!$form) {
+            return;
+        }
         $formFields = $form->Fields();
 
         $watch = [];
@@ -252,7 +256,9 @@ JS
                             $upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
                         } catch (ValidationException $e) {
                             $validationResult = $e->getResult();
-                            $form->addErrorMessage($field->Name, $validationResult->message(), 'bad');
+                            foreach ($validationResult->getMessages() as $message) {
+                                $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                            }
                             Controller::curr()->redirectBack();
                             return;
                         }
@@ -502,6 +508,7 @@ JS
             $conjunction = $rule['conjunction'];
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
+            $holder = $rule['holder'];
 
             $result .= <<<EOS
 \n
@@ -510,8 +517,10 @@ JS
     function (){
         if ({$operations}) {
             $('{$target}').{$rule['view']};
+            {$holder}.{$rule['view']}.trigger('{$rule['holder_event']}');
         } else {
             $('{$target}').{$rule['opposite']};
+            {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
         }
     });
     $("{$target}").find('.hide').removeClass('hide');
