@@ -252,7 +252,9 @@ JS
                             $upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
                         } catch (ValidationException $e) {
                             $validationResult = $e->getResult();
-                            $form->addErrorMessage($field->Name, $validationResult->message(), 'bad');
+                            foreach ($validationResult->getMessages() as $message) {
+                                $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                            }
                             Controller::curr()->redirectBack();
                             return;
                         }
