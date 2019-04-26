@@ -87,9 +87,9 @@ class EditableFileField extends EditableFormField
     {
         $result = parent::validate();
 
-        $max = static::get_php_max_file_size();
-        if ($this->MaxFileSizeMB * 1024 > $max) {
-            $result->addError("Your max file size limit can't be larger than the server's limit of {$this->getPHPMaxFileSizeMB()}.");
+        $max = $this->getMax();
+        if ($this->getPHPMaxFileSizeMB(5) > $max) {
+            $result->addError("Your max file size limit can't be larger than the server's limit of {$this->getPHPMaxFileSizeMB()} Megabytes.");
         }
 
         return $result;
@@ -157,8 +157,8 @@ class EditableFileField extends EditableFormField
         return min($maxUpload, $maxPost);
     }
 
-    public function getPHPMaxFileSizeMB()
+    public function getPHPMaxFileSizeMB($roundingDecimals = 1)
     {
-        return round(static::get_php_max_file_size() / 1024 / 1024, 1);
+        return round(static::get_php_max_file_size() / 1024 / 1024, $roundingDecimals);
     }
 }
