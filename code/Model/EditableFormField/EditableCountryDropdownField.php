@@ -84,7 +84,7 @@ class EditableCountryDropdownField extends EditableFormField
 
     public function getValueFromData($data)
     {
-        if (isset($data[$this->Name])) {
+        if (!empty($data[$this->Name])) {
             $source = $this->getFormField()->getSource();
             return $source[$data[$this->Name]];
         }
