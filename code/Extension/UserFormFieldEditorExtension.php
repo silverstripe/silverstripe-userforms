@@ -103,7 +103,7 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldDeleteAction(),
                 new GridFieldToolbarHeader(),
                 new GridFieldOrderableRows('Sort'),
-                new GridFieldDetailForm()
+                new GridFieldDetailForm(null, false, false)
             );
 
         $editButton->removeExtraClass('grid-field__icon-action--hidden-on-hover');
