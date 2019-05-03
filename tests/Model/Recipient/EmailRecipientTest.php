@@ -27,4 +27,15 @@ class EmailRecipientTest extends SapphireTest
         $result = $recipient->getEmailBodyContent();
         $this->assertContains('/about-us/', $result);
     }
+
+    /**
+     * @expectedException SilverStripe\ORM\ValidationException
+     * @expectedExceptionMessage "Send email to" address or field is required
+     */
+    public function testEmptyRecipientFailsValidation()
+    {
+        $recipient = new EmailRecipient();
+        $recipient->EmailFrom = 'test@example.com';
+        $recipient->write();
+    }
 }

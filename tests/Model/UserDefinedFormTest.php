@@ -104,7 +104,6 @@ class UserDefinedFormTest extends FunctionalTest
         $this->assertNotContains('SummaryHide', array_keys($summaryFields), 'Summary field showing displayed field');
     }
 
-
     public function testEmailRecipientPopup()
     {
         $this->logInWithPermission('ADMIN');
@@ -114,6 +113,7 @@ class UserDefinedFormTest extends FunctionalTest
         $popup = new EmailRecipient();
         $popup->FormID = $form->ID;
         $popup->FormClass = UserDefinedForm::class;
+        $popup->EmailAddress = 'test@example.com';
 
         $fields = $popup->getCMSFields();
 
@@ -146,6 +146,7 @@ class UserDefinedFormTest extends FunctionalTest
     public function testGetEmailBodyContent()
     {
         $recipient = new EmailRecipient();
+        $recipient->EmailAddress = 'test@example.com';
 
         $emailBody = 'not html';
         $emailBodyHtml = '<p>html</p>';
@@ -185,6 +186,7 @@ class UserDefinedFormTest extends FunctionalTest
         $recipient = new EmailRecipient();
         $recipient->FormID = $page->ID;
         $recipient->FormClass = UserDefinedForm::class;
+        $recipient->EmailAddress = 'test@example.com';
 
         // Set the default template
         $recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues()));
