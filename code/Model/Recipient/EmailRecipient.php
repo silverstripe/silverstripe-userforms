@@ -550,6 +550,12 @@ class EmailRecipient extends DataObject
         if (!$this->EmailFrom && empty(Email::getSendAllEmailsFrom()) && empty(Email::config()->get('admin_email'))) {
             $result->addError(_t(__CLASS__.".EMAILFROMREQUIRED", '"Email From" address is required'));
         }
+
+        // Sending will also fail if there's no recipient defined
+        if (!$this->EmailAddress && !$this->SendEmailToFieldID) {
+            $result->addError(_t(__CLASS__.".EMAILTOREQUIRED", '"Send email to" address or field is required'));
+        }
+
         return $result;
     }
 

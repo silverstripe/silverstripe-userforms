@@ -2,13 +2,16 @@
 
 namespace SilverStripe\UserForms\Control;
 
+use Exception;
 use PageController;
+use Psr\Log\LoggerInterface;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
@@ -23,6 +26,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
+use Swift_RfcComplianceException;
 
 /**
  * Controller for the {@link UserDefinedForm} page type.
@@ -350,16 +354,30 @@ JS
 
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
                 $emailTo = $recipient->SendEmailToField();
-                if ($emailTo && $emailTo->exists()) {
-                    $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 
-                    if ($submittedFormField && is_string($submittedFormField->Value)) {
-                        $email->setTo(explode(',', $submittedFormField->Value));
+                try {
+                    if ($emailTo && $emailTo->exists()) {
+                        $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
+
+                        if ($submittedFormField && is_string($submittedFormField->Value)) {
+                            $email->setTo(explode(',', $submittedFormField->Value));
+                        } else {
+                            $email->setTo(explode(',', $recipient->EmailAddress));
+                        }
                     } else {
                         $email->setTo(explode(',', $recipient->EmailAddress));
                     }
-                } else {
-                    $email->setTo(explode(',', $recipient->EmailAddress));
+                } catch (Swift_RfcComplianceException $e) {
+                    // The sending address is empty and/or invalid. Log and skip sending.
+                    $error = sprintf(
+                        'Failed to set sender for userform submission %s: %s',
+                        $submittedForm->ID,
+                        $e->getMessage()
+                    );
+
+                    Injector::inst()->get(LoggerInterface::class)->notice($error);
+
+                    continue;
                 }
 
                 // check to see if there is a dynamic subject
