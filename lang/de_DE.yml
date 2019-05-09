@@ -1,31 +1,6 @@
 de_DE:
-  CustomRule:
-    BLANK: Leer
-    DELETE: Löschen
-    GREATERTHAN: 'Wert größer als'
-    GREATERTHANEQUAL: 'Wert größer oder gleich'
-    HIDETHISFIELD: 'Feld verstecken'
-    IS: 'Ist gleich'
-    LESSTHAN: 'Wert kleiner als'
-    LESSTHANEQUAL: 'Wert kleiner oder gleich'
-    NOTBLANK: 'Nicht leer'
-    NOTVALUE: 'kein Wert'
-    SHOWTHISFIELD: 'Feld anzeigen'
-    VALUE: Wert
-    WHEN: Wann
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
-  FieldEditor:
-    ADD: Hinzufügen
-    SELECTAFIELD: 'Feld auswählen'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Seiten
-    SINGULARNAME: Seite
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filter
-    ResetFilter: Zurücksetzen
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Feld hinzufügen'
     ADD_FIELD_GROUP: 'Gruppe hinzufügen'
@@ -35,48 +10,21 @@ de_DE:
     FILTERSUBMISSIONS: 'Einreichungen filtern...'
     WHEREVALUEIS: 'nach Wert...'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Hinzufügen
-    ADDLabel: 'Option hinzufügen'
-    ADDRULE: 'Regel hinzufügen'
-    BLANK: Leer
     CHECKEDBYDEFAULT: 'Standardmäßig ist dieses Feld markiert'
     CUSTOMERROR: 'Eigene Fehlermeldung'
     CUSTOMRULES: 'Eigene Regeln'
     DEFAULTTOTODAY: 'Standardmäßig auf heute'
-    DELETE: 'Lösche dieses Feld'
-    DRAG: 'Klicken und Festhalten um die Anordnung der Felder zu verändern'
-    ENTERQUESTION: 'Tragen Sie die Frage hier ein'
-    EXTRACLASSA: 'Extra Styling/Layout'
-    EXTRACLASSB: 'Extra CSS Klasse - mehrere mit Leerzeichen trennen'
     EXTRACLASS_MULTIPLE: 'Mehrere CSS Klassen mit Leerzeichen trennen'
     EXTRACLASS_TITLE: 'Extra CSS Klassen'
-    FIELDCONFIGURATION: 'Feld Konfiguration'
     FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
-    FIELDONDEFAULT: 'Standard Feld'
-    GREATERTHAN: 'Wert größer als'
-    GREATERTHANEQUAL: 'Wert größer oder gleich'
     GROUP: Gruppe
-    HIDE: Verstecken
-    HIDETHISFIELD: 'Feld verstecken'
-    IS: Ist
-    LESSTHAN: 'Wert kleiner als'
-    LESSTHANEQUAL: 'Wert kleiner oder gleich'
-    LOCKED: 'Diese Felder können nicht verändert werden'
-    NOTBLANK: 'Nicht leer'
-    NOTVALUE: 'Kein Wert'
-    OPTIONS: Optionen
     PLURALNAME: 'Editierbare Formularfelder'
     REQUIRED: 'Pflichtfeld?'
     RIGHTTITLE: 'Titel rechts'
-    SHOW: Zeigen
-    SHOWOPTIONS: 'Optionen anzeigen'
-    SHOWTHISFIELD: 'Feld anzeigen'
     SINGULARNAME: 'Editierbares Formularfeld'
     TITLE: Titel
     TYPE: Typ
     VALIDATION: Validierung
-    VALUE: Wert
-    WHEN: Wann
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxen
     SINGULARNAME: 'Checkbox Feld'
@@ -121,9 +69,6 @@ de_DE:
     PLURALNAME: Zahlenfelder
     SINGULARNAME: Zahlenfeld
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Option entfernen'
-    DRAG: 'Ziehen um Optionen neu zu ordnen'
-    LOCKED: 'Diese Felder können nicht verändert werden'
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
@@ -131,7 +76,6 @@ de_DE:
     SINGULARNAME: Radio-Button
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Anzahl der Zeilen'
-    PLACEHOLDER: Platzhalter
     PLURALNAME: Textfelder
     SINGULARNAME: Textfeld
     TEXTLENGTH: Textlänge
@@ -149,32 +93,19 @@ de_DE:
     PLURALNAME: 'Abgesendete Formularfelder'
     SINGULARNAME: 'Abgesendetes Formularfeld'
   SilverStripe\UserForms\Model\UserDefinedForm:
-    ADDEMAILRECIPIENT: 'E-Mail Empfänger hinzufügen'
     CLEARBUTTON: Löschen
-    CONFIGURATION: Konfiguration
     DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
     EMAILADDRESS: E-Mail
     EMAILBODY: Inhalt
     EMAILFROM: Von
-    EMAILRECIPIENTS: 'E-Mail Empfänger'
     EMAILSUBJECT: Betreff
-    ENABLELIVEVALIDATION: 'Live Validierung einschalten'
     EmailFromContent: 'Mit der Absenderadresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
-    FIELDS: Felder
-    FORM: Formular
     FROMADDRESS: 'E-Mail versendet von'
     HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
-    ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
     ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Formularfeld als Empfängeradresse'
-    RECIPIENTS: Empfänger
     REPLYADDRESS: 'E-Mail Adresse für "Antworten an"'
-    SAVESUBMISSIONS: 'Speichern von Einreichungen deaktivieren'
     SENDEMAILTO: 'E-Mail senden an'
     SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
-    SHOWCLEARFORM: '"Formular zurücksetzen" Button anzeigen'
     SINGULARNAME: 'Anpassbares Formular'
-    SUBMISSIONS: Einreichungen
     SUBMITBUTTON: Senden
-    TEXTONCLEAR: 'Text auf der Löschen-Schaltfläche:'
-    TEXTONSUBMIT: 'Text auf der Einreich-Schaltfläche:'

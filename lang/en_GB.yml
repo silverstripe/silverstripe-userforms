@@ -17,17 +17,11 @@ en_GB:
     EMAILBODY: Body
     EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
-    FORM: Form
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
-    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
-    ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Text on submit button:'

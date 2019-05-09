@@ -1,26 +1,11 @@
 fa_IR:
-  CustomRule:
-    DELETE: حذف
-  FieldEditor:
-    ADD: افزودن
-    SELECTAFIELD: 'انتخاب یک فیلد'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: صفحات
-    SINGULARNAME: صفحه
-  SilverStripe\Forms\GridField\GridField:
-    Filter: پالایش
-    ResetFilter: 'از نو'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'افزودن فیلد'
     ADD_FIELD_GROUP: 'افزودن فیلد گروهی'
     FORMFIELDS: 'فیلدهای فرم'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: افزودن
     DEFAULTTOTODAY: 'تاریخ پیش فرض به امروز؟'
-    DELETE: حذف
     GROUP: گروه
-    MAXVALUE: 'بیشترین مقدار'
-    MINVALUE: 'کمترین مقدار'
     REQUIRED: 'آیا این فیلد الزامی است؟'
     RIGHTTITLE: 'عنوان سمت راست'
     TITLE: عنوان
@@ -49,17 +34,10 @@ fa_IR:
     DOWNLOADFILE: 'دانلود فایل'
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: پاک‌کردن
-    DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
     EMAILADDRESS: ایمیل
     EMAILFROM: از
     EMAILSUBJECT: 'موضوع پست الکترونیک'
     EMAILTEMPLATE: 'قالب پست الکترونیک'
-    FIELDS: فیلدها
-    FORM: فرم
     PLURALNAME: 'صفحه اصلی'
-    RECIPIENTS: 'دریافت کنندگان'
     SENDEMAILTO: 'ارسال ایمیل به'
-    SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
     SUBMITBUTTON: 'ثبت کردن'
-    TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
-    TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'

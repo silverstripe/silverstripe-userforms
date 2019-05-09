@@ -208,7 +208,6 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
-    MINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
   SilverStripe\UserForms\Model\EditableFormField\Validator:
     REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:

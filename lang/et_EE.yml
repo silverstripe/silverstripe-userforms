@@ -1,48 +1,9 @@
 et_EE:
-  CustomRule:
-    BLANK: Blank
-    DELETE: Delete
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    SHOWTHISFIELD: 'Show This Field'
-    VALUE: Value
-    WHEN: When
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is required'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Add
-    ADDRULE: 'Add Rule'
-    BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: 'Kustuta see väli'
-    DRAG: 'Väljade ümber paigutamiseks lohistage neid'
-    FIELDCONFIGURATION: 'Field Configuration'
-    FIELDONDEFAULT: 'Field On Default'
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDE: Hide
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    LOCKED: 'Neid väli ei saa muuta'
     'NO': Ei
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    OPTIONS: Options
     REQUIRED: 'See väli on vormis vajalik ja seda ei saa kustutada'
-    SHOW: Show
-    SHOWOPTIONS: 'Show Options'
-    SHOWTHISFIELD: 'Show This Field'
     VALIDATION: Validation
-    VALUE: Value
-    WHEN: When
     'YES': Jah
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
@@ -60,10 +21,6 @@ et_EE:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Remove this option'
-    DRAG: 'Drag to rearrange order of options'
-    LOCKED: 'These fields cannot be modified'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
@@ -81,19 +38,12 @@ et_EE:
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
-    EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email Subject'
-    FORM: Vorm
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
-    ONCOMPLETELABEL: 'Näita lõpetamisel'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
-    SUBMISSIONS: Kaastööd
     SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Kiri saatmise nupul:'
