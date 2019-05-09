@@ -13,6 +13,7 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.ADDING_OPTION": "Menambahkan Pilihan",
     "UserForms.ADDING_RULE": "Menambahkan Aturan",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Semua pengiriman akan dihapus secara permanen. Lanjutkan?",
+    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Error creating field",
     "UserForms.ERROR_CREATING_OPTION": "Error creating option",
     "UserForms.HIDE_OPTIONS": "Sembunyikan Pilihan",

@@ -1,47 +1,8 @@
 fr_FR:
-  CustomRule:
-    BLANK: Blank
-    DELETE: Delete
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    SHOWTHISFIELD: 'Show This Field'
-    VALUE: Value
-    WHEN: When
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is required'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Add
-    ADDRULE: 'Add Rule'
-    BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: 'Supprimer ce champ'
-    DRAG: 'Glisser pour arranger l''ordre des champs'
-    FIELDCONFIGURATION: 'Field Configuration'
-    FIELDONDEFAULT: 'Field On Default'
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDE: Hide
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    LOCKED: 'Ces champs ne peuvent pas être modifiés'
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    OPTIONS: Options
     REQUIRED: 'Ce champ est requis pour ce formulaire et ne peut pas être supprimé'
-    SHOW: Show
-    SHOWOPTIONS: 'Show Options'
-    SHOWTHISFIELD: 'Show This Field'
     VALIDATION: Validation
-    VALUE: Value
-    WHEN: When
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -58,10 +19,6 @@ fr_FR:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Remove this option'
-    DRAG: 'Drag to rearrange order of options'
-    LOCKED: 'These fields cannot be modified'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
@@ -79,21 +36,14 @@ fr_FR:
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
-    EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email Subject'
     EmailFromContent: 'Le champ pour l''adresse de vous permet de définir d''où provient l''email. Sur la plupart des serveurs cela nécessitera que l''adresse mail soit du même domaine que votre site. Par exemple sur votresite.com l''adresse mail devra sûrement être exemple@votresite.com. Cependant vous pouvez mettre n''importe qu''elle adresse email, à laquelle vous souhaitez qu''on réponde. '
-    FORM: Formulaire
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
-    ONCOMPLETELABEL: 'Utiliser la complétion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     REPLYADDRESS: 'Email pour répondre à'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
-    SUBMISSIONS: Soumissions
     SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Texte du bouton Envoyer :'

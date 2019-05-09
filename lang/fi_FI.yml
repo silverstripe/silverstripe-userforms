@@ -1,29 +1,15 @@
 fi_FI:
-  CustomRule:
-    BLANK: Tyhjä
-    DELETE: Poista
-    GREATERTHAN: 'Arvo on suurempi kuin'
-    GREATERTHANEQUAL: 'Arvo on suurempi tai yhtä suuri kuin'
-    HIDETHISFIELD: 'Piilota tämä kenttä'
-    IS: 'On'
-    LESSTHAN: 'Arvo on pienempi kuin'
-    LESSTHANEQUAL: 'Arvo on pienempi tai yhtä suuri kuin'
-    NOTBLANK: 'Ei ole tyhjä'
-    NOTVALUE: 'Ei ole sama kuin'
-    SHOWTHISFIELD: 'Näytä tämä kenttä'
-    VALUE: 'On sama kuin'
-    WHEN: Kun
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
-  FieldEditor:
-    ADD: Lisää
-    SELECTAFIELD: 'Valitse kenttä'
   SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Sivut
-    SINGULARNAME: Sivu
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Suodata
-    ResetFilter: Nollaa
+    TABMAIN: Päätaso
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CLEARBUTTON: Tyhjennä
+    CONFIGURATION: Asetukset
+    RECIPIENTS: Vastaanottajat
+    SUBMISSIONS: Lähetykset
+    SUBMITBUTTON: Lähetä
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
@@ -34,10 +20,9 @@ fi_FI:
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Lataa tiedosto'
   SilverStripe\UserForms\Model\UserDefinedForm:
-    SUBMISSIONS: Lähetykset
+    PREVIEW_EMAIL: 'Esikatsele sähköposti'
+    SINGULARNAME: 'Käyttäjän lomake'
     SUBMITBUTTON: Lähetä
-    TEXTONCLEAR: 'Tyhjennä-nappulan teksti:'
-    TEXTONSUBMIT: 'Lähetä-nappulan teksti:'
     TYPEREPLY: 'Lisää vastausosoite'
     TYPESUBJECT: 'Lisää otsikko'
     TYPETO: 'Lisää vastaanottaja'

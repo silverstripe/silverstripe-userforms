@@ -1,71 +1,19 @@
 nb_NO:
-  CustomRule:
-    BLANK: Blank
-    DELETE: Slett
-    GREATERTHAN: 'Verdi større enn'
-    GREATERTHANEQUAL: 'Verdi større enn eller lik'
-    HIDETHISFIELD: 'Skjul dette feltet'
-    IS: Er
-    LESSTHAN: 'Verdi lavere enn'
-    LESSTHANEQUAL: 'Verdi lavere enn eller lik'
-    NOTBLANK: 'Ikke tom'
-    NOTVALUE: 'Ikke verdi'
-    SHOWTHISFIELD: 'Vis dette feltet'
-    VALUE: Verdi
-    WHEN: Når
-  FieldEditor:
-    ADD: 'Legg til'
-    SELECTAFIELD: 'Velg et felt'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Sider
-    SINGULARNAME: Side
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} er påkrevd'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filter
-    ResetFilter: Reset
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrer innsendte...'
     WHEREVALUEIS: 'hvor verdi er...'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: 'Legg til'
-    ADDLabel: 'Legt til alternativ'
-    ADDRULE: 'Legg til regel'
-    BLANK: Blank
     CHECKEDBYDEFAULT: 'Valgt som standard?'
     CUSTOMERROR: 'Tilpasset error melding'
     CUSTOMRULES: 'Tilpasset regler'
     DEFAULTTOTODAY: 'Standard for i dag?'
-    DELETE: Slett
-    DRAG: 'Dra for å omorganiser feltene'
-    ENTERQUESTION: 'Skriv inn spørsmål'
-    EXTRACLASSA: 'Ekstra stil/utsende?'
-    EXTRACLASSB: 'Ekstra CSS klasse - separate multipler med et mellomrom'
-    FIELDCONFIGURATION: 'Felt konfigurering'
     FIELDISREQUIRED: '{name} er påkrevd'
-    FIELDONDEFAULT: 'Valgt som standard?'
-    GREATERTHAN: 'Verdi større enn'
-    GREATERTHANEQUAL: 'Verdi større enn eller lik'
     GROUP: Gruppe
-    HIDE: Skjul
-    HIDETHISFIELD: 'Skjul dette feltet'
-    IS: Er
-    LESSTHAN: 'Verdi lavere enn'
-    LESSTHANEQUAL: 'Verdi lavere enn eller lik'
-    LOCKED: 'Disse feltene kan ikke bli endret'
-    NOTBLANK: 'Ikke tom'
-    NOTVALUE: 'Ikke verdi'
-    OPTIONS: Alternativer
     PLURALNAME: 'Redigerbare skjemafelt'
     REQUIRED: 'Er dette feltet påkrevd?'
     RIGHTTITLE: 'Høyre tittel'
-    SHOW: Vis
-    SHOWOPTIONS: 'Vis alternativer'
-    SHOWTHISFIELD: 'Vis dette feltet'
     SINGULARNAME: 'Redigerbar skjemafelt'
     VALIDATION: Validering
-    VALUE: Verdi
-    WHEN: Når
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Avkrysningsbokser
     SINGULARNAME: 'Avkrysningsboks felt'
@@ -102,9 +50,6 @@ nb_NO:
     PLURALNAME: 'Redigerbare flervalgfelt'
     SINGULARNAME: 'Redigerbare flervalgfelt'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Fjern alternativ'
-    DRAG: 'Dra for endre rekkefølge på alternativene'
-    LOCKED: 'Disse feltene kan ikke endres'
     PLURALNAME: 'Redigerbart alternativer'
     SINGULARNAME: 'Redigerbart alternativ'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
@@ -129,28 +74,18 @@ nb_NO:
     PLURALNAME: 'Sendt skjema felter'
     SINGULARNAME: 'Sendt skjema felt'
   SilverStripe\UserForms\Model\UserDefinedForm:
-    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
-    CONFIGURATION: Konfigurasjon
     DESCRIPTION: 'Legg til konfigurerbart skjema'
     EMAILADDRESS: Epost
     EMAILBODY: Body
     EMAILFROM: Fra
-    EMAILRECIPIENTS: 'Epost mottakere'
     EMAILSUBJECT: 'Epost emne'
-    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
     EmailFromContent: 'Skjemaadressen tillater deg å vis hvem melding kommer fra. På de fleste servere må denne e-post adressen være den samme som doment for din side. For eksempel om du har domene din-side.no, må e-post adressen være noen@din-side.no.'
-    FORM: Skjema
     FROMADDRESS: 'Sendt e-post fra'
     HIDEFORMDATA: 'Skjul skjemadata fra e-post'
-    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
     ORSELECTAFIELDTOUSEASFROM: '...eller velg et felt til å bruke som "svar til"-adresse'
     ORSELECTAFIELDTOUSEASTO: '...eller velg et felt til å bruke som adresse'
     REPLYADDRESS: 'E-post som "reply to"'
-    SAVESUBMISSIONS: 'Slå av auto lagring'
     SENDEMAILTO: 'Send e-post til'
     SENDPLAIN: 'Send e-post som tekst? (HTML vil bli strippet)'
-    SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
     SINGULARNAME: 'Bruker definert skjema'
-    SUBMISSIONS: Innsendte
     SUBMITBUTTON: Send
-    TEXTONSUBMIT: 'Tekst på "send" knapp'

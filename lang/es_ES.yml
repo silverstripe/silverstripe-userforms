@@ -1,31 +1,6 @@
 es_ES:
-  CustomRule:
-    BLANK: Blanco
-    DELETE: Borrar
-    GREATERTHAN: 'Valor mayor que'
-    GREATERTHANEQUAL: 'Valor mayor o igual'
-    HIDETHISFIELD: 'Ocultar este campo'
-    IS: Es
-    LESSTHAN: 'Valor menor que'
-    LESSTHANEQUAL: 'Valor menos o igual'
-    NOTBLANK: 'No en blanco'
-    NOTVALUE: 'No valor'
-    SHOWTHISFIELD: 'Mostrar este campo'
-    VALUE: Valor
-    WHEN: Cuando
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
-  FieldEditor:
-    ADD: Agregar
-    SELECTAFIELD: 'Seleccionar un campo'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Páginas
-    SINGULARNAME: Página
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} es requerido'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filtro
-    ResetFilter: Restablecer
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrar envíos.'
     WHEREVALUEIS: 'donde el valor es'
@@ -33,47 +8,18 @@ es_ES:
     PLURALNAME: 'Reglas personalizadas editables'
     SINGULARNAME: 'Regla personalizada editable'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Agregar
-    ADDLabel: 'Agregar opción'
-    ADDRULE: 'Agregar regla'
-    BLANK: blanco
     CHECKEDBYDEFAULT: '¿Marcado por defecto?'
     CUSTOMERROR: 'Mensaje de error personalizado'
     CUSTOMOPTIONS: Opciones
     CUSTOMRULES: 'Reglas especiales'
     DEFAULTTOTODAY: '¿Por defecto a hoy?'
-    DELETE: 'Borrar este campo'
-    DRAG: 'Arrastre para reajustar el orden de los campos'
-    ENTERQUESTION: 'Ingresar pregunta'
-    EXTRACLASSA: 'Estilo/disposición adicional'
-    EXTRACLASSB: 'Clase CSS adicional - separar varias con un espacio'
-    FIELDCONFIGURATION: 'Configuración del campo'
     FIELDISREQUIRED: '{name} es requerido'
-    FIELDONDEFAULT: 'Campo por defecto'
-    GREATERTHAN: 'Valor más grande que'
-    GREATERTHANEQUAL: 'Valor más grande o igual que'
     GROUP: Grupo
-    HIDE: Esconder
-    HIDETHISFIELD: 'Esconder este campo'
-    IS: Es
-    LESSTHAN: 'Valor menor que'
-    LESSTHANEQUAL: 'Valor menor o igual que'
-    LOCKED: 'Estos campos no pueden ser modificados'
-    MAXVALUE: 'Valor máximo'
-    MINVALUE: 'Valor mínimo'
     'NO': 'No'
-    NOTBLANK: 'No puede ser en blanco'
-    NOTVALUE: 'Sin valor'
-    OPTIONS: Opciones
     PLURALNAME: 'Campos de formulario editables'
     REQUIRED: 'Este campo es necesario para este formulario y no puede ser borrado'
-    SHOW: Mostrar
-    SHOWOPTIONS: 'Mostrar opciones'
-    SHOWTHISFIELD: 'Mostrar este campo'
     SINGULARNAME: 'Campo de formulario editable'
     VALIDATION: Validación
-    VALUE: Valor
-    WHEN: Cuando
     'YES': Sí
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Casillas de verificación'
@@ -117,9 +63,6 @@ es_ES:
     PLURALNAME: 'Campos numéricos'
     SINGULARNAME: 'Campo numérico'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Remover esta opción'
-    DRAG: 'Arrastrar para reorganizar el orden de las opciones'
-    LOCKED: 'Estos campos no pueden ser modificados'
     PLURALNAME: 'Opciones editables'
     SINGULARNAME: 'Opciones editables'
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
@@ -141,30 +84,20 @@ es_ES:
     PLURALNAME: 'Campos enviados en formulario'
     SINGULARNAME: 'Campo enviado en formulario'
   SilverStripe\UserForms\Model\UserDefinedForm:
-    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
-    CONFIGURATION: Configuración
     DESCRIPTION: 'Agrega un formulario personalizable.'
     EMAILADDRESS: Email
     EMAILBODY: Cuerpo
     EMAILFROM: De
-    EMAILRECIPIENTS: Destinatarios
     EMAILSUBJECT: 'Asunto del correo'
-    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
     EmailFromContent: 'La dirección desde permite establecer de quien viene el email. En la mayoría de los servidores esto se necesitará establecer a una dirección de email del mismo nombre de dominio que su sitio. Por ejemplo, en susitio.com la dirección desde puede ser algo como loquesea@susitio.com. Sin embargo, Ud puede establecer cualquier dirección de email que desee como dirección del remitente.'
-    FORM: Formulario
     FROMADDRESS: 'Enviar este mail desde'
     HIDEFORMDATA: 'Esconder los datos enviados en el mail'
-    ONCOMPLETELABEL: 'Mostrar al terminar'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleccione un campo del formulario para utilizar como dirección del remitente'
     ORSELECTAFIELDTOUSEASTO: '.. o seleccione un campo que se utiliza como la dirección'
     PLURALNAME: 'Páginas base'
     REPLYADDRESS: 'Email para responder a'
-    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
     SELECTAFIELDTOSETSUBJECT: '... o seleccionar un campo para usarlo como el asunto'
     SENDEMAILTO: 'Enviar mail a'
     SENDPLAIN: 'Enviar el correo como texto plano'
-    SHOWCLEARFORM: 'Mostrar el botón borrar'
     SINGULARNAME: 'Formulario definido por el usuario'
-    SUBMISSIONS: Propuestas
     SUBMITBUTTON: Enviar
-    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'

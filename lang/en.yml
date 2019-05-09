@@ -1,4 +1,6 @@
 en:
+  EditableTextField:
+    php.SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
@@ -32,8 +34,10 @@ en:
     UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
     WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filter
     FILTERSUBMISSIONS: 'Filter Submissions..'
     FROM: From
+    RESET: Reset
     TILL: Till
     WHEREVALUEIS: 'where value is..'
   SilverStripe\UserForms\Model\EditableCustomRule:
@@ -177,6 +181,7 @@ en:
     TITLE: Title
     VALUE: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    ORDER_WARNING: 'Minimum length should be less than the maximum length.'
     PLURALNAME: 'Numeric Fields'
     PLURALS:
       one: 'A Numeric Field'
@@ -208,7 +213,6 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
-    MINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
   SilverStripe\UserForms\Model\EditableFormField\Validator:
     REQUIRED_ERROR: 'Form fields cannot be required and have conditional display rules.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
@@ -216,6 +220,7 @@ en:
     EMAILCONTENTTAB: 'Email Content'
     EMAILDETAILSTAB: 'Email Details'
     EMAILFROMREQUIRED: '"Email From" address is required'
+    EMAILTOREQUIRED: '"Send email to" address or field is required'
     PLURALNAME: 'Email Recipients'
     PLURALS:
       one: 'An Email Recipient'

@@ -1,47 +1,8 @@
 tr_TR:
-  CustomRule:
-    BLANK: Blank
-    DELETE: Delete
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    SHOWTHISFIELD: 'Show This Field'
-    VALUE: Value
-    WHEN: When
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is required'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Add
-    ADDRULE: 'Add Rule'
-    BLANK: Blank
     CUSTOMRULES: 'Custom Rules'
-    DELETE: 'Bu alanı sil'
-    DRAG: 'Alanlari yeniden sıralamak için sürükleyin'
-    FIELDCONFIGURATION: 'Field Configuration'
-    FIELDONDEFAULT: 'Field On Default'
-    GREATERTHAN: 'Value Greater Than'
-    GREATERTHANEQUAL: 'Value Greater Than Or Equal'
-    HIDE: Hide
-    HIDETHISFIELD: 'Hide This Field'
-    IS: Is
-    LESSTHAN: 'Value Less Than'
-    LESSTHANEQUAL: 'Value Less Than Or Equal'
-    LOCKED: 'Bu alanlar değiştirilemez'
-    NOTBLANK: 'Not Blank'
-    NOTVALUE: 'Not Value'
-    OPTIONS: Options
     REQUIRED: 'Bu alan bu form için gereklidir, silinemez'
-    SHOW: Show
-    SHOWOPTIONS: 'Show Options'
-    SHOWTHISFIELD: 'Show This Field'
     VALIDATION: Validation
-    VALUE: Value
-    WHEN: When
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -58,10 +19,6 @@ tr_TR:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Remove this option'
-    DRAG: 'Drag to rearrange order of options'
-    LOCKED: 'These fields cannot be modified'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
@@ -79,19 +36,12 @@ tr_TR:
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILFROM: From
-    EMAILRECIPIENTS: 'Email Recipients'
     EMAILSUBJECT: 'Email Subject'
-    FORM: Form
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
-    ONCOMPLETELABEL: 'Tamamlanınca görüntüle'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
-    SUBMISSIONS: Gönderiler
     SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Gönder düğmesi üzerindeki yazı:'

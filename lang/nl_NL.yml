@@ -1,73 +1,21 @@
 nl_NL:
-  CustomRule:
-    BLANK: Blanco
-    DELETE: Verwijder
-    GREATERTHAN: 'Waarde groter dan'
-    GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
-    HIDETHISFIELD: 'Verberg dit veld'
-    IS: Is
-    LESSTHAN: 'Waarde kleiner dan'
-    LESSTHANEQUAL: 'Waarde kleiner of gelijk aan'
-    NOTBLANK: 'Is Blanco'
-    NOTVALUE: 'Geen waarde'
-    SHOWTHISFIELD: 'Toon dit veld'
-    VALUE: Waarde
-    WHEN: Wanneer
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Selecteer upload locatie'
-  FieldEditor:
-    ADD: Toevoegen
-    SELECTAFIELD: 'Kies een veld'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Paginas
-    SINGULARNAME: Pagina
-  SilverStripe\Forms\Form:
-    FIELDISREQUIRED: '{name} is verplicht'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filter
-    ResetFilter: Herstel
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Inzendingen filteren'
     WHEREVALUEIS: 'waar waarde is...'
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Toevoegen
-    ADDLabel: 'Optie toevoegen'
-    ADDRULE: 'Regel toevoegen'
-    BLANK: Blanco
     CHECKEDBYDEFAULT: 'Standaard aangevinkt'
     CUSTOMERROR: 'Aangepaste foutbericht'
     CUSTOMRULES: 'Aanpasbare regels'
     DEFAULTTOTODAY: 'Standaard ingesteld op vandaag?'
-    DELETE: Verwijder
-    DRAG: 'Versleep om de rangschikking van de velden te wijzigen'
-    ENTERQUESTION: 'Voer vraag in'
-    EXTRACLASSA: 'Extra Styling/Layout'
-    EXTRACLASSB: 'Extra css Class - meerdere classen aangeven met een spatie'
-    FIELDCONFIGURATION: 'Veld opties'
     FIELDISREQUIRED: '{name} is verplicht'
-    FIELDONDEFAULT: 'Toon dit veld?'
-    GREATERTHAN: 'Waarde groter dan'
-    GREATERTHANEQUAL: 'Waarde groter of gelijk aan'
     GROUP: Groep
-    HIDE: Verberg
-    HIDETHISFIELD: 'Verberg dit veld'
-    IS: Is
-    LESSTHAN: 'Waarde kleiner dan'
-    LESSTHANEQUAL: 'Waarde kleiner of gelijk aan'
-    LOCKED: 'Deze velden zijn niet aanpasbaar'
-    NOTBLANK: 'Niet blanco'
-    NOTVALUE: 'Geen waarde'
-    OPTIONS: Opties
     PLURALNAME: 'Bewerkbare formuliervelden'
     REQUIRED: 'Is dit veld verplicht?'
     RIGHTTITLE: 'Titel rechts'
-    SHOW: Toon
-    SHOWOPTIONS: 'Toon opties'
-    SHOWTHISFIELD: 'Toon dit veld'
     SINGULARNAME: 'Bewerkbaar formulierveld'
     VALIDATION: Validatie
-    VALUE: Waarde
-    WHEN: Wanneer
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Selectievakjes
     SINGULARNAME: Selectievakje
@@ -107,9 +55,6 @@ nl_NL:
     PLURALNAME: 'Numerieke velden'
     SINGULARNAME: 'Numerieke veld'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    DELETE: 'Verwijder optie'
-    DRAG: 'Sleep om volgorde van de opties te herschikken'
-    LOCKED: 'Deze velden zijn niet aanpasbaar'
     PLURALNAME: 'Bewerkbare opties'
     SINGULARNAME: 'Bewerkbare optie'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
@@ -134,30 +79,19 @@ nl_NL:
     PLURALNAME: 'Ingediende formvelden'
     SINGULARNAME: 'Ingediende formveld'
   SilverStripe\UserForms\Model\UserDefinedForm:
-    ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
     CLEARBUTTON: Herstellen
-    CONFIGURATION: Instellingen
     DESCRIPTION: 'Formulier pagina'
     EMAILADDRESS: Email
     EMAILBODY: Tekst
     EMAILFROM: Van
-    EMAILRECIPIENTS: 'Email ontvangers'
     EMAILSUBJECT: Onderwerp
-    ENABLELIVEVALIDATION: 'Zet real-time validatie aan'
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
-    FORM: Formulier
     FROMADDRESS: 'Email verzonden vanaf'
     HIDEFORMDATA: 'Verberg formulier gegevens in email?'
-    ONCOMPLETELABEL: 'Bericht na succesvol verzonden'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoorden op'
     ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
     REPLYADDRESS: 'E-mail voor antwoord op'
-    SAVESUBMISSIONS: 'Schakel opslaan van inzendingen uit'
     SENDEMAILTO: 'Stuur email naar'
     SENDPLAIN: 'Verstuur als platte tekst? (HTML wordt verwijderd)'
-    SHOWCLEARFORM: 'Toon Herstel-button'
     SINGULARNAME: 'Formulier pagina'
-    SUBMISSIONS: Inzendingen
     SUBMITBUTTON: Verzenden
-    TEXTONCLEAR: 'Tekst op herstel button:'
-    TEXTONSUBMIT: 'Tekst op Verzend-button'
