@@ -31,6 +31,6 @@ class UserDefinedForm extends Page
 
     /**
      * @var string
-    */
+     */
     private static $controller_name = UserDefinedFormController::class;
 }
