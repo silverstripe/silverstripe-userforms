@@ -29,8 +29,8 @@ class UserDefinedForm extends Page
      */
     private static $table_name = 'UserDefinedForm';
 
-    public function getControllerName()
-    {
-        return UserDefinedFormController::class;
-    }
+    /**
+     * @var string
+    */
+    private static $controller_name = UserDefinedFormController::class;
 }
