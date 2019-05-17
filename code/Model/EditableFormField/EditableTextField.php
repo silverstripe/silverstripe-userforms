@@ -2,13 +2,15 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Control\Email\Email;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\ValidationResult;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
@@ -171,14 +173,14 @@ class EditableTextField extends EditableFormField
         parent::updateFormField($field);
 
         if (is_numeric($this->MinLength) && $this->MinLength > 0) {
-            $field->setAttribute('data-rule-minlength', intval($this->MinLength));
+            $field->setAttribute('data-rule-minlength', (int) $this->MinLength);
         }
 
         if (is_numeric($this->MaxLength) && $this->MaxLength > 0) {
             if ($field instanceof TextField) {
-                $field->setMaxLength(intval($this->MaxLength));
+                $field->setMaxLength((int) $this->MaxLength);
             }
-            $field->setAttribute('data-rule-maxlength', intval($this->MaxLength));
+            $field->setAttribute('data-rule-maxlength', (int) $this->MaxLength);
         }
 
         if ($this->Autocomplete) {
