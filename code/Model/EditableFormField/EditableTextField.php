@@ -131,12 +131,18 @@ class EditableTextField extends EditableFormField
             FieldGroup::create(
                 _t(__CLASS__.'.TEXTLENGTH', 'Allowed text length'),
                 [
-                    NumericField::create('MinLength', false),
-                    LiteralField::create('RangeLength', _t(__CLASS__.".RANGE_TO", "to")),
+                    NumericField::create('MinLength', false)
+                        ->setAttribute('aria-label', _t(__CLASS__ . '.MIN_LENGTH', 'Minimum text length')),
+                    LiteralField::create(
+                        'RangeLength',
+                        '<span class="userform-field__allowed-length-separator">'
+                        . _t(__CLASS__ . '.RANGE_TO', 'to')
+                        . '</span>'
+                    ),
                     NumericField::create('MaxLength', false)
-
+                        ->setAttribute('aria-label', _t(__CLASS__ . '.MAX_LENGTH', 'Maximum text length')),
                 ]
-            )
+            )->addExtraClass('userform-field__allowed-length')
         ]);
 
         return $fields;
