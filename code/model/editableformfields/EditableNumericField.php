@@ -27,14 +27,22 @@ class EditableNumericField extends EditableFormField
     }
 
     /**
-     * @return NumericField
+     * @return UserFormsNumericField
      */
     public function getFormField()
     {
-        $field = NumericField::create($this->Name, $this->EscapedTitle, $this->Default)
+        $field = UserFormsNumericField::create($this->Name, $this->EscapedTitle, $this->Default)
             ->setFieldHolderTemplate('UserFormsField_holder')
             ->setTemplate('UserFormsField')
             ->addExtraClass('number');
+
+        if (!empty($this->MinValue)) {
+            $field->setMin($this->MinValue);
+        }
+
+        if (!empty($this->MaxValue)) {
+            $field->setMax($this->MaxValue);
+        }
 
         $this->doUpdateFormField($field);
 
