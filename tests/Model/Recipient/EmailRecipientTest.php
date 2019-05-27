@@ -29,7 +29,7 @@ class EmailRecipientTest extends SapphireTest
     }
 
     /**
-     * @expectedException SilverStripe\ORM\ValidationException
+     * @expectedException \SilverStripe\ORM\ValidationException
      * @expectedExceptionMessage "Send email to" address or field is required
      */
     public function testEmptyRecipientFailsValidation()
