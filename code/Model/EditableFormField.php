@@ -117,6 +117,13 @@ class EditableFormField extends DataObject
     ];
 
     /**
+     * @var array
+     */
+    private static $searchable_fields = [
+        'Title',
+    ];
+
+    /**
      * @config
      * @var array
      */
