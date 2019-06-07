@@ -1037,4 +1037,31 @@ class EditableFormField extends DataObject
     {
         return false;
     }
+    
+    
+    /**
+     * Anyone who has access to the editableoption parent will
+     *  be able to edit, delete, and view the editableoption
+     * 
+     * @return bool
+     */
+    public function canEdit($member = null)
+    {
+        return true;
+    }
+
+    public function canCreate($member = null, $context = array())
+    {
+        return true;
+    }
+
+    public function canView($member = null)
+    {
+        return true;
+    }
+
+    public function canDelete($member = null)
+    {
+        return true;
+    }
 }
