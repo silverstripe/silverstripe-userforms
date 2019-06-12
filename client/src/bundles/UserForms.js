@@ -529,6 +529,7 @@ jQuery(document).ready(($) => {
         $(form).removeClass('dirty');
 
         form.submit();
+        userform.$el.trigger('userform.form.submit');
       } else {
         userform.errorContainer.show();
       }
