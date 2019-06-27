@@ -166,3 +166,26 @@
 .cms-preview {
   z-index: 2;
 }
+
+// Custom styles for userforms fields in the CMS
+.userform-field {
+  &__allowed-length {
+    .form__fieldgroup-item {
+      // Removing default margin-top from field group, this one already has one in its parent container
+      margin-top: 0;
+    }
+
+    .field.text {
+      min-width: auto;
+    }
+
+    input.text {
+      width: 4rem;
+    }
+  }
+
+  &__allowed-length-separator {
+    display: inline-block;
+    margin: 0 .6rem .6rem 0;
+  }
+}

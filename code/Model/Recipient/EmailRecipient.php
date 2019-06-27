@@ -229,16 +229,21 @@ class EmailRecipient extends DataObject
 
         // Only show the preview link if the recipient has been saved.
         if (!empty($this->EmailTemplate)) {
-            $pageEditController = singleton(CMSPageEditController::class);
-            $pageEditController
-                ->getRequest()
-                ->setSession(Controller::curr()->getRequest()->getSession());
+            $request = Controller::curr()->getRequest();
 
+            $pageEditController = singleton(CMSPageEditController::class);
+            $pageEditController->getRequest()->setSession($request->getSession());
+
+            $currentUrl = $request->getURL();
             // If used in a regular page context, will have "/edit" on the end, if used in a trait context
-            // it won't. Strip that off in case.
-            $currentUrl = Controller::curr()->getRequest()->getURL();
-            if (substr($currentUrl, -5) === '/edit') {
-                $currentUrl = substr($currentUrl, 0, strlen($currentUrl) - 5);
+            // it won't. Strip that off in case. It may also have "ItemEditForm" on the end instead if this is
+            // an AJAX request, e.g. saving a GridFieldDetailForm
+            $remove = ['/edit', '/ItemEditForm'];
+            foreach ($remove as $badSuffix) {
+                $badSuffixLength = strlen($badSuffix);
+                if (substr($currentUrl, -$badSuffixLength) === $badSuffix) {
+                    $currentUrl = substr($currentUrl, 0, -$badSuffixLength);
+                }
             }
             $previewUrl = Controller::join_links($currentUrl, 'preview');
 

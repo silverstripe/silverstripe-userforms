@@ -312,7 +312,7 @@ jQuery(document).ready(($) => {
    * @desc Update the progress element to show a new step.
    */
   ProgressBar.prototype.update = function update(stepID) {
-    const $newStepElement = $(this.$el.find('.form-step')[stepID]);
+    const $newStepElement = $(this.$el.parent('.userform').find('.form-step')[stepID]);
     let stepNumber = 0;
     let barWidth = stepID / (this.$buttons.length - 1) * 100;
 
