@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Extension;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
@@ -103,7 +104,8 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldDeleteAction(),
                 new GridFieldToolbarHeader(),
                 new GridFieldOrderableRows('Sort'),
-                new GridFieldDetailForm(null, false, false)
+                new GridFieldDetailForm(),
+                new GridFieldPaginator(999)
             );
 
         $editButton->removeExtraClass('grid-field__icon-action--hidden-on-hover');
