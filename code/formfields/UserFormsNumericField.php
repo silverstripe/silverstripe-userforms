@@ -57,7 +57,11 @@ class UserFormsNumericField extends NumericField
         if ((!empty($this->min) && $this->value < $this->min) || (!empty($this->max) && $this->value > $this->max)) {
             $validator->validationError(
                 $this->name,
-                sprintf("This must be between %s and %s", $this->min, $this->max),
+                _t(
+                    'UserFormsNumericField.ErrorMsg',
+                    "This must be between {min} and {max}",
+                    ['min' => $this->min, 'max' => $this->max]
+                ),
                 "validation",
                 false
             );
