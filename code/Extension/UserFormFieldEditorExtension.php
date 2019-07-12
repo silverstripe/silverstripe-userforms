@@ -105,6 +105,7 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldToolbarHeader(),
                 new GridFieldOrderableRows('Sort'),
                 new GridFieldDetailForm(),
+                // Betterbuttons prev and next is enabled by adding a GridFieldPaginator component
                 new GridFieldPaginator(999)
             );
 
