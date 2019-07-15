@@ -4,12 +4,18 @@
 class UserFormsNumericField extends NumericField
 {
 
+    /**
+     * @var int
+     */
     private $min;
 
+    /**
+     * @var int
+     */
     private $max;
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getMin()
     {
@@ -17,7 +23,9 @@ class UserFormsNumericField extends NumericField
     }
 
     /**
-     * @param mixed $min
+     * @param int $min
+     * @return $this
+     * @throws Exception If the provided argument is not numeric
      */
     public function setMin($min)
     {
@@ -26,10 +34,11 @@ class UserFormsNumericField extends NumericField
         }
 
         $this->min = $min;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getMax()
     {
@@ -37,14 +46,17 @@ class UserFormsNumericField extends NumericField
     }
 
     /**
-     * @param mixed $max
+     * @param int $max
+     * @return $this
+     * @throws Exception If the provided argument is not numeric
      */
     public function setMax($max)
     {
         if (!is_numeric($max)) {
-            throw new Exception('$min must be a number.');
+            throw new Exception('$max must be a number.');
         }
         $this->max = $max;
+        return $this;
     }
 
     public function validate($validator)
@@ -56,8 +68,8 @@ class UserFormsNumericField extends NumericField
 
         if ((!empty($this->min) && $this->value < $this->min) || (!empty($this->max) && $this->value > $this->max)) {
             $msg = (!empty($this->min) && $this->value < $this->min) ?
-                _t(self::class . 'RANGE_ERROR_MIN', 'Please enter a value that is no less than {min}.', $this->min) :
-                _t(self::class . 'RANGE_ERROR_MAX', 'Please enter a value that is no more than {max}.', $this->max);
+                _t(self::class . 'RANGE_ERROR_MIN', 'Please enter a value that is no less than {min}.', ['min' => $this->getMin()]) :
+                _t(self::class . 'RANGE_ERROR_MAX', 'Please enter a value that is no more than {max}.', ['max' => $this->getMax()]);
             $validator->validationError($this->name, $msg, "validation", false);
 
             return false;
