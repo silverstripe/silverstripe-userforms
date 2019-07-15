@@ -55,16 +55,10 @@ class UserFormsNumericField extends NumericField
         }
 
         if ((!empty($this->min) && $this->value < $this->min) || (!empty($this->max) && $this->value > $this->max)) {
-            $validator->validationError(
-                $this->name,
-                _t(
-                    'UserFormsNumericField.ErrorMsg',
-                    "This must be between {min} and {max}",
-                    ['min' => $this->min, 'max' => $this->max]
-                ),
-                "validation",
-                false
-            );
+            $msg = (!empty($this->min) && $this->value < $this->min) ?
+                _t(self::class . 'RANGE_ERROR_MIN', 'Please enter a value that is no less than {min}.', $this->min) :
+                _t(self::class . 'RANGE_ERROR_MAX', 'Please enter a value that is no more than {max}.', $this->max);
+            $validator->validationError($this->name, $msg, "validation", false);
 
             return false;
         }
