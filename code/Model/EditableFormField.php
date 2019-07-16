@@ -228,6 +228,16 @@ class EditableFormField extends DataObject
     {
         $fields = FieldList::create(TabSet::create('Root'));
 
+        // If created with (+) button
+        if ($this->ClassName === EditableFormField::class) {
+            $fieldClasses = $this->getEditableFieldClasses();
+            $fields->addFieldsToTab('Root.Main', [
+                DropdownField::create('ClassName', _t(__CLASS__.'.TYPE', 'Type'), $fieldClasses)
+                    ->setEmptyString(_t(__CLASS__ . 'TYPE_EMPTY', 'Select field type'))
+            ]);
+            return $fields;
+        }
+
         // Main tab
         $fields->addFieldsToTab(
             'Root.Main',

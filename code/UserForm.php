@@ -258,7 +258,7 @@ SQL;
             $config->addComponent(new GridFieldDeleteAction());
             $config->addComponent(new GridFieldPageCount('toolbar-header-right'));
             $config->addComponent($pagination = new GridFieldPaginator(25));
-            $config->addComponent(new GridFieldDetailForm(null, null, false));
+            $config->addComponent(new GridFieldDetailForm(null, true, false));
             $config->addComponent(new GridFieldButtonRow('after'));
             $config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
             $config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));

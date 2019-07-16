@@ -39,6 +39,18 @@ class Validator extends RequiredFields
             return false;
         }
 
+        // When the record is unsaved and the classname is not set throw an error
+        if ((!$this->record || !$this->record->exists()) && (!isset($data['ClassName']) || empty($data['ClassName']))) {
+            $this->validationError(
+                'ClassName',
+                _t(
+                    __CLASS__ . 'CLASSNAME_ERROR',
+                    'You need to select a field type before you can create the field'
+                )
+            );
+            return false;
+        }
+
         // Skip unsaved records
         if (!$this->record || !$this->record->exists()) {
             return true;
