@@ -1,13 +1,11 @@
 # See https://github.com/silverstripe/silverstripe-travis-support for setup details
 
-sudo: false
+dist: trusty
 
 language: php
 
 matrix:
   include:
-    - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=3.5
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3
     - php: 5.6
@@ -15,6 +13,8 @@ matrix:
     - php: 7.1
       env: DB=MYSQL CORE_RELEASE=3.6
     - php: 7.2
+      env: DB=MYSQL CORE_RELEASE=3.7
+    - php: 7.3
       env: DB=MYSQL CORE_RELEASE=3.7
 
 before_script:
