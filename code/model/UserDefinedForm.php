@@ -782,7 +782,9 @@ JS
             {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
         }
     });
-    $("{$target}").find('.hide').removeClass('hide');
+    if (!$("{$target}").hasClass('form-step')) {
+        $("{$target}").find('.hide').removeClass('hide');
+    }
 EOS;
         }
 
