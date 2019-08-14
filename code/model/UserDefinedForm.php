@@ -578,7 +578,7 @@ JS
         // email users on submit.
         if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
             foreach ($recipients as $recipient) {
-                $email = new UserFormRecipientEmail($submittedFields);
+                $email = UserFormRecipientEmail::create($submittedFields);
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments) {
