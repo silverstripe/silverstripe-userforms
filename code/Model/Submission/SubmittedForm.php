@@ -132,10 +132,10 @@ class SubmittedForm extends DataObject
         }
 
         if ($this->Parent()) {
-            return $this->Parent()->canCreate();
+            return $this->Parent()->canCreate($member);
         }
 
-        return parent::canCreate();
+        return parent::canCreate($member);
     }
 
     /**
