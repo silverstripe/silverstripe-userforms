@@ -1,5 +1,7 @@
 language: php
 
+dist: trusty
+
 env:
   global:
     - COMPOSER_ROOT_VERSION=5.0.x-dev
