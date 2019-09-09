@@ -130,7 +130,12 @@ class SubmittedForm extends DataObject
         if ($extended !== null) {
             return $extended;
         }
-        return $this->Parent()->canCreate();
+
+        if ($this->Parent()) {
+            return $this->Parent()->canCreate($member);
+        }
+
+        return parent::canCreate($member);
     }
 
     /**
