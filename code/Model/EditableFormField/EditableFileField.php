@@ -9,6 +9,7 @@ use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\ORM\ValidationResult;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 
