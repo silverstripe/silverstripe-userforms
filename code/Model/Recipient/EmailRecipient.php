@@ -41,6 +41,7 @@ use SilverStripe\UserForms\UserForm;
 use SilverStripe\View\Requirements;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * A Form can have multiply members / emails to email the submission
@@ -151,7 +152,8 @@ class EmailRecipient extends DataObject
 
         $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
         if ($formID) {
-            return UserDefinedForm::get()->byID($formID);
+            $parent_class = get_class(Injector::inst()->get(UserDefinedForm::class));
+            return $parent_class::get()->byID($formID);
         }
     }
 
