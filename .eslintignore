@@ -1,0 +1,8 @@
+# Ignore dist files
+client/dist/
+
+# Ignore legacy files
+client/src/legacy/
+
+# Ignore auto-generated language files
+client/lang/

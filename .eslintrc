@@ -1,7 +1,0 @@
-{
-  "extends": "airbnb",
-  "root": true,
-  "rules": {
-    "init-declarations": 1
-  }
-}

@@ -5,6 +5,7 @@ dist: trusty
 env:
   global:
     - COMPOSER_ROOT_VERSION=5.0.x-dev
+    - TRAVIS_NODE_VERSION="10"
 
 matrix:
   include:
@@ -15,7 +16,7 @@ matrix:
     - php: 7.1
       env: DB=MYSQL RECIPE_VERSION=4.3.x-dev PHPUNIT_COVERAGE_TEST=1
     - php: 7.2
-      env: DB=PGSQL RECIPE_VERSION=4.4.x-dev PHPUNIT_TEST=1
+      env: DB=PGSQL RECIPE_VERSION=4.4.x-dev PHPUNIT_TEST=1 NPM_TEST=1
     - php: 7.3
       env: DB=MYSQL RECIPE_VERSION=4.x-dev PHPUNIT_TEST=1
 
@@ -29,12 +30,16 @@ before_script:
   - composer validate
   - composer require --no-update silverstripe/recipe-cms:$RECIPE_VERSION
   - if [[ $DB == PGSQL ]]; then composer require --no-update silverstripe/postgresql:2.2.x-dev; fi
-  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+  - composer install --prefer-source --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+  - if [[ $NPM_TEST ]]; then nvm install $TRAVIS_NODE_VERSION && nvm use $TRAVIS_NODE_VERSION && npm install -g yarn && yarn install --network-concurrency 1 && yarn run build; fi
 
 script:
   - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit; fi
   - if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml -vvv; fi
   - if [[ $PHPCS_TEST ]]; then vendor/bin/phpcs code/ tests/; fi
+  - if [[ $NPM_TEST ]]; then git diff-files --quiet -w --relative=client; fi
+  - if [[ $NPM_TEST ]]; then git diff -w --no-color --relative=client; fi
+  - if [[ $NPM_TEST ]]; then yarn run lint; fi
 
 after_success:
   - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
