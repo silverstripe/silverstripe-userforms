@@ -1,3 +1,3 @@
 // Used for CMS form fields
-import 'bundles/FieldEditor.js';
-import 'bundles/Recipient.js';
+import 'bundles/FieldEditor';
+import 'bundles/Recipient';

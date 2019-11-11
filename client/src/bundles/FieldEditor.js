@@ -26,11 +26,13 @@ jQuery.entwine('ss', ($) => {
             return;
           }
           case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroup': {
-            thisLevel = ++depth;
+            depth += 1;
+            thisLevel = depth;
             break;
           }
           case 'SilverStripe\\UserForms\\Model\\EditableFormField\\EditableFieldGroupEnd': {
-            thisLevel = depth--;
+            thisLevel = depth;
+            depth -= 1;
             break;
           }
           default: {

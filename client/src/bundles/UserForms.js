@@ -286,7 +286,7 @@ jQuery(document).ready(($) => {
     // Spaces out the steps below progress bar evenly
     this.$jsAlign.each((index, button) => {
       const $button = $(button);
-      const leftPercent = 100 / (self.$jsAlign.length - 1) * index;
+      const leftPercent = (100 / (self.$jsAlign.length - 1)) * index;
       const leftPercentCssValue = `${leftPercent}%`;
       const buttonOffset = -1 * ($button.innerWidth() / 2);
 
@@ -314,7 +314,7 @@ jQuery(document).ready(($) => {
   ProgressBar.prototype.update = function update(stepID) {
     const $newStepElement = $(this.$el.parent('.userform').find('.form-step')[stepID]);
     let stepNumber = 0;
-    let barWidth = stepID / (this.$buttons.length - 1) * 100;
+    let barWidth = (stepID / (this.$buttons.length - 1)) * 100;
 
     // Set the current step number.
     this.$buttons.each((i, button) => {
@@ -419,18 +419,16 @@ jQuery(document).ready(($) => {
       lastStep = this.userformInstance.steps[i];
 
       // Skip if step is hidden
-      if (lastStep.conditionallyHidden()) {
-        continue;
+      if (!lastStep.conditionallyHidden()) {
+        // Update the "Next" button.
+        this.$el.find('.step-button-next')[stepID >= i ? 'hide' : 'show']();
+
+        // Update the "Actions".
+        this.$el.find('.btn-toolbar')[stepID >= i ? 'show' : 'hide']();
+
+        // Stop processing last step
+        break;
       }
-
-      // Update the "Next" button.
-      this.$el.find('.step-button-next')[stepID >= i ? 'hide' : 'show']();
-
-      // Update the "Actions".
-      this.$el.find('.btn-toolbar')[stepID >= i ? 'show' : 'hide']();
-
-      // Stop processing last step
-      break;
     }
   };
 
@@ -596,10 +594,10 @@ jQuery(document).ready(($) => {
   UserForm.prototype.jumpToStep = function jumpToStep(stepNumber, direction) {
     const targetStep = this.steps[stepNumber];
     let isValid = false;
-    const forward = direction === void 0 ? true : direction;
+    const forward = direction === undefined ? true : direction;
 
     // Make sure the target step exists.
-    if (targetStep === void 0) {
+    if (targetStep === undefined) {
       return;
     }
 
@@ -663,8 +661,8 @@ jQuery(document).ready(($) => {
       return;
     }
 
-    CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== void 0;
-    CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== void 0;
+    CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== undefined;
+    CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== undefined;
 
     // Extend the default validation options with conditional options
     // that are set by the user in the CMS.
