@@ -4,7 +4,7 @@ dist: trusty
 
 env:
   global:
-    - COMPOSER_ROOT_VERSION=5.5.x-dev
+    - COMPOSER_ROOT_VERSION=5.x-dev
     - TRAVIS_NODE_VERSION="10"
 
 matrix:
