@@ -3,14 +3,6 @@
 UserForms enables CMS users to create dynamic forms via a drag and drop interface
 and without getting involved in any PHP code.
 
-## Maintainer Contact
-
- * Will Rossiter (Nickname: wrossiter, willr) `<will (at) fullscreen (dot) io>`
-
-## Requirements
-
-See the "require" section of [composer.json](https://github.com/silverstripe/silverstripe-userforms/blob/master/composer.json)
-
 ## Features
 
 *  Construct a form using all major form fields (text, email, dropdown, radio, checkbox..)
