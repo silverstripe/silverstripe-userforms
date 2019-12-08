@@ -1,3 +1,7 @@
+---
+title: Form submissions
+---
+
 # Form submissions
 
 ## Viewing form submissions in the CMS

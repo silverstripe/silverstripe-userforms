@@ -1,3 +1,7 @@
+---
+title: Multi-page forms
+---
+
 ## Creating a multi-page form
 
 To create a multi-page form, simply click the 'Add Page Break' button. 
