@@ -1,3 +1,7 @@
+---
+title: Field types
+---
+
 # Field types
 
 ## Checkbox Field

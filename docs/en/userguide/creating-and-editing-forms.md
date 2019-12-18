@@ -1,3 +1,7 @@
+---
+title: Creating and editing forms
+---
+
 # Creating and editing forms
 
 To create a new form, first decide where in the site you want your form to be. If you
@@ -14,10 +18,10 @@ drop-down menu will show up. Select "User Defined Form" Then hit the "Go" button
 
 You will notice that a new page has been created, with the name of "New User Defined Form." You will be taken to edit the page once you click "Create."
 
-<div class="note" markdown="1">
+[note]
 Don't worry if you create your page in the "wrong" place. Pages can be moved and re-ordered
 easily.
-</div>
+[/note]
 
 ## Combining forms and content
 
