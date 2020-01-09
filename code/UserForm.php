@@ -107,7 +107,6 @@ trait UserForm
      * @var array Default values of variables when this page is created
      */
     private static $defaults = [
-        'Content' => '$UserDefinedForm',
         'DisableSaveSubmissions' => 0,
         'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
     ];
