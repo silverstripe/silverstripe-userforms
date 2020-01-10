@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Form;
 
+use InvalidArgumentException;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\FormField;
@@ -27,7 +28,7 @@ class UserFormsRequiredFields extends RequiredFields
      *
      * @param array $data
      *
-     * @return boolean
+     * @return bool
      */
     public function php($data)
     {
@@ -58,18 +59,14 @@ class UserFormsRequiredFields extends RequiredFields
             // get editable form field - owns display rules for field
             $editableFormField = $this->getEditableFormFieldByName($fieldName);
 
-            $error = false;
-
-            // validate if there are no display rules or the field is conditionally visible
-            if (!$this->hasDisplayRules($editableFormField) ||
-                $this->conditionalFieldEnabled($editableFormField, $data)) {
-                $error = $this->validateRequired($formField, $data);
-            }
+            // Validate if the field is displayed
+            $error =
+                $editableFormField->isDisplayed($data) &&
+                $this->validateRequired($formField, $data);
 
             // handle error case
             if ($formField && $error) {
                 $this->handleError($formField, $fieldName);
-
                 $valid = false;
             }
         }
@@ -77,57 +74,35 @@ class UserFormsRequiredFields extends RequiredFields
         return $valid;
     }
 
+    /**
+     * Retrieve an Editable Form field by its name.
+     * @param string $name
+     * @return EditableFormField
+     */
     private function getEditableFormFieldByName($name)
     {
-        return EditableFormField::get()->filter(['name' => $name])->first();
-    }
+        $field = EditableFormField::get()->filter(['Name' => $name])->first();
 
-    private function hasDisplayRules($field)
-    {
-        return ($field->DisplayRules()->count() > 0);
-    }
-
-    private function conditionalFieldEnabled($editableFormField, $data)
-    {
-        $displayRules = $editableFormField->DisplayRules();
-
-        $conjunction = $editableFormField->DisplayRulesConjunctionNice();
-
-        $displayed = ($editableFormField->ShowOnLoadNice() === 'show');
-
-        // && start with true and find and condition that doesn't satisfy
-        // || start with false and find and condition that satisfies
-        $conditionsSatisfied = ($conjunction === '&&');
-
-        foreach ($displayRules as $rule) {
-            $controllingField = EditableFormField::get()->byID($rule->ConditionFieldID);
-
-            if ($controllingField->DisplayRules()->count() > 0) { // controllingField is also a conditional field
-                // recursively check - if any of the dependant fields are hidden, then this field cannot be visible.
-                if ($this->conditionalFieldEnabled($controllingField, $data)) {
-                    return false;
-                };
-            }
-
-            $ruleSatisfied = $rule->validateAgainstFormData($data);
-
-            if ($conjunction === '||' && $ruleSatisfied) {
-                $conditionsSatisfied = true;
-                break;
-            }
-            if ($conjunction === '&&' && !$ruleSatisfied) {
-                $conditionsSatisfied = false;
-                break;
-            }
+        if ($field) {
+            return $field;
         }
 
-        // initially displayed - condition fails || initially hidden, condition passes
-        return ($displayed xor $conditionsSatisfied);
+        // This should happen if form field data got corrupted
+        throw new InvalidArgumentException(sprintf(
+            'Could not find EditableFormField with name `%s`',
+            $name
+        ));
     }
 
-    // logic replicated from php() method of parent class SilverStripe\Forms\RequiredFields
-    // TODO refactor to share with parent (would require corrosponding change in framework)
-    private function validateRequired($field, $data)
+    /**
+     * Check if the validation rules for the specified field are met by the provided data.
+     *
+     * @note Logic replicated from php() method of parent class `SilverStripe\Forms\RequiredFields`
+     * @param EditableFormField $field
+     * @param array $data
+     * @return bool
+     */
+    private function validateRequired(FormField $field, array $data)
     {
         $error = false;
         $fieldName = $field->getName();

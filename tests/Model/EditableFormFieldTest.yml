@@ -4,7 +4,7 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     Title: Basic Text Field
 
   basic-text-2:
-    Name: basic_text_name
+    Name: basic_text_name_2
     Title: Basic Text Field
 
   required-text:
@@ -23,6 +23,83 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     DisplayRulesConjunction: And
     ShowOnLoad: false
 
+  # No rule
+  alwaysVisible:
+    Name: AlwaysVisible
+    Title: "This field is always visible"
+    ShowOnLoad: true
+    DisplayRulesConjunction: And
+
+  alwaysVisibleOr:
+    Name: AlwaysVisibleOr
+    Title: "This field is always visible"
+    ShowOnLoad: true
+    DisplayRulesConjunction: Or
+
+  neverVisible:
+    Name: NeverVisible
+    Title: "This field is never visible"
+    ShowOnLoad: false
+    DisplayRulesConjunction: And
+
+  neverVisibleOr:
+    Name: NeverVisibleOr
+    Title: "This field is never visible"
+    ShowOnLoad: false
+    DisplayRulesConjunction: Or
+
+  # Single rule
+
+  singleDisplayRule:
+    Name: SingleDisplayRule
+    Title: "This field will be displayed if the display rule is tripped"
+    ShowOnLoad: false
+    DisplayRulesConjunction: And
+
+  singleDisplayRuleOr:
+    Name: SingleDisplayRuleOr
+    Title: "This field will be displayed if the display rule is tripped"
+    ShowOnLoad: false
+    DisplayRulesConjunction: Or
+
+  singleHiddingRule:
+    Name: SingleHiddingRule
+    Title: "This field will be hidden if the display rule is tripped"
+    ShowOnLoad: true
+    DisplayRulesConjunction: And
+
+  singleHiddingRuleOr:
+    Name: SingleHiddingRuleOr
+    Title: "This field will be hidden if the display rule is tripped"
+    ShowOnLoad: true
+    DisplayRulesConjunction: Or
+
+  # Multi rule
+  multiDisplayRule:
+    Name: MultiDisplayRule
+    Title: "This field will be displayed if displayed if all the rule are met"
+    ShowOnLoad: false
+    DisplayRulesConjunction: And
+
+  multiDisplayRuleOr:
+    Name: MultiDisplayRuleOr
+    Title: "This field will be displayed if at least one rule is met"
+    ShowOnLoad: false
+    DisplayRulesConjunction: Or
+
+  multiHiddingRule:
+    Name: MultiHiddingRule
+    Title: "This field will be hidden if all the rule are met"
+    ShowOnLoad: true
+    DisplayRulesConjunction: And
+
+  multiHiddingRuleOr:
+    Name: MultiHiddingRuleOr
+    Title: "This field will be hidden if one rule is met"
+    ShowOnLoad: true
+    DisplayRulesConjunction: Or
+
+
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:
     Display: Show
@@ -34,6 +111,66 @@ SilverStripe\UserForms\Model\EditableCustomRule:
     Display: Hide
     ConditionOption: HasValue
     FieldValue: 6
+
+  # Single rules
+  ruleSingleDisplay:
+    Display: Show
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.singleDisplayRule
+  ruleSingleDisplayOr:
+    Display: Show
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.singleDisplayRuleOr
+  ruleSingleHidding:
+    Display: Show
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.singleHiddingRule
+  ruleSingleHiddingOr:
+    Display: Show
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.singleHiddingRuleOr
+
+  # Multi rules
+  ruleMultiDisplay1:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiDisplayRule
+  ruleMultiDisplay2:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiDisplayRule
+
+  ruleMultiDisplayOr1:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiDisplayRuleOr
+  ruleMultiDisplayOr2:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiDisplayRuleOr
+
+
+  ruleMultiHidding1:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiHiddingRule
+  ruleMultiHidding2:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiHiddingRule
+
+  ruleMultiHiddingOr1:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiHiddingRuleOr
+  ruleMultiHiddingOr2:
+    ConditionOption: IsNotBlank
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.multiHiddingRuleOr
 
 SilverStripe\UserForms\Model\EditableFormField\EditableOption:
   option-1:

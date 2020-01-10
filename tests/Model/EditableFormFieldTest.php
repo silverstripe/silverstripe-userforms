@@ -232,4 +232,58 @@ class EditableFormFieldTest extends FunctionalTest
 
         $this->assertContains('/images/editabletextfield.png', $field->getIcon());
     }
+
+    public function displayedProvider()
+    {
+        $one = ['basic_text_name' => 'foobar'];
+        $two = array_merge($one, ['basic_text_name_2' => 'foobar']);
+
+        return [
+            'no display rule AND' => ['alwaysVisible', [], true],
+            'no display rule OR' =>  ['alwaysVisibleOr', [], true],
+
+            'no display rule hidden AND' => ['neverVisible', [], false],
+            'no display rule hidden OR' => ['neverVisibleOr', [], false],
+
+            '1 unmet display rule AND' => ['singleDisplayRule', [], false],
+            '1 met display rule AND' => ['singleDisplayRule', $one, true],
+            '1 unmet display rule OR' => ['singleDisplayRuleOr', [], false],
+            '1 met display rule OR' => ['singleDisplayRuleOr', $one, true],
+
+            '1 unmet hide rule AND' => ['singleHiddingRule', [], true],
+            '1 met hide rule AND' => ['singleHiddingRule', $one, false],
+            '1 unmet hide rule OR' => ['singleHiddingRuleOr', [], true],
+            '1 met hide rule OR' => ['singleHiddingRuleOr', $one, false],
+
+            'multi display rule AND none met' => ['multiDisplayRule', [], false],
+            'multi display rule AND partially met' => ['multiDisplayRule', $one, false],
+            'multi display rule AND all met' => ['multiDisplayRule', $two, true],
+
+            'multi display rule OR none met' => ['multiDisplayRuleOr', [], false],
+            'multi display rule OR partially met' => ['multiDisplayRuleOr', $one, true],
+            'multi display rule OR all met' => ['multiDisplayRuleOr', $two, true],
+
+            'multi hide rule AND none met' => ['multiHiddingRule', [], true],
+            'multi hide rule AND partially met' => ['multiHiddingRule', $one, true],
+            'multi hide rule AND all met' => ['multiHiddingRule', $two, false],
+
+            'multi hide rule OR none met' => ['multiHiddingRuleOr', [], true],
+            'multi hide rule OR partially met' => ['multiHiddingRuleOr', $one, false],
+            'multi hide rule OR all met' => ['multiHiddingRuleOr', $two, false],
+        ];
+    }
+
+    /**
+     * @param $fieldName
+     * @param $data
+     * @param $expected
+     * @dataProvider displayedProvider
+     */
+    public function testIsDisplayed($fieldName, $data, bool $expected)
+    {
+        /** @var EditableFormField $field */
+        $field = $this->objFromFixture(EditableTextField::class, $fieldName);
+        $this->assertEquals($expected, $field->isDisplayed($data));
+    }
+
 }
