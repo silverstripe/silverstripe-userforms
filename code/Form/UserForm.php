@@ -162,7 +162,7 @@ class UserForm extends Form
     /**
      * Get the required form fields for this form.
      *
-     * @return UserFormsRequiredFields
+     * @return RequiredFields
      */
     public function getRequiredFields()
     {
