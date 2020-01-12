@@ -927,6 +927,20 @@ class EditableFormField extends DataObject
     }
 
     /**
+     * Determine effective display rules for this field.
+     *
+     * @return SS_List
+     * @deprecated 5.6 No longer needed because of support for conditional required field.
+     */
+    public function EffectiveDisplayRules()
+    {
+        if ($this->Required) {
+            return ArrayList::create();
+        }
+        return $this->DisplayRules();
+    }
+
+    /**
      * Extracts info from DisplayRules into array so UserDefinedForm->buildWatchJS can run through it.
      * @return array|null
      */

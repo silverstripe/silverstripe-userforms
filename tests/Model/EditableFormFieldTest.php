@@ -73,12 +73,19 @@ class EditableFormFieldTest extends FunctionalTest
         // it has 1 rule - when ticked the checkbox hides the text field
         $this->assertEquals(1, $rules->Count());
 
+        // EffectiveDisplayRules rule has been deprecated
+        $this->assertEquals($rules, $checkbox->EffectiveDisplayRules());
+
         $checkboxRule = $rules->First();
         $checkboxRule->ConditionFieldID = $field->ID;
 
         $this->assertEquals($checkboxRule->Display, 'Hide');
         $this->assertEquals($checkboxRule->ConditionOption, 'HasValue');
         $this->assertEquals($checkboxRule->FieldValue, '6');
+
+        // If field is required then all custom rules are disabled
+        $checkbox->Required = true;
+        $this->assertEquals(0, $checkbox->EffectiveDisplayRules()->count());
     }
 
     public function testEditableOptionEmptyValue()
@@ -285,5 +292,4 @@ class EditableFormFieldTest extends FunctionalTest
         $field = $this->objFromFixture(EditableTextField::class, $fieldName);
         $this->assertEquals($expected, $field->isDisplayed($data));
     }
-
 }
