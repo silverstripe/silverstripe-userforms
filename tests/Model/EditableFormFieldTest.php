@@ -286,7 +286,7 @@ class EditableFormFieldTest extends FunctionalTest
      * @param $expected
      * @dataProvider displayedProvider
      */
-    public function testIsDisplayed($fieldName, $data, bool $expected)
+    public function testIsDisplayed($fieldName, $data, $expected)
     {
         /** @var EditableFormField $field */
         $field = $this->objFromFixture(EditableTextField::class, $fieldName);
