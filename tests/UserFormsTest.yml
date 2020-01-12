@@ -241,7 +241,7 @@ SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-n
   radio-field-3:
-    Name: radio-option-2
+    Name: radio-option-3
     Title: Radio Option 3
     Options:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y-2

@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model;
 
+use InvalidArgumentException;
 use LogicException;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
@@ -237,6 +238,7 @@ class EditableCustomRule extends DataObject
      *
      * @param array $data Submitted form data
      * @return boolean
+     * @throws LogicException Invalid ConditionOption is set for this rule.
      */
     public function validateAgainstFormData($data)
     {

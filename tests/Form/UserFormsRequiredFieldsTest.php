@@ -29,7 +29,42 @@ class UserFormsRequiredFieldsTest extends SapphireTest
         $this->assertInstanceOf(UserFormsRequiredFields::class, $validator, 'Uses UserFormsRequiredFields validator');
     }
 
-    public function testValidationOfConditionalRequiredFields()
+    public function dataProviderValidationOfConditionalRequiredFields()
+    {
+        return [
+            'Passes when non-conditional required field has a value' => [
+                [
+                    'required-text-field-2'     => 'some text',
+                    'radio-option-2'            => 'N',
+                    'conditional-required-text' => ''
+                ],
+                true
+            ],
+            'Fails when conditional required is displayed but not completed' => [
+                [
+                    'required-text-field-2'     => 'some text',
+                    'radio-option-2'            => 'Y',
+                    'conditional-required-text' => ''
+                ],
+                false
+            ],
+            'Passes when conditional required field has a value' => [
+                [
+                    'required-text-field-2'     => 'some text',
+                    'radio-option-2'            => 'Y',
+                    'conditional-required-text' => 'some more text'
+                ],
+                true
+            ]
+        ];
+    }
+
+    /**
+     * @param $data
+     * @param $expected
+     * @dataProvider dataProviderValidationOfConditionalRequiredFields
+     */
+    public function testValidationOfConditionalRequiredFields($data, $expected)
     {
         $page = $this->objFromFixture(UserDefinedForm::class, 'required-custom-rules-form');
         $validator = $this->getValidatorFromPage($page);
@@ -40,110 +75,73 @@ class UserFormsRequiredFieldsTest extends SapphireTest
             'Fails when non-conditional required field is empty'
         );
 
-        $this->assertTrue(
-            $validator->php(
-                [
-                    'required-text-field-2'     => 'some text',
-                    'radio-option-2'            => 'N',
-                    'conditional-required-text' => ''
-                ]
-            ),
-            'Passes when non-conditional required field has a value'
-        );
-
-        $this->assertFalse(
-            $validator->php(
-                [
-                    'required-text-field-2'     => 'some text',
-                    'radio-option-2'            => 'Y',
-                    'conditional-required-text' => ''
-                ]
-            ),
-            'Fails when conditional required is displayed but not completed'
-        );
-
-        $this->assertTrue(
-            $validator->php(
-                [
-                    'required-text-field-2'     => 'some text',
-                    'radio-option-2'            => 'Y',
-                    'conditional-required-text' => 'some more text'
-                ]
-            ),
-            'Passes when conditional required field has a value'
-        );
+        $this->assertEquals($expected, $validator->php($data));
     }
 
-    public function testValidationOfNestedConditionalRequiredFields()
+    public function dataProviderValidationOfNestedConditionalRequiredFields()
+    {
+        return [
+            'Fails when non-conditional required field is empty' => [[], false],
+            'Passes when non-conditional required field has a value' => [
+                [
+                    'required-text-field-3'       => 'some text',
+                    'radio-option-3'              => 'N',
+                    'conditional-required-text-2' => '',
+                    'conditional-required-text-3' => ''
+                ],
+                true
+            ],
+            'Fails when conditional required is displayed but not completed' => [
+                [
+                    'required-text-field-3'       => 'some text',
+                    'radio-option-3'              => 'Y',
+                    'conditional-required-text-2' => '',
+                    'conditional-required-text-3' => ''
+                ],
+                false
+            ],
+            'Passes when non-conditional required field has a value' => [
+                [
+                    'required-text-field-3'       => 'some text',
+                    'radio-option-3'              => 'Y',
+                    'conditional-required-text-2' => 'this text',
+                    'conditional-required-text-3' => ''
+                ],
+                true
+            ],
+            'Fails when nested conditional required is displayed but not completed' => [
+                [
+                    'required-text-field-3'       => 'some text',
+                    'radio-option-3'              => 'Y',
+                    'conditional-required-text-2' => 'Show more',
+                    'conditional-required-text-3' => ''
+                ],
+                false
+            ],
+            'Passes when nested conditional required field has a value' => [
+                [
+                    'required-text-field-3'       => 'some text',
+                    'radio-option-3'              => 'Y',
+                    'conditional-required-text-2' => 'Show more',
+                    'conditional-required-text-3' => 'more text'
+                ],
+                true
+            ]
+        ];
+    }
+
+    /**
+     * @param string $data
+     * @param array $expected
+     * @dataProvider dataProviderValidationOfNestedConditionalRequiredFields
+     */
+    public function testValidationOfNestedConditionalRequiredFields($data, $expected)
     {
         $page = $this->objFromFixture(UserDefinedForm::class, 'required-nested-custom-rules-form');
         $this->assertEquals(4, $page->Fields()->count());
         $validator = $this->getValidatorFromPage($page);
         $this->assertNotNull($validator);
 
-        $this->assertFalse(
-            $validator->php([]),
-            'Fails when non-conditional required field is empty'
-        );
-
-        $this->assertTrue(
-            $validator->php(
-                [
-                    'required-text-field-3'       => 'some text',
-                    'radio-option-2'              => 'N',
-                    'conditional-required-text-2' => '',
-                    'conditional-required-text-3' => ''
-                ]
-            ),
-            'Passes when non-conditional required field has a value'
-        );
-
-        $this->assertFalse(
-            $validator->php(
-                [
-                    'required-text-field-3'       => 'some text',
-                    'radio-option-2'              => 'Y',
-                    'conditional-required-text-2' => '',
-                    'conditional-required-text-3' => ''
-                ]
-            ),
-            'Fails when conditional required is displayed but not completed'
-        );
-
-        $this->assertTrue(
-            $validator->php(
-                [
-                    'required-text-field-3'       => 'some text',
-                    'radio-option-3'              => 'Y',
-                    'conditional-required-text-2' => 'this text',
-                    'conditional-required-text-3' => ''
-                ]
-            ),
-            'Passes when non-conditional required field has a value'
-        );
-
-        $this->assertFalse(
-            $validator->php(
-                [
-                    'required-text-field-3'       => 'some text',
-                    'radio-option-3'              => 'Y',
-                    'conditional-required-text-2' => 'Show more',
-                    'conditional-required-text-3' => ''
-                ]
-            ),
-            'Fails when nested conditional required is displayed but not completed'
-        );
-
-        $this->assertTrue(
-            $validator->php(
-                [
-                    'required-text-field-3'       => 'some text',
-                    'radio-option-3'              => 'Y',
-                    'conditional-required-text-2' => 'Show more',
-                    'conditional-required-text-3' => 'more text'
-                ]
-            ),
-            'Passes when nested conditional required field has a value'
-        );
+        $this->assertEquals($expected, $validator->php($data));
     }
 }
