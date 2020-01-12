@@ -123,7 +123,13 @@ class UserFormsRequiredFields extends RequiredFields
         return $error;
     }
 
-    private function handleError($formField, $fieldName)
+    /**
+     * Register an error for the provided field.
+     * @param FormField $formField
+     * @param string $fieldName
+     * @return void
+     */
+    private function handleError(FormField $formField, $fieldName)
     {
         $errorMessage = _t(
             'SilverStripe\\Forms\\Form.FIELDISREQUIRED',
