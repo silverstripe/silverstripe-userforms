@@ -134,21 +134,17 @@ class UserFormsRequiredFields extends RequiredFields
         $errorMessage = _t(
             'SilverStripe\\Forms\\Form.FIELDISREQUIRED',
             '{name} is required',
-            array(
+            [
                 'name' => strip_tags(
                     '"' . ($formField->Title() ? $formField->Title() : $fieldName) . '"'
                 )
-            )
+            ]
         );
 
         if ($msg = $formField->getCustomValidationMessage()) {
             $errorMessage = $msg;
         }
 
-        $this->validationError(
-            $fieldName,
-            $errorMessage,
-            "required"
-        );
+        $this->validationError($fieldName, $errorMessage, "required");
     }
 }

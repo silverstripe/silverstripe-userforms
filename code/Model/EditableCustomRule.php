@@ -25,24 +25,24 @@ use SilverStripe\Versioned\Versioned;
 class EditableCustomRule extends DataObject
 {
     private static $condition_options = [
-        'IsBlank'               => 'Is blank',
-        'IsNotBlank'            => 'Is not blank',
-        'HasValue'              => 'Equals',
-        'ValueNot'              => 'Doesn\'t equal',
-        'ValueLessThan'         => 'Less than',
-        'ValueLessThanEqual'    => 'Less than or equal',
-        'ValueGreaterThan'      => 'Greater than',
+        'IsBlank' => 'Is blank',
+        'IsNotBlank' => 'Is not blank',
+        'HasValue' => 'Equals',
+        'ValueNot' => 'Doesn\'t equal',
+        'ValueLessThan' => 'Less than',
+        'ValueLessThanEqual' => 'Less than or equal',
+        'ValueGreaterThan' => 'Greater than',
         'ValueGreaterThanEqual' => 'Greater than or equal'
     ];
 
     private static $db = [
-        'Display'         => 'Enum("Show,Hide")',
+        'Display' => 'Enum("Show,Hide")',
         'ConditionOption' => 'Enum("IsBlank,IsNotBlank,HasValue,ValueNot,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
-        'FieldValue'      => 'Varchar(255)'
+        'FieldValue' => 'Varchar(255)'
     ];
 
     private static $has_one = [
-        'Parent'         => EditableFormField::class,
+        'Parent' => EditableFormField::class,
         'ConditionField' => EditableFormField::class
     ];
 
@@ -240,7 +240,7 @@ class EditableCustomRule extends DataObject
      * @return boolean
      * @throws LogicException Invalid ConditionOption is set for this rule.
      */
-    public function validateAgainstFormData($data)
+    public function validateAgainstFormData(array $data)
     {
 
         $controllingField = $this->ConditionField();
