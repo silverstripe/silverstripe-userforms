@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model;
 
+use InvalidArgumentException;
 use LogicException;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
@@ -88,7 +89,7 @@ class EditableCustomRule extends DataObject
      * Return whether a user can create an object of this type
      *
      * @param Member $member
-     * @param array $context Virtual parameter to allow context to be passed in to check
+     * @param array  $context Virtual parameter to allow context to be passed in to check
      * @return bool
      */
     public function canCreate($member = null, $context = [])
@@ -229,6 +230,63 @@ class EditableCustomRule extends DataObject
 
         return $result;
     }
+
+
+    /**
+     * Determines whether the rule is satisfied, based on provided form data.
+     * Used for php validation of required conditional fields
+     *
+     * @param array $data Submitted form data
+     * @return boolean
+     * @throws LogicException Invalid ConditionOption is set for this rule.
+     */
+    public function validateAgainstFormData(array $data)
+    {
+
+        $controllingField = $this->ConditionField();
+
+        if (!isset($data[$controllingField->Name])) {
+            return false;
+        }
+
+        $valid = false;
+
+        $targetFieldValue = $this->FieldValue;
+        $actualFieldValue = $data[$controllingField->Name];
+
+        switch ($this->ConditionOption) {
+            case 'IsNotBlank':
+                $valid = ($actualFieldValue !== '');
+                break;
+            case 'IsBlank':
+                $valid = ($actualFieldValue === '');
+                break;
+            case 'HasValue':
+                $valid = ($actualFieldValue === $targetFieldValue);
+                break;
+            case 'ValueNot':
+                $valid = ($actualFieldValue !== $targetFieldValue);
+                break;
+            case 'ValueLessThan':
+                $valid = ($actualFieldValue < $targetFieldValue);
+                break;
+            case 'ValueLessThanEqual':
+                $valid = ($actualFieldValue <= $targetFieldValue);
+                break;
+            case 'ValueGreaterThan':
+                $valid = ($actualFieldValue > $targetFieldValue);
+                break;
+            case 'ValueGreaterThanEqual':
+                $valid = ($actualFieldValue >= $targetFieldValue);
+                break;
+            default:
+                throw new LogicException("Unhandled rule {$this->ConditionOption}");
+                break;
+        }
+
+        return $valid;
+    }
+
 
     /**
      * Returns the opposite visibility function for the value of the initial visibility field, e.g. show/hide. This

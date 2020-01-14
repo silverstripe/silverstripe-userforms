@@ -57,7 +57,7 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
  * @property boolean $ShowOnLoad
  * @property string $DisplayRulesConjunction
  * @method UserDefinedForm Parent() Parent page
- * @method DataList DisplayRules() List of EditableCustomRule objects
+ * @method DataList|EditableCustomRule[] DisplayRules() List of EditableCustomRule objects
  * @mixin Versioned
  */
 class EditableFormField extends DataObject
@@ -352,19 +352,6 @@ class EditableFormField extends DataObject
      */
     protected function getDisplayRuleFields()
     {
-        // Check display rules
-        if ($this->Required) {
-            return FieldList::create(
-                LiteralField::create(
-                    'DisplayRulesNotEnabled',
-                    '<div class="alert alert-warning">' . _t(
-                        __CLASS__.'.DISPLAY_RULES_DISABLED',
-                        'Display rules are not enabled for required fields. Please uncheck "Is this field Required?" under "Validation" to re-enable.'
-                    ) . '</div>'
-                )
-            );
-        }
-
         $allowedClasses = array_keys($this->getEditableFieldClasses(false));
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields([
@@ -943,6 +930,7 @@ class EditableFormField extends DataObject
      * Determine effective display rules for this field.
      *
      * @return SS_List
+     * @deprecated 5.6 No longer needed because of support for conditional required field.
      */
     public function EffectiveDisplayRules()
     {
@@ -972,7 +960,7 @@ class EditableFormField extends DataObject
 
         // Check for field dependencies / default
         /** @var EditableCustomRule $rule */
-        foreach ($this->EffectiveDisplayRules() as $rule) {
+        foreach ($this->DisplayRules() as $rule) {
             // Get the field which is effected
             /** @var EditableFormField $formFieldWatch */
             $formFieldWatch = DataObject::get_by_id(EditableFormField::class, $rule->ConditionFieldID);
@@ -1002,6 +990,48 @@ class EditableFormField extends DataObject
 
         return (count($result['selectors'])) ? $result : null;
     }
+
+    /**
+     * Check if this EditableFormField is displayed based on its DisplayRules and the provided data.
+     * @param array $data
+     * @return bool
+     */
+    public function isDisplayed(array $data)
+    {
+        $displayRules = $this->DisplayRules();
+
+        if ($displayRules->count() === 0) {
+            // If no display rule have been defined, isDisplayed equals the ShowOnLoad property
+            return $this->ShowOnLoad;
+        }
+
+        $conjunction = $this->DisplayRulesConjunctionNice();
+
+        // && start with true and find and condition that doesn't satisfy
+        // || start with false and find and condition that satisfies
+        $conditionsSatisfied = ($conjunction === '&&');
+
+        foreach ($displayRules as $rule) {
+            $controllingField = $rule->ConditionField();
+
+            // recursively check - if any of the dependant fields are hidden, assume the rule can not be satisfied
+            $ruleSatisfied = $controllingField->isDisplayed($data) && $rule->validateAgainstFormData($data);
+
+            if ($conjunction === '||' && $ruleSatisfied) {
+                $conditionsSatisfied = true;
+                break;
+            }
+            if ($conjunction === '&&' && !$ruleSatisfied) {
+                $conditionsSatisfied = false;
+                break;
+            }
+        }
+
+        // initially displayed - condition fails || initially hidden, condition passes
+        $startDisplayed = $this->ShowOnLoad;
+        return ($startDisplayed xor $conditionsSatisfied);
+    }
+
 
     /**
      * Replaces the set DisplayRulesConjunction with their JS logical operators
