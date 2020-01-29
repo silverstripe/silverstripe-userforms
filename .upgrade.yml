@@ -55,3 +55,9 @@ mappings:
   EditableLiteralFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\EditableLiteralFieldTest
   SecureEditableFileFieldTest: SilverStripe\UserForms\Tests\Model\EditableFormField\SecureEditableFileFieldTest
   UserDefinedForm_EmailRecipientConditionTest: SilverStripe\UserForms\Tests\Model\Recipient\EmailRecipientConditionTest
+
+warnings:
+  methods:
+    'SilverStripe\UserForms\Model\EditableFormField->EffectiveDisplayRules()':
+      message: 'EffectiveDisplayRules deprecated because of new support for conditional required field'
+      url: 'https://github.com/silverstripe/silverstripe-userforms/pull/770/'

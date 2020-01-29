@@ -8,7 +8,6 @@ use SilverStripe\Control\Session;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\UserForms\FormField\UserFormsStepField;
 use SilverStripe\UserForms\FormField\UserFormsFieldList;
 
@@ -175,7 +174,7 @@ class UserForm extends Form
             ->filter('Required', true)
             ->column('Name');
         $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());
-        $required = new RequiredFields($requiredNames);
+        $required = new UserFormsRequiredFields($requiredNames);
         $this->extend('updateRequiredFields', $required);
         $required->setForm($this);
         return $required;

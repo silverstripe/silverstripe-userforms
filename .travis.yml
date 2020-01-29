@@ -6,17 +6,17 @@ services:
   - mysql
   - postgresql
 
-
 env:
   global:
     - COMPOSER_ROOT_VERSION=5.x-dev
+    - TRAVIS_NODE_VERSION="10"
 
 matrix:
   include:
     - php: 7.1
       env: DB=MYSQL PHPUNIT_TEST=1
     - php: 7.1
-      env: DB=PGSQL PHPUNIT_TEST=1
+      env: DB=PGSQL PHPUNIT_TEST=1 NPM_TEST=1
     - php: 7.2
       env: DB=MYSQL PHPUNIT_TEST=1 PHPCS_TEST=1
     - php: 7.3
@@ -38,6 +38,9 @@ script:
   - if [[ $PHPCS_TEST ]]; then vendor/bin/phpcs code/ tests/; fi
   - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit; fi
   - if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml -vvv; fi
+  - if [[ $NPM_TEST ]]; then git diff-files --quiet -w --relative=client; fi
+  - if [[ $NPM_TEST ]]; then git diff -w --no-color --relative=client; fi
+  - if [[ $NPM_TEST ]]; then yarn run lint; fi
 
 after_success:
   - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
