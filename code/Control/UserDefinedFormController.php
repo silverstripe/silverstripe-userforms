@@ -24,6 +24,7 @@ use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
@@ -401,7 +402,11 @@ JS
                     $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
                     if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
                         foreach ($emailData['Fields'] as $field) {
-                            $body .= $field->Title . ': ' . $field->Value . " \n";
+                            if (in_array(SubmittedFileField::class, $field->getClassAncestry())) {
+                                $body .= $field->Title . ': ' . $field->ExportValue ." \n";
+                            } else {
+                                $body .= $field->Title . ': ' . $field->Value . " \n";
+                            }
                         }
                     }
 
