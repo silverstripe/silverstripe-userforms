@@ -402,7 +402,7 @@ JS
                     $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
                     if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
                         foreach ($emailData['Fields'] as $field) {
-                            if (in_array(SubmittedFileField::class, $field->getClassAncestry())) {
+                            if ($field instanceof SubmittedFileField) {
                                 $body .= $field->Title . ': ' . $field->ExportValue ." \n";
                             } else {
                                 $body .= $field->Title . ': ' . $field->Value . " \n";
