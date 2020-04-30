@@ -36,7 +36,10 @@
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
     "jquery": "^3.4.0",
-    "mime": "^1.4.1"
+    "mime": "^1.4.1",
+    "qs": "^6.9.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "babel": {
     "presets": [
