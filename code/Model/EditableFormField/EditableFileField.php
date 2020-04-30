@@ -13,6 +13,8 @@ use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Member;
+use SilverStripe\Security\InheritedPermissions;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 
@@ -21,7 +23,8 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
  *
  * @method Folder Folder
  * @property int FolderID
- * @property float MaxFileSizeMB
+ * @property boolean MaxFileSizeMB
+ * @property boolean FolderConfirmed
  * @package userforms
  */
 class EditableFileField extends EditableFormField
@@ -33,6 +36,7 @@ class EditableFileField extends EditableFormField
 
     private static $db = [
         'MaxFileSizeMB' => 'Float',
+        'FolderConfirmed' => 'Boolean',
     ];
 
     private static $has_one = [
@@ -51,19 +55,100 @@ class EditableFileField extends EditableFormField
     ];
 
     /**
+     * Returns a string describing the permissions of a folder
+     * @param Folder|null $folder
+     * @return string
+     */
+    public static function getFolderPermissionString(Folder $folder = null)
+    {
+        $folderPermissions = static::getFolderPermissionTuple($folder);
+
+        $icon = 'font-icon-user-lock';
+        if ($folderPermissions['CanViewType'] == InheritedPermissions::ANYONE) {
+            $icon = 'font-icon-address-card-warning';
+        }
+
+        return sprintf(
+            '<span class="icon %s form-description__icon" aria-hidden="true"></span>%s %s',
+            $icon,
+            $folderPermissions['CanViewTypeString'],
+            htmlspecialchars(implode(', ', $folderPermissions['ViewerGroups']), ENT_QUOTES)
+        );
+    }
+
+    /**
+     * Returns an array with a view type string and the viewer groups
+     * @param Folder|null $folder
+     * @return array
+     */
+    private static function getFolderPermissionTuple(Folder $folder = null)
+    {
+        $viewersOptionsField = [
+            InheritedPermissions::INHERIT => _t(__CLASS__.'.INHERIT', 'Visibility for this folder is inherited from the parent folder'),
+            InheritedPermissions::ANYONE => _t(__CLASS__.'.ANYONE', 'Unrestricted access, uploads will be visible to anyone'),
+            InheritedPermissions::LOGGED_IN_USERS => _t(__CLASS__.'.LOGGED_IN', 'Restricted access, uploads will be visible to logged-in users'),
+            InheritedPermissions::ONLY_THESE_USERS => _t(__CLASS__.'.ONLY_GROUPS', 'Restricted access, uploads will be visible to the following groups:')
+        ];
+
+        if (!$folder) {
+            return [
+                'CanViewType' => InheritedPermissions::ANYONE,
+                'CanViewTypeString' => $viewersOptionsField[InheritedPermissions::ANYONE],
+                'ViewerGroups' => [],
+            ];
+        }
+
+        $folder = static::getNonInheritedViewType($folder);
+
+        // ViewerGroups may still exist when permissions have been loosened
+        $viewerGroups = [];
+        if ($folder->CanViewType === InheritedPermissions::ONLY_THESE_USERS) {
+            $viewerGroups = $folder->ViewerGroups()->column('Title');
+        }
+
+        return [
+            'CanViewType' => $folder->CanViewType,
+            'CanViewTypeString' => $viewersOptionsField[$folder->CanViewType],
+            'ViewerGroups' => $viewerGroups,
+        ];
+    }
+
+    /**
+     * Returns the nearest non-inherited view permission of the provided
+     * @param File $file
+     * @return File
+     */
+    private static function getNonInheritedViewType(File $file)
+    {
+        if ($file->CanViewType !== InheritedPermissions::INHERIT) {
+            return $file;
+        }
+        $parent = $file->Parent();
+        if ($parent->exists()) {
+            return static::getNonInheritedViewType($parent);
+        } else {
+            // anyone can view top level files
+            $file->CanViewType = InheritedPermissions::ANYONE;
+        }
+        return $file;
+    }
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
+        $treeView = TreeDropdownField::create(
+            'FolderID',
+            _t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
+            Folder::class
+        );
+        $treeView->setDescription(static::getFolderPermissionString($this->Folder()));
         $fields->addFieldToTab(
             'Root.Main',
-            TreeDropdownField::create(
-                'FolderID',
-                _t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
-                Folder::class
-            )
+            $treeView
         );
 
         // Warn the user if the folder targeted by this field is not restricted
@@ -171,5 +256,31 @@ class EditableFileField extends EditableFormField
     public function getPHPMaxFileSizeMB()
     {
         return round(static::get_php_max_file_size() / 1024 / 1024, 1);
+    }
+
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        $folderChanged = $this->isChanged('FolderID');
+
+        // Default to either an existing sibling's folder, or the default form submissions folder
+        if ($this->FolderID === null) {
+            $inheritableSibling = EditableFileField::get()->filter([
+                'ParentID' => $this->ParentID,
+                'FolderConfirmed' => true,
+            ])->first();
+
+            if ($inheritableSibling) {
+                $this->FolderID = $inheritableSibling->FolderID;
+            } else {
+                $folder = UserDefinedFormController::getFormSubmissionFolder();
+                $this->FolderID = $folder->ID;
+            }
+        }
+
+        if ($folderChanged) {
+            $this->FolderConfirmed = true;
+        }
     }
 }

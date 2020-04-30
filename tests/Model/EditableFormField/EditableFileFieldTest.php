@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
+use SilverStripe\Assets\Folder;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
@@ -71,5 +72,41 @@ class EditableFileFieldTest extends SapphireTest
         $field = EditableFileField::create();
         $field->Name = 'EditableFormField_123456';
         $this->assertEmpty($field->getFormField()->Title());
+    }
+
+    public function testOnBeforeWrite()
+    {
+        $this->logOut();
+
+        /** @var EditableFileField $fileField */
+        $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
+
+        $defaultFolder = Folder::find('Form-submissions');
+        $this->assertNotEmpty($defaultFolder, 'Default Folder was created along with the EditableFileField');
+        $this->assertFalse($defaultFolder->canView(), 'Default Folder default to being restricted');
+        $this->assertFalse((boolean)$fileField->FolderConfirmed, 'EditableFileField are not Folder Confirmed initially');
+
+        $this->assertEquals(
+            $defaultFolder->ID,
+            $fileField->FolderID,
+            'EditableFileField default to default form submission folder'
+        );
+
+        $fileField->FolderID = Folder::find_or_make('boom')->ID;
+        $fileField->write();
+        $this->assertTrue(
+            (boolean)$fileField->FolderConfirmed,
+            'EditableFileField are Folder Confirmed once you assigned them a folder'
+        );
+
+        $secondField = EditableFileField::create();
+        $secondField->ParentID = $fileField->ParentID;
+        $secondField->write();
+
+        $this->assertEquals(
+            $fileField->FolderID,
+            $secondField->FolderID,
+            'Second EditableFileField defaults to first field FolderID'
+        );
     }
 }
