@@ -17,6 +17,7 @@ use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\Versioned\Versioned;
@@ -77,7 +78,11 @@ class UserFormFieldEditorExtension extends DataExtension
         $editableColumns->setDisplayFields([
             'ClassName' => function ($record, $column, $grid) use ($fieldClasses) {
                 if ($record instanceof EditableFormField) {
-                    return $record->getInlineClassnameField($column, $fieldClasses);
+                    $field = $record->getInlineClassnameField($column, $fieldClasses);
+                    if ($record instanceof EditableFileField) {
+                        $field->setAttribute('data-folderconfirmed', $record->FolderConfirmed ? 1 : 0);
+                    }
+                    return $field;
                 }
             },
             'Title' => function ($record, $column, $grid) {
