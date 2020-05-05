@@ -139,7 +139,13 @@ jQuery(document).ready(($) => {
     } else {
       // Generate better link to field
       $input.closest('.field[id]').each(() => {
-        anchor = `#${$(this).attr('id')}`;
+        const anchorID = $(this).attr('id');
+
+        if (!anchorID) {
+          return;
+        }
+
+        anchor = `#${anchorID}`;
       });
 
       // Add a new error message
