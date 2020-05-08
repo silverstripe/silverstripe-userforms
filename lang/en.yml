@@ -261,7 +261,7 @@ en:
     EMAIL_RECIPIENT_UNSAVED_FORM: 'You will be able to select from valid form fields after saving this record.'
     EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
     FROMADDRESS: 'Send email from'
-    FileUploadWarning: 'Files uploaded through this field could be publicly accessible if the exact URL is known'
+    UnrestrictedFileUploadWarning: 'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.'
     HIDEFORMDATA: 'Hide form data from email?'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
