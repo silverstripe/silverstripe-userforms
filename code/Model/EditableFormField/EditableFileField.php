@@ -4,7 +4,9 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
+use SilverStripe\Assets\Upload_Validator;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
@@ -96,11 +98,14 @@ class EditableFileField extends EditableFormField
         return $result;
     }
 
+
+
     public function getFormField()
     {
         $field = FileField::create($this->Name, $this->Title ?: false)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
-            ->setTemplate(__CLASS__);
+            ->setTemplate(__CLASS__)
+            ->setValidator(Injector::inst()->get(Upload_Validator::class . '.userforms'));
 
         $field->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__);

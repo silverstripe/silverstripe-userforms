@@ -1,0 +1,6 @@
+---
+Name: mimeuploadvalidator-userforms
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Assets\Upload_Validator.userforms:
+    class: SilverStripe\MimeValidator\MimeUploadValidator
