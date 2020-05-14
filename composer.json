@@ -47,7 +47,8 @@
     },
     "suggest": {
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
-        "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background"
+        "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background",
+        "silverstripe/spamprotection": "Adds support for spam protection to your user forms"
     },
     "extra": {
         "expose": [

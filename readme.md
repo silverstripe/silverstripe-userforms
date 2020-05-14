@@ -27,10 +27,20 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
 ## Installation
 
 ```sh
-$ composer require silverstripe/userforms
+composer require silverstripe/userforms
 ```
 
 You'll also need to run `dev/build`. You should see a new page type in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
+
+## SPAM protection
+
+This module does not include SPAM protection out of the box. Consider installing `silverstripe/spamprotection` as well. This will allow CMS users to add a "SPAM Protection Field" to user forms.
+
+```sh
+composer require silverstripe/spamprotection
+```
+
+Read the [SpamProtection Module README](https://github.com/silverstripe/silverstripe-spamprotection/) for details on how to configure this module.
 
 ## Documentation
 
