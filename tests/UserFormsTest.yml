@@ -1,3 +1,7 @@
+SilverStripe\Security\Group:
+  admin:
+    Title: Administrators
+
 SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
   form1step1:
     Title: 'Step 1'
@@ -261,6 +265,11 @@ SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
     Name: group1start
     End: =>SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd.group1end
 
+SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+  fileuploadfield:
+    Name: FileUploadField
+    Title: File Upload Field
+
 SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
 # filtered recipient 1
   blank-rule:
@@ -441,6 +450,11 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Title: Form with MultipleOption fields
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableDropdown.basic-dropdown
+
+  restricted-user-form:
+    Title: Form with MultipleOption fields
+    CanEditType: OnlyTheseUsers
+    EditorGroups: =>SilverStripe\Security\Group.admin
 
   upload-form:
     Title: 'Form with upload field'
