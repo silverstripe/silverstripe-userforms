@@ -2,6 +2,8 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use InvalidArgumentException;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\CSSContentParser;
@@ -10,6 +12,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
@@ -366,5 +369,59 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check emails
         $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject: Basic Value');
+    }
+
+    public function testConfirmfolderformInvalidRequest() {
+        $this->logInWithPermission('CMS_ACCESS_CMSMain');
+
+        $url = 'UserDefinedFormController/confirmfolderform?';
+        $userDefinedFormID = $this->idFromFixture(UserDefinedForm::class, 'basic-form-page');
+        $fieldID = $this->idFromFixture(EditableFileField::class, 'fileuploadfield');
+
+
+        $response = $this->get($url . http_build_query(['UserFormID' => $userDefinedFormID]));
+        $this->assertEquals(400, $response->getStatusCode(), 'Request without ID parameter is invalid');
+
+        $response = $this->get($url . http_build_query(['ID' => $fieldID]));
+        $this->assertEquals(400, $response->getStatusCode(), 'Request without UserFormID parameter is invalid');
+
+        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => -1]));
+        $this->assertEquals(400, $response->getStatusCode(), 'Request with unknown UserFormID is invalid');
+
+        $response = $this->get($url . http_build_query(['ID' => -1, 'UserFormID' => $userDefinedFormID]));
+        $this->assertEquals(200, $response->getStatusCode(), 'Request with unknown ID and known UserFormID is valid');
+    }
+
+    public function testConfirmfolderformAccessControl() {
+
+        $url = 'UserDefinedFormController/confirmfolderform?';
+        $userDefinedFormID = $this->idFromFixture(UserDefinedForm::class, 'basic-form-page');
+        $restrictedUserDefinedFormID = $this->idFromFixture(UserDefinedForm::class, 'restricted-user-form');
+        $fieldID = $this->idFromFixture(EditableFileField::class, 'fileuploadfield');
+
+        $this->logOut();
+        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $userDefinedFormID]));
+        $this->assertEquals(403, $response->getStatusCode(), 'Anonymous users can\'t access confirm folder form ');
+
+        $this->logInWithPermission('CMS_ACCESS_CMSMain');
+
+        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $userDefinedFormID]));
+        $this->assertEquals(200, $response->getStatusCode(), 'CMS editors can access confirm folder form ');
+
+        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $restrictedUserDefinedFormID]));
+        $this->assertEquals(
+            403,
+            $response->getStatusCode(),
+            'CMS editors can\'t access confirm folder form for restricted form'
+        );
+
+        $this->logInWithPermission('ADMIN');
+
+        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $restrictedUserDefinedFormID]));
+        $this->assertEquals(
+            200,
+            $response->getStatusCode(),
+            'Admins can access confirm folder form for restricted form'
+        );
     }
 }
