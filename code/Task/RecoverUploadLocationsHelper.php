@@ -248,7 +248,6 @@ class RecoverUploadLocationsHelper
         if ($this->filesVersioned) {
             $draftVersion = Versioned::get_versionnumber_by_stage(File::class, Versioned::DRAFT, $fileId);
             $liveVersion = Versioned::get_versionnumber_by_stage(File::class, Versioned::LIVE, $fileId);
-            ;
 
             if ($draftVersion && $draftVersion != $liveVersion) {
                 $draft = Versioned::get_version(File::class, $fileId, $draftVersion);

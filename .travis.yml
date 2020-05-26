@@ -1,6 +1,9 @@
 language: php
 
-dist: trusty
+dist: xenial
+
+services:
+  - mysql
 
 env:
   global:
