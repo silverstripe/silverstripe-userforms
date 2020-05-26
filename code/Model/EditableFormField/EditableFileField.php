@@ -63,11 +63,12 @@ class EditableFileField extends EditableFormField
             $icon = 'font-icon-address-card-warning';
         }
 
-        return
-            '<span class="icon ' . $icon . ' form-description__icon" aria-hidden="true"></span>' .
-            $folderPermissions['CanViewType'] .
-            ' ' .
-            htmlspecialchars(implode(', ', $folderPermissions['ViewerGroups']), ENT_QUOTES);
+        return sprintf(
+            '<span class="icon %s form-description__icon" aria-hidden="true"></span> %s %s',
+            $icon,
+            $folderPermissions['CanViewType'],
+            htmlspecialchars(implode(', ', $folderPermissions['ViewerGroups']), ENT_QUOTES)
+        );
     }
 
     /**
@@ -93,9 +94,15 @@ class EditableFileField extends EditableFormField
 
         $folder = static::getNonInheritedViewType($folder);
 
+        // ViewerGroups may still exist when permissions have been loosened
+        $viewerGroups = [];
+        if ($folder->CanViewType === InheritedPermissions::ONLY_THESE_USERS) {
+            $viewerGroups = $folder->ViewerGroups()->column('Title');
+        }
+
         return [
             'CanViewType' => $viewersOptionsField[$folder->CanViewType],
-            'ViewerGroups' => $folder->ViewerGroups()->column('Title'),
+            'ViewerGroups' => $viewerGroups,
         ];
     }
 
