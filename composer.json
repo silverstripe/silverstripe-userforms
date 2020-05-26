@@ -49,6 +49,10 @@
         "colymba/gridfield-bulk-editing-tools": "Allows for bulk management of form submissions",
         "silverstripe/gridfieldqueuedexport": "Export large submission as CSV through queued jobs in the background"
     },
+    "scripts": {
+        "lint": "phpcs code/ tests/",
+        "lint-clean": "phpcbf code/ tests/"
+    },
     "extra": {
         "expose": [
             "client/dist",

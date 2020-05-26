@@ -62,7 +62,7 @@ class RecoverUploadLocationsHelper
 
     /**
      * Cache of the EditableFileField versions
-     * 
+     *
      * @var EditableFileField
      */
     private $fieldFolderCache = array();
@@ -115,7 +115,7 @@ class RecoverUploadLocationsHelper
 
     /**
      * Process all the files and return the number
-     * 
+     *
      * @return int Number of files processed
      */
     protected function process()
@@ -134,7 +134,7 @@ class RecoverUploadLocationsHelper
         $errorsCount = 0;
 
         // Loop over the files to process
-        foreach($this->chunk() as $uploadRecord) {
+        foreach ($this->chunk() as $uploadRecord) {
             ++$processedCount;
 
             $fileId = $uploadRecord['UploadedFileID'];
@@ -171,10 +171,10 @@ class RecoverUploadLocationsHelper
 
     /**
      * Fetches the EditableFileField version from cache and returns its FolderID
-     * 
+     *
      * @param int $fieldId EditableFileField.ID
      * @param int EditableFileField Version
-     * 
+     *
      * @return int
      */
     protected function getExpectedUploadFolderId($fieldId, $fieldVersion)
@@ -196,11 +196,11 @@ class RecoverUploadLocationsHelper
     /**
      * Fetches a Folder by its ID, gracefully handling
      * deleted folders
-     * 
+     *
      * @param int $id Folder.ID
-     * 
+     *
      * @return Folder
-     * 
+     *
      * @throws RuntimeException when folder could not be found
      */
     protected function getFolder($id)
@@ -231,10 +231,10 @@ class RecoverUploadLocationsHelper
 
     /**
      * Recover an uploaded file location
-     * 
+     *
      * @param int $fileId File.ID
      * @param int $expectedFolderId ID of the folder where the file should have end up
-     * 
+     *
      * @return int Number of files recovered
      */
     protected function recover($fileId, $expectedFolderId)
@@ -247,7 +247,7 @@ class RecoverUploadLocationsHelper
 
         if ($this->filesVersioned) {
             $draftVersion = Versioned::get_versionnumber_by_stage(File::class, Versioned::DRAFT, $fileId);
-            $liveVersion = Versioned::get_versionnumber_by_stage(File::class, Versioned::LIVE, $fileId);;
+            $liveVersion = Versioned::get_versionnumber_by_stage(File::class, Versioned::LIVE, $fileId);
 
             if ($draftVersion && $draftVersion != $liveVersion) {
                 $draft = Versioned::get_version(File::class, $fileId, $draftVersion);
@@ -305,11 +305,11 @@ class RecoverUploadLocationsHelper
      * when manually moving them to another folder through CMS
      *
      * @see https://github.com/silverstripe/silverstripe-userforms/issues/944
-     * 
+     *
      * @param int $fileId File.ID
      * @param File $file The live version of the file
      * @param File|null $draft The draft version of the file
-     * 
+     *
      * @return int Number of files recovered
      */
     protected function checkResidual($fileId, File $file, File $draft = null)
@@ -370,7 +370,7 @@ class RecoverUploadLocationsHelper
      *
      * @param File $file the file instance
      * @param int $expectedFolder The expected folder
-     * 
+     *
      * @return int How many files have been recovered
      */
     protected function recoverLiveOnly(File $file, Folder $expectedFolder)
@@ -560,7 +560,7 @@ limit 100
     /**
      * Returns DataList object containing every
      * uploaded file record
-     * 
+     *
      * @return DataList
      */
     private function getCountQuery()
