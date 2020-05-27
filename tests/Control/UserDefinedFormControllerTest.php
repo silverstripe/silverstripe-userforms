@@ -386,7 +386,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject: Basic Value');
     }
 
-    public function testConfirmfolderformInvalidRequest() {
+    public function testConfirmfolderformInvalidRequest()
+    {
         $this->logInWithPermission('CMS_ACCESS_CMSMain');
 
         $url = 'UserDefinedFormController/confirmfolderform?';
@@ -407,8 +408,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals(200, $response->getStatusCode(), 'Request with unknown ID and known UserFormID is valid');
     }
 
-    public function testConfirmfolderformAccessControl() {
-
+    public function testConfirmfolderformAccessControl()
+    {
         $url = 'UserDefinedFormController/confirmfolderform?';
         $userDefinedFormID = $this->idFromFixture(UserDefinedForm::class, 'basic-form-page');
         $restrictedUserDefinedFormID = $this->idFromFixture(UserDefinedForm::class, 'restricted-user-form');
@@ -423,7 +424,10 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $userDefinedFormID]));
         $this->assertEquals(200, $response->getStatusCode(), 'CMS editors can access confirm folder form ');
 
-        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $restrictedUserDefinedFormID]));
+        $response = $this->get($url . http_build_query([
+                'ID' => $fieldID,
+                'UserFormID' => $restrictedUserDefinedFormID
+            ]));
         $this->assertEquals(
             403,
             $response->getStatusCode(),
@@ -432,7 +436,10 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $this->logInWithPermission('ADMIN');
 
-        $response = $this->get($url . http_build_query(['ID' => $fieldID, 'UserFormID' => $restrictedUserDefinedFormID]));
+        $response = $this->get($url . http_build_query([
+                'ID' => $fieldID,
+                'UserFormID' => $restrictedUserDefinedFormID
+            ]));
         $this->assertEquals(
             200,
             $response->getStatusCode(),

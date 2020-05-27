@@ -707,7 +707,7 @@ JS
         }
         // change the class if it is incorrect
         if (!$editableFormField instanceof EditableFileField) {
-            $editableFormField->setClassName(EditableFileField::class);
+            $editableFormField = $editableFormField->newClassInstance(EditableFileField::class);
         }
         if (!$editableFormField) {
             throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
