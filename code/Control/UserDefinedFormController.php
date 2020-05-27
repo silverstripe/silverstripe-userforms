@@ -571,6 +571,7 @@ JS
 
     /**
      * This returns a Confirm Folder form used to verify the upload folder for EditableFileFields
+     *
      * @return ViewableData
      */
     public function confirmfolderform()
@@ -605,22 +606,21 @@ JS
         if (!$editableFormField) {
             $editableFormField = EditableFileField::create();
         } elseif ($editableFormField instanceof EditableFileField) {
-            $folderId = $editableFormField->Folder->ID;
+            $folderId = $editableFormField->FolderID;
         }
         /** @var Folder $folder */
         $folder = Folder::get()->byID($folderId);
-
+        if (!$folder) {
+            $folder = Folder::find_or_make($this->config()->get('form_submissions_folder'));
+        }
 
         $fields = FieldList::create();
-
 
         $label = LiteralField::create('Label', _t(__CLASS__.'.CONFIRM_FOLDER_LABEL', 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'));
         $label->addExtraClass(' mb-3');
         $fields->push($label);
 
-
         $fields->push(static::getRestrictedAccessField($this->config()->get('form_submissions_folder'), $userForm->Title));
-
 
         $options = OptionsetField::create('FolderOptions', _t(__CLASS__.'.FOLDER_OPTIONS_TITLE', 'Form folder options'), [
             "new" => _t(__CLASS__.'.FOLDER_OPTIONS_NEW', 'Create a new folder (recommended)'),
@@ -633,7 +633,7 @@ JS
             'FolderID',
             '',
             Folder::class
-        )->setValue((int) $folderId);
+        )->setValue($folder->ID);
         $treeView->addExtraClass('pt-1');
         $treeView->setDescription(EditableFileField::getFolderPermissionString($folder));
         $fields->push($treeView);
@@ -726,18 +726,19 @@ JS
             $folder = Folder::get()->byID($folderID);
         } else {
             // create the folder
-            $createFolder = $this->config()->get('form_submissions_folder') . '/' . $request->requestVar('CreateFolder');
+            $createFolder = $request->requestVar('CreateFolder') ?: $editableFormField->Parent()->Title;
+            $fullPath = $this->config()->get('form_submissions_folder') . '/' . $createFolder;
             $formSubmissionsFolderExists = !!Folder::find($this->config()->get('form_submissions_folder'));
-            $folder = Folder::find_or_make($createFolder);
+            $folder = Folder::find_or_make($fullPath);
 
-            // If this is the first time we create the form submission folder
+            // Set default permissions if this is the first time we create the form submission folder
             if (!$formSubmissionsFolderExists) {
                 $this->updateFormSubmissionFolderPermissions();
             }
         }
 
         // assign the folder
-        $editableFileField->Folder = $folder;
+        $editableFileField->FolderID = $folder->ID;
         $editableFileField->write();
 
         // respond

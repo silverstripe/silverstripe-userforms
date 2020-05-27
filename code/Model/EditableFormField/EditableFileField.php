@@ -5,12 +5,14 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\InheritedPermissions;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 
@@ -250,6 +252,18 @@ class EditableFileField extends EditableFormField
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
+        // Default to either an existing sibling's folder, or the default form submissions folder
+        if (!$this->FolderID) {
+            $inheritableSibling = EditableFileField::get()->filter([
+                'ParentID' => $this->ParentID,
+                'FolderConfirmed' => true,
+            ])->first();
+
+            $this->FolderID = $inheritableSibling ? $inheritableSibling->FolderID : Folder::find_or_make(
+                Config::inst()->get(UserDefinedFormController::class, 'form_submissions_folder')
+            )->ID;
+        }
 
         if ($this->isChanged('FolderID')) {
             $this->FolderConfirmed = true;
