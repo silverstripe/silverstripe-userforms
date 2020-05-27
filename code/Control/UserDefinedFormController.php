@@ -592,7 +592,7 @@ JS
             throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
         }
 
-        if (!$userForm->canView()) {
+        if (!$userForm->canEdit()) {
             throw new PermissionFailureException();
         }
 
