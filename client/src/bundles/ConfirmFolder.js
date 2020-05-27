@@ -59,8 +59,12 @@ jQuery.entwine('ss', ($) => {
   /** Display permissions for folder selected */
   $('#Form_ConfirmFolderForm_FolderID_Holder .treedropdownfield.is-open,#Form_ItemEditForm_FolderID .treedropdownfield.is-open').entwine({
     onunmatch() {
-      const folderID = $(this).find('input[name=FolderID]').val();
-      const fetchURL = `UserDefinedFormController/getfoldergrouppermissions?FolderID=${folderID}`;
+      // Build url
+      const parsedURL = url.parse('UserDefinedFormController/getfoldergrouppermissions');
+      const parsedQs = qs.parse(parsedURL.query);
+      parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
+      const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
+
       return fetch(fetchURL, {
         credentials: 'same-origin',
       })
