@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Control;
 use Exception;
 use PageController;
 use Psr\Log\LoggerInterface;
+use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
@@ -200,7 +201,7 @@ class UserDefinedFormController extends PageController
                     });
                 })(jQuery);
 JS
-            , 'UserFormsConditional-' . $form->ID);
+                , 'UserFormsConditional-' . $form->ID);
         }
     }
 
@@ -255,10 +256,8 @@ JS
 
                         // create the file from post data
                         $upload = Upload::create();
-                        $file = File::create();
-                        $file->ShowInSearch = 0;
                         try {
-                            $upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
+                            $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
                         } catch (ValidationException $e) {
                             $validationResult = $e->getResult();
                             foreach ($validationResult->getMessages() as $message) {
@@ -266,6 +265,16 @@ JS
                             }
                             Controller::curr()->redirectBack();
                             return;
+                        }
+                        /** @var AssetContainer|File $file */
+                        $file = $upload->getFile();
+                        $file->ShowInSearch = 0;
+                        $file->write();
+
+                        // generate image thumbnail to show in asset-admin
+                        // you can run userforms without asset-admin, so need to ensure asset-admin is installed
+                        if (class_exists(AssetAdmin::class)) {
+                            AssetAdmin::singleton()->generateThumbnails($file);
                         }
 
                         // write file to form field

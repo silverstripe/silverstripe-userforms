@@ -247,6 +247,11 @@ SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y-2
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-n-2
 
+SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+  file-field-1:
+    Name: 'file_field_name'
+    Title: 'File field title'
+
 SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
   group1end:
     Name: group1end
@@ -436,6 +441,11 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Title: Form with MultipleOption fields
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableDropdown.basic-dropdown
+
+  upload-form:
+    Title: 'Form with upload field'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-1
 
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:
