@@ -648,7 +648,7 @@ JS
 
 
         if (!$editableFormField instanceof EditableFileField) {
-            $editableFormField->setClassName(EditableFileField::class);
+            $editableFormField = $editableFormField->newClassInstance(EditableFileField::class);
             $editableFormField->write();
         }
         $treeView->setSchemaData([
@@ -692,6 +692,9 @@ JS
         $editableFormField = EditableFormField::get()->byID($id);
         if (!$editableFormField) {
             $editableFormField = Versioned::get_by_stage(EditableFormField::class, Versioned::DRAFT)->byID($id);
+        }
+        if (!$editableFormField) {
+            throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
         }
         // change the class if it is incorrect
         if (!$editableFormField instanceof EditableFileField) {
