@@ -64,7 +64,7 @@ class EditableFileField extends EditableFormField
         }
 
         return sprintf(
-            '<span class="icon %s form-description__icon" aria-hidden="true"></span> %s %s',
+            '<span class="icon %s form-description__icon" aria-hidden="true"></span>%s %s',
             $icon,
             $folderPermissions['CanViewType'],
             htmlspecialchars(implode(', ', $folderPermissions['ViewerGroups']), ENT_QUOTES)
