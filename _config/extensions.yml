@@ -4,3 +4,6 @@ Name: userformsextensions
 SilverStripe\UserForms\Model\UserDefinedForm:
   extensions:
     UpgradePolymorphicExtension: SilverStripe\UserForms\Extension\UpgradePolymorphicExtension
+SilverStripe\Assets\File:
+  extensions:
+    - SilverStripe\UserForms\Extension\UserFormFileExtension
