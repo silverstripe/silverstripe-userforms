@@ -21,6 +21,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Security;
+use SilverStripe\UserForms\Extension\UserFormFileExtension;
 use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
@@ -269,6 +270,7 @@ JS
                         /** @var AssetContainer|File $file */
                         $file = $upload->getFile();
                         $file->ShowInSearch = 0;
+                        $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
                         $file->write();
 
                         // generate image thumbnail to show in asset-admin
