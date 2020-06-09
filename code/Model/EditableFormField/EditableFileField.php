@@ -5,17 +5,23 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 
 /**
  * Allows a user to add a field that can be used to upload a file.
  *
+ * @method Folder Folder
+ * @property int FolderID
+ * @property float MaxFileSizeMB
  * @package userforms
  */
 class EditableFileField extends EditableFormField
@@ -60,14 +66,18 @@ class EditableFileField extends EditableFormField
             )
         );
 
-        $fields->addFieldToTab("Root.Main", LiteralField::create(
-            'FileUploadWarning',
-            '<p class="alert alert-info">' . _t(
-                'SilverStripe\\UserForms\\Model\\UserDefinedForm.FileUploadWarning',
-                'Files uploaded through this field could be publicly accessible if the exact URL is known'
-            )
-            . '</p>'
-        ), 'Type');
+        // Warn the user if the folder targeted by this field is not restricted
+        if ($this->FolderID && !$this->Folder()->hasRestrictedAccess()) {
+            $fields->addFieldToTab("Root.Main", LiteralField::create(
+                'FileUploadWarning',
+                '<p class="alert alert-warning">' . _t(
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.UnrestrictedFileUploadWarning',
+                    'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.',
+                    ['path' => Convert::raw2att($this->Folder()->Filename)]
+                )
+                . '</p>'
+            ), 'Type');
+        }
 
         $fields->addFieldToTab(
             'Root.Main',
