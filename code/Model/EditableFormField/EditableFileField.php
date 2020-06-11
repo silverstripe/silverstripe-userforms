@@ -14,6 +14,7 @@ use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\InheritedPermissions;
+use SilverStripe\UserForms\Control\UserDefinedFormAdmin;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
@@ -274,7 +275,7 @@ class EditableFileField extends EditableFormField
             if ($inheritableSibling) {
                 $this->FolderID = $inheritableSibling->FolderID;
             } else {
-                $folder = UserDefinedFormController::getFormSubmissionFolder();
+                $folder = UserDefinedFormAdmin::getFormSubmissionFolder();
                 $this->FolderID = $folder->ID;
             }
         }

@@ -2,22 +2,12 @@
 
 namespace SilverStripe\UserForms\Control;
 
-use PageController;
-use Psr\Log\LoggerInterface;
-use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Admin\LeftAndMain;
-use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
-use SilverStripe\Assets\Upload;
 use SilverStripe\CMS\Controllers\CMSMain;
-use SilverStripe\Control\Controller;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPResponse_Exception;
-use SilverStripe\Core\Extension;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
@@ -28,42 +18,32 @@ use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\Schema\FormSchema;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
-use SilverStripe\i18n\i18n;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
-use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Group;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionFailureException;
 use SilverStripe\Security\Security;
-use SilverStripe\UserForms\Extension\UserFormFileExtension;
-use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
-use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
-use SilverStripe\View\Requirements;
-use SilverStripe\View\SSViewer;
-use SilverStripe\View\ViewableData;
-use Swift_RfcComplianceException;
 
 /**
- * Controller for the {@link UserDefinedForm} page type.
+ * Provides a few endpoints the user form CMS UI targets with some AJAX request.
  *
- * @package userforms
+ * @note While this is a LeftAndMain controller, it doesn't actually appear in the Left side CMS navigation.
  */
 class UserDefinedFormAdmin extends LeftAndMain
 {
     private static $allowed_actions = [
-        'confirmfolderformschema' => 'CMS_ACCESS_CMSMain',
-        'ConfirmFolderForm' => 'CMS_ACCESS_CMSMain',
-        'confirmfolder' => 'CMS_ACCESS_CMSMain',
-        'getfoldergrouppermissions' => 'CMS_ACCESS_CMSMain',
+        'confirmfolderformschema',
+        'ConfirmFolderForm',
+        'confirmfolder',
+        'getfoldergrouppermissions',
     ];
+
+    private static $required_permission_codes = 'CMS_ACCESS_CMSMain';
 
     private static $url_segment = 'user-forms';
 
@@ -99,13 +79,15 @@ class UserDefinedFormAdmin extends LeftAndMain
         return $textField;
     }
 
+
     public function index($request)
     {
+        // Don't serve anythign under the main URL.
         return $this->httpError(404);
     }
 
     /**
-     * This returns a Confirm Folder form used to verify the upload folder for EditableFileFields
+     * This returns a Confirm Folder form schema used to verify the upload folder for EditableFileFields
      * @param HTTPRequest $request
      * @return HTTPResponse
      */
@@ -143,6 +125,7 @@ class UserDefinedFormAdmin extends LeftAndMain
         $folder = Folder::get()->byID($folderId);
         if (!$folder) {
             $folder = $this->getFormSubmissionFolder();
+            $folderId = $folder->ID;
         }
 
         $form = $this->buildConfirmFolderForm(
@@ -168,11 +151,21 @@ class UserDefinedFormAdmin extends LeftAndMain
         return $response;
     }
 
+    /**
+     * Return the ConfirmFolderForm. This is only exposed so the treeview has somewhere to direct it's AJAX calss.
+     * @return Form
+     */
     public function ConfirmFolderForm(): Form
     {
         return $this->buildConfirmFolderForm();
     }
 
+    /**
+     * Build the ConfirmFolderForm
+     * @param string $suggestedFolderName Suggested name for the folder name field
+     * @param string $permissionFolderString Description to append to the treeview field
+     * @return Form
+     */
     private function buildConfirmFolderForm(string $suggestedFolderName = '', string $permissionFolderString = ''): Form
     {
         // Build our Field list for the Form we will return to the front end.
@@ -192,8 +185,7 @@ class UserDefinedFormAdmin extends LeftAndMain
             ], "new"),
             TreeDropdownField::create('FolderID', '', Folder::class)
                 ->addExtraClass('pt-1')
-                ->setDescription($permissionFolderString)
-            ,
+                ->setDescription($permissionFolderString),
             HiddenField::create('ID')
         );
 
@@ -207,15 +199,16 @@ class UserDefinedFormAdmin extends LeftAndMain
         );
 
         return Form::create($this, 'ConfirmFolderForm', $fields, $actions, RequiredFields::create('ID'))
-            ->setFormAction('UserDefinedFormController/ConfirmFolderForm')
             ->setFormAction($this->Link('ConfirmFolderForm'))
             ->addExtraClass('form--no-dividers');
     }
 
     /**
      * Sets the selected folder as the upload folder for an EditableFileField
-     * @return HTTPResponse
+     * @param array $data
+     * @param Form $form
      * @param HTTPRequest $request
+     * @return HTTPResponse
      * @throws ValidationException
      */
     public function confirmfolder(array $data, Form $form, HTTPRequest $request)
@@ -251,7 +244,7 @@ class UserDefinedFormAdmin extends LeftAndMain
         }
 
         // check if we're creating a new folder or using an existing folder
-        $option = $data['FolderOptions'];
+        $option = isset($data['FolderOptions']) ? $data['FolderOptions'] : '';
         if ($option === 'existing') {
             // set existing folder
             $folderID = $data['FolderID'];
@@ -276,6 +269,7 @@ class UserDefinedFormAdmin extends LeftAndMain
     }
 
     /**
+     * Get the permission for a specific folder
      * @return HTTPResponse
      */
     public function getfoldergrouppermissions()
@@ -301,6 +295,7 @@ class UserDefinedFormAdmin extends LeftAndMain
     }
 
     /**
+     * Set the permission for the default submisison folder.
      * @throws ValidationException
      */
     private static function updateFormSubmissionFolderPermissions()

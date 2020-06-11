@@ -60,7 +60,7 @@ jQuery.entwine('ss', ($) => {
   $('#Form_ConfirmFolderForm_FolderID_Holder .treedropdownfield.is-open,#Form_ItemEditForm_FolderID .treedropdownfield.is-open').entwine({
     onunmatch() {
       // Build url
-      const parsedURL = url.parse('UserDefinedFormController/getfoldergrouppermissions');
+      const parsedURL = url.parse('admin/user-forms/getfoldergrouppermissions');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
       const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
