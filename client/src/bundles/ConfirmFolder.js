@@ -140,7 +140,7 @@ jQuery.entwine('ss', ($) => {
       const editableFileFieldID = $(this).data('id');
 
       // Build schema url
-      const parsedURL = url.parse('UserDefinedFormController/confirmfolderformschema');
+      const parsedURL = url.parse('admin/user-forms/confirmfolderformschema');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
@@ -177,7 +177,7 @@ jQuery.entwine('ss', ($) => {
         .then(() => {
           jQuery.noticeAdd({ text: i18n._t('UserForms.FILE_CONFIRMATION_CONFIRMATION', 'Folder confirmed successfully.'), stay: false, type: 'success' });
           this.close(true);
-          $('#Form_EditForm_action_save').trigger('click');
+          $('[name=action_doSave], [name=action_save]').click();
         })
         .catch((error) => {
           jQuery.noticeAdd({ text: error.message, stay: false, type: 'error' });
