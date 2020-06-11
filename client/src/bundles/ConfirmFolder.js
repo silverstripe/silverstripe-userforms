@@ -138,13 +138,11 @@ jQuery.entwine('ss', ($) => {
       const handleSubmit = (...args) => this._handleSubmitModal(...args);
       const title = i18n._t('UserForms.FILE_CONFIRMATION_TITLE', 'Select file upload folder');
       const editableFileFieldID = $(this).data('id');
-      const userFormID = $('#Form_EditForm_ID').attr('value');
 
       // Build schema url
-      const parsedURL = url.parse('UserDefinedFormController/confirmfolderform');
+      const parsedURL = url.parse('UserDefinedFormController/confirmfolderformschema');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
-      parsedQs.UserFormID = userFormID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
 
       ReactDOM.render(

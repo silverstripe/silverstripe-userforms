@@ -9,6 +9,7 @@ use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\Upload;
+use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPResponse;
@@ -62,7 +63,8 @@ class UserDefinedFormController extends PageController
         'ping',
         'Form',
         'finished',
-        'confirmfolderform' => 'CMS_ACCESS_CMSMain',
+        'confirmfolderformschema' => 'CMS_ACCESS_CMSMain',
+        'ConfirmFolderForm' => 'CMS_ACCESS_CMSMain',
         'confirmfolder' => 'CMS_ACCESS_CMSMain',
         'getfoldergrouppermissions' => 'CMS_ACCESS_CMSMain',
     ];
@@ -574,43 +576,36 @@ JS
 
     /**
      * This returns a Confirm Folder form used to verify the upload folder for EditableFileFields
-     *
-     * @return ViewableData
+     * @param HTTPRequest $request
+     * @return HTTPResponse
      */
-    public function confirmfolderform()
+    public function confirmfolderformschema(HTTPRequest $request)
     {
-        $request = $this->getRequest();
+        // Retrieve editable form field by its ID
         $id = $request->requestVar('ID');
         if (!$id) {
             throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
         }
-        $userFormID = $request->requestVar('UserFormID');
-        if (!$userFormID) {
-            throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
+        $editableFormField = EditableFormField::get()->byID($id);
+        if (!$editableFormField) {
+            $editableFormField = Versioned::get_by_stage(EditableFormField::class, Versioned::DRAFT)
+                ->byID($id);
         }
-        $userForm = UserDefinedForm::get()->byID($userFormID);
-        if (!$userForm) {
-            $userForm = Versioned::get_by_stage(UserDefinedForm::class, Versioned::DRAFT)->byID($userFormID);
-        }
-        if (!$userForm) {
+        if (!$editableFormField) {
             throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
         }
 
+        // Retrieve the editable form fields Parent
+        $userForm = $editableFormField->Parent();
+        if (!$userForm) {
+            throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
+        }
         if (!$userForm->canEdit()) {
             throw new PermissionFailureException();
         }
 
-        $editableFormField = EditableFormField::get()->filter(['ID' => $id, 'ParentID' => $userFormID])->first();
-        if (!$editableFormField) {
-            $editableFormField = Versioned::get_by_stage(EditableFormField::class, Versioned::DRAFT)
-                ->filter(['ID' => $id, 'ParentID' => $userFormID])->first();
-        }
-
+        // Get the folder we want to associate to this EditableFileField
         $folderId = 0;
-        if (!$editableFormField) {
-            throw new HTTPResponse_Exception(_t(__CLASS__.'.INVALID_REQUEST', 'This request was invalid.'), 400);
-        }
-
         if ($editableFormField instanceof EditableFileField) {
             $folderId = $editableFormField->FolderID;
         }
@@ -620,67 +615,22 @@ JS
             $folder = $this->getFormSubmissionFolder();
         }
 
-        $fields = FieldList::create();
+        $form = $this->buildConfirmFolderForm(
+            $userForm->Title ?: '',
+            EditableFileField::getFolderPermissionString($folder)
+        );
+        $form->loadDataFrom(['FolderID' => $folderId, 'ID' => $id]);
 
-        $labelA = LiteralField::create('LabelA', _t(__CLASS__.'.CONFIRM_FOLDER_LABEL_A', 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'));
-        $labelA->addExtraClass(' mb-2');
-        $fields->push($labelA);
-
-        $labelB = LiteralField::create('LabelB', _t(__CLASS__.'.CONFIRM_FOLDER_LABEL_B', 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>'));
-        $labelB->addExtraClass(' mb-3');
-        $fields->push($labelB);
-
-        $fields->push(static::getRestrictedAccessField($this->config()->get('form_submissions_folder'), $userForm->Title));
-
-        $options = OptionsetField::create('FolderOptions', _t(__CLASS__.'.FOLDER_OPTIONS_TITLE', 'Form folder options'), [
-            "new" => _t(__CLASS__.'.FOLDER_OPTIONS_NEW', 'Create a new folder (recommended)'),
-            "existing" => _t(__CLASS__.'.FOLDER_OPTIONS_EXISTING', 'Use an existing folder')
-        ], "new");
-        $fields->push($options);
-
-
-        $treeView = TreeDropdownField::create(
-            'FolderID',
-            '',
-            Folder::class
-        )->setValue($folder->ID);
-        $treeView->addExtraClass('pt-1');
-        $treeView->setDescription(EditableFileField::getFolderPermissionString($folder));
-        $fields->push($treeView);
-
-
-        $fields->push(HiddenField::create('ID', 'ID', $editableFormField->ID));
-
-        $submitAction = FormAction::create('confirmfolder', _t(__CLASS__.'.FORM_ACTION_CONFIRM', 'Save and continue'));
-        $submitAction->setUseButtonTag(false);
-        $submitAction->addExtraClass('btn');
-        $submitAction->addExtraClass('btn-primary');
-
-        $cancelAction = FormAction::create("cancel", _t('SilverStripe\\CMS\\Controllers\\CMSMain.Cancel', "Cancel"))
-            ->addExtraClass('btn-secondary')
-            ->setUseButtonTag(true);
-
-        $form = Form::create($this, 'ConfirmFolderForm', $fields, FieldList::create($submitAction, $cancelAction));
-        $form->setFormAction("UserDefinedFormController/confirmfolder");
-        $form->addExtraClass('form--no-dividers');
-
-
+        // Convert the EditableFormField to an EditableFileField if it's not already one.
         if (!$editableFormField instanceof EditableFileField) {
             $editableFormField = $editableFormField->newClassInstance(EditableFileField::class);
             $editableFormField->write();
         }
-        $treeView->setSchemaData([
-            'data' => [
-                'urlTree' => "admin/pages/edit/EditForm/$userFormID/field/Fields/item/$id/ItemEditForm/field/FolderID/tree"
-            ]
-        ]);
-
 
         // create the schema response
         $parts = $this->getRequest()->getHeader(LeftAndMain::SCHEMA_HEADER);
         $schemaID = $this->getRequest()->getURL();
-        $data = FormSchema::singleton()
-            ->getMultipartSchema($parts, $schemaID, $form);
+        $data = FormSchema::singleton()->getMultipartSchema($parts, $schemaID, $form);
 
         // return the schema response
         $response = HTTPResponse::create(json_encode($data));
@@ -688,18 +638,60 @@ JS
         return $response;
     }
 
+    public function ConfirmFolderForm(): Form
+    {
+        return $this->buildConfirmFolderForm();
+    }
+
+    private function buildConfirmFolderForm(string $suggestedFolderName = '', string $permissionFolderString = ''): Form
+    {
+        // Build our Field list for the Form we will return to the front end.
+        $fields = FieldList::create(
+            LiteralField::create(
+                'LabelA',
+                _t(__CLASS__.'.CONFIRM_FOLDER_LABEL_A', 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.')
+            )->addExtraClass(' mb-2'),
+            LiteralField::create(
+                'LabelB',
+                _t(__CLASS__.'.CONFIRM_FOLDER_LABEL_B', 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>')
+            )->addExtraClass(' mb-3'),
+            static::getRestrictedAccessField($this->config()->get('form_submissions_folder'), $suggestedFolderName),
+            OptionsetField::create('FolderOptions', _t(__CLASS__.'.FOLDER_OPTIONS_TITLE', 'Form folder options'), [
+                "new" => _t(__CLASS__.'.FOLDER_OPTIONS_NEW', 'Create a new folder (recommended)'),
+                "existing" => _t(__CLASS__.'.FOLDER_OPTIONS_EXISTING', 'Use an existing folder')
+            ], "new"),
+            TreeDropdownField::create('FolderID', '', Folder::class)
+                ->addExtraClass('pt-1')
+                ->setDescription($permissionFolderString)
+            ,
+            HiddenField::create('ID')
+        );
+
+        $actions = FieldList::create(
+            FormAction::create('confirmfolder', _t(__CLASS__.'.FORM_ACTION_CONFIRM', 'Save and continue'))
+                ->setUseButtonTag(false)
+                ->addExtraClass('btn btn-primary'),
+            FormAction::create("cancel", _t(CMSMain::class . '.Cancel', "Cancel"))
+                ->addExtraClass('btn btn-secondary')
+                ->setUseButtonTag(true)
+        );
+
+        return Form::create($this, 'ConfirmFolderForm', $fields, $actions)
+            ->setFormAction('UserDefinedFormController/ConfirmFolderForm')
+            ->addExtraClass('form--no-dividers');
+    }
+
     /**
      * Sets the selected folder as the upload folder for an EditableFileField
      * @return HTTPResponse
+     * @param HTTPRequest $request
      * @throws ValidationException
      */
-    public function confirmfolder()
+    public function confirmfolder(HTTPRequest $request)
     {
         if (!Permission::checkMember(null, "CMS_ACCESS_AssetAdmin")) {
             throw new PermissionFailureException();
         }
-
-        $request = $this->getRequest();
 
         // retrieve the EditableFileField
         $id = $request->requestVar('ID');
