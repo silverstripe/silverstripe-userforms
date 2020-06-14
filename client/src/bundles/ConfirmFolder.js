@@ -60,7 +60,7 @@ jQuery.entwine('ss', ($) => {
   $('#Form_ConfirmFolderForm_FolderID_Holder .treedropdownfield.is-open,#Form_ItemEditForm_FolderID .treedropdownfield.is-open').entwine({
     onunmatch() {
       // Build url
-      const parsedURL = url.parse('UserDefinedFormController/getfoldergrouppermissions');
+      const parsedURL = url.parse('admin/user-forms/getfoldergrouppermissions');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
       const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
@@ -138,13 +138,11 @@ jQuery.entwine('ss', ($) => {
       const handleSubmit = (...args) => this._handleSubmitModal(...args);
       const title = i18n._t('UserForms.FILE_CONFIRMATION_TITLE', 'Select file upload folder');
       const editableFileFieldID = $(this).data('id');
-      const userFormID = $('#Form_EditForm_ID').attr('value');
 
       // Build schema url
-      const parsedURL = url.parse('UserDefinedFormController/confirmfolderform');
+      const parsedURL = url.parse('admin/user-forms/confirmfolderformschema');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
-      parsedQs.UserFormID = userFormID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
 
       ReactDOM.render(
@@ -179,7 +177,7 @@ jQuery.entwine('ss', ($) => {
         .then(() => {
           jQuery.noticeAdd({ text: i18n._t('UserForms.FILE_CONFIRMATION_CONFIRMATION', 'Folder confirmed successfully.'), stay: false, type: 'success' });
           this.close(true);
-          $('#Form_EditForm_action_save').trigger('click');
+          $('[name=action_doSave], [name=action_save]').click();
         })
         .catch((error) => {
           jQuery.noticeAdd({ text: error.message, stay: false, type: 'error' });

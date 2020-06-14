@@ -41,6 +41,7 @@ use SilverStripe\Core\Config\Configurable;
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
  *
+ * @mixin UserFormFieldEditorExtension
  */
 trait UserForm
 {
