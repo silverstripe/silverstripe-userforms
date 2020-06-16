@@ -19,8 +19,6 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.HIDE_OPTIONS": "Hide options",
     "UserForms.LEAVE_CONFIRMATION": "You have unsaved changes!",
     "UserForms.REMOVED_OPTION": "Removed option",
-    "UserForms.SHOW_OPTIONS": "Show options",
-    "UserForms.FILE_CONFIRMATION_TITLE": "Select file upload folder",
-    "UserForms.FILE_CONFIRMATION_CONFIRMATION": "Folder confirmed successfully."
+    "UserForms.SHOW_OPTIONS": "Show options"
 });
 }
