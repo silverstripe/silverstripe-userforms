@@ -1,4 +1,6 @@
 en:
+  EditableFormField:
+    php.SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Select field type'
   EditableTextField:
     php.SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
   EditableUploadField:
@@ -22,6 +24,15 @@ en:
     SUBMITBUTTON: Submit
     TEXTONCLEAR: 'Text on clear button:'
     TEXTONSUBMIT: 'Text on submit button:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CONFIRM_FOLDER_LABEL_A: 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'
+    CONFIRM_FOLDER_LABEL_B: 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>'
+    FOLDER_OPTIONS_EXISTING: 'Use an existing folder'
+    FOLDER_OPTIONS_NEW: 'Create a new folder (recommended)'
+    FOLDER_OPTIONS_TITLE: 'Form folder options'
+    FORM_ACTION_CONFIRM: 'Save and continue'
+    INVALID_REQUEST: 'This request was invalid.'
+    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Add Field'
     ADD_FIELD_GROUP: 'Add Field Group'
@@ -132,6 +143,10 @@ en:
       other: '{count} Editable Field Group Ends'
     SINGULARNAME: 'Editable Field Group End'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    ANYONE: 'Unrestricted access, uploads will be visible to anyone'
+    INHERIT: 'Visibility for this folder is inherited from the parent folder'
+    LOGGED_IN: 'Restricted access, uploads will be visible to logged-in users'
+    ONLY_GROUPS: 'Restricted access, uploads will be visible to the following groups:'
     PLURALNAME: 'File Upload Fields'
     PLURALS:
       one: 'A File Upload Field'
@@ -203,6 +218,8 @@ en:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     AUTOCOMPLETE: Autocomplete
     AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
+    MAX_LENGTH: 'Maximum text length'
+    MIN_LENGTH: 'Minimum text length'
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
     PLURALNAME: 'Text Fields'
@@ -261,7 +278,6 @@ en:
     EMAIL_RECIPIENT_UNSAVED_FORM: 'You will be able to select from valid form fields after saving this record.'
     EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
     FROMADDRESS: 'Send email from'
-    UnrestrictedFileUploadWarning: 'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.'
     HIDEFORMDATA: 'Hide form data from email?'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
@@ -287,15 +303,4 @@ en:
     TYPEREPLY: 'Type reply address'
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
-  SilverStripe\UserForms\Control\UserDefinedFormController:
-    INVALID_REQUEST: 'This request was invalid.'
-    CONFIRM_FOLDER_LABEL_A: 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'
-    CONFIRM_FOLDER_LABEL_B: 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>'
-    FOLDER_OPTIONS_TITLE: 'Form folder options'
-    FOLDER_OPTIONS_NEW: 'Create a new folder (recommended)'
-    FOLDER_OPTIONS_EXISTING: 'Use an existing folder'
-    FORM_ACTION_CONFIRM: 'Save and continue'
-    FOLDER_PERMISSIONS_INHERIT: 'Visibility for this folder is inherited from the parent folder'
-    FOLDER_PERMISSIONS_ANYONE: 'Unrestricted access, uploads will be visible to anyone'
-    FOLDER_PERMISSIONS_LOGGED_IN: 'Restricted access, uploads will be visible to logged-in users'
-    FOLDER_PERMISSIONS_ONLY_GROUPS: 'Restricted access, uploads will be visible to the following groups:'
+    UnrestrictedFileUploadWarning: 'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.'
