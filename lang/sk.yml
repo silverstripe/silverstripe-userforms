@@ -27,11 +27,7 @@ sk:
     CUSTOMRULES: 'Vlastné pravidlá'
     DEFAULT: 'Predvolená hodnota'
     DEFAULTTOTODAY: 'Zobraziť v predvolenom režime na dnešný dátum?'
-    DELETE: Vymazať
-    DRAG: 'Ťahaním preskupiť poradie polí'
-    ENTERQUESTION: 'Zadajte otázku'
-    EXTRACLASSA: 'Extra úprava/vzhľad'
-    EXTRACLASSB: 'Extra CSS triedy - viaceré triedy oddeľujte medzerou'
+    DISPLAY_RULES_DISABLED: 'Pravidlá zobrazenia nie sú povolené pre povinné/vyžadované polia. Prosím odškrtnite "Je pole povinné/vyžadované?" na záložke "Validácia".'
     EXTRACLASS_MULTIPLE: 'Jednotlivé CSS triedy oddeľte jednou medzerou'
     EXTRACLASS_SELECT: 'Vyberte si zo zoznamu povolených štýlov'
     EXTRACLASS_TITLE: 'Extra úprava/vzhľad'
@@ -120,6 +116,8 @@ sk:
     RANGE_TO: do
     SINGULARNAME: 'Textové pole'
     TEXTLENGTH: 'Povolená dĺžka textu'
+  SilverStripe\UserForms\Model\EditableFormField\Validator:
+    REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Vlastné pravidlá'
     EMAILCONTENTTAB: 'Obsah e-mailu'

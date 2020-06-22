@@ -1,3 +1,19 @@
+SilverStripe\Security\Group:
+  admin:
+    Title: Administrators
+
+SilverStripe\Assets\Folder:
+  unrestricted:
+    Name: unrestricted
+    CanViewType: Anyone
+  restricted:
+    Name: restricted-folder
+    CanViewType: LoggedInUsers
+  admin-only:
+    Name: admin-only
+    CanViewType: OnlyTheseUsers
+    ViewerGroups: =>SilverStripe\Security\Group.admin
+
 SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
   form1step1:
     Title: 'Step 1'
@@ -169,6 +185,10 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     Title: Summary Text Field
     ShowInSummary: false
 
+  become-file-upload:
+    Name: BecomeFileUpload
+    Title: I will be converted to a File upload field
+
 SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
   basic-dropdown:
     Name: basic-dropdown
@@ -246,6 +266,15 @@ SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     Options:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-y-2
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.option-n-2
+
+SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+  file-field-1:
+    Name: 'file_field_name'
+    Title: 'File field title'
+    Folder: =>SilverStripe\Assets\Folder.unrestricted
+  file-field-2:
+    Name: FileUploadField
+    Title: File Upload Field
 
 SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
   group1end:
@@ -436,6 +465,19 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Title: Form with MultipleOption fields
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableDropdown.basic-dropdown
+
+  restricted-user-form:
+    Title: Form editable only by admin
+    CanEditType: OnlyTheseUsers
+    EditorGroups: =>SilverStripe\Security\Group.admin
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-2
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.become-file-upload
+
+  upload-form:
+    Title: 'Form with upload field'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-1
 
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:

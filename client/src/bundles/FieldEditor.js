@@ -95,7 +95,10 @@ jQuery.entwine('ss', ($) => {
           }
 
           $newField.addClass('flashBackground');
-          $('.cms-content-fields').scrollTop($('.cms-content-fields')[0].scrollHeight);
+          const $contenFields = $('.cms-content-fields');
+          if ($contenFields.length > 0) {
+            $contenFields.scrollTop($contenFields[0].scrollHeight);
+          }
           if ($groupEnd) {
             $groupEnd.css('visibility', 'visible');
           }
