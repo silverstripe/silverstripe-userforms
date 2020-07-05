@@ -9,7 +9,7 @@ added
 
 ## How (without the "why")
 
-You need to create your own `EditableFormField` (the field which will be used in the CMS). This class needs to
+You need to create your own subclass of `EditableFormField` (the field which will be used in the CMS). This class needs to
 implement the method `getFormField()`, which will need to return an instantiated `FormField` to be used in the
 frontend form.
 
