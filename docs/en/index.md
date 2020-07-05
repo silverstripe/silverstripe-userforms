@@ -28,6 +28,7 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
  * [Troubleshooting](troubleshooting.md)
  * [User Documentation](userguide/index.md)
  * [Compiling Front-End Files](compiling-front-end-files.md)
+ * [Creating Custom Fields](creating-custom-fields.md)
  * [Upgrading to SilverStripe 4](upgrading.md)
 
 ## Thanks
