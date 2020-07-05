@@ -33,7 +33,7 @@ author specified.
 
 So, we have two fields, with two different concerns.
 
-The `EditableFormField` subclass is what you want to create to represent the field as it is used in the CMS. Its
+The subclass of `EditableFormField` is what you want to create to represent the field as it is used in the CMS. Its
 validation should be based on what you require your **content authors** to enter.
 
 The `FormField` subclass is what you want to create to represent the field as it is used on the frontend. Its
