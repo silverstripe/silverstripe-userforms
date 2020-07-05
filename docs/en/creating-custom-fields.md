@@ -1,7 +1,7 @@
 # Creating custom fields
 
 To create and use your own custom fields, depending on what you want to accomplish, you may need to create two
-subclasses.
+new classes subclassed from the following:
 
 - `EditableFormField` - this Field represents what will be seen/used in the CMS userforms interface
 - `FormField` - this Field represents what will be seen/used in the frontend user form when the above field has been
