@@ -13,7 +13,7 @@ You need to create your own subclass of `EditableFormField` (the field which wil
 implement the method `getFormField()`, which will need to return an instantiated `FormField` to be used in the
 frontend form.
 
-`EditableTextField` and `TextField` are probably the best examples to look in to.
+`EditableTextField` and `TextField` are two existing classes and probably the best example to look in to.
 
 ## Why two different Fields?
 
