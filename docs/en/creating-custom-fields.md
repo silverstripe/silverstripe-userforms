@@ -36,7 +36,7 @@ So, we have two fields, with two different concerns.
 The subclass of `EditableFormField` is what you want to create to represent the field as it is used in the CMS. Its
 validation should be based on what you require your **content authors** to enter.
 
-The `FormField` subclass is what you want to create to represent the field as it is used on the frontend. Its
+The subclass of `FormField` is what you want to create to represent the field as it is used on the frontend. Its
 validation should be based on what you require your **frontend users** to enter.
 
 The `EditableFormField` is in charge of instantiating its `FormField` with any/all information that that `FormField`
