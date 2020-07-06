@@ -107,7 +107,7 @@ Files have a number of icons which can help to identify the original source of a
 
 **Form submission:** ![Address card icon](_images/address-card.png)
 
-This indicates a file is associated with a form submission, this file could contain personal identifiable information and care should be taken so that it is not leaked.
+This indicates a file is associated with a form submission. This file has not been uploaded to the CMS by a Content Manager and may contain sensitive information. Care should be taken so that it is not published and leaked.
 
 **Form submission with warning:** ![Address card with warning icon](_images/address-card-warning.png)
 
