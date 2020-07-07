@@ -54,7 +54,7 @@ computers. This is useful for getting documents and media files.
 
 You will be prompted to choose a folder that this field uploads files to. 
 By default the "Form-Submissions" folder will be selected, however you’re free to create your own folder 
-(Form-Submissions/<your-submission-folder>) or choose an existing folder.
+(Form-Submissions/your-submission-folder) or choose an existing folder.
 
 To learn more about setting up File Upload folders refer to 
 [Form submissions, File Upload Field](/optional_features/forms/form-submissions/#file-upload-field).
