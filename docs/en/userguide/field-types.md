@@ -52,17 +52,14 @@ automatically when a form is filled out.
 Selecting a File Upload Field adds a field where users can upload a file from their
 computers. This is useful for getting documents and media files.
 
-The folder that this field uploads to can be customised by selecting "Show Options"
-and then selecting a new folder from the "Select upload folder" option. If no folder
-is selected it will upload by default to the "Uploads" folder.
+You will be prompted to choose a folder that this field uploads files to. 
+By default the "Form-Submissions" folder will be selected, however you’re free to create your own folder 
+(Form-Submissions/<your-submission-folder>) or choose an existing folder.
 
-If the default "Uploads" folder is used, or if you choose a folder that does not have additional CMS access permissions set, you may be exposing files uploaded via your form to the public, as well as anyone with access to the CMS.
+To learn more about setting up File Upload folders refer to 
+[Form submissions, File Upload Field](/optional_features/forms/form-submissions/#file-upload-field).
 
-You can set any permission requirements on the upload folder by finding it in the "Files" area, clicking on it to edit and going to the "Permissions" tab.
-
-Only certain file extensions are considered safe for upload,
-e.g. webserver script files will be denied but images will be allowed. The webserver environment also imposes a limit on file size by default.
-
+Only certain file extensions are considered safe and will be accepted. By default there is also a limit on file size.
 
 ## Heading
 
