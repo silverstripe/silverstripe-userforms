@@ -121,7 +121,7 @@ A caution symbol is added to the form submission icon because it has a higher ri
 **Restricted access:** ![User with lock icon](_images/user-lock.png)
 
 Indicates that a file/folder has restricted access and will only be visible to certain users or groups. To learn more about the usage of this particular icon refer to 
-[File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions).
+[File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/file_permissions/).
 
 ## Overview of files with custom permissions
 
@@ -129,7 +129,7 @@ Indicates that a file/folder has restricted access and will only be visible to c
 
 [note]
 Folder with restricted access containing files with custom permissions and their associated file icons.
-* FS - Form submission
+FS - Form submission
 [/note]
 
 To get started, create a new **User Defined Form** page in the CMS. See [Creating and editing forms](creating-and-editing-forms) 
@@ -191,12 +191,12 @@ You will either see a **restricted access** icon, or a **warning** icon.
 
 To store your files in a safer manor you can do one of several things:
 * Create a new folder from the Files area, or if this is your first time setting up an Upload Field for this form you will 
-be guided through the process, for more information see [Setting up a folder to store file uploads for your form](#Setting-up-a-folder-to-store-file-uploads-for-your-form).
+be guided through the process, for more information see [Setting up a folder to store file uploads for your form](#setting-up-a-folder-to-store-file-uploads-for-your-form).
 * Change the upload folder to one which already has restricted access. Edit the Upload Field and select a folder from the **Select a folder** dropdown. 
 * Change the view access permissions of the current folder in the Files area to restrict access to the file.
 
 You can manage your folder permissions by navigating to the Files section in the CMS menu and edit the folders details. 
-See [File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions) 
+See [File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/file_permissions/) 
 for more information and [Roles and permissions](https://userhelp.silverstripe.org/en/4/managing_your_website/managing_roles_and_permissions/) to learn more.
 
-For more information on the usage of these icons in the files area, please refer to [File Indicators](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions/#file-indicators).
+For more information on the usage of these icons in the files area, please refer to [File Indicators](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/file_permissions/#file-indicators).
