@@ -56,11 +56,13 @@ The folder that this field uploads to can be customised by selecting "Show Optio
 and then selecting a new folder from the "Select upload folder" option. If no folder
 is selected it will upload by default to the "Uploads" folder.
 
-Only certain file extensions are considered safe for upload,
-e.g. webserver script files will be denied but images will be allowed.
-The webserver environment also imposes a limit on file size by default.
+If the default "Uploads" folder is used, or if you choose a folder that does not have additional CMS access permissions set, you may be exposing files uploaded via your form to the public, as well as anyone with access to the CMS.
 
-You can set any permissions requirements on the upload folder by finding it in the "Files" area, clicking on it to edit and going to the "Permissions" tab.
+You can set any permission requirements on the upload folder by finding it in the "Files" area, clicking on it to edit and going to the "Permissions" tab.
+
+Only certain file extensions are considered safe for upload,
+e.g. webserver script files will be denied but images will be allowed. The webserver environment also imposes a limit on file size by default.
+
 
 ## Heading
 

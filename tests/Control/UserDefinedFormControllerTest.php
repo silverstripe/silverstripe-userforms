@@ -2,14 +2,26 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use SilverStripe\Assets\Dev\TestAssetStore;
+use SilverStripe\Assets\File;
+use SilverStripe\Assets\Folder;
+use SilverStripe\Assets\Storage\AssetStore;
+use SilverStripe\Assets\Upload_Validator;
+use InvalidArgumentException;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Control\Session;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
@@ -32,7 +44,16 @@ class UserDefinedFormControllerTest extends FunctionalTest
     {
         parent::setUp();
 
+        // Set backend and base url
+        TestAssetStore::activate('AssetStoreTest');
+
         Config::modify()->merge(SSViewer::class, 'themes', ['simple', '$default']);
+    }
+
+    public function tearDown()
+    {
+        TestAssetStore::reset();
+        parent::tearDown();
     }
 
     public function testProcess()
@@ -366,5 +387,41 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check emails
         $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject: Basic Value');
+    }
+
+    public function testImageThumbnailCreated()
+    {
+        Config::modify()->set(Upload_Validator::class, 'use_is_uploaded_file', false);
+
+        $userForm = $this->setupFormFrontend('upload-form');
+        $controller = UserDefinedFormController::create($userForm);
+        $field = $this->objFromFixture(EditableFileField::class, 'file-field-1');
+
+        $path = realpath(__DIR__ . '/fixtures/testfile.jpg');
+        $data = [
+            $field->Name => [
+                'name' => 'testfile.jpg',
+                'type' => 'image/jpeg',
+                'tmp_name' => $path,
+                'error' => 0,
+                'size' => filesize($path),
+            ]
+        ];
+        $_FILES[$field->Name] = $data[$field->Name];
+
+        $controller->getRequest()->setSession(new Session([]));
+        $controller->process($data, $controller->Form());
+
+        /** @var File $image */
+        // Getting File instead of Image so that we still delete the physical file in case it was
+        // created with the wrong ClassName
+        // Using StartsWith in-case of existing file so was created as testfile-v2.jpg
+        $image = File::get()->filter(['Name:StartsWith' => 'testfile'])->last();
+        $this->assertNotNull($image);
+
+        // Assert thumbnail variant created
+        /** @var AssetStore $store */
+        $store = Injector::inst()->get(AssetStore::class);
+        $this->assertTrue($store->exists($image->getFilename(), $image->getHash(), 'FitMaxWzM1MiwyNjRd'));
     }
 }

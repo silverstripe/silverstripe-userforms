@@ -1,3 +1,7 @@
+SilverStripe\Security\Group:
+  admin:
+    Title: Administrators
+
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   basic-text:
     Name: basic_text_name
@@ -311,3 +315,8 @@ SilverStripe\UserForms\Model\UserDefinedForm:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.basic-text-2
   empty-form:
     Title: Empty Form
+
+  form-with-file-upload:
+    Title: A Form with a file upload field
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field

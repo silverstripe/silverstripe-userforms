@@ -61,7 +61,8 @@ class SubmittedFileField extends SubmittedFormField
      */
     public function getLink()
     {
-        if ($file = $this->UploadedFile()) {
+        $file = $this->UploadedFile();
+        if ($file && $file->exists()) {
             if (trim($file->getFilename(), '/') != trim(ASSETS_DIR, '/')) {
                 return $this->UploadedFile()->AbsoluteLink();
             }

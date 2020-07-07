@@ -2,15 +2,15 @@
 
 namespace SilverStripe\UserForms\Control;
 
-use Exception;
 use PageController;
 use Psr\Log\LoggerInterface;
+use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
-use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
@@ -20,13 +20,17 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Security;
+use SilverStripe\UserForms\Extension\UserFormFileExtension;
 use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
+use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
+use SilverStripe\View\ViewableData;
 use Swift_RfcComplianceException;
 
 /**
@@ -42,8 +46,11 @@ class UserDefinedFormController extends PageController
         'index',
         'ping',
         'Form',
-        'finished'
+        'finished',
     ];
+
+    /** @var string The name of the folder where form submissions will be placed by default */
+    private static $form_submissions_folder = 'Form-submissions';
 
     protected function init()
     {
@@ -200,7 +207,7 @@ class UserDefinedFormController extends PageController
                     });
                 })(jQuery);
 JS
-            , 'UserFormsConditional-' . $form->ID);
+                , 'UserFormsConditional-' . $form->ID);
         }
     }
 
@@ -255,10 +262,8 @@ JS
 
                         // create the file from post data
                         $upload = Upload::create();
-                        $file = File::create();
-                        $file->ShowInSearch = 0;
                         try {
-                            $upload->loadIntoFile($_FILES[$field->Name], $file, $foldername);
+                            $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
                         } catch (ValidationException $e) {
                             $validationResult = $e->getResult();
                             foreach ($validationResult->getMessages() as $message) {
@@ -266,6 +271,17 @@ JS
                             }
                             Controller::curr()->redirectBack();
                             return;
+                        }
+                        /** @var AssetContainer|File $file */
+                        $file = $upload->getFile();
+                        $file->ShowInSearch = 0;
+                        $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
+                        $file->write();
+
+                        // generate image thumbnail to show in asset-admin
+                        // you can run userforms without asset-admin, so need to ensure asset-admin is installed
+                        if (class_exists(AssetAdmin::class)) {
+                            AssetAdmin::singleton()->generateThumbnails($file);
                         }
 
                         // write file to form field
@@ -401,7 +417,11 @@ JS
                     $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
                     if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
                         foreach ($emailData['Fields'] as $field) {
-                            $body .= $field->Title . ': ' . $field->Value . " \n";
+                            if ($field instanceof SubmittedFileField) {
+                                $body .= $field->Title . ': ' . $field->ExportValue ." \n";
+                            } else {
+                                $body .= $field->Title . ': ' . $field->Value . " \n";
+                            }
                         }
                     }
 
