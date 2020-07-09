@@ -19,6 +19,7 @@ and without getting involved in any PHP code.
  * [Troubleshooting](troubleshooting.md)
  * [User Documentation](userguide/index.md)
  * [Compiling Front-End Files](compiling-front-end-files.md)
+ * [Creating Custom Fields](creating-custom-fields.md)
  * [Upgrading to SilverStripe 4](upgrading.md)
 
 ## Thanks
