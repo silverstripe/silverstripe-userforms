@@ -38,4 +38,16 @@ class EmailRecipientTest extends SapphireTest
         $recipient->EmailFrom = 'test@example.com';
         $recipient->write();
     }
+
+    public function testEmailAddressesTrimmed()
+    {
+        $recipient = new EmailRecipient();
+        $recipient->EmailAddress = 'test1@example.com  ';
+        $recipient->EmailFrom = 'test2@example.com  ';
+        $recipient->EmailReplyTo = 'test3@example.com  ';
+        $recipient->write();
+        $this->assertSame('test1@example.com', $recipient->EmailAddress);
+        $this->assertSame('test2@example.com', $recipient->EmailFrom);
+        $this->assertSame('test3@example.com', $recipient->EmailReplyTo);
+    }
 }
