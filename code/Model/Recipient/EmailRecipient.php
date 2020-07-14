@@ -116,6 +116,17 @@ class EmailRecipient extends DataObject
         DB::query("UPDATE \"UserDefinedForm_EmailRecipient\" SET \"FormClass\" = 'Page' WHERE \"FormClass\" IS NULL");
     }
 
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        // email addresses have trim() applied to them during validation for a slightly nicer UX
+        // apply trim() here too before saving to the database
+        $this->EmailAddress = trim($this->EmailAddress);
+        $this->EmailFrom = trim($this->EmailFrom);
+        $this->EmailReplyTo = trim($this->EmailReplyTo);
+    }
+
     public function summaryFields()
     {
         $fields = parent::summaryFields();
