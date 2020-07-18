@@ -65,7 +65,13 @@ class UserDefinedFormController extends PageController
 
         // load the jquery
         if (!$page->config()->get('block_default_userforms_js')) {
-            Requirements::javascript('//code.jquery.com/jquery-3.4.1.min.js');
+            Requirements::javascript(
+                'https://code.jquery.com/jquery-3.5.0.min.js',
+                [
+                    'integrity' => 'sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=',
+                    'crossorigin' => 'anonymous'
+                ]
+            );
             Requirements::javascript(
                 'silverstripe/userforms:client/thirdparty/jquery-validate/jquery.validate.min.js'
             );
