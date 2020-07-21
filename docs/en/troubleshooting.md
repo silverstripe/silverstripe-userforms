@@ -7,6 +7,12 @@ Check the below if you have any issues during installation or use
 After installation make sure you have done a `dev/build` you may also need to flush the admin view by appending
 `?flush=1` to the URL, e.g. `http://yoursite.com/admin?flush=1`
 
+## Checkbox or Radio group custom messages not showing
+
+If your project has a custom template for `UserFormsCheckboxSetField.ss` or `UserFormsOptionSetField.ss`, then you will need to ensure they include `$Top.getValidationAttributesHTML().RAW`. See
+* [UserFormsCheckboxSetField.ss](../../templates/SilverStripe/UserForms/FormField/UserFormsCheckboxSetField.ss)
+* [UserFormsOptionSetField.ss](../../templates/SilverStripe/UserForms/FormField/UserFormsOptionSetField.ss)
+
 ## UserForms EditableFormField Column Clean task
 
 This task is used to clear unused columns from EditableFormField database tables.

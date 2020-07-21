@@ -2,7 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Forms\OptionsetField;
+use SilverStripe\UserForms\FormField\UserFormsOptionSetField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 
 /**
@@ -35,9 +35,9 @@ class EditableRadioField extends EditableMultipleOptionField
 
     public function getFormField()
     {
-        $field = OptionsetField::create($this->Name, $this->Title ?: false, $this->getOptionsMap())
+        $field = UserFormsOptionSetField::create($this->Name, $this->Title ?: false, $this->getOptionsMap())
             ->setFieldHolderTemplate(EditableMultipleOptionField::class . '_holder')
-            ->setTemplate('SilverStripe\\UserForms\\FormField\\UserFormsOptionSetField');
+            ->setTemplate(UserFormsOptionSetField::class);
 
         // Set default item
         $defaultOption = $this->getDefaultOptions()->first();
