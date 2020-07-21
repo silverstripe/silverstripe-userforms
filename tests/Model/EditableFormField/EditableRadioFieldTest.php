@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\UserForms\FormField\UserFormsOptionSetField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 
 class EditableRadioFieldTest extends SapphireTest
@@ -16,7 +17,7 @@ class EditableRadioFieldTest extends SapphireTest
     {
         $radio = $this->objFromFixture(EditableRadioField::class, 'radio-field');
         $this->assertSame(
-            'SilverStripe\\UserForms\\FormField\\UserFormsOptionSetField',
+            UserFormsOptionSetField::class,
             $radio->getFormField()->getTemplate()
         );
     }
