@@ -495,7 +495,7 @@ jQuery(document).ready(($) => {
       error.addClass('message');
 
       if (element.is(':radio') || element.parents('.checkboxset').length > 0) {
-        error.appendTo(element.closest('.middleColumn'));
+        error.appendTo(element.closest('.middleColumn, .field'));
       } else if (element.parents('.checkbox').length > 0) {
         error.appendTo(element.closest('.field'));
       } else {
