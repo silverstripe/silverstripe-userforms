@@ -50,7 +50,6 @@ eo:
     DEFAULT: 'Apriora valoro'
     DEFAULTTOTODAY: 'Ĉu apriorie hodiaŭ?'
     DISPLAYIF: 'Baskuligi videblecon kiam'
-    DISPLAY_RULES_DISABLED: 'Vidigaj reguloj ne estas enŝaltitaj por bezonataj kampoj. Por reaktivigi ĝin, bonvolu malmarki "Ĉu ĉi tiu kampo estas bezonata?" sub "Validigo".'
     EXTRACLASS_MULTIPLE: 'Disigi ĉiun CSS-klason per unu spaceto'
     EXTRACLASS_SELECT: 'Elekti el la listo de eblaj stiloj'
     EXTRACLASS_TITLE: 'Ekstra stilado/aranĝado'
@@ -208,8 +207,6 @@ eo:
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Permesata longo de teksto'
-  SilverStripe\UserForms\Model\EditableFormField\Validator:
-    REQUIRED_ERROR: 'Formularaj kampoj ne povas esti nepraj kaj havi kondiĉajn vidigoregulojn.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Propraj reguloj'
     EMAILCONTENTTAB: 'Retpoŝta enhavo'
@@ -258,7 +255,6 @@ eo:
     EMAIL_RECIPIENT_UNSAVED_FORM: 'Konservinte ĉi tiun rikordon vi povos elekti el validaj formularaj kampoj.'
     EmailFromContent: 'La de-adreso estas kie vi povas agordi de kie venas la retpoŝto. Ĉe plejmultaj serviloj tio devus esti retpoŝta adreso ĉe la sama domajno kiel via retejo. Ekzemple, ĉe viareto.com, la de-adreso eble devus esti iuloko@viareto.com. Tamen vi povas agordi la de-adreson al iu ajn adreso.'
     FROMADDRESS: 'Sendi retpoŝton de'
-    FileUploadWarning: 'Dosieroj alŝutitaj per ĉi tiu kampo eble estos alireblaj se la ĝusta URL estas sciata.'
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'

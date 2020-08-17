@@ -27,7 +27,6 @@ it:
     CUSTOMRULES: 'Regole personalizzate'
     DEFAULT: 'Valore di default'
     DEFAULTTOTODAY: 'Di default a oggi?'
-    DISPLAY_RULES_DISABLED: 'Le regole di visualizzazione non sono attivate per i campi richiesti. Per piacere deseleziona "Questo campo è obbligatorio?" sotto "Validazione" per riabilitarle.'
     EXTRACLASS_MULTIPLE: 'Separa ogni classe CSS con uno spazio singolo'
     EXTRACLASS_SELECT: 'Seleziona da una lista di stili consentiti'
     EXTRACLASS_TITLE: 'Stile/Layout extra'
@@ -116,8 +115,6 @@ it:
     RANGE_TO: a
     SINGULARNAME: 'Campo testo'
     TEXTLENGTH: 'Lunghezza testo consentita'
-  SilverStripe\UserForms\Model\EditableFormField\Validator:
-    REQUIRED_ERROR: 'I campi dei form non possono essere obbligatori e avere regole di visualizzazione condizionali.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Regole personalizzate'
     EMAILCONTENTTAB: 'Contenuto dell''e-mail'
@@ -148,7 +145,6 @@ it:
     EMAILTEMPLATE: 'Schema e-mail'
     EmailFromContent: 'L''indirizzo mittente ti permette di impostare da chi viene l''e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l''indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere.'
     FROMADDRESS: 'Manda e-mail da'
-    FileUploadWarning: 'I files caricati attraverso questo campo potrebbero essere pubblicamente accessibili se si conosce la loro URL esatta'
     HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
