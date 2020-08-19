@@ -4,7 +4,6 @@ namespace SilverStripe\UserForms\Control;
 
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\Folder;
-use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPResponse_Exception;
@@ -193,7 +192,7 @@ class UserDefinedFormAdmin extends LeftAndMain
             FormAction::create('confirmfolder', _t(__CLASS__.'.FORM_ACTION_CONFIRM', 'Save and continue'))
                 ->setUseButtonTag(false)
                 ->addExtraClass('btn btn-primary'),
-            FormAction::create("cancel", _t(CMSMain::class . '.Cancel', "Cancel"))
+            FormAction::create("cancel", _t(__CLASS__ . '.CANCEL', "Cancel"))
                 ->addExtraClass('btn btn-secondary')
                 ->setUseButtonTag(true)
         );
