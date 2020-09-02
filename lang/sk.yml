@@ -27,7 +27,6 @@ sk:
     CUSTOMRULES: 'Vlastné pravidlá'
     DEFAULT: 'Predvolená hodnota'
     DEFAULTTOTODAY: 'Zobraziť v predvolenom režime na dnešný dátum?'
-    DISPLAY_RULES_DISABLED: 'Pravidlá zobrazenia nie sú povolené pre povinné/vyžadované polia. Prosím odškrtnite "Je pole povinné/vyžadované?" na záložke "Validácia".'
     EXTRACLASS_MULTIPLE: 'Jednotlivé CSS triedy oddeľte jednou medzerou'
     EXTRACLASS_SELECT: 'Vyberte si zo zoznamu povolených štýlov'
     EXTRACLASS_TITLE: 'Extra úprava/vzhľad'
@@ -116,8 +115,6 @@ sk:
     RANGE_TO: do
     SINGULARNAME: 'Textové pole'
     TEXTLENGTH: 'Povolená dĺžka textu'
-  SilverStripe\UserForms\Model\EditableFormField\Validator:
-    REQUIRED_ERROR: 'Formulárové polia nemôžu byť vyžadované, ak majú podmienené pravidlá zobrazenia.'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Vlastné pravidlá'
     EMAILCONTENTTAB: 'Obsah e-mailu'
@@ -148,7 +145,6 @@ sk:
     EMAILTEMPLATE: 'E-mailová šablóna'
     EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
     FROMADDRESS: 'E-mail odosielateľa'
-    FileUploadWarning: 'Súbory nahraté pomocou tohto políčka môžu byť verejné prístupné, pokiaľ je známa presná URL adresa.'
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
     ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte poľe, ktoré sa použije na odpoveď'
     ORSELECTAFIELDTOUSEASTO: '... alebo vyberte poľe, ktoré sa použije ako E-mail príjemcu'

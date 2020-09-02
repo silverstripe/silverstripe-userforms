@@ -495,7 +495,7 @@ jQuery(document).ready(($) => {
       error.addClass('message');
 
       if (element.is(':radio') || element.parents('.checkboxset').length > 0) {
-        error.appendTo(element.closest('.middleColumn'));
+        error.appendTo(element.closest('.middleColumn, .field'));
       } else if (element.parents('.checkbox').length > 0) {
         error.appendTo(element.closest('.field'));
       } else {
@@ -530,8 +530,10 @@ jQuery(document).ready(($) => {
 
       if (isValid) {
         // Remove required attributes on hidden fields
-        $(form).find('.field.requiredField.hide input')
-          .removeAttr('required aria-required data-rule-required').valid();
+        const hiddenInputs = $(form).find('.field.requiredField.hide input');
+        if (hiddenInputs.length > 0) {
+          hiddenInputs.removeAttr('required aria-required data-rule-required').valid();
+        }
 
         // When using the "are you sure?" plugin, ensure the form immediately submits.
         $(form).removeClass('dirty');
