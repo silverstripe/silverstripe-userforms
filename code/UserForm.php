@@ -325,7 +325,7 @@ SQL;
         if ($this->EmailRecipients()->Count() == 0 && static::config()->recipients_warning_enabled) {
             $fields->addFieldToTab('Root.Main', LiteralField::create(
                 'EmailRecipientsWarning',
-                '<p class="message warning">' . _t(
+                '<p class="alert alert-warning">' . _t(
                     __CLASS__.'.NORECIPIENTS',
                     'Warning: You have not configured any recipients. Form submissions may be missed.'
                 )
