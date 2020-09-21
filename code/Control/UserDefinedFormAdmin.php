@@ -65,7 +65,7 @@ class UserDefinedFormAdmin extends LeftAndMain
         /** @var Folder $formSubmissionsFolder */
         $formSubmissionsFolder = Folder::find($folder);
         $textField->setDescription(EditableFileField::getFolderPermissionString($formSubmissionsFolder));
-        $textField->addExtraClass('pt-2');
+        $textField->addExtraClass('pt-2 userform-confirm-folder');
         $textField->setSchemaData([
             'data' => [
                 'prefix' => static::config()->get('form_submissions_folder') . '/',
