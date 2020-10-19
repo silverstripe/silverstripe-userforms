@@ -257,13 +257,14 @@ JS
 
             if (!empty($data[$field->Name])) {
                 if (in_array(EditableFileField::class, $field->getClassAncestry())) {
-                    if (!empty($_FILES[$field->Name]['name'])) {
+                    if (is_uploaded_file($_FILES[$field->Name]['tmp_name'])) {
                         $foldername = $field->getFormField()->getFolderName();
 
                         // create the file from post data
                         $upload = Upload::create();
+                        $uploaded = false;
                         try {
-                            $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
+                            $uploaded = $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
                         } catch (ValidationException $e) {
                             $validationResult = $e->getResult();
                             foreach ($validationResult->getMessages() as $message) {
@@ -272,24 +273,29 @@ JS
                             Controller::curr()->redirectBack();
                             return;
                         }
-                        /** @var AssetContainer|File $file */
-                        $file = $upload->getFile();
-                        $file->ShowInSearch = 0;
-                        $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
-                        $file->write();
 
-                        // generate image thumbnail to show in asset-admin
-                        // you can run userforms without asset-admin, so need to ensure asset-admin is installed
-                        if (class_exists(AssetAdmin::class)) {
-                            AssetAdmin::singleton()->generateThumbnails($file);
-                        }
+                        if ($uploaded) {
+                            /** @var AssetContainer|File $file */
+                            $file = $upload->getFile();
+                            $file->ShowInSearch = 0;
+                            $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
+                            $file->write();
 
-                        // write file to form field
-                        $submittedField->UploadedFileID = $file->ID;
+                            // generate image thumbnail to show in asset-admin
+                            // you can run userforms without asset-admin, so need to ensure asset-admin is installed
+                            if (class_exists(AssetAdmin::class)) {
+                                AssetAdmin::singleton()->generateThumbnails($file);
+                            }
 
-                        // attach a file only if lower than 1MB
-                        if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
-                            $attachments[] = $file;
+                            // write file to form field
+                            $submittedField->UploadedFileID = $file->ID;
+
+                            // attach a file only if lower than 1MB
+                            if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
+                                $attachments[] = $file;
+                            }
+                        } else {
+                            // TODO: deal with invalid upload
                         }
                     }
                 }
