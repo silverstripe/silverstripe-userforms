@@ -6,6 +6,7 @@ use PageController;
 use Psr\Log\LoggerInterface;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Assets\File;
+use SilverStripe\Assets\Storage\AssetContainer;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
@@ -277,22 +278,27 @@ JS
                         if ($uploaded) {
                             /** @var AssetContainer|File $file */
                             $file = $upload->getFile();
-                            $file->ShowInSearch = 0;
-                            $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
-                            $file->write();
+                            
+                            if ($file && $file instanceof AssetContainer) {
+                                $file->ShowInSearch = 0;
+                                $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
+                                $file->write();
 
-                            // generate image thumbnail to show in asset-admin
-                            // you can run userforms without asset-admin, so need to ensure asset-admin is installed
-                            if (class_exists(AssetAdmin::class)) {
-                                AssetAdmin::singleton()->generateThumbnails($file);
-                            }
+                                // generate image thumbnail to show in asset-admin
+                                // you can run userforms without asset-admin, so need to ensure asset-admin is installed
+                                if (class_exists(AssetAdmin::class)) {
+                                    AssetAdmin::singleton()->generateThumbnails($file);
+                                }
 
-                            // write file to form field
-                            $submittedField->UploadedFileID = $file->ID;
+                                // write file to form field
+                                $submittedField->UploadedFileID = $file->ID;
 
-                            // attach a file only if lower than 1MB
-                            if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
-                                $attachments[] = $file;
+                                // attach a file only if lower than 1MB
+                                if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
+                                    $attachments[] = $file;
+                                }
+                            } else {
+                                // TODO: handle error   
                             }
                         } else {
                             // TODO: deal with invalid upload
