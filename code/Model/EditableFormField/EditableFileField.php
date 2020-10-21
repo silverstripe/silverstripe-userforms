@@ -6,12 +6,9 @@ use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\Upload_Validator;
 use SilverStripe\Core\Config\Config;
-<<<<<<< HEAD
 use SilverStripe\Core\Convert;
 use SilverStripe\Forms\FieldList;
-=======
 use SilverStripe\Core\Injector\Injector;
->>>>>>> 5.5
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
