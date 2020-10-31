@@ -411,6 +411,11 @@ class EditableFormField extends DataObject
 
     public function onBeforeWrite()
     {
+        $formField = $this->getFormField();
+        if ($formField && !$formField->hasData()) {
+            $this->Required = false;
+        }
+
         parent::onBeforeWrite();
 
         // Set a field name.
