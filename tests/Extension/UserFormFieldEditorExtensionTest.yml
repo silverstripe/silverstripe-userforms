@@ -1,0 +1,21 @@
+SilverStripe\UserForms\Model\UserDefinedForm:
+  page:
+SilverStripe\UserForms\Tests\Extension\UserFormBlockStub:
+  block:
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  page-text-field:
+    Name: basic_text_name
+    Title: Page Text Field
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.page
+  block-text-field-1:
+    Name: basic_text_name_2
+    Title: Block Text Field
+    Parent: =>SilverStripe\UserForms\Tests\Extension\UserFormBlockStub.block
+  block-text-field-2:
+    Name: basic_text_name_3
+    Title: Block Text Field
+    Parent: =>SilverStripe\UserForms\Tests\Extension\UserFormBlockStub.block
+  block-text-field-3:
+    Name: basic_text_name_4
+    Title: Block Text Field
+    Parent: =>SilverStripe\UserForms\Tests\Extension\UserFormBlockStub.block

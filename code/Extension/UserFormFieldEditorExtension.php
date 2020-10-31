@@ -196,6 +196,7 @@ class UserFormFieldEditorExtension extends DataExtension
         $live = Versioned::get_by_stage(EditableFormField::class, Versioned::LIVE)
             ->filter([
                 'ParentID' => $this->owner->ID,
+                'ParentClass' => get_class($this->owner),
             ]);
 
         if (!empty($seenIDs)) {
