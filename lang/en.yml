@@ -255,11 +255,11 @@ en:
       other: '{count} Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
+    PLURALNAME: 'Submitted forms'
     PLURALS:
-      one: 'A Submitted Form'
-      other: '{count} Submitted Forms'
-    SINGULARNAME: 'Submitted Form'
+      one: 'A Submitted form'
+      other: '{count} Submitted forms'
+    SINGULARNAME: 'Submitted form'
     SUBMITTER: Submitter
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
