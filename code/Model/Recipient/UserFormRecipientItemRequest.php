@@ -63,6 +63,9 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
         );
 
         foreach ($fields as $field) {
+            if (!$field->showInReports()) {
+                continue;
+            }
             $data->push(ArrayData::create([
                 'Name' => $field->dbObject('Name'),
                 'Title' => $field->dbObject('Title'),
