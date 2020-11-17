@@ -1,30 +1,71 @@
 de_DE:
+  EditableFormField:
+    php:
+      SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Wähle Feld-Typ'
+  EditableTextField:
+    php:
+      SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
   EditableUploadField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
+    CLEARBUTTON: Löschen
+    CONFIGURATION: Konfiguration
+    DISABLECSRFSECURITYTOKEN: 'Deaktiviere CSRF-Token'
+    DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'
+    ENABLELIVEVALIDATION: 'Aktiviere Live-Validierung'
+    NORECIPIENTS: 'Warnung: Sie haben keine Empfänger konfiguriert. Einsendungen gehen möglicherweise verloren.'
+    RECIPIENTS: Empfänger
+    SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
+    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
+    SUBMISSIONS: Einsendungen
+    SUBMITBUTTON: Absenden
+    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONSUBMIT: 'Text auf Absende-Button'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    FOLDER_OPTIONS_NEW: 'Neuen Ordner erzeugen (empfohlen)'
+    FORM_ACTION_CONFIRM: 'Speichern und weiter'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Feld hinzufügen'
     ADD_FIELD_GROUP: 'Gruppe hinzufügen'
     ADD_PAGE_BREAK: 'Seite hinzufügen'
     FORMFIELDS: Formularfelder
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Einreichungen filtern...'
-    WHEREVALUEIS: 'nach Wert...'
+    FILTER: Filter
+    FILTERSUBMISSIONS: 'Einreichungen filtern..'
+    FROM: Formular
+    RESET: Zurücksetzen
+    WHEREVALUEIS: 'nach Wert..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    PLURALNAME: 'Editierbare eigene Regeln'
+    SINGULARNAME: 'Editierbare eigene Regel'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Standardmäßig ist dieses Feld markiert'
     CUSTOMERROR: 'Eigene Fehlermeldung'
+    CUSTOMOPTIONS: Optionen
     CUSTOMRULES: 'Eigene Regeln'
+    DEFAULT: Standardwert
     DEFAULTTOTODAY: 'Standardmäßig auf heute'
-    EXTRACLASS_MULTIPLE: 'Mehrere CSS Klassen mit Leerzeichen trennen'
-    EXTRACLASS_TITLE: 'Extra CSS Klassen'
+    DISPLAYIF: 'Sichtbarkeit ändern wenn'
+    EXTRACLASS_MULTIPLE: 'Mehrere CSS-Klassen mit Leerzeichen trennen'
+    EXTRACLASS_SELECT: 'Wähle aus der Liste erlaubter Stile'
+    EXTRACLASS_TITLE: 'Zusätzliche Stile'
+    EXTRACLASS_Title: 'Zusätzliche CSS-Klassen'
     FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
     GROUP: Gruppe
+    INITIALVISIBILITY: 'Interne Sichtbarkeit'
+    NAME: Name
+    'NO': Nein
+    PLACEHOLDER: Platzhalter
     PLURALNAME: 'Editierbare Formularfelder'
     REQUIRED: 'Pflichtfeld?'
     RIGHTTITLE: 'Titel rechts'
+    SHOWINSUMMARY: 'Zeige in Zusammenfassung'
     SINGULARNAME: 'Editierbares Formularfeld'
     TITLE: Titel
     TYPE: Typ
     VALIDATION: Validierung
+    'YES': Ja
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxen
     SINGULARNAME: 'Checkbox Feld'
@@ -32,8 +73,10 @@ de_DE:
     PLURALNAME: 'Checkbox Gruppen'
     SINGULARNAME: 'Checkbox Gruppe'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
-    PLURALNAME: 'Länder Dropdowns'
-    SINGULARNAME: 'Länder Dropdown'
+    DEFAULT: Standardwert
+    EMPTY_STRING: 'Leere Zeichenkette'
+    PLURALNAME: Länder-Dropdowns
+    SINGULARNAME: Länder-Dropdown
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: Datumsfelder
     SINGULARNAME: Datumsfeld
@@ -41,11 +84,16 @@ de_DE:
     PLURALNAME: Dropdowns
     SINGULARNAME: 'Dropdown Feld'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: 'E-Mail Felder'
-    SINGULARNAME: 'E-Mail Feld'
+    PLURALNAME: E-Mail-Felder
+    SINGULARNAME: E-Mail-Feld
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Editierbare Feld-Gruppen'
+    SINGULARNAME: 'Editierbare Feld-Gruppe'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_START: 'Gruppe {group}'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'Dateiupload Felder'
-    SINGULARNAME: 'Dateiupload Feld'
+    PLURALNAME: Dateiupload-Felder
+    SINGULARNAME: Dateiupload-Feld
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Überschriftsebene auswählen'
     PLURALNAME: Überschriften
@@ -53,35 +101,59 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Seiten
     SINGULARNAME: Seiten
+    STEP_NEXT: Nächste
+    STEP_PREV: Vorherige
     STEP_TITLE: 'Seite {page}'
     TITLE_FIRST: 'Erste Seite'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    CONTENT: HTML
     HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
-    PLURALNAME: 'HTML Blöcke'
-    SINGULARNAME: 'HTML Block'
+    HIDELABEL: '''Titel''-Label in Frontend verbergen?'
+    PLURALNAME: HTML-Blöcke
+    SINGULARNAME: HTML-Block
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Felder'
     SINGULARNAME: 'Member List Feld'
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    DEFAULT: 'Standardmäßig ausgewählt?'
+    OPTIONSTAB: Optionen
     PLURALNAME: 'Editierbare Multi-Option Felder'
     SINGULARNAME: 'Editierbares Multi-Option Feld'
+    TITLE: Titel
+    VALUE: Wert
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    ORDER_WARNING: 'Minimale Länge sollte unter maximaler Länge liegen.'
     PLURALNAME: Zahlenfelder
+    RANGE: 'Erlaubte nummerische Range'
+    RANGE_TO: an
     SINGULARNAME: Zahlenfeld
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
-    PLURALNAME: Radio-Buttons
+    PLURALNAME: Radio-Groups
     SINGULARNAME: Radio-Button
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: Auto-Vervollständigung
+    MAX_LENGTH: 'Maximale Textlänge'
+    MIN_LENGTH: 'Minimale Textlänge'
     NUMBERROWS: 'Anzahl der Zeilen'
+    NUMBERROWS_DESCRIPTION: 'Felder mit mehr als einer Zeile werden als Text-Area generiert'
     PLURALNAME: Textfelder
+    RANGE_TO: an
     SINGULARNAME: Textfeld
     TEXTLENGTH: Textlänge
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    PLURALNAME: 'Anpassbares Formular E-Mail Empfänger'
+    CUSTOMRULESTAB: 'Eigene Regeln'
+    EMAILCONTENTTAB: E-Mail-Inhalt
+    EMAILDETAILSTAB: E-Mail-Details
+    EMAILFROMREQUIRED: 'Absender-Adresse ist erforderlich'
+    EMAILTOREQUIRED: 'Empfänger-Adresse ist erforderlich'
+    PLURALNAME: E-Mail-Empfänger
     SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'Bedingungen für E-Mail-Empfänger'
+    SINGULARNAME: 'Bedingung für E-Mail-Empfänger'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Datei herunterladen'
     PLURALNAME: 'Abgesendete Dateifelder'
@@ -89,6 +161,7 @@ de_DE:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Abgesendete Formulare'
     SINGULARNAME: 'Abgesendetes Formular'
+    SUBMITTER: Absender
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Abgesendete Formularfelder'
     SINGULARNAME: 'Abgesendetes Formularfeld'
@@ -99,13 +172,27 @@ de_DE:
     EMAILBODY: Inhalt
     EMAILFROM: Von
     EMAILSUBJECT: Betreff
-    EmailFromContent: 'Mit der Absenderadresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
+    EMAILTEMPLATE: E-Mail-Template
+    EmailFromContent: 'Mit der Absender-Adresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
     FROMADDRESS: 'E-Mail versendet von'
     HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
-    ORSELECTAFIELDTOUSEASFROM: '.. oder wähle ein Formularfeld als Absenderadresse'
-    ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Formularfeld als Empfängeradresse'
-    REPLYADDRESS: 'E-Mail Adresse für "Antworten an"'
+    ORSELECTAFIELDTOUSEASFROM: '.. oder ein Feld für Antwort-Adresse wählen'
+    ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Feld als Empfänger-Adresse'
+    PLURALNAME: 'Benutzerdefinierte Formulare'
+    PREVIEW_EMAIL: E-Mail-Vorschau
+    PREVIEW_EMAIL_DESCRIPTION: 'Hinweis: Ungespeicherte Änderungen werde nicht in der Vorschau angezeigt.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Sie können die Vorschau dieser E-Mail ansehen, wenn der Empfänger gespeichert wurde.'
+    REPLYADDRESS: 'E-Mail-Adresse für "Antworten an"'
+    REPLYADDRESS_DESCRIPTION: 'E-Mail-Adresse, an welche der Empfänger antworten kann.'
+    SELECTAFIELDTOSETSUBJECT: '.. oder ein Feld als Betreff wählen'
     SENDEMAILTO: 'E-Mail senden an'
+    SENDEMAILTO_DESCRIPTION: 'Sie können mehrere E-Mail-Adressen kommasepariert eingeben'
+    SENDIF: Versand-Bedingung
+    SENDIFAND: 'Alle Bedingungen sind wahr'
+    SENDIFOR: 'Beliebige Bedingung ist wahr'
     SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
     SINGULARNAME: 'Anpassbares Formular'
     SUBMITBUTTON: Senden
+    TYPEREPLY: 'Antwort-Adresse eingeben'
+    TYPESUBJECT: 'Betreff eingeben'
+    TYPETO: 'Empfänger-Adresse eingeben'
