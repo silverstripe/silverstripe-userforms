@@ -25,6 +25,7 @@ en:
     TEXTONCLEAR: 'Text on clear button:'
     TEXTONSUBMIT: 'Text on submit button:'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: 'Cancel'
     CONFIRM_FOLDER_LABEL_A: 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'
     CONFIRM_FOLDER_LABEL_B: 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>'
     FOLDER_OPTIONS_EXISTING: 'Use an existing folder'
@@ -254,11 +255,11 @@ en:
       other: '{count} Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
+    PLURALNAME: 'Submitted forms'
     PLURALS:
-      one: 'A Submitted Form'
-      other: '{count} Submitted Forms'
-    SINGULARNAME: 'Submitted Form'
+      one: 'A Submitted form'
+      other: '{count} Submitted forms'
+    SINGULARNAME: 'Submitted form'
     SUBMITTER: Submitter
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
