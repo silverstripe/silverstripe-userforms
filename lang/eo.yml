@@ -1,12 +1,4 @@
 eo:
-  EditableFormField:
-    php:
-      SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Elekti tipon de kampo'
-  EditableTextField:
-    php:
-      SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'La minimuma longo devus esti malpli ol la maksimuma longo.'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Ĉefa
   SilverStripe\UserForms:
@@ -89,6 +81,7 @@ eo:
     SINGULARNAME: 'Redaktebla formulara kampo'
     TITLE: Titolo
     TYPE: Tipo
+    TYPE_EMPTY: 'Elekti tipon de kampo'
     VALIDATION: Validigo
     'YES': Jes
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
@@ -222,6 +215,7 @@ eo:
     AUTOCOMPLETE_DESCRIPTION: 'Subtenataj TTT-legiloj provos aŭtomate plenigi ĉi tiun kampon per uzantinformo, uzu ĝin por agordi la enan valoron'
     MAX_LENGTH: 'Maksimuma longo de teksto'
     MIN_LENGTH: 'Minimuma longo de teksto'
+    MINMAXLENGTHCHECK: 'La minimuma longo devus esti malpli ol la maksimuma longo.'
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLURALNAME: 'Tekstaj kampoj'
