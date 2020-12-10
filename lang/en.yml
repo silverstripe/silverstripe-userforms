@@ -1,10 +1,4 @@
 en:
-  EditableFormField:
-    php.SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Select field type'
-  EditableTextField:
-    php.SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
   SilverStripe\UserForms:
@@ -88,6 +82,7 @@ en:
     SINGULARNAME: 'Editable Form Field'
     TITLE: Title
     TYPE: Type
+    TYPE_EMPTY: 'Select field type'
     VALIDATION: Validation
     'YES': 'Yes'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
@@ -221,6 +216,7 @@ en:
     AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
     MAX_LENGTH: 'Maximum text length'
     MIN_LENGTH: 'Minimum text length'
+    MINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
     PLURALNAME: 'Text Fields'
