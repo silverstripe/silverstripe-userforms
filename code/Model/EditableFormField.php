@@ -233,7 +233,7 @@ class EditableFormField extends DataObject
             $fieldClasses = $this->getEditableFieldClasses();
             $fields->addFieldsToTab('Root.Main', [
                 DropdownField::create('ClassName', _t(__CLASS__.'.TYPE', 'Type'), $fieldClasses)
-                    ->setEmptyString(_t(__CLASS__ . 'TYPE_EMPTY', 'Select field type'))
+                    ->setEmptyString(_t(__CLASS__ . '.TYPE_EMPTY', 'Select field type'))
             ]);
             return $fields;
         }

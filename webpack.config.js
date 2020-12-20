@@ -1,6 +1,7 @@
 const Path = require('path');
 // Import the core config
 const webpackConfig = require('@silverstripe/webpack-config');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {
   resolveJS,
   externalJS,
@@ -49,7 +50,11 @@ const config = [
     resolve: resolveJS(ENV, PATHS),
     externals: externalJS(ENV, PATHS),
     module: moduleJS(ENV, PATHS),
-    plugins: pluginJS(ENV, PATHS),
+    plugins: pluginJS(ENV, PATHS).concat([
+      new CopyWebpackPlugin([
+        { from: 'client/src/images', to: 'images' },
+      ])
+    ])
   },
   {
     name: 'css',
