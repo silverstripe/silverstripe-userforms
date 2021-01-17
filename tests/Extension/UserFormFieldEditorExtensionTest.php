@@ -30,7 +30,7 @@ class UserFormFieldEditorExtensionTest extends SapphireTest
         $block = $this->objFromFixture(UserFormBlockStub::class, 'block');
 
         // assert setup
-        
+        $this->assertSame($page->ID, $block->ID);
         $this->assertCount(1, $page->Fields());
         $this->assertCount(3, $block->Fields());
 
@@ -40,6 +40,8 @@ class UserFormFieldEditorExtensionTest extends SapphireTest
 
         $initialLivePage = UserDefinedForm::get()->First();
         $initialLiveBlock = UserFormBlockStub::get()->First();
+
+        $this->assertSame($initialLivePage->ID, $initialLiveBlock->ID);
         $this->assertCount(1, $initialLivePage->Fields());
         $this->assertCount(3, $initialLiveBlock->Fields());
 
