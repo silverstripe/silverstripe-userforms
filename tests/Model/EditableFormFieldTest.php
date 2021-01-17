@@ -298,10 +298,9 @@ class EditableFormFieldTest extends FunctionalTest
     {
         $requiredTextField = $this->objFromFixture(EditableTextField::class, 'required-text');
         $fieldId = $requiredTextField->ID;
-
         $this->assertTrue((bool)$requiredTextField->Required);
-        $literalField = $requiredTextField->newClassInstance(EditableLiteralField::class);
 
+        $literalField = $requiredTextField->newClassInstance(EditableLiteralField::class);
         $this->assertTrue((bool)$literalField->Required);
 
         $literalField->write();
