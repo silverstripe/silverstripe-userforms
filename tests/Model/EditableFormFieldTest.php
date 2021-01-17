@@ -10,6 +10,7 @@ use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox;
 use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
@@ -291,5 +292,21 @@ class EditableFormFieldTest extends FunctionalTest
         /** @var EditableFormField $field */
         $field = $this->objFromFixture(EditableTextField::class, $fieldName);
         $this->assertEquals($expected, $field->isDisplayed($data));
+    }
+
+    public function testChangingDataFieldTypeToDatalessRemovesRequiredSetting()
+    {
+        $requiredTextField = $this->objFromFixture(EditableTextField::class, 'required-text');
+        $fieldId = $requiredTextField->ID;
+        $this->assertTrue((bool)$requiredTextField->Required);
+
+        $literalField = $requiredTextField->newClassInstance(EditableLiteralField::class);
+        $this->assertTrue((bool)$literalField->Required);
+
+        $literalField->write();
+        $this->assertFalse((bool)$literalField->Required);
+
+        $updatedField = EditableFormField::get()->byId($fieldId);
+        $this->assertFalse((bool)$updatedField->Required);
     }
 }
