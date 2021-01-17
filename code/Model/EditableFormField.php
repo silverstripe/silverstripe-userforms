@@ -418,7 +418,6 @@ class EditableFormField extends DataObject
             $this->Required = false;
         }
 
-
         // Set a field name.
         if (!$this->Name) {
             // New random name
