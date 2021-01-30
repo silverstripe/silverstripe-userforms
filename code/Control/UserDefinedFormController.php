@@ -52,6 +52,13 @@ class UserDefinedFormController extends PageController
     /** @var string The name of the folder where form submissions will be placed by default */
     private static $form_submissions_folder = 'Form-submissions';
 
+    /**
+     * Size in megabytes that an uploaded file must not excede for it to be attached to an email
+     * @var int
+     * @config
+     */
+    private static $maximum_email_attachment_size = 1;
+
     protected function init()
     {
         parent::init();
@@ -212,6 +219,16 @@ JS
     }
 
     /**
+     * Returns the maximum size uploaded files can be before they're excluded from CMS configured recipient emails
+     *
+     * @return int size in megabytes
+     */
+    public function getMaximumAllowedEmailAttachmentSize()
+    {
+        return 1024 * 1024 * (int)$this->config()->get('maximum_email_attachment_size');
+    }
+
+    /**
      * Process the form that is submitted through the site
      *
      * {@see UserForm::validate()} for validation step prior to processing
@@ -287,8 +304,8 @@ JS
                         // write file to form field
                         $submittedField->UploadedFileID = $file->ID;
 
-                        // attach a file only if lower than 1MB
-                        if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
+                        // attach a file to recipient email only if lower than configured size
+                        if ($file->getAbsoluteSize() < $this->getMaximumAllowedEmailAttachmentSize()) {
                             $attachments[] = $file;
                         }
                     }

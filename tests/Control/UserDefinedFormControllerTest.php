@@ -47,7 +47,9 @@ class UserDefinedFormControllerTest extends FunctionalTest
         // Set backend and base url
         TestAssetStore::activate('AssetStoreTest');
 
-        Config::modify()->merge(SSViewer::class, 'themes', ['simple', '$default']);
+        $config = Config::modify();
+        $config->set(UserDefinedFormController::class, 'maximum_email_attachment_size', 1);
+        $config->merge(SSViewer::class, 'themes', ['simple', '$default']);
     }
 
     public function tearDown()
@@ -423,5 +425,13 @@ class UserDefinedFormControllerTest extends FunctionalTest
         /** @var AssetStore $store */
         $store = Injector::inst()->get(AssetStore::class);
         $this->assertTrue($store->exists($image->getFilename(), $image->getHash(), 'FitMaxWzM1MiwyNjRd'));
+    }
+
+    public function testEmailAttachmentMaximumSizeCanBeConfigured()
+    {
+        $udfController = new UserDefinedFormController();
+        $this->assertSame(1 * 1024 * 1024, $udfController->getMaximumAllowedEmailAttachmentSize());
+        Config::modify()->set(UserDefinedFormController::class, 'maximum_email_attachment_size', 5);
+        $this->assertSame(5 * 1024 * 1024, $udfController->getMaximumAllowedEmailAttachmentSize());
     }
 }
