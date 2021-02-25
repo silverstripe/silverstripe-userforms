@@ -15,12 +15,13 @@ use SilverStripe\Versioned\Versioned;
  * A custom rule for showing / hiding an EditableFormField
  * based the value of another EditableFormField.
  *
+ * @property string $ConditionOption
+ * @property int $ConditionFieldID
+ * @property string $Display
+ * @property string $FieldValue
+ * @property int $ParentID
  * @method EditableFormField Parent()
  * @method EditableFormField ConditionField()
- *
- * @property string Display
- * @property string ConditionOption
- * @property string FieldValue
  */
 class EditableCustomRule extends DataObject
 {

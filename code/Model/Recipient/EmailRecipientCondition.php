@@ -14,12 +14,12 @@ use SilverStripe\UserForms\Model\EditableFormField;
 /**
  * Declares a condition that determines whether an email can be sent to a given recipient
  *
+ * @property int $ConditionFieldID
+ * @property string $ConditionOption
+ * @property string $ConditionValue
+ * @property int $ParentID
+ * @method EditableFormField ConditionField()
  * @method EmailRecipient Parent()
- *
- * @property Enum ConditionOption
- * @property Varchar ConditionValue
- *
- * @method EditableFormField ConditionField
  */
 class EmailRecipientCondition extends DataObject
 {

@@ -2,9 +2,9 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Core\Convert;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\UserForms\Model\EditableFormField;
 
@@ -12,6 +12,8 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Allows an editor to insert a generic heading into a field
  *
  * @package userforms
+ * @property int $Level
+ * @property int $HideFromReports
  */
 class EditableFormHeading extends EditableFormField
 {

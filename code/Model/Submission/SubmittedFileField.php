@@ -10,8 +10,9 @@ use SilverStripe\ORM\FieldType\DBField;
  * {@link SubmittedForm}.
  *
  * @package userforms
+ * @property int $UploadedFileID
+ * @method File UploadedFile()
  */
-
 class SubmittedFileField extends SubmittedFormField
 {
     private static $has_one = [

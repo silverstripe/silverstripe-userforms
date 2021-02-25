@@ -12,7 +12,6 @@ use SilverStripe\UserForms\Model\EditableCustomRule;
  *
  * @package userforms
  */
-
 class EditableCheckboxGroupField extends EditableMultipleOptionField
 {
     private static $singular_name = 'Checkbox Group';
