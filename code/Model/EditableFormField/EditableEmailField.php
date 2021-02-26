@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\EmailField;
+use SilverStripe\Forms\FormField;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
@@ -12,7 +13,6 @@ use SilverStripe\UserForms\Model\EditableFormField;
  *
  * @package userforms
  */
-
 class EditableEmailField extends EditableFormField
 {
     private static $singular_name = 'Email Field';

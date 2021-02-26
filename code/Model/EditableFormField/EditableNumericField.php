@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -13,8 +14,9 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * This control represents a user-defined numeric field in a user defined form
  *
  * @package userforms
+ * @property int $MaxValue
+ * @property int $MinValue
  */
-
 class EditableNumericField extends EditableFormField
 {
 

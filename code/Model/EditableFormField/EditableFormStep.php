@@ -2,6 +2,8 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\UserForms\FormField\UserFormsStepField;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -48,6 +50,7 @@ class EditableFormStep extends EditableFormField
             ->setName($this->Name)
             ->setTitle($this->Title);
         $this->doUpdateFormField($field);
+
         return $field;
     }
 

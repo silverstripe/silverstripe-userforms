@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
@@ -11,8 +12,8 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * A user modifiable checkbox on a UserDefinedForm
  *
  * @package userforms
+ * @property int $CheckedDefault
  */
-
 class EditableCheckbox extends EditableFormField
 {
     private static $singular_name = 'Checkbox Field';
