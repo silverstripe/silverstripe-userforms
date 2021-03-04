@@ -65,9 +65,9 @@ class UserDefinedFormController extends PageController
 
         // load the jquery
         if (!$page->config()->get('block_default_userforms_js')) {
-            Requirements::javascript('silverstripe/userforms:client/thirdparty/jquery-3.4.1.min.js');
+            Requirements::javascript('silverstripe/userforms:client/dist/js/jquery.min.js');
             Requirements::javascript(
-                'silverstripe/userforms:client/thirdparty/jquery-validate/jquery.validate.min.js'
+                'silverstripe/userforms:client/dist/js/jquery-validation/jquery.validate.min.js'
             );
             Requirements::javascript('silverstripe/admin:client/dist/js/i18n.js');
             Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
@@ -78,7 +78,7 @@ class UserDefinedFormController extends PageController
             // Bind a confirmation message when navigating away from a partially completed form.
             if ($page::config()->get('enable_are_you_sure')) {
                 Requirements::javascript(
-                    'silverstripe/userforms:client/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js'
+                    'silverstripe/userforms:client/dist/js/jquery.are-you-sure/jquery.are-you-sure.js'
                 );
             }
         }
@@ -87,7 +87,7 @@ class UserDefinedFormController extends PageController
     /**
      * Add the necessary jQuery validate i18n translation files, either by locale or by langauge,
      * e.g. 'en_NZ' or 'en'. This adds "methods_abc.min.js" as well as "messages_abc.min.js" from the
-     * jQuery validate thirdparty library.
+     * jQuery validate thirdparty library from dist/js.
      */
     protected function addUserFormsValidatei18n()
     {
@@ -102,7 +102,7 @@ class UserDefinedFormController extends PageController
 
         foreach ($candidates as $candidate) {
             foreach (['messages', 'methods'] as $candidateType) {
-                $localisationCandidate = "client/thirdparty/jquery-validate/localization/{$candidateType}_{$candidate}.min.js";
+                $localisationCandidate = "client/dist/js/jquery-validation/localization/{$candidateType}_{$candidate}.min.js";
 
                 $resource = $module->getResource($localisationCandidate);
                 if ($resource->exists()) {
