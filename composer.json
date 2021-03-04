@@ -60,7 +60,6 @@
         "expose": [
             "client/dist",
             "client/lang",
-            "client/thirdparty",
             "images"
         ]
     },
