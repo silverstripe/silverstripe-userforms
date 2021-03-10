@@ -10,7 +10,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{*.yml,package.json,*.js,*.scss}]
+[{*.yml,package.json,*.js,*.scss,*.feature}]
 indent_size = 2
 
 # The indent size used in the package.json file cannot be changed:

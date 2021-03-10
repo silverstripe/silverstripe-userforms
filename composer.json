@@ -44,7 +44,8 @@
     "autoload": {
         "psr-4": {
             "SilverStripe\\UserForms\\": "code/",
-            "SilverStripe\\UserForms\\Tests\\": "tests/"
+            "SilverStripe\\UserForms\\Tests\\": "tests/php/",
+            "SilverStripe\\UserForms\\Tests\\Behat\\Context\\": "tests/behat/src/"
         }
     },
     "suggest": {
