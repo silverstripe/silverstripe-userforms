@@ -548,6 +548,7 @@ JS
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
             $holder = $rule['holder'];
+            $isFormStep = strpos($target, 'EditableFormStep') !== false;
 
             $result .= <<<EOS
 \n
@@ -562,8 +563,26 @@ JS
             {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
         }
     });
+EOS;
+            if ($isFormStep) {
+                // Hide the step jump button if the FormStep has is initially hidden.
+                // This is particularly important beacause the next/prev page buttons logic is controlled by
+                // the visibility of the FormStep buttons
+                // The HTML for the FormStep buttons is defined in UserFormProgress.ss
+                $id = str_replace('#', '', $target);
+                $result .= <<<EOS
+    $('.step-button-wrapper[data-for="{$id}"]').addClass('hide');
+EOS;
+            } else {
+                // If a field's initial state is set to be hidden, a '.hide' class will be added to the field as well
+                // as the fieldholder. Afterwards, JS only removes it from the fieldholder, thus the field stays hidden.
+                // We'll update update the JS so that the '.hide' class is removed from the field from the beginning,
+                // though we need to ensure we don't do this on FormSteps (page breaks) otherwise we'll mistakenly
+                // target fields contained within the formstep
+                $result .= <<<EOS
     $("{$target}").find('.hide').removeClass('hide');
 EOS;
+            }
         }
 
         return $result;

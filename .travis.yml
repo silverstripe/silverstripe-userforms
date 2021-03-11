@@ -29,6 +29,12 @@ jobs:
         - REQUIRE_INSTALLER="4.7.x-dev"
         - PHPUNIT_TEST=1
         - PHPCS_TEST=1
+    - php: 7.3
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.7.x-dev"
+        - BEHAT_TEST=1
+        - BEHAT_SUITE="userforms"
     - php: 7.4
       env:
         - DB=MYSQL
