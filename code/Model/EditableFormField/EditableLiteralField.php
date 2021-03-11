@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorSanitiser;
@@ -16,6 +17,9 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * you can add your own HTML / Images / Flash
  *
  * @package userforms
+ * @property string $Content
+ * @property int $HideFromReports
+ * @property int $HideLabel
  */
 class EditableLiteralField extends EditableFormField
 {

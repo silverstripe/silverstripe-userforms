@@ -65,9 +65,9 @@ class UserDefinedFormController extends PageController
 
         // load the jquery
         if (!$page->config()->get('block_default_userforms_js')) {
-            Requirements::javascript('silverstripe/userforms:client/thirdparty/jquery-3.4.1.min.js');
+            Requirements::javascript('silverstripe/userforms:client/dist/js/jquery.min.js');
             Requirements::javascript(
-                'silverstripe/userforms:client/thirdparty/jquery-validate/jquery.validate.min.js'
+                'silverstripe/userforms:client/dist/js/jquery-validation/jquery.validate.min.js'
             );
             Requirements::javascript('silverstripe/admin:client/dist/js/i18n.js');
             Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
@@ -78,7 +78,7 @@ class UserDefinedFormController extends PageController
             // Bind a confirmation message when navigating away from a partially completed form.
             if ($page::config()->get('enable_are_you_sure')) {
                 Requirements::javascript(
-                    'silverstripe/userforms:client/thirdparty/jquery.are-you-sure/jquery.are-you-sure.js'
+                    'silverstripe/userforms:client/dist/js/jquery.are-you-sure/jquery.are-you-sure.js'
                 );
             }
         }
@@ -87,7 +87,7 @@ class UserDefinedFormController extends PageController
     /**
      * Add the necessary jQuery validate i18n translation files, either by locale or by langauge,
      * e.g. 'en_NZ' or 'en'. This adds "methods_abc.min.js" as well as "messages_abc.min.js" from the
-     * jQuery validate thirdparty library.
+     * jQuery validate thirdparty library from dist/js.
      */
     protected function addUserFormsValidatei18n()
     {
@@ -102,7 +102,7 @@ class UserDefinedFormController extends PageController
 
         foreach ($candidates as $candidate) {
             foreach (['messages', 'methods'] as $candidateType) {
-                $localisationCandidate = "client/thirdparty/jquery-validate/localization/{$candidateType}_{$candidate}.min.js";
+                $localisationCandidate = "client/dist/js/jquery-validation/localization/{$candidateType}_{$candidate}.min.js";
 
                 $resource = $module->getResource($localisationCandidate);
                 if ($resource->exists()) {
@@ -548,6 +548,7 @@ JS
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
             $holder = $rule['holder'];
+            $isFormStep = strpos($target, 'EditableFormStep') !== false;
 
             $result .= <<<EOS
 \n
@@ -562,8 +563,26 @@ JS
             {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
         }
     });
+EOS;
+            if ($isFormStep) {
+                // Hide the step jump button if the FormStep has is initially hidden.
+                // This is particularly important beacause the next/prev page buttons logic is controlled by
+                // the visibility of the FormStep buttons
+                // The HTML for the FormStep buttons is defined in UserFormProgress.ss
+                $id = str_replace('#', '', $target);
+                $result .= <<<EOS
+    $('.step-button-wrapper[data-for="{$id}"]').addClass('hide');
+EOS;
+            } else {
+                // If a field's initial state is set to be hidden, a '.hide' class will be added to the field as well
+                // as the fieldholder. Afterwards, JS only removes it from the fieldholder, thus the field stays hidden.
+                // We'll update update the JS so that the '.hide' class is removed from the field from the beginning,
+                // though we need to ensure we don't do this on FormSteps (page breaks) otherwise we'll mistakenly
+                // target fields contained within the formstep
+                $result .= <<<EOS
     $("{$target}").find('.hide').removeClass('hide');
 EOS;
+            }
         }
 
         return $result;

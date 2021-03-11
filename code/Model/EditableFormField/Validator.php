@@ -3,7 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\RequiredFields;
-use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableFormField;
 
 class Validator extends RequiredFields
 {

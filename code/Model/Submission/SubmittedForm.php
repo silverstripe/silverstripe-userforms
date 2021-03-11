@@ -12,8 +12,17 @@ use SilverStripe\Forms\GridField\GridFieldPrintButton;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\Security\Member;
 
+/**
+ * @package userforms
+ * @property int $SubmittedByID
+ * @property int $ParentID
+ * @method Member SubmittedBy()
+ * @method DataObject Parent()
+ * @method HasManyList|SubmittedFormField[] Values()
+ */
 class SubmittedForm extends DataObject
 {
     private static $has_one = [

@@ -11,8 +11,14 @@ use SilverStripe\Versioned\Versioned;
  * Base Class for EditableOption Fields such as the ones used in
  * dropdown fields and in radio check box groups
  *
- * @method EditableMultipleOptionField Parent()
  * @package userforms
+ * @property int $Default
+ * @property string $Name
+ * @property int $ParentID
+ * @property int $Sort
+ * @property string $Value
+ * @method EditableMultipleOptionField Parent()
+ * @mixin Versioned
  */
 class EditableOption extends DataObject
 {
@@ -98,7 +104,6 @@ class EditableOption extends DataObject
 
     /**
      * @param Member $member
-     *
      * @return boolean
      */
     public function canEdit($member = null)
@@ -107,7 +112,6 @@ class EditableOption extends DataObject
     }
     /**
      * @param Member $member
-     *
      * @return boolean
      */
     public function canDelete($member = null)

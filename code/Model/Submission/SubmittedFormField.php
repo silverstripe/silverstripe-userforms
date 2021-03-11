@@ -11,6 +11,8 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Data received from a UserDefinedForm submission
  *
  * @package userforms
+ * @property string $Name
+ * @property string $Value
  */
 class SubmittedFormField extends DataObject
 {

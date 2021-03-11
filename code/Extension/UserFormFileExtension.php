@@ -13,6 +13,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\Versioned\Versioned;
 
 /**
+ * @property string $UserFormUpload
  * @method File SubmittedFileField
  */
 class UserFormFileExtension extends DataExtension

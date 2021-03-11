@@ -13,10 +13,9 @@ use SilverStripe\UserForms\Model\EditableFormField;
 /**
  * A dropdown field which allows the user to select a country
  *
+ * @package userforms
  * @property bool $UseEmptyString
  * @property string $EmptyString
- *
- * @package userforms
  */
 class EditableCountryDropdownField extends EditableFormField
 {

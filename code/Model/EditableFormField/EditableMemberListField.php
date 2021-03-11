@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Security\Group;
 use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -11,6 +12,8 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Creates an editable field that displays members in a given group
  *
  * @package userforms
+ * @property int $GroupID
+ * @method Group Group()
  */
 class EditableMemberListField extends EditableFormField
 {

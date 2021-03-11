@@ -6,10 +6,11 @@ use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\Security\Group;
 use SilverStripe\UserForms\Model\EditableFormField;
-use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 
 /**
  * Specifies that this ends a group of fields
+ *
+ * @method EditableFieldGroup Group()
  */
 class EditableFieldGroupEnd extends EditableFormField
 {

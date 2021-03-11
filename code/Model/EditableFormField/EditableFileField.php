@@ -24,11 +24,11 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 /**
  * Allows a user to add a field that can be used to upload a file.
  *
- * @method Folder Folder
- * @property int FolderID
- * @property boolean MaxFileSizeMB
- * @property boolean FolderConfirmed
  * @package userforms
+ * @property int $FolderConfirmed
+ * @property int $FolderID
+ * @property float $MaxFileSizeMB
+ * @method Folder Folder
  */
 class EditableFileField extends EditableFormField
 {

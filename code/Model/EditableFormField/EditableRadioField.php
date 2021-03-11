@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\UserForms\FormField\UserFormsOptionSetField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 
@@ -12,7 +13,6 @@ use SilverStripe\UserForms\Model\EditableCustomRule;
  *
  * @package userforms
  */
-
 class EditableRadioField extends EditableMultipleOptionField
 {
     private static $singular_name = 'Radio Group';

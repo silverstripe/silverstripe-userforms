@@ -3,16 +3,18 @@
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\Map;
+use SilverStripe\ORM\SS_List;
 use SilverStripe\UserForms\Model\EditableFormField;
-use SilverStripe\Versioned\Versioned;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
@@ -29,8 +31,8 @@ use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
  * @see EditableDropdownField
  *
  * @package userforms
+ * @method HasManyList|EditableOption[] Options()
  */
-
 class EditableMultipleOptionField extends EditableFormField
 {
     /**
@@ -56,7 +58,7 @@ class EditableMultipleOptionField extends EditableFormField
     private static $table_name = 'EditableMultipleOptionField';
 
     /**
-     * @return \SilverStripe\Forms\FieldList
+     * @return FieldList
      */
     public function getCMSFields()
     {
@@ -165,7 +167,7 @@ class EditableMultipleOptionField extends EditableFormField
     /**
      * Returns all default options
      *
-     * @return \SilverStripe\ORM\SS_List
+     * @return SS_List
      */
     protected function getDefaultOptions()
     {

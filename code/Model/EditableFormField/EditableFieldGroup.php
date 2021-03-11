@@ -9,6 +9,9 @@ use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * Specifies that this ends a group of fields
+ *
+ * @property int $EditableFieldGroupEndID
+ * @method EditableFieldGroupEnd EditableFieldGroupEnd()
  */
 class EditableFieldGroup extends EditableFormField
 {
@@ -35,7 +38,7 @@ class EditableFieldGroup extends EditableFormField
     /**
      * Non-data field type
      *
-     * @var type
+     * @var bool
      */
     private static $literal = true;
 
