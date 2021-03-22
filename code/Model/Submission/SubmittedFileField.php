@@ -62,12 +62,28 @@ class SubmittedFileField extends SubmittedFormField
      */
     public function getLink()
     {
-        $file = $this->UploadedFile();
-        if ($file && $file->exists()) {
-            if (trim($file->getFilename(), '/') != trim(ASSETS_DIR, '/')) {
-                return $this->UploadedFile()->AbsoluteLink();
+        if ($file = $this->getUploadedFileFromDraft()) {
+            if ($file->exists()) {
+                return $file->getAbsoluteURL();
             }
         }
+    }
+
+    /**
+     * As uploaded files are stored in draft by default, this retrieves the
+     * uploaded file from draft mode rather than using the current stage.
+     * 
+     * @return File
+     */
+    public function getUploadedFileFromDraft(): ?File
+    {
+        $fileId = $this->UploadedFileID;
+
+        return Versioned::withVersionedMode(function() use ($fileId) {
+            Versioned::set_stage(Versioned::DRAFT);
+
+            return File::get()->byID($fileId);
+        });
     }
 
     /**
@@ -77,8 +93,8 @@ class SubmittedFileField extends SubmittedFormField
      */
     public function getFileName()
     {
-        if ($this->UploadedFile()) {
-            return $this->UploadedFile()->Name;
+        if ($file = $this->getUploadedFileFromDraft()) {
+            return $file->Name;
         }
     }
 }
