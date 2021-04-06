@@ -7,7 +7,6 @@ use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\Storage\AssetStore;
 use SilverStripe\Assets\Upload_Validator;
-use InvalidArgumentException;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Session;
@@ -20,7 +19,6 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
-use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
@@ -28,6 +26,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
+use function filesize;
 
 /**
  * @package userforms
@@ -424,4 +423,39 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $store = Injector::inst()->get(AssetStore::class);
         $this->assertTrue($store->exists($image->getFilename(), $image->getHash(), 'FitMaxWzM1MiwyNjRd'));
     }
+
+    public function testRecipientAttachment()
+    {
+        Config::modify()->set(Upload_Validator::class, 'use_is_uploaded_file', false);
+
+        $userForm = $this->setupFormFrontend('upload-form');
+        $controller = UserDefinedFormController::create($userForm);
+        $field = $this->objFromFixture(EditableFileField::class, 'file-field-1');
+
+        $path = realpath(__DIR__ . '/fixtures/testfile.jpg');
+        $data = [
+            $field->Name => [
+                'name' => 'testfile.jpg',
+                'type' => 'image/jpeg',
+                'tmp_name' => $path,
+                'error' => 0,
+                'size' => filesize($path),
+            ]
+        ];
+        $_FILES[$field->Name] = $data[$field->Name];
+
+        $controller->getRequest()->setSession(new Session([]));
+        $controller->process($data, $controller->Form());
+
+        // check emails
+        $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject');
+        $email = $this->findEmail('test@example.com', 'no-reply@example.com', 'Email Subject');
+        $this->assertNotEmpty($email['AttachedFiles'], 'Recipients receive attachment by default');
+
+        // no data
+        $this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');
+        $nodata = $this->findEmail('nodata@example.com', 'no-reply@example.com', 'Email Subject');
+        $this->assertEmpty($nodata['AttachedFiles'], 'Recipients with HideFormData do not receive attachment');
+    }
+
 }

@@ -478,6 +478,9 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Title: 'Form with upload field'
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-1
+    EmailRecipients:
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
 
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:
@@ -498,3 +501,4 @@ SilverStripe\UserForms\Model\EditableCustomRule:
     FieldValue: 'Show more'
     ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-2
     Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.conditional-required-text-3
+
