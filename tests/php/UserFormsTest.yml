@@ -370,6 +370,17 @@ SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     EmailSubject: Test Email
     EmailFrom: test3@example.com, test4@example.com
 
+  upload-recipient:
+    EmailAddress: test@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+
+  upload-no-data:
+    EmailAddress: nodata@example.com
+    EmailSubject: Email Subject
+    EmailFrom: no-reply@example.com
+    HideFormData: true
+
 SilverStripe\UserForms\Model\UserDefinedForm:
   basic-form-page:
     Content: '<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>'
@@ -479,8 +490,8 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     Fields:
       - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-1
     EmailRecipients:
-      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.recipient-1
-      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.no-data
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.upload-recipient
+      - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.upload-no-data
 
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:
