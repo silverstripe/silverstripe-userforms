@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Tests\Model\Recipient;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
+use SilverStripe\UserForms\Model\UserDefinedForm;
 
 class EmailRecipientTest extends SapphireTest
 {
@@ -49,5 +50,20 @@ class EmailRecipientTest extends SapphireTest
         $this->assertSame('test1@example.com', $recipient->EmailAddress);
         $this->assertSame('test2@example.com', $recipient->EmailFrom);
         $this->assertSame('test3@example.com', $recipient->EmailReplyTo);
+    }
+
+    public function testGetEmailTemplateDropdownValues()
+    {
+        $form = new UserDefinedForm();
+        $form->write();
+        $recipient = new EmailRecipient();
+        $recipient->FormID = $form->ID;
+        $recipient->FormClass = UserDefinedForm::class;
+        $ds = DIRECTORY_SEPARATOR;
+        $expected = [
+            "email{$ds}SubmittedFormEmail" => 'SubmittedFormEmail',
+            "email{$ds}SubmittedFormEmailPlain" => 'SubmittedFormEmailPlain'
+        ];
+        $this->assertSame($expected, $recipient->getEmailTemplateDropdownValues());
     }
 }
