@@ -68,16 +68,18 @@ class UserDefinedFormControllerTest extends FunctionalTest
         // load the form
         $this->get($form->URLSegment);
 
+        /** @var EditableTextField $field */
         $field = $this->objFromFixture(EditableTextField::class, 'basic-text');
 
-        $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [$field->Name => 'Basic Value']);
+        $data = [$field->Name => 'Basic Value <b>HTML</b>'];
+        $response = $this->submitForm('UserForm_Form_' . $form->ID, null, $data);
 
         // should have a submitted form field now
         $submitted = DataObject::get(SubmittedFormField::class, "\"Name\" = 'basic_text_name'");
         $this->assertListAllMatch(
             [
                 'Name' => 'basic_text_name',
-                'Value' => 'Basic Value',
+                'Value' => 'Basic Value <b>HTML</b>',
                 'Title' => 'Basic Text Field'
             ],
             $submitted
@@ -93,14 +95,22 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $this->assertEquals('Basic Text Field', (string) $title[0], 'Email contains the field name');
 
+        // submitted html tags are escaped for the html value
+        $value = 'class="readonly">My body html Basic Value &lt;b&gt;HTML&lt;/b&gt;</span>';
+        $this->assertTrue(strpos($email['Content'], $value) !== false, 'Email contains the merge field value');
+
         $value = $parser->getBySelector('dd');
-        $this->assertEquals('Basic Value', (string) $value[0], 'Email contains the value');
+        $this->assertEquals('Basic Value <b>HTML</b>', (string) $value[0], 'Email contains the value');
 
         // no html
         $this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
         $nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
         $this->assertContains('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
+
+        // submitted html tags are not escaped because the email is being sent as text/plain
+        $value = 'My body text Basic Value <b>HTML</b>';
+        $this->assertContains($value, $nohtml['Content'], 'Email contains the merge field value');
 
         // no data
         $this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');

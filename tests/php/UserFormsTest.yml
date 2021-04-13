@@ -317,12 +317,14 @@ SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     EmailAddress: test@example.com
     EmailSubject: Email Subject
     EmailFrom: no-reply@example.com
+    EmailBodyHtml: '<div class="form__field-holder"><span id="Form_ItemEditForm_MergeField" class="readonly">My body html $basic_text_name</span></div>'
 
   no-html:
     EmailAddress: nohtml@example.com
     EmailSubject: Email Subject
     EmailFrom: no-reply@example.com
     SendPlain: true
+    EmailBody: 'My body text $basic_text_name'
 
   no-data:
     EmailAddress: nodata@example.com

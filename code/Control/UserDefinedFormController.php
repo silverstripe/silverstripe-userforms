@@ -345,6 +345,8 @@ JS
                 // Add specific template data for the current recipient
                 $emailData['HideFormData'] =  (bool) $recipient->HideFormData;
                 // Include any parsed merge field references from the CMS editor - this is already escaped
+                // This string substitution works for both HTML and plain text emails.
+                // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
                 $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
 
                 // Push the template data to the Email's data
@@ -414,7 +416,8 @@ JS
                 $this->extend('updateEmail', $email, $recipient, $emailData);
 
                 if ((bool)$recipient->SendPlain) {
-                    $body = strip_tags($recipient->getEmailBodyContent()) . "\n";
+                    // decode previously encoded html tags because the email is being sent as text/plain
+                    $body = html_entity_decode($emailData['Body']) . "\n";
                     if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
                         foreach ($emailData['Fields'] as $field) {
                             if ($field instanceof SubmittedFileField) {
