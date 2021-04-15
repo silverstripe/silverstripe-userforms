@@ -16,18 +16,6 @@ use SilverStripe\Versioned\Versioned;
 class FixtureContext extends BaseFixtureContext
 {
     /**
-     * @When /^I click the "([^"]+)" element$/
-     * @param $selector
-     */
-    public function iClickTheElement(string $selector): void
-    {
-        $page = $this->getMainContext()->getSession()->getPage();
-        $element = $page->find('css', $selector);
-        assertNotNull($element, sprintf('Element %s not found', $selector));
-        $element->click();
-    }
-
-    /**
      * Example: Given a userform with a hidden form step "My userform"
      *
      * @Given /^a userform with a hidden form step "([^"]+)"$/
