@@ -246,7 +246,11 @@ class EditableFileField extends EditableFormField
 
     public function getSubmittedFormField()
     {
-        return SubmittedFileField::create();
+        $field = SubmittedFileField::create();
+
+        $this->extend('updateSubmittedFileField', $field);
+
+        return $field;
     }
 
     /**
