@@ -53,16 +53,12 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
     protected function getPreviewFieldData()
     {
         $data = ArrayList::create();
-
-        $fields = $this->record->Form()->Fields()->filter(
-            'ClassName:not',
-            [
-                EditableLiteralField::class,
-                EditableFormHeading::class,
-            ]
-        );
+        $fields = $this->record->Form()->Fields();
 
         foreach ($fields as $field) {
+            if (!$field->showInReports()) {
+                continue;
+            }
             $data->push(ArrayData::create([
                 'Name' => $field->dbObject('Name'),
                 'Title' => $field->dbObject('Title'),
