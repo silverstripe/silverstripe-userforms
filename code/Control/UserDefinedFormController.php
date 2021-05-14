@@ -359,7 +359,7 @@ JS
                 if ($emailFrom && $emailFrom->exists()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
-                    if ($submittedFormField && is_string($submittedFormField->Value)) {
+                    if ($submittedFormField && $submittedFormField->Value && is_string($submittedFormField->Value)) {
                         $email->setReplyTo(explode(',', $submittedFormField->Value));
                     }
                 } elseif ($recipient->EmailReplyTo) {
