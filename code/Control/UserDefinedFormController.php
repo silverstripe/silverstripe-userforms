@@ -323,7 +323,7 @@ JS
                 // Merge fields are used for CMS authors to reference specific form fields in email content
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
-                if ($attachments) {
+                if ($attachments && (bool) $recipient->HideFormData === false) {
                     foreach ($attachments as $file) {
                         /** @var File $file */
                         if ((int) $file->ID === 0) {
