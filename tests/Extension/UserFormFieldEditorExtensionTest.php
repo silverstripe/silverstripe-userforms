@@ -31,21 +31,20 @@ class UserFormFieldEditorExtensionTest extends SapphireTest
 
         // assert setup
         $this->assertSame($page->ID, $block->ID);
-        $this->assertCount(1, $page->Fields());
-        $this->assertCount(3, $block->Fields());
+        $this->assertCount(2, $page->Fields(), 'Draft UserForm page starts with 2 fields');
+        $this->assertCount(3, $block->Fields(), 'Draft UserForm block starts with 3 fields');
 
         // ensure setup has affected live mode too
         $origReadingMode = Versioned::get_reading_mode();
-        Versioned::set_reading_mode(Versioned::LIVE);
+        Versioned::withVersionedMode(function () {
+            Versioned::set_reading_mode(Versioned::LIVE);
+            $initialLivePage = UserDefinedForm::get()->First();
+            $initialLiveBlock = UserFormBlockStub::get()->First();
 
-        $initialLivePage = UserDefinedForm::get()->First();
-        $initialLiveBlock = UserFormBlockStub::get()->First();
-
-        $this->assertSame($initialLivePage->ID, $initialLiveBlock->ID);
-        $this->assertCount(1, $initialLivePage->Fields());
-        $this->assertCount(3, $initialLiveBlock->Fields());
-
-        Versioned::set_reading_mode($origReadingMode);
+            $this->assertSame($initialLivePage->ID, $initialLiveBlock->ID);
+            $this->assertCount(2, $initialLivePage->Fields(), 'Live UserForm page starst with 2 fields');
+            $this->assertCount(3, $initialLiveBlock->Fields(), 'Live UserForm block starst with 3 fields');
+        });
 
         // execute change
         $newField = new EditableEmailField();
@@ -57,21 +56,32 @@ class UserFormFieldEditorExtensionTest extends SapphireTest
         $page->publishRecursive();
 
         // assert effect of change
+        /** @var UserDefinedForm $checkPage */
         $checkPage = UserDefinedForm::get()->First();
         $checkBlock = UserFormBlockStub::get()->First();
 
-        $this->assertCount(2, $checkPage->Fields());
-        $this->assertCount(3, $checkBlock->Fields());
+        $this->assertCount(3, $checkPage->Fields(), 'Field has been added to draft user form page');
+        $this->assertCount(
+            3,
+            $checkBlock->Fields(),
+            'Draft userform block with same ID is not affected'
+        );
 
         // ensure this is true for live mode too
-        $origReadingMode = Versioned::get_reading_mode();
-        Versioned::set_reading_mode(Versioned::LIVE);
-
-        $checkLivePage = UserDefinedForm::get()->First();
-        $checkLiveBlock = UserFormBlockStub::get()->First();
-        $this->assertCount(2, $checkLivePage->Fields());
-        $this->assertCount(3, $checkLiveBlock->Fields());
-
-        Versioned::set_reading_mode($origReadingMode);
+        Versioned::withVersionedMode(function () {
+            Versioned::set_reading_mode(Versioned::LIVE);
+            $checkLivePage = UserDefinedForm::get()->First();
+            $checkLiveBlock = UserFormBlockStub::get()->First();
+            $this->assertCount(
+                3,
+                $checkLivePage->Fields(),
+                'Field has been added to live user form page'
+            );
+            $this->assertCount(
+                3,
+                $checkLiveBlock->Fields(),
+                'Live userform block with same ID is not affected'
+            );
+        });
     }
 }
