@@ -792,7 +792,11 @@ class EditableFormField extends DataObject
      */
     public function getSubmittedFormField()
     {
-        return SubmittedFormField::create();
+        $field = SubmittedFormField::create();
+
+        $this->extend('updateSubmittedFormField', $field);
+
+        return $field;
     }
 
 
