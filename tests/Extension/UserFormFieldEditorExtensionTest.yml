@@ -4,6 +4,12 @@ SilverStripe\UserForms\Model\UserDefinedForm:
 SilverStripe\UserForms\Tests\Extension\UserFormBlockStub:
   block:
     ID: 9999
+
+SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+  pageFirstStep:
+    Title: First Step
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.page
+
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   page-text-field:
     Name: basic_text_name
