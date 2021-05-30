@@ -14,7 +14,7 @@ fi_FI:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
     ADD_PAGE_BREAK: 'Lisää sivunvaihto'
-    FORMFIELDS: Lomakekentät
+    FORMFIELDS: 'Lomakekentät'
   SilverStripe\UserForms\Model\EditableFormField:
     REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:

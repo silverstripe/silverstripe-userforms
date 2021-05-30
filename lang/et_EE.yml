@@ -1,10 +1,10 @@
 et_EE:
   SilverStripe\UserForms\Model\EditableFormField:
     CUSTOMRULES: 'Custom Rules'
-    'NO': Ei
+    'NO': 'Ei'
     REQUIRED: 'See väli on vormis vajalik ja seda ei saa kustutada'
     VALIDATION: Validation
-    'YES': Jah
+    'YES': 'Jah'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
