@@ -118,7 +118,7 @@ class UserForm extends Form
      */
     public function getFormFields()
     {
-        $fields = new UserFormsFieldList();
+        $fields = UserFormsFieldList::create();
         $target = $fields;
 
         foreach ($this->controller->data()->Fields() as $field) {
@@ -174,7 +174,7 @@ class UserForm extends Form
             ->filter('Required', true)
             ->column('Name');
         $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());
-        $required = new UserFormsRequiredFields($requiredNames);
+        $required = UserFormsRequiredFields::create($requiredNames);
         $this->extend('updateRequiredFields', $required);
         $required->setForm($this);
         return $required;
