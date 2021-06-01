@@ -1,5 +1,5 @@
 sv:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrera inskickade svar'

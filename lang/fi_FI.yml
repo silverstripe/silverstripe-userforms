@@ -1,5 +1,5 @@
 fi_FI:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Päätaso

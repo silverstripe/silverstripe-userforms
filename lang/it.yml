@@ -1,5 +1,5 @@
 it:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'

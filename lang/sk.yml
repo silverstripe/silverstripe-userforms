@@ -1,5 +1,5 @@
 sk:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Pridať políčko'

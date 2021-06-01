@@ -1,5 +1,5 @@
 pl_PL:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Zgłoszenia filtrów ..'
