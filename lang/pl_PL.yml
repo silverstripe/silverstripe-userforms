@@ -1,6 +1,4 @@
 pl_PL:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Zgłoszenia filtrów ..'
     WHEREVALUEIS: 'których wartość jest ..'
@@ -10,13 +8,13 @@ pl_PL:
     CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Domyślnie to dzisiaj?'
     GROUP: Grupa
-    'NO': Nie
+    'NO': 'Nie'
     PLURALNAME: 'Edytowalne pole formularza'
     REQUIRED: 'To pole jest wymagane w tym formularzu i nie może zostać usunięte'
     RIGHTTITLE: 'Right Title'
     SINGULARNAME: 'Edytowalne pole formularza'
     VALIDATION: Validation
-    'YES': Tak
+    'YES': 'Tak'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxes
     SINGULARNAME: 'Checkbox Field'

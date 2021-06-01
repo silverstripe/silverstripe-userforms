@@ -1,6 +1,4 @@
 sv:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrera inskickade svar'
     WHEREVALUEIS: 'när värdet är..'
@@ -13,31 +11,31 @@ sv:
     GROUP: Grupp
     PLURALNAME: 'Redigeringsbara formulärfält'
     REQUIRED: 'Är detta fält obligatoriskt?'
-    RIGHTTITLE: Högertitel
+    RIGHTTITLE: 'Högertitel'
     SINGULARNAME: 'Redigeringsbart formulärfält'
     TITLE: Titel
     VALIDATION: Validering
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Kryssrutor
-    SINGULARNAME: Kryssrutefält
+    SINGULARNAME: 'Kryssrutefält'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: Kryssrutegrupper
-    SINGULARNAME: Kryssrutegrupp
+    PLURALNAME: 'Kryssrutegrupper'
+    SINGULARNAME: 'Kryssrutegrupp'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Rullgardinsmenyer för länder'
     SINGULARNAME: 'Rullgardinsmeny för länder'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: Datumfält
-    SINGULARNAME: Datumfält
+    PLURALNAME: 'Datumfält'
+    SINGULARNAME: 'Datumfält'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Rullgardinsmenyer
-    SINGULARNAME: Rullgardinsmenyfält
+    SINGULARNAME: 'Rullgardinsmenyfält'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: E-postfält
-    SINGULARNAME: E-postfält
+    PLURALNAME: 'E-postfält'
+    SINGULARNAME: 'E-postfält'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: Filuppladdningsfält
-    SINGULARNAME: Filuppladdningsfält
+    PLURALNAME: 'Filuppladdningsfält'
+    SINGULARNAME: 'Filuppladdningsfält'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Välj rubrikstorlek'
     PLURALNAME: Rubriker
@@ -46,11 +44,11 @@ sv:
     STEP_TITLE: 'Sida {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Göm från rapport?'
-    PLURALNAME: HTML-block
-    SINGULARNAME: HTML-block
+    PLURALNAME: 'HTML-block'
+    SINGULARNAME: 'HTML-block'
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    PLURALNAME: Medlemsfält
-    SINGULARNAME: Medlemsfält
+    PLURALNAME: 'Medlemsfält'
+    SINGULARNAME: 'Medlemsfält'
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Redigeringsbart multialternativfält'
     SINGULARNAME: 'Redigeringsbart multialternativfält'
@@ -61,13 +59,13 @@ sv:
     PLURALNAME: 'Redigeringsbara alternativ'
     SINGULARNAME: 'Redigeringsbart alternativ'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
-    PLURALNAME: Radiofält
-    SINGULARNAME: Radiofält
+    PLURALNAME: 'Radiofält'
+    SINGULARNAME: 'Radiofält'
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Antal rader'
-    PLURALNAME: Textfält
-    SINGULARNAME: Textfält
-    TEXTLENGTH: Textlängd
+    PLURALNAME: 'Textfält'
+    SINGULARNAME: 'Textfält'
+    TEXTLENGTH: 'Textlängd'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'Mottagare av formulär'
     SINGULARNAME: 'Mottagare av formulär'
@@ -87,7 +85,7 @@ sv:
     EMAILADDRESS: E-post
     EMAILBODY: Innehåll
     EMAILFROM: Från
-    EMAILSUBJECT: E-postämne
+    EMAILSUBJECT: 'E-postämne'
     EmailFromContent: 'Från-adressen låter dig ställa in varifrån e-postmeddelandet skickas. På de flesta servrar måste adressen ha samma domännamn som din sajt. Till exempel på yoursite.com så måste adressen vara something@yoursite.com. Det är däremot möjligt att lägga valfri e-postadress under "E-postadress att svara till". '
     FROMADDRESS: 'E-postadress att skicka formulär från'
     HIDEFORMDATA: 'Göm formulärdata från e-post?'

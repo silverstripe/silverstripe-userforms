@@ -1,11 +1,9 @@
 sk:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Pridať políčko'
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
     ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
-    FORMFIELDS: Formulár
+    FORMFIELDS: 'Formulár'
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
     NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
@@ -42,9 +40,9 @@ sk:
     TITLE: Názov
     TYPE: Typ
     VALIDATION: Validácia
-    'YES': Áno
+    'YES': 'Áno'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: 'Zaškrtávacie polia (checkbox)'
+    PLURALNAME: Zaškrtávacie polia (checkbox)
     SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Skupiny zaškrtávacích polí'
@@ -56,7 +54,7 @@ sk:
     PLURALNAME: 'Dátumové polia'
     SINGULARNAME: 'Dátumové pole'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: 'Rozbaľovacie polia'
+    PLURALNAME: Rozbaľovacie polia
     SINGULARNAME: 'Rozbaľovacie pole'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'E-mailové polia'
@@ -103,8 +101,8 @@ sk:
     RANGE_TO: do
     SINGULARNAME: 'Numerické/číselné pole'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    PLURALNAME: Možnosti
-    SINGULARNAME: Možnosť
+    PLURALNAME: 'Možnosti'
+    SINGULARNAME: 'Možnosť'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Prepínacie polia (radio)'
     SINGULARNAME: 'Prepínacie pole (radio)'
@@ -141,7 +139,7 @@ sk:
     EMAILBODY: Správa
     EMAILBODYHTML: Správa
     EMAILFROM: Od
-    EMAILSUBJECT: Predmet
+    EMAILSUBJECT: 'Predmet'
     EMAILTEMPLATE: 'E-mailová šablóna'
     EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
     FROMADDRESS: 'E-mail odosielateľa'

@@ -1,29 +1,29 @@
 ja:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: メールフィールド
-    SINGULARNAME: メールフィールド
+    PLURALNAME: 'メールフィールド'
+    SINGULARNAME: 'メールフィールド'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'レポートから隠しますか?'
-    PLURALNAME: HTMLブロック
-    SINGULARNAME: HTMLブロック
+    PLURALNAME: 'HTMLブロック'
+    SINGULARNAME: 'HTMLブロック'
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
-    PLURALNAME: 編集可能なマルチオプションフィールド
-    SINGULARNAME: 編集可能なマルチオプションフィールド
+    PLURALNAME: '編集可能なマルチオプションフィールド'
+    SINGULARNAME: '編集可能なマルチオプションフィールド'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    PLURALNAME: ユーザー定義フォームのメール受信者
-    SINGULARNAME: ユーザー定義フォームのメール受信者
+    PLURALNAME: 'ユーザー定義フォームのメール受信者'
+    SINGULARNAME: 'ユーザー定義フォームのメール受信者'
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: メール
     EMAILBODY: ボディ
     EMAILFROM: 送信者
-    EMAILSUBJECT: メールの件名
+    EMAILSUBJECT: 'メールの件名'
     EmailFromContent: '送信元アドレスでどこからメールを送信するのか設定することができます。多くのサーバーではこれはあなたのサイトのドメイン名と同じメールアドレスに設定する必要があります。たとえば yoursite.com では送信元アドレスは something@yoursite.com としなければいけません。ただし、返信先アドレスは好きなメールアドレスを設定することができます。'
-    FROMADDRESS: メールの送信元
+    FROMADDRESS: 'メールの送信元'
     HIDEFORMDATA: 'メールからフォームデータを見えないようにしますか?'
-    ORSELECTAFIELDTOUSEASFROM: ..またはフィールドを選択して返信先アドレスとして使用
-    ORSELECTAFIELDTOUSEASTO: ..またはフィールドを選択して宛先アドレスとして使用
-    REPLYADDRESS: 以下への返信メール
-    SENDEMAILTO: メールを送信
+    ORSELECTAFIELDTOUSEASFROM: '..またはフィールドを選択して返信先アドレスとして使用'
+    ORSELECTAFIELDTOUSEASTO: '..またはフィールドを選択して宛先アドレスとして使用'
+    REPLYADDRESS: '以下への返信メール'
+    SENDEMAILTO: 'メールを送信'
     SENDPLAIN: 'プレーンテキストとしてメールを送信しますか? (HTMLは取り除かれます)'
-    SINGULARNAME: ユーザー定義フォーム
+    SINGULARNAME: 'ユーザー定義フォーム'
     SUBMITBUTTON: 送信

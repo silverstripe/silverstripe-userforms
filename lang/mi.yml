@@ -15,7 +15,7 @@ mi:
     SINGULARNAME: 'Āpure Puka Ka Taea Te Whakatika'
     VALIDATION: Manatokonga
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: 'Ngā Pouakataki'
+    PLURALNAME: Ngā Pouakataki
     SINGULARNAME: 'Āpure Pouakataki'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Ngā Rōpū Pouakataki'
@@ -27,7 +27,7 @@ mi:
     PLURALNAME: 'Ngā Āpure Rā'
     SINGULARNAME: 'Āpure Rā'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: 'Ngā Takaiho'
+    PLURALNAME: Ngā Takaiho
     SINGULARNAME: 'Āpure Takaiho'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Ngā Āpure Īmēra'
@@ -37,7 +37,7 @@ mi:
     SINGULARNAME: 'Āpure Tukuatu Kōnae'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kōwhiri Taumata Pane'
-    PLURALNAME: 'Ngā Pane'
+    PLURALNAME: Ngā Pane
     SINGULARNAME: Pane
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
