@@ -1,5 +1,5 @@
 en:
-  EditableUploadField:
+  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main

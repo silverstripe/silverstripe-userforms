@@ -1,11 +1,9 @@
 de_DE:
-  EditableFormField:
-    php:
-      SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Wähle Feld-Typ'
-  EditableTextField:
-    php:
-      SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
-  EditableUploadField:
+  SilverStripe\UserForms\Model\EditableFormField:
+    TYPE_EMPTY: 'Wähle Feld-Typ'
+  SilverStripe\UserForms\Model\EditableTextField:
+    MINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
+  SilverStripe\UserForms\Model\EditableFileField:
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'

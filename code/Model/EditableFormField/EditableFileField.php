@@ -145,7 +145,7 @@ class EditableFileField extends EditableFormField
 
         $treeView = TreeDropdownField::create(
             'FolderID',
-            _t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
+            _t(__CLASS__.'.SELECTUPLOADFOLDER', 'Select upload folder'),
             Folder::class
         );
         $treeView->setDescription(static::getFolderPermissionString($this->Folder()));
