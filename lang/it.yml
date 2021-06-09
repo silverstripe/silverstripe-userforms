@@ -1,6 +1,4 @@
 it:
-  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
@@ -71,6 +69,7 @@ it:
     SINGULARNAME: 'Fine del gruppo di campi modificabili'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campi di caricamento file'
+    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
     SINGULARNAME: 'Campo di caricamento file'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Seleziona livello di intestazione'

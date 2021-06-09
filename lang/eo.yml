@@ -1,6 +1,4 @@
 eo:
-  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Ĉefa
   SilverStripe\UserForms:
@@ -148,6 +146,7 @@ eo:
     PLURALS:
       one: 'Unu kampo por dosiera alŝuto'
       other: '{count} kampoj por dosiera alŝuto'
+    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'

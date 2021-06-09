@@ -1,6 +1,4 @@
 sk:
-  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Pridať políčko'
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
@@ -71,6 +69,7 @@ sk:
     SINGULARNAME: 'Koniec skupiny polí'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Polia pre nahratie súboru'
+    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
     SINGULARNAME: 'Pole pre nahratie súboru'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Úroveň nadpisu'

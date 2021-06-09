@@ -1,6 +1,4 @@
 de_DE:
-  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
     CLEARBUTTON: Löschen
@@ -88,6 +86,7 @@ de_DE:
     FIELD_GROUP_START: 'Gruppe {group}'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Dateiupload-Felder'
+    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
     SINGULARNAME: 'Dateiupload-Feld'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Überschriftsebene auswählen'
