@@ -1,4 +1,6 @@
 it:
+  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
+    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'

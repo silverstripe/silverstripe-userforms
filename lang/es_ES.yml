@@ -1,4 +1,6 @@
 es_ES:
+  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
+    SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrar envíos.'
     WHEREVALUEIS: 'donde el valor es'

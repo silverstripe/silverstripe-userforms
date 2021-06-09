@@ -1,4 +1,6 @@
 nl_NL:
+  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
+    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Inzendingen filteren'
     WHEREVALUEIS: 'waar waarde is...'

@@ -1,4 +1,6 @@
 de_DE:
+  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
+    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
     CLEARBUTTON: Löschen
@@ -56,6 +58,7 @@ de_DE:
     SINGULARNAME: 'Editierbares Formularfeld'
     TITLE: Titel
     TYPE: Typ
+    TYPE_EMPTY: 'Wähle Feld-Typ'
     VALIDATION: Validierung
     'YES': 'Ja'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
@@ -128,6 +131,7 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     AUTOCOMPLETE: Auto-Vervollständigung
     MAX_LENGTH: 'Maximale Textlänge'
+    MINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
     MIN_LENGTH: 'Minimale Textlänge'
     NUMBERROWS: 'Anzahl der Zeilen'
     NUMBERROWS_DESCRIPTION: 'Felder mit mehr als einer Zeile werden als Text-Area generiert'
