@@ -1,6 +1,4 @@
 fi_FI:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Päätaso
   SilverStripe\UserForms:
@@ -14,9 +12,11 @@ fi_FI:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
     ADD_PAGE_BREAK: 'Lisää sivunvaihto'
-    FORMFIELDS: Lomakekentät
+    FORMFIELDS: 'Lomakekentät'
   SilverStripe\UserForms\Model\EditableFormField:
     REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Lataa tiedosto'
   SilverStripe\UserForms\Model\UserDefinedForm:

@@ -1,6 +1,4 @@
 en:
-  SilverStripe\UserForms\Model\SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
   SilverStripe\UserForms:
@@ -149,6 +147,7 @@ en:
     PLURALS:
       one: 'A File Upload Field'
       other: '{count} File Upload Fields'
+    SELECTUPLOADFOLDER: 'Select upload folder'
     SINGULARNAME: 'File Upload Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Select Heading Level'

@@ -1,6 +1,4 @@
 nl_NL:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Inzendingen filteren'
     WHEREVALUEIS: 'waar waarde is...'
@@ -18,7 +16,7 @@ nl_NL:
     VALIDATION: Validatie
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Selectievakjes
-    SINGULARNAME: Selectievakje
+    SINGULARNAME: 'Selectievakje'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Groepen van selectievakjes'
     SINGULARNAME: 'Groep van selectievakje'
@@ -26,8 +24,8 @@ nl_NL:
     PLURALNAME: 'Vervolgkeuzelijsten van landen'
     SINGULARNAME: 'Vervolgkeuzelijst van landen'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: Datumvelden
-    SINGULARNAME: Datumveld
+    PLURALNAME: 'Datumvelden'
+    SINGULARNAME: 'Datumveld'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Vervolgkeuzelijsten
     SINGULARNAME: 'Vervolgkeuzelijst veld'
@@ -36,6 +34,7 @@ nl_NL:
     SINGULARNAME: 'Email veld'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Velden voor bestand uploaden'
+    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
     SINGULARNAME: 'Veld voor bestand uploaden'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kies grootte van kopje'
@@ -84,7 +83,7 @@ nl_NL:
     EMAILADDRESS: Email
     EMAILBODY: Tekst
     EMAILFROM: Van
-    EMAILSUBJECT: Onderwerp
+    EMAILSUBJECT: 'Onderwerp'
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
     FROMADDRESS: 'Email verzonden vanaf'
     HIDEFORMDATA: 'Verberg formulier gegevens in email?'
