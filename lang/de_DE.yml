@@ -1,6 +1,4 @@
 de_DE:
-  SilverStripe\UserForms\Model\EditableFormField:
-    TYPE_EMPTY: 'Wähle Feld-Typ'
   SilverStripe\UserForms\Model\EditableTextField:
     MINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
   SilverStripe\UserForms\Model\EditableFileField:
@@ -62,6 +60,7 @@ de_DE:
     SINGULARNAME: 'Editierbares Formularfeld'
     TITLE: Titel
     TYPE: Typ
+    TYPE_EMPTY: 'Wähle Feld-Typ'
     VALIDATION: Validierung
     'YES': Ja
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
