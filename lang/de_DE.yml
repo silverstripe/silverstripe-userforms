@@ -1,6 +1,4 @@
 de_DE:
-  SilverStripe\UserForms\Model\EditableFormField:
-    TYPE_EMPTY: 'Wähle Feld-Typ'
   SilverStripe\UserForms\Model\EditableTextField:
     MINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
   SilverStripe\UserForms\Model\EditableFileField:
@@ -38,6 +36,7 @@ de_DE:
     PLURALNAME: 'Editierbare eigene Regeln'
     SINGULARNAME: 'Editierbare eigene Regel'
   SilverStripe\UserForms\Model\EditableFormField:
+    TYPE_EMPTY: 'Wähle Feld-Typ'
     CHECKEDBYDEFAULT: 'Standardmäßig ist dieses Feld markiert'
     CUSTOMERROR: 'Eigene Fehlermeldung'
     CUSTOMOPTIONS: Optionen
