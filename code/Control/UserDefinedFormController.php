@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Control;
 
+use Exception;
 use PageController;
 use Psr\Log\LoggerInterface;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
@@ -429,9 +430,18 @@ JS
                     }
 
                     $email->setBody($body);
-                    $email->sendPlain();
+
+                    try {
+                        $email->sendPlain();
+                    } catch (Exception $e) {
+                        Injector::inst()->get(LoggerInterface::class)->error($e);
+                    }
                 } else {
-                    $email->send();
+                    try {
+                        $email->send();
+                    } catch (Exception $e) {
+                        Injector::inst()->get(LoggerInterface::class)->error($e);
+                    }
                 }
             }
         }
