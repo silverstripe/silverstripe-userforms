@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\Security\Group;
@@ -50,9 +51,11 @@ class EditableFieldGroupEnd extends EditableFormField
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        $fields->removeByName(['MergeField', 'Default', 'Validation', 'DisplayRules']);
-        return $fields;
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName(['MergeField', 'Default', 'Validation', 'DisplayRules']);
+        });
+
+        return parent::getCMSFields();
     }
 
     public function getInlineClassnameField($column, $fieldClasses)

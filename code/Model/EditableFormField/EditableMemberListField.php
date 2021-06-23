@@ -32,22 +32,22 @@ class EditableMemberListField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName('Default');
+            $fields->removeByName('Validation');
 
-        $fields->removeByName('Default');
-        $fields->removeByName('Validation');
+            /** @skipUpgrade */
+            $fields->addFieldToTab(
+                'Root.Main',
+                DropdownField::create(
+                    'GroupID',
+                    _t('SilverStripe\\UserForms\\Model\\EditableFormField.GROUP', 'Group'),
+                    Group::get()->map()
+                )->setEmptyString(' ')
+            );
+        });
 
-        /** @skipUpgrade */
-        $fields->addFieldToTab(
-            'Root.Main',
-            DropdownField::create(
-                'GroupID',
-                _t('SilverStripe\\UserForms\\Model\\EditableFormField.GROUP', 'Group'),
-                Group::get()->map()
-            )->setEmptyString(' ')
-        );
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getFormField()

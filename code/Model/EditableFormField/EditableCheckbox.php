@@ -33,14 +33,14 @@ class EditableCheckbox extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->replaceField('Default', CheckboxField::create(
+                "CheckedDefault",
+                _t('SilverStripe\\UserForms\\Model\\EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?')
+            ));
+        });
 
-        $fields->replaceField('Default', CheckboxField::create(
-            "CheckedDefault",
-            _t('SilverStripe\\UserForms\\Model\\EditableFormField.CHECKEDBYDEFAULT', 'Checked by Default?')
-        ));
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getFormField()

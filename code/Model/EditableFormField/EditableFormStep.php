@@ -34,11 +34,11 @@ class EditableFormStep extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName(['MergeField', 'Default', 'Validation', 'RightTitle']);
+        });
 
-        $fields->removeByName(['MergeField', 'Default', 'Validation', 'RightTitle']);
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
