@@ -1,0 +1,25 @@
+SilverStripe\UserForms\Model\UserDefinedForm:
+  userform1:
+    Title: userform1
+SilverStripe\UserForms\Model\Submission\SubmittedForm:
+  form1:
+    Created: '2021-05-27 01:01:01'
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.userform1
+  form2:
+    Created: '2021-05-01 01:01:01'
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.userform1
+SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+  formfield1:
+    Title: Name
+    Value: John
+    Parent: =>SilverStripe\UserForms\Model\Submission\SubmittedForm.form1
+  filefield1:
+    Title: Files
+    Parent: =>SilverStripe\UserForms\Model\Submission\SubmittedForm.form1
+  formfield2:
+    Title: Name
+    Value: Smith
+    Parent: =>SilverStripe\UserForms\Model\Submission\SubmittedForm.form2
+  filefield2:
+    Title: Files
+    Parent: =>SilverStripe\UserForms\Model\Submission\SubmittedForm.form2
