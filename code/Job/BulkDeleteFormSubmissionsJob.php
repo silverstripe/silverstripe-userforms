@@ -185,18 +185,20 @@ class BulkDeleteFormSubmissionsJob extends AbstractQueuedJob
         if ($fileList->exists()) {
             $fileList->each(function($file) use(&$counter) {
                 /* @var $file File */
-                // delete file from the asset store
-                $file->deleteFile();
+                if ($file->exists()) {
+                    // delete file from the asset store
+                    $file->deleteFile();
 
-                // check if file has live version
-                if ($file->isPublished()) {
-                    $file->doUnpublish();
+                    // check if file has live version
+                    if ($file->isPublished()) {
+                        $file->doUnpublish();
+                    }
+
+                    // remove the DB record of this file
+                    $file->delete();
+
+                    $counter += 1;
                 }
-
-                // remove the DB record of this file
-                $file->delete();
-
-                $counter += 1;
             });
         }
 
