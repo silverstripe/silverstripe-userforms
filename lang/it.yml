@@ -1,6 +1,4 @@
 it:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
@@ -15,7 +13,7 @@ it:
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtra invii..'
     FROM: Da
-    TILL: 'Fino a'
+    TILL: Fino a
     WHEREVALUEIS: 'dove il valore è..'
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
@@ -42,9 +40,9 @@ it:
     TITLE: Titolo
     TYPE: Tipo
     VALIDATION: Validazione
-    'YES': Si
+    'YES': 'Si'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: 'Caselle di controllo'
+    PLURALNAME: Caselle di controllo
     SINGULARNAME: 'Campo casella di controllo'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Gruppi di caselle di controllo'
@@ -56,7 +54,7 @@ it:
     PLURALNAME: 'Campi date'
     SINGULARNAME: 'Campo data'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: 'Menù a tendina'
+    PLURALNAME: Menù a tendina
     SINGULARNAME: 'Campo menù a tendina'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Campi e-mail'
@@ -71,6 +69,7 @@ it:
     SINGULARNAME: 'Fine del gruppo di campi modificabili'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campi di caricamento file'
+    SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
     SINGULARNAME: 'Campo di caricamento file'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Seleziona livello di intestazione'
@@ -100,7 +99,7 @@ it:
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campi numerici'
     RANGE: 'Intervallo numerico ammesso'
-    RANGE_TO: 'fino a'
+    RANGE_TO: fino a
     SINGULARNAME: 'Campo numerico'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Opzioni modificabili'

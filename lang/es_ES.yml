@@ -1,6 +1,4 @@
 es_ES:
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrar envíos.'
     WHEREVALUEIS: 'donde el valor es'
@@ -20,9 +18,9 @@ es_ES:
     REQUIRED: 'Este campo es necesario para este formulario y no puede ser borrado'
     SINGULARNAME: 'Campo de formulario editable'
     VALIDATION: Validación
-    'YES': Sí
+    'YES': 'Sí'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: 'Casillas de verificación'
+    PLURALNAME: Casillas de verificación
     SINGULARNAME: 'Campo de casillas de verificación'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Grupos de casillas de verificación'
@@ -34,7 +32,7 @@ es_ES:
     PLURALNAME: 'Campos de fecha'
     SINGULARNAME: 'Campo de fecha'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: 'Listas desplegables'
+    PLURALNAME: Listas desplegables
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Correos electrónicos'
     SINGULARNAME: 'Campo de correo electrónico'
@@ -44,6 +42,7 @@ es_ES:
     FIELD_GROUP_START: 'Grupo {group}'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campos subir archivo'
+    SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
     SINGULARNAME: 'Campo subir archivo'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Selecionar el nivel del encabezado'
