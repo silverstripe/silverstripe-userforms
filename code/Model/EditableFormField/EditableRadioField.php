@@ -26,11 +26,11 @@ class EditableRadioField extends EditableMultipleOptionField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName('Default');
+        });
 
-        $fields->removeByName('Default');
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getFormField()

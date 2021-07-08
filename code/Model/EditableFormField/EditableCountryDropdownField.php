@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\i18n\i18n;
 use SilverStripe\UserForms\Model\EditableCustomRule;
@@ -35,28 +36,28 @@ class EditableCountryDropdownField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName('Default');
+            $fields->addFieldToTab(
+                'Root.Main',
+                DropdownField::create('Default', _t(__CLASS__ . '.DEFAULT', 'Default value'))
+                             ->setSource(i18n::getData()->getCountries())
+                             ->setHasEmptyDefault(true)
+                             ->setEmptyString('---')
+            );
 
-        $fields->removeByName('Default');
-        $fields->addFieldToTab(
-            'Root.Main',
-            DropdownField::create('Default', _t(__CLASS__ . '.DEFAULT', 'Default value'))
-                         ->setSource(i18n::getData()->getCountries())
-                         ->setHasEmptyDefault(true)
-                         ->setEmptyString('---')
-        );
+            $fields->addFieldToTab(
+                'Root.Main',
+                CheckboxField::create('UseEmptyString', _t(__CLASS__ . '.USE_EMPTY_STRING', 'Set default empty string'))
+            );
 
-        $fields->addFieldToTab(
-            'Root.Main',
-            CheckboxField::create('UseEmptyString', _t(__CLASS__ . '.USE_EMPTY_STRING', 'Set default empty string'))
-        );
+            $fields->addFieldToTab(
+                'Root.Main',
+                TextField::create('EmptyString', _t(__CLASS__ . '.EMPTY_STRING', 'Empty String'))
+            );
+        });
 
-        $fields->addFieldToTab(
-            'Root.Main',
-            TextField::create('EmptyString', _t(__CLASS__ . '.EMPTY_STRING', 'Empty String'))
-        );
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getFormField()

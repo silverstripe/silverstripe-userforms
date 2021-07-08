@@ -141,42 +141,42 @@ class EditableFileField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $treeView = TreeDropdownField::create(
+                'FolderID',
+                _t(__CLASS__.'.SELECTUPLOADFOLDER', 'Select upload folder'),
+                Folder::class
+            );
+            $treeView->setDescription(static::getFolderPermissionString($this->Folder()));
+            $fields->addFieldToTab(
+                'Root.Main',
+                $treeView
+            );
 
-        $treeView = TreeDropdownField::create(
-            'FolderID',
-            _t(__CLASS__.'.SELECTUPLOADFOLDER', 'Select upload folder'),
-            Folder::class
-        );
-        $treeView->setDescription(static::getFolderPermissionString($this->Folder()));
-        $fields->addFieldToTab(
-            'Root.Main',
-            $treeView
-        );
+            // Warn the user if the folder targeted by this field is not restricted
+            if ($this->FolderID && !$this->Folder()->hasRestrictedAccess()) {
+                $fields->addFieldToTab("Root.Main", LiteralField::create(
+                    'FileUploadWarning',
+                    '<p class="alert alert-warning">' . _t(
+                        'SilverStripe\\UserForms\\Model\\UserDefinedForm.UnrestrictedFileUploadWarning',
+                        'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.',
+                        ['path' => Convert::raw2att($this->Folder()->Filename)]
+                    )
+                    . '</p>'
+                ), 'Type');
+            }
 
-        // Warn the user if the folder targeted by this field is not restricted
-        if ($this->FolderID && !$this->Folder()->hasRestrictedAccess()) {
-            $fields->addFieldToTab("Root.Main", LiteralField::create(
-                'FileUploadWarning',
-                '<p class="alert alert-warning">' . _t(
-                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.UnrestrictedFileUploadWarning',
-                    'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.',
-                    ['path' => Convert::raw2att($this->Folder()->Filename)]
-                )
-                . '</p>'
-            ), 'Type');
-        }
+            $fields->addFieldToTab(
+                'Root.Main',
+                NumericField::create('MaxFileSizeMB')
+                    ->setTitle('Max File Size MB')
+                    ->setDescription("Note: Maximum php allowed size is {$this->getPHPMaxFileSizeMB()} MB")
+            );
 
-        $fields->addFieldToTab(
-            'Root.Main',
-            NumericField::create('MaxFileSizeMB')
-                ->setTitle('Max File Size MB')
-                ->setDescription("Note: Maximum php allowed size is {$this->getPHPMaxFileSizeMB()} MB")
-        );
+            $fields->removeByName('Default');
+        });
 
-        $fields->removeByName('Default');
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**

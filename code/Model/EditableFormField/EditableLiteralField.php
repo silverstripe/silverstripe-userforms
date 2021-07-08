@@ -118,25 +118,25 @@ class EditableLiteralField extends EditableFormField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName(['Default', 'Validation', 'RightTitle']);
 
-        $fields->removeByName(['Default', 'Validation', 'RightTitle']);
+            $fields->addFieldsToTab('Root.Main', [
+                HTMLEditorField::create('Content', _t(__CLASS__.'.CONTENT', 'HTML'))
+                    ->setRows(4)
+                    ->setColumns(20),
+                CheckboxField::create(
+                    'HideFromReports',
+                    _t(__CLASS__.'.HIDEFROMREPORT', 'Hide from reports?')
+                ),
+                CheckboxField::create(
+                    'HideLabel',
+                    _t(__CLASS__.'.HIDELABEL', "Hide 'Title' label on frontend?")
+                )
+            ]);
+        });
 
-        $fields->addFieldsToTab('Root.Main', [
-            HTMLEditorField::create('Content', _t(__CLASS__.'.CONTENT', 'HTML'))
-                ->setRows(4)
-                ->setColumns(20),
-            CheckboxField::create(
-                'HideFromReports',
-                _t(__CLASS__.'.HIDEFROMREPORT', 'Hide from reports?')
-            ),
-            CheckboxField::create(
-                'HideLabel',
-                _t(__CLASS__.'.HIDELABEL', "Hide 'Title' label on frontend?")
-            )
-        ]);
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getFormField()
