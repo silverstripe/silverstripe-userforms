@@ -1,11 +1,4 @@
 de_DE:
-<<<<<<< HEAD
-  SilverStripe\UserForms\Model\EditableTextField:
-    MINMAXLENGTHCHECK: 'Minimale Länge sollte kleiner als maximale Länge sein'
-  SilverStripe\UserForms\Model\EditableFileField:
-    SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
-=======
->>>>>>> 5.9
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
     CLEARBUTTON: Löschen
