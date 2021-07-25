@@ -25,6 +25,7 @@ use SilverStripe\UserForms\Extension\UserFormFileExtension;
 use SilverStripe\UserForms\Form\UserForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
@@ -305,146 +306,7 @@ JS
             $submittedFields->push($submittedField);
         }
 
-        $emailData = [
-            'Sender' => Security::getCurrentUser(),
-            'HideFormData' => false,
-            'Fields' => $submittedFields,
-            'Body' => '',
-        ];
-
-        $this->extend('updateEmailData', $emailData, $attachments);
-
-        // email users on submit.
-        if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
-            foreach ($recipients as $recipient) {
-                $email = Email::create()
-                    ->setHTMLTemplate('email/SubmittedFormEmail')
-                    ->setPlainTemplate('email/SubmittedFormEmailPlain');
-
-                // Merge fields are used for CMS authors to reference specific form fields in email content
-                $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
-
-                if ($attachments && (bool) $recipient->HideFormData === false) {
-                    foreach ($attachments as $file) {
-                        /** @var File $file */
-                        if ((int) $file->ID === 0) {
-                            continue;
-                        }
-
-                        $email->addAttachmentFromData(
-                            $file->getString(),
-                            $file->getFilename(),
-                            $file->getMimeType()
-                        );
-                    }
-                }
-
-                if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
-                    $email->setHTMLTemplate($recipient->EmailTemplate);
-                }
-
-                // Add specific template data for the current recipient
-                $emailData['HideFormData'] =  (bool) $recipient->HideFormData;
-                // Include any parsed merge field references from the CMS editor - this is already escaped
-                // This string substitution works for both HTML and plain text emails.
-                // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
-                $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
-
-                // Push the template data to the Email's data
-                foreach ($emailData as $key => $value) {
-                    $email->addData($key, $value);
-                }
-
-                // check to see if they are a dynamic reply to. eg based on a email field a user selected
-                $emailFrom = $recipient->SendEmailFromField();
-                if ($emailFrom && $emailFrom->exists()) {
-                    $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
-
-                    if ($submittedFormField && $submittedFormField->Value && is_string($submittedFormField->Value)) {
-                        $email->setReplyTo(explode(',', $submittedFormField->Value));
-                    }
-                } elseif ($recipient->EmailReplyTo) {
-                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
-                }
-
-                // check for a specified from; otherwise fall back to server defaults
-                if ($recipient->EmailFrom) {
-                    $email->setFrom(explode(',', $recipient->EmailFrom));
-                }
-
-                // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
-                $emailTo = $recipient->SendEmailToField();
-
-                try {
-                    if ($emailTo && $emailTo->exists()) {
-                        $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
-
-                        if ($submittedFormField && is_string($submittedFormField->Value)) {
-                            $email->setTo(explode(',', $submittedFormField->Value));
-                        } else {
-                            $email->setTo(explode(',', $recipient->EmailAddress));
-                        }
-                    } else {
-                        $email->setTo(explode(',', $recipient->EmailAddress));
-                    }
-                } catch (Swift_RfcComplianceException $e) {
-                    // The sending address is empty and/or invalid. Log and skip sending.
-                    $error = sprintf(
-                        'Failed to set sender for userform submission %s: %s',
-                        $submittedForm->ID,
-                        $e->getMessage()
-                    );
-
-                    Injector::inst()->get(LoggerInterface::class)->notice($error);
-
-                    continue;
-                }
-
-                // check to see if there is a dynamic subject
-                $emailSubject = $recipient->SendEmailSubjectField();
-                if ($emailSubject && $emailSubject->exists()) {
-                    $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
-
-                    if ($submittedFormField && trim($submittedFormField->Value)) {
-                        $email->setSubject($submittedFormField->Value);
-                    } else {
-                        $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
-                    }
-                } else {
-                    $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
-                }
-
-                $this->extend('updateEmail', $email, $recipient, $emailData);
-
-                if ((bool)$recipient->SendPlain) {
-                    // decode previously encoded html tags because the email is being sent as text/plain
-                    $body = html_entity_decode($emailData['Body']) . "\n";
-                    if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
-                        foreach ($emailData['Fields'] as $field) {
-                            if ($field instanceof SubmittedFileField) {
-                                $body .= $field->Title . ': ' . $field->ExportValue ." \n";
-                            } else {
-                                $body .= $field->Title . ': ' . $field->Value . " \n";
-                            }
-                        }
-                    }
-
-                    $email->setBody($body);
-
-                    try {
-                        $email->sendPlain();
-                    } catch (Exception $e) {
-                        Injector::inst()->get(LoggerInterface::class)->error($e);
-                    }
-                } else {
-                    try {
-                        $email->send();
-                    } catch (Exception $e) {
-                        Injector::inst()->get(LoggerInterface::class)->error($e);
-                    }
-                }
-            }
-        }
+        $this->sendEmails($data, $form, $submittedForm, $submittedFields, $attachments);
 
         $submittedForm->extend('updateAfterProcess');
 
@@ -476,6 +338,171 @@ JS
         }
 
         return $this->redirect($this->Link('finished') . $referrer . $this->config()->get('finished_anchor'));
+    }
+
+    /**
+     * Sends emails for the form, inject over this function to change how email submissions works
+     *
+     * @param array $data
+     * @param Form $form
+     * @param SubmittedForm $submittedForm
+     * @param ArrayList $submittedFields
+     * @param array $attachments
+     */
+    public function sendEmails($data, $form, SubmittedForm $submittedForm, ArrayList $submittedFields, array $attachments): void
+    {
+        $emailData = [
+            'Sender' => Security::getCurrentUser(),
+            'HideFormData' => false,
+            'Fields' => $submittedFields,
+            'Body' => '',
+        ];
+
+        $this->extend('updateEmailData', $emailData, $attachments);
+
+        // email users on submit.
+        if ($recipients = $this->FilteredEmailRecipients($data, $form)) {
+            foreach ($recipients as $recipient) {
+                $this->sendEmail($recipient, $emailData, $submittedForm, $submittedFields, $attachments);
+            }
+        }
+    }
+
+    /**
+     * @param EmailRecipient|mixed $recipient
+     * @param array $emailData
+     * @param SubmittedForm $submittedForm
+     * @param ArrayList $submittedFields
+     * @param array $attachments
+     */
+    public function sendEmail($recipient, array $emailData, SubmittedForm $submittedForm, ArrayList $submittedFields, array $attachments)
+    {
+        $email = Email::create()
+            ->setHTMLTemplate('email/SubmittedFormEmail')
+            ->setPlainTemplate('email/SubmittedFormEmailPlain');
+
+        // Merge fields are used for CMS authors to reference specific form fields in email content
+        $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
+
+        if ($attachments && (bool) $recipient->HideFormData === false) {
+            foreach ($attachments as $file) {
+                /** @var File $file */
+                if ((int) $file->ID === 0) {
+                    continue;
+                }
+
+                $email->addAttachmentFromData(
+                    $file->getString(),
+                    $file->getFilename(),
+                    $file->getMimeType()
+                );
+            }
+        }
+
+        if (!$recipient->SendPlain && $recipient->emailTemplateExists()) {
+            $email->setHTMLTemplate($recipient->EmailTemplate);
+        }
+
+        // Add specific template data for the current recipient
+        $emailData['HideFormData'] =  (bool) $recipient->HideFormData;
+        // Include any parsed merge field references from the CMS editor - this is already escaped
+        // This string substitution works for both HTML and plain text emails.
+        // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
+        $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
+
+        // Push the template data to the Email's data
+        foreach ($emailData as $key => $value) {
+            $email->addData($key, $value);
+        }
+
+        // check to see if they are a dynamic reply to. eg based on a email field a user selected
+        $emailFrom = $recipient->SendEmailFromField();
+        if ($emailFrom && $emailFrom->exists()) {
+            $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
+
+            if ($submittedFormField && $submittedFormField->Value && is_string($submittedFormField->Value)) {
+                $email->setReplyTo(explode(',', $submittedFormField->Value));
+            }
+        } elseif ($recipient->EmailReplyTo) {
+            $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
+        }
+
+        // check for a specified from; otherwise fall back to server defaults
+        if ($recipient->EmailFrom) {
+            $email->setFrom(explode(',', $recipient->EmailFrom));
+        }
+
+        // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
+        $emailTo = $recipient->SendEmailToField();
+
+        try {
+            if ($emailTo && $emailTo->exists()) {
+                $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
+
+                if ($submittedFormField && is_string($submittedFormField->Value)) {
+                    $email->setTo(explode(',', $submittedFormField->Value));
+                } else {
+                    $email->setTo(explode(',', $recipient->EmailAddress));
+                }
+            } else {
+                $email->setTo(explode(',', $recipient->EmailAddress));
+            }
+        } catch (Swift_RfcComplianceException $e) {
+            // The sending address is empty and/or invalid. Log and skip sending.
+            $error = sprintf(
+                'Failed to set sender for userform submission %s: %s',
+                $submittedForm->ID,
+                $e->getMessage()
+            );
+
+            Injector::inst()->get(LoggerInterface::class)->notice($error);
+
+            return;
+        }
+
+        // check to see if there is a dynamic subject
+        $emailSubject = $recipient->SendEmailSubjectField();
+        if ($emailSubject && $emailSubject->exists()) {
+            $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
+
+            if ($submittedFormField && trim($submittedFormField->Value)) {
+                $email->setSubject($submittedFormField->Value);
+            } else {
+                $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
+            }
+        } else {
+            $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
+        }
+
+        $this->extend('updateEmail', $email, $recipient, $emailData);
+
+        if ((bool)$recipient->SendPlain) {
+            // decode previously encoded html tags because the email is being sent as text/plain
+            $body = html_entity_decode($emailData['Body']) . "\n";
+            if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
+                foreach ($emailData['Fields'] as $field) {
+                    if ($field instanceof SubmittedFileField) {
+                        $body .= $field->Title . ': ' . $field->ExportValue ." \n";
+                    } else {
+                        $body .= $field->Title . ': ' . $field->Value . " \n";
+                    }
+                }
+            }
+
+            $email->setBody($body);
+
+            try {
+                $email->sendPlain();
+            } catch (Exception $e) {
+                Injector::inst()->get(LoggerInterface::class)->error($e);
+            }
+        } else {
+            try {
+                $email->send();
+            } catch (Exception $e) {
+                Injector::inst()->get(LoggerInterface::class)->error($e);
+            }
+        }
     }
 
     /**
