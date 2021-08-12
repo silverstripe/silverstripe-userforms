@@ -101,13 +101,13 @@ class UserFormFieldEditorExtension extends DataExtension
                 new GridFieldButtonRow(),
                 (new GridFieldAddClassesButton(EditableTextField::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
-                    ->setButtonClass('btn-primary'),
+                    ->setButtonClass('btn-primary discard-confirmation'),
                 (new GridFieldAddClassesButton(EditableFormStep::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break'))
-                    ->setButtonClass('btn-secondary'),
+                    ->setButtonClass('btn-secondary discard-confirmation'),
                 (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group'))
-                    ->setButtonClass('btn-secondary'),
+                    ->setButtonClass('btn-secondary discard-confirmation'),
                 $editButton = new GridFieldEditButton(),
                 new GridFieldDeleteAction(),
                 new GridFieldToolbarHeader(),
