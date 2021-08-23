@@ -90,6 +90,14 @@ trait UserForm
     private static $block_default_userforms_js = false;
 
     /**
+     * Set this to true to disable automatic inclusion of jQuery
+     * Use to disable jQuery requirment if site already includes it
+     * @config
+     * @var bool
+     */
+    private static $block_userforms_jquery = false;
+
+    /**
      * @var array Fields on the user defined form page.
      */
     private static $db = [
