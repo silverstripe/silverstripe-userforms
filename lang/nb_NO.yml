@@ -24,8 +24,8 @@ nb_NO:
     PLURALNAME: 'Land nedfellsmenyer'
     SINGULARNAME: 'Land nedfellsmeny'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: 'Datofelter'
-    SINGULARNAME: 'Datofelt'
+    PLURALNAME: Datofelter
+    SINGULARNAME: Datofelt
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Nedfellsmeny
     SINGULARNAME: 'Nedfellsmeny felt'
@@ -33,8 +33,8 @@ nb_NO:
     PLURALNAME: 'Epost felt'
     SINGULARNAME: 'Epost felt'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'Filopplastingsfelter'
-    SINGULARNAME: 'Filopplastingsfelt'
+    PLURALNAME: Filopplastingsfelter
+    SINGULARNAME: Filopplastingsfelt
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Velg overskrift nivå'
     PLURALNAME: Overskrifter
@@ -53,12 +53,12 @@ nb_NO:
     PLURALNAME: 'Redigerbart alternativer'
     SINGULARNAME: 'Redigerbart alternativ'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
-    PLURALNAME: 'Radiofelt'
-    SINGULARNAME: 'Radiofelt'
+    PLURALNAME: Radiofelt
+    SINGULARNAME: Radiofelt
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Antall rader'
-    PLURALNAME: 'Tekstfelt'
-    SINGULARNAME: 'Tekstfelt'
+    PLURALNAME: Tekstfelt
+    SINGULARNAME: Tekstfelt
     TEXTLENGTH: 'Tekst lengde'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'Bruker definert e-post mottakere'

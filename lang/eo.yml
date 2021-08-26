@@ -19,6 +19,7 @@ eo:
     TEXTONCLEAR: 'Teksto sur vakiga butono:'
     TEXTONSUBMIT: 'Teksto sur senda butono:'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Rezigni
     CONFIRM_FOLDER_LABEL_A: 'Dosieroj alŝutataj de viaj uzantoj devus konserviĝi zorge por redukti la riskon videbligi konfidencajn datumojn. Certigu ke la dosierujo kiun vi elektas estas videbla nur de taŭgaj personoj. Eblas mastrumi la permesojn pri dosierujoj en la sekcio Dosieroj.'
     CONFIRM_FOLDER_LABEL_B: 'La elektita dosierujo iĝos la apriora por ĉi tiu formularo. Eblas ŝanĝi ĉi tiun individue en la <i>dosieralŝuta kampo.</i>'
     FOLDER_OPTIONS_EXISTING: 'Uzi ekzistantan dosierujon'
@@ -68,7 +69,7 @@ eo:
     INITIALVISIBILITY: 'Komenca videbleco'
     MERGEFIELDNAME: 'Kunfandi kapon'
     NAME: Nomo
-    'NO': 'Ne'
+    'NO': Ne
     PLACEHOLDER: Lokokupilo
     PLURALNAME: 'Redakteblaj formularaj kampoj'
     PLURALS:
@@ -83,7 +84,7 @@ eo:
     TYPE: Tipo
     TYPE_EMPTY: 'Elekti tipon de kampo'
     VALIDATION: Validigo
-    'YES': 'Jes'
+    'YES': Jes
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Markobutonoj
     PLURALS:
@@ -156,11 +157,11 @@ eo:
       other: '{count} titoloj'
     SINGULARNAME: Titolo
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    PLURALNAME: 'Paĝosaltoj'
+    PLURALNAME: Paĝosaltoj
     PLURALS:
       one: 'Unu paĝosalto'
       other: '{count} paĝosaltoj'
-    SINGULARNAME: 'Paĝosalto'
+    SINGULARNAME: Paĝosalto
     STEP_NEXT: Sekva
     STEP_PREV: Antaŭa
     STEP_TITLE: 'Paĝo {paĝo}'
@@ -169,11 +170,11 @@ eo:
     CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
     HIDELABEL: 'Ĉu kaŝi etikedon ''Titolo'' en fasado?'
-    PLURALNAME: 'HTML-blokoj'
+    PLURALNAME: HTML-blokoj
     PLURALS:
       one: 'Unu HTML-bloko'
       other: '{count} HTML-blokoj'
-    SINGULARNAME: 'HTML-bloko'
+    SINGULARNAME: HTML-bloko
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Kampoj por membrolisto'
     PLURALS:
@@ -212,7 +213,7 @@ eo:
       other: '{count} radiobutonaj grupoj'
     SINGULARNAME: 'Radiobutona grupo'
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    AUTOCOMPLETE: Aŭtomate kompletigi
+    AUTOCOMPLETE: 'Aŭtomate kompletigi'
     AUTOCOMPLETE_DESCRIPTION: 'Subtenataj TTT-legiloj provos aŭtomate plenigi ĉi tiun kampon per uzantinformo, uzu ĝin por agordi la enan valoron'
     MAX_LENGTH: 'Maksimuma longo de teksto'
     MINMAXLENGTHCHECK: 'La minimuma longo devus esti malpli ol la maksimuma longo.'

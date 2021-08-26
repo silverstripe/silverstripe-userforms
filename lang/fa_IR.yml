@@ -9,7 +9,7 @@ fa_IR:
     REQUIRED: 'آیا این فیلد الزامی است؟'
     RIGHTTITLE: 'عنوان سمت راست'
     TITLE: عنوان
-    'YES': 'بله'
+    'YES': بله
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'فیلدهای تاریخ'
     SINGULARNAME: 'فیلد تاریخ'
@@ -40,4 +40,4 @@ fa_IR:
     EMAILTEMPLATE: 'قالب پست الکترونیک'
     PLURALNAME: 'صفحه اصلی'
     SENDEMAILTO: 'ارسال ایمیل به'
-    SUBMITBUTTON: ثبت کردن
+    SUBMITBUTTON: 'ثبت کردن'

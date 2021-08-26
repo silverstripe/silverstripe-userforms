@@ -13,7 +13,7 @@ it:
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtra invii..'
     FROM: Da
-    TILL: Fino a
+    TILL: 'Fino a'
     WHEREVALUEIS: 'dove il valore è..'
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
@@ -40,9 +40,9 @@ it:
     TITLE: Titolo
     TYPE: Tipo
     VALIDATION: Validazione
-    'YES': 'Si'
+    'YES': Si
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Caselle di controllo
+    PLURALNAME: 'Caselle di controllo'
     SINGULARNAME: 'Campo casella di controllo'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Gruppi di caselle di controllo'
@@ -54,7 +54,7 @@ it:
     PLURALNAME: 'Campi date'
     SINGULARNAME: 'Campo data'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Menù a tendina
+    PLURALNAME: 'Menù a tendina'
     SINGULARNAME: 'Campo menù a tendina'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Campi e-mail'
@@ -99,7 +99,7 @@ it:
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campi numerici'
     RANGE: 'Intervallo numerico ammesso'
-    RANGE_TO: fino a
+    RANGE_TO: 'fino a'
     SINGULARNAME: 'Campo numerico'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Opzioni modificabili'
