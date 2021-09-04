@@ -279,10 +279,10 @@ en:
     HIDEFORMDATA: 'Hide form data from email?'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'User Defined Forms'
+    PLURALNAME: 'Base Pages'
     PLURALS:
       one: 'An User Defined Form'
-      other: '{count} User Defined Forms'
+      other: '{count} Base Pages'
     PREVIEW_EMAIL: 'Preview email'
     PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
     PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'

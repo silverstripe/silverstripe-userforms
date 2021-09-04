@@ -15,7 +15,7 @@ ar:
     SINGULARNAME: 'حقل استمارة قابل للتحرير'
     VALIDATION: المصادقة
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: مربعات لوضع إشارة
+    PLURALNAME: 'مربعات لوضع إشارة'
     SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'مجموعات ذات مربعات لوضع إشارة'
@@ -27,7 +27,7 @@ ar:
     PLURALNAME: 'حقول التاريخ'
     SINGULARNAME: 'حقل التاريخ'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: القائمات المنسدلة للروابط
+    PLURALNAME: 'القائمات المنسدلة للروابط'
     SINGULARNAME: 'حقل القائمة المنسدلة'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'حقول البريد الإلكتروني'
@@ -75,7 +75,7 @@ ar:
     SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'يضيف استمارة مخصصة.'
-    EMAILADDRESS: البريد الإلكتروني
+    EMAILADDRESS: 'البريد الإلكتروني'
     EMAILBODY: هيئة
     EMAILFROM: من
     EMAILSUBJECT: 'موضوع البريد الإلكتروني'
