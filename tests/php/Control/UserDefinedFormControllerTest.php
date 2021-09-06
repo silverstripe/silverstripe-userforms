@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use Egulias\EmailValidator\Validation\RFCValidation;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
@@ -128,11 +129,17 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertStringEndsWith('#uff', $location);
 
         // check that multiple email addresses are supported in to and from
-        $this->assertEmailSent(
-            'test1@example.com; test2@example.com',
-            'test3@example.com; test4@example.com',
-            'Test Email'
-        );
+        // space between addresses is for framework 4.8 and lower which does not trim() email addresses
+        // no space addresses is for framework 4.9 which does trim() email addresses
+        $to = 'test1@example.com; test2@example.com';
+        $from = 'test3@example.com; test4@example.com';
+        $found = (bool)static::findEmail($to, $from, 'Test Email');
+        if (!$found) {
+            $to = 'test1@example.com;test2@example.com';
+            $from = 'test3@example.com;test4@example.com';
+            $found = (bool)static::findEmail($to, $from, 'Test Email');
+        }
+        $this->assertTrue($found);
     }
 
     public function testValidation()
