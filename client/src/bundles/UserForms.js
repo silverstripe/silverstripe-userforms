@@ -377,8 +377,10 @@ jQuery(document).ready(($) => {
   function FormActions(element) {
     const self = this;
 
-    this.$el = element instanceof $ ? element : $(element);
-    this.userformInstance = this.$el.closest('.userform').data('inst');
+    this.$el = element instanceof $ ? element : $(element)
+    const $elFormItself = this.$el.closest('.userform')
+
+    this.userformInstance = $elFormItself.data('inst')
 
     this.$prevButton = this.$el.find('.step-button-prev');
     this.$nextButton = this.$el.find('.step-button-next');
@@ -386,16 +388,23 @@ jQuery(document).ready(($) => {
     // Show the buttons.
     this.$prevButton.parent().attr('aria-hidden', false).show();
     this.$nextButton.parent().attr('aria-hidden', false).show();
-
+    
+    // Scroll up to the next page... 
+    const scrollUpFx = function (e) {
+      const scrollTop = $elFormItself.offset()
+      $('html, body').animate({scrollTop: scrollTop.top}, 'slow')
+    }
     // Bind the step navigation event listeners.
     this.$prevButton.on('click', (e) => {
-      e.preventDefault();
-      self.$el.trigger('userform.action.prev');
-    });
+      e.preventDefault()
+      scrollUpFx(e)
+      self.$el.trigger('userform.action.prev')
+    })
     this.$nextButton.on('click', (e) => {
-      e.preventDefault();
-      self.$el.trigger('userform.action.next');
-    });
+      e.preventDefault()
+      scrollUpFx(e)
+      self.$el.trigger('userform.action.next')
+    })
 
     // Listen for changes to the current form step, or conditional pages,
     // so we can show hide buttons appropriately.
