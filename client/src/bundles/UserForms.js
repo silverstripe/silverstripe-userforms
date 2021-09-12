@@ -389,21 +389,21 @@ jQuery(document).ready(($) => {
     this.$prevButton.parent().attr('aria-hidden', false).show();
     this.$nextButton.parent().attr('aria-hidden', false).show();
 
-    // Scroll up to the next page... 
-    const scrollUpFx = function (e) {
+    // Scroll up to the next page...
+    const scrollUpFx = function () {
       const scrollTop = $elFormItself.offset();
-      $('html, body').animate({scrollTop: scrollTop.top}, 'slow');
-    }
-    
+      $('html, body').animate({ scrollTop: scrollTop.top }, 'slow');
+    };
+
     // Bind the step navigation event listeners.
     this.$prevButton.on('click', (e) => {
       e.preventDefault();
-      scrollUpFx(e);
+      scrollUpFx();
       self.$el.trigger('userform.action.prev');
-    })
+    });
     this.$nextButton.on('click', (e) => {
       e.preventDefault();
-      scrollUpFx(e);
+      scrollUpFx();
       self.$el.trigger('userform.action.next');
     });
 
