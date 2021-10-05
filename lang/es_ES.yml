@@ -93,7 +93,6 @@ es_ES:
     HIDEFORMDATA: 'Esconder los datos enviados en el mail'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleccione un campo del formulario para utilizar como dirección del remitente'
     ORSELECTAFIELDTOUSEASTO: '.. o seleccione un campo que se utiliza como la dirección'
-    PLURALNAME: 'Páginas base'
     REPLYADDRESS: 'Email para responder a'
     SELECTAFIELDTOSETSUBJECT: '... o seleccionar un campo para usarlo como el asunto'
     SENDEMAILTO: 'Enviar mail a'

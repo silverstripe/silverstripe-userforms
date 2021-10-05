@@ -173,7 +173,6 @@ de_DE:
     HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder ein Feld für Antwort-Adresse wählen'
     ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Feld als Empfänger-Adresse'
-    PLURALNAME: 'Benutzerdefinierte Formulare'
     PREVIEW_EMAIL: E-Mail-Vorschau
     PREVIEW_EMAIL_DESCRIPTION: 'Hinweis: Ungespeicherte Änderungen werde nicht in der Vorschau angezeigt.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Sie können die Vorschau dieser E-Mail ansehen, wenn der Empfänger gespeichert wurde.'

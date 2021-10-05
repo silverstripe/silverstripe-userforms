@@ -90,7 +90,6 @@ pl_PL:
     HIDEFORMDATA: 'Hide Form Data from Email'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'Strony bazowe'
     REPLYADDRESS: 'Email z odpowiedzią do'
     SELECTAFIELDTOSETSUBJECT: '... lub wybierz pole, które zawiera tytuł'
     SENDEMAILTO: 'Send Email To'

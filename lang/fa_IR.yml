@@ -38,6 +38,5 @@ fa_IR:
     EMAILFROM: از
     EMAILSUBJECT: 'موضوع پست الکترونیک'
     EMAILTEMPLATE: 'قالب پست الکترونیک'
-    PLURALNAME: 'صفحه اصلی'
     SENDEMAILTO: 'ارسال ایمیل به'
     SUBMITBUTTON: 'ثبت کردن'

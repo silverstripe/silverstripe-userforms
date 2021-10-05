@@ -92,7 +92,6 @@ sv:
     HIDEFORMDATA: 'Göm formulärdata från e-post?'
     ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'
     ORSELECTAFIELDTOUSEASTO: '.. eller välj ett fält att använda som mottagare'
-    PLURALNAME: 'Bas sidor'
     REPLYADDRESS: 'E-postadress att svara till'
     SELECTAFIELDTOSETSUBJECT: '.. eller välj ett fält att använda som ämne'
     SENDEMAILTO: 'E-postadress att skicka formulär till'

@@ -147,7 +147,6 @@ it:
     HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
-    PLURALNAME: 'Pagine base'
     PREVIEW_EMAIL: 'Anteprima e-mail'
     PREVIEW_EMAIL_DESCRIPTION: 'Nota: Le modifiche non salvate non appariranno nell''anteprima'
     PREVIEW_EMAIL_UNAVAILABLE: 'Puoi vedere un''anteprima di questa email dopo aver salvato il destinatario.'

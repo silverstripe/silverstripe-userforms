@@ -279,10 +279,6 @@ eo:
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
-    PLURALNAME: 'Propre difinitaj formularoj'
-    PLURALS:
-      one: 'Unu propre difinita formularo'
-      other: '{count} propre difinitaj formularoj'
     PREVIEW_EMAIL: 'Antaŭvidi retpoŝton'
     PREVIEW_EMAIL_DESCRIPTION: 'Notu: nekonservitaj ŝanĝoj ne vidiĝos en la antaŭvido.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Konservinte la ricevonton vi povos antaŭvidi la retpoŝton.'

@@ -147,7 +147,6 @@ sk:
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
     ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte pole, ktoré sa použije na odpoveď'
     ORSELECTAFIELDTOUSEASTO: '... alebo vyberte pole, ktoré sa použije ako E-mail príjemcu'
-    PLURALNAME: 'Jednoduché formuláre'
     PREVIEW_EMAIL: 'Náhľad e-mailu'
     PREVIEW_EMAIL_DESCRIPTION: 'Poznámka: Neuložené zmeny sa v náhľade nezobrazujú.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Akonáhle uložite príjemcu, budete si môcť pozrieť ako bude vyzerať tento e-mail.'
