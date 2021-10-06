@@ -13,6 +13,7 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataList;
 use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
@@ -196,6 +197,7 @@ class UserFormFieldEditorExtension extends DataExtension
         $live = Versioned::get_by_stage(EditableFormField::class, Versioned::LIVE)
             ->filter([
                 'ParentID' => $this->owner->ID,
+                'ParentClass' => get_class($this->owner),
             ]);
 
         if (!empty($seenIDs)) {

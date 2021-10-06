@@ -4,6 +4,7 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -13,10 +14,9 @@ use SilverStripe\UserForms\Model\EditableFormField;
  *
  * Represents a modifiable dropdown (select) box on a form
  *
+ * @package userforms
  * @property bool $UseEmptyString
  * @property string $EmptyString
- *
- * @package userforms
  */
 class EditableDropdown extends EditableMultipleOptionField
 {

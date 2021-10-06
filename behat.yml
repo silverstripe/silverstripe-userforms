@@ -1,0 +1,34 @@
+# Run asset-admin behat tests with this command (installed with silverstripe/installer)
+# Note that asset-admin behat tests require CMS module
+# ========================================================================= #
+# vendor/bin/selenium-server-standalone -Dwebdriver.firefox.bin="/Applications/Firefox31.app/Contents/MacOS/firefox-bin"
+# vendor/bin/serve --bootstrap-file vendor/silverstripe/cms/tests/behat/serve-bootstrap.php
+# vendor/bin/behat @asset-admin
+# ========================================================================= #
+default:
+  suites:
+    userforms:
+      paths:
+        - "%paths.modules.userforms%/tests/behat/features"
+      contexts:
+        - SilverStripe\UserForms\Tests\Behat\Context\FeatureContext
+        - SilverStripe\Framework\Tests\Behaviour\CmsFormsContext
+        - SilverStripe\Framework\Tests\Behaviour\CmsUiContext
+        - SilverStripe\BehatExtension\Context\BasicContext
+        - SilverStripe\BehatExtension\Context\EmailContext
+        - SilverStripe\BehatExtension\Context\LoginContext
+        -
+          SilverStripe\UserForms\Tests\Behat\Context\FixtureContext:
+            - "%paths.modules.userforms%/tests/behat/files/"
+  extensions:
+    SilverStripe\BehatExtension\Extension:
+      bootstrap_file: vendor/silverstripe/cms/tests/behat/serve-bootstrap.php
+      screenshot_path: "%paths.base%/artifacts/screenshots"
+      retry_seconds: 4 # default is 2
+    SilverStripe\BehatExtension\MinkExtension:
+      default_session: facebook_web_driver
+      javascript_session: facebook_web_driver
+      facebook_web_driver:
+        browser: chrome
+        wd_host: "http://127.0.0.1:9515" #chromedriver port
+      browser_name: chrome

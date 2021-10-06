@@ -24,11 +24,11 @@ use SilverStripe\Forms\SegmentField;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
@@ -48,16 +48,20 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
  *
  * @package userforms
  *
- * @property string $Name
- * @property string $Title
- * @property string $Default
- * @property int $Sort
- * @property bool $Required
  * @property string $CustomErrorMessage
- * @property boolean $ShowOnLoad
+ * @property string $Default
  * @property string $DisplayRulesConjunction
+ * @property string $ExtraClass
+ * @property string $Name
+ * @property int $ParentID
+ * @property string $Placeholder
+ * @property string $RightTitle
+ * @property bool $Required
+ * @property int $ShowInSummary
+ * @property int $ShowOnLoad
+ * @property int $Sort
  * @method UserDefinedForm Parent() Parent page
- * @method DataList|EditableCustomRule[] DisplayRules() List of EditableCustomRule objects
+ * @method HasManyList|EditableCustomRule[] DisplayRules() List of EditableCustomRule objects
  * @mixin Versioned
  */
 class EditableFormField extends DataObject
@@ -233,7 +237,7 @@ class EditableFormField extends DataObject
             $fieldClasses = $this->getEditableFieldClasses();
             $fields->addFieldsToTab('Root.Main', [
                 DropdownField::create('ClassName', _t(__CLASS__.'.TYPE', 'Type'), $fieldClasses)
-                    ->setEmptyString(_t(__CLASS__ . 'TYPE_EMPTY', 'Select field type'))
+                    ->setEmptyString(_t(__CLASS__ . '.TYPE_EMPTY', 'Select field type'))
             ]);
             return $fields;
         }
@@ -341,8 +345,10 @@ class EditableFormField extends DataObject
 
         // make sure to migrate the class across (prior to v5.x)
         DB::query("UPDATE \"EditableFormField\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
-        DB::query("UPDATE \"EditableFormField_Live\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
-        DB::query("UPDATE \"EditableFormField_Versions\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
+        if (self::has_extension(Versioned::class)) {
+            DB::query("UPDATE \"EditableFormField_Live\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
+            DB::query("UPDATE \"EditableFormField_Versions\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
+        }
     }
 
     /**
@@ -412,6 +418,11 @@ class EditableFormField extends DataObject
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
+        $formField = $this->getFormField();
+        if ($formField && !$formField->hasData()) {
+            $this->Required = false;
+        }
 
         // Set a field name.
         if (!$this->Name) {

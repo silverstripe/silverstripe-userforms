@@ -30,6 +30,7 @@ use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Member;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -47,6 +48,25 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
  * to and custom subjects
  *
  * @package userforms
+ * @property string $CustomRulesCondition
+ * @property string $EmailAddress
+ * @property string $EmailBody
+ * @property string $EmailBodyHtml
+ * @property string $EmailFrom
+ * @property string $EmailReplyTo
+ * @property string $EmailSubject
+ * @property string $EmailTemplate
+ * @property int $FormID
+ * @property int $HideFromData
+ * @property int $SendPlain
+ * @property int $SendEmailFromFieldID
+ * @property int $SendEmailSubjectFieldID
+ * @property int $SendEmailToFieldID
+ * @method HasManyList|EmailRecipientCondition[] CustomRules()
+ * @method DataObject Form()
+ * @method EditableFormField SendEmailFromField()
+ * @method EditableFormField SendEmailSubjectField()
+ * @method EditableFormField SendEmailToField()
  */
 class EmailRecipient extends DataObject
 {
@@ -521,8 +541,8 @@ class EmailRecipient extends DataObject
             }
             $templatePath = substr($absoluteFilename, strlen($prefixToStrip) + 1);
 
-            // Optionally remove "templates/" prefixes
-            if (preg_match('/(?<=templates\/).*$/', $templatePath, $matches)) {
+            // Optionally remove "templates/" ("templates\" on Windows respectively) prefixes
+            if (preg_match('#(?<=templates' . preg_quote(DIRECTORY_SEPARATOR, '#') . ').*$#', $templatePath, $matches)) {
                 $templatePath = $matches[0];
             }
 

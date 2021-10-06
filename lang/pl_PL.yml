@@ -1,6 +1,4 @@
 pl_PL:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Zgłoszenia filtrów ..'
     WHEREVALUEIS: 'których wartość jest ..'
@@ -37,6 +35,7 @@ pl_PL:
     SINGULARNAME: 'Email Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Pola przesyłania plików'
+    SELECTUPLOADFOLDER: 'Wybierz folder dla przesyłanych plików'
     SINGULARNAME: 'Pole przesyłania pliku'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Wybierzpoziom nagłówka'

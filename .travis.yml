@@ -1,47 +1,48 @@
-language: php
+version: ~> 1.0
 
-dist: xenial
+# Use a manual matrix as composer.json requires "silverstripe/cms": "^4.6",
+# This should be changed to "standard-jobs-range-npm" as soon as the lowest recipe
+# version in the travis shared jobs matrix is 4.6
+import:
+  - silverstripe/silverstripe-travis-shared:config/provision/standard.yml
 
-services:
-  - mysql
-  - postgresql
-
-env:
-  global:
-    - COMPOSER_ROOT_VERSION=5.x-dev
-    - TRAVIS_NODE_VERSION="10"
-
-matrix:
+jobs:
   include:
-    - php: 7.1
-      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1 PHPCS_TEST=1
-    - php: 7.2
-      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1 NPM_TEST=1
-    - php: 7.3
-      env: DB=PGSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1 PHPUNIT_COVERAGE_TEST=1
     - php: 7.4
-      env: DB=MYSQL RECIPE_VERSION=4.x-dev PHPUNIT_TEST=1
-
-before_script:
-  # Init PHP
-  - phpenv rehash
-  - phpenv config-rm xdebug.ini
-  - echo 'memory_limit=-1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
-  # Install composer dependencies
-  - composer validate
-  - composer require --no-update silverstripe/recipe-cms:$RECIPE_VERSION
-  - if [[ $DB == PGSQL ]]; then composer require --no-update silverstripe/postgresql:^2 --prefer-dist; fi
-  - composer install --prefer-source --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
-  - if [[ $NPM_TEST ]]; then nvm install $TRAVIS_NODE_VERSION && nvm use $TRAVIS_NODE_VERSION && npm install -g yarn && yarn install --network-concurrency 1 && yarn run build; fi
-
-script:
-  - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit; fi
-  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml -vvv; fi
-  - if [[ $PHPCS_TEST ]]; then composer run-script lint; fi
-  - if [[ $NPM_TEST ]]; then git diff-files --quiet -w --relative=client; fi
-  - if [[ $NPM_TEST ]]; then git diff -w --no-color --relative=client; fi
-  - if [[ $NPM_TEST ]]; then yarn run lint; fi
-
-after_success:
-  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.6.x-dev"
+        - NPM_TEST=1
+    - php: 7.1
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.6.x-dev"
+        - PHPUNIT_TEST=1
+    - php: 7.2
+      env:
+        - DB=PGSQL
+        - REQUIRE_INSTALLER="4.6.x-dev"
+        - PHPUNIT_TEST=1
+    - php: 7.3
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.7.x-dev"
+        - PHPUNIT_TEST=1
+        - PHPCS_TEST=1
+    - php: 7.3
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.7.x-dev"
+        - BEHAT_TEST=1
+        - BEHAT_SUITE="userforms"
+    - php: 7.4
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.x-dev"
+        - PHPUNIT_COVERAGE_TEST=1
+    - php: nightly
+      env:
+        - DB=MYSQL
+        - REQUIRE_INSTALLER="4.x-dev"
+        - PHPUNIT_TEST=1
+        - COMPOSER_INSTALL_ARG=--ignore-platform-reqs

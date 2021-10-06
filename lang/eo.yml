@@ -1,6 +1,4 @@
 eo:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Ĉefa
   SilverStripe\UserForms:
@@ -20,6 +18,16 @@ eo:
     SUBMITBUTTON: Sendi
     TEXTONCLEAR: 'Teksto sur vakiga butono:'
     TEXTONSUBMIT: 'Teksto sur senda butono:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Rezigni
+    CONFIRM_FOLDER_LABEL_A: 'Dosieroj alŝutataj de viaj uzantoj devus konserviĝi zorge por redukti la riskon videbligi konfidencajn datumojn. Certigu ke la dosierujo kiun vi elektas estas videbla nur de taŭgaj personoj. Eblas mastrumi la permesojn pri dosierujoj en la sekcio Dosieroj.'
+    CONFIRM_FOLDER_LABEL_B: 'La elektita dosierujo iĝos la apriora por ĉi tiu formularo. Eblas ŝanĝi ĉi tiun individue en la <i>dosieralŝuta kampo.</i>'
+    FOLDER_OPTIONS_EXISTING: 'Uzi ekzistantan dosierujon'
+    FOLDER_OPTIONS_NEW: 'Krei novan dosierujon (rekomendite)'
+    FOLDER_OPTIONS_TITLE: 'Agordoj pri formularaj dosierujoj'
+    FORM_ACTION_CONFIRM: 'Konservi kaj daŭrigi'
+    INVALID_REQUEST: 'Ĉi tiu peto ne validas.'
+    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aldoni kampon'
     ADD_FIELD_GROUP: 'Aldoni kampogrupon'
@@ -32,8 +40,10 @@ eo:
     UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
     WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filtri
     FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
     FROM: De
+    RESET: Reagordi
     TILL: Ĝis
     WHEREVALUEIS: 'kie valoro estas..'
   SilverStripe\UserForms\Model\EditableCustomRule:
@@ -72,6 +82,7 @@ eo:
     SINGULARNAME: 'Redaktebla formulara kampo'
     TITLE: Titolo
     TYPE: Tipo
+    TYPE_EMPTY: 'Elekti tipon de kampo'
     VALIDATION: Validigo
     'YES': Jes
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
@@ -128,10 +139,15 @@ eo:
       other: '{count} redakteblaj kampaj grupaj finoj'
     SINGULARNAME: 'Finaĵo de redakteblaj kampaj grupoj'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    ANYONE: 'Nelimigita aliro, alŝutoj estos videblaj de ĉiuj'
+    INHERIT: 'Videbleco por ĉi tiu dosierujo estas heredata el la patra dosierujo.'
+    LOGGED_IN: 'Limigita aliro, alŝutoj estos videblaj de alsalutintaj uzantoj'
+    ONLY_GROUPS: 'Limigita aliro, alŝutoj estos videblaj de la jenaj grupoj:'
     PLURALNAME: 'Kampoj por dosiera alŝuto'
     PLURALS:
       one: 'Unu kampo por dosiera alŝuto'
       other: '{count} kampoj por dosiera alŝuto'
+    SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'
@@ -176,6 +192,7 @@ eo:
     TITLE: Titolo
     VALUE: Valoro
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    ORDER_WARNING: 'La minimuma longo devus esti malpli ol la maksimuma longo.'
     PLURALNAME: 'Numeraj kampoj'
     PLURALS:
       one: 'Unu numera kampo'
@@ -198,6 +215,9 @@ eo:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     AUTOCOMPLETE: 'Aŭtomate kompletigi'
     AUTOCOMPLETE_DESCRIPTION: 'Subtenataj TTT-legiloj provos aŭtomate plenigi ĉi tiun kampon per uzantinformo, uzu ĝin por agordi la enan valoron'
+    MAX_LENGTH: 'Maksimuma longo de teksto'
+    MINMAXLENGTHCHECK: 'La minimuma longo devus esti malpli ol la maksimuma longo.'
+    MIN_LENGTH: 'Minimuma longo de teksto'
     NUMBERROWS: 'Nombro da vicoj'
     NUMBERROWS_DESCRIPTION: 'Kampoj kun pli ol unu vico generiĝos kiel tekstareo'
     PLURALNAME: 'Tekstaj kampoj'
@@ -212,6 +232,7 @@ eo:
     EMAILCONTENTTAB: 'Retpoŝta enhavo'
     EMAILDETAILSTAB: 'Retpoŝtaj detaloj'
     EMAILFROMREQUIRED: '"Retpoŝto de" estas bezonata'
+    EMAILTOREQUIRED: '"Sendi retpoŝton al" adreso aŭ kampo estas bezonata'
     PLURALNAME: 'Retpoŝtaj ricevontoj'
     PLURALS:
       one: 'Unu retpoŝta ricevonto'
@@ -280,3 +301,4 @@ eo:
     TYPEREPLY: 'Tajpi respondan adreson'
     TYPESUBJECT: 'Tajpi temon'
     TYPETO: 'Tajpi al-adreson'
+    UnrestrictedFileUploadWarning: 'Aliro al la "{path}" de la aktuala alŝuta dosierujo ne estas limigita. Alŝutitaj dosieroj estos publike alireblaj se la ekzakta URL estas konata.'

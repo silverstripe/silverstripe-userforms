@@ -378,7 +378,9 @@ jQuery(document).ready(($) => {
     const self = this;
 
     this.$el = element instanceof $ ? element : $(element);
-    this.userformInstance = this.$el.closest('.userform').data('inst');
+    const $elFormItself = this.$el.closest('.userform');
+
+    this.userformInstance = $elFormItself.data('inst');
 
     this.$prevButton = this.$el.find('.step-button-prev');
     this.$nextButton = this.$el.find('.step-button-next');
@@ -387,13 +389,21 @@ jQuery(document).ready(($) => {
     this.$prevButton.parent().attr('aria-hidden', false).show();
     this.$nextButton.parent().attr('aria-hidden', false).show();
 
+    // Scroll up to the next page...
+    const scrollUpFx = function () {
+      const scrollTop = $elFormItself.offset();
+      $('html, body').animate({ scrollTop: scrollTop.top }, 'slow');
+    };
+
     // Bind the step navigation event listeners.
     this.$prevButton.on('click', (e) => {
       e.preventDefault();
+      scrollUpFx();
       self.$el.trigger('userform.action.prev');
     });
     this.$nextButton.on('click', (e) => {
       e.preventDefault();
+      scrollUpFx();
       self.$el.trigger('userform.action.next');
     });
 

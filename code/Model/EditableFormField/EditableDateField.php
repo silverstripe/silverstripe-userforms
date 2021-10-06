@@ -14,6 +14,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableDateField\FormField;
  * Allows a user to add a date field.
  *
  * @package userforms
+ * @property int $DefaultToToday
  */
 class EditableDateField extends EditableFormField
 {

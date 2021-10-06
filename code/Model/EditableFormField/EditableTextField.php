@@ -19,8 +19,11 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * This control represents a user-defined text field in a user defined form
  *
  * @package userforms
+ * @property string $Autocomplete
+ * @property int $MaxLength
+ * @property int $MinLength
+ * @property int $Rows
  */
-
 class EditableTextField extends EditableFormField
 {
     private static $singular_name = 'Text Field';
@@ -112,7 +115,7 @@ class EditableTextField extends EditableFormField
 
         if ($this->MinLength > $this->MaxLength) {
             $result->addError(_t(
-                __CLASS__ . 'MINMAXLENGTHCHECK',
+                __CLASS__ . '.MINMAXLENGTHCHECK',
                 'Minimum length should be less than the Maximum length.'
             ));
         }

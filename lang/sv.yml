@@ -1,6 +1,4 @@
 sv:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrera inskickade svar'
     WHEREVALUEIS: 'när värdet är..'
@@ -37,6 +35,7 @@ sv:
     SINGULARNAME: E-postfält
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: Filuppladdningsfält
+    SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
     SINGULARNAME: Filuppladdningsfält
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Välj rubrikstorlek'

@@ -1,6 +1,4 @@
 nl_NL:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Inzendingen filteren'
     WHEREVALUEIS: 'waar waarde is...'
@@ -36,6 +34,7 @@ nl_NL:
     SINGULARNAME: 'Email veld'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Velden voor bestand uploaden'
+    SELECTUPLOADFOLDER: 'Selecteer upload locatie'
     SINGULARNAME: 'Veld voor bestand uploaden'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kies grootte van kopje'

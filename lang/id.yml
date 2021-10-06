@@ -1,26 +1,4 @@
 id:
-  CustomRule:
-    BLANK: Kosong
-    DELETE: Hapus
-    GREATERTHAN: 'Nilai Lebih Besar Dari'
-    GREATERTHANEQUAL: 'Nilai Lebih Besar atau sama'
-    HIDETHISFIELD: 'Sembunyikan Ruas Ini'
-    LESSTHAN: 'Nilai Kurang Dari'
-    NOTBLANK: 'Tidak Kosong'
-    VALUE: Nilai
-    WHEN: Ketika
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Halaman
-    SINGULARNAME: Halaman
   SilverStripe\UserForms\Model\EditableFormField:
-    ADD: Tambah
-    ADDLabel: 'Tambah pilihan'
-    BLANK: Kosong
-    DELETE: Hapus
-    ENTERQUESTION: 'Masukkan Pertanyaan'
     GROUP: Grup
-    HIDE: Sembunyikan
-    MAXVALUE: 'Nilai Maks'
-    MINVALUE: 'Nilai Min'
-    SHOW: Tampilkan
     VALIDATION: Validasi

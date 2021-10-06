@@ -1,10 +1,4 @@
 en:
-  EditableFormField:
-    php.SilverStripe\UserForms\Model\EditableFormFieldTYPE_EMPTY: 'Select field type'
-  EditableTextField:
-    php.SilverStripe\UserForms\Model\EditableFormField\EditableTextFieldMINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Select upload folder'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Main
   SilverStripe\UserForms:
@@ -25,7 +19,7 @@ en:
     TEXTONCLEAR: 'Text on clear button:'
     TEXTONSUBMIT: 'Text on submit button:'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: 'Cancel'
+    CANCEL: Cancel
     CONFIRM_FOLDER_LABEL_A: 'Files that your users upload should be stored carefully to reduce the risk of exposing sensitive data. Ensure the folder you select can only be viewed by appropriate parties. Folder permissions can be managed within the Files area.'
     CONFIRM_FOLDER_LABEL_B: 'The folder selected will become the default for this form. This can be changed on an individual basis in the <i>File upload field.</i>'
     FOLDER_OPTIONS_EXISTING: 'Use an existing folder'
@@ -88,6 +82,7 @@ en:
     SINGULARNAME: 'Editable Form Field'
     TITLE: Title
     TYPE: Type
+    TYPE_EMPTY: 'Select field type'
     VALIDATION: Validation
     'YES': 'Yes'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
@@ -152,6 +147,7 @@ en:
     PLURALS:
       one: 'A File Upload Field'
       other: '{count} File Upload Fields'
+    SELECTUPLOADFOLDER: 'Select upload folder'
     SINGULARNAME: 'File Upload Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Select Heading Level'
@@ -220,6 +216,7 @@ en:
     AUTOCOMPLETE: Autocomplete
     AUTOCOMPLETE_DESCRIPTION: 'Supported browsers will attempt to populate this field automatically with the users information, use to set the value populated'
     MAX_LENGTH: 'Maximum text length'
+    MINMAXLENGTHCHECK: 'Minimum length should be less than the Maximum length.'
     MIN_LENGTH: 'Minimum text length'
     NUMBERROWS: 'Number of rows'
     NUMBERROWS_DESCRIPTION: 'Fields with more than one row will be generated as a textarea'
@@ -282,10 +279,10 @@ en:
     HIDEFORMDATA: 'Hide form data from email?'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'User Defined Forms'
+    PLURALNAME: 'Base Pages'
     PLURALS:
       one: 'An User Defined Form'
-      other: '{count} User Defined Forms'
+      other: '{count} Base Pages'
     PREVIEW_EMAIL: 'Preview email'
     PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
     PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'

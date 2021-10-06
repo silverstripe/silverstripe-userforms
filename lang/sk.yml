@@ -1,6 +1,4 @@
 sk:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Pridať políčko'
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
@@ -33,7 +31,7 @@ sk:
     EXTRACLASS_Title: 'Extra CSS triedy'
     FIELDISREQUIRED: '{name} je vyžadované'
     GROUP: Skupina
-    'NO': ' Nie'
+    'NO': Nie
     PLURALNAME: 'Formulárové polia'
     REQUIRED: 'Je pole povinné/vyžadované?'
     REQUIRED_DESCRIPTION: 'Všimnite si prosím, že podmienené polia nemôžu byť vyžadované.'
@@ -71,6 +69,7 @@ sk:
     SINGULARNAME: 'Koniec skupiny polí'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Polia pre nahratie súboru'
+    SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
     SINGULARNAME: 'Pole pre nahratie súboru'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Úroveň nadpisu'
@@ -146,8 +145,8 @@ sk:
     EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
     FROMADDRESS: 'E-mail odosielateľa'
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
-    ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte poľe, ktoré sa použije na odpoveď'
-    ORSELECTAFIELDTOUSEASTO: '... alebo vyberte poľe, ktoré sa použije ako E-mail príjemcu'
+    ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte pole, ktoré sa použije na odpoveď'
+    ORSELECTAFIELDTOUSEASTO: '... alebo vyberte pole, ktoré sa použije ako E-mail príjemcu'
     PLURALNAME: 'Jednoduché formuláre'
     PREVIEW_EMAIL: 'Náhľad e-mailu'
     PREVIEW_EMAIL_DESCRIPTION: 'Poznámka: Neuložené zmeny sa v náhľade nezobrazujú.'
@@ -155,7 +154,7 @@ sk:
     REPLYADDRESS: 'Odpoveď na'
     REPLYADDRESS_DESCRIPTION: 'E-mailová adresa, na ktorú príde odpoveď od príjemcu.'
     RulesDescription: 'E-maily budú zasielane príjemcovi len vtedy, ak sú splnené vlastné pravidlá. Ak pravidlá nie sú definované, príjemca bude dostávať e-maily pri každom podanom formulári.'
-    SELECTAFIELDTOSETSUBJECT: '... alebo vyber poľe, ktoré sa použije ako predmet'
+    SELECTAFIELDTOSETSUBJECT: '... alebo vyberte pole, ktoré sa použije ako predmet'
     SENDEMAILTO: 'E-mail príjemcu'
     SENDEMAILTO_DESCRIPTION: 'Môžete zadať viac e-mailových adries, pričom jednotlivé adresy oddeľujte čiarkou.'
     SENDIF: 'Podmienka poslania'

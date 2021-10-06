@@ -1,6 +1,4 @@
 es_ES:
-  EditableUploadField:
-    SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrar envíos.'
     WHEREVALUEIS: 'donde el valor es'
@@ -44,6 +42,7 @@ es_ES:
     FIELD_GROUP_START: 'Grupo {group}'
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campos subir archivo'
+    SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
     SINGULARNAME: 'Campo subir archivo'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Selecionar el nivel del encabezado'

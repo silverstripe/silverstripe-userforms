@@ -4,9 +4,11 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
+use SilverStripe\Assets\Upload_Validator;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
@@ -22,11 +24,11 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 /**
  * Allows a user to add a field that can be used to upload a file.
  *
- * @method Folder Folder
- * @property int FolderID
- * @property boolean MaxFileSizeMB
- * @property boolean FolderConfirmed
  * @package userforms
+ * @property int $FolderConfirmed
+ * @property int $FolderID
+ * @property float $MaxFileSizeMB
+ * @method Folder Folder
  */
 class EditableFileField extends EditableFormField
 {
@@ -143,7 +145,7 @@ class EditableFileField extends EditableFormField
 
         $treeView = TreeDropdownField::create(
             'FolderID',
-            _t('EditableUploadField.SELECTUPLOADFOLDER', 'Select upload folder'),
+            _t(__CLASS__.'.SELECTUPLOADFOLDER', 'Select upload folder'),
             Folder::class
         );
         $treeView->setDescription(static::getFolderPermissionString($this->Folder()));
@@ -185,18 +187,21 @@ class EditableFileField extends EditableFormField
         $result = parent::validate();
 
         $max = static::get_php_max_file_size();
-        if ($this->MaxFileSizeMB * 1024 > $max) {
+        if ($this->MaxFileSizeMB * 1024 * 1024 > $max) {
             $result->addError("Your max file size limit can't be larger than the server's limit of {$this->getPHPMaxFileSizeMB()}.");
         }
 
         return $result;
     }
 
+
+
     public function getFormField()
     {
         $field = FileField::create($this->Name, $this->Title ?: false)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
-            ->setTemplate(__CLASS__);
+            ->setTemplate(__CLASS__)
+            ->setValidator(Injector::inst()->get(Upload_Validator::class . '.userforms'));
 
         $field->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__);
