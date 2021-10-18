@@ -308,6 +308,7 @@ JS
         $emailData = [
             'Sender' => Security::getCurrentUser(),
             'HideFormData' => false,
+            'SubmittedForm' => $submittedForm,
             'Fields' => $submittedFields,
             'Body' => '',
         ];
