@@ -24,7 +24,7 @@ class EditableNumericFieldTest extends SapphireTest
 
         $result = $field->validate();
         $this->assertFalse($result->isValid(), 'Validation should fail when min is greater than max');
-        $this->assertContains('Minimum length should be less than the maximum length', $result->serialize());
+        $this->assertStringContainsString('Minimum length should be less than the maximum length', $result->serialize());
     }
 
     public function testValidate()

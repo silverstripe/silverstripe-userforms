@@ -22,7 +22,7 @@ class EditableFileFieldTest extends SapphireTest
     /**
      * Hold the server default max file size upload limit for later
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -48,7 +48,7 @@ class EditableFileFieldTest extends SapphireTest
     {
 
         $fileField = $this->objFromFixture(EditableFileField::class, 'file-field');
-        $this->setExpectedException(ValidationException::class);
+        $this->expectException(ValidationException::class);
         $fileField->MaxFileSizeMB = $this->php_max_file_size * 2;
         $fileField->write();
     }

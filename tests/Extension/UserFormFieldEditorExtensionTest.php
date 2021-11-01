@@ -15,7 +15,7 @@ class UserFormFieldEditorExtensionTest extends SapphireTest
         UserFormBlockStub::class,
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $page = $this->objFromFixture(UserDefinedForm::class, 'page');
