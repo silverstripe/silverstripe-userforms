@@ -37,7 +37,7 @@ class UserDefinedFormTest extends FunctionalTest
         UserDefinedForm::class => [UserFormFieldEditorExtension::class],
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         Email::config()->update('admin_email', 'no-reply@example.com');
@@ -526,12 +526,12 @@ class UserDefinedFormTest extends FunctionalTest
         $result = $this->get($page->Link());
         $body = Convert::nl2os($result->getBody(), ''); // strip out newlines
         $this->assertFalse($result->isError());
-        $this->assertContains('<p>Here is my form</p><form', $body);
-        $this->assertContains('</form><p>Thank you for filling it out</p>', $body);
+        $this->assertStringContainsString('<p>Here is my form</p><form', $body);
+        $this->assertStringContainsString('</form><p>Thank you for filling it out</p>', $body);
 
-        $this->assertNotContains('<p>$UserDefinedForm</p>', $body);
-        $this->assertNotContains('<p></p>', $body);
-        $this->assertNotContains('</p><p>Thank you for filling it out</p>', $body);
+        $this->assertStringNotContainsString('<p>$UserDefinedForm</p>', $body);
+        $this->assertStringNotContainsString('<p></p>', $body);
+        $this->assertStringNotContainsString('</p><p>Thank you for filling it out</p>', $body);
     }
 
     public function testEmailAddressValidation()
@@ -546,8 +546,8 @@ class UserDefinedFormTest extends FunctionalTest
         $result = $recipient->validate();
         $this->assertFalse($result->isValid());
         $this->assertNotEmpty($result->getMessages());
-        $this->assertContains('filtered.example.com', $result->getMessages()[0]['message']);
-        $this->assertNotContains('filtered2@example.com', $result->getMessages()[0]['message']);
+        $this->assertStringContainsString('filtered.example.com', $result->getMessages()[0]['message']);
+        $this->assertStringNotContainsString('filtered2@example.com', $result->getMessages()[0]['message']);
 
         // test valid email addresses pass validation
         $recipient = $this->objFromFixture(

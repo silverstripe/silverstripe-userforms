@@ -30,7 +30,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": "^7.3 || ^8.0",
+        "silverstripe/framework": "^4.10",
         "silverstripe/cms": "^4.6",
         "symbiote/silverstripe-gridfieldextensions": "^3.1",
         "silverstripe/segment-field": "^2.0",
@@ -38,7 +39,7 @@
         "silverstripe/mimevalidator": "^2.0"
     },
     "require-dev": {
-        "sminnee/phpunit": "^5.7",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "autoload": {

@@ -11,14 +11,14 @@ use SilverStripe\Versioned\Versioned;
 
 class SubmittedFileFieldTest extends SapphireTest
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         TestAssetStore::activate('SubmittedFileFieldTest');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         TestAssetStore::reset();
 
@@ -40,7 +40,7 @@ class SubmittedFileFieldTest extends SapphireTest
         $submittedFile->ParentID = $submittedForm->ID;
         $submittedFile->write();
 
-        $this->assertContains('test-SubmittedFileFieldTest', $submittedFile->getFileName(), 'Submitted file is linked');
+        $this->assertStringContainsString('test-SubmittedFileFieldTest', $submittedFile->getFileName(), 'Submitted file is linked');
 
         $submittedForm->delete();
         $fileId = $file->ID;

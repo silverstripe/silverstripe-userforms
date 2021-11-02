@@ -12,7 +12,7 @@ class EditableCountryDropdownFieldTest extends SapphireTest
     {
         $field = new EditableCountryDropdownField;
 
-        $this->assertContains('/images/editabledropdown.png', $field->getIcon());
+        $this->assertStringContainsString('/images/editabledropdown.png', $field->getIcon());
     }
 
     public function testAllowEmptyTitle()

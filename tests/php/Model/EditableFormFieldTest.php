@@ -184,9 +184,9 @@ class EditableFormFieldTest extends FunctionalTest
         $checkboxField->write();
 
         // Test values are in the expected format
-        $this->assertRegExp('/^EditableTextField_.+/', $textfield1->Name);
-        $this->assertRegExp('/^EditableTextField_.+/', $textfield2->Name);
-        $this->assertRegExp('/^EditableCheckbox_.+/', $checkboxField->Name);
+        $this->assertMatchesRegularExpression('/^EditableTextField_.+/', $textfield1->Name);
+        $this->assertMatchesRegularExpression('/^EditableTextField_.+/', $textfield2->Name);
+        $this->assertMatchesRegularExpression('/^EditableCheckbox_.+/', $checkboxField->Name);
         $this->assertNotEquals($textfield1->Name, $textfield2->Name);
     }
 
@@ -238,7 +238,7 @@ class EditableFormFieldTest extends FunctionalTest
     {
         $field = new EditableTextField;
 
-        $this->assertContains('/images/editabletextfield.png', $field->getIcon());
+        $this->assertStringContainsString('/images/editabletextfield.png', $field->getIcon());
     }
 
     public function displayedProvider()

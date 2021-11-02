@@ -23,7 +23,7 @@ class EditableCustomRuleTest extends SapphireTest
         $this->assertNotEmpty($result1['operation']);
 
         //Check for equals sign
-        $this->assertContains('==', $result1['operation']);
+        $this->assertStringContainsString('==', $result1['operation']);
 
         /** @var EditableCustomRule $rule2 */
         $rule2 = $this->objFromFixture(EditableCustomRule::class, 'rule2');
@@ -34,7 +34,7 @@ class EditableCustomRuleTest extends SapphireTest
         $this->assertNotEmpty($result2['operation']);
 
         //Check for greater than sign
-        $this->assertContains('>', $result2['operation']);
+        $this->assertStringContainsString('>', $result2['operation']);
     }
 
     /**
@@ -133,11 +133,9 @@ class EditableCustomRuleTest extends SapphireTest
         );
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testValidateAgainstFormDataWithNonSenseRule()
     {
+        $this->expectException(\LogicException::class);
         $rule1 = $this->objFromFixture(EditableCustomRule::class, 'rule1');
         $rule1->ConditionOption = 'NonSenseRule';
         $rule1->validateAgainstFormData(['CountrySelection' => 'booya']);

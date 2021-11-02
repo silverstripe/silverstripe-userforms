@@ -38,7 +38,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
 {
     protected static $fixture_file = '../UserFormsTest.yml';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -401,7 +401,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             $response->getStatusCode(),
             'Valid request is successfull'
         );
-        $this->assertContains('Unrestricted access, uploads will be visible to anyone', $response->getBody());
+        $this->assertStringContainsString('Unrestricted access, uploads will be visible to anyone', $response->getBody());
 
         $folder = Folder::find('restricted-folder');
         $response = $this->get($url . http_build_query(['FolderID' => 0]));
@@ -410,7 +410,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             $response->getStatusCode(),
             'Valid request for root folder is successful'
         );
-        $this->assertContains('Unrestricted access, uploads will be visible to anyone', $response->getBody());
+        $this->assertStringContainsString('Unrestricted access, uploads will be visible to anyone', $response->getBody());
 
         $folder = Folder::find('restricted-folder');
         $response = $this->get($url . http_build_query(['FolderID' => $folder->ID]));
@@ -419,7 +419,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             $response->getStatusCode(),
             'Valid request for root folder is successful'
         );
-        $this->assertContains('Restricted access, uploads will be visible to logged-in users ', $response->getBody());
+        $this->assertStringContainsString('Restricted access, uploads will be visible to logged-in users ', $response->getBody());
 
         $this->logInWithPermission('ADMIN');
         $adminOnlyFolder = Folder::find('admin-only');
@@ -429,7 +429,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             $response->getStatusCode(),
             'Valid request for folder restricted to group is successful'
         );
-        $this->assertContains('Restricted access, uploads will be visible to the following groups: Administrators', $response->getBody());
+        $this->assertStringContainsString('Restricted access, uploads will be visible to the following groups: Administrators', $response->getBody());
     }
 
     public function testGetFormSubmissionFolder()

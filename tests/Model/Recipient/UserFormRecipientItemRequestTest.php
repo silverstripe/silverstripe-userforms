@@ -38,10 +38,10 @@ class UserFormRecipientItemRequestTest extends SapphireTest
         $request = new UserFormRecipientItemRequest(null, null, $recipient, null, '');
         $html = $request->preview()->getValue();
         foreach ($falseClasses as $class) {
-            $this->assertNotContains('My' . $class, $html);
+            $this->assertStringNotContainsString('My' . $class, $html);
         }
         foreach ($trueClasses as $class) {
-            $this->assertContains('My' . $class, $html);
+            $this->assertStringContainsString('My' . $class, $html);
         }
     }
 }

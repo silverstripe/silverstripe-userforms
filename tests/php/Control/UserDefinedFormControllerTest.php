@@ -39,7 +39,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
     protected static $disable_themes = true;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -49,7 +49,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         Config::modify()->merge(SSViewer::class, 'themes', ['simple', '$default']);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         TestAssetStore::reset();
         parent::tearDown();
@@ -105,11 +105,11 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
         $nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
-        $this->assertContains('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
+        $this->assertStringContainsString('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
 
         // submitted html tags are not escaped because the email is being sent as text/plain
         $value = 'My body text Basic Value <b>HTML</b>';
-        $this->assertContains($value, $nohtml['Content'], 'Email contains the merge field value');
+        $this->assertStringContainsString($value, $nohtml['Content'], 'Email contains the merge field value');
 
         // no data
         $this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');
@@ -123,7 +123,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         // check to see if the user was redirected (301)
         $this->assertEquals($response->getStatusCode(), 302);
         $location = $response->getHeader('Location');
-        $this->assertContains('finished', $location);
+        $this->assertStringContainsString('finished', $location);
         $this->assertStringEndsWith('#uff', $location);
 
         // check that multiple email addresses are supported in to and from
@@ -142,7 +142,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->get($form->URLSegment);
         /** @var HTTPResponse $response */
         $response = $this->submitForm('UserForm_Form_' . $form->ID, null, []);
-        $this->assertContains('This field is required', $response->getBody());
+        $this->assertStringContainsString('This field is required', $response->getBody());
 
         // Post with all fields, but invalid email
         $this->get($form->URLSegment);
@@ -151,7 +151,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
             'required-email' => 'invalid',
             'required-text' => 'bob'
         ]);
-        $this->assertContains('Please enter an email address', $response->getBody());
+        $this->assertStringContainsString('Please enter an email address', $response->getBody());
 
         // Post with only required
         $this->get($form->URLSegment);
@@ -159,7 +159,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $response = $this->submitForm('UserForm_Form_' . $form->ID, null, [
             'required-text' => 'bob'
         ]);
-        $this->assertContains("Thanks, we've received your submission.", $response->getBody());
+        $this->assertStringContainsString("Thanks, we've received your submission.", $response->getBody());
     }
 
     public function testFinished()
@@ -172,7 +172,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $response = $this->get($form->URLSegment.'/finished');
 
-        $this->assertContains($form->OnCompleteMessage, $response->getBody());
+        $this->assertStringContainsString($form->OnCompleteMessage, $response->getBody());
     }
 
     public function testAppendingFinished()
@@ -185,7 +185,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $response = $this->get($form->URLSegment.'/finished');
 
-        $this->assertNotContains($form->OnCompleteMessage, $response->getBody());
+        $this->assertStringNotContainsString($form->OnCompleteMessage, $response->getBody());
     }
 
     public function testForm()
@@ -320,7 +320,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $parser = new CSSContentParser($html);
 
         // Assert Content has been rendered with the shortcode in place
-        $this->assertContains('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
+        $this->assertStringContainsString('<p>Here is my form</p><p>$UserDefinedForm</p><p>Thank you for filling it out</p>', $html);
         // And the form in the $From area
         $this->assertArrayHasKey(0, $parser->getBySelector('form#UserForm_Form_' . $form->ID));
         // check for the input

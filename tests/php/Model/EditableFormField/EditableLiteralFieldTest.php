@@ -15,7 +15,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
  */
 class EditableLiteralFieldTest extends SapphireTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $cmsConfig = HTMLEditorConfig::get('cms');
@@ -48,11 +48,11 @@ class EditableLiteralFieldTest extends SapphireTest
             'Title' => 'Test label'
         ]);
 
-        $this->assertContains('Test label', $field->getFormField()->FieldHolder());
+        $this->assertStringContainsString('Test label', $field->getFormField()->FieldHolder());
         $this->assertEquals('Test label', $field->getFormField()->Title());
 
         $field->HideLabel = true;
-        $this->assertNotContains('Test label', $field->getFormField()->FieldHolder());
+        $this->assertStringNotContainsString('Test label', $field->getFormField()->FieldHolder());
         $this->assertEmpty($field->getFormField()->Title());
     }
 
