@@ -447,7 +447,7 @@ JS
             }
         }
 
-        $submittedForm->extend('updateAfterProcess');
+        $submittedForm->extend('updateAfterProcess', $emailData, $attachments);
 
         $session = $this->getRequest()->getSession();
         $session->clear("FormInfo.{$form->FormName()}.errors");
