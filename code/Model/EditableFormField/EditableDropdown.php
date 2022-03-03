@@ -36,23 +36,23 @@ class EditableDropdown extends EditableMultipleOptionField
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->addFieldToTab(
+                'Root.Main',
+                CheckboxField::create('UseEmptyString')
+                    ->setTitle('Set default empty string')
+            );
 
-        $fields->addFieldToTab(
-            'Root.Main',
-            CheckboxField::create('UseEmptyString')
-                ->setTitle('Set default empty string')
-        );
+            $fields->addFieldToTab(
+                'Root.Main',
+                TextField::create('EmptyString')
+                    ->setTitle('Empty String')
+            );
 
-        $fields->addFieldToTab(
-            'Root.Main',
-            TextField::create('EmptyString')
-                ->setTitle('Empty String')
-        );
+            $fields->removeByName('Default');
+        });
 
-        $fields->removeByName('Default');
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
