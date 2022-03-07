@@ -80,6 +80,7 @@ class EmailRecipient extends DataObject
         'EmailTemplate' => 'Varchar',
         'SendPlain' => 'Boolean',
         'HideFormData' => 'Boolean',
+        'HideInvisibleFields' => 'Boolean',
         'CustomRulesCondition' => 'Enum("And,Or")'
     ];
 
@@ -302,6 +303,10 @@ class EmailRecipient extends DataObject
             CheckboxField::create(
                 'HideFormData',
                 _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.HIDEFORMDATA', 'Hide form data from email?')
+            ),
+            CheckboxField::create(
+                'HideInvisibleFields',
+                _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.HIDEINVISIBLEFIELDS', 'Hide invisible fields from email?')
             ),
             CheckboxField::create(
                 'SendPlain',
