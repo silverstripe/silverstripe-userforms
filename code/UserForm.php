@@ -326,7 +326,7 @@ SQL;
             $fields->addFieldToTab('Root.Main', LiteralField::create(
                 'EmailRecipientsWarning',
                 '<p class="alert alert-warning">' . _t(
-                    'SilverStripe\UserForms\Model\UserDefinedForm.NORECIPIENTS',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.NORECIPIENTS',
                     'Warning: You have not configured any recipients. Form submissions may be missed.'
                 )
                 . '</p>'
