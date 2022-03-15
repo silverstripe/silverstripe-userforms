@@ -256,6 +256,9 @@ JS
                 }
             }
 
+            // set visibility flag according to display rules
+            $submittedField->Displayed = $field->isDisplayed($data);
+
             if (!empty($data[$field->Name])) {
                 if (in_array(EditableFileField::class, $field->getClassAncestry())) {
                     if (!empty($_FILES[$field->Name]['name'])) {
@@ -305,6 +308,8 @@ JS
             $submittedFields->push($submittedField);
         }
 
+        $visibleSubmittedFields = $submittedFields->filter('Displayed', true);
+
         $emailData = [
             'Sender' => Security::getCurrentUser(),
             'HideFormData' => false,
@@ -350,6 +355,10 @@ JS
                 // This string substitution works for both HTML and plain text emails.
                 // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
                 $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
+                // only include visible fields if recipient visibility flag is set
+                if ((bool) $recipient->HideInvisibleFields) {
+                    $emailData['Fields'] = $visibleSubmittedFields;
+                }
 
                 // Push the template data to the Email's data
                 foreach ($emailData as $key => $value) {

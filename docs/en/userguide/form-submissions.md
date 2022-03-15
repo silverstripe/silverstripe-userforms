@@ -50,6 +50,10 @@ In this field you can add a custom message to add to the email
 
 You can check this if you do not wish for the email recipient to see the form submission's data in the email.
 
+#### Hide invisible fields from email?
+
+You can check this if you want to hide the fields from the email that were invisible to the user according to the display rules set up for the form fields. 
+
 #### Send email as plain text?
 
 You can check this if you want to remove all of the HTML from the email, this means the email

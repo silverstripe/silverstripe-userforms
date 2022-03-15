@@ -19,7 +19,8 @@ class SubmittedFormField extends DataObject
     private static $db = [
         'Name' => 'Varchar',
         'Value' => 'Text',
-        'Title' => 'Varchar(255)'
+        'Title' => 'Varchar(255)',
+        'Displayed' => 'Boolean',
     ];
 
     private static $has_one = [
