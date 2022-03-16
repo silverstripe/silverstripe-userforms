@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Extension;
 
+use SilverStripe\Admin\AdminRootController;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\Tab;
@@ -124,7 +125,9 @@ class UserFormFieldEditorExtension extends DataExtension
             '',
             $fields,
             $config
-        )->addExtraClass('uf-field-editor');
+        )
+            ->addExtraClass('uf-field-editor')
+            ->setAttribute('data-admin-url', AdminRootController::admin_url());
 
         return $fieldEditor;
     }
