@@ -60,7 +60,8 @@ jQuery.entwine('ss', ($) => {
   $('#Form_ConfirmFolderForm_FolderID_Holder .treedropdownfield.is-open,#Form_ItemEditForm_FolderID .treedropdownfield.is-open').entwine({
     onunmatch() {
       // Build url
-      const parsedURL = url.parse('admin/user-forms/getfoldergrouppermissions');
+      const adminUrl = window.location.pathname.split('/')[1];
+      const parsedURL = url.parse(adminUrl + '/user-forms/getfoldergrouppermissions');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
       const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
@@ -140,7 +141,8 @@ jQuery.entwine('ss', ($) => {
       const editableFileFieldID = $(this).data('id');
 
       // Build schema url
-      const parsedURL = url.parse('admin/user-forms/confirmfolderformschema');
+      const adminUrl = window.location.pathname.split('/')[1];
+      const parsedURL = url.parse(adminUrl + '/user-forms/confirmfolderformschema');
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
