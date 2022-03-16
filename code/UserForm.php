@@ -110,7 +110,6 @@ trait UserForm
     private static $defaults = [
         'Content' => '$UserDefinedForm',
         'DisableSaveSubmissions' => 0,
-        'OnCompleteMessage' => '<p>Thanks, we\'ve received your submission.</p>'
     ];
 
     /**
@@ -166,6 +165,15 @@ trait UserForm
      * @var array
      */
     protected $fieldsFromTo = [];
+
+    /**
+    * @var array
+    */
+    public function populateDefaults()
+    {
+        parent::populateDefaults();
+        $this->OnCompleteMessage = '<p>' . _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ONCOMPLETEMESSAGE', 'Thanks, we\'ve received your submission.') . '</p>';
+    }
 
     /**
      * @return FieldList
