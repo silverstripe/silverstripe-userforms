@@ -60,8 +60,8 @@ jQuery.entwine('ss', ($) => {
   $('#Form_ConfirmFolderForm_FolderID_Holder .treedropdownfield.is-open,#Form_ItemEditForm_FolderID .treedropdownfield.is-open').entwine({
     onunmatch() {
       // Build url
-      const adminUrl = window.location.pathname.split('/')[1];
-      const parsedURL = url.parse(adminUrl + '/user-forms/getfoldergrouppermissions');
+      const adminUrl = $(this).closest('#Form_ConfirmFolderForm').data('adminUrl');
+      const parsedURL = url.parse(`${adminUrl}user-forms/getfoldergrouppermissions`);
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
       const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
@@ -105,7 +105,9 @@ jQuery.entwine('ss', ($) => {
 
       dialog = $('<div id="confirm-folder__dialog-wrapper" />');
       const id = $(this).closest('tr').data('id');
+      const adminUrl = $(this).closest('.uf-field-editor').data('adminUrl');
       dialog.data('id', id);
+      dialog.data('adminUrl', adminUrl);
       $('body').append(dialog);
 
       dialog.open();
@@ -141,8 +143,8 @@ jQuery.entwine('ss', ($) => {
       const editableFileFieldID = $(this).data('id');
 
       // Build schema url
-      const adminUrl = window.location.pathname.split('/')[1];
-      const parsedURL = url.parse(adminUrl + '/user-forms/confirmfolderformschema');
+      const adminUrl = $(this).data('adminUrl');
+      const parsedURL = url.parse(`${adminUrl}user-forms/confirmfolderformschema`);
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
