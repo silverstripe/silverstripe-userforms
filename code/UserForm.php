@@ -183,16 +183,16 @@ trait UserForm
             $fields->removeByName('EmailRecipients');
 
             // define tabs
-            $fields->findOrMakeTab('Root.FormOptions', _t(__CLASS__.'.CONFIGURATION', 'Configuration'));
-            $fields->findOrMakeTab('Root.Recipients', _t(__CLASS__.'.RECIPIENTS', 'Recipients'));
-            $fields->findOrMakeTab('Root.Submissions', _t(__CLASS__.'.SUBMISSIONS', 'Submissions'));
+            $fields->findOrMakeTab('Root.FormOptions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIGURATION', 'Configuration'));
+            $fields->findOrMakeTab('Root.Recipients', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.RECIPIENTS', 'Recipients'));
+            $fields->findOrMakeTab('Root.Submissions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));
 
 
             // text to show on complete
             $onCompleteFieldSet = CompositeField::create(
                 $label = LabelField::create(
                     'OnCompleteMessageLabel',
-                    _t(__CLASS__.'.ONCOMPLETELABEL', 'Show on completion')
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ONCOMPLETELABEL', 'Show on completion')
                 ),
                 $editor = HTMLEditorField::create(
                     'OnCompleteMessage',
@@ -210,7 +210,7 @@ trait UserForm
             $emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
             $emailRecipientsConfig->getComponentByType(GridFieldAddNewButton::class)
                 ->setButtonName(
-                    _t(__CLASS__.'.ADDEMAILRECIPIENT', 'Add Email Recipient')
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ADDEMAILRECIPIENT', 'Add Email Recipient')
                 );
 
             // who do we email on submission
@@ -315,7 +315,7 @@ SQL;
                 'Root.FormOptions',
                 CheckboxField::create(
                     'DisableSaveSubmissions',
-                    _t(__CLASS__.'.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
                 )
             );
         });
@@ -326,7 +326,7 @@ SQL;
             $fields->addFieldToTab('Root.Main', LiteralField::create(
                 'EmailRecipientsWarning',
                 '<p class="alert alert-warning">' . _t(
-                    __CLASS__.'.NORECIPIENTS',
+                    'SilverStripe\\UserForms\\Model\\UserDefinedForm.NORECIPIENTS',
                     'Warning: You have not configured any recipients. Form submissions may be missed.'
                 )
                 . '</p>'
@@ -367,17 +367,17 @@ SQL;
      */
     public function getFormOptions()
     {
-        $submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t(__CLASS__.'.SUBMITBUTTON', 'Submit');
-        $clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t(__CLASS__.'.CLEARBUTTON', 'Clear');
+        $submit = ($this->SubmitButtonText) ? $this->SubmitButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMITBUTTON', 'Submit');
+        $clear = ($this->ClearButtonText) ? $this->ClearButtonText : _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CLEARBUTTON', 'Clear');
 
         $options = FieldList::create(
-            TextField::create('SubmitButtonText', _t(__CLASS__.'.TEXTONSUBMIT', 'Text on submit button:'), $submit),
-            TextField::create('ClearButtonText', _t(__CLASS__.'.TEXTONCLEAR', 'Text on clear button:'), $clear),
-            CheckboxField::create('ShowClearButton', _t(__CLASS__.'.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
-            CheckboxField::create('EnableLiveValidation', _t(__CLASS__.'.ENABLELIVEVALIDATION', 'Enable live validation')),
-            CheckboxField::create('DisplayErrorMessagesAtTop', _t(__CLASS__.'.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
-            CheckboxField::create('DisableCsrfSecurityToken', _t(__CLASS__.'.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
-            CheckboxField::create('DisableAuthenicatedFinishAction', _t(__CLASS__.'.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
+            TextField::create('SubmitButtonText', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.TEXTONSUBMIT', 'Text on submit button:'), $submit),
+            TextField::create('ClearButtonText', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.TEXTONCLEAR', 'Text on clear button:'), $clear),
+            CheckboxField::create('ShowClearButton', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
+            CheckboxField::create('EnableLiveValidation', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
+            CheckboxField::create('DisplayErrorMessagesAtTop', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
+            CheckboxField::create('DisableCsrfSecurityToken', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
+            CheckboxField::create('DisableAuthenicatedFinishAction', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
         );
 
         $this->extend('updateFormOptions', $options);
