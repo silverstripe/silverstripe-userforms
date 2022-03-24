@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Control;
 
+use SilverStripe\Admin\AdminRootController;
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Control\HTTPRequest;
@@ -199,7 +200,8 @@ class UserDefinedFormAdmin extends LeftAndMain
 
         return Form::create($this, 'ConfirmFolderForm', $fields, $actions, RequiredFields::create('ID'))
             ->setFormAction($this->Link('ConfirmFolderForm'))
-            ->addExtraClass('form--no-dividers');
+            ->addExtraClass('form--no-dividers')
+            ->setAttribute('data-admin-url', AdminRootController::admin_url());
     }
 
     /**
