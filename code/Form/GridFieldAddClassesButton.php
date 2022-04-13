@@ -145,7 +145,7 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
         }
 
         // Filter out classes without permission
-        return array_filter($classes, function ($class) {
+        return array_filter($classes ?? [], function ($class) {
             return singleton($class)->canCreate();
         });
     }
@@ -219,7 +219,7 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
 
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
-        switch (strtolower($actionName)) {
+        switch (strtolower($actionName ?? '')) {
             case $this->getAction():
                 return $this->handleAdd($gridField);
             default:

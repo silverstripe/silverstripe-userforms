@@ -255,7 +255,7 @@ SQL;
             $columns = array();
 
             foreach (DB::query($columnSQL)->map() as $name => $title) {
-                $columns[$name] = trim(strtr($title, '.', ' '));
+                $columns[$name] = trim(strtr($title ?? '', '.', ' '));
             }
 
             $config = GridFieldConfig::create();

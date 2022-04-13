@@ -8,11 +8,11 @@ class UnderscoreSegmentFieldModifier extends SlugSegmentFieldModifier
 {
     public function getPreview($value)
     {
-        return str_replace('-', '_', parent::getPreview($value));
+        return str_replace('-', '_', parent::getPreview($value) ?? '');
     }
 
     public function getSuggestion($value)
     {
-        return str_replace('-', '_', parent::getSuggestion($value));
+        return str_replace('-', '_', parent::getSuggestion($value) ?? '');
     }
 }

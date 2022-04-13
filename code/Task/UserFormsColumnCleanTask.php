@@ -57,7 +57,7 @@ class UserFormsColumnCleanTask extends MigrationTask
                     DB::query($query);
                     $backedUp = 1;
                 }
-                if (!isset($columns[$column]) && !in_array($column, $this->keepColumns)) {
+                if (!isset($columns[$column]) && !in_array($column, $this->keepColumns ?? [])) {
                     echo "Dropping $column from $db <br />";
                     $query = "ALTER TABLE $db DROP COLUMN $column";
                     DB::query($query);

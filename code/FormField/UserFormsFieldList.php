@@ -43,7 +43,7 @@ class UserFormsFieldList extends FieldList implements UserFormsFieldContainer
     public function clearEmptySteps()
     {
         foreach ($this as $field) {
-            if ($field instanceof UserFormsStepField && count($field->getChildren()) === 0) {
+            if ($field instanceof UserFormsStepField && count($field->getChildren() ?? []) === 0) {
                 $this->remove($field);
             }
         }

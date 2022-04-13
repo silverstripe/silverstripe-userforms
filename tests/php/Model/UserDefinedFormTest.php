@@ -100,8 +100,8 @@ class UserDefinedFormTest extends FunctionalTest
 
         $summaryFields = $gridFieldDataColumns->getDisplayFields($submissionsgrid);
 
-        $this->assertContains('SummaryShow', array_keys($summaryFields), 'Summary field not showing displayed field');
-        $this->assertNotContains('SummaryHide', array_keys($summaryFields), 'Summary field showing displayed field');
+        $this->assertContains('SummaryShow', array_keys($summaryFields ?? []), 'Summary field not showing displayed field');
+        $this->assertNotContains('SummaryHide', array_keys($summaryFields ?? []), 'Summary field showing displayed field');
     }
 
     public function testEmailRecipientPopup()
@@ -177,13 +177,13 @@ class UserDefinedFormTest extends FunctionalTest
 
         // Installation path can be as a project when testing in Travis, so check partial match
         $foundKey = false;
-        foreach (array_keys($result) as $key) {
-            if (strpos($key, 'email' . DIRECTORY_SEPARATOR . 'SubmittedFormEmail') !== false) {
+        foreach (array_keys($result ?? []) as $key) {
+            if (strpos($key ?? '', 'email' . DIRECTORY_SEPARATOR . 'SubmittedFormEmail') !== false) {
                 $foundKey = true;
             }
         }
         $this->assertTrue($foundKey);
-        $this->assertTrue(in_array('SubmittedFormEmail', array_values($result)));
+        $this->assertTrue(in_array('SubmittedFormEmail', array_values($result ?? [])));
     }
 
     public function testEmailTemplateExists()
@@ -195,7 +195,7 @@ class UserDefinedFormTest extends FunctionalTest
         $recipient->EmailAddress = 'test@example.com';
 
         // Set the default template
-        $recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues()));
+        $recipient->EmailTemplate = current(array_keys($recipient->getEmailTemplateDropdownValues() ?? []));
         $recipient->write();
 
         // The default template exists

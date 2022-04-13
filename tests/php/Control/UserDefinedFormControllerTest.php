@@ -96,7 +96,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // submitted html tags are escaped for the html value
         $value = 'class="readonly">My body html Basic Value &lt;b&gt;HTML&lt;/b&gt;</span>';
-        $this->assertTrue(strpos($email['Content'], $value) !== false, 'Email contains the merge field value');
+        $this->assertTrue(strpos($email['Content'] ?? '', $value ?? '') !== false, 'Email contains the merge field value');
 
         $value = $parser->getBySelector('dd');
         $this->assertEquals('Basic Value <b>HTML</b>', (string) $value[0], 'Email contains the value');
@@ -198,14 +198,14 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($controller->Form()->getName(), 'Form_' . $form->ID, 'The form is referenced as Form');
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
-        $this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 0);
+        $this->assertEquals(count($controller->Form()->getValidator()->getRequired() ?? []), 0);
 
         $requiredForm = $this->objFromFixture(UserDefinedForm::class, 'validation-form');
         $controller = new UserDefinedFormController($requiredForm);
 
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
-        $this->assertEquals(count($controller->Form()->getValidator()->getRequired()), 1);
+        $this->assertEquals(count($controller->Form()->getValidator()->getRequired() ?? []), 1);
     }
 
     public function testGetFormFields()
@@ -413,7 +413,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
                 'type' => 'image/jpeg',
                 'tmp_name' => $path,
                 'error' => 0,
-                'size' => filesize($path),
+                'size' => filesize($path ?? ''),
             ]
         ];
         $_FILES[$field->Name] = $data[$field->Name];
@@ -449,7 +449,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
                 'type' => 'image/jpeg',
                 'tmp_name' => $path,
                 'error' => 0,
-                'size' => filesize($path),
+                'size' => filesize($path ?? ''),
             ]
         ];
         $_FILES[$field->Name] = $data[$field->Name];
