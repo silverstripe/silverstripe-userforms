@@ -67,7 +67,7 @@ class UpgradePolymorphicExtension extends DataExtension
                     // If the defined data class doesn't have the UserForm trait applied, it's probably wrong. Re-map
                     // it to a default value that does
                     $classTraits = class_uses($relationshipObject);
-                    if (in_array(UserForm::class, $classTraits)) {
+                    if (in_array(UserForm::class, $classTraits ?? [])) {
                         continue;
                     }
 

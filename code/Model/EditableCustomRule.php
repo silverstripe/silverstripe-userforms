@@ -299,7 +299,7 @@ class EditableCustomRule extends DataObject
      */
     public function toggleDisplayText($initialState, $invert = false)
     {
-        $action = strtolower($initialState) === 'hide' ? 'removeClass' : 'addClass';
+        $action = strtolower($initialState ?? '') === 'hide' ? 'removeClass' : 'addClass';
         if ($invert) {
             $action = $action === 'removeClass' ? 'addClass' : 'removeClass';
         }
@@ -316,7 +316,7 @@ class EditableCustomRule extends DataObject
      */
     public function toggleDisplayEvent($initialState, $invert = false)
     {
-        $action = strtolower($initialState) === 'hide' ? 'show' : 'hide';
+        $action = strtolower($initialState ?? '') === 'hide' ? 'show' : 'hide';
         if ($invert) {
             $action = $action === 'hide' ? 'show' : 'hide';
         }

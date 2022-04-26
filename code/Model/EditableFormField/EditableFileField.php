@@ -209,7 +209,7 @@ class EditableFileField extends EditableFormField
         $field->getValidator()->setAllowedExtensions(
             array_diff(
                 // filter out '' since this would be a regex problem on JS end
-                array_filter(Config::inst()->get(File::class, 'allowed_extensions')),
+                array_filter(Config::inst()->get(File::class, 'allowed_extensions') ?? []),
                 $this->config()->get('allowed_extensions_blacklist')
             )
         );
@@ -223,7 +223,7 @@ class EditableFileField extends EditableFormField
         $folder = $this->Folder();
         if ($folder && $folder->exists()) {
             $field->setFolderName(
-                preg_replace("/^assets\//", "", $folder->Filename)
+                preg_replace("/^assets\//", "", $folder->Filename ?? '')
             );
         }
 

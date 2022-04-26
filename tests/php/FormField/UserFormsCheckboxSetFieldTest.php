@@ -46,6 +46,6 @@ class UserFormsCheckboxSetFieldTest extends SapphireTest
         $userFormsCheckboxSetField = $editableCheckboxGroupField->getFormField();
         $html = $userFormsCheckboxSetField->renderWith(UserFormsCheckboxSetField::class)->getValue();
         $attributesHTML = 'data-rule-required="true" data-msg-required="My custom error message with &amp;#039;single&amp;#039; and &amp;quot;double&amp;quot; quotes"';
-        $this->assertTrue(strpos($html, $attributesHTML) > 0);
+        $this->assertTrue(strpos($html ?? '', $attributesHTML ?? '') > 0);
     }
 }

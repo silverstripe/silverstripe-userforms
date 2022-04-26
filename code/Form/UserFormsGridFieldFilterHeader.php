@@ -122,7 +122,7 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
         $actions->addExtraClass('no-change-track');
 
         $colSpan = 2 + count($gridField->getConfig()->getComponentByType(GridFieldDataColumns::class)
-            ->getDisplayFields($gridField));
+            ->getDisplayFields($gridField) ?? []);
 
         $forTemplate = ArrayData::create(array(
             'Fields'    => $fields,

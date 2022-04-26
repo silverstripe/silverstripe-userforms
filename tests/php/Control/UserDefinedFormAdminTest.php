@@ -106,7 +106,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             null,
             ['X-FormSchema-Request' => 'auto,schema,state,errors']
         );
-        $schemaData = json_decode($response->getBody(), true);
+        $schemaData = json_decode($response->getBody() ?? '', true);
 
         $this->assertEquals('ConfirmFolderForm', $schemaData['schema']['name']);
         $this->assertField($schemaData, 'FolderOptions', ['component' => 'OptionsetField']);
@@ -128,7 +128,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
             null,
             ['X-FormSchema-Request' => 'auto,schema,state,errors']
         );
-        $schemaData = json_decode($response->getBody(), true);
+        $schemaData = json_decode($response->getBody() ?? '', true);
 
         $this->assertEquals('ConfirmFolderForm', $schemaData['schema']['name']);
         $this->assertField($schemaData, 'FolderOptions', ['component' => 'OptionsetField']);

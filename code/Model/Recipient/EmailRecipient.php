@@ -143,9 +143,9 @@ class EmailRecipient extends DataObject
 
         // email addresses have trim() applied to them during validation for a slightly nicer UX
         // apply trim() here too before saving to the database
-        $this->EmailAddress = trim($this->EmailAddress);
-        $this->EmailFrom = trim($this->EmailFrom);
-        $this->EmailReplyTo = trim($this->EmailReplyTo);
+        $this->EmailAddress = trim($this->EmailAddress ?? '');
+        $this->EmailFrom = trim($this->EmailFrom ?? '');
+        $this->EmailReplyTo = trim($this->EmailReplyTo ?? '');
     }
 
     public function summaryFields()
@@ -272,9 +272,9 @@ class EmailRecipient extends DataObject
             // an AJAX request, e.g. saving a GridFieldDetailForm
             $remove = ['/edit', '/ItemEditForm'];
             foreach ($remove as $badSuffix) {
-                $badSuffixLength = strlen($badSuffix);
-                if (substr($currentUrl, -$badSuffixLength) === $badSuffix) {
-                    $currentUrl = substr($currentUrl, 0, -$badSuffixLength);
+                $badSuffixLength = strlen($badSuffix ?? '');
+                if (substr($currentUrl ?? '', -$badSuffixLength) === $badSuffix) {
+                    $currentUrl = substr($currentUrl ?? '', 0, -$badSuffixLength);
                 }
             }
             $previewUrl = Controller::join_links($currentUrl, 'preview');
@@ -534,7 +534,7 @@ class EmailRecipient extends DataObject
         $found = $finder->find(BASE_PATH . DIRECTORY_SEPARATOR . $templateDirectory);
 
         foreach ($found as $key => $value) {
-            $template = pathinfo($value);
+            $template = pathinfo($value ?? '');
             $absoluteFilename = $template['dirname'] . DIRECTORY_SEPARATOR . $template['filename'];
 
             // Optionally remove vendor/ path prefixes
@@ -544,10 +544,10 @@ class EmailRecipient extends DataObject
             } else {
                 $prefixToStrip = BASE_PATH;
             }
-            $templatePath = substr($absoluteFilename, strlen($prefixToStrip) + 1);
+            $templatePath = substr($absoluteFilename ?? '', strlen($prefixToStrip ?? '') + 1);
 
             // Optionally remove "templates/" ("templates\" on Windows respectively) prefixes
-            if (preg_match('#(?<=templates' . preg_quote(DIRECTORY_SEPARATOR, '#') . ').*$#', $templatePath, $matches)) {
+            if (preg_match('#(?<=templates' . preg_quote(DIRECTORY_SEPARATOR, '#') . ').*$#', $templatePath ?? '', $matches)) {
                 $templatePath = $matches[0];
             }
 
@@ -573,9 +573,9 @@ class EmailRecipient extends DataObject
         foreach ($checkEmail as $check => $translation) {
             if ($this->$check) {
                 //may be a comma separated list of emails
-                $addresses = explode(',', $this->$check);
+                $addresses = explode(',', $this->$check ?? '');
                 foreach ($addresses as $address) {
-                    $trimAddress = trim($address);
+                    $trimAddress = trim($address ?? '');
                     if ($trimAddress && !Email::is_valid_address($trimAddress)) {
                         $error = _t(
                             __CLASS__.".$translation",

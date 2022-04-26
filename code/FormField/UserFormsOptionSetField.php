@@ -24,7 +24,7 @@ class UserFormsOptionSetField extends OptionsetField
      */
     public function getValidationAttributesHTML()
     {
-        $attrs = array_filter(array_keys($this->getAttributes()), function ($attr) {
+        $attrs = array_filter(array_keys($this->getAttributes() ?? []), function ($attr) {
             return !in_array($attr, ['data-rule-required', 'data-msg-required']);
         });
         return $this->getAttributesHTML(...$attrs);

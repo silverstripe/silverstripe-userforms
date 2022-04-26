@@ -24,7 +24,7 @@ class UserFormsCheckboxSetField extends CheckboxSetField
      */
     public function getValidationAttributesHTML()
     {
-        $attrs = array_filter(array_keys($this->getAttributes()), function ($attr) {
+        $attrs = array_filter(array_keys($this->getAttributes() ?? []), function ($attr) {
             return !in_array($attr, ['data-rule-required', 'data-msg-required']);
         });
         return $this->getAttributesHTML(...$attrs);
@@ -60,8 +60,8 @@ class UserFormsCheckboxSetField extends CheckboxSetField
 
         $previous = $value = $this->Value();
 
-        if (is_string($value) && strstr($value, ",")) {
-            $value = explode(",", $value);
+        if (is_string($value) && strstr($value ?? '', ",")) {
+            $value = explode(",", $value ?? '');
         }
 
         // set the value as an array for parent validation

@@ -358,7 +358,7 @@ class EditableFormField extends DataObject
      */
     protected function getDisplayRuleFields()
     {
-        $allowedClasses = array_keys($this->getEditableFieldClasses(false));
+        $allowedClasses = array_keys($this->getEditableFieldClasses(false) ?? []);
         $editableColumns = new GridFieldEditableColumns();
         $editableColumns->setDisplayFields([
             'ConditionFieldID' => function ($record, $column, $grid) use ($allowedClasses) {
@@ -584,7 +584,7 @@ class EditableFormField extends DataObject
             return false;
         }
 
-        return stripos($this->ID, 'new') === 0;
+        return stripos($this->ID ?? '', 'new') === 0;
     }
 
     /**
@@ -612,7 +612,7 @@ class EditableFormField extends DataObject
         $shortClass = end($classNamespaces);
 
         $resource = ModuleLoader::getModule('silverstripe/userforms')
-            ->getResource('images/' . strtolower($shortClass) . '.png');
+            ->getResource('images/' . strtolower($shortClass ?? '') . '.png');
 
         if (!$resource->exists()) {
             return '';
@@ -782,7 +782,7 @@ class EditableFormField extends DataObject
         }
 
         // if this field has a placeholder
-        if (strlen($this->Placeholder) >= 0) {
+        if (strlen($this->Placeholder ?? '') >= 0) {
             $field->setAttribute('placeholder', $this->Placeholder);
         }
     }
@@ -983,10 +983,10 @@ class EditableFormField extends DataObject
             $fieldToWatch = $formFieldWatch->getSelectorFieldOnly();
 
             $expression = $rule->buildExpression();
-            if (!in_array($fieldToWatch, $result['selectors'])) {
+            if (!in_array($fieldToWatch, $result['selectors'] ?? [])) {
                 $result['selectors'][] = $fieldToWatch;
             }
-            if (!in_array($expression['event'], $result['events'])) {
+            if (!in_array($expression['event'], $result['events'] ?? [])) {
                 $result['events'][] = $expression['event'];
             }
             $result['operations'][] = $expression['operation'];
@@ -999,7 +999,7 @@ class EditableFormField extends DataObject
             $result['holder_event_opposite'] = $rule->toggleDisplayEvent($result['initialState'], true);
         }
 
-        return (count($result['selectors'])) ? $result : null;
+        return (count($result['selectors'] ?? [])) ? $result : null;
     }
 
     /**
@@ -1050,7 +1050,7 @@ class EditableFormField extends DataObject
      */
     public function DisplayRulesConjunctionNice()
     {
-        return (strtolower($this->DisplayRulesConjunction) === 'or') ? '||' : '&&';
+        return (strtolower($this->DisplayRulesConjunction ?? '') === 'or') ? '||' : '&&';
     }
 
     /**

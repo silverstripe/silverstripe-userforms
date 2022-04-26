@@ -113,11 +113,11 @@ class UserFormsRequiredFields extends RequiredFields
             if ($field instanceof FileField && isset($value['error']) && $value['error']) {
                 $error = true;
             } else {
-                $error = (count($value)) ? false : true;
+                $error = (count($value ?? [])) ? false : true;
             }
         } else {
             // assume a string or integer
-            $error = (strlen($value)) ? false : true;
+            $error = (strlen($value ?? '')) ? false : true;
         }
 
         return $error;

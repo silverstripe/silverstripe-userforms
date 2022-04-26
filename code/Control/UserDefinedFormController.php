@@ -124,14 +124,14 @@ class UserDefinedFormController extends PageController
     {
         $form = $this->Form();
         if ($this->Content && $form && !$this->config()->disable_form_content_shortcode) {
-            $hasLocation = stristr($this->Content, '$UserDefinedForm');
+            $hasLocation = stristr($this->Content ?? '', '$UserDefinedForm');
             if ($hasLocation) {
                 /** @see Requirements_Backend::escapeReplacement */
-                $formEscapedForRegex = addcslashes($form->forTemplate(), '\\$');
+                $formEscapedForRegex = addcslashes($form->forTemplate() ?? '', '\\$');
                 $content = preg_replace(
                     '/(<p[^>]*>)?\\$UserDefinedForm(<\\/p>)?/i',
-                    $formEscapedForRegex,
-                    $this->Content
+                    $formEscapedForRegex ?? '',
+                    $this->Content ?? ''
                 );
                 return [
                     'Content' => DBField::create_field('HTMLText', $content),
@@ -260,7 +260,7 @@ JS
             $submittedField->Displayed = $field->isDisplayed($data);
 
             if (!empty($data[$field->Name])) {
-                if (in_array(EditableFileField::class, $field->getClassAncestry())) {
+                if (in_array(EditableFileField::class, $field->getClassAncestry() ?? [])) {
                     if (!empty($_FILES[$field->Name]['name'])) {
                         $foldername = $field->getFormField()->getFolderName();
 
@@ -371,15 +371,15 @@ JS
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
                     if ($submittedFormField && $submittedFormField->Value && is_string($submittedFormField->Value)) {
-                        $email->setReplyTo(explode(',', $submittedFormField->Value));
+                        $email->setReplyTo(explode(',', $submittedFormField->Value ?? ''));
                     }
                 } elseif ($recipient->EmailReplyTo) {
-                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo));
+                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo ?? ''));
                 }
 
                 // check for a specified from; otherwise fall back to server defaults
                 if ($recipient->EmailFrom) {
-                    $email->setFrom(explode(',', $recipient->EmailFrom));
+                    $email->setFrom(explode(',', $recipient->EmailFrom ?? ''));
                 }
 
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
@@ -390,12 +390,12 @@ JS
                         $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 
                         if ($submittedFormField && is_string($submittedFormField->Value)) {
-                            $email->setTo(explode(',', $submittedFormField->Value));
+                            $email->setTo(explode(',', $submittedFormField->Value ?? ''));
                         } else {
-                            $email->setTo(explode(',', $recipient->EmailAddress));
+                            $email->setTo(explode(',', $recipient->EmailAddress ?? ''));
                         }
                     } else {
-                        $email->setTo(explode(',', $recipient->EmailAddress));
+                        $email->setTo(explode(',', $recipient->EmailAddress ?? ''));
                     }
                 } catch (Swift_RfcComplianceException $e) {
                     // The sending address is empty and/or invalid. Log and skip sending.
@@ -415,7 +415,7 @@ JS
                 if ($emailSubject && $emailSubject->exists()) {
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailSubjectField()->Name);
 
-                    if ($submittedFormField && trim($submittedFormField->Value)) {
+                    if ($submittedFormField && trim($submittedFormField->Value ?? '')) {
                         $email->setSubject($submittedFormField->Value);
                     } else {
                         $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
@@ -428,7 +428,7 @@ JS
 
                 if ((bool)$recipient->SendPlain) {
                     // decode previously encoded html tags because the email is being sent as text/plain
-                    $body = html_entity_decode($emailData['Body']) . "\n";
+                    $body = html_entity_decode($emailData['Body'] ?? '') . "\n";
                     if (isset($emailData['Fields']) && !$emailData['HideFormData']) {
                         foreach ($emailData['Fields'] as $field) {
                             if ($field instanceof SubmittedFileField) {
@@ -474,7 +474,7 @@ JS
                 // to allow us to get through the finshed method
                 if (!$this->Form()->getSecurityToken()->isEnabled()) {
                     $randNum = rand(1, 1000);
-                    $randHash = md5($randNum);
+                    $randHash = md5($randNum ?? '');
                     $session->set('FormProcessed', $randHash);
                     $session->set('FormProcessedNum', $randNum);
                 }
@@ -531,7 +531,7 @@ JS
                 // make sure the session matches the SecurityID and is not left over from another form
                 if ($formProcessed != $securityID) {
                     // they may have disabled tokens on the form
-                    $securityID = md5($this->getRequest()->getSession()->get('FormProcessedNum'));
+                    $securityID = md5($this->getRequest()->getSession()->get('FormProcessedNum') ?? '');
                     if ($formProcessed != $securityID) {
                         return $this->redirect($this->Link() . $referrer);
                     }
@@ -571,7 +571,7 @@ JS
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
             $holder = $rule['holder'];
-            $isFormStep = strpos($target, 'EditableFormStep') !== false;
+            $isFormStep = strpos($target ?? '', 'EditableFormStep') !== false;
 
             $result .= <<<EOS
 \n
@@ -592,7 +592,7 @@ EOS;
                 // This is particularly important beacause the next/prev page buttons logic is controlled by
                 // the visibility of the FormStep buttons
                 // The HTML for the FormStep buttons is defined in UserFormProgress.ss
-                $id = str_replace('#', '', $target);
+                $id = str_replace('#', '', $target ?? '');
                 $result .= <<<EOS
     $('.step-button-wrapper[data-for="{$id}"]').addClass('hide');
 EOS;
