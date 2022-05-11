@@ -265,8 +265,13 @@ en:
       other: '{count} Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
+    CONFIGURATION: Configuration
     DESCRIPTION: 'Adds a customizable form.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
+    DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Display error messages above the form?'
     EMAILADDRESS: Email
     EMAILBODY: Body
     EMAILBODYHTML: Body
@@ -274,10 +279,14 @@ en:
     EMAILSUBJECT: 'Email subject'
     EMAILTEMPLATE: 'Email template'
     EMAIL_RECIPIENT_UNSAVED_FORM: 'You will be able to select from valid form fields after saving this record.'
+    ENABLELIVEVALIDATION: 'Enable live validation'
     EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
     FROMADDRESS: 'Send email from'
     HIDEFORMDATA: 'Hide form data from email?'
     HIDEINVISIBLEFIELDS: 'Hide invisible fields from email?'
+    NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
+    ONCOMPLETELABEL: 'Show on completion'
+    ONCOMPLETEMESSAGE: 'Thanks, we''ve received your submission.'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     PLURALNAME: 'Base Pages'
@@ -287,9 +296,11 @@ en:
     PREVIEW_EMAIL: 'Preview email'
     PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
     PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'
+    RECIPIENTS: Recipients
     REPLYADDRESS: 'Email for reply to'
     REPLYADDRESS_DESCRIPTION: 'The email address which the recipient is able to ''reply'' to.'
     RulesDescription: 'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this recipient will receive notifications for every submission.'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'
     SENDEMAILTO: 'Send email to'
     SENDEMAILTO_DESCRIPTION: 'You may enter multiple email addresses as a comma separated list.'
@@ -297,8 +308,12 @@ en:
     SENDIFAND: 'All conditions are true'
     SENDIFOR: 'Any conditions are true'
     SENDPLAIN: 'Send email as plain text? (HTML will be stripped)'
+    SHOWCLEARFORM: 'Show Clear Form Button'
     SINGULARNAME: 'User Defined Form'
+    SUBMISSIONS: Submissions
     SUBMITBUTTON: Submit
+    TEXTONCLEAR: 'Text on clear button:'
+    TEXTONSUBMIT: 'Text on submit button:'
     TYPEREPLY: 'Type reply address'
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
