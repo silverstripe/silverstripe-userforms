@@ -2,6 +2,13 @@ SilverStripe\Security\Group:
   admin:
     Title: Administrators
 
+SilverStripe\Assets\Folder:
+  user-form-folder-parent:
+    Title: folder1
+  user-form-folder-child:
+    Title: folder1-1
+    Parent: =>SilverStripe\Assets\Folder.user-form-folder-parent
+
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   basic-text:
     Name: basic_text_name
@@ -289,6 +296,14 @@ SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
   file-field:
     Name: file-uploader
     Title: Set file
+  file-field-without-folder:
+    Name: file-uploader-without-folder
+    Title: Set file
+    FolderID: 0
+  file-field-with-folder:
+    Name: file-uploader-with-folder
+    Title: Set file
+    FolderID: =>SilverStripe\Assets\Folder.user-form-folder-child
 
 SilverStripe\UserForms\Model\UserDefinedForm:
   basic-form-page:

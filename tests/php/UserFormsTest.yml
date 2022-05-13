@@ -275,6 +275,10 @@ SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
   file-field-2:
     Name: FileUploadField
     Title: File Upload Field
+  file-field-3:
+    Name: FileUploadField
+    Title: File Upload Field Without Folder
+    Folder: ''
 
 SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
   group1end:
@@ -494,6 +498,11 @@ SilverStripe\UserForms\Model\UserDefinedForm:
     EmailRecipients:
       - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.upload-recipient
       - =>SilverStripe\UserForms\Model\Recipient\EmailRecipient.upload-no-data
+
+  upload-form-without-folder:
+    Title: 'Form with upload field without folder'
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableFileField.file-field-3
 
 SilverStripe\UserForms\Model\EditableCustomRule:
   rule1:

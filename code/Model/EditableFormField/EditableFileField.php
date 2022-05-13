@@ -194,7 +194,18 @@ class EditableFileField extends EditableFormField
         return $result;
     }
 
+    public function getFolderExists(): bool
+    {
+        return $this->Folder()->ID !== 0;
+    }
 
+    public function createProtectedFolder(): void
+    {
+        $folderName = sprintf('page-%d/upload-field-%d', $this->ParentID, $this->ID);
+        $folder = UserDefinedFormAdmin::getFormSubmissionFolder($folderName);
+        $this->FolderID = $folder->ID;
+        $this->write();
+    }
 
     public function getFormField()
     {

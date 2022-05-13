@@ -24,6 +24,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 use function filesize;
@@ -466,5 +467,48 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('nodata@example.com', 'no-reply@example.com', 'Email Subject');
         $nodata = $this->findEmail('nodata@example.com', 'no-reply@example.com', 'Email Subject');
         $this->assertEmpty($nodata['AttachedFiles'], 'Recipients with HideFormData do not receive attachment');
+    }
+
+    public function testMissingFolderCreated()
+    {
+        Config::modify()->set(Upload_Validator::class, 'use_is_uploaded_file', false);
+        $userForm = $this->setupFormFrontend('upload-form-without-folder');
+        $controller = UserDefinedFormController::create($userForm);
+        $field = $this->objFromFixture(EditableFileField::class, 'file-field-3');
+
+        $path = realpath(__DIR__ . '/fixtures/testfile.jpg');
+        $data = [
+            $field->Name => [
+                'name' => 'testfile.jpg',
+                'type' => 'image/jpeg',
+                'tmp_name' => $path,
+                'error' => 0,
+                'size' => filesize($path ?? ''),
+            ]
+        ];
+        $_FILES[$field->Name] = $data[$field->Name];
+
+        $controller->getRequest()->setSession(new Session([]));
+
+        $folderExistBefore = $field->getFolderExists();
+        $stageBefore = Versioned::get_stage();
+
+        $controller->process($data, $controller->Form());
+
+        $field = EditableFileField::get_by_id($field->ID);
+        $filter = [
+            'ParentID' => $field->Folder()->ID,
+            'Name' => 'testfile.jpg',
+        ];
+        $fileDraftCount = Versioned::get_by_stage(File::class, Versioned::DRAFT)->filter($filter)->count();
+        $fileLiveCount = Versioned::get_by_stage(File::class, Versioned::LIVE)->filter($filter)->count();
+
+        $folderExistAfter = $field->getFolderExists();
+
+        $this->assertFalse($folderExistBefore);
+        $this->assertTrue($folderExistAfter);
+        $this->assertEquals($stageBefore, Versioned::get_stage());
+        $this->assertEquals(1, $fileDraftCount);
+        $this->assertEquals(0, $fileLiveCount);
     }
 }
