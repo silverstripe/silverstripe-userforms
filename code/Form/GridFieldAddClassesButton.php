@@ -7,6 +7,8 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridField_HTMLProvider;
+use SilverStripe\UserForms\Model\EditableFormField;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 
 /**
  * A button which allows objects to be created with a specified classname(s)
@@ -248,7 +250,40 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
             $list->add($item);
         }
 
+        $this->writeModifiedFieldData($grid);
+
         // Should trigger a simple reload
         return null;
+    }
+
+    /**
+     * Write any existing form field data that was modified before clicking add button
+     */
+    private function writeModifiedFieldData(GridField $gridField): void
+    {
+        $vars = $gridField->getRequest()->requestVars();
+        $data = $vars['Fields'][GridFieldEditableColumns::POST_KEY] ?? [];
+        $ids = array_keys($data);
+        if (empty($ids)) {
+            return;
+        }
+        $list = EditableFormField::get()->filter(['ID' => $ids]);
+        foreach ($ids as $id) {
+            $row = $data[$id];
+            $field = $list->byID($id);
+            if (!$field) {
+                continue;
+            }
+            $update = false;
+            foreach ($row as $name => $value) {
+                if ($field->{$name} !== $value) {
+                    $field->{$name} = $value;
+                    $update = true;
+                }
+            }
+            if ($update) {
+                $field->write();
+            }
+        }
     }
 }
