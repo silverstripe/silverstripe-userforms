@@ -36,6 +36,20 @@ class FixtureContext extends BaseFixtureContext
         $this->createCustomRule('cr1', $fs02, $tf01);
         $this->createEditableFormField(EditableFormStep::class, 'EditableFormStep_03', $udf);
         $this->createEditableFormField(EditableTextField::class, 'EditableTextField_03', $udf);
+        $this->createEditableFormField(EditableFormStep::class, 'EditableFormStep_04', $udf);
+        $tf04 = $this->createEditableFormField(EditableTextField::class, 'EditableTextField_04', $udf);
+        $fs05 = $this->createEditableFormField(EditableFormStep::class, 'EditableFormStep_05', $udf);
+        $this->createEditableFormField(EditableTextField::class, 'EditableTextField_05', $udf);
+        $fs05->ShowOnLoad = 0;
+        $fs05->write();
+        $this->createCustomRule('cr2', $fs05, $tf04);
+        $fs06 = $this->createEditableFormField(EditableFormStep::class, 'EditableFormStep_06', $udf);
+        $this->createEditableFormField(EditableTextField::class, 'EditableTextField_06', $udf);
+        $fs06->ShowOnLoad = 0;
+        $fs06->write();
+        $this->createCustomRule('cr3', $fs06, $tf04);
+        $this->createEditableFormField(EditableFormStep::class, 'EditableFormStep_07', $udf);
+        $this->createEditableFormField(EditableTextField::class, 'EditableTextField_07', $udf);
         $udf->publishRecursive();
     }
 
