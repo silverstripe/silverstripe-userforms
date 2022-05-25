@@ -28,6 +28,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
@@ -52,6 +53,8 @@ class UserDefinedFormController extends PageController
 
     /** @var string The name of the folder where form submissions will be placed by default */
     private static $form_submissions_folder = 'Form-submissions';
+
+    private static string $file_upload_stage = Versioned::DRAFT;
 
     protected function init()
     {
@@ -262,25 +265,39 @@ JS
             if (!empty($data[$field->Name])) {
                 if (in_array(EditableFileField::class, $field->getClassAncestry() ?? [])) {
                     if (!empty($_FILES[$field->Name]['name'])) {
-                        $foldername = $field->getFormField()->getFolderName();
+                        if (!$field->getFolderExists()) {
+                            $field->createProtectedFolder();
+                        }
+                        
+                        $file = Versioned::withVersionedMode(function () use ($field, $form) {
+                            $stage = Injector::inst()->get(self::class)->config()->get('file_upload_stage');
+                            Versioned::set_stage($stage);
 
-                        // create the file from post data
-                        $upload = Upload::create();
-                        try {
-                            $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
-                        } catch (ValidationException $e) {
-                            $validationResult = $e->getResult();
-                            foreach ($validationResult->getMessages() as $message) {
-                                $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                            $foldername = $field->getFormField()->getFolderName();
+                            // create the file from post data
+                            $upload = Upload::create();
+                            try {
+                                $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
+                            } catch (ValidationException $e) {
+                                $validationResult = $e->getResult();
+                                foreach ($validationResult->getMessages() as $message) {
+                                    $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                                }
+                                Controller::curr()->redirectBack();
+                                return null;
                             }
-                            Controller::curr()->redirectBack();
+                            /** @var AssetContainer|File $file */
+                            $file = $upload->getFile();
+                            $file->ShowInSearch = 0;
+                            $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
+                            $file->write();
+
+                            return $file;
+                        });
+
+                        if (is_null($file)) {
                             return;
                         }
-                        /** @var AssetContainer|File $file */
-                        $file = $upload->getFile();
-                        $file->ShowInSearch = 0;
-                        $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
-                        $file->write();
 
                         // generate image thumbnail to show in asset-admin
                         // you can run userforms without asset-admin, so need to ensure asset-admin is installed

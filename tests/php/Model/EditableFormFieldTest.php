@@ -169,6 +169,51 @@ class EditableFormFieldTest extends FunctionalTest
     }
 
     /**
+     * Test that if folder is not set or folder was removed,
+     * then getFormField() saves file in protected folder
+     */
+    public function testCreateProtectedFolder()
+    {
+        $fileField1 = $this->objFromFixture(EditableFileField::class, 'file-field-without-folder');
+        $fileField2 = $this->objFromFixture(EditableFileField::class, 'file-field-with-folder');
+
+        $fileField1->createProtectedFolder();
+
+        $formField1 = $fileField1->getFormField();
+        $formField2 = $fileField2->getFormField();
+
+        $canViewParent1 = $fileField1->Folder()->Parent()->Parent()->CanViewType;
+        $canViewParent2 = $fileField2->Folder()->Parent()->CanViewType;
+
+        $this->assertEquals('OnlyTheseUsers', $canViewParent1);
+        $this->assertEquals('Inherit', $canViewParent2);
+
+        $this->assertTrue(
+            (bool) preg_match(
+                sprintf(
+                    '/^Form-submissions\/page-%d\/upload-field-%d/',
+                    $fileField1->ParentID,
+                    $fileField1->ID
+                ),
+                $formField1->folderName,
+            )
+        );
+        $this->assertEquals('folder1/folder1-1/', $formField2->folderName);
+    }
+
+    /**
+     * Verify that folder is related to a field exist
+     */
+    public function testGetFolderExists()
+    {
+        $fileField1 = $this->objFromFixture(EditableFileField::class, 'file-field-without-folder');
+        $fileField2 = $this->objFromFixture(EditableFileField::class, 'file-field-with-folder');
+        
+        $this->assertFalse($fileField1->getFolderExists());
+        $this->assertTrue($fileField2->getFolderExists());
+    }
+
+    /**
      * Verify that unique names are automatically generated for each formfield
      */
     public function testUniqueName()
