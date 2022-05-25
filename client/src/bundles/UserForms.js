@@ -627,9 +627,9 @@ jQuery(document).ready(($) => {
     // hidden by custom display rules. If it is then jump to the next step.
     if (targetStep.conditionallyHidden()) {
       if (forward) {
-        this.jumpToStep(stepNumber + 1);
+        this.jumpToStep(stepNumber + 1, direction);
       } else {
-        this.jumpToStep(stepNumber - 1);
+        this.jumpToStep(stepNumber - 1, direction);
       }
 
       return;
