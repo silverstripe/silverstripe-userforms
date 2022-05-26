@@ -12,7 +12,26 @@ Feature: Next form step for userforms
       And the ".progress-title" element should contain "EditableFormStep_01"
     When I click on the ".step-button-next" element
     Then the ".progress-title" element should contain "EditableFormStep_03"
+      And I click on the ".step-button-next" element
+    Then the ".progress-title" element should contain "EditableFormStep_04"
+      And I click on the ".step-button-next" element
+    Then the ".progress-title" element should contain "EditableFormStep_07"
+      And I click on the ".step-button-prev" element
+    Then the ".progress-title" element should contain "EditableFormStep_04"
+      And I fill in "abc" for "EditableTextField_04"
+      And I click on the ".step-button-next" element
+    Then the ".progress-title" element should contain "EditableFormStep_05"
+      And I click on the ".step-button-next" element
+    Then the ".progress-title" element should contain "EditableFormStep_06"
+      And I click on the ".step-button-prev" element
+    Then the ".progress-title" element should contain "EditableFormStep_05"
+      And I click on the ".step-button-prev" element
+    Then the ".progress-title" element should contain "EditableFormStep_04"
+      And I fill in "" for "EditableTextField_04"
+      And I click on the ".step-button-prev" element
+    Then the ".progress-title" element should contain "EditableFormStep_03"
     When I click on the ".step-button-prev" element
+    Then the ".progress-title" element should contain "EditableFormStep_01"
       And I fill in "abc" for "EditableTextField_01"
       And I click on the ".step-button-next" element
     Then the ".progress-title" element should contain "EditableFormStep_02"
