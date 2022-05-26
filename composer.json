@@ -34,7 +34,7 @@
         "silverstripe/framework": "^4.10",
         "silverstripe/cms": "^4.6",
         "symbiote/silverstripe-gridfieldextensions": "^3.1",
-        "silverstripe/segment-field": "^2.0",
+        "silverstripe/segment-field": "^2.2",
         "silverstripe/versioned": "^1.0",
         "silverstripe/mimevalidator": "^2.0"
     },
