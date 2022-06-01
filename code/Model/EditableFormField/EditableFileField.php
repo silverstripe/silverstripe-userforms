@@ -201,7 +201,7 @@ class EditableFileField extends EditableFormField
         $field = FileField::create($this->Name, $this->Title ?: false)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__)
-            ->setValidator(Injector::inst()->get(Upload_Validator::class . '.userforms'));
+            ->setValidator(Injector::inst()->get(Upload_Validator::class . '.userforms', false));
 
         $field->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__);
