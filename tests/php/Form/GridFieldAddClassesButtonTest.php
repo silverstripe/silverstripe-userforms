@@ -34,7 +34,11 @@ class GridFieldAddClassesButtonTest extends SapphireTest
         $controller->setCurrentPageID($udf->ID);
         $controller->pushCurrent();
         $list = new DataList(EditableFormField::class);
-        $field = EditableTextField::create(['ParentID' => $udfID, 'Title' => 'MyTitle']);
+        $field = EditableTextField::create([
+            'ParentClass' => UserDefinedForm::class,
+            'ParentID' => $udfID,
+            'Title' => 'MyTitle',
+        ]);
         $fieldID = $field->write();
         $list->add($field);
         $gridField = new GridField('MyName', 'MyTitle', $list);
