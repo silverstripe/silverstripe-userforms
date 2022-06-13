@@ -193,7 +193,6 @@ trait UserForm
             // define tabs
             $fields->findOrMakeTab('Root.FormOptions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIGURATION', 'Configuration'));
             $fields->findOrMakeTab('Root.Recipients', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.RECIPIENTS', 'Recipients'));
-            $fields->findOrMakeTab('Root.Submissions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));
 
 
             // text to show on complete
@@ -237,87 +236,8 @@ trait UserForm
             $fields->addFieldToTab('Root.Recipients', $emailRecipients);
             $fields->addFieldsToTab('Root.FormOptions', $this->getFormOptions());
 
-
-            // view the submissions
-            // make sure a numeric not a empty string is checked against this int column for SQL server
-            $parentID = (!empty($this->ID)) ? (int) $this->ID : 0;
-
-            // get a list of all field names and values used for print and export CSV views of the GridField below.
-            $columnSQL = <<<SQL
-SELECT "SubmittedFormField"."Name" as "Name", COALESCE("EditableFormField"."Title", "SubmittedFormField"."Title") as "Title", COALESCE("EditableFormField"."Sort", 999) AS "Sort"
-FROM "SubmittedFormField"
-LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
-LEFT JOIN "EditableFormField" ON "EditableFormField"."Name" = "SubmittedFormField"."Name" AND "EditableFormField"."ParentID" = '$parentID'
-WHERE "SubmittedForm"."ParentID" = '$parentID'
-ORDER BY "Sort", "Title"
-SQL;
-            // Sanitise periods in title
-            $columns = array();
-
-            foreach (DB::query($columnSQL)->map() as $name => $title) {
-                $columns[$name] = trim(strtr($title ?? '', '.', ' '));
-            }
-
-            $config = GridFieldConfig::create();
-            $config->addComponent(new GridFieldToolbarHeader());
-            $config->addComponent($sort = new GridFieldSortableHeader());
-            $config->addComponent($filter = new UserFormsGridFieldFilterHeader());
-            $config->addComponent(new GridFieldDataColumns());
-            $config->addComponent(new GridFieldEditButton());
-            $config->addComponent(new GridFieldDeleteAction());
-            $config->addComponent(new GridFieldPageCount('toolbar-header-right'));
-            $config->addComponent($pagination = new GridFieldPaginator(25));
-            $config->addComponent(new GridFieldDetailForm(null, true, false));
-            $config->addComponent(new GridFieldButtonRow('after'));
-            $config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
-            $config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
-
-            // show user form items in the summary tab
-            $summaryarray = array(
-                'ID' => 'ID',
-                'Created' => 'Created',
-                'LastEdited' => 'Last Edited'
-            );
-
-            foreach (EditableFormField::get()->filter(array('ParentID' => $parentID)) as $eff) {
-                if ($eff->ShowInSummary) {
-                    $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
-                }
-            }
-
-            $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields($summaryarray);
-
-            /**
-             * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
-             */
-            if (class_exists(BulkManager::class)) {
-                $config->addComponent(new BulkManager);
-            }
-
-            $sort->setThrowExceptionOnBadDataType(false);
-            $filter->setThrowExceptionOnBadDataType(false);
-            $pagination->setThrowExceptionOnBadDataType(false);
-
-            // attach every column to the print view form
-            $columns['Created'] = 'Created';
-            $columns['SubmittedBy.Email'] = 'Submitter';
-            $filter->setColumns($columns);
-
-            // print configuration
-
-            $print->setPrintHasHeader(true);
-            $print->setPrintColumns($columns);
-
-            // export configuration
-            $export->setCsvHasHeader(true);
-            $export->setExportColumns($columns);
-
-            $submissions = GridField::create(
-                'Submissions',
-                '',
-                $this->Submissions()->sort('Created', 'DESC'),
-                $config
-            );
+            $submissions = $this->getSubmissionsGridField();
+            $fields->findOrMakeTab('Root.Submissions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));
             $fields->addFieldToTab('Root.Submissions', $submissions);
             $fields->addFieldToTab(
                 'Root.FormOptions',
@@ -342,6 +262,88 @@ SQL;
         }
 
         return $fields;
+    }
+
+    public function getSubmissionsGridField()
+    {
+        // view the submissions
+        // make sure a numeric not a empty string is checked against this int column for SQL server
+        $parentID = (!empty($this->ID)) ? (int) $this->ID : 0;
+
+        // get a list of all field names and values used for print and export CSV views of the GridField below.
+        $columnSQL = <<<SQL
+SELECT DISTINCT
+  "SubmittedFormField"."Name" as "Name",
+  REPLACE(COALESCE("EditableFormField"."Title", "SubmittedFormField"."Title"), '.', ' ') as "Title",
+  COALESCE("EditableFormField"."Sort", 999) AS "Sort"
+FROM "SubmittedFormField"
+  LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
+  LEFT JOIN "EditableFormField" ON "EditableFormField"."Name" = "SubmittedFormField"."Name"
+WHERE "SubmittedForm"."ParentID" = '$parentID'
+  AND "EditableFormField"."ParentID" = '$parentID'
+ORDER BY "Sort", "Title"
+SQL;
+
+        $columns = DB::query($columnSQL)->map();
+
+        $config = GridFieldConfig::create();
+        $config->addComponent(new GridFieldToolbarHeader());
+        $config->addComponent($sort = new GridFieldSortableHeader());
+        $config->addComponent($filter = new UserFormsGridFieldFilterHeader());
+        $config->addComponent(new GridFieldDataColumns());
+        $config->addComponent(new GridFieldEditButton());
+        $config->addComponent(new GridFieldDeleteAction());
+        $config->addComponent(new GridFieldPageCount('toolbar-header-right'));
+        $config->addComponent($pagination = new GridFieldPaginator(25));
+        $config->addComponent(new GridFieldDetailForm(null, true, false));
+        $config->addComponent(new GridFieldButtonRow('after'));
+        $config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
+        $config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
+
+        // show user form items in the summary tab
+        $summaryarray = array(
+            'ID' => 'ID',
+            'Created' => 'Created',
+            'LastEdited' => 'Last Edited'
+        );
+
+        foreach (EditableFormField::get()->filter(['ParentID' => $parentID, 'ShowInSummary' => 1]) as $eff) {
+            $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
+        }
+
+        $config->getComponentByType(GridFieldDataColumns::class)->setDisplayFields($summaryarray);
+
+        /**
+         * Support for {@link https://github.com/colymba/GridFieldBulkEditingTools}
+         */
+        if (class_exists(BulkManager::class)) {
+            $config->addComponent(new BulkManager);
+        }
+
+        $sort->setThrowExceptionOnBadDataType(false);
+        $filter->setThrowExceptionOnBadDataType(false);
+        $pagination->setThrowExceptionOnBadDataType(false);
+
+        // attach every column to the print view form
+        $columns['Created'] = 'Created';
+        $columns['SubmittedBy.Email'] = 'Submitter';
+        $filter->setColumns($columns);
+
+        // print configuration
+        $print->setPrintHasHeader(true);
+        $print->setPrintColumns($columns);
+
+        // export configuration
+        $export->setCsvHasHeader(true);
+        $export->setExportColumns($columns);
+
+        $submissions = GridField::create(
+            'Submissions',
+            '',
+            $this->Submissions()->sort('Created', 'DESC'),
+            $config
+        );
+        return $submissions;
     }
 
     /**

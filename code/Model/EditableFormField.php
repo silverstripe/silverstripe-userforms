@@ -145,6 +145,10 @@ class EditableFormField extends DataObject
         'ShowOnLoad' => true,
     ];
 
+    private static $indexes = [
+        'Name' => 'Name',
+    ];
+
 
     /**
      * @config
