@@ -42,6 +42,9 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.0"
     },
+    "conflict": {
+        "egulias/email-validator": "^2"
+    },
     "autoload": {
         "psr-4": {
             "SilverStripe\\UserForms\\": "code/",
