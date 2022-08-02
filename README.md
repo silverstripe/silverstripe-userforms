@@ -1,14 +1,10 @@
 # UserForms
 
+[![CI](https://github.com/silverstripe/silverstripe-userforms/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-userforms/actions/workflows/ci.yml)
+[![Silverstripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
+
 UserForms enables CMS users to create dynamic forms via a drag and drop interface
 and without getting involved in any PHP code.
-
-[![CI](https://github.com/silverstripe/silverstripe-userforms/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-userforms/actions/workflows/ci.yml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-userforms/?branch=master)
-[![codecov](https://codecov.io/gh/silverstripe/silverstripe-userforms/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-userforms)
-[![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
-[![Version](http://img.shields.io/packagist/v/silverstripe/userforms.svg?style=flat)](https://packagist.org/packages/silverstripe/silverstripe-userforms)
-[![License](http://img.shields.io/packagist/l/silverstripe/userforms.svg?style=flat)](LICENSE.md)
 
 ## Requirements
 
