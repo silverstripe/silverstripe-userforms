@@ -39,16 +39,26 @@ class SubmittedFileField extends SubmittedFormField
     public function getFormattedValue()
     {
         $name = $this->getFileName();
-        $link = $this->getLink();
+        $link = $this->getLink(false);
         $title = _t(__CLASS__ . '.DOWNLOADFILE', 'Download File');
+        $message = _t(__CLASS__ . '.INSUFFICIENTRIGHTS', 'You don\'t have the right permissions to download this file');
+        $file = $this->getUploadedFileFromDraft();
 
         if ($link) {
-            return DBField::create_field('HTMLText', sprintf(
-                '%s - <a href="%s" target="_blank">%s</a>',
-                $name,
-                $link,
-                $title
-            ));
+            if ($file->canView()) {
+                return DBField::create_field('HTMLText', sprintf(
+                    '%s - <a href="%s" target="_blank">%s</a>',
+                    htmlspecialchars($name),
+                    htmlspecialchars($link),
+                    htmlspecialchars($title)
+                ));
+            } else {
+                return DBField::create_field('HTMLText', sprintf(
+                    '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
+                    htmlspecialchars($name),
+                    htmlspecialchars($message)
+                ));
+            }
         }
 
         return false;
@@ -69,11 +79,11 @@ class SubmittedFileField extends SubmittedFormField
      *
      * @return string
      */
-    public function getLink()
+    public function getLink($grant = true)
     {
         if ($file = $this->getUploadedFileFromDraft()) {
             if ($file->exists()) {
-                return $file->getAbsoluteURL();
+                return $file->getURL($grant);
             }
         }
     }
