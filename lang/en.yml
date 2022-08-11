@@ -246,6 +246,7 @@ en:
     SINGULARNAME: 'Email Recipient Condition'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
+    INSUFFICIENTRIGHTS: 'You don''t have the right permissions to download this file'
     PLURALNAME: 'Submitted File Fields'
     PLURALS:
       one: 'A Submitted File Field'
