@@ -1,13 +1,14 @@
-name: Build Docs
+name: Deploy Userhelp Docs
 on:
   push:
     branches:
-      - 'master'
+      - '6'
+      - '5'
     paths:
       - 'docs/en/userguide/**'
 jobs:
-  build:
-    name: build-docs
+  deploy:
+    name: deploy-userhelp-docs
     runs-on: ubuntu-latest
     steps:
       - name: Run build hook
