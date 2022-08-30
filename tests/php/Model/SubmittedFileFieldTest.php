@@ -4,6 +4,8 @@ namespace SilverStripe\UserForms\Tests\Model;
 
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
+use SilverStripe\Assets\Storage\AssetStore;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
@@ -11,11 +13,27 @@ use SilverStripe\Versioned\Versioned;
 
 class SubmittedFileFieldTest extends SapphireTest
 {
+    protected $file;
+    protected $submittedForm;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         TestAssetStore::activate('SubmittedFileFieldTest');
+
+        $this->file = File::create();
+        $this->file->setFromString('ABC', 'test-SubmittedFileFieldTest.txt');
+        $this->file->write();
+
+        $this->submittedForm = SubmittedForm::create();
+        $this->submittedForm->write();
+
+        $this->submittedFile = SubmittedFileField::create();
+        $this->submittedFile->UploadedFileID = $this->file->ID;
+        $this->submittedFile->Name = 'File';
+        $this->submittedFile->ParentID = $this->submittedForm->ID;
+        $this->submittedFile->write();
     }
 
     protected function tearDown(): void
@@ -27,23 +45,10 @@ class SubmittedFileFieldTest extends SapphireTest
 
     public function testDeletingSubmissionRemovesFile()
     {
-        $file = File::create();
-        $file->setFromString('ABC', 'test-SubmittedFileFieldTest.txt');
-        $file->write();
+        $this->assertStringContainsString('test-SubmittedFileFieldTest', $this->submittedFile->getFileName(), 'Submitted file is linked');
 
-        $submittedForm = SubmittedForm::create();
-        $submittedForm->write();
-
-        $submittedFile = SubmittedFileField::create();
-        $submittedFile->UploadedFileID = $file->ID;
-        $submittedFile->Name = 'File';
-        $submittedFile->ParentID = $submittedForm->ID;
-        $submittedFile->write();
-
-        $this->assertStringContainsString('test-SubmittedFileFieldTest', $submittedFile->getFileName(), 'Submitted file is linked');
-
-        $submittedForm->delete();
-        $fileId = $file->ID;
+        $this->submittedForm->delete();
+        $fileId = $this->file->ID;
 
         $draftVersion = Versioned::withVersionedMode(function () use ($fileId) {
             Versioned::set_stage(Versioned::DRAFT);
@@ -60,5 +65,39 @@ class SubmittedFileFieldTest extends SapphireTest
         });
 
         $this->assertNull($liveVersion, 'Live file has been deleted');
+    }
+
+    public function testGetFormattedValue()
+    {
+        $fileName = $this->submittedFile->getFileName();
+        $message = "You don&#039;t have the right permissions to download this file";
+
+        $this->file->CanViewType = 'OnlyTheseUsers';
+        $this->file->write();
+        
+        $this->loginWithPermission('ADMIN');
+        $this->assertEquals(
+            sprintf(
+                '%s - <a href="/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt" target="_blank">Download File</a>',
+                $fileName
+            ),
+            $this->submittedFile->getFormattedValue()->value
+        );
+            
+        $this->loginWithPermission('CMS_ACCESS_CMSMain');
+        $this->assertEquals(
+            sprintf(
+                '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
+                $fileName,
+                $message
+            ),
+            $this->submittedFile->getFormattedValue()->value
+        );
+
+        $store = Injector::inst()->get(AssetStore::class);
+        $this->assertFalse(
+            $store->canView($fileName, $this->file->getHash()),
+            'Users without canView rights on the file should not have been session granted access to it'
+        );
     }
 }
