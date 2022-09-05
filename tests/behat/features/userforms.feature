@@ -3,13 +3,13 @@ Feature: Userforms
   I want to user userforms
 
   Background:
-    Given the "group" "EDITOR group" has permissions "CMS_ACCESS_LeftAndMain"
+    Given the "group" "EDITOR" has permissions "Access to 'Pages' section" and "Access to 'Files' section" and "FILE_EDIT_ALL"
     # Explicitly create an admin group with the default administrators code for UserDefinedFormAdmin
     And the "group" "ADMIN group" has permissions "Full administrative rights"
     And a "group" "ADMIN group" has the "Code" "administrators"
 
   Scenario: Operate userforms
-    Given I am logged in with "ADMIN" permissions
+    Given I am logged in as a member of "EDITOR" group
     When I go to "/admin/pages"
     And I press the "Add new" button
     And I select the "User Defined Form" radio button
@@ -88,8 +88,7 @@ Feature: Userforms
     Then the rendered HTML should contain "<p>Custom body</p>"
 
     # Logout
-    Given I go to "/Security/login"
-    And I press the "Log in as someone else" button
+    Given I am not logged in
 
     # View frontend as anonymous user
     When I go to "/my-userform"
