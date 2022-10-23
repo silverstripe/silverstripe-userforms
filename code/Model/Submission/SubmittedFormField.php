@@ -34,6 +34,10 @@ class SubmittedFormField extends DataObject
 
     private static $table_name = 'SubmittedFormField';
 
+    private static $indexes = [
+        'Name' => 'Name',
+    ];
+
     /**
      * @param Member $member
      * @param array $context
