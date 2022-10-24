@@ -101,6 +101,12 @@ class SubmittedForm extends DataObject
                     ->addExtraClass('form-field--no-divider')
             );
 
+            $fields->insertAfter('Submitter', ReadonlyField::create('Created', _t(__CLASS__ . '.CREATED', 'Created'), $this->Created)
+                                       ->addExtraClass('form-field--no-divider'));
+
+            $fields->insertAfter('Created', ReadonlyField::create('LastEdited', _t(__CLASS__ . '.LASTEDITED', 'Last changed'), $this->LastEdited)
+                                       ->addExtraClass('form-field--no-divider'));
+
             $values = GridField::create(
                 'Values',
                 SubmittedFormField::class,

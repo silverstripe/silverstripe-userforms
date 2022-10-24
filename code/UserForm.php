@@ -303,11 +303,7 @@ SQL;
         $config->addComponent($print = new GridFieldPrintButton('buttons-after-left'));
 
         // show user form items in the summary tab
-        $summaryarray = array(
-            'ID' => 'ID',
-            'Created' => 'Created',
-            'LastEdited' => 'Last Edited'
-        );
+        $summaryarray = SubmittedForm::singleton()->summaryFields();
 
         foreach (EditableFormField::get()->filter(['ParentID' => $parentID, 'ShowInSummary' => 1]) as $eff) {
             $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
