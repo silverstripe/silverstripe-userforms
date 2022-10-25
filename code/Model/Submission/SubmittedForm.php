@@ -39,8 +39,8 @@ class SubmittedForm extends DataObject
     ];
 
     private static $summary_fields = [
-        'ID',
-        'Created'
+        'ID' => 'ID',
+        'Created.Nice' => 'Created'
     ];
 
     private static $table_name = 'SubmittedForm';
