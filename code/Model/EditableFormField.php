@@ -29,6 +29,7 @@ use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
+use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
@@ -444,6 +445,12 @@ class EditableFormField extends DataObject
                 ->filter('ParentID', $parentID)
                 ->max('Sort') + 1;
         }
+
+        // Include _new_ Email Fields by default in GridField summary
+        if ($this->isChanged('ClassName') && $this->ClassName ===  EditableEmailField::class) {
+            $this->ShowInSummary = true;
+        };
+
     }
 
     /**

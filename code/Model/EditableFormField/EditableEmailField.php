@@ -23,10 +23,6 @@ class EditableEmailField extends EditableFormField
 
     private static $table_name = 'EditableEmailField';
 
-    private static $defaults = [
-        'ShowInSummary' => true
-    ];
-
     public function getSetsOwnError()
     {
         return true;
