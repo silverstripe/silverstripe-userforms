@@ -446,11 +446,10 @@ class EditableFormField extends DataObject
                 ->max('Sort') + 1;
         }
 
-        // Include _new_ Email Fields by default in GridField summary
+        // Include _new_ Email Fields by default in GridField summary (not possible via $defaults since the initial record is always EditableFormField)
         if ($this->isChanged('ClassName') && $this->ClassName ===  EditableEmailField::class) {
             $this->ShowInSummary = true;
-        };
-
+        }
     }
 
     /**
