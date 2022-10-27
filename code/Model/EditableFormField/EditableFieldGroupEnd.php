@@ -5,7 +5,6 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LabelField;
-use SilverStripe\Security\Group;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
@@ -44,7 +43,7 @@ class EditableFieldGroupEnd extends EditableFormField
             __CLASS__.'.FIELD_GROUP_END',
             '{group} end',
             [
-                'group' => ($group && $group->exists()) ? $group->CMSTitle : Group::class
+                'group' => ($group && $group->exists()) ? $group->CMSTitle : 'Group'
             ]
         );
     }
