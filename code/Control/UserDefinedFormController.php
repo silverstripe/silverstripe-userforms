@@ -56,6 +56,16 @@ class UserDefinedFormController extends PageController
 
     private static string $file_upload_stage = Versioned::DRAFT;
 
+    /**
+     * Size that an uploaded file must not excede for it to be attached to an email
+     * Follows PHP "shorthand bytes" definition rules.
+     * @see self::parseByteSizeString()
+     *
+     * @var int
+     * @config
+     */
+    private static $maximum_email_attachment_size = '1M';
+
     protected function init()
     {
         parent::init();
@@ -216,6 +226,42 @@ JS
     }
 
     /**
+     * Returns the maximum size uploaded files can be before they're excluded from CMS configured recipient emails
+     *
+     * @return int size in megabytes
+     */
+    public function getMaximumAllowedEmailAttachmentSize()
+    {
+        return $this->parseByteSizeString($this->config()->get('maximum_email_attachment_size'));
+    }
+
+    /**
+     * Convert file sizes with a single character for unit size to true byte count.
+     * Just as with php.ini and e.g. 128M -> 1024 * 1024 * 128 bytes.
+     * @see https://www.php.net/manual/en/faq.using.php#faq.using.shorthandbytes
+     *
+     * @param string $byteSize
+     * @return int bytes
+     */
+    protected function parseByteSizeString($byteSize)
+    {
+        // kilo, mega, giga
+        $validUnits = 'kmg';
+        $valid = preg_match("/^(?<number>\d+)((?<unit>[$validUnits])b?)?$/i", $byteSize, $matches);
+        if (!$valid) {
+            throw new \InvalidArgumentException(
+                "Expected a positive integer followed optionally by K, M, or G. Found '$byteSize' instead"
+            );
+        }
+        $power = 0;
+        // prepend b for bytes to $validUnits to give correct mapping of ordinal position to exponent
+        if (isset($matches['unit'])) {
+            $power = stripos("b$validUnits", $matches['unit']);
+        }
+        return intval($matches['number']) * pow(1024, $power);
+    }
+
+    /**
      * Process the form that is submitted through the site
      *
      * {@see UserForm::validate()} for validation step prior to processing
@@ -268,7 +314,7 @@ JS
                         if (!$field->getFolderExists()) {
                             $field->createProtectedFolder();
                         }
-                        
+
                         $file = Versioned::withVersionedMode(function () use ($field, $form) {
                             $stage = Injector::inst()->get(self::class)->config()->get('file_upload_stage');
                             Versioned::set_stage($stage);
@@ -308,8 +354,8 @@ JS
                         // write file to form field
                         $submittedField->UploadedFileID = $file->ID;
 
-                        // attach a file only if lower than 1MB
-                        if ($file->getAbsoluteSize() < 1024 * 1024 * 1) {
+                        // attach a file to recipient email only if lower than configured size
+                        if ($file->getAbsoluteSize() <= $this->getMaximumAllowedEmailAttachmentSize()) {
                             $attachments[] = $file;
                         }
                     }
