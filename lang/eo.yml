@@ -302,3 +302,19 @@ eo:
     TYPESUBJECT: 'Tajpi temon'
     TYPETO: 'Tajpi al-adreson'
     UnrestrictedFileUploadWarning: 'Aliro al la "{path}" de la aktuala alŝuta dosierujo ne estas limigita. Alŝutitaj dosieroj estos publike alireblaj se la ekzakta URL estas konata.'
+    ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
+    CONFIGURATION: Agordaro
+    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentigon de kompletiga ago'
+    DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
+    DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
+    ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
+    HIDEINVISIBLEFIELDS: 'Ĉu kaŝu nevideblajn kampojn de retpoŝto?'
+    NORECIPIENTS: 'Averto: Vi ne agordis ricevontojn. Eble mankos sendoj de formularoj.'
+    ONCOMPLETELABEL: 'Vidigi je kompletigo'
+    ONCOMPLETEMESSAGE: 'Dankon. Nii ricevis vian sendaĵon.'
+    RECIPIENTS: Ricevontoj
+    SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
+    SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
+    SUBMISSIONS: Sendaĵoj
+    TEXTONCLEAR: 'Teksto sur vakiga butono:'
+    TEXTONSUBMIT: 'Teksto sur senda butono:'
