@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model;
 
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
@@ -650,12 +651,13 @@ class EditableFormField extends DataObject
     /**
      * Returns the Title for rendering in the front-end (with XML values escaped)
      *
-     * @deprecated 5.0..6.0 XML is automatically escaped in templates from SS 4 onwards. Please use $Title directly.
+     * @deprecated 4.12.0 Use $Title directly instead
      *
      * @return string
      */
     public function getEscapedTitle()
     {
+        Deprecation::notice('4.12.0', 'Use $Title directly instead');
         return Convert::raw2xml($this->Title);
     }
 
@@ -945,10 +947,11 @@ class EditableFormField extends DataObject
      * Determine effective display rules for this field.
      *
      * @return SS_List
-     * @deprecated 5.6 No longer needed because of support for conditional required field.
+     * @deprecated 5.6.0 Will be removed without equivalent functionality to replace it
      */
     public function EffectiveDisplayRules()
     {
+        Deprecation::notice('5.6.0', 'Will be removed without equivalent functionality to replace it');
         if ($this->Required) {
             return ArrayList::create();
         }
