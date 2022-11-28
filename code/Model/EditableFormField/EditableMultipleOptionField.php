@@ -116,16 +116,13 @@ class EditableMultipleOptionField extends EditableFormField
      * Duplicate a pages content. We need to make sure all the fields attached
      * to that page go with it
      *
+     * @param bool $doWrite @deprecated
+     * @param string $manyMany @deprecated
      * {@inheritDoc}
      */
     public function duplicate($doWrite = true, $manyMany = 'many_many')
     {
-        // Versioned 1.0 has a bug where [] will result in _all_ relations being duplicated
-        if ($manyMany === 'many_many' && !$this->manyMany()) {
-            $manyMany = null;
-        }
-
-        $clonedNode = parent::duplicate(true, $manyMany);
+        $clonedNode = parent::duplicate(true);
 
         foreach ($this->Options() as $field) {
             /** @var EditableOption $newField */

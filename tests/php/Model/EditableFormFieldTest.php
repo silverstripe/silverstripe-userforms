@@ -15,6 +15,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\Dev\Deprecation;
 
 /**
  * @package userforms
@@ -62,6 +63,9 @@ class EditableFormFieldTest extends FunctionalTest
 
     public function testCustomRules()
     {
+        if (Deprecation::isEnabled()) {
+            $this->markTestSkipped('Test calls deprecated code');
+        }
         $this->logInWithPermission('ADMIN');
         $form = $this->objFromFixture(UserDefinedForm::class, 'custom-rules-form');
 

@@ -332,12 +332,12 @@ class EmailRecipient extends DataObject
 
         if ($templates) {
             $fields->insertBefore(
+                'EmailBodyHtml',
                 DropdownField::create(
                     'EmailTemplate',
                     _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILTEMPLATE', 'Email template'),
                     $templates
-                )->addExtraClass('toggle-html-only'),
-                'EmailBodyHtml'
+                )->addExtraClass('toggle-html-only')
             );
         }
 
