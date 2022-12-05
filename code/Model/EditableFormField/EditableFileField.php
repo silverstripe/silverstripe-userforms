@@ -265,8 +265,8 @@ class EditableFileField extends EditableFormField
      */
     public static function get_php_max_file_size()
     {
-        $maxUpload = File::ini2bytes(ini_get('upload_max_filesize'));
-        $maxPost = File::ini2bytes(ini_get('post_max_size'));
+        $maxUpload = Convert::memstring2bytes(ini_get('upload_max_filesize'));
+        $maxPost = Convert::memstring2bytes(ini_get('post_max_size'));
         return min($maxUpload, $maxPost);
     }
 

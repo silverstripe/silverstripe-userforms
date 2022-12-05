@@ -56,7 +56,7 @@ class UserFormFieldEditorExtension extends DataExtension
     {
         $fieldEditor = $this->getFieldEditorGrid();
 
-        $fields->insertAfter(new Tab('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')), 'Main');
+        $fields->insertAfter('Main', new Tab('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')));
         $fields->addFieldToTab('Root.FormFields', $fieldEditor);
 
         return $fields;
@@ -192,7 +192,7 @@ class UserFormFieldEditorExtension extends DataExtension
         foreach ($this->owner->Fields() as $field) {
             // store any IDs of fields we publish so we don't unpublish them
             $seenIDs[] = $field->ID;
-            $field->doPublish(Versioned::DRAFT, Versioned::LIVE);
+            $field->publishRecursive();
             $field->destroy();
         }
 
@@ -291,7 +291,7 @@ class UserFormFieldEditorExtension extends DataExtension
     public function onAfterRevertToLive()
     {
         foreach ($this->owner->Fields() as $field) {
-            $field->copyVersionToStage(Versioned::LIVE, Versioned::DRAFT, false);
+            $field->copyVersionToStage(Versioned::LIVE, Versioned::DRAFT);
             $field->writeWithoutVersion();
         }
     }
