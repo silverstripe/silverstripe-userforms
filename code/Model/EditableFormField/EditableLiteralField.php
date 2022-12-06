@@ -161,7 +161,7 @@ class EditableLiteralField extends EditableFormField
         parent::updateFormField($field);
 
         if ($this->HideLabel) {
-            $this->ExtraClass .= ' nolabel';
+            $field->addExtraClass('nolabel');
         } else {
             $field->setTitle($this->Title);
         }
