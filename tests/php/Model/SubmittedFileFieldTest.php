@@ -83,7 +83,8 @@ class SubmittedFileFieldTest extends SapphireTest
             ),
             $this->submittedFile->getFormattedValue()->value
         );
-            
+
+        $this->logOut();
         $this->loginWithPermission('CMS_ACCESS_CMSMain');
         $this->assertEquals(
             sprintf(

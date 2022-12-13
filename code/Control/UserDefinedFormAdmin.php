@@ -80,7 +80,7 @@ class UserDefinedFormAdmin extends LeftAndMain
     }
 
 
-    public function index($request)
+    public function index(HTTPRequest $request): HTTPResponse
     {
         // Don't serve anythign under the main URL.
         return $this->httpError(404);
