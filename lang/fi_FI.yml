@@ -8,6 +8,9 @@ fi_FI:
     RECIPIENTS: Vastaanottajat
     SUBMISSIONS: Lähetykset
     SUBMITBUTTON: Lähetä
+    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
+    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
+    TEXTONSUBMIT: 'Lähetä-napin teksti:'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
@@ -15,8 +18,48 @@ fi_FI:
     FORMFIELDS: Lomakekentät
   SilverStripe\UserForms\Model\EditableFormField:
     REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
+    CHECKEDBYDEFAULT: 'Valittu oletuksena?'
+    CUSTOMERROR: 'Mukautettu virheviesti'
+    CUSTOMOPTIONS: Asetukset
+    CUSTOMRULES: 'Mukautetut säännöt'
+    DEFAULT: Oletusarvo
+    DEFAULTTOTODAY: 'Oletus ''Tänään''?'
+    DISPLAYIF: 'Päivitä näkyvyys kun'
+    EXTRACLASS_MULTIPLE: 'Erota jokainen CSS-luokka yhdellä välilyönnillä'
+    EXTRACLASS_SELECT: 'Valitse sallittujen tyylien listalta'
+    EXTRACLASS_TITLE: 'Ylimääräinen tyyli/ulkoasu'
+    EXTRACLASS_Title: 'Ylimääräinen CSS-luokka'
+    FIELDISREQUIRED: '{name} on pakollinen'
+    GROUP: Ryhmä
+    INITIALVISIBILITY: 'Alustava näkyvyys'
+    MERGEFIELDNAME: 'Yhdistä kenttä'
+    NAME: Nimi
+    'NO': Ei
+    PLACEHOLDER: Opastusteksti
+    PLURALNAME: 'Muokattavat lomakekentät'
+    PLURALS:
+      one: 'Muokattava lomakekenttä'
+      other: '{count} Muokattavaa lomakekenttää'
+    REQUIRED: 'Onko tämä kenttä pakollinen?'
+    RIGHTTITLE: 'Oikeanpuolinen lisäotsikko'
+    SHOWINSUMMARY: 'Näytä yhteenvedossa'
+    SINGULARNAME: 'Muokattava lomakekenttä'
+    TITLE: Otsikko
+    TYPE: Tyyppi
+    TYPE_EMPTY: 'Valitse kentän tyyppi'
+    VALIDATION: Validointi
+    'YES': Kyllä
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
+    ANYONE: 'Rajoittamaton pääsy, lisätyt tiedostot on näkyvissä kaikille'
+    INHERIT: 'Kansion näkyvyys perintyy yllä olevasta kansiosta'
+    LOGGED_IN: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä kirjautuneille käyttäjille'
+    ONLY_GROUPS: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä seuraaville käyttäjäryhmille:'
+    PLURALNAME: Tiedostonlatauskentät
+    PLURALS:
+      one: Tiedostonlatauskenttä
+      other: '{count} Tiedostonlatauskenttiä'
+    SINGULARNAME: Tiedostonlatauskenttä
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Lataa tiedosto'
   SilverStripe\UserForms\Model\UserDefinedForm:
@@ -26,3 +69,108 @@ fi_FI:
     TYPEREPLY: 'Lisää vastausosoite'
     TYPESUBJECT: 'Lisää otsikko'
     TYPETO: 'Lisää vastaanottaja'
+    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
+    SUBMISSIONS: 'Vastaanotetut lomakkeet'
+    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
+    TEXTONSUBMIT: 'Lähetä-napin teksti:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Peruuta
+    FOLDER_OPTIONS_EXISTING: 'Käytä olemassa olevaa kansiota'
+    FOLDER_OPTIONS_NEW: 'Luo uusi kansio (suositeltu)'
+    FOLDER_OPTIONS_TITLE: 'Lomakkeen kansion asetukset'
+    FORM_ACTION_CONFIRM: 'Tallenna ja jatka'
+    INVALID_REQUEST: 'Pyyntö oli virheellinen'
+    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
+    NO_PAGE: 'Kenttä ''{name}'' löytyi ennen yhtäkään sivua'
+    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
+    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Suodatin
+    FILTERSUBMISSIONS: 'Suodata vastaanotettuja lomakkeita..'
+    FROM: Lähettäjä
+    RESET: Nollaa
+    TILL: Vastaanottaja
+    WHEREVALUEIS: 'jonka arvo on...'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Monivalintakentät
+    PLURALS:
+      one: Valintakenttä
+      other: '{count} valintakentät'
+    SINGULARNAME: Valintakenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: Valintakentät
+    PLURALS:
+      one: Valintakenttä-ryhmä
+      other: '{count} Valintakenttä-ryhmät'
+    SINGULARNAME: Valintakenttä-ryhmä
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: Oletusarvo
+    EMPTY_STRING: 'Tyhjä merkkijono'
+    PLURALNAME: Maavalikot
+    PLURALS:
+      one: Maavalikko
+      other: '{count} Maavalikot'
+    SINGULARNAME: Maavalikko
+    USE_EMPTY_STRING: 'Aseta oletusarvo tyhjäksi'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: Päivämääräkentät
+    PLURALS:
+      one: Päivämääräkenttä
+      other: '{count} Päivämääräkentät'
+    SINGULARNAME: Päivämääräkenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Pudotusvalikot
+    PLURALS:
+      one: Pudotusvalikko
+      other: '{count} Pudotusvalikot'
+    SINGULARNAME: Pudotusvalikko
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: Sähköpostikenttä
+    PLURALS:
+      one: Sähköpostikenttä
+      other: '{count} Sähköpostikentät'
+    SINGULARNAME: Sähköpostikenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Muokattavat kenttäryhmät'
+    PLURALS:
+      one: 'Muokattava kenttäryhmä'
+      other: '{count} Muokattavia kenttäryhmiä'
+    SINGULARNAME: 'Muokattava kenttäryhmä'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: '{group} päättyy'
+    FIELD_GROUP_START: 'Ryhmä {group}'
+    PLURALNAME: 'Muokattava kenttäryhmä päättyy'
+    PLURALS:
+      one: 'Muokattava kenttäryhmä päättyy'
+      other: '{count} Muokattavat kenttäryhmät päättyy'
+    SINGULARNAME: 'Muokattava kenttäryhmä päättyy'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Valitse otsikon taso'
+    PLURALNAME: Otsikot
+    PLURALS:
+      one: Otsikko
+      other: '{count} Otsikot'
+    SINGULARNAME: Otsikko
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    PLURALNAME: Sivuvaihdot
+    PLURALS:
+      one: Sivunvaihto
+      other: '{count} Sivunvaihdot'
+    SINGULARNAME: Sivunvaihto
+    STEP_NEXT: Seuraava
+    STEP_PREV: Edellinen
+    STEP_TITLE: 'Sivu {page}'
+    TITLE_FIRST: 'Ensimmäinen sivu'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    CONTENT: HTML
+    HIDEFROMREPORT: 'Piilota yhteenvedoista?'
+    HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    SINGULARNAME: Jäsenlistakenttä
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    DEFAULT: 'Valittu oletuksena?'
+    OPTIONSTAB: Valinnat
+    TITLE: Otsikko
