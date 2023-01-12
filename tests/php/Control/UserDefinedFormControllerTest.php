@@ -37,8 +37,6 @@ class UserDefinedFormControllerTest extends FunctionalTest
 {
     protected static $fixture_file = '../UserFormsTest.yml';
 
-    protected static $use_draft_site = true;
-
     protected static $disable_themes = true;
 
     protected function setUp(): void
@@ -109,7 +107,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
         $nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
-        $this->assertStringContainsString('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
+        $this->assertStringContainsString('* Basic Value <b>HTML</b>', $nohtml['Content'], 'Email contains no html');
 
         // submitted html tags are not escaped because the email is being sent as text/plain
         $value = 'My body text Basic Value <b>HTML</b>';
@@ -132,8 +130,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check that multiple email addresses are supported in to and from
         $this->assertEmailSent(
-            'test1@example.com; test2@example.com',
-            'test3@example.com; test4@example.com',
+            'test1@example.com, test2@example.com',
+            'test3@example.com, test4@example.com',
             'Test Email'
         );
     }

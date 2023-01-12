@@ -120,7 +120,7 @@ class EditableMultipleOptionField extends EditableFormField
      * @param string $manyMany @deprecated
      * {@inheritDoc}
      */
-    public function duplicate($doWrite = true, $manyMany = 'many_many')
+    public function duplicate(bool $doWrite = true, ?array $manyMany = null): static
     {
         $clonedNode = parent::duplicate(true);
 
