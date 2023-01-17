@@ -11,6 +11,7 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\View\Parsers\HTMLValue;
 
 /**
  * Editable Literal Field. A literal field is just a blank slate where
@@ -83,7 +84,7 @@ class EditableLiteralField extends EditableFormField
         }
 
         // Perform sanitisation
-        $htmlValue = Injector::inst()->create('HTMLValue', $content);
+        $htmlValue = Injector::inst()->create(HTMLValue::class, $content);
         $santiser = Injector::inst()->create(HTMLEditorSanitiser::class, $this->getEditorConfig());
         $santiser->sanitise($htmlValue);
         return $htmlValue->getContent();
