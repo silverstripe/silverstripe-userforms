@@ -2,8 +2,6 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Dev\Deprecation;
-use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
 use SilverStripe\Versioned\Versioned;
@@ -68,16 +66,6 @@ class EditableOption extends DataObject
     public static function set_allow_empty_values($allow)
     {
         self::$allow_empty_values = (bool) $allow;
-    }
-
-    /**
-     * @deprecated 5.0.0 Use $Title in templates instead
-     * @return string
-     */
-    public function getEscapedTitle()
-    {
-        Deprecation::notice('5.0.0', 'Use $Title in templates instead');
-        return Convert::raw2xml($this->Title);
     }
 
     /**

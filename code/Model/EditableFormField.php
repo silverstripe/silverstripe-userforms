@@ -2,13 +2,11 @@
 
 namespace SilverStripe\UserForms\Model;
 
-use SilverStripe\Dev\Deprecation;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Convert;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
@@ -24,13 +22,11 @@ use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\SegmentField;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\HasManyList;
-use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
@@ -649,19 +645,6 @@ class EditableFormField extends DataObject
     }
 
     /**
-     * Returns the Title for rendering in the front-end (with XML values escaped)
-     *
-     * @deprecated 4.12.0 Use $Title directly instead
-     *
-     * @return string
-     */
-    public function getEscapedTitle()
-    {
-        Deprecation::notice('4.12.0', 'Use $Title directly instead');
-        return Convert::raw2xml($this->Title);
-    }
-
-    /**
      * Find the numeric indicator (1.1.2) that represents it's nesting value
      *
      * Only useful for fields attached to a current page, and that contain other fields such as pages
@@ -941,21 +924,6 @@ class EditableFormField extends DataObject
     {
         return EditableFormField\Validator::create()
             ->setRecord($this);
-    }
-
-    /**
-     * Determine effective display rules for this field.
-     *
-     * @return SS_List
-     * @deprecated 5.6.0 Will be removed without equivalent functionality to replace it
-     */
-    public function EffectiveDisplayRules()
-    {
-        Deprecation::notice('5.6.0', 'Will be removed without equivalent functionality to replace it');
-        if ($this->Required) {
-            return ArrayList::create();
-        }
-        return $this->DisplayRules();
     }
 
     /**
