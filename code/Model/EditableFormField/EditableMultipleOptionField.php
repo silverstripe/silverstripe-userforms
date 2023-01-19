@@ -103,7 +103,7 @@ class EditableMultipleOptionField extends EditableFormField
                 $optionsConfig
             );
 
-            $fields->insertAfter(Tab::create('Options', _t(__CLASS__.'.OPTIONSTAB', 'Options')), 'Main');
+            $fields->insertAfter('Main', Tab::create('Options', _t(__CLASS__.'.OPTIONSTAB', 'Options')));
             $fields->addFieldToTab('Root.Options', $optionsGrid);
         });
 
