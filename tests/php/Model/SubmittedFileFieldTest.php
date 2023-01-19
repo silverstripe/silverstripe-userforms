@@ -15,6 +15,7 @@ class SubmittedFileFieldTest extends SapphireTest
 {
     protected $file;
     protected $submittedForm;
+    protected $submittedFile;
 
     protected function setUp(): void
     {
