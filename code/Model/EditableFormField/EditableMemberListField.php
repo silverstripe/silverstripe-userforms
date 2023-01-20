@@ -36,7 +36,6 @@ class EditableMemberListField extends EditableFormField
             $fields->removeByName('Default');
             $fields->removeByName('Validation');
 
-            /** @skipUpgrade */
             $fields->addFieldToTab(
                 'Root.Main',
                 DropdownField::create(

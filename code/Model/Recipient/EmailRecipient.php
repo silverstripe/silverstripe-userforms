@@ -152,7 +152,6 @@ class EmailRecipient extends DataObject
     {
         $fields = parent::summaryFields();
         if (isset($fields['EmailAddress'])) {
-            /** @skipUpgrade */
             $fields['EmailAddress'] = _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILADDRESS', 'Email');
         }
         if (isset($fields['EmailSubject'])) {
