@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms;
 
 use Colymba\BulkManager\BulkManager;
+use SilverStripe\Core\Convert;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
@@ -269,6 +270,7 @@ trait UserForm
         // view the submissions
         // make sure a numeric not a empty string is checked against this int column for SQL server
         $parentID = (!empty($this->ID)) ? (int) $this->ID : 0;
+        $parentClass = Convert::raw2sql(get_class($this));
 
         // get a list of all field names and values used for print and export CSV views of the GridField below.
         $columnSQL = <<<SQL
@@ -279,8 +281,8 @@ SELECT DISTINCT
 FROM "SubmittedFormField"
   LEFT JOIN "SubmittedForm" ON "SubmittedForm"."ID" = "SubmittedFormField"."ParentID"
   LEFT JOIN "EditableFormField" ON "EditableFormField"."Name" = "SubmittedFormField"."Name"
-WHERE "SubmittedForm"."ParentID" = '$parentID'
-  AND "EditableFormField"."ParentID" = '$parentID'
+WHERE "SubmittedForm"."ParentID" = '$parentID' AND "SubmittedForm"."ParentClass" = '$parentClass'
+  AND "EditableFormField"."ParentID" = '$parentID' AND "EditableFormField"."ParentClass" = '$parentClass'
 ORDER BY "Sort", "Title"
 SQL;
 
@@ -307,7 +309,7 @@ SQL;
             'LastEdited' => 'Last Edited'
         );
 
-        foreach (EditableFormField::get()->filter(['ParentID' => $parentID, 'ShowInSummary' => 1]) as $eff) {
+        foreach (EditableFormField::get()->filter(['ParentID' => $parentID, 'ParentClass' => get_class($this), 'ShowInSummary' => 1]) as $eff) {
             $summaryarray[$eff->Name] = $eff->Title ?: $eff->Name;
         }
 
