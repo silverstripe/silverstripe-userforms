@@ -1,0 +1,17 @@
+SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  summary-show:
+    Name: SummaryShow
+    Title: Summary Text Field
+    ShowInSummary: true
+
+  summary-hide:
+    Name: SummaryHide
+    Title: Summary Text Field
+    ShowInSummary: false
+
+SilverStripe\UserForms\Tests\Model\SubClassFormTest\SubClassForm:
+  summary-rules-form:
+    Title: Summary Fields Form
+    Fields:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.summary-show
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.summary-hide
