@@ -50,6 +50,8 @@ Feature: Userforms
     And I fill in "Form_Fields_GridFieldEditableColumns_7_Title" with "My upload field"
     # Weird behat limitation where the only the select field on the first row is selectable
     And I drag the ".ss-gridfield-item[data-id='7'] .handle" element to the ".ss-gridfield-item[data-id='2'] .handle" element
+    # Behat sometimes messes up and doesn't correctly select the upload field if you don't give it a beat after reordering
+    And I wait for 2 seconds
     And I select "File Upload Field" from the "Form_Fields_GridFieldEditableColumns_7_ClassName" field
     # Click save on the file upload modal to use the default "Form-submissions" folder
     And I press the "Save and continue" button
@@ -66,6 +68,7 @@ Feature: Userforms
     # Drag and drop my text field 2 to Page Two
     Then I drag the ".ss-gridfield-item[data-id='4'] .handle" element to the ".ss-gridfield-item[data-id='6'] .handle" element
     And I press the "Publish" button
+    And I dismiss all toasts
 
     # Add email recipient with custom text and custom rules
     When I click the "Recipients" CMS tab

@@ -2,8 +2,9 @@
 import i18n from 'i18n';
 import jQuery from 'jquery';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { loadComponent } from 'lib/Injector';
+import { joinUrlPaths } from 'lib/urls';
 import url from 'url';
 import qs from 'qs';
 
@@ -61,7 +62,7 @@ jQuery.entwine('ss', ($) => {
     onunmatch() {
       // Build url
       const adminUrl = $(this).closest('#Form_ConfirmFolderForm').data('adminUrl');
-      const parsedURL = url.parse(`${adminUrl}user-forms/getfoldergrouppermissions`);
+      const parsedURL = url.parse(joinUrlPaths(adminUrl, 'user-forms/getfoldergrouppermissions'));
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.FolderID = $(this).find('input[name=FolderID]').val();
       const fetchURL = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
@@ -116,6 +117,8 @@ jQuery.entwine('ss', ($) => {
 
   /** handle modal rendering */
   $('#confirm-folder__dialog-wrapper').entwine({
+    ReactRoot: null,
+
     onunmatch() {
       // solves errors given by ReactDOM "no matched root found" error.
       this._clearModal();
@@ -144,12 +147,17 @@ jQuery.entwine('ss', ($) => {
 
       // Build schema url
       const adminUrl = $(this).data('adminUrl');
-      const parsedURL = url.parse(`${adminUrl}user-forms/confirmfolderformschema`);
+      const parsedURL = url.parse(joinUrlPaths(adminUrl, 'user-forms/confirmfolderformschema'));
       const parsedQs = qs.parse(parsedURL.query);
       parsedQs.ID = editableFileFieldID;
       const schemaUrl = url.format({ ...parsedURL, search: qs.stringify(parsedQs) });
 
-      ReactDOM.render(
+      let root = this.getReactRoot();
+      if (!root) {
+        root = createRoot(this[0]);
+        this.setReactRoot(root);
+      }
+      root.render(
         <FormBuilderModal
           title={title}
           isOpen={isOpen}
@@ -161,14 +169,16 @@ jQuery.entwine('ss', ($) => {
           responseClassBad="modal__response modal__response--error"
           responseClassGood="modal__response modal__response--good"
           identifier="UserForms.ConfirmFolder"
-        />,
-        this[0]
+        />
       );
     },
 
     _clearModal() {
-      ReactDOM.unmountComponentAtNode(this[0]);
-      // this.empty();
+      const root = this.getReactRoot();
+      if (root) {
+        root.unmount();
+        this.setReactRoot(null);
+      }
     },
 
     _handleHideModal() {

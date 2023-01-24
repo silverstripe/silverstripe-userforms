@@ -1,9 +1,4 @@
-/**
- * @file Manages the multi-step navigation.
- */
-
-import jQuery from 'jquery';
-import i18n from 'i18n';
+/* global i18n, jQuery */
 
 jQuery(document).ready(($) => {
   // Settings that come from the CMS.
