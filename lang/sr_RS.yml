@@ -2,6 +2,17 @@ sr_RS:
   SilverStripe\UserForms\Model\EditableFormField:
     CUSTOMRULES: 'Custom Rules'
     VALIDATION: Validation
+    CHECKEDBYDEFAULT: 'Checked by Default?'
+    CUSTOMERROR: 'Custom Error Message'
+    CUSTOMOPTIONS: Options
+    DEFAULTTOTODAY: 'Default to Today?'
+    FIELDISREQUIRED: '{name} је обавезно'
+    GROUP: Група
+    NAME: Име
+    PLURALNAME: 'Editable Form Fields'
+    REQUIRED: 'Захтевано?'
+    SINGULARNAME: 'Editable Form Field'
+    TITLE: Наслов
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -18,9 +29,13 @@ sr_RS:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
+    OPTIONSTAB: Options
+    TITLE: Наслов
+    VALUE: Value
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+    CUSTOMRULESTAB: 'Custom Rules'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -44,3 +59,51 @@ sr_RS:
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
+    EMAILBODYHTML: Body
+    ONCOMPLETELABEL: 'Show on completion'
+    PLURALNAME: 'User Defined Forms'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Submissions
+    TEXTONSUBMIT: 'Text on submit button:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Главно
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Show on completion'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Submissions
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Text on submit button:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Одустани
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Филтер
+    FROM: From
+    RESET: 'Врати у пређашње стање'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Број редова'
+    PLURALNAME: 'Text Fields'
+    SINGULARNAME: 'Text Field'

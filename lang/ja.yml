@@ -9,9 +9,13 @@ ja:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 編集可能なマルチオプションフィールド
     SINGULARNAME: 編集可能なマルチオプションフィールド
+    OPTIONSTAB: オプション
+    TITLE: タイトル
+    VALUE: 数値
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: ユーザー定義フォームのメール受信者
     SINGULARNAME: ユーザー定義フォームのメール受信者
+    CUSTOMRULESTAB: カスタムルール
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: メール
     EMAILBODY: ボディ
@@ -27,3 +31,83 @@ ja:
     SENDPLAIN: 'プレーンテキストとしてメールを送信しますか? (HTMLは取り除かれます)'
     SINGULARNAME: ユーザー定義フォーム
     SUBMITBUTTON: 送信
+    CLEARBUTTON: クリア
+    EMAILBODYHTML: ボディ
+    ONCOMPLETELABEL: 完成時に表示
+    SAVESUBMISSIONS: 提出物をサーバーに保存するのを無効化
+    SHOWCLEARFORM: フォームをクリアーボタンを表示する
+    TEXTONSUBMIT: '送信ボタンのテキスト:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: メイン
+  SilverStripe\UserForms:
+    CLEARBUTTON: クリア
+    ONCOMPLETELABEL: 完成時に表示
+    SAVESUBMISSIONS: 提出物をサーバーに保存するのを無効化
+    SHOWCLEARFORM: フォームをクリアーボタンを表示する
+    SUBMITBUTTON: 送信
+    TEXTONSUBMIT: '送信ボタンのテキスト:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: キャンセル
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: フィルタ
+    FROM: 送信者
+    RESET: リセット
+  SilverStripe\UserForms\Model\EditableFormField:
+    CHECKEDBYDEFAULT: 'デフォルトでチェックしますか?'
+    CUSTOMERROR: カスタムエラーメッセージ
+    CUSTOMOPTIONS: オプション
+    CUSTOMRULES: カスタムルール
+    DEFAULTTOTODAY: '本日にデフォルトしますか?'
+    EXTRACLASS_TITLE: エクストラスタイリングまたはレイアウト
+    FIELDISREQUIRED: '{name} が必要'
+    GROUP: グループ
+    NAME: 名前
+    PLURALNAME: 編集可能フォームフィールド
+    REQUIRED: 'このフィールドは必要ですか?'
+    SINGULARNAME: 編集可能フォームフィールド
+    TITLE: タイトル
+    VALIDATION: 確認
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: チェックボックス
+    SINGULARNAME: チェックボックスフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: チェックボックスグループ
+    SINGULARNAME: チェックボックスグループ
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 日付フィールド
+    SINGULARNAME: 日付フィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: ドロップダウン
+    SINGULARNAME: ドロップダウンフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: ファイルアップロードフィールド
+    SINGULARNAME: ファイルアップロードフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 見出しレベルを選択
+    PLURALNAME: 見出し
+    SINGULARNAME: 見出し
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: 次へ
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    PLURALNAME: メンバーリストフィールド
+    SINGULARNAME: メンバーリストフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: へ
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 編集可能なオプション
+    SINGULARNAME: 編集可能なオプション
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 行数
+    PLURALNAME: テキストフィールド
+    RANGE_TO: へ
+    SINGULARNAME: テキストフィールド
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
+    DOWNLOADFILE: ファイルをダウンロード
+    PLURALNAME: 送信済ファイルフィールド
+    SINGULARNAME: 送信済ファイルフィールド
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    PLURALNAME: 送信済フォーム
+    SINGULARNAME: 送信済フォーム
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    PLURALNAME: 送信済フォームフィールド
+    SINGULARNAME: 送信済フォームフィールド

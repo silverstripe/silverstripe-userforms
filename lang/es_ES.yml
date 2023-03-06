@@ -2,6 +2,9 @@ es_ES:
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Filtrar envíos.'
     WHEREVALUEIS: 'donde el valor es'
+    FILTER: Filtro
+    FROM: De
+    RESET: Restablecer
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Reglas personalizadas editables'
     SINGULARNAME: 'Regla personalizada editable'
@@ -19,6 +22,13 @@ es_ES:
     SINGULARNAME: 'Campo de formulario editable'
     VALIDATION: Validación
     'YES': Sí
+    DEFAULT: 'Valor predeterminado'
+    EXTRACLASS_TITLE: 'Estilo/disposición adicional'
+    EXTRACLASS_Title: 'Clases CSS extra'
+    INITIALVISIBILITY: 'Visibilidad inicial'
+    REQUIRED_DESCRIPTION: 'Por favor tomar en cuenta que los campos con condiciones no pueden marcarse como requeridos'
+    TITLE: Título
+    TYPE: Tipo
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Casillas de verificación'
     SINGULARNAME: 'Campo de casillas de verificación'
@@ -28,11 +38,13 @@ es_ES:
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Selectores de país'
     SINGULARNAME: 'Selector de país'
+    DEFAULT: 'Valor predeterminado'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Campos de fecha'
     SINGULARNAME: 'Campo de fecha'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: 'Listas desplegables'
+    SINGULARNAME: 'Campo desplegable'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Correos electrónicos'
     SINGULARNAME: 'Campo de correo electrónico'
@@ -58,6 +70,9 @@ es_ES:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Campos de opción múltiple'
     SINGULARNAME: 'Campo de opción múltiple'
+    OPTIONSTAB: Opciones
+    TITLE: Título
+    VALUE: Valor
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campos numéricos'
     SINGULARNAME: 'Campo numérico'
@@ -69,9 +84,13 @@ es_ES:
     PLURALNAME: 'Campos de texto'
     SINGULARNAME: 'Campo de texto'
     TEXTLENGTH: 'Longitud del texto'
+    AUTOCOMPLETE: Autocompletar
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'Destinatarios definidos por el usuario'
     SINGULARNAME: 'Destinatario definido por el usuario'
+    CUSTOMRULESTAB: 'Reglas especiales'
+    EMAILCONTENTTAB: 'Contenido de correo'
+    EMAILDETAILSTAB: 'Detalles de correo'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Descargar archivo'
     PLURALNAME: 'Archivos enviados'
@@ -100,3 +119,31 @@ es_ES:
     SENDPLAIN: 'Enviar el correo como texto plano'
     SINGULARNAME: 'Formulario definido por el usuario'
     SUBMITBUTTON: Enviar
+    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
+    CONFIGURATION: Configuración
+    EMAILBODYHTML: Cuerpo
+    EMAILTEMPLATE: 'Plantilla de correo'
+    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
+    ONCOMPLETELABEL: 'Mostrar al terminar'
+    PREVIEW_EMAIL: 'Vista previa de correo'
+    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
+    SHOWCLEARFORM: 'Mostrar el botón borrar'
+    SUBMISSIONS: Propuestas
+    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
+    CONFIGURATION: Configuración
+    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
+    ONCOMPLETELABEL: 'Mostrar al terminar'
+    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
+    SHOWCLEARFORM: 'Mostrar el botón borrar'
+    SUBMISSIONS: Propuestas
+    SUBMITBUTTON: Enviar
+    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Agregar campo'
+    ADD_FIELD_GROUP: 'Agregar grupo de campos'
+    ADD_PAGE_BREAK: 'Agregar cambio de página'
+    FORMFIELDS: 'Campos del formulario'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_TITLE: 'Página {page}'

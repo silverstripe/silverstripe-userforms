@@ -5,6 +5,15 @@ et_EE:
     REQUIRED: 'See väli on vormis vajalik ja seda ei saa kustutada'
     VALIDATION: Validation
     'YES': Jah
+    CHECKEDBYDEFAULT: 'Checked by Default?'
+    CUSTOMERROR: 'Custom Error Message'
+    CUSTOMOPTIONS: Options
+    DEFAULTTOTODAY: 'Default to Today?'
+    GROUP: Grupp
+    NAME: Nimi
+    PLURALNAME: 'Editable Form Fields'
+    SINGULARNAME: 'Editable Form Field'
+    TITLE: Pealkiri
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -21,9 +30,13 @@ et_EE:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
+    OPTIONSTAB: Options
+    TITLE: Pealkiri
+    VALUE: Value
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+    CUSTOMRULESTAB: 'Custom Rules'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -47,3 +60,57 @@ et_EE:
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
+    EMAILBODYHTML: Body
+    ONCOMPLETELABEL: 'Näita lõpetamisel'
+    PLURALNAME: 'User Defined Forms'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Kaastööd
+    TEXTONSUBMIT: 'Kiri saatmise nupul:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Avaleht
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Näita lõpetamisel'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Kaastööd
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Kiri saatmise nupul:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Loobu
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filtreeri
+    FROM: From
+    RESET: Lähtesta
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Eelmine
+    STEP_PREV: Eelmine
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: kuni
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Arv ridu'
+    PLURALNAME: 'Text Fields'
+    RANGE_TO: kuni
+    SINGULARNAME: 'Text Field'
