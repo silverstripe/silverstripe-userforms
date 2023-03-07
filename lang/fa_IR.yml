@@ -10,6 +10,11 @@ fa_IR:
     RIGHTTITLE: 'عنوان سمت راست'
     TITLE: عنوان
     'YES': بله
+    CUSTOMOPTIONS: گزینه‌ها
+    FIELDISREQUIRED: '{name} مورد نیاز است'
+    NAME: نام
+    'NO': خیر
+    TYPE: نوع
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'فیلدهای تاریخ'
     SINGULARNAME: 'فیلد تاریخ'
@@ -18,11 +23,16 @@ fa_IR:
     SINGULARNAME: 'فیلد ایمیل'
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     TITLE_FIRST: 'صفحه نخست'
+    STEP_NEXT: بعدی
+    STEP_PREV: قبلی
+    STEP_TITLE: 'صفحه‌ی {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     PLURALNAME: 'بلوک های HTML'
     SINGULARNAME: 'بلوک HTML'
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'انتخاب به عنوان پیش فرض؟'
+    OPTIONSTAB: گزینه‌ها
+    TITLE: عنوان
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'فیلد عددی'
     RANGE_TO: به
@@ -41,3 +51,26 @@ fa_IR:
     PLURALNAME: 'صفحه اصلی'
     SENDEMAILTO: 'ارسال ایمیل به'
     SUBMITBUTTON: 'ثبت کردن'
+    CONFIGURATION: پیکربندی
+    DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
+    RECIPIENTS: دریافت‌کنندگان
+    SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
+    TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
+    TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: اصلی
+  SilverStripe\UserForms:
+    CLEARBUTTON: پاک‌کردن
+    CONFIGURATION: پیکربندی
+    DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
+    RECIPIENTS: دریافت‌کنندگان
+    SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
+    SUBMITBUTTON: 'ثبت کردن'
+    TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
+    TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: لغو
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: پالایش
+    FROM: از
+    RESET: 'از نو'

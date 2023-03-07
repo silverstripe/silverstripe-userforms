@@ -2,6 +2,9 @@ ar:
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'تصفية التقديمات..'
     WHEREVALUEIS: 'حيث القيمة هي..'
+    FILTER: مرشح
+    FROM: من
+    RESET: 'إعادة تعيين'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'افتراضيا مُعَلّم'
     CUSTOMERROR: 'نص خطأ مخصص'
@@ -14,6 +17,13 @@ ar:
     RIGHTTITLE: 'عنوان اليمين'
     SINGULARNAME: 'حقل استمارة قابل للتحرير'
     VALIDATION: المصادقة
+    CUSTOMOPTIONS: الخيارات
+    EXTRACLASS_TITLE: 'تصميم/تخطيط إضافي'
+    NAME: الاسم
+    'NO': لا
+    TITLE: عنوان
+    TYPE: النوع
+    'YES': نعم
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'مربعات لوضع إشارة'
     SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
@@ -49,6 +59,9 @@ ar:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
     SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
+    OPTIONSTAB: الخيارات
+    TITLE: عنوان
+    VALUE: القيمة
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'الخيارات القابلة للتحرير'
     SINGULARNAME: 'خيار قابل للتحرير'
@@ -60,9 +73,11 @@ ar:
     PLURALNAME: 'حقول نصية'
     SINGULARNAME: 'حقل نصي'
     TEXTLENGTH: 'طول النص'
+    RANGE_TO: إلى
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
     SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'
+    CUSTOMRULESTAB: 'القواعد المخصصة'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'تحميل الملف'
     PLURALNAME: 'حقول الملف التي قدمت'
@@ -89,3 +104,33 @@ ar:
     SENDPLAIN: 'إرسال البريد الإلكتروني كنص عادي؟ (سيتم تجريد كود الHTML)'
     SINGULARNAME: 'نموذج يحدده المستخدم'
     SUBMITBUTTON: تقديم
+    ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
+    CONFIGURATION: المواصفات
+    EMAILBODYHTML: هيئة
+    EMAILTEMPLATE: 'نموذج البريد الالكترونى'
+    ENABLELIVEVALIDATION: 'تفعيل المصادقة الآنية'
+    ONCOMPLETELABEL: 'اعرض عند الاكتمال'
+    PLURALNAME: 'الصفحات الأساسية'
+    SAVESUBMISSIONS: 'قم بتعطيل حفظ التقديمات إلى الخادم'
+    SHOWCLEARFORM: 'زر عرض النموذج ممسوحاً'
+    SUBMISSIONS: التقديمات
+    TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: الرئيسة
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
+    CONFIGURATION: المواصفات
+    ENABLELIVEVALIDATION: 'تفعيل المصادقة الآنية'
+    ONCOMPLETELABEL: 'اعرض عند الاكتمال'
+    SAVESUBMISSIONS: 'قم بتعطيل حفظ التقديمات إلى الخادم'
+    SHOWCLEARFORM: 'زر عرض النموذج ممسوحاً'
+    SUBMISSIONS: التقديمات
+    SUBMITBUTTON: تقديم
+    TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: الغاء
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: التالي
+    STEP_PREV: السابق
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: إلى

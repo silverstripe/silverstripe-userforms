@@ -1,1 +1,41 @@
-ru: {  }
+ru:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Главная
+  SilverStripe\UserForms:
+    CLEARBUTTON: Сбросить
+    CONFIGURATION: Конфигурация
+    RECIPIENTS: Получатели
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Отмена
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Фильтр
+    FROM: От
+    RESET: Сброс
+  SilverStripe\UserForms\Model\EditableFormField:
+    CUSTOMOPTIONS: Опции
+    FIELDISREQUIRED: 'Поле {name} является обязательным'
+    GROUP: Группа
+    NAME: Название
+    'NO': Нет
+    TITLE: Заголовок
+    TYPE: Тип
+    'YES': Да
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Вперёд
+    STEP_PREV: Назад
+    STEP_TITLE: 'Страница {page}'
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Опции
+    TITLE: Заголовок
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: по
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: по
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Сбросить
+    CONFIGURATION: Конфигурация
+    EMAILADDRESS: Email
+    EMAILFROM: От
+    EMAILSUBJECT: 'Тема письма'
+    PLURALNAME: 'Базовые страницы'
+    RECIPIENTS: Получатели
