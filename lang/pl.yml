@@ -1,1 +1,35 @@
-pl: {  }
+pl:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Główny
+  SilverStripe\UserForms:
+    CLEARBUTTON: Wyczyść
+    RECIPIENTS: Odbiorcy
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Anuluj
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filtr
+    FROM: Od
+    RESET: Resetuj
+  SilverStripe\UserForms\Model\EditableFormField:
+    FIELDISREQUIRED: 'Pole {name} jest wymagane'
+    GROUP: Grupa
+    NAME: Nazwa
+    'NO': Nie
+    TITLE: Tytuł
+    TYPE: 'Rodzaj strony'
+    'YES': Tak
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Następny
+    STEP_PREV: Poprzedni
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    TITLE: Tytuł
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: do
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: do
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Wyczyść
+    EMAILADDRESS: Email
+    EMAILFROM: Od
+    PLURALNAME: 'Podstawowe strony'
+    RECIPIENTS: Odbiorcy

@@ -1,1 +1,35 @@
-fr: {  }
+fr:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Principal
+  SilverStripe\UserForms:
+    CLEARBUTTON: Effacer
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Annuler
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filtrer
+    FROM: De
+    RESET: Réinitialiser
+  SilverStripe\UserForms\Model\EditableFormField:
+    FIELDISREQUIRED: '{name} requis'
+    GROUP: Groupe
+    NAME: Nom
+    'NO': Non
+    TITLE: Titre
+    TYPE: Type
+    'YES': Oui
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Suivant
+    STEP_PREV: Préc
+    STEP_TITLE: 'Page {page}'
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    TITLE: Titre
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: kime
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: kime
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Effacer
+    EMAILADDRESS: Email
+    EMAILFROM: De
+    EMAILSUBJECT: 'Sujet de l''email'
+    PLURALNAME: 'Base Pages'
