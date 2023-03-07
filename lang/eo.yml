@@ -251,6 +251,7 @@ eo:
       one: 'Unu sendita dosiera kampo'
       other: '{count} senditaj dosieraj kampoj'
     SINGULARNAME: 'Kampo de sendita dosiero'
+    INSUFFICIENTRIGHTS: 'Vi ne havas taŭgajn permesojn por elŝuti ĉi tiun dosieron'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Senditaj formularoj'
     PLURALS:

@@ -3,6 +3,14 @@ fr_FR:
     CUSTOMRULES: 'Custom Rules'
     REQUIRED: 'Ce champ est requis pour ce formulaire et ne peut pas être supprimé'
     VALIDATION: Validation
+    CHECKEDBYDEFAULT: 'Vérifié par défaut ?'
+    CUSTOMERROR: 'Message d''erreur personnalisé'
+    CUSTOMOPTIONS: Options
+    DEFAULTTOTODAY: 'Par défaut pour aujourd''hui ?'
+    EXTRACLASS_TITLE: 'Style/sortie supplémentaire'
+    GROUP: Groupe
+    PLURALNAME: 'Champs de formulaire modifiable'
+    SINGULARNAME: 'Champ de formulaire modifiable'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -19,9 +27,12 @@ fr_FR:
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
+    OPTIONSTAB: Options
+    VALUE: Valeur
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
+    CUSTOMRULESTAB: 'Custom Rules'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -47,3 +58,45 @@ fr_FR:
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SINGULARNAME: 'User Defined Form'
     SUBMITBUTTON: Submit
+    EMAILBODYHTML: Body
+    ONCOMPLETELABEL: 'Utiliser la complétion'
+    PLURALNAME: 'User Defined Forms'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Soumissions
+    TEXTONSUBMIT: 'Texte du bouton Envoyer :'
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Utiliser la complétion'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Soumissions
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Texte du bouton Envoyer :'
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FROM: From
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Cases à cocher'
+    SINGULARNAME: 'Champ de la case à cocher'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Groupes de case à cocher'
+    SINGULARNAME: 'Groupe de case à cocher'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Champs date'
+    SINGULARNAME: 'Champ date'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Déroulants
+    SINGULARNAME: 'Champ déroulant'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Champs pour l''upload de fichier'
+    SINGULARNAME: 'Champ pour l''upload de fichier'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Sélectionnez le niveau de tête'
+    PLURALNAME: Principaux
+    SINGULARNAME: Principal
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Options modifiables'
+    SINGULARNAME: 'Option modifiable'
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Nombre de lignes'
+    PLURALNAME: 'Champs texte'
+    SINGULARNAME: 'Champ texte'

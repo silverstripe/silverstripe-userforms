@@ -11,6 +11,13 @@ fi_FI:
     SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
     TEXTONCLEAR: 'Tyhjennä-napin teksti:'
     TEXTONSUBMIT: 'Lähetä-napin teksti:'
+    DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
+    DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Näytä virheilmoitukset lomakkeen yläpuolella?'
+    ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
+    NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
+    ONCOMPLETELABEL: 'Näytä valmistuessa'
+    SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
@@ -62,6 +69,8 @@ fi_FI:
     SINGULARNAME: Tiedostonlatauskenttä
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Lataa tiedosto'
+    PLURALNAME: 'Lähetetyt tiedostokentät'
+    SINGULARNAME: 'Lähetetty tiedostokenttä'
   SilverStripe\UserForms\Model\UserDefinedForm:
     PREVIEW_EMAIL: 'Esikatsele sähköposti'
     SINGULARNAME: 'Käyttäjän lomake'
@@ -73,6 +82,41 @@ fi_FI:
     SUBMISSIONS: 'Vastaanotetut lomakkeet'
     TEXTONCLEAR: 'Tyhjennä-napin teksti:'
     TEXTONSUBMIT: 'Lähetä-napin teksti:'
+    ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CLEARBUTTON: Tyhjennä
+    CONFIGURATION: Asetukset
+    DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
+    DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Näytä virheilmoitukset lomakkeen yläpuolella?'
+    EMAILADDRESS: Sähköposti
+    EMAILBODY: Viesti
+    EMAILBODYHTML: Viesti
+    EMAILFROM: Lähettäjä
+    EMAILSUBJECT: Otsikko
+    EMAILTEMPLATE: Sähköpostipohja
+    ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
+    EmailFromContent: 'Lähettäjän sähköpostiosoite kenttään voit laittaa osoitteen, josta lomake näkyy lähetetyn. Jotkut palvelimet vaativat, että osoitteen on oltava samalla domain päätteellä kuin sivustosi. Esimerkiksi omasivusto.fi domainilla osoitteen tulisi olla osoitteesi@omasivusto.fi. Voit käyttää kuitenkin haluamaasi osoitetta, jos sille ei ole teknistä estettä.'
+    FROMADDRESS: 'Lähetä sähköposti osoitteesta'
+    HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
+    NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
+    ONCOMPLETELABEL: 'Näytä valmistuessa'
+    ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
+    ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
+    PLURALNAME: Pohjasivut
+    PREVIEW_EMAIL_DESCRIPTION: 'Huomio: tallentamattomat muutokset eivät näy esikatselussa.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Voit esikatsella tämän sähköpostin, kunhan olet tallentanut Vastaanottajan.'
+    RECIPIENTS: Vastaanottajat
+    REPLYADDRESS: Vastaussähköposti
+    REPLYADDRESS_DESCRIPTION: 'Sähköpostiosoite, johon vastaanottajalla on mahdollisuus vastata.'
+    SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
+    SELECTAFIELDTOSETSUBJECT: '... tai valitse kenttä, jota käytetään Aiheena'
+    SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
+    SENDEMAILTO_DESCRIPTION: 'Voit lisätä useamman osoitteen pilkulla erotettuna listana'
+    SENDIF: Lähetyssääntö
+    SENDIFAND: 'Kaikki ehdot ovat tosia'
+    SENDIFOR: 'Kaikki ehdot ovat tosia'
+    SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Peruuta
     FOLDER_OPTIONS_EXISTING: 'Käytä olemassa olevaa kansiota'
@@ -168,9 +212,49 @@ fi_FI:
     CONTENT: HTML
     HIDEFROMREPORT: 'Piilota yhteenvedoista?'
     HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
+    PLURALNAME: HTML-alueet
+    SINGULARNAME: HTML-alue
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     SINGULARNAME: Jäsenlistakenttä
+    PLURALNAME: Jäsenlistakentät
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
     OPTIONSTAB: Valinnat
     TITLE: Otsikko
+    PLURALNAME: 'Muokattavat monivalintakentät'
+    SINGULARNAME: 'Muokattava monivalintakenttä'
+    VALUE: Arvo
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    PLURALNAME: 'Muokattavat mukautetut säännöt'
+    SINGULARNAME: 'Muokattava mukautettu sääntö'
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    PLURALNAME: 'Numeeriset kentät'
+    RANGE: 'Sallittu numeerinen väli'
+    RANGE_TO: –
+    SINGULARNAME: 'Numeerinen kenttä'
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Muokattavat vaihtoehdot'
+    SINGULARNAME: 'Muokattava vaihtoehto'
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
+    PLURALNAME: Radiopainikkeet
+    SINGULARNAME: Radiopainike
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: Automaattitäydennys
+    AUTOCOMPLETE_DESCRIPTION: 'Tuetut selaimet yrittävät täydentää kentän automaattisesti käyttäjän omilla tiedoilla, valitse asettaaksesi käytettävät arvot'
+    NUMBERROWS: 'Rivejen määrä'
+    NUMBERROWS_DESCRIPTION: 'Kenttät, joissa on enemmän kuin yksi rivi, luodaan tekstialueena.'
+    PLURALNAME: Tekstikentät
+    RANGE_TO: –
+    SINGULARNAME: Tekstikenttä
+    TEXTLENGTH: 'Tekstin pituus'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Mukautetut säännöt'
+    EMAILCONTENTTAB: 'Sähköpostin sisältö'
+    EMAILDETAILSTAB: 'Sähköpostin tiedot'
+    PLURALNAME: Vastaanottajat
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    PLURALNAME: 'Lähetetyt lomakkeet'
+    SINGULARNAME: 'Lähetetty lomake'
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    PLURALNAME: 'Lähetetyt lomakekentät'
+    SINGULARNAME: 'Lähetetty lomakekenttä'

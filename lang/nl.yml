@@ -123,6 +123,7 @@ nl:
       one: 'Ingestuurd bestandsveld'
       other: '{count} Ingestuurde bestandsvelden'
     SINGULARNAME: 'Ingestuurd bestand'
+    INSUFFICIENTRIGHTS: 'Je hebt onvoldoende rechten om dit bestand te downloaden'
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: E-mail
     EMAILBODY: Tekst
@@ -189,7 +190,7 @@ nl:
     CUSTOMOPTIONS: Instellingen
     CUSTOMRULES: Voorwaarden
     DEFAULT: 'Standaard waarde'
-    DEFAULTTOTODAY: 'Standaard instellen op vandaag'
+    DEFAULTTOTODAY: 'Automatisch de huidige datum invullen'
     DISPLAYIF: 'Zichtbaar als'
     EXTRACLASS_MULTIPLE: 'Meerdere CSS-classes met een spatie scheiden'
     EXTRACLASS_SELECT: 'Kies een van de mogelijke stylen'
@@ -217,17 +218,17 @@ nl:
     VALIDATION: Validatie
     'YES': Ja
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Selectievakjes
+    PLURALNAME: Checkbox
     PLURALS:
-      one: Selectievakje
-      other: '{count} Selectievakjes'
-    SINGULARNAME: Selectievakje
+      one: Checkbox
+      other: '{count} checkboxes'
+    SINGULARNAME: Checkbox
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Groep selectievakjes'
+    PLURALNAME: 'Checkbox groep'
     PLURALS:
-      one: 'Een groep selectievakjes'
-      other: '{count} groepen selectievaktjes'
-    SINGULARNAME: 'Selectievakjes groep'
+      one: 'Een checkbox-groep'
+      other: '{count} checkbox-groepen'
+    SINGULARNAME: Checkbox-groep
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     DEFAULT: 'Standaard waarde'
     EMPTY_STRING: 'Tekst wanneer er nog geen keuze gemaakt is'

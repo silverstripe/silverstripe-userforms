@@ -15,6 +15,8 @@ it:
     FROM: Da
     TILL: 'Fino a'
     WHEREVALUEIS: 'dove il valore è..'
+    FILTER: Filtra
+    RESET: Azzera
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
     SINGULARNAME: 'Regola personalizzata modificabile'
@@ -41,6 +43,8 @@ it:
     TYPE: Tipo
     VALIDATION: Validazione
     'YES': Si
+    NAME: Nome
+    PLACEHOLDER: Segnaposto
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Caselle di controllo'
     SINGULARNAME: 'Campo casella di controllo'
@@ -50,6 +54,7 @@ it:
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Menù a tendina Nazioni'
     SINGULARNAME: 'Menù a tendina Nazioni'
+    DEFAULT: 'Valore di default'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Campi date'
     SINGULARNAME: 'Campo data'
@@ -80,6 +85,8 @@ it:
     SINGULARNAME: 'Interruzione di pagina'
     STEP_TITLE: 'Pagina {page}'
     TITLE_FIRST: 'Prima pagina'
+    STEP_NEXT: Seguente
+    STEP_PREV: Prec
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Nascondi dai rapporti?'
@@ -147,7 +154,7 @@ it:
     HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
-    PLURALNAME: 'Pagine base'
+    PLURALNAME: 'Pagine Base'
     PREVIEW_EMAIL: 'Anteprima e-mail'
     PREVIEW_EMAIL_DESCRIPTION: 'Nota: Le modifiche non salvate non appariranno nell''anteprima'
     PREVIEW_EMAIL_UNAVAILABLE: 'Puoi vedere un''anteprima di questa email dopo aver salvato il destinatario.'
@@ -166,3 +173,38 @@ it:
     TYPEREPLY: 'Inserisci l''e-mail di risposta'
     TYPESUBJECT: 'Inserisci l''oggetto'
     TYPETO: 'Inserisci l''e-mail destinatario'
+    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
+    CONFIGURATION: Configurazione
+    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
+    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
+    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
+    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
+    ONCOMPLETELABEL: 'Mostra al completamento'
+    RECIPIENTS: Destinatari
+    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
+    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
+    SUBMISSIONS: Invii
+    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
+    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Principale
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
+    CLEARBUTTON: Azzera
+    CONFIGURATION: Configurazione
+    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
+    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
+    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
+    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
+    ONCOMPLETELABEL: 'Mostra al completamento'
+    RECIPIENTS: Destinatari
+    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
+    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
+    SUBMISSIONS: Invii
+    SUBMITBUTTON: Invia
+    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
+    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Annulla
