@@ -31,12 +31,12 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "silverstripe/framework": "^4.10",
-        "silverstripe/cms": "^4.6",
+        "silverstripe/framework": "4.13.x-dev",
+        "silverstripe/cms": "4.13.x-dev",
         "symbiote/silverstripe-gridfieldextensions": "^3.1",
-        "silverstripe/segment-field": "^2.2",
-        "silverstripe/versioned": "^1.0",
-        "silverstripe/mimevalidator": "^2.0"
+        "silverstripe/segment-field": "2.8.x-dev",
+        "silverstripe/versioned": "1.13.x-dev",
+        "silverstripe/mimevalidator": "2.5.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
