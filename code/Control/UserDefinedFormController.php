@@ -73,16 +73,16 @@ class UserDefinedFormController extends PageController
         $page = $this->data();
 
         // load the css
-        if (!$page->config()->get('block_default_userforms_css')) {
+        if (1 || !$page->config()->get('block_default_userforms_css')) {
             Requirements::css('silverstripe/userforms:client/dist/styles/userforms.css');
         }
 
         // load the jquery
-        if (!$page->config()->get('block_default_userforms_js')) {
-            Requirements::javascript('silverstripe/userforms:client/dist/js/jquery.min.js');
-            Requirements::javascript(
-                'silverstripe/userforms:client/dist/js/jquery-validation/jquery.validate.min.js'
-            );
+        if (1 || !$page->config()->get('block_default_userforms_js')) {
+//            Requirements::javascript('silverstripe/userforms:client/dist/js/jquery.min.js');
+//            Requirements::javascript(
+//                'silverstripe/userforms:client/dist/js/jquery-validation/jquery.validate.min.js'
+//            );
             Requirements::javascript('silverstripe/admin:client/dist/js/i18n.js');
             Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
             Requirements::javascript('silverstripe/userforms:client/dist/js/userforms.js');
@@ -91,9 +91,10 @@ class UserDefinedFormController extends PageController
 
             // Bind a confirmation message when navigating away from a partially completed form.
             if ($page::config()->get('enable_are_you_sure')) {
-                Requirements::javascript(
-                    'silverstripe/userforms:client/dist/js/jquery.are-you-sure/jquery.are-you-sure.js'
-                );
+// TODO:
+//                Requirements::javascript(
+//                    'silverstripe/userforms:client/dist/js/jquery.are-you-sure/jquery.are-you-sure.js'
+//                );
             }
         }
     }
@@ -215,11 +216,9 @@ class UserDefinedFormController extends PageController
         // Only add customScript if $default or $rules is defined
         if ($rules) {
             Requirements::customScript(<<<JS
-                (function($) {
-                    $(document).ready(function() {
-                        {$rules}
-                    });
-                })(jQuery);
+                document.addEventListener("DOMContentLoaded", function() {
+                    {$rules}
+                })
 JS
                 , 'UserFormsConditional-' . $form->ID);
         }
@@ -626,10 +625,11 @@ JS
      */
     protected function buildWatchJS($watch)
     {
+
         $result = '';
         foreach ($watch as $key => $rule) {
-            $events = implode(' ', $rule['events']);
-            $selectors = implode(', ', $rule['selectors']);
+            $events = implode(',', $rule['events']);
+            $selectors = implode(',', $rule['selectors']);
             $conjunction = $rule['conjunction'];
             $operations = implode(" {$conjunction} ", $rule['operations']);
             $target = $rule['targetFieldID'];
@@ -638,17 +638,40 @@ JS
 
             $result .= <<<EOS
 \n
-    $('.userform').on('{$events}',
-    "{$selectors}",
-    function (){
-        if ({$operations}) {
-            $('{$target}').{$rule['view']};
-            {$holder}.{$rule['view']}.trigger('{$rule['holder_event']}');
-        } else {
-            $('{$target}').{$rule['opposite']};
-            {$holder}.{$rule['opposite']}.trigger('{$rule['holder_event_opposite']}');
+    var form = document.querySelector('form.userform');
+    if (form) {
+
+        function closest(el, sel) {
+            while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+            return el;
         }
-    });
+
+        function triggerDispatchEvent(element, eventName, arg) {
+            const event = new CustomEvent(eventName, {
+                detail: arg
+            });
+            element.dispatchEvent(event);
+        }
+        window.triggerDispatchEvent = triggerDispatchEvent;
+
+        var selectors = "{$selectors}".split(',');
+        "{$events}".split(',').forEach(function(event) {
+            form.addEventListener(event, function(e) {
+                selectors.forEach(function(selector) {
+                    if (e.target.matches(selector)) {
+                        if ({$operations}) {
+                            document.querySelector('{$target}').{$rule['view']};
+                            triggerDispatchEvent({$holder}, '{$rule['holder_event']}');
+                            // {$holder}.{$rule['view']}.trigger('{$rule['holder_event']}');
+                        } else {
+                            document.querySelector('{$target}').{$rule['opposite']};
+                            triggerDispatchEvent({$holder}, '{$rule['holder_event_opposite']}');
+                        }
+                    }
+                })
+            });
+        });
+    }
 EOS;
             if ($isFormStep) {
                 // Hide the step jump button if the FormStep has is initially hidden.
@@ -657,7 +680,7 @@ EOS;
                 // The HTML for the FormStep buttons is defined in UserFormProgress.ss
                 $id = str_replace('#', '', $target ?? '');
                 $result .= <<<EOS
-    $('.step-button-wrapper[data-for="{$id}"]').addClass('hide');
+    document.querySelector('.step-button-wrapper[data-for="{$id}"]').addClass('hide');
 EOS;
             } else {
                 // If a field's initial state is set to be hidden, a '.hide' class will be added to the field as well
@@ -666,7 +689,9 @@ EOS;
                 // though we need to ensure we don't do this on FormSteps (page breaks) otherwise we'll mistakenly
                 // target fields contained within the formstep
                 $result .= <<<EOS
-    $("{$target}").find('.hide').removeClass('hide');
+    if (document.querySelector('{$target}').querySelector('.hide')) {
+        document.querySelector('{$target}').querySelector('.hide').classList.remove('hide');
+    }
 EOS;
             }
         }

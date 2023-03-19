@@ -15,6 +15,10 @@
 
   .step-buttons {
     margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     position: relative;
   }
 
@@ -28,8 +32,8 @@
   }
 
   .step-button-jump {
-    position: absolute;
-    top: 0;
+    //position: absolute;
+    //top: 0;
     opacity: .7;
   }
 }

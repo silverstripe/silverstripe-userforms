@@ -863,7 +863,7 @@ class EditableFormField extends DataObject
      */
     public function getSelectorHolder()
     {
-        return sprintf('$("%s")', $this->getSelectorOnly());
+        return sprintf('document.querySelector("%s")', $this->getSelectorOnly());
     }
 
     /**
@@ -886,7 +886,7 @@ class EditableFormField extends DataObject
      */
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)
     {
-        return sprintf("$(%s)", $this->getSelectorFieldOnly());
+        return sprintf("document.querySelector(%s)", $this->getSelectorFieldOnly());
     }
 
     /**

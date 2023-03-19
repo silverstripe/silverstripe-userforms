@@ -38,9 +38,7 @@
   },
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
-    "jquery": "^3.5.0",
-    "jquery-validation": "^1.19.5",
-    "jquery.are-you-sure": "^1.9.0",
+    "validator": "13.9.0",
     "mime": "^1.4.1",
     "qs": "^6.9.4",
     "react": "^16.13.1",

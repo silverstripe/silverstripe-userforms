@@ -1,1 +1,573 @@
-!function(t){function e(n){if(r[n])return r[n].exports;var i=r[n]={i:n,l:!1,exports:{}};return t[n].call(i.exports,i,i.exports,e),i.l=!0,i.exports}var r={};e.m=t,e.c=r,e.i=function(t){return t},e.d=function(t,r,n){e.o(t,r)||Object.defineProperty(t,r,{configurable:!1,enumerable:!0,get:n})},e.n=function(t){var r=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(r,"a",r),r},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s="./client/src/bundles/bundle.js")}({"./client/src/bundles/UserForms.js":function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{default:t}}var i=r(1),s=n(i),o=r(0),a=n(o);(0,s.default)(document).ready(function(t){function e(e){return this.$el=e instanceof t?e:t(e),this.$el.find("h4").text(a.default._t("UserForms.ERROR_CONTAINER_HEADER","Please correct the following errors and try again:")),this}function r(r){var n=this;this.$el=r instanceof t?r:t(r);var i=this.$el.closest(".userform").data("inst");return this.$elButton=t(".step-button-wrapper[data-for='"+this.$el.prop("id")+"']"),this.viewed=!1,this.valid=!1,this.id=null,this.hide(),u.DISPLAY_ERROR_MESSAGES_AT_TOP&&(this.errorContainer=new e(this.$el.find(".error-container")),i.$el.on("userform.form.error",function(e,r){n.$el.is(":visible")&&t.each(r.errorList,function(e,r){n.errorContainer.updateErrorMessage(t(r.element),r.message)})}),i.$el.on("userform.form.valid",function(t,e){n.errorContainer.removeErrorMessage(e)})),this.$elButton.on("userform.field.hide userform.field.show",function(){i.$el.trigger("userform.form.conditionalstep")}),this}function n(e){var r=this;this.$el=e instanceof t?e:t(e),this.$buttons=this.$el.find(".step-button-jump"),this.$jsAlign=this.$el.find(".js-align");var n=this.$el.closest(".userform").data("inst");return this.$buttons.each(function(e,n){t(n).on("click",function(e){e.preventDefault();var n=parseInt(t(e.target).data("step"),10);r.$el.trigger("userform.progress.changestep",n)})}),n.$el.on("userform.form.changestep",function(t,e){r.update(e)}),n.$el.on("userform.form.conditionalstep",function(){var e=r.$buttons.filter(":visible");e.each(function(e,r){t(r).text(e+1)}),r.$el.find(".progress-bar").attr("aria-valuemax",e.length),r.$el.find(".total-step-number").text(e.length)}),this.$jsAlign.each(function(e,n){var i=t(n),s=100/(r.$jsAlign.length-1)*e,o=s+"%",a=i.innerWidth()/2*-1;i.css({left:o,marginLeft:a}),e===r.$jsAlign.length-1?i.css({marginLeft:2*a}):0===e&&i.css({marginLeft:0})}),this}function i(e){var r=this;this.$el=e instanceof t?e:t(e);var n=this.$el.closest(".userform");this.userformInstance=n.data("inst"),this.$prevButton=this.$el.find(".step-button-prev"),this.$nextButton=this.$el.find(".step-button-next"),this.$prevButton.parent().attr("aria-hidden",!1).show(),this.$nextButton.parent().attr("aria-hidden",!1).show();var i=function(){var e=n.offset();t("html, body").animate({scrollTop:e.top},"slow")};return this.$prevButton.on("click",function(t){t.preventDefault(),i(),r.$el.trigger("userform.action.prev")}),this.$nextButton.on("click",function(t){t.preventDefault(),i(),r.$el.trigger("userform.action.next")}),this.userformInstance.$el.on("userform.form.changestep userform.form.conditionalstep",function(){r.update()}),this}function s(r){var n=this;return this.$el=r instanceof t?r:t(r),this.steps=[],this.errorContainer=new e(this.$el.children(".error-container")),this.$el.on("userform.action.prev",function(){n.prevStep()}),this.$el.on("userform.action.next",function(){n.nextStep()}),this.$el.find(".userform-progress").on("userform.progress.changestep",function(t,e){n.jumpToStep(e-1)}),this.$el.on("userform.form.valid",function(t,e){n.errorContainer.removeStepLink(e)}),this.$el.validate(this.validationOptions),this.$el.find(".optionset.requiredField input").each(function(e,r){t(r).rules("add",{required:!0})}),this}function o(o,d){var f=this,c=t(d);if(0!==c.length){u.ENABLE_LIVE_VALIDATION=void 0!==c.data("livevalidation"),u.DISPLAY_ERROR_MESSAGES_AT_TOP=void 0!==c.data("toperrors"),!1===u.ENABLE_LIVE_VALIDATION&&t.extend(s.prototype.validationOptions,{onfocusout:!1}),u.DISPLAY_ERROR_MESSAGES_AT_TOP&&t.extend(s.prototype.validationOptions,{invalidHandler:function(t,e){c.trigger("userform.form.error",[e])},onfocusout:!1}),c.find(".userform-progress, .step-navigation").attr("aria-hidden",!1).show(),t.extend(r.prototype,l),t.extend(e.prototype,l);var h=new s(c);c.data("inst",h),u.HIDE_FIELD_LABELS&&c.find("label.left").each(function(){var e=t(f);t('[name="'+e.attr("for")+'"]').attr("placeholder",e.text()),e.remove()}),h.$el.find(".form-step").each(function(t,e){var n=new r(e);h.addStep(n)}),h.setCurrentStep(h.steps[0]);var p=c.find(".userform-progress");p.length&&new n(p).update(0);var m=c.find(".step-navigation");m.length&&new i(m).update(),t(document).on("click","input.text[data-showcalendar]",function(){var e=t(f);e.ssDatepicker(),e.data("datepicker")&&e.datepicker("show")}),setInterval(function(){t.ajax({url:"UserDefinedFormController/ping"})},18e4),void 0!==c.areYouSure&&c.areYouSure({message:a.default._t("UserForms.LEAVE_CONFIRMATION","You have unsaved changes!")})}}var u={},l={show:function(){this.$el.attr("aria-hidden",!1).show()},hide:function(){this.$el.attr("aria-hidden",!0).hide()}};e.prototype.hasErrors=function(){return this.$el.find(".error-list").children().length>0},e.prototype.removeErrorMessage=function(t){this.$el.find("#"+t+"-top-error").remove(),this.hasErrors()||this.hide()},e.prototype.addStepLink=function(e){var r=this.$el.closest(".userform").data("inst"),n=e.$el.attr("id")+"-error-link",i=this.$el.find("#"+n),s=e.$el.attr("id"),o=e.$el.data("title");i.length||(i=t('<li id="'+n+'"><a href="#'+s+'">'+o+"</a></li>"),i.on("click",function(t){t.preventDefault(),r.jumpToStep(e.id)}),this.$el.find(".error-list").append(i))},e.prototype.removeStepLink=function(e){var r=t("#"+e).closest(".form-step").attr("id");this.$el.find("#"+r+"-error-link").remove(),this.$el.find(".error-list").is(":empty")&&this.hide()},e.prototype.updateErrorMessage=function(e,r){var n=this,i=e.attr("id"),s="#"+i,o=i+"-top-error",a=t("#"+o),u=e.attr("aria-describedby");if(!r)return void a.addClass("fixed");a.removeClass("fixed"),this.show(),1===a.length?a.show().find("a").html(r):(e.closest(".field[id]").each(function(){var e=t(n).attr("id");e&&(s="#"+e)}),a=t("<li><a></a></li>"),a.attr("id",o).find("a").attr("href",location.pathname+location.search+s).html(r),this.$el.find("ul").append(a),u?u.match(new RegExp("\\b"+o+"\\b"))||(u+=" "+o):u=o,e.attr("aria-describedby",u))},r.prototype.conditionallyHidden=function(){return!this.$elButton.find("button").is(":visible")},n.prototype.update=function(e){var r=t(this.$el.parent(".userform").find(".form-step")[e]),n=0,i=e/(this.$buttons.length-1)*100;this.$buttons.each(function(r,i){return!(r>e||(t(i).is(":visible")&&(n+=1),0))}),this.$el.find(".current-step-number").each(function(e,r){t(r).text(n)}),this.$el.find("[aria-valuenow]").each(function(e,r){t(r).attr("aria-valuenow",n)}),this.$buttons.each(function(e,r){var i=t(r),s=i.parent();if(parseInt(i.data("step"),10)===n&&i.is(":visible"))return s.addClass("current viewed"),void i.removeAttr("disabled");s.removeClass("current")}),this.$el.siblings(".progress-title").text(r.data("title")),i=i?i+"%":"",this.$el.find(".progress-bar").width(i)},i.prototype.update=function(){var t=this.userformInstance.steps.length,e=this.userformInstance.currentStep?this.userformInstance.currentStep.id:0,r=null,n=null;for(this.$el.find(".step-button-prev")[0===e?"hide":"show"](),r=t-1;r>=0;r--)if(n=this.userformInstance.steps[r],!n.conditionallyHidden()){this.$el.find(".step-button-next")[e>=r?"hide":"show"](),this.$el.find(".btn-toolbar")[e>=r?"show":"hide"]();break}},s.prototype.validationOptions={ignore:":hidden,ul",errorClass:"error",errorElement:"span",errorPlacement:function(t,e){t.addClass("message"),e.is(":radio")||e.parents(".checkboxset").length>0?t.appendTo(e.closest(".middleColumn, .field")):e.parents(".checkbox").length>0?t.appendTo(e.closest(".field")):t.insertAfter(e)},invalidHandler:function(t,e){setTimeout(function(){e.currentElements.filter(".error").first().focus()},0)},submitHandler:function(e){var r=!0,n=t(e).closest(".userform").data("inst");if(n.currentStep&&(n.currentStep.valid=t(e).valid()),t.each(n.steps,function(t,e){e.valid||e.conditionallyHidden()||(r=!1,n.errorContainer.addStepLink(e))}),r){var i=t(e).find(".field.requiredField.hide input");i.length>0&&i.removeAttr("required aria-required data-rule-required").valid(),t(e).removeClass("dirty"),e.submit(),n.$el.trigger("userform.form.submit")}else n.errorContainer.show()},success:function(e){var r=t(e).closest(".userform").data("inst"),n=t(e).attr("id"),i=n.substr(0,n.indexOf("-error")).replace(/[\\[\\]]/,"");e.remove(),r.$el.trigger("userform.form.valid",[i])}},s.prototype.addStep=function(t){t instanceof r&&(t.id=this.steps.length,this.steps.push(t))},s.prototype.setCurrentStep=function(t){t instanceof r&&(this.currentStep=t,this.currentStep.show(),this.currentStep.viewed=!0,this.currentStep.$el.addClass("viewed"))},s.prototype.jumpToStep=function(t,e){var r=this.steps[t],n=!1,i=void 0===e||e;if(void 0!==r){if(r.conditionallyHidden())return void(i?this.jumpToStep(t+1,e):this.jumpToStep(t-1,e));n=this.$el.valid(),this.currentStep.valid=n,!1===n&&!1===r.viewed||(this.currentStep.hide(),this.setCurrentStep(r),this.$el.trigger("userform.form.changestep",[r.id]))}},s.prototype.nextStep=function(){this.jumpToStep(this.steps.indexOf(this.currentStep)+1,!0)},s.prototype.prevStep=function(){this.jumpToStep(this.steps.indexOf(this.currentStep)-1,!1)},t(".userform").each(o)})},"./client/src/bundles/bundle.js":function(t,e,r){"use strict";r("./client/src/bundles/UserForms.js")},0:function(t,e){t.exports=i18n},1:function(t,e){t.exports=jQuery}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./client/src/bundles/bundle.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./client/src/bundles/UserForms.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _i18n = __webpack_require__(0);
+
+var _i18n2 = _interopRequireDefault(_i18n);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var forms = document.querySelectorAll('form.userform');
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = forms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var form = _step.value;
+
+      var userForm = new UserForm(form);
+      userForm.init();
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+});
+
+var ProgressBar = function () {
+  function ProgressBar(dom, userForm) {
+    _classCallCheck(this, ProgressBar);
+
+    this.dom = dom;
+    this.userForm = userForm;
+    this.progressTitle = this.userForm.dom.querySelector('.progress-title');
+    this.buttons = this.dom.querySelectorAll('.step-button-jump');
+    this.currentStepNumber = this.dom.querySelector('.current-step-number');
+    this.init();
+  }
+
+  _createClass(ProgressBar, [{
+    key: 'init',
+    value: function init() {
+      var _this = this;
+
+      this.dom.style.display = 'initial';
+      var buttons = this.buttons;
+
+      var _loop = function _loop(button) {
+        button.addEventListener('click', function (e) {
+          e.preventDefault();
+          var stepNumber = parseInt(button.getAttribute('data-step'), 10);
+          _this.userForm.jumpToStep(stepNumber);
+          return false;
+        });
+      };
+
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = buttons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var button = _step2.value;
+
+          _loop(button);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      this.userForm.dom.addEventListener('userform.form.changestep', function (e) {
+        _this.update(e.detail.stepId);
+      });
+
+      this.update(0);
+    }
+  }, {
+    key: 'isVisible',
+    value: function isVisible(element) {
+      return !(element.style.display !== 'none' && element.style.visibility !== 'hidden' && element.classList.contains('hide'));
+    }
+  }, {
+    key: 'update',
+    value: function update(stepId) {
+      var stepNumber = this.userForm.getCurrentStepID() + 1;
+      var newStep = this.userForm.getStep(stepId);
+      var newStepElement = newStep.step;
+      var barWidth = stepId / (this.buttons.length - 1) * 100;
+
+      this.currentStepNumber.innerText = stepNumber;
+
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = this.dom.querySelectorAll('[aria-valuenow]')[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var e = _step3.value;
+
+          e.setAttribute('aria-valuenow', stepNumber);
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = this.buttons[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var button = _step4.value;
+
+          var parent = button.parentNode;
+          if (parseInt(button.getAttribute('data-step'), 10) === stepNumber && this.isVisible(button)) {
+            parent.classList.add('current');
+            parent.classList.add('viewed');
+
+            button.disabled = false;
+            break;
+          }
+          parent.classList.remove('current');
+        }
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
+      this.progressTitle.innerText = newStepElement.getAttribute('data-title');
+
+      barWidth = barWidth ? barWidth + '%' : '';
+      this.dom.querySelector('.progress-bar').style.width = barWidth;
+    }
+  }]);
+
+  return ProgressBar;
+}();
+
+var FormStep = function () {
+  function FormStep(step, userForm) {
+    _classCallCheck(this, FormStep);
+
+    this.step = step;
+    this.userForm = userForm;
+    this.viewed = false;
+    this.buttonHolder = null;
+    this.id = 0;
+
+    this.init();
+  }
+
+  _createClass(FormStep, [{
+    key: 'init',
+    value: function init() {
+      var _this2 = this;
+
+      var id = this.getHTMLId();
+      this.buttonHolder = document.querySelector('.step-button-wrapper[data-for=\'' + id + '\']');
+      ['userform.field.hide', 'userform.field.show'].forEach(function (action) {
+        _this2.buttonHolder.addEventListener(action, function () {
+          _this2.userForm.dom.trigger('userform.form.conditionalstep');
+        });
+      });
+    }
+  }, {
+    key: 'setId',
+    value: function setId(id) {
+      this.id = id;
+    }
+  }, {
+    key: 'getHTMLId',
+    value: function getHTMLId() {
+      return this.step.getAttribute('id');
+    }
+  }, {
+    key: 'show',
+    value: function show() {
+      this.step.setAttribute('aria-hidden', false);
+      this.step.classList.remove('hide');
+      this.step.classList.add('viewed');
+      this.viewed = true;
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      this.step.setAttribute('aria-hidden', true);
+      this.step.classList.add('hide');
+    }
+  }, {
+    key: 'conditionallyHidden',
+    value: function conditionallyHidden() {
+      var button = this.buttonHolder.querySelector('button');
+      return !(button.style.display !== 'none' && button.visibility !== 'hidden' && button.classList.contains('hide'));
+    }
+  }]);
+
+  return FormStep;
+}();
+
+var FormActions = function () {
+  function FormActions(dom, userForm) {
+    _classCallCheck(this, FormActions);
+
+    this.dom = dom;
+    this.userForm = userForm;
+    this.prevButton = dom.querySelector('.step-button-prev');
+    this.nextButton = dom.querySelector('.step-button-next');
+
+    this.init();
+  }
+
+  _createClass(FormActions, [{
+    key: 'init',
+    value: function init() {
+      var _this3 = this;
+
+      this.prevButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        window.triggerDispatchEvent(_this3.userForm.dom, 'userform.action.prev');
+      });
+      this.nextButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        window.triggerDispatchEvent(_this3.userForm.dom, 'userform.action.next');
+      });
+
+      this.update();
+
+      this.userForm.dom.addEventListener('userform.form.changestep', function () {
+        _this3.update();
+      });
+
+      this.userForm.dom.addEventListener('userform.form.conditionalstep', function () {
+        _this3.update();
+      });
+    }
+  }, {
+    key: 'update',
+    value: function update() {
+      var numberOfSteps = this.userForm.getNumberOfSteps();
+      var stepID = this.userForm.getCurrentStepID();
+      var i = null;
+      var lastStep = null;
+      for (i = numberOfSteps - 1; i >= 0; i--) {
+        lastStep = this.userForm.getStep(i);
+        if (!lastStep.conditionallyHidden()) {
+          if (stepID >= i) {
+            this.nextButton.parentNode.classList.add('hide');
+            this.prevButton.parentNode.classList.remove('hide');
+          } else {
+            this.nextButton.parentNode.classList.remove('hide');
+            this.prevButton.parentNode.classList.add('hide');
+          }
+
+          if (stepID >= i) {
+            this.dom.querySelector('.btn-toolbar').classList.remove('hide');
+          } else {
+            this.dom.querySelector('.btn-toolbar').classList.add('hide');
+          }
+
+          break;
+        }
+      }
+    }
+  }]);
+
+  return FormActions;
+}();
+
+var UserForm = function () {
+  function UserForm(form) {
+    _classCallCheck(this, UserForm);
+
+    this.dom = form;
+    this.CONSTANTS = {};
+    this.steps = [];
+    this.progressBar = null;
+    this.actions = null;
+    this.currentStep = null;
+
+    this.CONSTANTS.ENABLE_LIVE_VALIDATION = this.dom.getAttribute('livevalidation') !== undefined;
+    this.CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = this.dom.getAttribute('toperrors') !== undefined;
+  }
+
+  _createClass(UserForm, [{
+    key: 'init',
+    value: function init() {
+      this.initialiseFormSteps();
+    }
+  }, {
+    key: 'initialiseFormSteps',
+    value: function initialiseFormSteps() {
+      var _this4 = this;
+
+      var steps = this.dom.querySelectorAll('.form-step');
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
+
+      try {
+        for (var _iterator5 = steps[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var stepDom = _step5.value;
+
+          var step = new FormStep(stepDom, this);
+          step.hide();
+          this.addStep(step);
+        }
+      } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion5 && _iterator5.return) {
+            _iterator5.return();
+          }
+        } finally {
+          if (_didIteratorError5) {
+            throw _iteratorError5;
+          }
+        }
+      }
+
+      this.setCurrentStep(this.steps[0]);
+
+      var progressBarDom = this.dom.querySelector('.userform-progress');
+      if (progressBarDom) {
+        this.progressBar = new ProgressBar(progressBarDom, this);
+      }
+
+      var stepNavigation = this.dom.querySelector('.step-navigation');
+      if (stepNavigation) {
+        this.formActions = new FormActions(stepNavigation, this);
+        this.formActions.update();
+      }
+
+      this.setUpPing();
+
+      this.dom.addEventListener('userform.action.next', function () {
+        _this4.nextStep();
+      });
+
+      this.dom.addEventListener('userform.action.prev', function () {
+        _this4.prevStep();
+      });
+    }
+  }, {
+    key: 'setCurrentStep',
+    value: function setCurrentStep(step) {
+      if (!(step instanceof FormStep)) {
+        return;
+      }
+      this.currentStep = step;
+      this.currentStep.show();
+    }
+  }, {
+    key: 'addStep',
+    value: function addStep(step) {
+      if (!(step instanceof FormStep)) {
+        return;
+      }
+      step.setId(this.steps.length);
+      this.steps.push(step);
+    }
+  }, {
+    key: 'getNumberOfSteps',
+    value: function getNumberOfSteps() {
+      return this.steps.length;
+    }
+  }, {
+    key: 'getCurrentStepID',
+    value: function getCurrentStepID() {
+      return this.currentStep.id ? this.currentStep.id : 0;
+    }
+  }, {
+    key: 'getStep',
+    value: function getStep(index) {
+      return this.steps[index];
+    }
+  }, {
+    key: 'nextStep',
+    value: function nextStep() {
+      this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
+    }
+  }, {
+    key: 'prevStep',
+    value: function prevStep() {
+      this.jumpToStep(this.steps.indexOf(this.currentStep) - 1, true);
+    }
+  }, {
+    key: 'jumpToStep',
+    value: function jumpToStep(stepNumber, direction) {
+      var targetStep = this.steps[stepNumber];
+      var isValid = false;
+      var forward = direction === undefined ? true : direction;
+
+      if (targetStep === undefined) {
+        return;
+      }
+
+      if (targetStep.conditionallyHidden()) {
+        if (forward) {
+          this.jumpToStep(stepNumber + 1, direction);
+        } else {
+          this.jumpToStep(stepNumber - 1, direction);
+        }
+        return;
+      }
+
+      if (this.currentStep) {
+        this.currentStep.hide();
+      }
+
+      this.setCurrentStep(targetStep);
+
+      window.triggerDispatchEvent(this.dom, 'userform.form.changestep', {
+        stepId: targetStep.id
+      });
+    }
+  }, {
+    key: 'setUpPing',
+    value: function setUpPing() {
+      window.setInterval(function () {
+        fetch('UserDefinedFormController/ping');
+      }, 180 * 1000);
+    }
+  }]);
+
+  return UserForm;
+}();
+
+/***/ }),
+
+/***/ "./client/src/bundles/bundle.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__("./client/src/bundles/UserForms.js");
+
+/***/ }),
+
+/***/ 0:
+/***/ (function(module, exports) {
+
+module.exports = i18n;
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=userforms.js.map
