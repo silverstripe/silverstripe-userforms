@@ -4,17 +4,6 @@
 import Schema from 'async-validator';
 import i18n from 'i18n';
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const forms = document.querySelectorAll('form.userform');
-  for (const form of forms) {
-    const userForm = new UserForm(form);
-    userForm.init();
-  }
-
-});
-
-
 const isVisible = (element) => {
   return element.style.display !== 'none'
     && element.style.visibility !== 'hidden'
@@ -23,7 +12,6 @@ const isVisible = (element) => {
 
 
 class ProgressBar {
-
   constructor(dom, userForm) {
     this.dom = dom;
     this.userForm = userForm;
@@ -50,13 +38,12 @@ class ProgressBar {
     });
 
     this.update(0)
-
   }
 
   update(stepId) {
-    let stepNumber = this.userForm.getCurrentStepID() + 1;
-    let newStep = this.userForm.getStep(stepId);
-    let newStepElement = newStep.step;
+    const stepNumber = this.userForm.getCurrentStepID() + 1;
+    const newStep = this.userForm.getStep(stepId);
+    const newStepElement = newStep.step;
     let barWidth = (stepId / (this.buttons.length - 1)) * 100;
 
     this.currentStepNumber.innerText = stepNumber;
@@ -76,7 +63,6 @@ class ProgressBar {
         break;
       }
       parent.classList.remove('current');
-
     }
 
     this.progressTitle.innerText = newStepElement.getAttribute('data-title');
@@ -85,11 +71,9 @@ class ProgressBar {
     barWidth = barWidth ? `${barWidth}%` : '';
     this.dom.querySelector('.progress-bar').style.width = barWidth;
   }
-
 }
 
 class FormStep {
-
   constructor(step, userForm) {
     this.step = step;
     this.userForm = userForm;
@@ -167,13 +151,17 @@ class FormStep {
     return input.getAttribute('name');
   }
 
-  getValidationsDescriptors() {
+  getValidationsDescriptors(onlyDirty) {
     const descriptors = {}
     const fields = this.step.querySelectorAll('input, textarea, select');
 
     for (const field of fields) {
 
       if (!isVisible(field)) {
+        continue;
+      }
+
+      if (onlyDirty && !field.classList.contains('dirty')) {
         continue;
       }
 
@@ -206,32 +194,57 @@ class FormStep {
     return descriptors;
   }
 
-  validate() {
-    const descriptors = this.getValidationsDescriptors();
-    const validator = new Schema(descriptors);
+  validate(onlyDirty) {
+    const descriptors = this.getValidationsDescriptors(onlyDirty);
+    if (Object.keys(descriptors).length) {
+      const validator = new Schema(descriptors);
 
-    const formData = new FormData(this.userForm.dom);
-    var data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    
+      const formData = new FormData(this.userForm.dom);
+      var data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      const promise = new Promise((resolve, reject) => {
+        validator.validate(data, (errors, fields) => {
+          if (errors && errors.length) {
+            this.displayErrorMessages(errors);
+            reject(errors);
+          } else {
+            this.displayErrorMessages([]);
+            resolve();
+          }
+        })
+
+      });
+      return promise;
+    }
+
     const promise = new Promise((resolve, reject) => {
-      validator.validate(data, (errors, fields) => {
-        if (errors && errors.length) {
-          this.displayErrorMessages(errors);
-          reject(errors);
-        } else {
-          resolve();
-        }
-      })
-
+      resolve();
     });
     return promise;
+  }
 
+  enableLiveValidation() {
+    const fields = this.step.querySelectorAll('input, textarea, select');
+    for (const field of fields) {
+
+      field.addEventListener('change', () => {
+        field.classList.add('dirty');
+      });
+
+      field.addEventListener('focusout', () => {
+        this.validate(true).then(() => {
+        }).catch(() => {
+        });
+      })
+    }
   }
 
   displayErrorMessages(errors) {
+    const errorIds = [];
+
     for (const error of errors) {
       const fieldHolder = this.userForm.dom.querySelector(`#${error.field}`);
       if (fieldHolder) {
@@ -239,17 +252,27 @@ class FormStep {
         if (!errorLabel) {
           errorLabel = document.createElement('span');
           errorLabel.classList.add('error');
+          errorLabel.setAttribute('data-id', error.field);
         }
+        errorIds.push(error.field);
         errorLabel.innerHTML = error.message;
         fieldHolder.append(errorLabel);
       }
     }
-  }
 
+
+    // remove any thats not required
+    const messages = this.step.querySelectorAll('span.error');
+    for (const mesasge of messages) {
+      const id = mesasge.getAttribute('data-id');
+      if (errorIds.indexOf(id) === -1) {
+        mesasge.remove();
+      }
+    }
+  }
 }
 
 class FormActions {
-
   constructor(dom, userForm) {
     this.dom = dom;
     this.userForm = userForm;
@@ -313,12 +336,9 @@ class FormActions {
       }
     }
   }
-
 }
 
-
 class UserForm {
-
   constructor(form) {
     this.dom = form;
     this.CONSTANTS = {}; // Settings that come from the CMS.
@@ -341,6 +361,10 @@ class UserForm {
       const step = new FormStep(stepDom, this);
       step.hide();
       this.addStep(step);
+
+      if (this.CONSTANTS.ENABLE_LIVE_VALIDATION) {
+        step.enableLiveValidation();
+      }
     }
 
     this.setCurrentStep(this.steps[0]);
@@ -445,6 +469,13 @@ class UserForm {
       fetch('UserDefinedFormController/ping');
     }, 180 * 1000);
   }
-
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const forms = document.querySelectorAll('form.userform');
+  for (const form of forms) {
+    const userForm = new UserForm(form);
+    userForm.init();
+  }
+});

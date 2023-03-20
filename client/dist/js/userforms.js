@@ -88,36 +88,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  var forms = document.querySelectorAll('form.userform');
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = forms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var form = _step.value;
-
-      var userForm = new UserForm(form);
-      userForm.init();
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-});
-
 var isVisible = function isVisible(element) {
   return element.style.display !== 'none' && element.style.visibility !== 'hidden' && !element.classList.contains('hide');
 };
@@ -151,27 +121,27 @@ var ProgressBar = function () {
         });
       };
 
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (var _iterator2 = buttons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var button = _step2.value;
+        for (var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var button = _step.value;
 
           _loop(button);
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
           }
         } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
+          if (_didIteratorError) {
+            throw _iteratorError;
           }
         }
       }
@@ -192,38 +162,38 @@ var ProgressBar = function () {
 
       this.currentStepNumber.innerText = stepNumber;
 
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.dom.querySelectorAll('[aria-valuenow]')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var e = _step2.value;
+
+          e.setAttribute('aria-valuenow', stepNumber);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
       var _iteratorNormalCompletion3 = true;
       var _didIteratorError3 = false;
       var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator3 = this.dom.querySelectorAll('[aria-valuenow]')[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var e = _step3.value;
-
-          e.setAttribute('aria-valuenow', stepNumber);
-        }
-      } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
-          }
-        } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
-          }
-        }
-      }
-
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
-
-      try {
-        for (var _iterator4 = this.buttons[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var button = _step4.value;
+        for (var _iterator3 = this.buttons[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var button = _step3.value;
 
           var parent = button.parentNode;
           if (parseInt(button.getAttribute('data-step'), 10) === stepNumber && isVisible(button)) {
@@ -236,16 +206,16 @@ var ProgressBar = function () {
           parent.classList.remove('current');
         }
       } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return) {
-            _iterator4.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -352,7 +322,7 @@ var FormStep = function () {
     }
   }, {
     key: 'getValidationsDescriptors',
-    value: function getValidationsDescriptors() {
+    value: function getValidationsDescriptors(onlyDirty) {
       var _this3 = this;
 
       var descriptors = {};
@@ -361,6 +331,10 @@ var FormStep = function () {
       var _loop2 = function _loop2(field) {
 
         if (!isVisible(field)) {
+          return 'continue';
+        }
+
+        if (onlyDirty && !field.classList.contains('dirty')) {
           return 'continue';
         }
 
@@ -389,6 +363,87 @@ var FormStep = function () {
         }
       };
 
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = fields[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var field = _step4.value;
+
+          var _ret2 = _loop2(field);
+
+          if (_ret2 === 'continue') continue;
+        }
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
+      return descriptors;
+    }
+  }, {
+    key: 'validate',
+    value: function validate(onlyDirty) {
+      var _this4 = this;
+
+      var descriptors = this.getValidationsDescriptors(onlyDirty);
+      if (Object.keys(descriptors).length) {
+        var validator = new _asyncValidator2.default(descriptors);
+
+        var formData = new FormData(this.userForm.dom);
+        var data = {};
+        formData.forEach(function (value, key) {
+          data[key] = value;
+        });
+
+        var _promise = new Promise(function (resolve, reject) {
+          validator.validate(data, function (errors, fields) {
+            if (errors && errors.length) {
+              _this4.displayErrorMessages(errors);
+              reject(errors);
+            } else {
+              _this4.displayErrorMessages([]);
+              resolve();
+            }
+          });
+        });
+        return _promise;
+      }
+
+      var promise = new Promise(function (resolve, reject) {
+        resolve();
+      });
+      return promise;
+    }
+  }, {
+    key: 'enableLiveValidation',
+    value: function enableLiveValidation() {
+      var _this5 = this;
+
+      var fields = this.step.querySelectorAll('input, textarea, select');
+
+      var _loop3 = function _loop3(field) {
+
+        field.addEventListener('change', function () {
+          field.classList.add('dirty');
+        });
+
+        field.addEventListener('focusout', function () {
+          _this5.validate(true).then(function () {}).catch(function () {});
+        });
+      };
+
       var _iteratorNormalCompletion5 = true;
       var _didIteratorError5 = false;
       var _iteratorError5 = undefined;
@@ -397,9 +452,7 @@ var FormStep = function () {
         for (var _iterator5 = fields[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
           var field = _step5.value;
 
-          var _ret2 = _loop2(field);
-
-          if (_ret2 === 'continue') continue;
+          _loop3(field);
         }
       } catch (err) {
         _didIteratorError5 = true;
@@ -415,38 +468,12 @@ var FormStep = function () {
           }
         }
       }
-
-      return descriptors;
-    }
-  }, {
-    key: 'validate',
-    value: function validate() {
-      var _this4 = this;
-
-      var descriptors = this.getValidationsDescriptors();
-      var validator = new _asyncValidator2.default(descriptors);
-
-      var formData = new FormData(this.userForm.dom);
-      var data = {};
-      formData.forEach(function (value, key) {
-        data[key] = value;
-      });
-
-      var promise = new Promise(function (resolve, reject) {
-        validator.validate(data, function (errors, fields) {
-          if (errors && errors.length) {
-            _this4.displayErrorMessages(errors);
-            reject(errors);
-          } else {
-            resolve();
-          }
-        });
-      });
-      return promise;
     }
   }, {
     key: 'displayErrorMessages',
     value: function displayErrorMessages(errors) {
+      var errorIds = [];
+
       var _iteratorNormalCompletion6 = true;
       var _didIteratorError6 = false;
       var _iteratorError6 = undefined;
@@ -461,7 +488,9 @@ var FormStep = function () {
             if (!errorLabel) {
               errorLabel = document.createElement('span');
               errorLabel.classList.add('error');
+              errorLabel.setAttribute('data-id', error.field);
             }
+            errorIds.push(error.field);
             errorLabel.innerHTML = error.message;
             fieldHolder.append(errorLabel);
           }
@@ -477,6 +506,35 @@ var FormStep = function () {
         } finally {
           if (_didIteratorError6) {
             throw _iteratorError6;
+          }
+        }
+      }
+
+      var messages = this.step.querySelectorAll('span.error');
+      var _iteratorNormalCompletion7 = true;
+      var _didIteratorError7 = false;
+      var _iteratorError7 = undefined;
+
+      try {
+        for (var _iterator7 = messages[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+          var mesasge = _step7.value;
+
+          var id = mesasge.getAttribute('data-id');
+          if (errorIds.indexOf(id) === -1) {
+            mesasge.remove();
+          }
+        }
+      } catch (err) {
+        _didIteratorError7 = true;
+        _iteratorError7 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion7 && _iterator7.return) {
+            _iterator7.return();
+          }
+        } finally {
+          if (_didIteratorError7) {
+            throw _iteratorError7;
           }
         }
       }
@@ -501,27 +559,27 @@ var FormActions = function () {
   _createClass(FormActions, [{
     key: 'init',
     value: function init() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.prevButton.addEventListener('click', function (e) {
         e.preventDefault();
 
-        window.triggerDispatchEvent(_this5.userForm.dom, 'userform.action.prev');
+        window.triggerDispatchEvent(_this6.userForm.dom, 'userform.action.prev');
       });
       this.nextButton.addEventListener('click', function (e) {
         e.preventDefault();
 
-        window.triggerDispatchEvent(_this5.userForm.dom, 'userform.action.next');
+        window.triggerDispatchEvent(_this6.userForm.dom, 'userform.action.next');
       });
 
       this.update();
 
       this.userForm.dom.addEventListener('userform.form.changestep', function () {
-        _this5.update();
+        _this6.update();
       });
 
       this.userForm.dom.addEventListener('userform.form.conditionalstep', function () {
-        _this5.update();
+        _this6.update();
       });
     }
   }, {
@@ -584,32 +642,36 @@ var UserForm = function () {
   }, {
     key: 'initialiseFormSteps',
     value: function initialiseFormSteps() {
-      var _this6 = this;
+      var _this7 = this;
 
       var steps = this.dom.querySelectorAll('.form-step');
-      var _iteratorNormalCompletion7 = true;
-      var _didIteratorError7 = false;
-      var _iteratorError7 = undefined;
+      var _iteratorNormalCompletion8 = true;
+      var _didIteratorError8 = false;
+      var _iteratorError8 = undefined;
 
       try {
-        for (var _iterator7 = steps[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          var stepDom = _step7.value;
+        for (var _iterator8 = steps[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+          var stepDom = _step8.value;
 
           var step = new FormStep(stepDom, this);
           step.hide();
           this.addStep(step);
+
+          if (this.CONSTANTS.ENABLE_LIVE_VALIDATION) {
+            step.enableLiveValidation();
+          }
         }
       } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
+        _didIteratorError8 = true;
+        _iteratorError8 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion7 && _iterator7.return) {
-            _iterator7.return();
+          if (!_iteratorNormalCompletion8 && _iterator8.return) {
+            _iterator8.return();
           }
         } finally {
-          if (_didIteratorError7) {
-            throw _iteratorError7;
+          if (_didIteratorError8) {
+            throw _iteratorError8;
           }
         }
       }
@@ -630,11 +692,11 @@ var UserForm = function () {
       this.setUpPing();
 
       this.dom.addEventListener('userform.action.next', function () {
-        _this6.nextStep();
+        _this7.nextStep();
       });
 
       this.dom.addEventListener('userform.action.prev', function () {
-        _this6.prevStep();
+        _this7.prevStep();
       });
     }
   }, {
@@ -673,10 +735,10 @@ var UserForm = function () {
   }, {
     key: 'nextStep',
     value: function nextStep() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.currentStep.validate().then(function () {
-        _this7.jumpToStep(_this7.steps.indexOf(_this7.currentStep) + 1, true);
+        _this8.jumpToStep(_this8.steps.indexOf(_this8.currentStep) + 1, true);
       }).catch(function (errors) {});
     }
   }, {
@@ -725,6 +787,35 @@ var UserForm = function () {
 
   return UserForm;
 }();
+
+document.addEventListener("DOMContentLoaded", function () {
+  var forms = document.querySelectorAll('form.userform');
+  var _iteratorNormalCompletion9 = true;
+  var _didIteratorError9 = false;
+  var _iteratorError9 = undefined;
+
+  try {
+    for (var _iterator9 = forms[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+      var form = _step9.value;
+
+      var userForm = new UserForm(form);
+      userForm.init();
+    }
+  } catch (err) {
+    _didIteratorError9 = true;
+    _iteratorError9 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion9 && _iterator9.return) {
+        _iterator9.return();
+      }
+    } finally {
+      if (_didIteratorError9) {
+        throw _iteratorError9;
+      }
+    }
+  }
+});
 
 /***/ }),
 
