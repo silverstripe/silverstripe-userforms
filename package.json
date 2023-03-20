@@ -39,6 +39,7 @@
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
     "validator": "13.9.0",
+    "async-validator": "4.2.5",
     "mime": "^1.4.1",
     "qs": "^6.9.4",
     "react": "^16.13.1",

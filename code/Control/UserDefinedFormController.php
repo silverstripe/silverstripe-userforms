@@ -645,6 +645,7 @@ JS
             while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
             return el;
         }
+        window.closest = closest;
 
         function triggerDispatchEvent(element, eventName, arg) {
             const event = new CustomEvent(eventName, {

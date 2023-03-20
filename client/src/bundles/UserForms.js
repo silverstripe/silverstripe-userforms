@@ -1,7 +1,7 @@
 /**
  * @file Manages the multi-step navigation.
  */
-
+import Schema from 'async-validator';
 import i18n from 'i18n';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+const isVisible = (element) => {
+  return element.style.display !== 'none'
+    && element.style.visibility !== 'hidden'
+    && !element.classList.contains('hide');
+}
 
 
 class ProgressBar {
@@ -46,10 +53,6 @@ class ProgressBar {
 
   }
 
-  isVisible(element) {
-    return !(element.style.display !== 'none' && element.style.visibility !== 'hidden' && element.classList.contains('hide'))
-  }
-
   update(stepId) {
     let stepNumber = this.userForm.getCurrentStepID() + 1;
     let newStep = this.userForm.getStep(stepId);
@@ -65,7 +68,7 @@ class ProgressBar {
     for (const button of this.buttons) {
       const parent = button.parentNode;
       if (parseInt(button.getAttribute('data-step'), 10) === stepNumber
-          && this.isVisible(button)) {
+          && isVisible(button)) {
         parent.classList.add('current');
         parent.classList.add('viewed');
 
@@ -75,7 +78,6 @@ class ProgressBar {
       parent.classList.remove('current');
 
     }
-
 
     this.progressTitle.innerText = newStepElement.getAttribute('data-title');
 
@@ -130,7 +132,118 @@ class FormStep {
 
   conditionallyHidden() {
     const button = this.buttonHolder.querySelector('button');
-    return !(button.style.display !== 'none' && button.visibility !== 'hidden' && button.classList.contains('hide'))
+    return !(button.style.display !== 'none' && button.visibility !== 'hidden' && !button.classList.contains('hide'))
+  }
+
+
+  getValidatorType(input) {
+    if (input.getAttribute('type') === 'email') {
+      return 'email';
+    }
+    if (input.getAttribute('type') === 'date') {
+      return 'date';
+    }
+    if (input.classList.contains('numeric') || input.getAttribute('type') === 'numeric') {
+      return 'number';
+    }
+    return 'string';
+  }
+
+  getValidatorMessage(input) {
+    if (input.getAttribute('data-msg-required')) {
+      return input.getAttribute('data-msg-required');
+    }
+    return this.getFieldLabel(input) + ' is required';
+  }
+
+  getFieldLabel(input) {
+    const holder = window.closest(input, 'div.field');
+    if (holder) {
+      const label = holder.querySelector('label.left');
+      if (label) {
+        return label.innerText;
+      }
+    }
+    return input.getAttribute('name');
+  }
+
+  getValidationsDescriptors() {
+    const descriptors = {}
+    const fields = this.step.querySelectorAll('input, textarea, select');
+
+    for (const field of fields) {
+
+      if (!isVisible(field)) {
+        continue;
+      }
+
+      const label = this.getFieldLabel(field);
+      descriptors[field.getAttribute('name')] = {
+        title: label,
+        type: this.getValidatorType(field),
+        required: field.getAttribute('required') == 'required',
+        message: this.getValidatorMessage(field)
+      }
+
+      const min = field.getAttribute('data-rule-min');
+      const max = field.getAttribute('data-rule-max');
+      if (min !== null || max !== null) {
+        descriptors[field.getAttribute('name')]['asyncValidator'] = (rule, value) => {
+          return new Promise((resolve, reject) => {
+            if (min !== null && value < min) {
+              reject(`${label} cannot be less than ${min}`);
+            }
+            else if (max !== null && value > max) {
+              reject(`${label} cannot be greater than ${max}`);
+            } else {
+              resolve();
+            }
+          });
+        }
+      }
+    }
+
+    return descriptors;
+  }
+
+  validate() {
+    const descriptors = this.getValidationsDescriptors();
+    const validator = new Schema(descriptors);
+
+    const formData = new FormData(this.userForm.dom);
+    var data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    
+    const promise = new Promise((resolve, reject) => {
+      validator.validate(data, (errors, fields) => {
+        if (errors && errors.length) {
+          this.displayErrorMessages(errors);
+          reject(errors);
+        } else {
+          resolve();
+        }
+      })
+
+    });
+    return promise;
+
+  }
+
+  displayErrorMessages(errors) {
+    for (const error of errors) {
+      const fieldHolder = this.userForm.dom.querySelector(`#${error.field}`);
+      if (fieldHolder) {
+        let errorLabel = fieldHolder.querySelector('span.error');
+        if (!errorLabel) {
+          errorLabel = document.createElement('span');
+          errorLabel.classList.add('error');
+        }
+        errorLabel.innerHTML = error.message;
+        fieldHolder.append(errorLabel);
+      }
+    }
   }
 
 }
@@ -172,27 +285,30 @@ class FormActions {
 
   update() {
     const numberOfSteps = this.userForm.getNumberOfSteps();
-    const stepID = this.userForm.getCurrentStepID();
+    const stepId = this.userForm.getCurrentStepID();
     let i = null;
     let lastStep = null;
     for (i = numberOfSteps - 1; i >= 0; i--) {
       lastStep = this.userForm.getStep(i);
       if (!lastStep.conditionallyHidden()) {
-        if (stepID >= i) {
+        if (stepId >= i) {
           this.nextButton.parentNode.classList.add('hide');
-          this.prevButton.parentNode.classList.remove('hide');
         } else {
           this.nextButton.parentNode.classList.remove('hide');
+        }
+
+        if (stepId > 0 && stepId <= i) {
+          this.prevButton.parentNode.classList.remove('hide');
+        } else {
           this.prevButton.parentNode.classList.add('hide');
         }
 
-        if (stepID >= i) {
+        if (stepId >= i) {
           this.dom.querySelector('.btn-toolbar').classList.remove('hide');
         } else {
           this.dom.querySelector('.btn-toolbar').classList.add('hide');
         }
 
-        // this.userForm.dom.querySelector('.btn-toolbar');
         break;
       }
     }
@@ -282,7 +398,11 @@ class UserForm {
   }
 
   nextStep() {
-    this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
+    this.currentStep.validate().then(() => {
+      this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
+    }).catch((errors) => {
+
+    });
   }
 
   prevStep() {
