@@ -2,6 +2,7 @@
  * @file Manages the multi-step navigation.
  */
 import Schema from 'async-validator';
+import i18n from 'i18n';
 
 function isVisible(element) {
   return element.style.display !== 'none'
@@ -365,10 +366,15 @@ class UserForm {
 
     this.CONSTANTS.ENABLE_LIVE_VALIDATION = this.dom.getAttribute('livevalidation') !== undefined;
     this.CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = this.dom.getAttribute('toperrors') !== undefined;
+    this.CONSTANTS.ENABLE_ARE_YOU_SURE = this.dom.getAttribute('enableareyousure') !== undefined;
   }
 
   init() {
     this.initialiseFormSteps();
+
+    if (this.CONSTANTS.ENABLE_ARE_YOU_SURE) {
+      this.initAreYouSure();
+    }
   }
 
   initialiseFormSteps() {
@@ -495,6 +501,24 @@ class UserForm {
     window.setInterval(() => {
       fetch('UserDefinedFormController/ping');
     }, 180 * 1000);
+  }
+
+  initAreYouSure() {
+    window.addEventListener('beforeunload', (e) => {
+      const dirtyFields = this.dom.querySelectorAll('.dirty');
+      if (dirtyFields.length === 0) {
+        return true;
+      }
+      if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
+        if (window.hasUserFormsPropted) {
+          return;
+        }
+        window.hasUserFormsPropted = true;
+        window.setTimeout(function() {window.hasUserFormsPropted = false;}, 900);
+      }
+      e.preventDefault();
+      event.returnValue = i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!');
+    });
   }
 }
 

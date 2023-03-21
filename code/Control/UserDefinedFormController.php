@@ -166,10 +166,16 @@ class UserDefinedFormController extends PageController
      */
     public function Form()
     {
+        $page = $this->data();
         $form = UserForm::create($this, 'Form_' . $this->ID);
         /** @skipUpgrade */
         $form->setFormAction(Controller::join_links($this->Link(), 'Form'));
         $this->generateConditionalJavascript();
+
+        if ($page::config()->get('enable_are_you_sure')) {
+            $form->setAttribute('enableareyousure', 1);
+        }
+
         return $form;
     }
 
