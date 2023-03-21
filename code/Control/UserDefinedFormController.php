@@ -73,29 +73,17 @@ class UserDefinedFormController extends PageController
         $page = $this->data();
 
         // load the css
-        if (1 || !$page->config()->get('block_default_userforms_css')) {
+        if (!$page->config()->get('block_default_userforms_css')) {
             Requirements::css('silverstripe/userforms:client/dist/styles/userforms.css');
         }
 
         // load the jquery
-        if (1 || !$page->config()->get('block_default_userforms_js')) {
-//            Requirements::javascript('silverstripe/userforms:client/dist/js/jquery.min.js');
-//            Requirements::javascript(
-//                'silverstripe/userforms:client/dist/js/jquery-validation/jquery.validate.min.js'
-//            );
+        if (!$page->config()->get('block_default_userforms_js')) {
             Requirements::javascript('silverstripe/admin:client/dist/js/i18n.js');
             Requirements::add_i18n_javascript('silverstripe/userforms:client/lang');
             Requirements::javascript('silverstripe/userforms:client/dist/js/userforms.js');
 
             $this->addUserFormsValidatei18n();
-
-            // Bind a confirmation message when navigating away from a partially completed form.
-            if ($page::config()->get('enable_are_you_sure')) {
-// TODO:
-//                Requirements::javascript(
-//                    'silverstripe/userforms:client/dist/js/jquery.are-you-sure/jquery.are-you-sure.js'
-//                );
-            }
         }
     }
 

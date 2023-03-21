@@ -2,14 +2,12 @@
  * @file Manages the multi-step navigation.
  */
 import Schema from 'async-validator';
-import i18n from 'i18n';
 
-const isVisible = (element) => {
+function isVisible(element) {
   return element.style.display !== 'none'
     && element.style.visibility !== 'hidden'
     && !element.classList.contains('hide');
 }
-
 
 class ProgressBar {
   constructor(dom, userForm) {
@@ -24,20 +22,18 @@ class ProgressBar {
   init() {
     this.dom.style.display = 'initial';
     const buttons = this.buttons;
-    for (const button of buttons) {
+    buttons.forEach((button) => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const stepNumber = parseInt(button.getAttribute('data-step'), 10);
-        this.userForm.jumpToStep(stepNumber);
+        this.userForm.jumpToStep(stepNumber - 1);
         return false;
       });
-    }
-
+    });
     this.userForm.dom.addEventListener('userform.form.changestep', (e) => {
       this.update(e.detail.stepId);
     });
-
-    this.update(0)
+    this.update(0);
   }
 
   update(stepId) {
@@ -48,22 +44,22 @@ class ProgressBar {
 
     this.currentStepNumber.innerText = stepNumber;
 
-    for (const e of this.dom.querySelectorAll('[aria-valuenow]')) {
+    this.dom.querySelectorAll('[aria-valuenow]').forEach((e) => {
       e.setAttribute('aria-valuenow', stepNumber);
-    }
+    });
 
-    for (const button of this.buttons) {
-      const parent = button.parentNode;
-      if (parseInt(button.getAttribute('data-step'), 10) === stepNumber
-          && isVisible(button)) {
+    this.buttons.forEach((button) => {
+      const btn = button;
+      const parent = btn.parentNode;
+      if (parseInt(btn.getAttribute('data-step'), 10) === stepNumber
+        && isVisible(btn)) {
         parent.classList.add('current');
         parent.classList.add('viewed');
 
-        button.disabled = false; // .removeAttribute('disabled');
-        break;
+        btn.disabled = false;
       }
       parent.classList.remove('current');
-    }
+    });
 
     this.progressTitle.innerText = newStepElement.getAttribute('data-title');
 
@@ -89,9 +85,9 @@ class FormStep {
     this.buttonHolder = document.querySelector(`.step-button-wrapper[data-for='${id}']`);
     ['userform.field.hide', 'userform.field.show'].forEach((action) => {
       this.buttonHolder.addEventListener(action, () => {
-        this.userForm.dom.trigger('userform.form.conditionalstep')
+        this.userForm.dom.trigger('userform.form.conditionalstep');
       });
-    })
+    });
   }
 
   setId(id) {
@@ -116,7 +112,7 @@ class FormStep {
 
   conditionallyHidden() {
     const button = this.buttonHolder.querySelector('button');
-    return !(button.style.display !== 'none' && button.visibility !== 'hidden' && !button.classList.contains('hide'))
+    return !(button.style.display !== 'none' && button.visibility !== 'hidden' && !button.classList.contains('hide'));
   }
 
 
@@ -137,13 +133,17 @@ class FormStep {
     if (input.getAttribute('data-msg-required')) {
       return input.getAttribute('data-msg-required');
     }
-    return this.getFieldLabel(input) + ' is required';
+    return `${this.getFieldLabel(input)} is required`;
+  }
+
+  getHolderForField(input) {
+    return window.closest(input, '.field');
   }
 
   getFieldLabel(input) {
-    const holder = window.closest(input, 'div.field');
+    const holder = this.getHolderForField(input);
     if (holder) {
-      const label = holder.querySelector('label.left');
+      const label = holder.querySelector('label.left, legend.left');
       if (label) {
         return label.innerText;
       }
@@ -152,44 +152,54 @@ class FormStep {
   }
 
   getValidationsDescriptors(onlyDirty) {
-    const descriptors = {}
+    const descriptors = {};
     const fields = this.step.querySelectorAll('input, textarea, select');
 
-    for (const field of fields) {
+    fields.forEach((field) => {
+      if (isVisible(field) && (!onlyDirty || (onlyDirty && !field.classList.contains('dirty')))) {
+        const label = this.getFieldLabel(field);
+        const holder = this.getHolderForField(field);
 
-      if (!isVisible(field)) {
-        continue;
-      }
+        descriptors[field.getAttribute('name')] = {
+          title: label,
+          type: this.getValidatorType(field),
+          required: holder.classList.contains('requiredField'),
+          message: this.getValidatorMessage(field)
+        };
 
-      if (onlyDirty && !field.classList.contains('dirty')) {
-        continue;
-      }
+        const min = field.getAttribute('data-rule-min');
+        const max = field.getAttribute('data-rule-max');
+        if (min !== null || max !== null) {
+          descriptors[field.getAttribute('name')].asyncValidator = function numericValidator(rule, value) {
+            return new Promise((resolve, reject) => {
+              if (min !== null && value < min) {
+                reject(`${label} cannot be less than ${min}`);
+              } else if (max !== null && value > max) {
+                reject(`${label} cannot be greater than ${max}`);
+              } else {
+                resolve();
+              }
+            });
+          };
+        }
 
-      const label = this.getFieldLabel(field);
-      descriptors[field.getAttribute('name')] = {
-        title: label,
-        type: this.getValidatorType(field),
-        required: field.getAttribute('required') == 'required',
-        message: this.getValidatorMessage(field)
-      }
-
-      const min = field.getAttribute('data-rule-min');
-      const max = field.getAttribute('data-rule-max');
-      if (min !== null || max !== null) {
-        descriptors[field.getAttribute('name')]['asyncValidator'] = (rule, value) => {
-          return new Promise((resolve, reject) => {
-            if (min !== null && value < min) {
-              reject(`${label} cannot be less than ${min}`);
-            }
-            else if (max !== null && value > max) {
-              reject(`${label} cannot be greater than ${max}`);
-            } else {
-              resolve();
-            }
-          });
+        const minL = field.getAttribute('data-rule-minlength');
+        const maxL = field.getAttribute('data-rule-maxlength');
+        if (minL !== null || maxL !== null) {
+          descriptors[field.getAttribute('name')].asyncValidator = function lengthValidator(rule, value) {
+            return new Promise((resolve, reject) => {
+              if (minL !== null && value.length < minL) {
+                reject(`${label} cannot be shorter than ${minL}`);
+              } else if (maxL !== null && value.length > maxL) {
+                reject(`${label} cannot be longer than ${maxL}`);
+              } else {
+                resolve();
+              }
+            });
+          };
         }
       }
-    }
+    });
 
     return descriptors;
   }
@@ -200,13 +210,22 @@ class FormStep {
       const validator = new Schema(descriptors);
 
       const formData = new FormData(this.userForm.dom);
-      var data = {};
+      const data = {};
       formData.forEach((value, key) => {
         data[key] = value;
       });
 
+      // now check for unselected checkboxes and radio buttons
+      const selectableFields = this.step.querySelectorAll('input[type="radio"],input[type="checkbox"]');
+      selectableFields.forEach((selectableField) => {
+        const fieldName = selectableField.getAttribute('name');
+        if (typeof data[fieldName] === 'undefined') {
+          data[fieldName] = '';
+        }
+      });
+
       const promise = new Promise((resolve, reject) => {
-        validator.validate(data, (errors, fields) => {
+        validator.validate(data, (errors) => {
           if (errors && errors.length) {
             this.displayErrorMessages(errors);
             reject(errors);
@@ -214,13 +233,12 @@ class FormStep {
             this.displayErrorMessages([]);
             resolve();
           }
-        })
-
+        });
       });
       return promise;
     }
 
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve) => {
       resolve();
     });
     return promise;
@@ -228,8 +246,7 @@ class FormStep {
 
   enableLiveValidation() {
     const fields = this.step.querySelectorAll('input, textarea, select');
-    for (const field of fields) {
-
+    fields.forEach((field) => {
       field.addEventListener('change', () => {
         field.classList.add('dirty');
       });
@@ -238,14 +255,14 @@ class FormStep {
         this.validate(true).then(() => {
         }).catch(() => {
         });
-      })
-    }
+      });
+    });
   }
 
   displayErrorMessages(errors) {
     const errorIds = [];
 
-    for (const error of errors) {
+    errors.forEach((error) => {
       const fieldHolder = this.userForm.dom.querySelector(`#${error.field}`);
       if (fieldHolder) {
         let errorLabel = fieldHolder.querySelector('span.error');
@@ -258,17 +275,17 @@ class FormStep {
         errorLabel.innerHTML = error.message;
         fieldHolder.append(errorLabel);
       }
-    }
-
+    });
 
     // remove any thats not required
     const messages = this.step.querySelectorAll('span.error');
-    for (const mesasge of messages) {
+
+    messages.forEach((mesasge) => {
       const id = mesasge.getAttribute('data-id');
       if (errorIds.indexOf(id) === -1) {
         mesasge.remove();
       }
-    }
+    });
   }
 }
 
@@ -303,7 +320,6 @@ class FormActions {
     this.userForm.dom.addEventListener('userform.form.conditionalstep', () => {
       this.update();
     });
-
   }
 
   update() {
@@ -357,15 +373,15 @@ class UserForm {
 
   initialiseFormSteps() {
     const steps = this.dom.querySelectorAll('.form-step');
-    for (const stepDom of steps) {
+
+    steps.forEach((stepDom) => {
       const step = new FormStep(stepDom, this);
       step.hide();
       this.addStep(step);
-
       if (this.CONSTANTS.ENABLE_LIVE_VALIDATION) {
         step.enableLiveValidation();
       }
-    }
+    });
 
     this.setCurrentStep(this.steps[0]);
 
@@ -384,12 +400,27 @@ class UserForm {
 
     this.dom.addEventListener('userform.action.next', () => {
       this.nextStep();
-    })
+    });
 
     this.dom.addEventListener('userform.action.prev', () => {
       this.prevStep();
-    })
+    });
 
+    this.dom.addEventListener('submit', (e) => {
+      this.validateForm(e);
+    });
+  }
+
+
+  validateForm(e) {
+    e.preventDefault();
+    this.currentStep.validate()
+      .then((errors) => {
+        if (!errors) {
+          this.dom.submit();
+        }
+      })
+      .catch(() => {});
   }
 
   setCurrentStep(step) {
@@ -424,19 +455,15 @@ class UserForm {
   nextStep() {
     this.currentStep.validate().then(() => {
       this.jumpToStep(this.steps.indexOf(this.currentStep) + 1, true);
-    }).catch((errors) => {
-
-    });
+    }).catch(() => {});
   }
 
   prevStep() {
     this.jumpToStep(this.steps.indexOf(this.currentStep) - 1, true);
   }
 
-  jumpToStep(stepNumber, direction)
-  {
+  jumpToStep(stepNumber, direction) {
     const targetStep = this.steps[stepNumber];
-    let isValid = false;
     const forward = direction === undefined ? true : direction;
 
     if (targetStep === undefined) {
@@ -472,10 +499,10 @@ class UserForm {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const forms = document.querySelectorAll('form.userform');
-  for (const form of forms) {
+  forms.forEach((form) => {
     const userForm = new UserForm(form);
     userForm.init();
-  }
+  });
 });

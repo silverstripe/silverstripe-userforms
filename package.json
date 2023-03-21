@@ -37,6 +37,7 @@
     "node-dir": "^0.1.17"
   },
   "dependencies": {
+    "jquery": "^3.5.0",
     "babel-preset-es2016": "^6.24.1",
     "validator": "13.9.0",
     "async-validator": "4.2.5",
