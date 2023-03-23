@@ -4,6 +4,9 @@
 import Schema from 'async-validator';
 import i18n from 'i18n';
 
+const DIRTY_CLASS = 'dirty';
+const FOCUSED_CLASS = 'focused';
+
 function isVisible(element) {
   return element.style.display !== 'none'
     && element.style.visibility !== 'hidden'
@@ -157,7 +160,7 @@ class FormStep {
     const fields = this.step.querySelectorAll('input, textarea, select');
 
     fields.forEach((field) => {
-      if (isVisible(field) && (!onlyDirty || (onlyDirty && !field.classList.contains('dirty')))) {
+      if (isVisible(field) && (!onlyDirty || (onlyDirty && field.classList.contains(FOCUSED_CLASS)))) {
         const label = this.getFieldLabel(field);
         const holder = this.getHolderForField(field);
 
@@ -248,8 +251,12 @@ class FormStep {
   enableLiveValidation() {
     const fields = this.step.querySelectorAll('input, textarea, select');
     fields.forEach((field) => {
+      field.addEventListener('focusin', () => {
+        field.classList.add(FOCUSED_CLASS);
+      });
+
       field.addEventListener('change', () => {
-        field.classList.add('dirty');
+        field.classList.add(DIRTY_CLASS);
       });
 
       field.addEventListener('focusout', () => {
@@ -505,7 +512,7 @@ class UserForm {
 
   initAreYouSure() {
     window.addEventListener('beforeunload', (e) => {
-      const dirtyFields = this.dom.querySelectorAll('.dirty');
+      const dirtyFields = this.dom.querySelectorAll(`.${DIRTY_CLASS}`);
       if (dirtyFields.length === 0) {
         return true;
       }

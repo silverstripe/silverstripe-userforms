@@ -210,8 +210,24 @@ class UserDefinedFormController extends PageController
         // Only add customScript if $default or $rules is defined
         if ($rules) {
             Requirements::customScript(<<<JS
+        function closest(el, sel) {
+            while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+            return el;
+        }
+        window.closest = closest;
+
+        function triggerDispatchEvent(element, eventName, arg) {
+            const event = new CustomEvent(eventName, {
+                detail: arg
+            });
+            element.dispatchEvent(event);
+        }
+        window.triggerDispatchEvent = triggerDispatchEvent;
                 document.addEventListener("DOMContentLoaded", function() {
-                    {$rules}
+                    var form = document.querySelector('form.userform');
+                    if (form) {
+                        {$rules}
+                    }
                 })
 JS
                 , 'UserFormsConditional-' . $form->ID);
@@ -632,41 +648,22 @@ JS
 
             $result .= <<<EOS
 \n
-    var form = document.querySelector('form.userform');
-    if (form) {
+    "{$events}".split(',').forEach(function(event) {
+        form.addEventListener(event, function(e) {
 
-        function closest(el, sel) {
-            while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
-            return el;
-        }
-        window.closest = closest;
-
-        function triggerDispatchEvent(element, eventName, arg) {
-            const event = new CustomEvent(eventName, {
-                detail: arg
-            });
-            element.dispatchEvent(event);
-        }
-        window.triggerDispatchEvent = triggerDispatchEvent;
-
-        var selectors = "{$selectors}".split(',');
-        "{$events}".split(',').forEach(function(event) {
-            form.addEventListener(event, function(e) {
-                selectors.forEach(function(selector) {
-                    if (e.target.matches(selector)) {
-                        if ({$operations}) {
-                            document.querySelector('{$target}').{$rule['view']};
-                            triggerDispatchEvent({$holder}, '{$rule['holder_event']}');
-                            // {$holder}.{$rule['view']}.trigger('{$rule['holder_event']}');
-                        } else {
-                            document.querySelector('{$target}').{$rule['opposite']};
-                            triggerDispatchEvent({$holder}, '{$rule['holder_event_opposite']}');
-                        }
+            "{$selectors}".split(',').forEach(function(selector) {
+                if (e.target.matches(selector)) {
+                    if ({$operations}) {
+                        document.querySelector('{$target}').{$rule['view']};
+                        triggerDispatchEvent({$holder}, '{$rule['holder_event']}');
+                    } else {
+                        document.querySelector('{$target}').{$rule['opposite']};
+                        triggerDispatchEvent({$holder}, '{$rule['holder_event_opposite']}');
                     }
-                })
-            });
+                }
+            })
         });
-    }
+    });
 EOS;
             if ($isFormStep) {
                 // Hide the step jump button if the FormStep has is initially hidden.
