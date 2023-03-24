@@ -3,11 +3,11 @@
 namespace SilverStripe\UserForms\Control;
 
 use Exception;
-use PageController;
 use Psr\Log\LoggerInterface;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
+use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPRequest;
@@ -40,7 +40,7 @@ use Swift_RfcComplianceException;
  *
  * @package userforms
  */
-class UserDefinedFormController extends PageController
+class UserDefinedFormController extends ContentController
 {
     private static $finished_anchor = '#uff';
 
