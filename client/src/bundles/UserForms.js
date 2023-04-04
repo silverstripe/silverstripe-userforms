@@ -2,7 +2,6 @@
  * @file Manages the multi-step navigation.
  */
 import Schema from 'async-validator';
-import i18n from 'i18n';
 
 const DIRTY_CLASS = 'dirty';
 const FOCUSED_CLASS = 'focused';
@@ -155,8 +154,7 @@ class FormStep {
     return input.getAttribute('name');
   }
 
-  isInputNumeric(input)
-  {
+  isInputNumeric(input) {
     return this.getValidatorType(input) === 'number';
   }
 
@@ -169,7 +167,9 @@ class FormStep {
     const fields = this.step.querySelectorAll('input, textarea, select');
 
     fields.forEach((field) => {
-      if (isVisible(field) && (!onlyDirty || (onlyDirty && field.classList.contains(FOCUSED_CLASS)))) {
+      if (isVisible(field)
+          && (!onlyDirty || (onlyDirty && field.classList.contains(FOCUSED_CLASS)))
+      ) {
         const label = this.getFieldLabel(field);
         const holder = this.getHolderForField(field);
 
@@ -224,11 +224,12 @@ class FormStep {
       const formData = new FormData(this.userForm.dom);
       const data = {};
       formData.forEach((value, key) => {
+        let sanitised = value;
         const input = this.getInputByName(key);
-        if (input && this.isInputNumeric(input)) {
-          value = parseFloat(value); // because FormData reads all the values as strings
+        if (sanitised && input && this.isInputNumeric(input)) {
+          sanitised = parseFloat(sanitised); // because FormData reads all the values as strings
         }
-        data[key] = value;
+        data[key] = sanitised;
       });
 
       // now check for unselected checkboxes and radio buttons
@@ -239,8 +240,6 @@ class FormStep {
           data[fieldName] = '';
         }
       });
-
-      console.log(data);
 
       const promise = new Promise((resolve, reject) => {
         validator.validate(data, (errors) => {
@@ -532,13 +531,23 @@ class UserForm {
       }
       if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
         if (window.hasUserFormsPropted) {
-          return;
+          return true;
         }
         window.hasUserFormsPropted = true;
-        window.setTimeout(function() {window.hasUserFormsPropted = false;}, 900);
+        window.setTimeout(
+          () => {
+            window.hasUserFormsPropted = false;
+          },
+          900
+        );
       }
       e.preventDefault();
-      event.returnValue = i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!');
+      if (typeof window.i18n !== 'undefined') {
+        event.returnValue = window.i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!');
+      } else {
+        event.returnValue = 'You have unsaved changes!';
+      }
+      return true;
     });
   }
 }
