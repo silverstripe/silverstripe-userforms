@@ -155,6 +155,15 @@ class FormStep {
     return input.getAttribute('name');
   }
 
+  isInputNumeric(input)
+  {
+    return this.getValidatorType(input) === 'number';
+  }
+
+  getInputByName(name) {
+    return this.step.querySelector(`input[name="${name}"]`);
+  }
+
   getValidationsDescriptors(onlyDirty) {
     const descriptors = {};
     const fields = this.step.querySelectorAll('input, textarea, select');
@@ -204,7 +213,6 @@ class FormStep {
         }
       }
     });
-
     return descriptors;
   }
 
@@ -216,6 +224,10 @@ class FormStep {
       const formData = new FormData(this.userForm.dom);
       const data = {};
       formData.forEach((value, key) => {
+        const input = this.getInputByName(key);
+        if (input && this.isInputNumeric(input)) {
+          value = parseFloat(value); // because FormData reads all the values as strings
+        }
         data[key] = value;
       });
 
@@ -227,6 +239,8 @@ class FormStep {
           data[fieldName] = '';
         }
       });
+
+      console.log(data);
 
       const promise = new Promise((resolve, reject) => {
         validator.validate(data, (errors) => {
