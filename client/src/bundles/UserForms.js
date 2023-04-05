@@ -525,32 +525,38 @@ class UserForm {
     }, 180 * 1000);
   }
 
-  initAreYouSure() {
-    window.addEventListener('beforeunload', (e) => {
-      const dirtyFields = this.dom.querySelectorAll(`.${DIRTY_CLASS}`);
-      if (dirtyFields.length === 0) {
+  doConfirm(e) {
+    const dirtyFields = this.dom.querySelectorAll(`.${DIRTY_CLASS}`);
+    if (dirtyFields.length === 0) {
+      return true;
+    }
+    if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
+      if (window.hasUserFormsPropted) {
         return true;
       }
-      if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
-        if (window.hasUserFormsPropted) {
-          return true;
-        }
-        window.hasUserFormsPropted = true;
-        window.setTimeout(
-          () => {
-            window.hasUserFormsPropted = false;
-          },
-          900
-        );
-      }
-      e.preventDefault();
-      if (typeof window.i18n !== 'undefined') {
-        event.returnValue = window.i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!');
-      } else {
-        event.returnValue = 'You have unsaved changes!';
-      }
-      return true;
-    });
+      window.hasUserFormsPropted = true;
+      window.setTimeout(
+        () => {
+          window.hasUserFormsPropted = false;
+        },
+        900
+      );
+    }
+    e.preventDefault();
+    if (typeof window.i18n !== 'undefined') {
+      event.returnValue = window.i18n._t('UserForms.LEAVE_CONFIRMATION', 'You have unsaved changes!');
+    } else {
+      event.returnValue = 'You have unsaved changes!';
+    }
+    return true;
+  }
+
+  initAreYouSure() {
+    const confirmFunction = this.doConfirm.bind(this);
+    this.dom.addEventListener('submit', (e) => {
+      window.removeEventListener('beforeunload', confirmFunction);
+    })
+    window.addEventListener('beforeunload', confirmFunction);
   }
 }
 
