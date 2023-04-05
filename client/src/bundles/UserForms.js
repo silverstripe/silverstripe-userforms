@@ -86,11 +86,13 @@ class FormStep {
   init() {
     const id = this.getHTMLId();
     this.buttonHolder = document.querySelector(`.step-button-wrapper[data-for='${id}']`);
-    ['userform.field.hide', 'userform.field.show'].forEach((action) => {
-      this.buttonHolder.addEventListener(action, () => {
-        this.userForm.dom.trigger('userform.form.conditionalstep');
+    if (this.buttonHolder) {
+      ['userform.field.hide', 'userform.field.show'].forEach((action) => {
+        this.buttonHolder.addEventListener(action, () => {
+          this.userForm.dom.trigger('userform.form.conditionalstep');
+        });
       });
-    });
+    }
   }
 
   setId(id) {

@@ -186,9 +186,9 @@ class EditableCustomRule extends DataObject
                 if ($checkboxField) {
                     if ($formFieldWatch->isCheckBoxGroupField()) {
                         $expression = sprintf(
-                            "$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
+                            '[...document.querySelectorAll("%s:checked")].map(function(i) {  return i ? i.getAttribute("value") : null; }).indexOf(\'%s\') > -1',
+                            $target,
                             $fieldValue,
-                            $target
                         );
                     } else {
                         $expression = "{$target}.prop('checked')";
