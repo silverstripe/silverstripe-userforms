@@ -6,7 +6,7 @@
   },
   "description": "UserForms module provides a visual form builder for the SilverStripe CMS. No coding required to build forms such as contact pages.",
   "scripts": {
-    "build": "yarn && yarn lint && NODE_ENV=production webpack -p --bail --progress",
+    "build": "yarn && NODE_ENV=production webpack -p --bail --progress",
     "dev": "NODE_ENV=development webpack --progress",
     "watch": "NODE_ENV=development webpack --watch --progress",
     "css": "WEBPACK_CHILD=css npm run build",

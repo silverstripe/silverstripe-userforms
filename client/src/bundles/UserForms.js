@@ -128,6 +128,9 @@ class FormStep {
     if (input.getAttribute('type') === 'date') {
       return 'date';
     }
+    if (input.getAttribute('type') === 'file') {
+      return 'object';
+    }
     if (input.classList.contains('numeric') || input.getAttribute('type') === 'numeric') {
       return 'number';
     }
@@ -158,6 +161,10 @@ class FormStep {
 
   isInputNumeric(input) {
     return this.getValidatorType(input) === 'number';
+  }
+
+  isInputFile(input) {
+    return input.getAttribute('type') === 'file';
   }
 
   getInputByName(name) {

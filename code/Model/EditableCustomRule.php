@@ -174,7 +174,8 @@ class EditableCustomRule extends DataObject
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
             case 'IsBlank':
-                $expression = ($checkboxField || $radioField) ? "!{$target}.is(\":checked\")"
+                $expression = ($checkboxField || $radioField)
+                    ? sprintf("document.querySelector(\"%s:checked\") !== null", $target)
                     : "document.querySelector(\"{$target}\").value == ''";
                 if ((string) $this->ConditionOption === 'IsNotBlank') {
                     //Negate
@@ -201,7 +202,7 @@ class EditableCustomRule extends DataObject
                         $fieldValue
                     );
                 } else {
-                    $expression = sprintf('%s.value == "%s"', $target, $fieldValue);
+                    $expression = sprintf('document.querySelector("%s").value == "%s"', $target, $fieldValue);
                 }
 
                 if ((string) $this->ConditionOption === 'ValueNot') {
