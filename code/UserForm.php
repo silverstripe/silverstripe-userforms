@@ -185,10 +185,13 @@ trait UserForm
         $this->beforeUpdateCMSFields(function ($fields) {
 
             // remove
-            $fields->removeByName('OnCompleteMessageLabel');
-            $fields->removeByName('OnCompleteMessage');
-            $fields->removeByName('Fields');
-            $fields->removeByName('EmailRecipients');
+            $fields->removeByName([
+                'OnCompleteMessageLabel',
+                'OnCompleteMessage',
+                'Fields',
+                'EmailRecipients',
+                'Submissions'
+            ]);
 
             // define tabs
             $fields->findOrMakeTab('Root.FormOptions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIGURATION', 'Configuration'));
