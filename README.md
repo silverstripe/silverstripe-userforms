@@ -6,10 +6,6 @@
 UserForms enables CMS users to create dynamic forms via a drag and drop interface
 and without getting involved in any PHP code.
 
-## Requirements
-
-See the "require" section of [composer.json](https://github.com/silverstripe/silverstripe-userforms/blob/master/composer.json)
-
 ## Features
 
 *  Construct a form using all major form fields (text, email, dropdown, radio, checkbox..)
@@ -25,8 +21,6 @@ See the "require" section of [composer.json](https://github.com/silverstripe/sil
 ```sh
 composer require silverstripe/userforms
 ```
-
-You'll also need to run `dev/build`. You should see a new page type in the CMS 'User Defined Form'. This has a new 'Form' tab which has your form builder.
 
 ## Spam protection
 
