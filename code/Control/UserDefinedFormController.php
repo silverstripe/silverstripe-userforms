@@ -207,22 +207,29 @@ class UserDefinedFormController extends PageController
             $rules .= $this->buildWatchJS($watch);
         }
 
+        // add the custom scripts thats used by the steps.
+        Requirements::customScript(<<<JS
+            function closest(el, sel) {
+                while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+                return el;
+            }
+            window.closest = closest;
+
+            function triggerDispatchEvent(element, eventName, arg) {
+                const event = new CustomEvent(eventName, {
+                    detail: arg
+                });
+                element.dispatchEvent(event);
+            }
+            window.triggerDispatchEvent = triggerDispatchEvent;
+JS
+        );
+
+
+
         // Only add customScript if $default or $rules is defined
         if ($rules) {
             Requirements::customScript(<<<JS
-        function closest(el, sel) {
-            while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
-            return el;
-        }
-        window.closest = closest;
-
-        function triggerDispatchEvent(element, eventName, arg) {
-            const event = new CustomEvent(eventName, {
-                detail: arg
-            });
-            element.dispatchEvent(event);
-        }
-        window.triggerDispatchEvent = triggerDispatchEvent;
                 document.addEventListener("DOMContentLoaded", function() {
                     var form = document.querySelector('form.userform');
                     if (form) {
