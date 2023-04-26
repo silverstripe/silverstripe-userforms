@@ -189,13 +189,12 @@ trait UserForm
                 'OnCompleteMessageLabel',
                 'OnCompleteMessage',
                 'Fields',
-                'EmailRecipients',
-                'Submissions'
+                'EmailRecipients'
             ]);
 
             // define tabs
-            $fields->findOrMakeTab('Root.FormOptions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIGURATION', 'Configuration'));
-            $fields->findOrMakeTab('Root.Recipients', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.RECIPIENTS', 'Recipients'));
+            $fields->findOrMakeTab('Root.FormOptions')->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIGURATION', 'Configuration'));
+            $fields->findOrMakeTab('Root.Recipients')->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.RECIPIENTS', 'Recipients'));
 
 
             // text to show on complete
@@ -240,7 +239,7 @@ trait UserForm
             $fields->addFieldsToTab('Root.FormOptions', $this->getFormOptions());
 
             $submissions = $this->getSubmissionsGridField();
-            $fields->findOrMakeTab('Root.Submissions', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));
+            $fields->findOrMakeTab('Root.Submissions')->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));
             $fields->addFieldToTab('Root.Submissions', $submissions);
             $fields->addFieldToTab(
                 'Root.FormOptions',
