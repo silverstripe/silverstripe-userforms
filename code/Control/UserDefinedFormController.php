@@ -314,9 +314,9 @@ JS
                         if (!$field->getFolderExists()) {
                             $field->createProtectedFolder();
                         }
-
-                        $file = Versioned::withVersionedMode(function () use ($field, $form) {
-                            $stage = $this->config()->get('file_upload_stage');
+                        $stage = $this->config()->get('file_upload_stage');
+                        $file = Versioned::withVersionedMode(function () use ($field, $form,$stage) {
+                           
                             Versioned::set_stage($stage);
 
                             $foldername = $field->getFormField()->getFolderName();
