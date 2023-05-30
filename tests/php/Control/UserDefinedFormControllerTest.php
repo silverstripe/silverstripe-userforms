@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use ReflectionClass;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
@@ -579,5 +580,37 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->expectException('\InvalidArgumentException');
         $controller = new SizeStringTestableController(); // extends UserDefinedFormController
         $controller->convertSizeStringToBytes($input);
+    }
+
+    public function provideValidEmailsToArray()
+    {
+        return [
+            [[], [null]],
+            [[], [' , , ']],
+            [[], ['broken.email, broken@.email, broken2.@email']],
+            [
+                ['broken@email', 'correctemail@email.com'],
+                [', broken@email, email@-email.com,correctemail@email.com,']
+            ],
+            [
+                ['correctemail1@email.com', 'correctemail2@email.com', 'correctemail3@email.com'],
+                ['correctemail1@email.com, correctemail2@email.com, correctemail3@email.com']
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider provideValidEmailsToArray
+     * Test that provided email is valid
+     */
+    public function testValidEmailsToArray(array $expectedOutput, array $input)
+    {
+        $class = new ReflectionClass(UserDefinedFormController::class);
+        $method = $class->getMethod('validEmailsToArray');
+        $method->setAccessible(true);
+
+        $controller = new UserDefinedFormController();
+
+        $this->assertEquals($expectedOutput, $method->invokeArgs($controller, $input));
     }
 }
