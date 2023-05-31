@@ -2,7 +2,7 @@ nl:
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Hoofdgedeelte
   SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Email ontvanger toevoegen'
+    ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
     CLEARBUTTON: Wissen
     CONFIGURATION: Configuratie
     DISABLECSRFSECURITYTOKEN: 'CSRF-token uitschakelen'
@@ -131,7 +131,7 @@ nl:
     EMAILFROM: Afzender
     EMAILSUBJECT: E-mailonderwerp
     EMAILTEMPLATE: E-mailtemplate
-    EmailFromContent: 'Met het afzender-adres kunt u instellen waar het bericht vandaan komt. Op de meeste servers moet dit een e-mailadres zijn van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dient de afzender bijvoorbeeld website@jouwwebsite.nl te zijn. Voor het antwoord-adres kan vervolgens een ander adres gebruikt worden.'
+    EmailFromContent: 'Met het afzender-adres kan je instellen waar het bericht vandaan komt. Dit moet veelal een e-mailadres zijn afkomstig van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl, dient de afzender website@jouwwebsite.nl te zijn. Voor het reply-adres kan vervolgens een ander adres gebruikt worden.'
     FROMADDRESS: 'E-mailadres afzender'
     HIDEFORMDATA: 'Verberg formulier-gegevens in de e-mail'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoord-adres'
@@ -146,7 +146,7 @@ nl:
     SENDPLAIN: 'Versturen als platte tekst (HTML wordt verwijderd)'
     SINGULARNAME: 'Formulier pagina'
     SUBMITBUTTON: Verzenden
-    TYPESUBJECT: E-mailonderwerp
+    TYPESUBJECT: 'Typ het onderwerp...'
     UnrestrictedFileUploadWarning: 'Toegang tot de ingestelde map "{path}" is niet afgeschermd. Ingezonden bestanden zijn daarmee publiek toegankelijk, als de URL geraden wordt.'
     ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
     CLEARBUTTON: Wissen
@@ -176,8 +176,8 @@ nl:
     SUBMISSIONS: Inzendingen
     TEXTONCLEAR: 'Tekst op herstel-knop'
     TEXTONSUBMIT: 'Tekst op verzend-knop'
-    TYPEREPLY: 'Reply e-mailadres'
-    TYPETO: 'Reply e-mailadres'
+    TYPEREPLY: 'Typ het reply e-mailadres...'
+    TYPETO: 'Typ het e-mailadres...'
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: Voorwaarden
     PLURALS:
