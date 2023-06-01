@@ -184,6 +184,11 @@ class EditableFormField extends DataObject
     private static $cascade_duplicates = false;
 
     /**
+     * This is protected rather that private so that it's unit testable
+     */
+    protected static $isDisplayedRecursionProtection = [];
+
+    /**
      * @var bool
      */
     protected $readonly;
@@ -978,12 +983,27 @@ class EditableFormField extends DataObject
     }
 
     /**
+     * Used to prevent infinite recursion when checking a CMS user has setup two or more fields to have
+     * their display rules dependent on one another
+     *
+     * There will be several thousand calls to isDisplayed before memory is likely to be hit, so 100
+     * calls is a reasonable limit that ensures that this doesn't prevent legit use cases from being
+     * identified as recursion
+     */
+    private function checkIsDisplayedRecursionProtection(): bool
+    {
+        $count = count(array_filter(static::$isDisplayedRecursionProtection, fn($id) => $id === $this->ID));
+        return $count < 100;
+    }
+
+    /**
      * Check if this EditableFormField is displayed based on its DisplayRules and the provided data.
      * @param array $data
      * @return bool
      */
     public function isDisplayed(array $data)
     {
+        static::$isDisplayedRecursionProtection[] = $this->ID;
         $displayRules = $this->DisplayRules();
 
         if ($displayRules->count() === 0) {
@@ -1001,7 +1021,9 @@ class EditableFormField extends DataObject
             $controllingField = $rule->ConditionField();
 
             // recursively check - if any of the dependant fields are hidden, assume the rule can not be satisfied
-            $ruleSatisfied = $controllingField->isDisplayed($data) && $rule->validateAgainstFormData($data);
+            $ruleSatisfied = $this->checkIsDisplayedRecursionProtection()
+            && $controllingField->isDisplayed($data)
+            && $rule->validateAgainstFormData($data);
 
             if ($conjunction === '||' && $ruleSatisfied) {
                 $conditionsSatisfied = true;
