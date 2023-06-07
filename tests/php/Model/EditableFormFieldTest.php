@@ -16,6 +16,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\Dev\Deprecation;
+use SilverStripe\UserForms\Model\EditableCustomRule;
 
 /**
  * @package userforms
@@ -357,5 +358,55 @@ class EditableFormFieldTest extends FunctionalTest
 
         $updatedField = EditableFormField::get()->byId($fieldId);
         $this->assertFalse((bool)$updatedField->Required);
+    }
+
+    public function testRecursionProtection()
+    {
+        $radioOne = EditableRadioField::create();
+        $radioOneID = $radioOne->write();
+        $optionOneOne = EditableOption::create();
+        $optionOneOne->Value = 'yes';
+        $optionOneOne->ParentID = $radioOneID;
+        $optionOneTwo = EditableOption::create();
+        $optionOneTwo->Value = 'no';
+        $optionOneTwo->ParentID = $radioOneID;
+
+        $radioTwo = EditableRadioField::create();
+        $radioTwoID = $radioTwo->write();
+        $optionTwoOne = EditableOption::create();
+        $optionTwoOne->Value = 'yes';
+        $optionTwoOne->ParentID = $radioOneID;
+        $optionTwoTwo = EditableOption::create();
+        $optionTwoTwo->Value = 'no';
+        $optionTwoTwo->ParentID = $radioTwoID;
+
+        $conditionOne = EditableCustomRule::create();
+        $conditionOne->ParentID = $radioOneID;
+        $conditionOne->ConditionFieldID = $radioTwoID;
+        $conditionOne->ConditionOption = 'HasValue';
+        $conditionOne->FieldValue = 'yes';
+        $conditionOne->write();
+        $radioOne->DisplayRules()->add($conditionOne);
+
+        $conditionTwo = EditableCustomRule::create();
+        $conditionTwo->ParentID = $radioTwoID;
+        $conditionTwo->ConditionFieldID = $radioOneID;
+        $conditionTwo->ConditionOption = 'IsNotBlank';
+        $conditionTwo->write();
+        $radioTwo->DisplayRules()->add($conditionTwo);
+
+        $testField = new class extends EditableFormField
+        {
+            public function countIsDisplayedRecursionProtection(int $fieldID)
+            {
+                return count(array_filter(static::$isDisplayedRecursionProtection, function ($id) use ($fieldID) {
+                    return $id === $fieldID;
+                }));
+            }
+        };
+
+        $this->assertSame(0, $testField->countIsDisplayedRecursionProtection($radioOneID));
+        $radioOne->isDisplayed([]);
+        $this->assertSame(100, $testField->countIsDisplayedRecursionProtection($radioOneID));
     }
 }
