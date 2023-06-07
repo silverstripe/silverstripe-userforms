@@ -126,8 +126,7 @@ class UserFormFieldEditorExtension extends DataExtension
             $fields,
             $config
         )
-            ->addExtraClass('uf-field-editor')
-            ->setAttribute('data-admin-url', AdminRootController::admin_url());
+            ->addExtraClass('uf-field-editor');
 
         return $fieldEditor;
     }
