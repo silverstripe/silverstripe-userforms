@@ -200,8 +200,7 @@ class UserDefinedFormAdmin extends LeftAndMain
 
         return Form::create($this, 'ConfirmFolderForm', $fields, $actions, RequiredFields::create('ID'))
             ->setFormAction($this->Link('ConfirmFolderForm'))
-            ->addExtraClass('form--no-dividers')
-            ->setAttribute('data-admin-url', AdminRootController::admin_url());
+            ->addExtraClass('form--no-dividers');
     }
 
     /**
