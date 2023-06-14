@@ -2,3 +2,58 @@ id:
   SilverStripe\UserForms\Model\EditableFormField:
     GROUP: Grup
     VALIDATION: Validasi
+    FIELDISREQUIRED: '{name} wajib diisi'
+    NAME: Nama
+    'NO': Tidak
+    TITLE: Judul
+    TYPE: Tipe
+    'YES': Ya
+    db_Name: Nama
+    db_Title: Judul
+    has_one_Parent: Induk
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Utama
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Batal
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Saring
+    FROM: Dari
+    RESET: Reset
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grup
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Folder
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Selanjutnya
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Konten
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Grup
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    TITLE: Judul
+    VALUE: Nilai
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: Nama
+    db_Title: Judul
+    db_Value: Nilai
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'Alamat email'
+    db_EmailFrom: 'Surel dari'
+    db_EmailSubject: 'Subyek email'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: Nama
+    db_Title: Judul
+    db_Value: Nilai
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    EMAILADDRESS: Email
+    EMAILFROM: Dari
+    EMAILSUBJECT: 'Subyek email'
+    PLURALNAME: 'Laman Dasar'

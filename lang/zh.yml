@@ -24,6 +24,10 @@ zh:
     TITLE: 题目
     TYPE: 类型
     'YES': 是
+    db_Name: 姓名
+    db_RightTitle: 右标题
+    db_Title: 题目
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 复选框
     SINGULARNAME: 复选框字段
@@ -45,6 +49,7 @@ zh:
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 文件上传字段
     SINGULARNAME: 文件上传字段
+    has_one_Folder: 文件夹
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 选择标题级别
     PLURALNAME: 标题
@@ -53,18 +58,25 @@ zh:
     HIDEFROMREPORT: 从报告中隐藏？
     PLURALNAME: 'HTML 模块'
     SINGULARNAME: 'HTML 模块'
+    db_Content: 内容
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 成员列表字段
     SINGULARNAME: 成员列表字段
+    has_one_Group: 小组
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 可编辑的多个选项字段
     SINGULARNAME: 可编辑的多个选项字段
     OPTIONSTAB: 选项
     TITLE: 题目
     VALUE: 值
+    has_many_Options: 选项
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 可编辑的选项
     SINGULARNAME: 可编辑的选项
+    db_Name: 姓名
+    db_Title: 题目
+    db_Value: 值
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 广播字段
     SINGULARNAME: 广播字段
@@ -78,6 +90,11 @@ zh:
     PLURALNAME: 用户定义的表格电子邮件接受者
     SINGULARNAME: 用户定义的表格电子邮件接受者
     CUSTOMRULESTAB: 自定义规则
+    db_EmailAddress: 电子邮件地址
+    db_EmailFrom: 邮件来自
+    db_EmailSubject: 电子邮件主题
+    db_EmailTemplate: 邮件模板
+    has_one_Form: 表格
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 下载文件
     PLURALNAME: 已提交的文件字段
@@ -85,9 +102,14 @@ zh:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 已提交的表格
     SINGULARNAME: 已提交的表格
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 已提交的表格字段
     SINGULARNAME: 已提交的表格字段
+    db_Name: 姓名
+    db_Title: 题目
+    db_Value: 值
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 添加一个可定制的表格。
     EMAILADDRESS: 电子邮件
@@ -116,6 +138,8 @@ zh:
     SHOWCLEARFORM: 显示清除表格按钮
     SUBMISSIONS: 提交
     TEXTONSUBMIT: 提交按钮上的文本
+    db_EnableLiveValidation: 启用现场验证
+    has_many_Submissions: 提交
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: 主要的
   SilverStripe\UserForms:
@@ -135,3 +159,9 @@ zh:
     STEP_NEXT: 下一页
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: 至
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: 父
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: 小组
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: 父

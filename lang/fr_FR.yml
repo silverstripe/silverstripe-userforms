@@ -24,15 +24,19 @@ fr_FR:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Groupe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     OPTIONSTAB: Options
     VALUE: Valeur
+    has_many_Options: Options
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     CUSTOMRULESTAB: 'Custom Rules'
+    db_EmailSubject: 'Email Subject'
+    has_one_Form: Formulaire
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -43,6 +47,7 @@ fr_FR:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Value: Valeur
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
@@ -65,6 +70,7 @@ fr_FR:
     SHOWCLEARFORM: 'Show Clear Form Button'
     SUBMISSIONS: Soumissions
     TEXTONSUBMIT: 'Texte du bouton Envoyer :'
+    has_many_Submissions: Soumissions
   SilverStripe\UserForms:
     ONCOMPLETELABEL: 'Utiliser la complétion'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
@@ -96,7 +102,10 @@ fr_FR:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Options modifiables'
     SINGULARNAME: 'Option modifiable'
+    db_Value: Valeur
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Nombre de lignes'
     PLURALNAME: 'Champs texte'
     SINGULARNAME: 'Champ texte'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Groupe

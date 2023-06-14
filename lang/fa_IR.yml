@@ -3,6 +3,7 @@ fa_IR:
     ADD_FIELD: 'افزودن فیلد'
     ADD_FIELD_GROUP: 'افزودن فیلد گروهی'
     FORMFIELDS: 'فیلدهای فرم'
+    has_many_Fields: فیلدها
   SilverStripe\UserForms\Model\EditableFormField:
     DEFAULTTOTODAY: 'تاریخ پیش فرض به امروز؟'
     GROUP: گروه
@@ -15,6 +16,11 @@ fa_IR:
     NAME: نام
     'NO': خیر
     TYPE: نوع
+    db_Name: نام
+    db_RightTitle: 'عنوان سمت راست'
+    db_Sort: مرتب‌سازی
+    db_Title: عنوان
+    has_one_Parent: والد
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'فیلدهای تاریخ'
     SINGULARNAME: 'فیلد تاریخ'
@@ -29,10 +35,12 @@ fa_IR:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     PLURALNAME: 'بلوک های HTML'
     SINGULARNAME: 'بلوک HTML'
+    db_Content: محتوا
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'انتخاب به عنوان پیش فرض؟'
     OPTIONSTAB: گزینه‌ها
     TITLE: عنوان
+    has_many_Options: گزینه‌ها
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'فیلد عددی'
     RANGE_TO: به
@@ -57,6 +65,7 @@ fa_IR:
     SHOWCLEARFORM: 'نمایش دکمه خالی کردن فرم'
     TEXTONCLEAR: 'متن روی دکمه خالی کردن فرم:'
     TEXTONSUBMIT: 'متن روی دکمه ثبت کردن:'
+    has_many_Fields: فیلدها
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: اصلی
   SilverStripe\UserForms:
@@ -74,3 +83,29 @@ fa_IR:
     FILTER: پالایش
     FROM: از
     RESET: 'از نو'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: والد
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: گروه
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: پوشه
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: گروه
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: نام
+    db_Sort: مرتب‌سازی
+    db_Title: عنوان
+    has_one_Parent: والد
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'نشانی ایمیل'
+    db_EmailSubject: 'موضوع پست الکترونیک'
+    db_EmailTemplate: 'قالب پست الکترونیک'
+    has_one_Form: فرم
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: والد
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    has_one_Parent: والد
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: نام
+    db_Title: عنوان
+    has_one_Parent: والد
