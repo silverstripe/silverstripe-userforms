@@ -24,6 +24,11 @@ sv:
     'NO': Nej
     TYPE: Typ
     'YES': Ja
+    db_Name: Namn
+    db_RightTitle: Högertitel
+    db_Sort: Sortera
+    db_Title: Titel
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Kryssrutor
     SINGULARNAME: Kryssrutefält
@@ -46,6 +51,7 @@ sv:
     PLURALNAME: Filuppladdningsfält
     SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
     SINGULARNAME: Filuppladdningsfält
+    has_one_Folder: Mapp
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Välj rubrikstorlek'
     PLURALNAME: Rubriker
@@ -58,15 +64,18 @@ sv:
     HIDEFROMREPORT: 'Göm från rapport?'
     PLURALNAME: HTML-block
     SINGULARNAME: HTML-block
+    db_Content: Innehåll
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: Medlemsfält
     SINGULARNAME: Medlemsfält
+    has_one_Group: Grupp
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Redigeringsbart multialternativfält'
     SINGULARNAME: 'Redigeringsbart multialternativfält'
     OPTIONSTAB: Alternativ
     TITLE: Titel
     VALUE: Värde
+    has_many_Options: Alternativ
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeriska fält'
     SINGULARNAME: 'Numeriskt fält'
@@ -74,6 +83,11 @@ sv:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Redigeringsbara alternativ'
     SINGULARNAME: 'Redigeringsbart alternativ'
+    db_Name: Namn
+    db_Sort: Sortera
+    db_Title: Titel
+    db_Value: Värde
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiofält
     SINGULARNAME: Radiofält
@@ -87,6 +101,9 @@ sv:
     PLURALNAME: 'Mottagare av formulär'
     SINGULARNAME: 'Mottagare av formulär'
     CUSTOMRULESTAB: 'Anpassade regler'
+    db_EmailAddress: E-postadress
+    db_EmailSubject: E-postämne
+    has_one_Form: Formulär
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Ladda ner fil'
     PLURALNAME: 'Inskickade filfält'
@@ -94,9 +111,14 @@ sv:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Inskickade formulär'
     SINGULARNAME: 'Inskickat formulär'
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Inskickade formulärfält'
     SINGULARNAME: 'Inskickat formulärfält'
+    db_Name: Namn
+    db_Title: Titel
+    db_Value: Värde
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Rensa
     DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
@@ -127,6 +149,8 @@ sv:
     SUBMISSIONS: 'Inskickade svar'
     TEXTONCLEAR: 'Text på Rensa-knapp:'
     TEXTONSUBMIT: 'Text på Skicka-knapp:'
+    db_EnableLiveValidation: 'Aktivera direktvalidering'
+    has_many_Submissions: 'Inskickade svar'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Allmän
   SilverStripe\UserForms:
@@ -144,3 +168,9 @@ sv:
     TEXTONSUBMIT: 'Text på Skicka-knapp:'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Avbryt
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Förälder
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grupp
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Förälder

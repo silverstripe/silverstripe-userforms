@@ -29,6 +29,7 @@ es_ES:
     REQUIRED_DESCRIPTION: 'Por favor tomar en cuenta que los campos con condiciones no pueden marcarse como requeridos'
     TITLE: Título
     TYPE: Tipo
+    db_Title: Título
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Casillas de verificación'
     SINGULARNAME: 'Campo de casillas de verificación'
@@ -52,6 +53,7 @@ es_ES:
     PLURALNAME: 'Grupos de campos editables'
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_START: 'Grupo {group}'
+    belongs_to_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campos subir archivo'
     SELECTUPLOADFOLDER: 'Seleccionar carpeta de carga'
@@ -67,30 +69,38 @@ es_ES:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Listado de miembros'
     SINGULARNAME: 'Listado de miembro'
+    has_one_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Campos de opción múltiple'
     SINGULARNAME: 'Campo de opción múltiple'
     OPTIONSTAB: Opciones
     TITLE: Título
     VALUE: Valor
+    has_many_Options: Opciones
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campos numéricos'
     SINGULARNAME: 'Campo numérico'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Opciones editables'
     SINGULARNAME: 'Opciones editables'
+    db_Title: Título
+    db_Value: Valor
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Cantidad de filas'
     PLURALNAME: 'Campos de texto'
     SINGULARNAME: 'Campo de texto'
     TEXTLENGTH: 'Longitud del texto'
     AUTOCOMPLETE: Autocompletar
+    db_Autocomplete: Autocompletar
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'Destinatarios definidos por el usuario'
     SINGULARNAME: 'Destinatario definido por el usuario'
     CUSTOMRULESTAB: 'Reglas especiales'
     EMAILCONTENTTAB: 'Contenido de correo'
     EMAILDETAILSTAB: 'Detalles de correo'
+    db_EmailSubject: 'Asunto del correo'
+    db_EmailTemplate: 'Plantilla de correo'
+    has_one_Form: Formulario
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Descargar archivo'
     PLURALNAME: 'Archivos enviados'
@@ -101,6 +111,8 @@ es_ES:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Campos enviados en formulario'
     SINGULARNAME: 'Campo enviado en formulario'
+    db_Title: Título
+    db_Value: Valor
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'Agrega un formulario personalizable.'
     EMAILADDRESS: Email
@@ -130,6 +142,9 @@ es_ES:
     SHOWCLEARFORM: 'Mostrar el botón borrar'
     SUBMISSIONS: Propuestas
     TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
+    db_EnableLiveValidation: 'Habilitar la validación en vivo'
+    has_many_Fields: Campos
+    has_many_Submissions: Propuestas
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Agregar destinatario de email'
     CONFIGURATION: Configuración
@@ -145,5 +160,6 @@ es_ES:
     ADD_FIELD_GROUP: 'Agregar grupo de campos'
     ADD_PAGE_BREAK: 'Agregar cambio de página'
     FORMFIELDS: 'Campos del formulario'
+    has_many_Fields: Campos
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_TITLE: 'Página {page}'

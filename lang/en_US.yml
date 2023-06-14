@@ -11,10 +11,13 @@ en_US:
     SINGULARNAME: 'Editable Multiple Option Field'
     OPTIONSTAB: Options
     VALUE: Value
+    has_many_Options: Options
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     CUSTOMRULESTAB: 'Custom Rules'
+    db_EmailSubject: 'Email subject'
+    has_one_Form: Form
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
@@ -76,9 +79,11 @@ en_US:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
+    db_Value: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Number of rows'
     PLURALNAME: 'Text Fields'
@@ -93,3 +98,6 @@ en_US:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Value: Value
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Group

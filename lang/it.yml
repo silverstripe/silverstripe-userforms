@@ -4,6 +4,7 @@ it:
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
     ADD_PAGE_BREAK: 'Aggiungi interruzione di pagina'
     FORMFIELDS: 'Campi del modulo'
+    has_many_Fields: Campi
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Il campo richiesto ''{name}'' non può essere posizionato all''interno di una pagina condizionale'
     NO_PAGE: 'Il campo ''{name}'' è stato trovato prima di una qualunque pagina'
@@ -20,6 +21,7 @@ it:
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
     SINGULARNAME: 'Regola personalizzata modificabile'
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Spuntato di default?'
     CUSTOMERROR: 'Messaggio di errore personalizzato'
@@ -45,6 +47,12 @@ it:
     'YES': Si
     NAME: Nome
     PLACEHOLDER: Segnaposto
+    db_Name: Nome
+    db_Placeholder: Segnaposto
+    db_RightTitle: 'Titolo a destra'
+    db_Sort: Ordine
+    db_Title: Titolo
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Caselle di controllo'
     SINGULARNAME: 'Campo casella di controllo'
@@ -72,10 +80,12 @@ it:
     FIELD_GROUP_START: 'Gruppo {group}'
     PLURALNAME: 'Fine dei gruppi di campi modificabili'
     SINGULARNAME: 'Fine del gruppo di campi modificabili'
+    belongs_to_Group: Gruppo
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Campi di caricamento file'
     SELECTUPLOADFOLDER: 'Seleziona la cartella di caricamento'
     SINGULARNAME: 'Campo di caricamento file'
+    has_one_Folder: Cartella
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Seleziona livello di intestazione'
     PLURALNAME: Intestazioni
@@ -93,9 +103,11 @@ it:
     HIDELABEL: 'Nascondi etichetta ''Titolo'' dal frontend?'
     PLURALNAME: 'Blocchi HTML'
     SINGULARNAME: 'Blocco HTML'
+    db_Content: Contenuto
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Campi lista membri'
     SINGULARNAME: 'Campo lista membri'
+    has_one_Group: Gruppo
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Selezionato di default?'
     OPTIONSTAB: Opzioni
@@ -103,6 +115,7 @@ it:
     SINGULARNAME: 'Campo a opzione multipla editabili'
     TITLE: Titolo
     VALUE: Valore
+    has_many_Options: Opzioni
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Campi numerici'
     RANGE: 'Intervallo numerico ammesso'
@@ -111,6 +124,11 @@ it:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Opzioni modificabili'
     SINGULARNAME: 'Opzione modificabile'
+    db_Name: Nome
+    db_Sort: Ordine
+    db_Title: Titolo
+    db_Value: Valore
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Gruppi di pulsanti a scelta singola'
     SINGULARNAME: 'Gruppo di pulsanti a scelta singola'
@@ -127,9 +145,14 @@ it:
     EMAILDETAILSTAB: 'Dettagli dell''e-mail'
     PLURALNAME: 'Destinatari e-mail del modulo definito dall''utente'
     SINGULARNAME: 'Destinatario e-mail del modulo definito dall''utente'
+    db_EmailAddress: 'Indirizzo email'
+    db_EmailSubject: 'Oggetto e-mail'
+    db_EmailTemplate: 'Schema e-mail'
+    has_one_Form: Modulo
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Condizioni per il destinatario del modulo definito dall''utente'
     SINGULARNAME: 'Condizione per il destinatario del modulo definito dall''utente'
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Scarica file'
     PLURALNAME: 'Campi file inviati'
@@ -137,9 +160,14 @@ it:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Moduli inviati'
     SINGULARNAME: 'Modulo inviato'
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Campi moduli inviati'
     SINGULARNAME: 'Campo modulo inviato'
+    db_Name: Nome
+    db_Title: Titolo
+    db_Value: Valore
+    has_one_Parent: Parente
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Azzera
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
@@ -187,6 +215,9 @@ it:
     SUBMISSIONS: Invii
     TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
     TEXTONSUBMIT: 'Testo sul pulsante di invio:'
+    db_EnableLiveValidation: 'Abilita la validazione in tempo reale'
+    has_many_Fields: Campi
+    has_many_Submissions: Invii
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Principale
   SilverStripe\UserForms:

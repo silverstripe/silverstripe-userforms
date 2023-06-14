@@ -22,6 +22,10 @@ mi:
     NAME: Ingoa
     TITLE: Taitara
     TYPE: Momo
+    db_Name: Ingoa
+    db_RightTitle: 'Taitara Tika'
+    db_Title: Taitara
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Ngā Pouakataki'
     SINGULARNAME: 'Āpure Pouakataki'
@@ -43,6 +47,7 @@ mi:
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Ngā Āpure Tukuatu Kōnae'
     SINGULARNAME: 'Āpure Tukuatu Kōnae'
+    has_one_Folder: Kōpaki
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kōwhiri Taumata Pane'
     PLURALNAME: 'Ngā Pane'
@@ -51,18 +56,25 @@ mi:
     HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
     PLURALNAME: 'Ngā Poraka HTML'
     SINGULARNAME: 'Poraka HTML'
+    db_Content: 'Ngā ihirangi'
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ngā Āpure Rārangi Mema'
     SINGULARNAME: 'Āpure Rārangi Mema'
+    has_one_Group: Rōpū
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Ngā Āpure Kōwhiringa Maha Whakatika'
     SINGULARNAME: 'Āpure Kōwhiringa Maha Whakatika'
     OPTIONSTAB: 'Ngā Kōwhiringa'
     TITLE: Taitara
     VALUE: Uara
+    has_many_Options: 'Ngā Kōwhiringa'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Ngā Kōwhiringa Whakatika'
     SINGULARNAME: 'Kōwhiringa Whakatika'
+    db_Name: Ingoa
+    db_Title: Taitara
+    db_Value: Uara
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Ngā āpure irirangi'
     SINGULARNAME: 'Āpure irirangi'
@@ -76,6 +88,11 @@ mi:
     PLURALNAME: 'Ngā Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
     SINGULARNAME: 'Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
     CUSTOMRULESTAB: 'Ngā Ture Ritenga Ake'
+    db_EmailAddress: 'Wāhitau Īmēra'
+    db_EmailFrom: 'Īmēra mai'
+    db_EmailSubject: 'Kaupapa īmēra'
+    db_EmailTemplate: 'Tātauira īmēra'
+    has_one_Form: Puka
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Tikiake Kōnae'
     PLURALNAME: 'Ngā Āpure Kōnae Kua Tukuna'
@@ -83,9 +100,14 @@ mi:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Ngā Puka Kua Tukuna'
     SINGULARNAME: 'Puka Kua Tukuna'
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Ngā Āpure Puka Kua Tukuna'
     SINGULARNAME: 'Āpure Puka Kua Tukuna'
+    db_Name: Ingoa
+    db_Title: Taitara
+    db_Value: Uara
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'Ka tāpiri i te puka ka taea te whakarite.'
     EMAILADDRESS: Īmēra
@@ -113,6 +135,8 @@ mi:
     SHOWCLEARFORM: 'Whakaatu Pātene Ūkui Puka'
     SUBMISSIONS: 'Ngā Tukunga'
     TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
+    db_EnableLiveValidation: 'Whakahohea te manatoko wā tūturu'
+    has_many_Submissions: 'Ngā Tukunga'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Matua
   SilverStripe\UserForms:
@@ -131,3 +155,9 @@ mi:
     STEP_NEXT: Panuku
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: ki
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Matua
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Rōpū
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Matua

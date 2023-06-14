@@ -1,1 +1,60 @@
-hr: {  }
+hr:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Osnovno
+  SilverStripe\UserForms:
+    CLEARBUTTON: Očisti
+    CONFIGURATION: Konfiguracija
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Odustani
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filter
+    FROM: Od
+    RESET: Resetiraj
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\EditableFormField:
+    CUSTOMOPTIONS: Opcije
+    GROUP: Grupa
+    NAME: Naziv
+    'NO': Ne
+    TITLE: Naslov
+    TYPE: Tip
+    'YES': Da
+    db_Name: Naziv
+    db_Title: Naslov
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grupa
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Direktorij
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Slijedeći
+    STEP_TITLE: 'Stranica {page} '
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Sadržaj
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Grupa
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Opcije
+    TITLE: Naslov
+    has_many_Options: Opcije
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: Naziv
+    db_Title: Naslov
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'Email adresa'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: Naziv
+    db_Title: Naslov
+    has_one_Parent: Roditelj
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Očisti
+    CONFIGURATION: Konfiguracija
+    EMAILADDRESS: Email
+    EMAILFROM: Od
+    PLURALNAME: 'Osnovne stranice'
