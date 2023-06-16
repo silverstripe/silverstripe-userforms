@@ -13,6 +13,8 @@ sr_RS:
     REQUIRED: 'Захтевано?'
     SINGULARNAME: 'Editable Form Field'
     TITLE: Наслов
+    db_Name: Име
+    db_Title: Наслов
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
@@ -23,19 +25,25 @@ sr_RS:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
+    db_Content: Садржај
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Група
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     OPTIONSTAB: Options
     TITLE: Наслов
     VALUE: Value
+    has_many_Options: Options
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     CUSTOMRULESTAB: 'Custom Rules'
+    db_EmailAddress: 'Адреса е-поште'
+    db_EmailSubject: 'Email Subject'
+    has_one_Form: Form
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -46,6 +54,9 @@ sr_RS:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Name: Име
+    db_Title: Наслов
+    db_Value: Value
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
@@ -66,6 +77,7 @@ sr_RS:
     SHOWCLEARFORM: 'Show Clear Form Button'
     SUBMISSIONS: Submissions
     TEXTONSUBMIT: 'Text on submit button:'
+    has_many_Submissions: Submissions
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Главно
   SilverStripe\UserForms:
@@ -96,6 +108,7 @@ sr_RS:
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'File Upload Fields'
     SINGULARNAME: 'File Upload Field'
+    has_one_Folder: Фасцикла
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
@@ -103,7 +116,12 @@ sr_RS:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
+    db_Name: Име
+    db_Title: Наслов
+    db_Value: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Број редова'
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Група

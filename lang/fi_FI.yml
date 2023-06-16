@@ -23,6 +23,7 @@ fi_FI:
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
     ADD_PAGE_BREAK: 'Lisää sivunvaihto'
     FORMFIELDS: Lomakekentät
+    has_many_Fields: Kentät
   SilverStripe\UserForms\Model\EditableFormField:
     REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
     CHECKEDBYDEFAULT: 'Valittu oletuksena?'
@@ -56,6 +57,10 @@ fi_FI:
     TYPE_EMPTY: 'Valitse kentän tyyppi'
     VALIDATION: Validointi
     'YES': Kyllä
+    db_Name: Nimi
+    db_Placeholder: Opastusteksti
+    db_RightTitle: 'Oikeanpuolinen lisäotsikko'
+    db_Title: Otsikko
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     SELECTUPLOADFOLDER: 'Valitse siirtokansio'
     ANYONE: 'Rajoittamaton pääsy, lisätyt tiedostot on näkyvissä kaikille'
@@ -117,6 +122,9 @@ fi_FI:
     SENDIFAND: 'Kaikki ehdot ovat tosia'
     SENDIFOR: 'Kaikki ehdot ovat tosia'
     SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
+    db_EnableLiveValidation: 'Aktivoi reaaliaikainen validointi'
+    has_many_Fields: Kentät
+    has_many_Submissions: 'Vastaanotetut lomakkeet'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Peruuta
     FOLDER_OPTIONS_EXISTING: 'Käytä olemassa olevaa kansiota'
@@ -191,6 +199,7 @@ fi_FI:
       one: 'Muokattava kenttäryhmä päättyy'
       other: '{count} Muokattavat kenttäryhmät päättyy'
     SINGULARNAME: 'Muokattava kenttäryhmä päättyy'
+    belongs_to_Group: Ryhmä
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Valitse otsikon taso'
     PLURALNAME: Otsikot
@@ -214,9 +223,11 @@ fi_FI:
     HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
     PLURALNAME: HTML-alueet
     SINGULARNAME: HTML-alue
+    db_Content: Sisältö
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     SINGULARNAME: Jäsenlistakenttä
     PLURALNAME: Jäsenlistakentät
+    has_one_Group: Ryhmä
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
     OPTIONSTAB: Valinnat
@@ -224,6 +235,7 @@ fi_FI:
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
     VALUE: Arvo
+    has_many_Options: Valinnat
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Muokattavat mukautetut säännöt'
     SINGULARNAME: 'Muokattava mukautettu sääntö'
@@ -235,6 +247,9 @@ fi_FI:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Muokattavat vaihtoehdot'
     SINGULARNAME: 'Muokattava vaihtoehto'
+    db_Name: Nimi
+    db_Title: Otsikko
+    db_Value: Arvo
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiopainikkeet
     SINGULARNAME: Radiopainike
@@ -247,14 +262,21 @@ fi_FI:
     RANGE_TO: –
     SINGULARNAME: Tekstikenttä
     TEXTLENGTH: 'Tekstin pituus'
+    db_Autocomplete: Automaattitäydennys
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Mukautetut säännöt'
     EMAILCONTENTTAB: 'Sähköpostin sisältö'
     EMAILDETAILSTAB: 'Sähköpostin tiedot'
     PLURALNAME: Vastaanottajat
+    db_EmailSubject: Otsikko
+    db_EmailTemplate: Sähköpostipohja
+    has_one_Form: Lomake
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Lähetetyt lomakkeet'
     SINGULARNAME: 'Lähetetty lomake'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Lähetetyt lomakekentät'
     SINGULARNAME: 'Lähetetty lomakekenttä'
+    db_Name: Nimi
+    db_Title: Otsikko
+    db_Value: Arvo

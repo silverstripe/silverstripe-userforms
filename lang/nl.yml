@@ -65,12 +65,14 @@ nl:
     PLURALS:
       one: 'Een HTML blok'
       other: '{count} HTML blok'
+    db_Content: Inhoud
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ledenlijst velden'
     SINGULARNAME: 'Ledenlijst veld'
     PLURALS:
       one: 'Keuzelijst leden'
       other: '{count} Keuzelijst leden'
+    has_one_Group: Groep
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Standaard aangevinkt'
     OPTIONSTAB: Opties
@@ -81,6 +83,7 @@ nl:
     SINGULARNAME: 'Multiple-choice veld'
     TITLE: Titel
     VALUE: Waarde
+    has_many_Options: Instellingen
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeriek velden'
     ORDER_WARNING: 'Minimale lengte moet kleiner zijn dan de maximale lengte.'
@@ -105,6 +108,7 @@ nl:
     MINMAXLENGTHCHECK: 'Minimale lengte moet lager zijn dan de maximale lengte'
     MIN_LENGTH: 'Minimale lengte'
     NUMBERROWS_DESCRIPTION: 'Velden met meer dan één rij, worden weergegeven als tekstvak'
+    db_Autocomplete: 'Automatisch aanvullen'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Voorwaarde voor versturen'
     EMAILCONTENTTAB: 'Inhoud e-mail'
@@ -116,6 +120,9 @@ nl:
       one: 'E-mail ontvanger'
       other: '{count} E-mail ontvangers'
     SINGULARNAME: 'E-mail ontvanger'
+    db_EmailAddress: E-mailadres
+    db_EmailSubject: E-mailonderwerp
+    db_EmailTemplate: E-mailtemplate
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
     PLURALNAME: 'Ingestuurde bestandsvelden'
@@ -178,6 +185,8 @@ nl:
     TEXTONSUBMIT: 'Tekst op verzend-knop'
     TYPEREPLY: 'Typ het reply e-mailadres...'
     TYPETO: 'Typ het e-mailadres...'
+    db_EnableLiveValidation: 'Real-time validatie aanzetten'
+    has_many_Submissions: Inzendingen
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: Voorwaarden
     PLURALS:
@@ -217,6 +226,11 @@ nl:
     TYPE_EMPTY: 'Kies soort veld'
     VALIDATION: Validatie
     'YES': Ja
+    db_Name: Naam
+    db_Placeholder: Placeholder
+    db_RightTitle: 'Titel rechts'
+    db_Sort: Volgorde
+    db_Title: Titel
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkbox
     PLURALS:
@@ -270,6 +284,7 @@ nl:
       one: 'Een veldengroep einde'
       other: '{count} veldengroep eindes'
     SINGULARNAME: 'Veldengroep einde'
+    belongs_to_Group: Groep
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     ANYONE: 'Onbeperkte toegang, uploads zijn NIET afgeschermd'
     INHERIT: 'Zichtbaarheid van deze map is overgenomen van de bovenliggende map'
@@ -281,6 +296,7 @@ nl:
       other: '{count} Uploadvelden'
     SELECTUPLOADFOLDER: 'Selecteer upload-locatie'
     SINGULARNAME: 'Uploaden veld'
+    has_one_Folder: Map
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kies grootte van kopje'
     PLURALNAME: Kopjes
@@ -294,6 +310,10 @@ nl:
       one: 'Bewerkbare optie'
       other: '{count} Bewerkbare opties'
     SINGULARNAME: 'Bewerkbare opties'
+    db_Name: Naam
+    db_Sort: Volgorde
+    db_Title: Titel
+    db_Value: Waarde
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Keuzerondje velden'
     PLURALS:
@@ -319,3 +339,6 @@ nl:
       one: 'Ingestuurd formulierveld'
       other: '{count} Ingestuurde formuliervelden'
     SINGULARNAME: 'Ingestuurd formulierveld'
+    db_Name: Naam
+    db_Title: Titel
+    db_Value: Waarde

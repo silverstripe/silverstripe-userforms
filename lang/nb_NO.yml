@@ -19,6 +19,7 @@ nb_NO:
     VALIDATION: Validering
     CUSTOMOPTIONS: Alternativer
     EXTRACLASS_TITLE: 'Ekstra stil/utsende?'
+    db_RightTitle: 'Høyre tittel'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Avkrysningsbokser
     SINGULARNAME: 'Avkrysningsboks felt'
@@ -51,14 +52,17 @@ nb_NO:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Medlemliste felt'
     SINGULARNAME: 'Medlemliste felt'
+    has_one_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Redigerbare flervalgfelt'
     SINGULARNAME: 'Redigerbare flervalgfelt'
     OPTIONSTAB: Alternativer
     VALUE: Verdi
+    has_many_Options: Alternativer
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Redigerbart alternativer'
     SINGULARNAME: 'Redigerbart alternativ'
+    db_Value: Verdi
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radiofelt
     SINGULARNAME: Radiofelt
@@ -71,6 +75,8 @@ nb_NO:
     PLURALNAME: 'Bruker definert e-post mottakere'
     SINGULARNAME: 'Bruker definert e-post mottaker'
     CUSTOMRULESTAB: 'Tilpasset regler'
+    db_EmailSubject: 'Epost emne'
+    has_one_Form: Skjema
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Last ned fil'
     PLURALNAME: 'Sendte fil felter'
@@ -81,6 +87,7 @@ nb_NO:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Sendt skjema felter'
     SINGULARNAME: 'Sendt skjema felt'
+    db_Value: Verdi
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'Legg til konfigurerbart skjema'
     EMAILADDRESS: Epost
@@ -107,6 +114,8 @@ nb_NO:
     SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
     SUBMISSIONS: Innsendte
     TEXTONSUBMIT: 'Tekst på "send" knapp'
+    db_EnableLiveValidation: 'Slå på sanntid validering'
+    has_many_Submissions: Innsendte
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
     CONFIGURATION: Konfigurasjon
@@ -117,3 +126,5 @@ nb_NO:
     SUBMISSIONS: Innsendte
     SUBMITBUTTON: Send
     TEXTONSUBMIT: 'Tekst på "send" knapp'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Gruppe
