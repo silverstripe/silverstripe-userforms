@@ -24,6 +24,10 @@ ar:
     TITLE: عنوان
     TYPE: النوع
     'YES': نعم
+    db_Name: الاسم
+    db_RightTitle: 'عنوان اليمين'
+    db_Title: عنوان
+    has_one_Parent: والد
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'مربعات لوضع إشارة'
     SINGULARNAME: 'حقل ذات مربع لوضع إشارة'
@@ -45,6 +49,7 @@ ar:
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'حقول تحميل الملف'
     SINGULARNAME: 'حقل تحميل الملف'
+    has_one_Folder: مجلد
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'حدد مستوى العنوان'
     PLURALNAME: عناوين
@@ -53,18 +58,25 @@ ar:
     HIDEFROMREPORT: 'إخقاء تقارير النموذج؟'
     PLURALNAME: 'بلوكات HTML'
     SINGULARNAME: 'بلوك HTML'
+    db_Content: المحتوى
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'حقول قائمة الأعضاء'
     SINGULARNAME: 'حقل قائمة الأعضاء'
+    has_one_Group: مجموعة
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'حقول الخيارات المتعددة القابلة للتعديل'
     SINGULARNAME: 'حقل الخيارات المتعددة القابل للتعديل'
     OPTIONSTAB: الخيارات
     TITLE: عنوان
     VALUE: القيمة
+    has_many_Options: الخيارات
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'الخيارات القابلة للتحرير'
     SINGULARNAME: 'خيار قابل للتحرير'
+    db_Name: الاسم
+    db_Title: عنوان
+    db_Value: القيمة
+    has_one_Parent: والد
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'حقول حلقية radio'
     SINGULARNAME: 'حقل حلقي Radio'
@@ -78,6 +90,11 @@ ar:
     PLURALNAME: 'نموذج مستلمي البريد الإلكتروني يحدده المستخدم'
     SINGULARNAME: 'نموذج مستلم البريد الإلكتروني يحدده المستخدم'
     CUSTOMRULESTAB: 'القواعد المخصصة'
+    db_EmailAddress: 'بريد إلكتروني'
+    db_EmailFrom: 'البريد الالكترونى من'
+    db_EmailSubject: 'موضوع البريد الإلكتروني'
+    db_EmailTemplate: 'نموذج البريد الالكترونى'
+    has_one_Form: نموذج
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'تحميل الملف'
     PLURALNAME: 'حقول الملف التي قدمت'
@@ -85,9 +102,14 @@ ar:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'الاستمارات التي قدّمت'
     SINGULARNAME: 'الاستمارة التي قدّمت'
+    has_one_Parent: والد
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'حقول الاستمارة التي تمّ تقديمها'
     SINGULARNAME: 'حقل الاستمارة الذي تمّ تقديمه'
+    db_Name: الاسم
+    db_Title: عنوان
+    db_Value: القيمة
+    has_one_Parent: والد
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'يضيف استمارة مخصصة.'
     EMAILADDRESS: 'البريد الإلكتروني'
@@ -115,6 +137,8 @@ ar:
     SHOWCLEARFORM: 'زر عرض النموذج ممسوحاً'
     SUBMISSIONS: التقديمات
     TEXTONSUBMIT: 'زر النص المتعلق بالتقديم:'
+    db_EnableLiveValidation: 'تفعيل المصادقة الآنية'
+    has_many_Submissions: التقديمات
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: الرئيسة
   SilverStripe\UserForms:
@@ -134,3 +158,9 @@ ar:
     STEP_PREV: السابق
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: إلى
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: والد
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: مجموعة
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: والد

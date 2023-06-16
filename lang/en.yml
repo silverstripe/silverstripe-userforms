@@ -33,6 +33,7 @@ en:
     ADD_FIELD_GROUP: 'Add Field Group'
     ADD_PAGE_BREAK: 'Add Page Break'
     FORMFIELDS: 'Form Fields'
+    has_many_Fields: Fields
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
     NO_PAGE: 'Field ''{name}'' found before any pages'
@@ -52,6 +53,12 @@ en:
       one: 'An Editable Custom Rule'
       other: '{count} Editable Custom Rules'
     SINGULARNAME: 'Editable Custom Rule'
+    db_ConditionOption: 'Condition option'
+    db_Display: Display
+    db_FieldValue: 'Field value'
+    db_Version: Version
+    has_one_ConditionField: 'Condition field'
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Checked by Default?'
     CUSTOMERROR: 'Custom Error Message'
@@ -85,12 +92,28 @@ en:
     TYPE_EMPTY: 'Select field type'
     VALIDATION: Validation
     'YES': 'Yes'
+    db_CustomErrorMessage: 'Custom error message'
+    db_Default: Default
+    db_DisplayRulesConjunction: 'Display rules conjunction'
+    db_ExtraClass: 'Extra class'
+    db_Name: Name
+    db_Placeholder: Placeholder
+    db_Required: Required
+    db_RightTitle: 'Right title'
+    db_ShowInSummary: 'Show in summary'
+    db_ShowOnLoad: 'Show on load'
+    db_Sort: Sort
+    db_Title: Title
+    db_Version: Version
+    has_many_DisplayRules: 'Display rules'
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxes
     PLURALS:
       one: 'A Checkbox Field'
       other: '{count} Checkboxes'
     SINGULARNAME: 'Checkbox Field'
+    db_CheckedDefault: 'Checked default'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Checkbox Groups'
     PLURALS:
@@ -106,18 +129,23 @@ en:
       other: '{count} Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
     USE_EMPTY_STRING: 'Set default empty string'
+    db_EmptyString: 'Empty string'
+    db_UseEmptyString: 'Use empty string'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Date Fields'
     PLURALS:
       one: 'A Date Field'
       other: '{count} Date Fields'
     SINGULARNAME: 'Date Field'
+    db_DefaultToToday: 'Default to today'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Dropdowns
     PLURALS:
       one: 'A Dropdown Field'
       other: '{count} Dropdowns'
     SINGULARNAME: 'Dropdown Field'
+    db_EmptyString: 'Empty string'
+    db_UseEmptyString: 'Use empty string'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Email Fields'
     PLURALS:
@@ -130,6 +158,7 @@ en:
       one: 'An Editable Field Group'
       other: '{count} Editable Field Groups'
     SINGULARNAME: 'Editable Field Group'
+    has_one_End: End
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_END: '{group} end'
     FIELD_GROUP_START: 'Group {group}'
@@ -138,6 +167,7 @@ en:
       one: 'An Editable Field Group End'
       other: '{count} Editable Field Group Ends'
     SINGULARNAME: 'Editable Field Group End'
+    belongs_to_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     ANYONE: 'Unrestricted access, uploads will be visible to anyone'
     INHERIT: 'Visibility for this folder is inherited from the parent folder'
@@ -149,6 +179,9 @@ en:
       other: '{count} File Upload Fields'
     SELECTUPLOADFOLDER: 'Select upload folder'
     SINGULARNAME: 'File Upload Field'
+    db_FolderConfirmed: 'Folder confirmed'
+    db_MaxFileSizeMB: 'Max file size MB'
+    has_one_Folder: Folder
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
@@ -156,6 +189,8 @@ en:
       one: 'A Heading'
       other: '{count} Headings'
     SINGULARNAME: Heading
+    db_HideFromReports: 'Hide from reports'
+    db_Level: Level
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Page Breaks'
     PLURALS:
@@ -175,12 +210,16 @@ en:
       one: 'A HTML Block'
       other: '{count} HTML Blocks'
     SINGULARNAME: 'HTML Block'
+    db_Content: Content
+    db_HideFromReports: 'Hide from reports'
+    db_HideLabel: 'Hide label'
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     PLURALS:
       one: 'A Member List Field'
       other: '{count} Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Selected by default?'
     OPTIONSTAB: Options
@@ -191,6 +230,7 @@ en:
     SINGULARNAME: 'Editable Multiple Option Field'
     TITLE: Title
     VALUE: Value
+    has_many_Options: Options
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     ORDER_WARNING: 'Minimum length should be less than the maximum length.'
     PLURALNAME: 'Numeric Fields'
@@ -200,12 +240,21 @@ en:
     RANGE: 'Allowed numeric range'
     RANGE_TO: to
     SINGULARNAME: 'Numeric Field'
+    db_MaxValue: 'Max value'
+    db_MinValue: 'Min value'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editable Options'
     PLURALS:
       one: 'An Editable Option'
       other: '{count} Editable Options'
     SINGULARNAME: 'Editable Option'
+    db_Default: Default
+    db_Name: Name
+    db_Sort: Sort
+    db_Title: Title
+    db_Value: Value
+    db_Version: Version
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Radio Groups'
     PLURALS:
@@ -227,6 +276,10 @@ en:
     RANGE_TO: to
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Allowed text length'
+    db_Autocomplete: Autocomplete
+    db_MaxLength: 'Max length'
+    db_MinLength: 'Min length'
+    db_Rows: Rows
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Custom Rules'
     EMAILCONTENTTAB: 'Email Content'
@@ -238,12 +291,32 @@ en:
       one: 'An Email Recipient'
       other: '{count} Email Recipients'
     SINGULARNAME: 'Email Recipient'
+    db_CustomRulesCondition: 'Custom rules condition'
+    db_EmailAddress: 'Email address'
+    db_EmailBody: 'Email body'
+    db_EmailBodyHtml: 'Email body html'
+    db_EmailFrom: 'Email from'
+    db_EmailReplyTo: 'Email reply to'
+    db_EmailSubject: 'Email subject'
+    db_EmailTemplate: 'Email template'
+    db_HideFormData: 'Hide form data'
+    db_HideInvisibleFields: 'Hide invisible fields'
+    db_SendPlain: 'Send plain'
+    has_many_CustomRules: 'Custom rules'
+    has_one_Form: Form
+    has_one_SendEmailFromField: 'Send email from field'
+    has_one_SendEmailSubjectField: 'Send email subject field'
+    has_one_SendEmailToField: 'Send email to field'
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Email Recipient Conditions'
     PLURALS:
       one: 'An Email Recipient Condition'
       other: '{count} Email Recipient Conditions'
     SINGULARNAME: 'Email Recipient Condition'
+    db_ConditionOption: 'Condition option'
+    db_ConditionValue: 'Condition value'
+    has_one_ConditionField: 'Condition field'
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     INSUFFICIENTRIGHTS: 'You don''t have the right permissions to download this file'
@@ -252,6 +325,7 @@ en:
       one: 'A Submitted File Field'
       other: '{count} Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
+    has_one_UploadedFile: 'Uploaded file'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Submitted Forms'
     PLURALS:
@@ -259,12 +333,20 @@ en:
       other: '{count} Submitted Forms'
     SINGULARNAME: 'Submitted Form'
     SUBMITTER: Submitter
+    has_many_Values: Values
+    has_one_Parent: Parent
+    has_one_SubmittedBy: 'Submitted by'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     PLURALS:
       one: 'A Submitted Form Field'
       other: '{count} Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Displayed: Displayed
+    db_Name: Name
+    db_Title: Title
+    db_Value: Value
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     CLEARBUTTON: Clear
@@ -319,3 +401,18 @@ en:
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
     UnrestrictedFileUploadWarning: 'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.'
+    db_ClearButtonText: 'Clear button text'
+    db_DisableAuthenicatedFinishAction: 'Disable authenicated finish action'
+    db_DisableCsrfSecurityToken: 'Disable csrf security token'
+    db_DisableSaveSubmissions: 'Disable save submissions'
+    db_DisplayErrorMessagesAtTop: 'Display error messages at top'
+    db_EnableLiveValidation: 'Enable live validation'
+    db_OnCompleteMessage: 'On complete message'
+    db_ShowClearButton: 'Show clear button'
+    db_SubmitButtonText: 'Submit button text'
+    has_many_EmailRecipients: 'Email recipients'
+    has_many_Fields: Fields
+    has_many_Submissions: Submissions
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Submitted file field'
+    db_UserFormUpload: 'User form upload'

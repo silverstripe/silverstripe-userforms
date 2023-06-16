@@ -17,6 +17,10 @@ es:
     TITLE: Título
     TYPE: Tipo
     'YES': Sí
+    db_Name: Nombre
+    db_Sort: Ordenar
+    db_Title: Título
+    has_one_Parent: Padre
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Siguiente
     STEP_PREV: Anterior
@@ -34,3 +38,31 @@ es:
     EMAILSUBJECT: 'Asunto del Email'
     EMAILTEMPLATE: 'Plantilla de Email'
     PLURALNAME: 'Páginas base'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Padre
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grupo
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Carpeta
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Contenido
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Grupo
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: Nombre
+    db_Sort: Ordenar
+    db_Title: Título
+    has_one_Parent: Padre
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'Correo electrónico'
+    db_EmailFrom: 'Email de'
+    db_EmailSubject: 'Asunto del Email'
+    db_EmailTemplate: 'Plantilla de Email'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Padre
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    has_one_Parent: Padre
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: Nombre
+    db_Title: Título
+    has_one_Parent: Padre

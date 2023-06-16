@@ -17,6 +17,10 @@ fr:
     TITLE: Titre
     TYPE: Type
     'YES': Oui
+    db_Name: Nom
+    db_Sort: Tri
+    db_Title: Titre
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Suivant
     STEP_PREV: Préc
@@ -33,3 +37,29 @@ fr:
     EMAILFROM: De
     EMAILSUBJECT: 'Sujet de l''email'
     PLURALNAME: 'Base Pages'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Parent
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Groupe
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Dossier
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Contenu
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Groupe
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: Nom
+    db_Sort: Tri
+    db_Title: Titre
+    has_one_Parent: Parent
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'Adresse email'
+    db_EmailSubject: 'Sujet de l''email'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Parent
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    has_one_Parent: Parent
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: Nom
+    db_Title: Titre
+    has_one_Parent: Parent

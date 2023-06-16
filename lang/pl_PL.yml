@@ -41,6 +41,11 @@ pl_PL:
     TITLE: Tytuł
     TYPE: Typ
     TYPE_EMPTY: 'Wybierz typ pola'
+    db_Name: Nazwa
+    db_Placeholder: Placeholder
+    db_RightTitle: 'Right Title'
+    db_Title: Tytuł
+    has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxes
     SINGULARNAME: 'Checkbox Field'
@@ -125,6 +130,7 @@ pl_PL:
       few: 'Bloki HTML {count}'
       many: 'Bloki HTML {count}'
       other: 'Bloki HTML {count}'
+    db_Content: Zawartość
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
@@ -133,6 +139,7 @@ pl_PL:
       few: 'Pola listy członków {count}'
       many: 'Pola listy członków {count}'
       other: 'Pola listy członków {count}'
+    has_one_Group: Grupa
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
@@ -145,6 +152,7 @@ pl_PL:
       other: 'Edytowalne pola wielu opcji {count}'
     TITLE: Tytuł
     VALUE: Wartość
+    has_many_Options: Opcje
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Pola numeryczne'
     SINGULARNAME: 'Pole numeryczne'
@@ -164,6 +172,10 @@ pl_PL:
       few: 'Edytowalnych opcji {count}'
       many: 'Edytowalnych opcji {count}'
       other: 'Edytowalne opcje {count}'
+    db_Name: Nazwa
+    db_Title: Tytuł
+    db_Value: Wartość
+    has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Pola wyboru'
     SINGULARNAME: 'Pole wyboru'
@@ -189,6 +201,7 @@ pl_PL:
       many: 'Pól tekstowych {count}'
       other: 'Pola tekstowe {count}'
     RANGE_TO: do
+    db_Autocomplete: Autouzupełnienie
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
@@ -202,6 +215,9 @@ pl_PL:
       few: 'Odbiorcy wiadomości e-mail {count}'
       many: 'Odbiorców wiadomości e-mail {count}'
       other: 'Odbiorcy wiadomości e-mail {count}'
+    db_EmailSubject: 'Email Subject'
+    db_EmailTemplate: 'Szablon e-mail'
+    has_one_Form: Formularz
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -220,6 +236,7 @@ pl_PL:
       many: 'Przesłane pola formularza {count}'
       other: 'Przesłane pola formularza {count}'
     SUBMITTER: Wysyłający
+    has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
@@ -228,6 +245,10 @@ pl_PL:
       few: 'Przesłanych pól formularza'
       many: 'Przesłanych pól formularza {count}'
       other: 'Przesłane pola formularza {count}'
+    db_Name: Nazwa
+    db_Title: Tytuł
+    db_Value: Wartość
+    has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Czyść
     DESCRIPTION: 'Dodaj własny formularz'
@@ -284,6 +305,8 @@ pl_PL:
     TYPESUBJECT: 'Podaj temat'
     TYPETO: 'Podaj adres'
     UnrestrictedFileUploadWarning: 'Dostęp do bieżącego folderu przesyłania „{path}” nie jest ograniczony. Przesłane pliki będą publicznie dostępne, jeśli znany będzie dokładny adres URL.'
+    db_EnableLiveValidation: 'Włącz sprawdzanie na żywo'
+    has_many_Submissions: Zgłoszenia
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Główny
   SilverStripe\UserForms:
@@ -332,6 +355,7 @@ pl_PL:
       many: 'Edytowalnych reguł niestandardowych {count}'
       other: 'Edytowalne reguły niestandardowe {count}'
     SINGULARNAME: 'Edytowalna reguła niestandardowa'
+    has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
     PLURALNAME: 'Edytowalne grupy pól'
     PLURALS:
@@ -350,6 +374,7 @@ pl_PL:
       many: '{count} Editable Field Group Ends'
       other: '{count} Editable Field Group Ends'
     SINGULARNAME: 'Editable Field Group End'
+    belongs_to_Group: Grupa
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Podział strony'
     PLURALS:
@@ -370,3 +395,4 @@ pl_PL:
       many: 'Warunków odbiorcy wiadomości e-mail {count}'
       other: 'Warunki odbiorcy wiadomości e-mail {count}'
     SINGULARNAME: 'Stan odbiorcy wiadomości e-mail'
+    has_one_Parent: Rodzic

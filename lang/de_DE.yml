@@ -24,6 +24,7 @@ de_DE:
     ADD_FIELD_GROUP: 'Gruppe hinzufügen'
     ADD_PAGE_BREAK: 'Seite hinzufügen'
     FORMFIELDS: Formularfelder
+    has_many_Fields: Felder
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filter
     FILTERSUBMISSIONS: 'Einreichungen filtern..'
@@ -61,6 +62,10 @@ de_DE:
     TYPE_EMPTY: 'Wähle Feld-Typ'
     VALIDATION: Validierung
     'YES': Ja
+    db_Name: Name
+    db_Placeholder: Platzhalter
+    db_RightTitle: 'Titel rechts'
+    db_Title: Titel
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxen
     SINGULARNAME: 'Checkbox Feld'
@@ -86,6 +91,7 @@ de_DE:
     SINGULARNAME: 'Editierbare Feld-Gruppe'
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_START: 'Gruppe {group}'
+    belongs_to_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: Dateiupload-Felder
     SELECTUPLOADFOLDER: 'Ordner für den Upload auswählen'
@@ -110,6 +116,7 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Felder'
     SINGULARNAME: 'Member List Feld'
+    has_one_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Standardmäßig ausgewählt?'
     OPTIONSTAB: Optionen
@@ -117,6 +124,7 @@ de_DE:
     SINGULARNAME: 'Editierbares Multi-Option Feld'
     TITLE: Titel
     VALUE: Wert
+    has_many_Options: Optionen
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     ORDER_WARNING: 'Minimale Länge sollte unter maximaler Länge liegen.'
     PLURALNAME: Zahlenfelder
@@ -126,6 +134,9 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
+    db_Name: Name
+    db_Title: Titel
+    db_Value: Wert
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: Radio-Groups
     SINGULARNAME: Radio-Button
@@ -140,6 +151,7 @@ de_DE:
     RANGE_TO: an
     SINGULARNAME: Textfeld
     TEXTLENGTH: Textlänge
+    db_Autocomplete: Auto-Vervollständigung
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Eigene Regeln'
     EMAILCONTENTTAB: E-Mail-Inhalt
@@ -148,6 +160,9 @@ de_DE:
     EMAILTOREQUIRED: 'Empfänger-Adresse ist erforderlich'
     PLURALNAME: E-Mail-Empfänger
     SINGULARNAME: 'Anpassbares Formular E-Mail Empfänger'
+    db_EmailSubject: Betreff
+    db_EmailTemplate: E-Mail-Template
+    has_one_Form: Formular
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Bedingungen für E-Mail-Empfänger'
     SINGULARNAME: 'Bedingung für E-Mail-Empfänger'
@@ -162,6 +177,9 @@ de_DE:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Abgesendete Formularfelder'
     SINGULARNAME: 'Abgesendetes Formularfeld'
+    db_Name: Name
+    db_Title: Titel
+    db_Value: Wert
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Löschen
     DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
@@ -207,3 +225,6 @@ de_DE:
     SUBMISSIONS: Einsendungen
     TEXTONCLEAR: 'Text auf ''Löschen''-Button'
     TEXTONSUBMIT: 'Text auf Absende-Button'
+    db_EnableLiveValidation: 'Aktiviere Live-Validierung'
+    has_many_Fields: Felder
+    has_many_Submissions: Einsendungen
