@@ -18,6 +18,8 @@ pl:
     TITLE: Tytuł
     TYPE: 'Rodzaj strony'
     'YES': Tak
+    db_Name: Nazwa
+    db_Title: Tytuł
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Następny
     STEP_PREV: Poprzedni
@@ -33,3 +35,19 @@ pl:
     EMAILFROM: Od
     PLURALNAME: 'Podstawowe strony'
     RECIPIENTS: Odbiorcy
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grupa
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Folder
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Zawartość
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Grupa
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    db_Name: Nazwa
+    db_Title: Tytuł
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    db_EmailAddress: 'Adres e-mail'
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    db_Name: Nazwa
+    db_Title: Tytuł

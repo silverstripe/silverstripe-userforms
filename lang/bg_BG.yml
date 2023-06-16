@@ -23,15 +23,19 @@ bg_BG:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     OPTIONSTAB: Options
     VALUE: Value
+    has_many_Options: Options
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     CUSTOMRULESTAB: 'Custom Rules'
+    db_EmailSubject: 'Email Subject'
+    has_one_Form: Формуляр
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
     PLURALNAME: 'Submitted File Fields'
@@ -42,6 +46,7 @@ bg_BG:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Value: Value
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
@@ -62,6 +67,7 @@ bg_BG:
     SHOWCLEARFORM: 'Show Clear Form Button'
     SUBMISSIONS: Заявления
     TEXTONSUBMIT: 'Текст за бутона на изпращане:'
+    has_many_Submissions: Заявления
   SilverStripe\UserForms:
     ONCOMPLETELABEL: 'Покажи при завършване'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
@@ -93,7 +99,10 @@ bg_BG:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
+    db_Value: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Номер на редове'
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Group

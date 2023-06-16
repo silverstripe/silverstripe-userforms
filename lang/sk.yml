@@ -4,6 +4,7 @@ sk:
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
     ADD_PAGE_BREAK: 'Pridať ďalšiu stranu'
     FORMFIELDS: Formulár
+    has_many_Fields: Políčka
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
     NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
@@ -20,6 +21,7 @@ sk:
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Vlastné pravidlá'
     SINGULARNAME: 'Vlastne pravidlo'
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Zaškrtnuté v predvolenom režime?'
     CUSTOMERROR: 'Vlastná chybová správa'
@@ -45,6 +47,12 @@ sk:
     'YES': Áno
     NAME: Meno
     PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
+    db_Name: Meno
+    db_Placeholder: 'Zástupná/Ukážková hodnota (placeholder)'
+    db_RightTitle: 'Popis vpravo'
+    db_Sort: Usporiadanie
+    db_Title: Názov
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Zaškrtávacie polia (checkbox)'
     SINGULARNAME: 'Zaškrtávacie pole (checkbox)'
@@ -72,10 +80,12 @@ sk:
     FIELD_GROUP_START: 'Skupina {group}'
     PLURALNAME: 'Konce skupiny polí'
     SINGULARNAME: 'Koniec skupiny polí'
+    belongs_to_Group: Skupina
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Polia pre nahratie súboru'
     SELECTUPLOADFOLDER: 'Priečinok na nahrávanie súborov'
     SINGULARNAME: 'Pole pre nahratie súboru'
+    has_one_Folder: Priečinok
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Úroveň nadpisu'
     PLURALNAME: Nadpisy
@@ -92,9 +102,11 @@ sk:
     HIDELABEL: 'Skryť ''Názov'' na FrontEnd-e?'
     PLURALNAME: 'HTML bloky'
     SINGULARNAME: 'HTML blok'
+    db_Content: Obsah
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Polia zoznamu členov'
     SINGULARNAME: 'Pole zoznamu členov'
+    has_one_Group: Skupina
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Vybrané v predvolenom režime?'
     OPTIONSTAB: Možnosti
@@ -102,6 +114,7 @@ sk:
     SINGULARNAME: 'Pole s viacerými možnosťami'
     TITLE: Názov
     VALUE: Hodnota
+    has_many_Options: Možnosti
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numerické/číselné polia'
     RANGE: 'Povolený rozsah'
@@ -110,6 +123,11 @@ sk:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: Možnosti
     SINGULARNAME: Možnosť
+    db_Name: Meno
+    db_Sort: Usporiadanie
+    db_Title: Názov
+    db_Value: Hodnota
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Prepínacie polia (radio)'
     SINGULARNAME: 'Prepínacie pole (radio)'
@@ -126,9 +144,14 @@ sk:
     EMAILDETAILSTAB: 'Detaily e-mailu'
     PLURALNAME: 'Užívateľom definovaný formulár - príjemcovia e-mailu'
     SINGULARNAME: 'Užívateľom definovaný formulár - príjemca e-mailu'
+    db_EmailAddress: 'Emailová adresa'
+    db_EmailSubject: Predmet
+    db_EmailTemplate: 'E-mailová šablóna'
+    has_one_Form: Formulár
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Užívateľom definovaný formulár - podmienky príjemcu e-mailu'
     SINGULARNAME: 'Užívateľom definovaný formulár - podmienka príjemcu e-mailu'
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Stiahnuť súbor'
     PLURALNAME: 'Pole s odoslanými súbormi'
@@ -136,9 +159,14 @@ sk:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Odoslané formuláre'
     SINGULARNAME: 'Odoslaný formulár'
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Odoslané formulárové polia'
     SINGULARNAME: 'Odoslané formulárove pole'
+    db_Name: Meno
+    db_Title: Názov
+    db_Value: Hodnota
+    has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Vyčistiť
     DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
@@ -186,6 +214,9 @@ sk:
     SUBMISSIONS: 'Podané formuláre'
     TEXTONCLEAR: 'Text na tlačidle RESET:'
     TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
+    db_EnableLiveValidation: 'Povoliť živú validáciu?'
+    has_many_Fields: Políčka
+    has_many_Submissions: 'Podané formuláre'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Hlavné
   SilverStripe\UserForms:

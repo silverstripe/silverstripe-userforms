@@ -6,16 +6,20 @@ en_GB:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
+    db_Content: Content
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
     OPTIONSTAB: Options
     TITLE: Title
     VALUE: Value
+    has_many_Options: Options
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     CUSTOMRULESTAB: 'Custom Rules'
+    db_EmailSubject: 'Email Subject'
+    has_one_Form: Form
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
@@ -55,6 +59,7 @@ en_GB:
     SINGULARNAME: 'Editable Form Field'
     TITLE: Title
     VALIDATION: Validation
+    db_Title: Title
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkboxes
     SINGULARNAME: 'Checkbox Field'
@@ -77,9 +82,12 @@ en_GB:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
+    has_one_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
+    db_Title: Title
+    db_Value: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Number of rows'
     PLURALNAME: 'Text Fields'
@@ -94,3 +102,7 @@ en_GB:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Submitted Form Fields'
     SINGULARNAME: 'Submitted Form Field'
+    db_Title: Title
+    db_Value: Value
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Group

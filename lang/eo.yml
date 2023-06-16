@@ -33,6 +33,7 @@ eo:
     ADD_FIELD_GROUP: 'Aldoni kampogrupon'
     ADD_PAGE_BREAK: 'Aldoni paĝosalton'
     FORMFIELDS: 'Formularaj kampoj'
+    has_many_Fields: Kampoj
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
     NO_PAGE: 'Trovis kampon ''{name}'' antaŭ eventualaj paĝoj'
@@ -52,6 +53,7 @@ eo:
       one: 'Unu redaktebla propra regulo'
       other: '{count} redakteblaj propraj reguloj'
     SINGULARNAME: 'Redaktebla propra regulo'
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Ĉu kontrolita apriore?'
     CUSTOMERROR: 'Propra mesaĝo pri eraro'
@@ -85,6 +87,13 @@ eo:
     TYPE_EMPTY: 'Elekti tipon de kampo'
     VALIDATION: Validigo
     'YES': Jes
+    db_Name: Nomo
+    db_Placeholder: Lokokupilo
+    db_RightTitle: 'Dekstra titolo'
+    db_ShowOnLoad: 'Vidigi ŝargante'
+    db_Sort: Ordigi
+    db_Title: Titolo
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Markobutonoj
     PLURALS:
@@ -138,6 +147,7 @@ eo:
       one: 'Unu redaktebla kampa grupa fino'
       other: '{count} redakteblaj kampaj grupaj finoj'
     SINGULARNAME: 'Finaĵo de redakteblaj kampaj grupoj'
+    belongs_to_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     ANYONE: 'Nelimigita aliro, alŝutoj estos videblaj de ĉiuj'
     INHERIT: 'Videbleco por ĉi tiu dosierujo estas heredata el la patra dosierujo.'
@@ -149,6 +159,7 @@ eo:
       other: '{count} kampoj por dosiera alŝuto'
     SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
+    has_one_Folder: Dosierujo
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'
     PLURALNAME: Titoloj
@@ -175,12 +186,14 @@ eo:
       one: 'Unu HTML-bloko'
       other: '{count} HTML-blokoj'
     SINGULARNAME: HTML-bloko
+    db_Content: Enhavo
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Kampoj por membrolisto'
     PLURALS:
       one: 'Unu kampo por membrolisto'
       other: '{count} kampoj por membrolisto'
     SINGULARNAME: 'Kampo por membrolisto'
+    has_one_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Elektita apriore?'
     OPTIONSTAB: Ebloj
@@ -191,6 +204,7 @@ eo:
     SINGULARNAME: 'Redaktebla plurebla kampo'
     TITLE: Titolo
     VALUE: Valoro
+    has_many_Options: Agordoj
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     ORDER_WARNING: 'La minimuma longo devus esti malpli ol la maksimuma longo.'
     PLURALNAME: 'Numeraj kampoj'
@@ -206,6 +220,11 @@ eo:
       one: 'Unu redaktebla eblo'
       other: '{count} redakteblaj ebloj'
     SINGULARNAME: 'Redaktebla eblo'
+    db_Name: Nomo
+    db_Sort: Ordigi
+    db_Title: Titolo
+    db_Value: Valoro
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Radiobutonaj grupoj'
     PLURALS:
@@ -227,6 +246,7 @@ eo:
     RANGE_TO: al
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Permesata longo de teksto'
+    db_Autocomplete: 'Aŭtomate kompletigi'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Propraj reguloj'
     EMAILCONTENTTAB: 'Retpoŝta enhavo'
@@ -238,12 +258,18 @@ eo:
       one: 'Unu retpoŝta ricevonto'
       other: '{count} retpoŝtaj ricevontoj'
     SINGULARNAME: 'Retpoŝta ricevonto'
+    db_EmailAddress: 'Retpoŝta adreso'
+    db_EmailFrom: 'Retpoŝto el'
+    db_EmailSubject: 'Temo de retpoŝto'
+    db_EmailTemplate: 'Retpoŝta ŝablono'
+    has_one_Form: Formularo
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Kondiĉoj por retpoŝtaj ricevontoj'
     PLURALS:
       one: 'Unu kondiĉo por retpoŝtaj ricevontoj'
       other: '{count} kondiĉoj por retpoŝtaj ricevontoj'
     SINGULARNAME: 'Kondiĉo por retpoŝtaj ricevontoj'
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Elŝuti dosieron'
     PLURALNAME: 'Kampoj de sendita dosiero'
@@ -259,12 +285,17 @@ eo:
       other: '{count} senditaj formularoj'
     SINGULARNAME: 'Sendita formularo'
     SUBMITTER: Sendinto
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Kampoj de sendita formularo'
     PLURALS:
       one: 'Unu sendita formulara kampo'
       other: '{count} senditaj formularaj kampoj'
     SINGULARNAME: 'Kampo de sendita formularo'
+    db_Name: Nomo
+    db_Title: Titolo
+    db_Value: Valoro
+    has_one_Parent: Patra
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Vakigi
     DESCRIPTION: 'Aldonas adapteblan formularon'
@@ -319,3 +350,6 @@ eo:
     SUBMISSIONS: Sendaĵoj
     TEXTONCLEAR: 'Teksto sur vakiga butono:'
     TEXTONSUBMIT: 'Teksto sur senda butono:'
+    db_EnableLiveValidation: 'Enŝalti samtempan validigon'
+    has_many_Fields: Kampoj
+    has_many_Submissions: Sendaĵoj

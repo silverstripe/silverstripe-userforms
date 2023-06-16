@@ -6,16 +6,21 @@ ja:
     HIDEFROMREPORT: 'レポートから隠しますか?'
     PLURALNAME: HTMLブロック
     SINGULARNAME: HTMLブロック
+    db_Content: 内容
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 編集可能なマルチオプションフィールド
     SINGULARNAME: 編集可能なマルチオプションフィールド
     OPTIONSTAB: オプション
     TITLE: タイトル
     VALUE: 数値
+    has_many_Options: オプション
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     PLURALNAME: ユーザー定義フォームのメール受信者
     SINGULARNAME: ユーザー定義フォームのメール受信者
     CUSTOMRULESTAB: カスタムルール
+    db_EmailAddress: メールアドレス
+    db_EmailSubject: メールの件名
+    has_one_Form: フォーム
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: メール
     EMAILBODY: ボディ
@@ -67,6 +72,8 @@ ja:
     SINGULARNAME: 編集可能フォームフィールド
     TITLE: タイトル
     VALIDATION: 確認
+    db_Name: 名前
+    db_Title: タイトル
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: チェックボックス
     SINGULARNAME: チェックボックスフィールド
@@ -82,6 +89,7 @@ ja:
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: ファイルアップロードフィールド
     SINGULARNAME: ファイルアップロードフィールド
+    has_one_Folder: フォルダ
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 見出しレベルを選択
     PLURALNAME: 見出し
@@ -91,11 +99,15 @@ ja:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: メンバーリストフィールド
     SINGULARNAME: メンバーリストフィールド
+    has_one_Group: グループ
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: へ
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 編集可能なオプション
     SINGULARNAME: 編集可能なオプション
+    db_Name: 名前
+    db_Title: タイトル
+    db_Value: 数値
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 行数
     PLURALNAME: テキストフィールド
@@ -111,3 +123,8 @@ ja:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 送信済フォームフィールド
     SINGULARNAME: 送信済フォームフィールド
+    db_Name: 名前
+    db_Title: タイトル
+    db_Value: 数値
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: グループ
