@@ -1,4 +1,5 @@
 /* global i18n, jQuery */
+/* eslint-disable no-restricted-globals, func-names */
 
 jQuery(document).ready(($) => {
   // Settings that come from the CMS.

@@ -22,7 +22,7 @@ jQuery.entwine('ss', ($) => {
           newField.find('.col-ClassName select').attr('data-folderconfirmed', 0);
         });
       });
-    }
+    },
   });
 
   function toggleVisibility(check, show, hide) {
@@ -43,7 +43,7 @@ jQuery.entwine('ss', ($) => {
     },
     onchange() {
       toggleVisibility($(this).prop('checked'), '#Form_ConfirmFolderForm_CreateFolder_Holder', '#Form_ConfirmFolderForm_FolderID_Holder');
-    }
+    },
   });
 
   /** Move our options under the radio button areas */
@@ -54,7 +54,7 @@ jQuery.entwine('ss', ($) => {
     },
     onchange() {
       toggleVisibility($(this).prop('checked'), '#Form_ConfirmFolderForm_FolderID_Holder', '#Form_ConfirmFolderForm_CreateFolder_Holder');
-    }
+    },
   });
 
   /** Display permissions for folder selected */
@@ -70,8 +70,8 @@ jQuery.entwine('ss', ($) => {
       return fetch(fetchURL, {
         credentials: 'same-origin',
       })
-        .then(response => response.json())
-        .then(response => {
+        .then((response) => response.json())
+        .then((response) => {
           $(this).siblings('.form__field-description').html(response);
           $(this).parent().siblings('.form__field-description').html(response);
           return response;
@@ -79,7 +79,7 @@ jQuery.entwine('ss', ($) => {
         .catch((error) => {
           jQuery.noticeAdd({ text: error.message, stay: false, type: 'error' });
         });
-    }
+    },
   });
 
   /**
@@ -167,7 +167,7 @@ jQuery.entwine('ss', ($) => {
           responseClassBad="modal__response modal__response--error"
           responseClassGood="modal__response modal__response--good"
           identifier="UserForms.ConfirmFolder"
-        />
+        />,
       );
     },
 
@@ -200,6 +200,6 @@ jQuery.entwine('ss', ($) => {
   $('#Form_ConfirmFolderForm_action_cancel').entwine({
     onclick() {
       $('#confirm-folder__dialog-wrapper').close();
-    }
+    },
   });
 });
