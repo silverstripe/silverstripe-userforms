@@ -37,7 +37,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@silverstripe/eslint-config": "^1.0.0",
+    "@silverstripe/eslint-config": "^1.1.0",
     "@silverstripe/webpack-config": "^2.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "webpack": "^5.74.0",
