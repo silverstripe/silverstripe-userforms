@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Tests\Model;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Storage\AssetStore;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
@@ -69,21 +70,23 @@ class SubmittedFileFieldTest extends SapphireTest
 
     public function testGetFormattedValue()
     {
+        // Set an explicit base URL so we get a reliable value for the test
+        Director::config()->set('alternate_base_url', 'http://mysite.com');
         $fileName = $this->submittedFile->getFileName();
         $message = "You don&#039;t have the right permissions to download this file";
 
         $this->file->CanViewType = 'OnlyTheseUsers';
         $this->file->write();
-        
+
         $this->loginWithPermission('ADMIN');
         $this->assertEquals(
             sprintf(
-                '%s - <a href="/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt" target="_blank">Download File</a>',
+                '%s - <a href="http://mysite.com/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt" target="_blank">Download File</a>',
                 $fileName
             ),
             $this->submittedFile->getFormattedValue()->value
         );
-            
+
         $this->loginWithPermission('CMS_ACCESS_CMSMain');
         $this->assertEquals(
             sprintf(
