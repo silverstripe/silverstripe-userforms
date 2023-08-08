@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Model\Submission;
 
 use SilverStripe\Assets\File;
+use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Versioned\Versioned;
 
@@ -83,7 +84,11 @@ class SubmittedFileField extends SubmittedFormField
     {
         if ($file = $this->getUploadedFileFromDraft()) {
             if ($file->exists()) {
-                return $file->getURL($grant);
+                $url = $file->getURL($grant);
+                if ($url) {
+                    return Director::absoluteURL($url);
+                }
+                return null;
             }
         }
     }
