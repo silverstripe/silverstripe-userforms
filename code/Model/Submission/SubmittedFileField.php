@@ -3,7 +3,9 @@
 namespace SilverStripe\UserForms\Model\Submission;
 
 use SilverStripe\Assets\File;
+use SilverStripe\Control\Controller;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\Versioned\Versioned;
 
 /**
@@ -32,7 +34,7 @@ class SubmittedFileField extends SubmittedFormField
 
     /**
      * Return the value of this field for inclusion into things such as
-     * reports.
+     * reports and email.
      *
      * @return string
      */
@@ -45,7 +47,7 @@ class SubmittedFileField extends SubmittedFormField
         $file = $this->getUploadedFileFromDraft();
 
         if ($link) {
-            if ($file->canView()) {
+            if ($file->canView() || Controller::curr() instanceof UserDefinedFormController) {
                 return DBField::create_field('HTMLText', sprintf(
                     '%s - <a href="%s" target="_blank">%s</a>',
                     htmlspecialchars($name, ENT_QUOTES),
