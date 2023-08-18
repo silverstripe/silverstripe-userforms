@@ -1,4 +1,25 @@
 sk:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Hlavné
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Pridať príjemcu'
+    CLEARBUTTON: Vyčistiť
+    CONFIGURATION: Konfigurácia
+    DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
+    DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'
+    DISPLAYERRORMESSAGESATTOP: 'Zobrazovať chybové hlásenia nad formulárom?'
+    ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
+    NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre nebudú doručené.'
+    ONCOMPLETELABEL: 'Správa po odoslaní formulára'
+    RECIPIENTS: Príjemcovia
+    SAVESUBMISSIONS: 'Zakázať ukladanie odoslaných formulárov na server?'
+    SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
+    SUBMISSIONS: 'Podané formuláre'
+    SUBMITBUTTON: Odoslať
+    TEXTONCLEAR: 'Text na tlačidle RESET:'
+    TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Zrušiť
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Pridať políčko'
     ADD_FIELD_GROUP: 'Pridať obaľovaciu skupinu'
@@ -12,12 +33,12 @@ sk:
     UNEXPECTED_GROUP_END: '''{name}'' nájdený bez odpovedajúcho začiatku'
     WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filter
     FILTERSUBMISSIONS: 'Filtrovať ...'
     FROM: Od
+    RESET: Reset
     TILL: Do
     WHEREVALUEIS: 'kde hodnota je ...'
-    FILTER: Filter
-    RESET: Reset
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Vlastné pravidlá'
     SINGULARNAME: 'Vlastne pravidlo'
@@ -35,7 +56,9 @@ sk:
     EXTRACLASS_Title: 'Extra CSS triedy'
     FIELDISREQUIRED: '{name} je vyžadované'
     GROUP: Skupina
+    NAME: Meno
     'NO': Nie
+    PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
     PLURALNAME: 'Formulárové polia'
     REQUIRED: 'Je pole povinné/vyžadované?'
     REQUIRED_DESCRIPTION: 'Všimnite si prosím, že podmienené polia nemôžu byť vyžadované.'
@@ -45,8 +68,6 @@ sk:
     TYPE: Typ
     VALIDATION: Validácia
     'YES': Áno
-    NAME: Meno
-    PLACEHOLDER: 'Zástupná/Ukážková hodnota (placeholder)'
     db_Name: Meno
     db_Placeholder: 'Zástupná/Ukážková hodnota (placeholder)'
     db_RightTitle: 'Popis vpravo'
@@ -60,9 +81,9 @@ sk:
     PLURALNAME: 'Skupiny zaškrtávacích polí'
     SINGULARNAME: 'Skupina zaškrtávacích polí'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Predvolená hodnota'
     PLURALNAME: 'Rozbaľovacie polia (výber krajiny)'
     SINGULARNAME: 'Rozbaľovacie pole (výber krajiny)'
-    DEFAULT: 'Predvolená hodnota'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Dátumové polia'
     SINGULARNAME: 'Dátumové pole'
@@ -93,9 +114,9 @@ sk:
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Zlomy strán'
     SINGULARNAME: 'Zlom strany'
+    STEP_NEXT: Ďalší
     STEP_TITLE: 'Strana {page}'
     TITLE_FIRST: 'Prvá strana'
-    STEP_NEXT: Ďalší
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Skryť z reportu?'
@@ -168,26 +189,36 @@ sk:
     db_Value: Hodnota
     has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Pridať príjemcu'
     CLEARBUTTON: Vyčistiť
+    CONFIGURATION: Konfigurácia
     DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
+    DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'
+    DISPLAYERRORMESSAGESATTOP: 'Zobrazovať chybové hlásenia nad formulárom?'
     EMAILADDRESS: E-mail
     EMAILBODY: Správa
     EMAILBODYHTML: Správa
     EMAILFROM: Od
     EMAILSUBJECT: Predmet
     EMAILTEMPLATE: 'E-mailová šablóna'
+    ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
     EmailFromContent: 'Políčko "E-mail odosielateľa" umožňuje nastaviť adresu, od koho príde e-mail. Na väčšine serverov musí mať táto adresa nastavenú rovnakú doménu ako je doména stránky. Napr. na stránke mojastranka.sk musí byť táto adresa nieco@mojastranka.sk. Avšak ako "Odpoveď na" môžete zadať ľubovoľnú e-mailovú adresu, na ktorú príde odpoveď.'
     FROMADDRESS: 'E-mail odosielateľa'
     HIDEFORMDATA: 'Skryť dáta z e-mailu?'
+    NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre nebudú doručené.'
+    ONCOMPLETELABEL: 'Správa po odoslaní formulára'
     ORSELECTAFIELDTOUSEASFROM: '... alebo vyberte pole, ktoré sa použije na odpoveď'
     ORSELECTAFIELDTOUSEASTO: '... alebo vyberte pole, ktoré sa použije ako E-mail príjemcu'
     PLURALNAME: 'Základné stránky'
     PREVIEW_EMAIL: 'Náhľad e-mailu'
     PREVIEW_EMAIL_DESCRIPTION: 'Poznámka: Neuložené zmeny sa v náhľade nezobrazujú.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Akonáhle uložite príjemcu, budete si môcť pozrieť ako bude vyzerať tento e-mail.'
+    RECIPIENTS: Príjemcovia
     REPLYADDRESS: 'Odpoveď na'
     REPLYADDRESS_DESCRIPTION: 'E-mailová adresa, na ktorú príde odpoveď od príjemcu.'
     RulesDescription: 'E-maily budú zasielane príjemcovi len vtedy, ak sú splnené vlastné pravidlá. Ak pravidlá nie sú definované, príjemca bude dostávať e-maily pri každom podanom formulári.'
+    SAVESUBMISSIONS: 'Zakázať ukladanie odoslaných formulárov na server?'
     SELECTAFIELDTOSETSUBJECT: '... alebo vyberte pole, ktoré sa použije ako predmet'
     SENDEMAILTO: 'E-mail príjemcu'
     SENDEMAILTO_DESCRIPTION: 'Môžete zadať viac e-mailových adries, pričom jednotlivé adresy oddeľujte čiarkou.'
@@ -195,46 +226,15 @@ sk:
     SENDIFAND: 'Všetky podmienky sú splnené'
     SENDIFOR: 'Akékoľvek podmienky sú splnené'
     SENDPLAIN: 'Poslať e-mail ako obyčajný text? (HTML značky budú odstránené)'
+    SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
     SINGULARNAME: 'Jednoduchý formulár'
+    SUBMISSIONS: 'Podané formuláre'
     SUBMITBUTTON: Odoslať
+    TEXTONCLEAR: 'Text na tlačidle RESET:'
+    TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
     TYPEREPLY: 'Napíšte adresu'
     TYPESUBJECT: 'Napíšte predmet'
     TYPETO: 'Napíšte adresu'
-    ADDEMAILRECIPIENT: 'Pridať príjemcu'
-    CONFIGURATION: Konfigurácia
-    DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
-    DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'
-    DISPLAYERRORMESSAGESATTOP: 'Zobrazovať chybové hlásenia nad formulárom?'
-    ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
-    NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre nebudú doručené.'
-    ONCOMPLETELABEL: 'Správa po odoslaní formulára'
-    RECIPIENTS: Príjemcovia
-    SAVESUBMISSIONS: 'Zakázať ukladanie odoslaných formulárov na server?'
-    SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
-    SUBMISSIONS: 'Podané formuláre'
-    TEXTONCLEAR: 'Text na tlačidle RESET:'
-    TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
     db_EnableLiveValidation: 'Povoliť živú validáciu?'
     has_many_Fields: Políčka
     has_many_Submissions: 'Podané formuláre'
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: Hlavné
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Pridať príjemcu'
-    CLEARBUTTON: Vyčistiť
-    CONFIGURATION: Konfigurácia
-    DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
-    DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'
-    DISPLAYERRORMESSAGESATTOP: 'Zobrazovať chybové hlásenia nad formulárom?'
-    ENABLELIVEVALIDATION: 'Povoliť živú validáciu?'
-    NORECIPIENTS: 'Varovanie: Nemáte pridaných žiadnych príjemcov. Podané formuláre nebudú doručené.'
-    ONCOMPLETELABEL: 'Správa po odoslaní formulára'
-    RECIPIENTS: Príjemcovia
-    SAVESUBMISSIONS: 'Zakázať ukladanie odoslaných formulárov na server?'
-    SHOWCLEARFORM: 'Zobraziť resetovacie tlačidlo?'
-    SUBMISSIONS: 'Podané formuláre'
-    SUBMITBUTTON: Odoslať
-    TEXTONCLEAR: 'Text na tlačidle RESET:'
-    TEXTONSUBMIT: 'Text na tlačidle ODOSLAŤ:'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Zrušiť

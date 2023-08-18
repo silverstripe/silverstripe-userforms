@@ -1,10 +1,24 @@
 sr_RS:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Главно
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Show on completion'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Submissions
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Text on submit button:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Одустани
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Филтер
+    FROM: From
+    RESET: 'Врати у пређашње стање'
   SilverStripe\UserForms\Model\EditableFormField:
-    CUSTOMRULES: 'Custom Rules'
-    VALIDATION: Validation
     CHECKEDBYDEFAULT: 'Checked by Default?'
     CUSTOMERROR: 'Custom Error Message'
     CUSTOMOPTIONS: Options
+    CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Default to Today?'
     FIELDISREQUIRED: '{name} је обавезно'
     GROUP: Група
@@ -13,14 +27,37 @@ sr_RS:
     REQUIRED: 'Захтевано?'
     SINGULARNAME: 'Editable Form Field'
     TITLE: Наслов
+    VALIDATION: Validation
     db_Name: Име
     db_Title: Наслов
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Email Fields'
     SINGULARNAME: 'Email Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Група
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+    has_one_Folder: Фасцикла
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
@@ -31,16 +68,26 @@ sr_RS:
     SINGULARNAME: 'Member List Field'
     has_one_Group: Група
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Options
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-    OPTIONSTAB: Options
     TITLE: Наслов
     VALUE: Value
     has_many_Options: Options
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+    db_Name: Име
+    db_Title: Наслов
+    db_Value: Value
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Број редова'
+    PLURALNAME: 'Text Fields'
+    SINGULARNAME: 'Text Field'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
-    CUSTOMRULESTAB: 'Custom Rules'
     db_EmailAddress: 'Адреса е-поште'
     db_EmailSubject: 'Email Subject'
     has_one_Form: Form
@@ -60,68 +107,21 @@ sr_RS:
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
+    EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
+    ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    SENDEMAILTO: 'Send Email To'
-    SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SINGULARNAME: 'User Defined Form'
-    SUBMITBUTTON: Submit
-    EMAILBODYHTML: Body
-    ONCOMPLETELABEL: 'Show on completion'
     PLURALNAME: 'User Defined Forms'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SENDEMAILTO: 'Send Email To'
+    SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
-    SUBMISSIONS: Submissions
-    TEXTONSUBMIT: 'Text on submit button:'
-    has_many_Submissions: Submissions
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: Главно
-  SilverStripe\UserForms:
-    ONCOMPLETELABEL: 'Show on completion'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
-    SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Submissions
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Text on submit button:'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Одустани
-  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Филтер
-    FROM: From
-    RESET: 'Врати у пређашње стање'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Checkboxes
-    SINGULARNAME: 'Checkbox Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
-    SINGULARNAME: 'Checkbox Group'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: 'Date Fields'
-    SINGULARNAME: 'Date Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'File Upload Fields'
-    SINGULARNAME: 'File Upload Field'
-    has_one_Folder: Фасцикла
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
-    LEVEL: 'Select Heading Level'
-    PLURALNAME: Headings
-    SINGULARNAME: Heading
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    PLURALNAME: 'Editable Options'
-    SINGULARNAME: 'Editable Option'
-    db_Name: Име
-    db_Title: Наслов
-    db_Value: Value
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    NUMBERROWS: 'Број редова'
-    PLURALNAME: 'Text Fields'
-    SINGULARNAME: 'Text Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Група
+    has_many_Submissions: Submissions

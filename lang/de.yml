@@ -12,6 +12,8 @@ de:
     FILTER: Filter
     FROM: Von
     RESET: Zurücksetzen
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Übergeordnet
   SilverStripe\UserForms\Model\EditableFormField:
     CUSTOMOPTIONS: Optionen
     FIELDISREQUIRED: '{name} muss ausgefüllt werden'
@@ -25,43 +27,31 @@ de:
     db_Sort: Sortierung
     db_Title: Titel
     has_one_Parent: Übergeordnet
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Gruppe
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Ordner
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Weiter
     STEP_PREV: Vorige
     STEP_TITLE: 'Seite {page}'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Inhalt
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     OPTIONSTAB: Optionen
     TITLE: Titel
     has_many_Options: Optionen
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: bis
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    RANGE_TO: bis
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    CLEARBUTTON: Löschen
-    CONFIGURATION: Einstellungen
-    EMAILADDRESS: E-Mail
-    EMAILFROM: Von
-    EMAILSUBJECT: E-Mail-Betreff
-    EMAILTEMPLATE: E-Mail-Vorlage
-    PLURALNAME: 'Basis Seiten'
-    RECIPIENTS: Empfänger
-    SUBMITBUTTON: Absenden
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Übergeordnet
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Gruppe
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    has_one_Folder: Ordner
-  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    db_Content: Inhalt
-  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    has_one_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Name: Name
     db_Sort: Sortierung
     db_Title: Titel
     has_one_Parent: Übergeordnet
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: bis
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     db_EmailAddress: E-Mail-Adresse
     db_EmailFrom: 'E-Mail von'
@@ -75,3 +65,13 @@ de:
     db_Name: Name
     db_Title: Titel
     has_one_Parent: Übergeordnet
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Löschen
+    CONFIGURATION: Einstellungen
+    EMAILADDRESS: E-Mail
+    EMAILFROM: Von
+    EMAILSUBJECT: E-Mail-Betreff
+    EMAILTEMPLATE: E-Mail-Vorlage
+    PLURALNAME: 'Basis Seiten'
+    RECIPIENTS: Empfänger
+    SUBMITBUTTON: Absenden

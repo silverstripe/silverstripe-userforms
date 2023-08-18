@@ -34,6 +34,9 @@ en:
     ADD_PAGE_BREAK: 'Add Page Break'
     FORMFIELDS: 'Form Fields'
     has_many_Fields: Fields
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Submitted file field'
+    db_UserFormUpload: 'User form upload'
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
     NO_PAGE: 'Field ''{name}'' found before any pages'
@@ -413,6 +416,3 @@ en:
     has_many_EmailRecipients: 'Email recipients'
     has_many_Fields: Fields
     has_many_Submissions: Submissions
-  SilverStripe\UserForms\Extension\UserFormFileExtension:
-    belongs_to_SubmittedFileField: 'Submitted file field'
-    db_UserFormUpload: 'User form upload'

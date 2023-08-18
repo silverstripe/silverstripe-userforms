@@ -34,6 +34,9 @@ eo:
     ADD_PAGE_BREAK: 'Aldoni paĝosalton'
     FORMFIELDS: 'Formularaj kampoj'
     has_many_Fields: Kampoj
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Kampo de sendita dosiero'
+    db_UserFormUpload: 'Alŝuti formularon de uzanto'
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
     NO_PAGE: 'Trovis kampon ''{name}'' antaŭ eventualaj paĝoj'
@@ -53,6 +56,11 @@ eo:
       one: 'Unu redaktebla propra regulo'
       other: '{count} redakteblaj propraj reguloj'
     SINGULARNAME: 'Redaktebla propra regulo'
+    db_ConditionOption: 'Kondiĉo eblo'
+    db_Display: Vidigi
+    db_FieldValue: 'Valoro de kampo'
+    db_Version: Versio
+    has_one_ConditionField: 'Kondiĉo kampo'
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Ĉu kontrolita apriore?'
@@ -87,12 +95,20 @@ eo:
     TYPE_EMPTY: 'Elekti tipon de kampo'
     VALIDATION: Validigo
     'YES': Jes
+    db_CustomErrorMessage: 'Propra mesaĝo pri eraro'
+    db_Default: Apriora
+    db_DisplayRulesConjunction: 'Vidigi regularan kajon'
+    db_ExtraClass: 'Kroma klaso'
     db_Name: Nomo
     db_Placeholder: Lokokupilo
+    db_Required: Nepra
     db_RightTitle: 'Dekstra titolo'
+    db_ShowInSummary: 'Vidigi en resumo'
     db_ShowOnLoad: 'Vidigi ŝargante'
     db_Sort: Ordigi
     db_Title: Titolo
+    db_Version: Versio
+    has_many_DisplayRules: 'Vidigi regulojn'
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Markobutonoj
@@ -100,6 +116,7 @@ eo:
       one: 'Unu markobutono'
       other: '{count} markobutonoj'
     SINGULARNAME: 'Markobutona kampo'
+    db_CheckedDefault: 'Kontrolis aprioran'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Markobutonaj grupoj'
     PLURALS:
@@ -115,18 +132,23 @@ eo:
       other: '{count} landaj fallistoj'
     SINGULARNAME: 'Landa fallisto'
     USE_EMPTY_STRING: 'Agordi aprioran vakan tekston'
+    db_EmptyString: 'Vaka teksto'
+    db_UseEmptyString: 'Uzi Vakan tekston'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Kampoj por dato'
     PLURALS:
       one: 'Unu data kampo'
       other: '{count} dataj kampoj'
     SINGULARNAME: 'Kampo por dato'
+    db_DefaultToToday: 'Apriorie hodiaŭ'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Fallistoj
     PLURALS:
       one: 'Unu fallisto'
       other: '{count} fallistoj'
     SINGULARNAME: 'Fallista kampo'
+    db_EmptyString: 'Vaka teksto'
+    db_UseEmptyString: 'Uzi Vakan tekston'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Kampoj por retpoŝto'
     PLURALS:
@@ -139,6 +161,7 @@ eo:
       one: 'Unu redaktebla kampa grupo'
       other: '{count} redakteblaj kampaj grupoj'
     SINGULARNAME: 'Redaktebla kampa grupo'
+    has_one_End: Fino
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_END: 'fino de {group}'
     FIELD_GROUP_START: 'Grupo {group}'
@@ -159,6 +182,8 @@ eo:
       other: '{count} kampoj por dosiera alŝuto'
     SELECTUPLOADFOLDER: 'Elekti alŝutan dosierujon'
     SINGULARNAME: 'Kampo por dosiera alŝuto'
+    db_FolderConfirmed: 'Konfirmis dosierujon'
+    db_MaxFileSizeMB: 'Maks dosiergrando MB'
     has_one_Folder: Dosierujo
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Elekti titolan nivelon'
@@ -167,6 +192,8 @@ eo:
       one: 'Unu titolo'
       other: '{count} titoloj'
     SINGULARNAME: Titolo
+    db_HideFromReports: 'Kaŝi de raportoj'
+    db_Level: Nivelo
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: Paĝosaltoj
     PLURALS:
@@ -187,6 +214,8 @@ eo:
       other: '{count} HTML-blokoj'
     SINGULARNAME: HTML-bloko
     db_Content: Enhavo
+    db_HideFromReports: 'Kaŝi de raportoj'
+    db_HideLabel: 'Kaŝi etikedon'
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Kampoj por membrolisto'
     PLURALS:
@@ -214,16 +243,20 @@ eo:
     RANGE: 'Ebla numera amplekso'
     RANGE_TO: al
     SINGULARNAME: 'Numera kampo'
+    db_MaxValue: 'Maks valoro'
+    db_MinValue: 'Min valoro'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Redakteblaj ebloj'
     PLURALS:
       one: 'Unu redaktebla eblo'
       other: '{count} redakteblaj ebloj'
     SINGULARNAME: 'Redaktebla eblo'
+    db_Default: Apriora
     db_Name: Nomo
     db_Sort: Ordigi
     db_Title: Titolo
     db_Value: Valoro
+    db_Version: Versio
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Radiobutonaj grupoj'
@@ -247,6 +280,9 @@ eo:
     SINGULARNAME: 'Teksta kampo'
     TEXTLENGTH: 'Permesata longo de teksto'
     db_Autocomplete: 'Aŭtomate kompletigi'
+    db_MaxLength: 'Maks longo'
+    db_MinLength: 'Min longo'
+    db_Rows: Vicoj
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Propraj reguloj'
     EMAILCONTENTTAB: 'Retpoŝta enhavo'
@@ -258,26 +294,41 @@ eo:
       one: 'Unu retpoŝta ricevonto'
       other: '{count} retpoŝtaj ricevontoj'
     SINGULARNAME: 'Retpoŝta ricevonto'
+    db_CustomRulesCondition: 'Propra regulara kondiĉo'
     db_EmailAddress: 'Retpoŝta adreso'
+    db_EmailBody: 'Korpo de retpoŝto'
+    db_EmailBodyHtml: 'Html-korpo de retpoŝto'
     db_EmailFrom: 'Retpoŝto el'
+    db_EmailReplyTo: 'Retpoŝta respondo al'
     db_EmailSubject: 'Temo de retpoŝto'
     db_EmailTemplate: 'Retpoŝta ŝablono'
+    db_HideFormData: 'Kaŝi formularajn datumojn'
+    db_HideInvisibleFields: 'Kaŝi nevideblajn kampojn'
+    db_SendPlain: 'Sendi plate'
+    has_many_CustomRules: 'Propraj reguloj'
     has_one_Form: Formularo
+    has_one_SendEmailFromField: 'Sendi retpoŝton de'
+    has_one_SendEmailSubjectField: 'Sendi retpoŝton, temo-kampo'
+    has_one_SendEmailToField: 'Sendi retpoŝton, al-kampo'
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Kondiĉoj por retpoŝtaj ricevontoj'
     PLURALS:
       one: 'Unu kondiĉo por retpoŝtaj ricevontoj'
       other: '{count} kondiĉoj por retpoŝtaj ricevontoj'
     SINGULARNAME: 'Kondiĉo por retpoŝtaj ricevontoj'
+    db_ConditionOption: 'Eblo de kondiĉo'
+    db_ConditionValue: 'Valoro de kondiĉo'
+    has_one_ConditionField: 'Kondiĉo kampo'
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Elŝuti dosieron'
+    INSUFFICIENTRIGHTS: 'Vi ne havas taŭgajn permesojn por elŝuti ĉi tiun dosieron'
     PLURALNAME: 'Kampoj de sendita dosiero'
     PLURALS:
       one: 'Unu sendita dosiera kampo'
       other: '{count} senditaj dosieraj kampoj'
     SINGULARNAME: 'Kampo de sendita dosiero'
-    INSUFFICIENTRIGHTS: 'Vi ne havas taŭgajn permesojn por elŝuti ĉi tiun dosieron'
+    has_one_UploadedFile: 'Alŝutita dosiero'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Senditaj formularoj'
     PLURALS:
@@ -285,20 +336,28 @@ eo:
       other: '{count} senditaj formularoj'
     SINGULARNAME: 'Sendita formularo'
     SUBMITTER: Sendinto
+    has_many_Values: Valoroj
     has_one_Parent: Patra
+    has_one_SubmittedBy: Sendis
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Kampoj de sendita formularo'
     PLURALS:
       one: 'Unu sendita formulara kampo'
       other: '{count} senditaj formularaj kampoj'
     SINGULARNAME: 'Kampo de sendita formularo'
+    db_Displayed: Vidigita
     db_Name: Nomo
     db_Title: Titolo
     db_Value: Valoro
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
     CLEARBUTTON: Vakigi
+    CONFIGURATION: Agordaro
     DESCRIPTION: 'Aldonas adapteblan formularon'
+    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentigon de kompletiga ago'
+    DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
+    DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
     EMAILADDRESS: Retpoŝto
     EMAILBODY: Korpo
     EMAILBODYHTML: Korpo
@@ -306,9 +365,14 @@ eo:
     EMAILSUBJECT: 'Temo de retpoŝto'
     EMAILTEMPLATE: 'Retpoŝta ŝablono'
     EMAIL_RECIPIENT_UNSAVED_FORM: 'Konservinte ĉi tiun rikordon vi povos elekti el validaj formularaj kampoj.'
+    ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
     EmailFromContent: 'La de-adreso estas kie vi povas agordi de kie venas la retpoŝto. Ĉe plejmultaj serviloj tio devus esti retpoŝta adreso ĉe la sama domajno kiel via retejo. Ekzemple, ĉe viareto.com, la de-adreso eble devus esti iuloko@viareto.com. Tamen vi povas agordi la de-adreson al iu ajn adreso.'
     FROMADDRESS: 'Sendi retpoŝton de'
     HIDEFORMDATA: 'Ĉu kaŝi formularajn datumojn de retpoŝto?'
+    HIDEINVISIBLEFIELDS: 'Ĉu kaŝu nevideblajn kampojn de retpoŝto?'
+    NORECIPIENTS: 'Averto: Vi ne agordis ricevontojn. Eble mankos sendoj de formularoj.'
+    ONCOMPLETELABEL: 'Vidigi je kompletigo'
+    ONCOMPLETEMESSAGE: 'Dankon. Nii ricevis vian sendaĵon.'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
     PLURALNAME: 'Bazaj paĝoj'
@@ -318,9 +382,11 @@ eo:
     PREVIEW_EMAIL: 'Antaŭvidi retpoŝton'
     PREVIEW_EMAIL_DESCRIPTION: 'Notu: nekonservitaj ŝanĝoj ne vidiĝos en la antaŭvido.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Konservinte la ricevonton vi povos antaŭvidi la retpoŝton.'
+    RECIPIENTS: Ricevontoj
     REPLYADDRESS: 'Retpoŝto al kiu respondi'
     REPLYADDRESS_DESCRIPTION: 'La retpoŝta adreso al kiu la ricevonto povos ''respondi''.'
     RulesDescription: 'Retpoŝtoj sendiĝos al la ricevonto nur se la propraj reguloj estas plenumitaj. Se neniu regulo estas agordita, tiu ricevonto ricevos atentigon por ĉiu sendo.'
+    SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
     SELECTAFIELDTOSETSUBJECT: '.. aŭ elekti kampon uzotan kiel la temon'
     SENDEMAILTO: 'Sendi retpoŝton al'
     SENDEMAILTO_DESCRIPTION: 'Vi povas enigi plurajn retadresojn kiel komodisigitan liston.'
@@ -328,28 +394,25 @@ eo:
     SENDIFAND: 'Ĉiuj kondiĉoj estas veraj'
     SENDIFOR: 'Ajnaj kondiĉoj estas veraj'
     SENDPLAIN: 'Ĉu sendi retpoŝton kiel platan tekston? (HTML estu forigita)'
+    SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
     SINGULARNAME: 'Formularo agordita de uzanto'
+    SUBMISSIONS: Sendaĵoj
     SUBMITBUTTON: Sendi
+    TEXTONCLEAR: 'Teksto sur vakiga butono:'
+    TEXTONSUBMIT: 'Teksto sur senda butono:'
     TYPEREPLY: 'Tajpi respondan adreson'
     TYPESUBJECT: 'Tajpi temon'
     TYPETO: 'Tajpi al-adreson'
     UnrestrictedFileUploadWarning: 'Aliro al la "{path}" de la aktuala alŝuta dosierujo ne estas limigita. Alŝutitaj dosieroj estos publike alireblaj se la ekzakta URL estas konata.'
-    ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
-    CONFIGURATION: Agordaro
-    DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentigon de kompletiga ago'
-    DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'
-    DISPLAYERRORMESSAGESATTOP: 'Ĉu vidigi prierarajn mesaĝojn super la formularo?'
-    ENABLELIVEVALIDATION: 'Enŝalti samtempan validigon'
-    HIDEINVISIBLEFIELDS: 'Ĉu kaŝu nevideblajn kampojn de retpoŝto?'
-    NORECIPIENTS: 'Averto: Vi ne agordis ricevontojn. Eble mankos sendoj de formularoj.'
-    ONCOMPLETELABEL: 'Vidigi je kompletigo'
-    ONCOMPLETEMESSAGE: 'Dankon. Nii ricevis vian sendaĵon.'
-    RECIPIENTS: Ricevontoj
-    SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
-    SHOWCLEARFORM: 'Vidigi butonon Vakigi formularon'
-    SUBMISSIONS: Sendaĵoj
-    TEXTONCLEAR: 'Teksto sur vakiga butono:'
-    TEXTONSUBMIT: 'Teksto sur senda butono:'
+    db_ClearButtonText: 'Vakigi butonan tekston'
+    db_DisableAuthenicatedFinishAction: 'Malŝalti aŭtentigan finan agon'
+    db_DisableCsrfSecurityToken: 'Malŝalti csrf sekurecan ĵetonon'
+    db_DisableSaveSubmissions: 'Malŝalti konservi sendadojn'
+    db_DisplayErrorMessagesAtTop: 'Vidigi prierarajn mesaĝojn supre'
     db_EnableLiveValidation: 'Enŝalti samtempan validigon'
+    db_OnCompleteMessage: 'Je kompleta mesaĝo'
+    db_ShowClearButton: 'Vidigi vakigan butonon'
+    db_SubmitButtonText: 'Sendi butonan tekston'
+    has_many_EmailRecipients: 'Retpoŝtaj ricevontoj'
     has_many_Fields: Kampoj
     has_many_Submissions: Sendaĵoj

@@ -1,28 +1,45 @@
 zh:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: 主要的
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 添加电子邮件收件人
+    CLEARBUTTON: 清除
+    CONFIGURATION: 配置
+    ENABLELIVEVALIDATION: 启用现场验证
+    ONCOMPLETELABEL: 完成时显示
+    SAVESUBMISSIONS: 禁用保存提交内容到服务器
+    SHOWCLEARFORM: 显示清除表格按钮
+    SUBMISSIONS: 提交
+    SUBMITBUTTON: 提交
+    TEXTONSUBMIT: 提交按钮上的文本
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: 取消
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 筛选器提交……
-    WHEREVALUEIS: 当值为……
     FILTER: 过滤器
+    FILTERSUBMISSIONS: 筛选器提交……
     FROM: 表格
     RESET: 重设
+    WHEREVALUEIS: 当值为……
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 默认选中？
     CUSTOMERROR: 自定义错误消息
+    CUSTOMOPTIONS: 选项
     CUSTOMRULES: 自定义规则
     DEFAULTTOTODAY: 默认为今天？
+    EXTRACLASS_TITLE: 额外的造型/布局
     FIELDISREQUIRED: '{name} 是必须的'
     GROUP: 小组
+    NAME: 姓名
+    'NO': 不是
     PLURALNAME: 可编辑的表格字段
     REQUIRED: 这个字段是必须的吗？
     RIGHTTITLE: 右标题
     SINGULARNAME: 可编辑的表格字段
-    VALIDATION: 验证
-    CUSTOMOPTIONS: 选项
-    EXTRACLASS_TITLE: 额外的造型/布局
-    NAME: 姓名
-    'NO': 不是
     TITLE: 题目
     TYPE: 类型
+    VALIDATION: 验证
     'YES': 是
     db_Name: 姓名
     db_RightTitle: 右标题
@@ -46,6 +63,8 @@ zh:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 电子邮件字段
     SINGULARNAME: 电子邮件字段
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: 小组
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 文件上传字段
     SINGULARNAME: 文件上传字段
@@ -54,6 +73,8 @@ zh:
     LEVEL: 选择标题级别
     PLURALNAME: 标题
     SINGULARNAME: 标题
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: 下一页
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 从报告中隐藏？
     PLURALNAME: 'HTML 模块'
@@ -64,12 +85,14 @@ zh:
     SINGULARNAME: 成员列表字段
     has_one_Group: 小组
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: 选项
     PLURALNAME: 可编辑的多个选项字段
     SINGULARNAME: 可编辑的多个选项字段
-    OPTIONSTAB: 选项
     TITLE: 题目
     VALUE: 值
     has_many_Options: 选项
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: 至
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 可编辑的选项
     SINGULARNAME: 可编辑的选项
@@ -83,18 +106,20 @@ zh:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 行数
     PLURALNAME: 文本字段
+    RANGE_TO: 至
     SINGULARNAME: 文本字段
     TEXTLENGTH: 文本长度
-    RANGE_TO: 至
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 自定义规则
     PLURALNAME: 用户定义的表格电子邮件接受者
     SINGULARNAME: 用户定义的表格电子邮件接受者
-    CUSTOMRULESTAB: 自定义规则
     db_EmailAddress: 电子邮件地址
     db_EmailFrom: 邮件来自
     db_EmailSubject: 电子邮件主题
     db_EmailTemplate: 邮件模板
     has_one_Form: 表格
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: 父
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 下载文件
     PLURALNAME: 已提交的文件字段
@@ -111,57 +136,32 @@ zh:
     db_Value: 值
     has_one_Parent: 父
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 添加电子邮件收件人
+    CLEARBUTTON: 清除
+    CONFIGURATION: 配置
     DESCRIPTION: 添加一个可定制的表格。
     EMAILADDRESS: 电子邮件
     EMAILBODY: 正文
+    EMAILBODYHTML: 正文
     EMAILFROM: 表格
     EMAILSUBJECT: 电子邮件主题
+    EMAILTEMPLATE: 邮件模板
+    ENABLELIVEVALIDATION: 启用现场验证
     EmailFromContent: '表格地址允许您设置电子邮件的发送人。在大多数服务器上这必须要设置成域名与您的站点域名一致的电子邮件地址。例如在 yoursite.com 上，发送人的电子邮件地址必须为 something@yoursite.com。但是您可以随意设置回复的电子邮件地址。'
     FROMADDRESS: 发送人电子邮件
     HIDEFORMDATA: 从电子邮件中隐藏表格数据？
+    ONCOMPLETELABEL: 完成时显示
     ORSELECTAFIELDTOUSEASFROM: '.. 或选择某字段作为回复地址'
     ORSELECTAFIELDTOUSEASTO: '.. 或选择某字段作为地址使用'
+    PLURALNAME: 基本页面
     REPLYADDRESS: 用于回复的电子邮件
+    SAVESUBMISSIONS: 禁用保存提交内容到服务器
     SENDEMAILTO: 发送电子邮件到
     SENDPLAIN: '以纯文本形式发送电子邮件？（HTML 将会被去除）'
-    SINGULARNAME: 用户定义表格
-    SUBMITBUTTON: 提交
-    ADDEMAILRECIPIENT: 添加电子邮件收件人
-    CLEARBUTTON: 清除
-    CONFIGURATION: 配置
-    EMAILBODYHTML: 正文
-    EMAILTEMPLATE: 邮件模板
-    ENABLELIVEVALIDATION: 启用现场验证
-    ONCOMPLETELABEL: 完成时显示
-    PLURALNAME: 基本页面
-    SAVESUBMISSIONS: 禁用保存提交内容到服务器
     SHOWCLEARFORM: 显示清除表格按钮
+    SINGULARNAME: 用户定义表格
     SUBMISSIONS: 提交
+    SUBMITBUTTON: 提交
     TEXTONSUBMIT: 提交按钮上的文本
     db_EnableLiveValidation: 启用现场验证
     has_many_Submissions: 提交
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: 主要的
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 添加电子邮件收件人
-    CLEARBUTTON: 清除
-    CONFIGURATION: 配置
-    ENABLELIVEVALIDATION: 启用现场验证
-    ONCOMPLETELABEL: 完成时显示
-    SAVESUBMISSIONS: 禁用保存提交内容到服务器
-    SHOWCLEARFORM: 显示清除表格按钮
-    SUBMISSIONS: 提交
-    SUBMITBUTTON: 提交
-    TEXTONSUBMIT: 提交按钮上的文本
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: 取消
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_NEXT: 下一页
-  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
-    RANGE_TO: 至
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: 父
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: 小组
-  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
-    has_one_Parent: 父
