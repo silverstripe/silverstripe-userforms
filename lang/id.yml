@@ -1,16 +1,4 @@
 id:
-  SilverStripe\UserForms\Model\EditableFormField:
-    GROUP: Grup
-    VALIDATION: Validasi
-    FIELDISREQUIRED: '{name} wajib diisi'
-    NAME: Nama
-    'NO': Tidak
-    TITLE: Judul
-    TYPE: Tipe
-    'YES': Ya
-    db_Name: Nama
-    db_Title: Judul
-    has_one_Parent: Induk
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: Utama
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
@@ -20,6 +8,18 @@ id:
     FROM: Dari
     RESET: Reset
   SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Induk
+  SilverStripe\UserForms\Model\EditableFormField:
+    FIELDISREQUIRED: '{name} wajib diisi'
+    GROUP: Grup
+    NAME: Nama
+    'NO': Tidak
+    TITLE: Judul
+    TYPE: Tipe
+    VALIDATION: Validasi
+    'YES': Ya
+    db_Name: Nama
+    db_Title: Judul
     has_one_Parent: Induk
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Grup

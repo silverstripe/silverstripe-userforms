@@ -1,21 +1,51 @@
 pt_PT:
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Show on completion'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Submissions
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Texto no botão "Enviar"'
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FROM: From
   SilverStripe\UserForms\Model\EditableFormField:
-    CUSTOMRULES: 'Custom Rules'
-    REQUIRED: 'Este campo é obrigatório para este formulário e não pode ser apagado.'
-    VALIDATION: Validation
     CHECKEDBYDEFAULT: 'Checked by Default?'
     CUSTOMERROR: 'Custom Error Message'
     CUSTOMOPTIONS: Options
+    CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Default to Today?'
     GROUP: Group
     PLURALNAME: 'Editable Form Fields'
+    REQUIRED: 'Este campo é obrigatório para este formulário e não pode ser apagado.'
     SINGULARNAME: 'Editable Form Field'
+    VALIDATION: Validation
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Email Fields'
     SINGULARNAME: 'Email Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Group
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
@@ -26,15 +56,23 @@ pt_PT:
     SINGULARNAME: 'Member List Field'
     has_one_Group: Group
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Options
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-    OPTIONSTAB: Options
     VALUE: Value
     has_many_Options: Options
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+    db_Value: Value
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Número de linhas'
+    PLURALNAME: 'Text Fields'
+    SINGULARNAME: 'Text Field'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
-    CUSTOMRULESTAB: 'Custom Rules'
     db_EmailSubject: 'Email Subject'
     has_one_Form: Formulário
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
@@ -51,59 +89,21 @@ pt_PT:
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
+    EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
+    ONCOMPLETELABEL: 'Show on completion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    SENDEMAILTO: 'Send Email To'
-    SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SINGULARNAME: 'User Defined Form'
-    SUBMITBUTTON: Submit
-    EMAILBODYHTML: Body
-    ONCOMPLETELABEL: 'Show on completion'
     PLURALNAME: 'User Defined Forms'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SENDEMAILTO: 'Send Email To'
+    SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SHOWCLEARFORM: 'Show Clear Form Button'
-    SUBMISSIONS: Submissions
-    TEXTONSUBMIT: 'Texto no botão "Enviar"'
-    has_many_Submissions: Submissions
-  SilverStripe\UserForms:
-    ONCOMPLETELABEL: 'Show on completion'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
-    SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Submissions
     SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Texto no botão "Enviar"'
-  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FROM: From
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Checkboxes
-    SINGULARNAME: 'Checkbox Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
-    SINGULARNAME: 'Checkbox Group'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: 'Date Fields'
-    SINGULARNAME: 'Date Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'File Upload Fields'
-    SINGULARNAME: 'File Upload Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
-    LEVEL: 'Select Heading Level'
-    PLURALNAME: Headings
-    SINGULARNAME: Heading
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    PLURALNAME: 'Editable Options'
-    SINGULARNAME: 'Editable Option'
-    db_Value: Value
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    NUMBERROWS: 'Número de linhas'
-    PLURALNAME: 'Text Fields'
-    SINGULARNAME: 'Text Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Group
+    has_many_Submissions: Submissions

@@ -1,4 +1,25 @@
 it:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Principale
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
+    CLEARBUTTON: Azzera
+    CONFIGURATION: Configurazione
+    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
+    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
+    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
+    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
+    ONCOMPLETELABEL: 'Mostra al completamento'
+    RECIPIENTS: Destinatari
+    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
+    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
+    SUBMISSIONS: Invii
+    SUBMITBUTTON: Invia
+    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
+    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Annulla
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Aggiungi campo'
     ADD_FIELD_GROUP: 'Aggiungi gruppo di campi'
@@ -12,12 +33,12 @@ it:
     UNEXPECTED_GROUP_END: '''{name}'' trovato senza un gruppo corrispondente'
     WRONG_GROUP_END: '''{name}'' trovato chiude il gruppo sbagliato ''{group}'''
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filtra
     FILTERSUBMISSIONS: 'Filtra invii..'
     FROM: Da
+    RESET: Azzera
     TILL: 'Fino a'
     WHEREVALUEIS: 'dove il valore è..'
-    FILTER: Filtra
-    RESET: Azzera
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
     SINGULARNAME: 'Regola personalizzata modificabile'
@@ -35,7 +56,9 @@ it:
     EXTRACLASS_Title: 'Classi CSS extra'
     FIELDISREQUIRED: '{name} è richiesto'
     GROUP: Gruppo
+    NAME: Nome
     'NO': 'No'
+    PLACEHOLDER: Segnaposto
     PLURALNAME: 'Campi modulo modificabili'
     REQUIRED: 'Questo campo è obbligatorio?'
     REQUIRED_DESCRIPTION: 'Prego nota che i campi condizionali non possono essere obbligatori'
@@ -45,8 +68,6 @@ it:
     TYPE: Tipo
     VALIDATION: Validazione
     'YES': Si
-    NAME: Nome
-    PLACEHOLDER: Segnaposto
     db_Name: Nome
     db_Placeholder: Segnaposto
     db_RightTitle: 'Titolo a destra'
@@ -60,9 +81,9 @@ it:
     PLURALNAME: 'Gruppi di caselle di controllo'
     SINGULARNAME: 'Gruppo di caselle di controllo'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Valore di default'
     PLURALNAME: 'Menù a tendina Nazioni'
     SINGULARNAME: 'Menù a tendina Nazioni'
-    DEFAULT: 'Valore di default'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Campi date'
     SINGULARNAME: 'Campo data'
@@ -93,10 +114,10 @@ it:
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Interruzioni di pagina'
     SINGULARNAME: 'Interruzione di pagina'
-    STEP_TITLE: 'Pagina {page}'
-    TITLE_FIRST: 'Prima pagina'
     STEP_NEXT: Seguente
     STEP_PREV: Prec
+    STEP_TITLE: 'Pagina {page}'
+    TITLE_FIRST: 'Prima pagina'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Nascondi dai rapporti?'
@@ -169,26 +190,36 @@ it:
     db_Value: Valore
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
     CLEARBUTTON: Azzera
+    CONFIGURATION: Configurazione
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
+    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
     EMAILADDRESS: E-mail
     EMAILBODY: Corpo
     EMAILBODYHTML: Corpo
     EMAILFROM: Da
     EMAILSUBJECT: 'Oggetto e-mail'
     EMAILTEMPLATE: 'Schema e-mail'
+    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
     EmailFromContent: 'L''indirizzo mittente ti permette di impostare da chi viene l''e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l''indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere.'
     FROMADDRESS: 'Manda e-mail da'
     HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
+    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
+    ONCOMPLETELABEL: 'Mostra al completamento'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
     PLURALNAME: 'Pagine Base'
     PREVIEW_EMAIL: 'Anteprima e-mail'
     PREVIEW_EMAIL_DESCRIPTION: 'Nota: Le modifiche non salvate non appariranno nell''anteprima'
     PREVIEW_EMAIL_UNAVAILABLE: 'Puoi vedere un''anteprima di questa email dopo aver salvato il destinatario.'
+    RECIPIENTS: Destinatari
     REPLYADDRESS: 'Indirizzo e-mail a cui rispondere'
     REPLYADDRESS_DESCRIPTION: 'L''indirizzo email a cui il destinatario può ''rispondere''.'
     RulesDescription: 'Le email saranno spedite solo al destinatario se sono soddisfatte le regole personalizzate. Se non è definita nessuna regola, il destinatario riceverà notifiche per ogni invio.'
+    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
     SELECTAFIELDTOSETSUBJECT: '.. o seleziona un campo da usare come oggetto'
     SENDEMAILTO: 'Manda e-mail a'
     SENDEMAILTO_DESCRIPTION: 'Puoi inserire più indirizzi email sotto forma di lista separata da virgole.'
@@ -196,46 +227,15 @@ it:
     SENDIFAND: 'Tutte le condizioni sono vere'
     SENDIFOR: 'Una qualunque delle condizioni è vera'
     SENDPLAIN: 'Manda e-mail come testo semplice? (L''HTML verrà rimosso)'
+    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
     SINGULARNAME: 'Modulo definito dall''utente'
+    SUBMISSIONS: Invii
     SUBMITBUTTON: Invia
+    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
+    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
     TYPEREPLY: 'Inserisci l''e-mail di risposta'
     TYPESUBJECT: 'Inserisci l''oggetto'
     TYPETO: 'Inserisci l''e-mail destinatario'
-    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
-    CONFIGURATION: Configurazione
-    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
-    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
-    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
-    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
-    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
-    ONCOMPLETELABEL: 'Mostra al completamento'
-    RECIPIENTS: Destinatari
-    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
-    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
-    SUBMISSIONS: Invii
-    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
-    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
     db_EnableLiveValidation: 'Abilita la validazione in tempo reale'
     has_many_Fields: Campi
     has_many_Submissions: Invii
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: Principale
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
-    CLEARBUTTON: Azzera
-    CONFIGURATION: Configurazione
-    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
-    DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
-    DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
-    ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
-    NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
-    ONCOMPLETELABEL: 'Mostra al completamento'
-    RECIPIENTS: Destinatari
-    SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
-    SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
-    SUBMISSIONS: Invii
-    SUBMITBUTTON: Invia
-    TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
-    TEXTONSUBMIT: 'Testo sul pulsante di invio:'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Annulla

@@ -1,28 +1,47 @@
 sv:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Allmän
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
+    CLEARBUTTON: Rensa
+    CONFIGURATION: Konfiguration
+    DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
+    ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
+    ONCOMPLETELABEL: 'Visa vid slutförande'
+    SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
+    SHOWCLEARFORM: 'Visa Rensa-knapp'
+    SUBMISSIONS: 'Inskickade svar'
+    SUBMITBUTTON: Skicka
+    TEXTONCLEAR: 'Text på Rensa-knapp:'
+    TEXTONSUBMIT: 'Text på Skicka-knapp:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Avbryt
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrera inskickade svar'
-    WHEREVALUEIS: 'när värdet är..'
     FILTER: Filter
+    FILTERSUBMISSIONS: 'Filtrera inskickade svar'
     FROM: Från
     RESET: Rensa
+    WHEREVALUEIS: 'när värdet är..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Ifylld som standard?'
     CUSTOMERROR: 'Speciellt felmeddelande'
+    CUSTOMOPTIONS: Alternativ
     CUSTOMRULES: 'Anpassade regler'
     DEFAULTTOTODAY: 'Dagens datum som standard?'
+    EXTRACLASS_TITLE: 'Extra stilar/layout'
     FIELDISREQUIRED: '{name} är obligatoriskt'
     GROUP: Grupp
+    NAME: Namn
+    'NO': Nej
     PLURALNAME: 'Redigeringsbara formulärfält'
     REQUIRED: 'Är detta fält obligatoriskt?'
     RIGHTTITLE: Högertitel
     SINGULARNAME: 'Redigeringsbart formulärfält'
     TITLE: Titel
-    VALIDATION: Validering
-    CUSTOMOPTIONS: Alternativ
-    EXTRACLASS_TITLE: 'Extra stilar/layout'
-    NAME: Namn
-    'NO': Nej
     TYPE: Typ
+    VALIDATION: Validering
     'YES': Ja
     db_Name: Namn
     db_RightTitle: Högertitel
@@ -47,6 +66,8 @@ sv:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: E-postfält
     SINGULARNAME: E-postfält
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Grupp
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: Filuppladdningsfält
     SELECTUPLOADFOLDER: 'Välj uppladdningsmapp'
@@ -57,9 +78,9 @@ sv:
     PLURALNAME: Rubriker
     SINGULARNAME: Rubrik
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_TITLE: 'Sida {page}'
     STEP_NEXT: Nästa
     STEP_PREV: Föregående
+    STEP_TITLE: 'Sida {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Göm från rapport?'
     PLURALNAME: HTML-block
@@ -70,16 +91,16 @@ sv:
     SINGULARNAME: Medlemsfält
     has_one_Group: Grupp
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Alternativ
     PLURALNAME: 'Redigeringsbart multialternativfält'
     SINGULARNAME: 'Redigeringsbart multialternativfält'
-    OPTIONSTAB: Alternativ
     TITLE: Titel
     VALUE: Värde
     has_many_Options: Alternativ
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeriska fält'
-    SINGULARNAME: 'Numeriskt fält'
     RANGE_TO: till
+    SINGULARNAME: 'Numeriskt fält'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Redigeringsbara alternativ'
     SINGULARNAME: 'Redigeringsbart alternativ'
@@ -94,16 +115,18 @@ sv:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Antal rader'
     PLURALNAME: Textfält
+    RANGE_TO: till
     SINGULARNAME: Textfält
     TEXTLENGTH: Textlängd
-    RANGE_TO: till
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Anpassade regler'
     PLURALNAME: 'Mottagare av formulär'
     SINGULARNAME: 'Mottagare av formulär'
-    CUSTOMRULESTAB: 'Anpassade regler'
     db_EmailAddress: E-postadress
     db_EmailSubject: E-postämne
     has_one_Form: Formulär
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Förälder
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Ladda ner fil'
     PLURALNAME: 'Inskickade filfält'
@@ -120,57 +143,34 @@ sv:
     db_Value: Värde
     has_one_Parent: Förälder
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
     CLEARBUTTON: Rensa
+    CONFIGURATION: Konfiguration
     DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
+    DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
     EMAILADDRESS: E-post
     EMAILBODY: Innehåll
+    EMAILBODYHTML: Innehåll
     EMAILFROM: Från
     EMAILSUBJECT: E-postämne
+    ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
     EmailFromContent: 'Från-adressen låter dig ställa in varifrån e-postmeddelandet skickas. På de flesta servrar måste adressen ha samma domännamn som din sajt. Till exempel på yoursite.com så måste adressen vara something@yoursite.com. Det är däremot möjligt att lägga valfri e-postadress under "E-postadress att svara till". '
     FROMADDRESS: 'E-postadress att skicka formulär från'
     HIDEFORMDATA: 'Göm formulärdata från e-post?'
+    ONCOMPLETELABEL: 'Visa vid slutförande'
     ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'
     ORSELECTAFIELDTOUSEASTO: '.. eller välj ett fält att använda som mottagare'
     PLURALNAME: Bas-sidor
     REPLYADDRESS: 'E-postadress att svara till'
+    SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
     SELECTAFIELDTOSETSUBJECT: '.. eller välj ett fält att använda som ämne'
     SENDEMAILTO: 'E-postadress att skicka formulär till'
     SENDPLAIN: 'Skicka e-post som vanlig text? (All HTML kommer tas bort)'
-    SINGULARNAME: 'Användardefinierat formulär'
-    SUBMITBUTTON: Skicka
-    ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
-    CONFIGURATION: Konfiguration
-    DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
-    EMAILBODYHTML: Innehåll
-    ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
-    ONCOMPLETELABEL: 'Visa vid slutförande'
-    SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
     SHOWCLEARFORM: 'Visa Rensa-knapp'
+    SINGULARNAME: 'Användardefinierat formulär'
     SUBMISSIONS: 'Inskickade svar'
+    SUBMITBUTTON: Skicka
     TEXTONCLEAR: 'Text på Rensa-knapp:'
     TEXTONSUBMIT: 'Text på Skicka-knapp:'
     db_EnableLiveValidation: 'Aktivera direktvalidering'
     has_many_Submissions: 'Inskickade svar'
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: Allmän
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
-    CLEARBUTTON: Rensa
-    CONFIGURATION: Konfiguration
-    DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
-    ENABLELIVEVALIDATION: 'Aktivera direktvalidering'
-    ONCOMPLETELABEL: 'Visa vid slutförande'
-    SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
-    SHOWCLEARFORM: 'Visa Rensa-knapp'
-    SUBMISSIONS: 'Inskickade svar'
-    SUBMITBUTTON: Skicka
-    TEXTONCLEAR: 'Text på Rensa-knapp:'
-    TEXTONSUBMIT: 'Text på Skicka-knapp:'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Avbryt
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Förälder
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Grupp
-  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
-    has_one_Parent: Förälder

@@ -1,15 +1,27 @@
 nb_NO:
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
+    CONFIGURATION: Konfigurasjon
+    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
+    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
+    SAVESUBMISSIONS: 'Slå av auto lagring'
+    SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
+    SUBMISSIONS: Innsendte
+    SUBMITBUTTON: Send
+    TEXTONSUBMIT: 'Tekst på "send" knapp'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrer innsendte...'
-    WHEREVALUEIS: 'hvor verdi er...'
     FILTER: Filter
+    FILTERSUBMISSIONS: 'Filtrer innsendte...'
     FROM: Fra
     RESET: Reset
+    WHEREVALUEIS: 'hvor verdi er...'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Valgt som standard?'
     CUSTOMERROR: 'Tilpasset error melding'
+    CUSTOMOPTIONS: Alternativer
     CUSTOMRULES: 'Tilpasset regler'
     DEFAULTTOTODAY: 'Standard for i dag?'
+    EXTRACLASS_TITLE: 'Ekstra stil/utsende?'
     FIELDISREQUIRED: '{name} er påkrevd'
     GROUP: Gruppe
     PLURALNAME: 'Redigerbare skjemafelt'
@@ -17,8 +29,6 @@ nb_NO:
     RIGHTTITLE: 'Høyre tittel'
     SINGULARNAME: 'Redigerbar skjemafelt'
     VALIDATION: Validering
-    CUSTOMOPTIONS: Alternativer
-    EXTRACLASS_TITLE: 'Ekstra stil/utsende?'
     db_RightTitle: 'Høyre tittel'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Avkrysningsbokser
@@ -38,6 +48,8 @@ nb_NO:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Epost felt'
     SINGULARNAME: 'Epost felt'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: Filopplastingsfelter
     SINGULARNAME: Filopplastingsfelt
@@ -54,9 +66,9 @@ nb_NO:
     SINGULARNAME: 'Medlemliste felt'
     has_one_Group: Gruppe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Alternativer
     PLURALNAME: 'Redigerbare flervalgfelt'
     SINGULARNAME: 'Redigerbare flervalgfelt'
-    OPTIONSTAB: Alternativer
     VALUE: Verdi
     has_many_Options: Alternativer
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
@@ -72,9 +84,9 @@ nb_NO:
     SINGULARNAME: Tekstfelt
     TEXTLENGTH: 'Tekst lengde'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Tilpasset regler'
     PLURALNAME: 'Bruker definert e-post mottakere'
     SINGULARNAME: 'Bruker definert e-post mottaker'
-    CUSTOMRULESTAB: 'Tilpasset regler'
     db_EmailSubject: 'Epost emne'
     has_one_Form: Skjema
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
@@ -89,42 +101,30 @@ nb_NO:
     SINGULARNAME: 'Sendt skjema felt'
     db_Value: Verdi
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
+    CONFIGURATION: Konfigurasjon
     DESCRIPTION: 'Legg til konfigurerbart skjema'
     EMAILADDRESS: Epost
     EMAILBODY: Body
+    EMAILBODYHTML: Body
     EMAILFROM: Fra
     EMAILSUBJECT: 'Epost emne'
+    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
     EmailFromContent: 'Skjemaadressen tillater deg å vis hvem melding kommer fra. På de fleste servere må denne e-post adressen være den samme som doment for din side. For eksempel om du har domene din-side.no, må e-post adressen være noen@din-side.no.'
     FROMADDRESS: 'Sendt e-post fra'
     HIDEFORMDATA: 'Skjul skjemadata fra e-post'
+    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
     ORSELECTAFIELDTOUSEASFROM: '...eller velg et felt til å bruke som "svar til"-adresse'
     ORSELECTAFIELDTOUSEASTO: '...eller velg et felt til å bruke som adresse'
+    PLURALNAME: 'Base sider'
     REPLYADDRESS: 'E-post som "reply to"'
+    SAVESUBMISSIONS: 'Slå av auto lagring'
     SENDEMAILTO: 'Send e-post til'
     SENDPLAIN: 'Send e-post som tekst? (HTML vil bli strippet)'
-    SINGULARNAME: 'Bruker definert skjema'
-    SUBMITBUTTON: Send
-    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
-    CONFIGURATION: Konfigurasjon
-    EMAILBODYHTML: Body
-    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
-    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
-    PLURALNAME: 'Base sider'
-    SAVESUBMISSIONS: 'Slå av auto lagring'
     SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
+    SINGULARNAME: 'Bruker definert skjema'
     SUBMISSIONS: Innsendte
+    SUBMITBUTTON: Send
     TEXTONSUBMIT: 'Tekst på "send" knapp'
     db_EnableLiveValidation: 'Slå på sanntid validering'
     has_many_Submissions: Innsendte
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
-    CONFIGURATION: Konfigurasjon
-    ENABLELIVEVALIDATION: 'Slå på sanntid validering'
-    ONCOMPLETELABEL: 'Vis ved ferdigstillelse'
-    SAVESUBMISSIONS: 'Slå av auto lagring'
-    SHOWCLEARFORM: 'Vis "visk ut skjema" knapp'
-    SUBMISSIONS: Innsendte
-    SUBMITBUTTON: Send
-    TEXTONSUBMIT: 'Tekst på "send" knapp'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Gruppe

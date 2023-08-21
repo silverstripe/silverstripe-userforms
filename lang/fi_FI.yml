@@ -5,27 +5,50 @@ fi_FI:
     ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
     CLEARBUTTON: Tyhjennä
     CONFIGURATION: Asetukset
-    RECIPIENTS: Vastaanottajat
-    SUBMISSIONS: Lähetykset
-    SUBMITBUTTON: Lähetä
-    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
-    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
-    TEXTONSUBMIT: 'Lähetä-napin teksti:'
     DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
     DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'
     DISPLAYERRORMESSAGESATTOP: 'Näytä virheilmoitukset lomakkeen yläpuolella?'
     ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
     NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
     ONCOMPLETELABEL: 'Näytä valmistuessa'
+    RECIPIENTS: Vastaanottajat
     SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
+    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
+    SUBMISSIONS: Lähetykset
+    SUBMITBUTTON: Lähetä
+    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
+    TEXTONSUBMIT: 'Lähetä-napin teksti:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Peruuta
+    FOLDER_OPTIONS_EXISTING: 'Käytä olemassa olevaa kansiota'
+    FOLDER_OPTIONS_NEW: 'Luo uusi kansio (suositeltu)'
+    FOLDER_OPTIONS_TITLE: 'Lomakkeen kansion asetukset'
+    FORM_ACTION_CONFIRM: 'Tallenna ja jatka'
+    INVALID_REQUEST: 'Pyyntö oli virheellinen'
+    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
     ADD_PAGE_BREAK: 'Lisää sivunvaihto'
     FORMFIELDS: Lomakekentät
     has_many_Fields: Kentät
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
+    NO_PAGE: 'Kenttä ''{name}'' löytyi ennen yhtäkään sivua'
+    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
+    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Suodatin
+    FILTERSUBMISSIONS: 'Suodata vastaanotettuja lomakkeita..'
+    FROM: Lähettäjä
+    RESET: Nollaa
+    TILL: Vastaanottaja
+    WHEREVALUEIS: 'jonka arvo on...'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    PLURALNAME: 'Muokattavat mukautetut säännöt'
+    SINGULARNAME: 'Muokattava mukautettu sääntö'
   SilverStripe\UserForms\Model\EditableFormField:
-    REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
     CHECKEDBYDEFAULT: 'Valittu oletuksena?'
     CUSTOMERROR: 'Mukautettu virheviesti'
     CUSTOMOPTIONS: Asetukset
@@ -49,6 +72,7 @@ fi_FI:
       one: 'Muokattava lomakekenttä'
       other: '{count} Muokattavaa lomakekenttää'
     REQUIRED: 'Onko tämä kenttä pakollinen?'
+    REQUIRED_DESCRIPTION: 'Huomioi, että ehdolliset kentät eivät voi olla pakollisia'
     RIGHTTITLE: 'Oikeanpuolinen lisäotsikko'
     SHOWINSUMMARY: 'Näytä yhteenvedossa'
     SINGULARNAME: 'Muokattava lomakekenttä'
@@ -61,91 +85,6 @@ fi_FI:
     db_Placeholder: Opastusteksti
     db_RightTitle: 'Oikeanpuolinen lisäotsikko'
     db_Title: Otsikko
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
-    ANYONE: 'Rajoittamaton pääsy, lisätyt tiedostot on näkyvissä kaikille'
-    INHERIT: 'Kansion näkyvyys perintyy yllä olevasta kansiosta'
-    LOGGED_IN: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä kirjautuneille käyttäjille'
-    ONLY_GROUPS: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä seuraaville käyttäjäryhmille:'
-    PLURALNAME: Tiedostonlatauskentät
-    PLURALS:
-      one: Tiedostonlatauskenttä
-      other: '{count} Tiedostonlatauskenttiä'
-    SINGULARNAME: Tiedostonlatauskenttä
-  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
-    DOWNLOADFILE: 'Lataa tiedosto'
-    PLURALNAME: 'Lähetetyt tiedostokentät'
-    SINGULARNAME: 'Lähetetty tiedostokenttä'
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    PREVIEW_EMAIL: 'Esikatsele sähköposti'
-    SINGULARNAME: 'Käyttäjän lomake'
-    SUBMITBUTTON: Lähetä
-    TYPEREPLY: 'Lisää vastausosoite'
-    TYPESUBJECT: 'Lisää otsikko'
-    TYPETO: 'Lisää vastaanottaja'
-    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
-    SUBMISSIONS: 'Vastaanotetut lomakkeet'
-    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
-    TEXTONSUBMIT: 'Lähetä-napin teksti:'
-    ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
-    CLEARBUTTON: Tyhjennä
-    CONFIGURATION: Asetukset
-    DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
-    DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
-    DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'
-    DISPLAYERRORMESSAGESATTOP: 'Näytä virheilmoitukset lomakkeen yläpuolella?'
-    EMAILADDRESS: Sähköposti
-    EMAILBODY: Viesti
-    EMAILBODYHTML: Viesti
-    EMAILFROM: Lähettäjä
-    EMAILSUBJECT: Otsikko
-    EMAILTEMPLATE: Sähköpostipohja
-    ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
-    EmailFromContent: 'Lähettäjän sähköpostiosoite kenttään voit laittaa osoitteen, josta lomake näkyy lähetetyn. Jotkut palvelimet vaativat, että osoitteen on oltava samalla domain päätteellä kuin sivustosi. Esimerkiksi omasivusto.fi domainilla osoitteen tulisi olla osoitteesi@omasivusto.fi. Voit käyttää kuitenkin haluamaasi osoitetta, jos sille ei ole teknistä estettä.'
-    FROMADDRESS: 'Lähetä sähköposti osoitteesta'
-    HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
-    NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
-    ONCOMPLETELABEL: 'Näytä valmistuessa'
-    ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
-    ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
-    PLURALNAME: Pohjasivut
-    PREVIEW_EMAIL_DESCRIPTION: 'Huomio: tallentamattomat muutokset eivät näy esikatselussa.'
-    PREVIEW_EMAIL_UNAVAILABLE: 'Voit esikatsella tämän sähköpostin, kunhan olet tallentanut Vastaanottajan.'
-    RECIPIENTS: Vastaanottajat
-    REPLYADDRESS: Vastaussähköposti
-    REPLYADDRESS_DESCRIPTION: 'Sähköpostiosoite, johon vastaanottajalla on mahdollisuus vastata.'
-    SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
-    SELECTAFIELDTOSETSUBJECT: '... tai valitse kenttä, jota käytetään Aiheena'
-    SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
-    SENDEMAILTO_DESCRIPTION: 'Voit lisätä useamman osoitteen pilkulla erotettuna listana'
-    SENDIF: Lähetyssääntö
-    SENDIFAND: 'Kaikki ehdot ovat tosia'
-    SENDIFOR: 'Kaikki ehdot ovat tosia'
-    SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
-    db_EnableLiveValidation: 'Aktivoi reaaliaikainen validointi'
-    has_many_Fields: Kentät
-    has_many_Submissions: 'Vastaanotetut lomakkeet'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Peruuta
-    FOLDER_OPTIONS_EXISTING: 'Käytä olemassa olevaa kansiota'
-    FOLDER_OPTIONS_NEW: 'Luo uusi kansio (suositeltu)'
-    FOLDER_OPTIONS_TITLE: 'Lomakkeen kansion asetukset'
-    FORM_ACTION_CONFIRM: 'Tallenna ja jatka'
-    INVALID_REQUEST: 'Pyyntö oli virheellinen'
-    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
-  SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
-    NO_PAGE: 'Kenttä ''{name}'' löytyi ennen yhtäkään sivua'
-    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
-    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
-  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Suodatin
-    FILTERSUBMISSIONS: 'Suodata vastaanotettuja lomakkeita..'
-    FROM: Lähettäjä
-    RESET: Nollaa
-    TILL: Vastaanottaja
-    WHEREVALUEIS: 'jonka arvo on...'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Monivalintakentät
     PLURALS:
@@ -200,6 +139,17 @@ fi_FI:
       other: '{count} Muokattavat kenttäryhmät päättyy'
     SINGULARNAME: 'Muokattava kenttäryhmä päättyy'
     belongs_to_Group: Ryhmä
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    ANYONE: 'Rajoittamaton pääsy, lisätyt tiedostot on näkyvissä kaikille'
+    INHERIT: 'Kansion näkyvyys perintyy yllä olevasta kansiosta'
+    LOGGED_IN: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä kirjautuneille käyttäjille'
+    ONLY_GROUPS: 'Rajoitettu pääsy, lisätyt tiedostot tulee olemaan näkyvissä seuraaville käyttäjäryhmille:'
+    PLURALNAME: Tiedostonlatauskentät
+    PLURALS:
+      one: Tiedostonlatauskenttä
+      other: '{count} Tiedostonlatauskenttiä'
+    SELECTUPLOADFOLDER: 'Valitse siirtokansio'
+    SINGULARNAME: Tiedostonlatauskenttä
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Valitse otsikon taso'
     PLURALNAME: Otsikot
@@ -225,20 +175,17 @@ fi_FI:
     SINGULARNAME: HTML-alue
     db_Content: Sisältö
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    SINGULARNAME: Jäsenlistakenttä
     PLURALNAME: Jäsenlistakentät
+    SINGULARNAME: Jäsenlistakenttä
     has_one_Group: Ryhmä
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Valittu oletuksena?'
     OPTIONSTAB: Valinnat
-    TITLE: Otsikko
     PLURALNAME: 'Muokattavat monivalintakentät'
     SINGULARNAME: 'Muokattava monivalintakenttä'
+    TITLE: Otsikko
     VALUE: Arvo
     has_many_Options: Valinnat
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    PLURALNAME: 'Muokattavat mukautetut säännöt'
-    SINGULARNAME: 'Muokattava mukautettu sääntö'
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     PLURALNAME: 'Numeeriset kentät'
     RANGE: 'Sallittu numeerinen väli'
@@ -271,6 +218,10 @@ fi_FI:
     db_EmailSubject: Otsikko
     db_EmailTemplate: Sähköpostipohja
     has_one_Form: Lomake
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
+    DOWNLOADFILE: 'Lataa tiedosto'
+    PLURALNAME: 'Lähetetyt tiedostokentät'
+    SINGULARNAME: 'Lähetetty tiedostokenttä'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Lähetetyt lomakkeet'
     SINGULARNAME: 'Lähetetty lomake'
@@ -280,3 +231,52 @@ fi_FI:
     db_Name: Nimi
     db_Title: Otsikko
     db_Value: Arvo
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CLEARBUTTON: Tyhjennä
+    CONFIGURATION: Asetukset
+    DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
+    DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'
+    DISPLAYERRORMESSAGESATTOP: 'Näytä virheilmoitukset lomakkeen yläpuolella?'
+    EMAILADDRESS: Sähköposti
+    EMAILBODY: Viesti
+    EMAILBODYHTML: Viesti
+    EMAILFROM: Lähettäjä
+    EMAILSUBJECT: Otsikko
+    EMAILTEMPLATE: Sähköpostipohja
+    ENABLELIVEVALIDATION: 'Aktivoi reaaliaikainen validointi'
+    EmailFromContent: 'Lähettäjän sähköpostiosoite kenttään voit laittaa osoitteen, josta lomake näkyy lähetetyn. Jotkut palvelimet vaativat, että osoitteen on oltava samalla domain päätteellä kuin sivustosi. Esimerkiksi omasivusto.fi domainilla osoitteen tulisi olla osoitteesi@omasivusto.fi. Voit käyttää kuitenkin haluamaasi osoitetta, jos sille ei ole teknistä estettä.'
+    FROMADDRESS: 'Lähetä sähköposti osoitteesta'
+    HIDEFORMDATA: 'Piilota lomakedata sähköpostista'
+    NORECIPIENTS: 'Varoitus: et ole lisännyt yhtään vastaanottajaa. Lähetetyt lomakkeet voivat jäädä näkemättä.'
+    ONCOMPLETELABEL: 'Näytä valmistuessa'
+    ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
+    ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
+    PLURALNAME: Pohjasivut
+    PREVIEW_EMAIL: 'Esikatsele sähköposti'
+    PREVIEW_EMAIL_DESCRIPTION: 'Huomio: tallentamattomat muutokset eivät näy esikatselussa.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Voit esikatsella tämän sähköpostin, kunhan olet tallentanut Vastaanottajan.'
+    RECIPIENTS: Vastaanottajat
+    REPLYADDRESS: Vastaussähköposti
+    REPLYADDRESS_DESCRIPTION: 'Sähköpostiosoite, johon vastaanottajalla on mahdollisuus vastata.'
+    SAVESUBMISSIONS: 'Poista lomakkeen tallennus tietokantaan (lähetys vain sähköpostiin)'
+    SELECTAFIELDTOSETSUBJECT: '... tai valitse kenttä, jota käytetään Aiheena'
+    SENDEMAILTO: 'Lähetä sähköposti osoitteeseen'
+    SENDEMAILTO_DESCRIPTION: 'Voit lisätä useamman osoitteen pilkulla erotettuna listana'
+    SENDIF: Lähetyssääntö
+    SENDIFAND: 'Kaikki ehdot ovat tosia'
+    SENDIFOR: 'Kaikki ehdot ovat tosia'
+    SENDPLAIN: 'Lähetä sähköposti puhtaassa tekstimuodossa (HTML-muotoilu poistetaan)'
+    SHOWCLEARFORM: 'Näytä lomakkeen tyhjennysnappi'
+    SINGULARNAME: 'Käyttäjän lomake'
+    SUBMISSIONS: 'Vastaanotetut lomakkeet'
+    SUBMITBUTTON: Lähetä
+    TEXTONCLEAR: 'Tyhjennä-napin teksti:'
+    TEXTONSUBMIT: 'Lähetä-napin teksti:'
+    TYPEREPLY: 'Lisää vastausosoite'
+    TYPESUBJECT: 'Lisää otsikko'
+    TYPETO: 'Lisää vastaanottaja'
+    db_EnableLiveValidation: 'Aktivoi reaaliaikainen validointi'
+    has_many_Fields: Kentät
+    has_many_Submissions: 'Vastaanotetut lomakkeet'
