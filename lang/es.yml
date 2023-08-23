@@ -9,6 +9,8 @@ es:
     FILTER: Filtrar
     FROM: De
     RESET: Restaurar
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Padre
   SilverStripe\UserForms\Model\EditableFormField:
     FIELDISREQUIRED: 'Se requiere {name} '
     GROUP: Grupo
@@ -21,38 +23,29 @@ es:
     db_Sort: Ordenar
     db_Title: Título
     has_one_Parent: Padre
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_NEXT: Siguiente
-    STEP_PREV: Anterior
-    STEP_TITLE: 'Página {page}'
-  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
-    TITLE: Título
-  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
-    RANGE_TO: al
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    RANGE_TO: al
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    CLEARBUTTON: Limpiar
-    EMAILADDRESS: 'Correo electrónico'
-    EMAILFROM: De
-    EMAILSUBJECT: 'Asunto del Email'
-    EMAILTEMPLATE: 'Plantilla de Email'
-    PLURALNAME: 'Páginas base'
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Padre
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     has_one_Folder: Carpeta
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Siguiente
+    STEP_PREV: Anterior
+    STEP_TITLE: 'Página {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     db_Content: Contenido
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     has_one_Group: Grupo
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    TITLE: Título
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: al
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Name: Nombre
     db_Sort: Ordenar
     db_Title: Título
     has_one_Parent: Padre
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: al
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     db_EmailAddress: 'Correo electrónico'
     db_EmailFrom: 'Email de'
@@ -66,3 +59,10 @@ es:
     db_Name: Nombre
     db_Title: Título
     has_one_Parent: Padre
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Limpiar
+    EMAILADDRESS: 'Correo electrónico'
+    EMAILFROM: De
+    EMAILSUBJECT: 'Asunto del Email'
+    EMAILTEMPLATE: 'Plantilla de Email'
+    PLURALNAME: 'Páginas base'

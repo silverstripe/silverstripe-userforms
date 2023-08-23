@@ -11,6 +11,8 @@ ru:
     FILTER: Фильтр
     FROM: От
     RESET: Сброс
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Родительская
   SilverStripe\UserForms\Model\EditableFormField:
     CUSTOMOPTIONS: Опции
     FIELDISREQUIRED: 'Поле {name} является обязательным'
@@ -24,41 +26,31 @@ ru:
     db_Sort: Сортировать
     db_Title: Заголовок
     has_one_Parent: Родительская
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Группа
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    has_one_Folder: Папка
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Вперёд
     STEP_PREV: Назад
     STEP_TITLE: 'Страница {page}'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    db_Content: Содержимое
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    has_one_Group: Группа
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     OPTIONSTAB: Опции
     TITLE: Заголовок
     has_many_Options: Опции
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: по
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    RANGE_TO: по
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    CLEARBUTTON: Сбросить
-    CONFIGURATION: Конфигурация
-    EMAILADDRESS: Email
-    EMAILFROM: От
-    EMAILSUBJECT: 'Тема письма'
-    PLURALNAME: 'Базовые страницы'
-    RECIPIENTS: Получатели
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Родительская
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Группа
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    has_one_Folder: Папка
-  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    db_Content: Содержимое
-  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    has_one_Group: Группа
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Name: Название
     db_Sort: Сортировать
     db_Title: Заголовок
     has_one_Parent: Родительская
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: по
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     db_EmailAddress: 'Адрес email'
     db_EmailSubject: 'Тема письма'
@@ -70,3 +62,11 @@ ru:
     db_Name: Название
     db_Title: Заголовок
     has_one_Parent: Родительская
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Сбросить
+    CONFIGURATION: Конфигурация
+    EMAILADDRESS: Email
+    EMAILFROM: От
+    EMAILSUBJECT: 'Тема письма'
+    PLURALNAME: 'Базовые страницы'
+    RECIPIENTS: Получатели
