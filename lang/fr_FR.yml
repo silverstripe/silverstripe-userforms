@@ -1,22 +1,52 @@
 fr_FR:
+  SilverStripe\UserForms:
+    ONCOMPLETELABEL: 'Utiliser la complétion'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
+    SHOWCLEARFORM: 'Show Clear Form Button'
+    SUBMISSIONS: Soumissions
+    SUBMITBUTTON: Submit
+    TEXTONSUBMIT: 'Texte du bouton Envoyer :'
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FROM: From
   SilverStripe\UserForms\Model\EditableFormField:
-    CUSTOMRULES: 'Custom Rules'
-    REQUIRED: 'Ce champ est requis pour ce formulaire et ne peut pas être supprimé'
-    VALIDATION: Validation
     CHECKEDBYDEFAULT: 'Vérifié par défaut ?'
     CUSTOMERROR: 'Message d''erreur personnalisé'
     CUSTOMOPTIONS: Options
+    CUSTOMRULES: 'Custom Rules'
     DEFAULTTOTODAY: 'Par défaut pour aujourd''hui ?'
     EXTRACLASS_TITLE: 'Style/sortie supplémentaire'
     GROUP: Groupe
     PLURALNAME: 'Champs de formulaire modifiable'
+    REQUIRED: 'Ce champ est requis pour ce formulaire et ne peut pas être supprimé'
     SINGULARNAME: 'Champ de formulaire modifiable'
+    VALIDATION: Validation
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Cases à cocher'
+    SINGULARNAME: 'Champ de la case à cocher'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Groupes de case à cocher'
+    SINGULARNAME: 'Groupe de case à cocher'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Champs date'
+    SINGULARNAME: 'Champ date'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: Déroulants
+    SINGULARNAME: 'Champ déroulant'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Champs email'
     SINGULARNAME: 'Champ email'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Groupe
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    PLURALNAME: 'Champs pour l''upload de fichier'
+    SINGULARNAME: 'Champ pour l''upload de fichier'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Sélectionnez le niveau de tête'
+    PLURALNAME: Principaux
+    SINGULARNAME: Principal
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
@@ -26,15 +56,23 @@ fr_FR:
     SINGULARNAME: 'Member List Field'
     has_one_Group: Groupe
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Options
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-    OPTIONSTAB: Options
     VALUE: Valeur
     has_many_Options: Options
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Options modifiables'
+    SINGULARNAME: 'Option modifiable'
+    db_Value: Valeur
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    NUMBERROWS: 'Nombre de lignes'
+    PLURALNAME: 'Champs texte'
+    SINGULARNAME: 'Champ texte'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Custom Rules'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
-    CUSTOMRULESTAB: 'Custom Rules'
     db_EmailSubject: 'Email Subject'
     has_one_Form: Formulaire
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
@@ -51,61 +89,23 @@ fr_FR:
   SilverStripe\UserForms\Model\UserDefinedForm:
     EMAILADDRESS: Email
     EMAILBODY: Body
+    EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
     EmailFromContent: 'Le champ pour l''adresse de vous permet de définir d''où provient l''email. Sur la plupart des serveurs cela nécessitera que l''adresse mail soit du même domaine que votre site. Par exemple sur votresite.com l''adresse mail devra sûrement être exemple@votresite.com. Cependant vous pouvez mettre n''importe qu''elle adresse email, à laquelle vous souhaitez qu''on réponde. '
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
+    ONCOMPLETELABEL: 'Utiliser la complétion'
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
+    PLURALNAME: 'User Defined Forms'
     REPLYADDRESS: 'Email pour répondre à'
+    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SINGULARNAME: 'User Defined Form'
-    SUBMITBUTTON: Submit
-    EMAILBODYHTML: Body
-    ONCOMPLETELABEL: 'Utiliser la complétion'
-    PLURALNAME: 'User Defined Forms'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SHOWCLEARFORM: 'Show Clear Form Button'
+    SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Soumissions
+    SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Texte du bouton Envoyer :'
     has_many_Submissions: Soumissions
-  SilverStripe\UserForms:
-    ONCOMPLETELABEL: 'Utiliser la complétion'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
-    SHOWCLEARFORM: 'Show Clear Form Button'
-    SUBMISSIONS: Soumissions
-    SUBMITBUTTON: Submit
-    TEXTONSUBMIT: 'Texte du bouton Envoyer :'
-  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FROM: From
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: 'Cases à cocher'
-    SINGULARNAME: 'Champ de la case à cocher'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Groupes de case à cocher'
-    SINGULARNAME: 'Groupe de case à cocher'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: 'Champs date'
-    SINGULARNAME: 'Champ date'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Déroulants
-    SINGULARNAME: 'Champ déroulant'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'Champs pour l''upload de fichier'
-    SINGULARNAME: 'Champ pour l''upload de fichier'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
-    LEVEL: 'Sélectionnez le niveau de tête'
-    PLURALNAME: Principaux
-    SINGULARNAME: Principal
-  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    PLURALNAME: 'Options modifiables'
-    SINGULARNAME: 'Option modifiable'
-    db_Value: Valeur
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    NUMBERROWS: 'Nombre de lignes'
-    PLURALNAME: 'Champs texte'
-    SINGULARNAME: 'Champ texte'
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Groupe

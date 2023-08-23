@@ -7,6 +7,7 @@ de_DE:
     DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'
     ENABLELIVEVALIDATION: 'Aktiviere Live-Validierung'
     NORECIPIENTS: 'Warnung: Sie haben keine Empfänger konfiguriert. Einsendungen gehen möglicherweise verloren.'
+    ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     RECIPIENTS: Empfänger
     SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
     SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
@@ -14,11 +15,10 @@ de_DE:
     SUBMITBUTTON: Absenden
     TEXTONCLEAR: 'Text auf ''Löschen''-Button'
     TEXTONSUBMIT: 'Text auf Absende-Button'
-    ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Abbrechen
     FOLDER_OPTIONS_NEW: 'Neuen Ordner erzeugen (empfohlen)'
     FORM_ACTION_CONFIRM: 'Speichern und weiter'
-    CANCEL: Abbrechen
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Feld hinzufügen'
     ADD_FIELD_GROUP: 'Gruppe hinzufügen'
@@ -181,24 +181,34 @@ de_DE:
     db_Title: Titel
     db_Value: Wert
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
     CLEARBUTTON: Löschen
+    CONFIGURATION: Konfiguration
     DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
+    DISABLECSRFSECURITYTOKEN: 'Deaktiviere CSRF-Token'
+    DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'
     EMAILADDRESS: E-Mail
     EMAILBODY: Inhalt
+    EMAILBODYHTML: Inhalt
     EMAILFROM: Von
     EMAILSUBJECT: Betreff
     EMAILTEMPLATE: E-Mail-Template
+    ENABLELIVEVALIDATION: 'Aktiviere Live-Validierung'
     EmailFromContent: 'Mit der Absender-Adresse können Sie bestimmen, von welcher Adresse aus die E-Mail versendet wird. Meistens ist es eine Adresse der selben Domain wie die Webseite. Die Webseite meineseite.com benötigt z.B. irgendwas@meineseite.com. Sie können zusätzlich jede Adresse als "Antworten an" eintragen.'
     FROMADDRESS: 'E-Mail versendet von'
     HIDEFORMDATA: 'Formulardaten in E-Mail nicht anzeigen'
+    NORECIPIENTS: 'Warnung: Sie haben keine Empfänger konfiguriert. Einsendungen gehen möglicherweise verloren.'
+    ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     ORSELECTAFIELDTOUSEASFROM: '.. oder ein Feld für Antwort-Adresse wählen'
     ORSELECTAFIELDTOUSEASTO: '.. oder wähle ein Feld als Empfänger-Adresse'
     PLURALNAME: 'Anpassbares Formular'
     PREVIEW_EMAIL: E-Mail-Vorschau
     PREVIEW_EMAIL_DESCRIPTION: 'Hinweis: Ungespeicherte Änderungen werde nicht in der Vorschau angezeigt.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Sie können die Vorschau dieser E-Mail ansehen, wenn der Empfänger gespeichert wurde.'
+    RECIPIENTS: Empfänger
     REPLYADDRESS: 'E-Mail-Adresse für "Antworten an"'
     REPLYADDRESS_DESCRIPTION: 'E-Mail-Adresse, an welche der Empfänger antworten kann.'
+    SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
     SELECTAFIELDTOSETSUBJECT: '.. oder ein Feld als Betreff wählen'
     SENDEMAILTO: 'E-Mail senden an'
     SENDEMAILTO_DESCRIPTION: 'Sie können mehrere E-Mail-Adressen kommasepariert eingeben'
@@ -206,25 +216,15 @@ de_DE:
     SENDIFAND: 'Alle Bedingungen sind wahr'
     SENDIFOR: 'Beliebige Bedingung ist wahr'
     SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
+    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
     SINGULARNAME: 'Anpassbares Formular'
+    SUBMISSIONS: Einsendungen
     SUBMITBUTTON: Senden
+    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONSUBMIT: 'Text auf Absende-Button'
     TYPEREPLY: 'Antwort-Adresse eingeben'
     TYPESUBJECT: 'Betreff eingeben'
     TYPETO: 'Empfänger-Adresse eingeben'
-    ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
-    CONFIGURATION: Konfiguration
-    DISABLECSRFSECURITYTOKEN: 'Deaktiviere CSRF-Token'
-    DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'
-    EMAILBODYHTML: Inhalt
-    ENABLELIVEVALIDATION: 'Aktiviere Live-Validierung'
-    NORECIPIENTS: 'Warnung: Sie haben keine Empfänger konfiguriert. Einsendungen gehen möglicherweise verloren.'
-    ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
-    RECIPIENTS: Empfänger
-    SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
-    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
-    SUBMISSIONS: Einsendungen
-    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
-    TEXTONSUBMIT: 'Text auf Absende-Button'
     db_EnableLiveValidation: 'Aktiviere Live-Validierung'
     has_many_Fields: Felder
     has_many_Submissions: Einsendungen

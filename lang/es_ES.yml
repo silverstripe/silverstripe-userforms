@@ -1,10 +1,26 @@
 es_ES:
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
+    CONFIGURATION: Configuración
+    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
+    ONCOMPLETELABEL: 'Mostrar al terminar'
+    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
+    SHOWCLEARFORM: 'Mostrar el botón borrar'
+    SUBMISSIONS: Propuestas
+    SUBMITBUTTON: Enviar
+    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Agregar campo'
+    ADD_FIELD_GROUP: 'Agregar grupo de campos'
+    ADD_PAGE_BREAK: 'Agregar cambio de página'
+    FORMFIELDS: 'Campos del formulario'
+    has_many_Fields: Campos
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Filtrar envíos.'
-    WHEREVALUEIS: 'donde el valor es'
     FILTER: Filtro
+    FILTERSUBMISSIONS: 'Filtrar envíos.'
     FROM: De
     RESET: Restablecer
+    WHEREVALUEIS: 'donde el valor es'
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Reglas personalizadas editables'
     SINGULARNAME: 'Regla personalizada editable'
@@ -13,22 +29,22 @@ es_ES:
     CUSTOMERROR: 'Mensaje de error personalizado'
     CUSTOMOPTIONS: Opciones
     CUSTOMRULES: 'Reglas especiales'
+    DEFAULT: 'Valor predeterminado'
     DEFAULTTOTODAY: '¿Por defecto a hoy?'
+    EXTRACLASS_TITLE: 'Estilo/disposición adicional'
+    EXTRACLASS_Title: 'Clases CSS extra'
     FIELDISREQUIRED: '{name} es requerido'
     GROUP: Grupo
+    INITIALVISIBILITY: 'Visibilidad inicial'
     'NO': 'No'
     PLURALNAME: 'Campos de formulario editables'
     REQUIRED: 'Este campo es necesario para este formulario y no puede ser borrado'
-    SINGULARNAME: 'Campo de formulario editable'
-    VALIDATION: Validación
-    'YES': Sí
-    DEFAULT: 'Valor predeterminado'
-    EXTRACLASS_TITLE: 'Estilo/disposición adicional'
-    EXTRACLASS_Title: 'Clases CSS extra'
-    INITIALVISIBILITY: 'Visibilidad inicial'
     REQUIRED_DESCRIPTION: 'Por favor tomar en cuenta que los campos con condiciones no pueden marcarse como requeridos'
+    SINGULARNAME: 'Campo de formulario editable'
     TITLE: Título
     TYPE: Tipo
+    VALIDATION: Validación
+    'YES': Sí
     db_Title: Título
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Casillas de verificación'
@@ -37,9 +53,9 @@ es_ES:
     PLURALNAME: 'Grupos de casillas de verificación'
     SINGULARNAME: 'Grupo de casillas de verificación'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Valor predeterminado'
     PLURALNAME: 'Selectores de país'
     SINGULARNAME: 'Selector de país'
-    DEFAULT: 'Valor predeterminado'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Campos de fecha'
     SINGULARNAME: 'Campo de fecha'
@@ -62,6 +78,8 @@ es_ES:
     LEVEL: 'Selecionar el nivel del encabezado'
     PLURALNAME: Encabezados
     SINGULARNAME: Encabezado
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_TITLE: 'Página {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: '¿Ocultar de los informes?'
     PLURALNAME: 'Bloques HTML'
@@ -71,9 +89,9 @@ es_ES:
     SINGULARNAME: 'Listado de miembro'
     has_one_Group: Grupo
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: Opciones
     PLURALNAME: 'Campos de opción múltiple'
     SINGULARNAME: 'Campo de opción múltiple'
-    OPTIONSTAB: Opciones
     TITLE: Título
     VALUE: Valor
     has_many_Options: Opciones
@@ -86,18 +104,18 @@ es_ES:
     db_Title: Título
     db_Value: Valor
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: Autocompletar
     NUMBERROWS: 'Cantidad de filas'
     PLURALNAME: 'Campos de texto'
     SINGULARNAME: 'Campo de texto'
     TEXTLENGTH: 'Longitud del texto'
-    AUTOCOMPLETE: Autocompletar
     db_Autocomplete: Autocompletar
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    PLURALNAME: 'Destinatarios definidos por el usuario'
-    SINGULARNAME: 'Destinatario definido por el usuario'
     CUSTOMRULESTAB: 'Reglas especiales'
     EMAILCONTENTTAB: 'Contenido de correo'
     EMAILDETAILSTAB: 'Detalles de correo'
+    PLURALNAME: 'Destinatarios definidos por el usuario'
+    SINGULARNAME: 'Destinatario definido por el usuario'
     db_EmailSubject: 'Asunto del correo'
     db_EmailTemplate: 'Plantilla de correo'
     has_one_Form: Formulario
@@ -114,52 +132,34 @@ es_ES:
     db_Title: Título
     db_Value: Valor
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
+    CONFIGURATION: Configuración
     DESCRIPTION: 'Agrega un formulario personalizable.'
     EMAILADDRESS: Email
     EMAILBODY: Cuerpo
+    EMAILBODYHTML: Cuerpo
     EMAILFROM: De
     EMAILSUBJECT: 'Asunto del correo'
+    EMAILTEMPLATE: 'Plantilla de correo'
+    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
     EmailFromContent: 'La dirección desde permite establecer de quien viene el email. En la mayoría de los servidores esto se necesitará establecer a una dirección de email del mismo nombre de dominio que su sitio. Por ejemplo, en susitio.com la dirección desde puede ser algo como loquesea@susitio.com. Sin embargo, Ud puede establecer cualquier dirección de email que desee como dirección del remitente.'
     FROMADDRESS: 'Enviar este mail desde'
     HIDEFORMDATA: 'Esconder los datos enviados en el mail'
+    ONCOMPLETELABEL: 'Mostrar al terminar'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleccione un campo del formulario para utilizar como dirección del remitente'
     ORSELECTAFIELDTOUSEASTO: '.. o seleccione un campo que se utiliza como la dirección'
     PLURALNAME: 'Páginas base'
+    PREVIEW_EMAIL: 'Vista previa de correo'
     REPLYADDRESS: 'Email para responder a'
+    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
     SELECTAFIELDTOSETSUBJECT: '... o seleccionar un campo para usarlo como el asunto'
     SENDEMAILTO: 'Enviar mail a'
     SENDPLAIN: 'Enviar el correo como texto plano'
-    SINGULARNAME: 'Formulario definido por el usuario'
-    SUBMITBUTTON: Enviar
-    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
-    CONFIGURATION: Configuración
-    EMAILBODYHTML: Cuerpo
-    EMAILTEMPLATE: 'Plantilla de correo'
-    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
-    ONCOMPLETELABEL: 'Mostrar al terminar'
-    PREVIEW_EMAIL: 'Vista previa de correo'
-    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
     SHOWCLEARFORM: 'Mostrar el botón borrar'
+    SINGULARNAME: 'Formulario definido por el usuario'
     SUBMISSIONS: Propuestas
+    SUBMITBUTTON: Enviar
     TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
     db_EnableLiveValidation: 'Habilitar la validación en vivo'
     has_many_Fields: Campos
     has_many_Submissions: Propuestas
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Agregar destinatario de email'
-    CONFIGURATION: Configuración
-    ENABLELIVEVALIDATION: 'Habilitar la validación en vivo'
-    ONCOMPLETELABEL: 'Mostrar al terminar'
-    SAVESUBMISSIONS: 'Deshabilitar el guardado de emails en el servidor'
-    SHOWCLEARFORM: 'Mostrar el botón borrar'
-    SUBMISSIONS: Propuestas
-    SUBMITBUTTON: Enviar
-    TEXTONSUBMIT: 'Texto en el botón aceptar/submit:'
-  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
-    ADD_FIELD: 'Agregar campo'
-    ADD_FIELD_GROUP: 'Agregar grupo de campos'
-    ADD_PAGE_BREAK: 'Agregar cambio de página'
-    FORMFIELDS: 'Campos del formulario'
-    has_many_Fields: Campos
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_TITLE: 'Página {page}'

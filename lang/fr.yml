@@ -9,6 +9,8 @@ fr:
     FILTER: Filtrer
     FROM: De
     RESET: Réinitialiser
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField:
     FIELDISREQUIRED: '{name} requis'
     GROUP: Groupe
@@ -21,37 +23,29 @@ fr:
     db_Sort: Tri
     db_Title: Titre
     has_one_Parent: Parent
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_NEXT: Suivant
-    STEP_PREV: Préc
-    STEP_TITLE: 'Page {page}'
-  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
-    TITLE: Titre
-  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
-    RANGE_TO: kime
-  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
-    RANGE_TO: kime
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    CLEARBUTTON: Effacer
-    EMAILADDRESS: Email
-    EMAILFROM: De
-    EMAILSUBJECT: 'Sujet de l''email'
-    PLURALNAME: 'Base Pages'
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Groupe
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     has_one_Folder: Dossier
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Suivant
+    STEP_PREV: Préc
+    STEP_TITLE: 'Page {page}'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     db_Content: Contenu
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     has_one_Group: Groupe
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    TITLE: Titre
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: kime
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Name: Nom
     db_Sort: Tri
     db_Title: Titre
     has_one_Parent: Parent
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    RANGE_TO: kime
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     db_EmailAddress: 'Adresse email'
     db_EmailSubject: 'Sujet de l''email'
@@ -63,3 +57,9 @@ fr:
     db_Name: Nom
     db_Title: Titre
     has_one_Parent: Parent
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: Effacer
+    EMAILADDRESS: Email
+    EMAILFROM: De
+    EMAILSUBJECT: 'Sujet de l''email'
+    PLURALNAME: 'Base Pages'

@@ -1,27 +1,43 @@
 mi:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Matua
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
+    CONFIGURATION: Whirihoranga
+    ENABLELIVEVALIDATION: 'Whakahohea te manatoko wā tūturu'
+    ONCOMPLETELABEL: 'Whakaaturia ina oti'
+    SAVESUBMISSIONS: 'Monokia Ngā Tukunga Tiaki ki te Tūmau'
+    SHOWCLEARFORM: 'Whakaatu Pātene Ūkui Puka'
+    SUBMISSIONS: 'Ngā Tukunga'
+    SUBMITBUTTON: Tuku
+    TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Whakakore
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
-    WHEREVALUEIS: 'ko te uara ko...'
     FILTER: Tātari
+    FILTERSUBMISSIONS: 'Ngā Tukunga Tātari...'
     FROM: Mai
     RESET: 'Tautuhi anō'
+    WHEREVALUEIS: 'ko te uara ko...'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Kua tākina aunoatia?'
     CUSTOMERROR: 'Karere Hapa Ritenga Ake'
+    CUSTOMOPTIONS: 'Ngā Kōwhiringa'
     CUSTOMRULES: 'Ngā Ture Ritenga Ake'
     DEFAULTTOTODAY: 'Me Tēnei Rā te Taunoa?'
+    EXTRACLASS_TITLE: 'Kāhua Tāpiri/Tahora'
     FIELDISREQUIRED: 'Kei te hiahiatia te {name}'
     GROUP: Rōpū
+    NAME: Ingoa
     PLURALNAME: 'Ngā Āpure Puka Ka Taea Te Whakatika'
     REQUIRED: 'He Whakaritenga tēnei āpure'
     RIGHTTITLE: 'Taitara Tika'
     SINGULARNAME: 'Āpure Puka Ka Taea Te Whakatika'
-    VALIDATION: Manatokonga
-    CUSTOMOPTIONS: 'Ngā Kōwhiringa'
-    EXTRACLASS_TITLE: 'Kāhua Tāpiri/Tahora'
-    NAME: Ingoa
     TITLE: Taitara
     TYPE: Momo
+    VALIDATION: Manatokonga
     db_Name: Ingoa
     db_RightTitle: 'Taitara Tika'
     db_Title: Taitara
@@ -44,6 +60,8 @@ mi:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Ngā Āpure Īmēra'
     SINGULARNAME: 'Āpure Īmēra'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Rōpū
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Ngā Āpure Tukuatu Kōnae'
     SINGULARNAME: 'Āpure Tukuatu Kōnae'
@@ -52,6 +70,8 @@ mi:
     LEVEL: 'Kōwhiri Taumata Pane'
     PLURALNAME: 'Ngā Pane'
     SINGULARNAME: Pane
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    STEP_NEXT: Panuku
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     HIDEFROMREPORT: 'Hunaia i ngā pūrongo?'
     PLURALNAME: 'Ngā Poraka HTML'
@@ -62,12 +82,14 @@ mi:
     SINGULARNAME: 'Āpure Rārangi Mema'
     has_one_Group: Rōpū
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: 'Ngā Kōwhiringa'
     PLURALNAME: 'Ngā Āpure Kōwhiringa Maha Whakatika'
     SINGULARNAME: 'Āpure Kōwhiringa Maha Whakatika'
-    OPTIONSTAB: 'Ngā Kōwhiringa'
     TITLE: Taitara
     VALUE: Uara
     has_many_Options: 'Ngā Kōwhiringa'
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE_TO: ki
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Ngā Kōwhiringa Whakatika'
     SINGULARNAME: 'Kōwhiringa Whakatika'
@@ -81,18 +103,20 @@ mi:
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Maha kapa'
     PLURALNAME: 'Ngā Āpure Tuhinga'
+    RANGE_TO: ki
     SINGULARNAME: 'Āpure Tuhinga'
     TEXTLENGTH: 'Roa tuhinga'
-    RANGE_TO: ki
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Ngā Ture Ritenga Ake'
     PLURALNAME: 'Ngā Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
     SINGULARNAME: 'Kaiwhiwhi Īmēra Puka Tautuhi ā-Kaiwhakamahi'
-    CUSTOMRULESTAB: 'Ngā Ture Ritenga Ake'
     db_EmailAddress: 'Wāhitau Īmēra'
     db_EmailFrom: 'Īmēra mai'
     db_EmailSubject: 'Kaupapa īmēra'
     db_EmailTemplate: 'Tātauira īmēra'
     has_one_Form: Puka
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    has_one_Parent: Matua
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Tikiake Kōnae'
     PLURALNAME: 'Ngā Āpure Kōnae Kua Tukuna'
@@ -109,55 +133,31 @@ mi:
     db_Value: Uara
     has_one_Parent: Matua
   SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
+    CONFIGURATION: Whirihoranga
     DESCRIPTION: 'Ka tāpiri i te puka ka taea te whakarite.'
     EMAILADDRESS: Īmēra
     EMAILBODY: Tinana
+    EMAILBODYHTML: Tinana
     EMAILFROM: Mai
     EMAILSUBJECT: 'Kaupapa īmēra'
+    EMAILTEMPLATE: 'Tātauira īmēra'
+    ENABLELIVEVALIDATION: 'Whakahohea te manatoko wā tūturu'
     EmailFromContent: 'Ka taea koe mā te wāhitau mai te tautuhi i te tangata nā wai te īmēra. Kei te nuinga o ngā tūmau me tautuhi tēnei ki tētahi wāhitau īmēra i te ingoa rohe e ōrite ana ki tō pae. Hei tauira kei yoursite.com me noho te wāhitau mai ko something@yoursite.com. Heoi ka taea te tautuhi i tāu e hiahia ai hei wāhitau whakautu ki.'
     FROMADDRESS: 'Tuku īmēra mai'
     HIDEFORMDATA: 'Me huna te raraunga puka i te īmēra?'
+    ONCOMPLETELABEL: 'Whakaaturia ina oti'
     ORSELECTAFIELDTOUSEASFROM: '.. ka tīpako rānei i tētahi āpure hei whakamahi hei wāhitau whakautu ki'
     ORSELECTAFIELDTOUSEASTO: '.. ka tīpako rānei i tētahi āpure hei whakamahi hei wāhitau ki'
+    PLURALNAME: 'Ngā Whārangi Taketake'
     REPLYADDRESS: 'Īmēra hei whakautu ki'
+    SAVESUBMISSIONS: 'Monokia Ngā Tukunga Tiaki ki te Tūmau'
     SENDEMAILTO: 'Tuku īmēra ki'
     SENDPLAIN: 'Tuku īmēra hei kuputuhi tōkau? (ka tangohia te HTML)'
-    SINGULARNAME: 'Puka Tautuhi ā-Kaiwhakamahi'
-    SUBMITBUTTON: Tuku
-    ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
-    CONFIGURATION: Whirihoranga
-    EMAILBODYHTML: Tinana
-    EMAILTEMPLATE: 'Tātauira īmēra'
-    ENABLELIVEVALIDATION: 'Whakahohea te manatoko wā tūturu'
-    ONCOMPLETELABEL: 'Whakaaturia ina oti'
-    PLURALNAME: 'Ngā Whārangi Taketake'
-    SAVESUBMISSIONS: 'Monokia Ngā Tukunga Tiaki ki te Tūmau'
     SHOWCLEARFORM: 'Whakaatu Pātene Ūkui Puka'
+    SINGULARNAME: 'Puka Tautuhi ā-Kaiwhakamahi'
     SUBMISSIONS: 'Ngā Tukunga'
+    SUBMITBUTTON: Tuku
     TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
     db_EnableLiveValidation: 'Whakahohea te manatoko wā tūturu'
     has_many_Submissions: 'Ngā Tukunga'
-  SilverStripe\CMS\Model\SiteTree:
-    TABMAIN: Matua
-  SilverStripe\UserForms:
-    ADDEMAILRECIPIENT: 'Tāpiri Kaiwhirhi Īmēra'
-    CONFIGURATION: Whirihoranga
-    ENABLELIVEVALIDATION: 'Whakahohea te manatoko wā tūturu'
-    ONCOMPLETELABEL: 'Whakaaturia ina oti'
-    SAVESUBMISSIONS: 'Monokia Ngā Tukunga Tiaki ki te Tūmau'
-    SHOWCLEARFORM: 'Whakaatu Pātene Ūkui Puka'
-    SUBMISSIONS: 'Ngā Tukunga'
-    SUBMITBUTTON: Tuku
-    TEXTONSUBMIT: 'Kuputuhi i te pātene tuku:'
-  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
-    CANCEL: Whakakore
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
-    STEP_NEXT: Panuku
-  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
-    RANGE_TO: ki
-  SilverStripe\UserForms\Model\EditableCustomRule:
-    has_one_Parent: Matua
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: Rōpū
-  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
-    has_one_Parent: Matua
