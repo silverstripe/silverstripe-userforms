@@ -1,47 +1,4 @@
 ja:
-  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: メールフィールド
-    SINGULARNAME: メールフィールド
-  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    HIDEFROMREPORT: 'レポートから隠しますか?'
-    PLURALNAME: HTMLブロック
-    SINGULARNAME: HTMLブロック
-    db_Content: 内容
-  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
-    PLURALNAME: 編集可能なマルチオプションフィールド
-    SINGULARNAME: 編集可能なマルチオプションフィールド
-    OPTIONSTAB: オプション
-    TITLE: タイトル
-    VALUE: 数値
-    has_many_Options: オプション
-  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    PLURALNAME: ユーザー定義フォームのメール受信者
-    SINGULARNAME: ユーザー定義フォームのメール受信者
-    CUSTOMRULESTAB: カスタムルール
-    db_EmailAddress: メールアドレス
-    db_EmailSubject: メールの件名
-    has_one_Form: フォーム
-  SilverStripe\UserForms\Model\UserDefinedForm:
-    EMAILADDRESS: メール
-    EMAILBODY: ボディ
-    EMAILFROM: 送信者
-    EMAILSUBJECT: メールの件名
-    EmailFromContent: '送信元アドレスでどこからメールを送信するのか設定することができます。多くのサーバーではこれはあなたのサイトのドメイン名と同じメールアドレスに設定する必要があります。たとえば yoursite.com では送信元アドレスは something@yoursite.com としなければいけません。ただし、返信先アドレスは好きなメールアドレスを設定することができます。'
-    FROMADDRESS: メールの送信元
-    HIDEFORMDATA: 'メールからフォームデータを見えないようにしますか?'
-    ORSELECTAFIELDTOUSEASFROM: ..またはフィールドを選択して返信先アドレスとして使用
-    ORSELECTAFIELDTOUSEASTO: ..またはフィールドを選択して宛先アドレスとして使用
-    REPLYADDRESS: 以下への返信メール
-    SENDEMAILTO: メールを送信
-    SENDPLAIN: 'プレーンテキストとしてメールを送信しますか? (HTMLは取り除かれます)'
-    SINGULARNAME: ユーザー定義フォーム
-    SUBMITBUTTON: 送信
-    CLEARBUTTON: クリア
-    EMAILBODYHTML: ボディ
-    ONCOMPLETELABEL: 完成時に表示
-    SAVESUBMISSIONS: 提出物をサーバーに保存するのを無効化
-    SHOWCLEARFORM: フォームをクリアーボタンを表示する
-    TEXTONSUBMIT: '送信ボタンのテキスト:'
   SilverStripe\CMS\Model\SiteTree:
     TABMAIN: メイン
   SilverStripe\UserForms:
@@ -86,6 +43,11 @@ ja:
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: ドロップダウン
     SINGULARNAME: ドロップダウンフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: メールフィールド
+    SINGULARNAME: メールフィールド
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: グループ
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: ファイルアップロードフィールド
     SINGULARNAME: ファイルアップロードフィールド
@@ -96,10 +58,22 @@ ja:
     SINGULARNAME: 見出し
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: 次へ
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    HIDEFROMREPORT: 'レポートから隠しますか?'
+    PLURALNAME: HTMLブロック
+    SINGULARNAME: HTMLブロック
+    db_Content: 内容
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: メンバーリストフィールド
     SINGULARNAME: メンバーリストフィールド
     has_one_Group: グループ
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    OPTIONSTAB: オプション
+    PLURALNAME: 編集可能なマルチオプションフィールド
+    SINGULARNAME: 編集可能なマルチオプションフィールド
+    TITLE: タイトル
+    VALUE: 数値
+    has_many_Options: オプション
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: へ
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
@@ -113,6 +87,13 @@ ja:
     PLURALNAME: テキストフィールド
     RANGE_TO: へ
     SINGULARNAME: テキストフィールド
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: カスタムルール
+    PLURALNAME: ユーザー定義フォームのメール受信者
+    SINGULARNAME: ユーザー定義フォームのメール受信者
+    db_EmailAddress: メールアドレス
+    db_EmailSubject: メールの件名
+    has_one_Form: フォーム
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: ファイルをダウンロード
     PLURALNAME: 送信済ファイルフィールド
@@ -126,5 +107,24 @@ ja:
     db_Name: 名前
     db_Title: タイトル
     db_Value: 数値
-  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
-    belongs_to_Group: グループ
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    CLEARBUTTON: クリア
+    EMAILADDRESS: メール
+    EMAILBODY: ボディ
+    EMAILBODYHTML: ボディ
+    EMAILFROM: 送信者
+    EMAILSUBJECT: メールの件名
+    EmailFromContent: '送信元アドレスでどこからメールを送信するのか設定することができます。多くのサーバーではこれはあなたのサイトのドメイン名と同じメールアドレスに設定する必要があります。たとえば yoursite.com では送信元アドレスは something@yoursite.com としなければいけません。ただし、返信先アドレスは好きなメールアドレスを設定することができます。'
+    FROMADDRESS: メールの送信元
+    HIDEFORMDATA: 'メールからフォームデータを見えないようにしますか?'
+    ONCOMPLETELABEL: 完成時に表示
+    ORSELECTAFIELDTOUSEASFROM: ..またはフィールドを選択して返信先アドレスとして使用
+    ORSELECTAFIELDTOUSEASTO: ..またはフィールドを選択して宛先アドレスとして使用
+    REPLYADDRESS: 以下への返信メール
+    SAVESUBMISSIONS: 提出物をサーバーに保存するのを無効化
+    SENDEMAILTO: メールを送信
+    SENDPLAIN: 'プレーンテキストとしてメールを送信しますか? (HTMLは取り除かれます)'
+    SHOWCLEARFORM: フォームをクリアーボタンを表示する
+    SINGULARNAME: ユーザー定義フォーム
+    SUBMITBUTTON: 送信
+    TEXTONSUBMIT: '送信ボタンのテキスト:'
