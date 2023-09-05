@@ -6,6 +6,8 @@ use SilverStripe\Assets\File;
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\Versioned\Versioned;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
 
 /**
  * A file uploaded on a {@link UserDefinedForm} and attached to a single
@@ -41,27 +43,40 @@ class SubmittedFileField extends SubmittedFormField
     {
         $name = $this->getFileName();
         $link = $this->getLink(false);
-        $title = _t(__CLASS__ . '.DOWNLOADFILE', 'Download File');
-        $message = _t(__CLASS__ . '.INSUFFICIENTRIGHTS', 'You don\'t have the right permissions to download this file');
-        $file = $this->getUploadedFileFromDraft();
-
         if ($link) {
-            if ($file->canView()) {
+            $title = _t(__CLASS__ . '.DOWNLOADFILE', 'Download File');
+            $file = $this->getUploadedFileFromDraft();
+            if (!$file->canView()) {
+                if (Security::getCurrentUser()) {
+                    // Logged in CMS user without permissions to view file in the CMS
+                    $default = 'You don\'t have the right permissions to download this file';
+                    $message = _t(__CLASS__ . '..INSUFFICIENTRIGHTS', $default);
+                    return DBField::create_field('HTMLText', sprintf(
+                        '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
+                        htmlspecialchars($name, ENT_QUOTES),
+                        htmlspecialchars($message, ENT_QUOTES)
+                    ));
+                } else {
+                    // Userforms submission filled in by non-logged in user being emailed to recipient
+                    $message = _t(__CLASS__ . '.YOUMUSTBELOGGEDIN', 'You must be logged in to view this file');
+                    return DBField::create_field('HTMLText', sprintf(
+                        '%s - <a href="%s" target="_blank">%s</a> - <em>%s</em>',
+                        htmlspecialchars($name, ENT_QUOTES),
+                        htmlspecialchars($link, ENT_QUOTES),
+                        htmlspecialchars($title, ENT_QUOTES),
+                        htmlspecialchars($message, ENT_QUOTES)
+                    ));
+                }
+            } else {
+                // Logged in CMS user with permissions to view file in the CMS
                 return DBField::create_field('HTMLText', sprintf(
                     '%s - <a href="%s" target="_blank">%s</a>',
                     htmlspecialchars($name, ENT_QUOTES),
                     htmlspecialchars($link, ENT_QUOTES),
                     htmlspecialchars($title, ENT_QUOTES)
                 ));
-            } else {
-                return DBField::create_field('HTMLText', sprintf(
-                    '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
-                    htmlspecialchars($name, ENT_QUOTES),
-                    htmlspecialchars($message, ENT_QUOTES)
-                ));
             }
         }
-
         return false;
     }
 
