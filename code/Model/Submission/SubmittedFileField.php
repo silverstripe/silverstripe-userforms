@@ -50,7 +50,7 @@ class SubmittedFileField extends SubmittedFormField
                 if (Security::getCurrentUser()) {
                     // Logged in CMS user without permissions to view file in the CMS
                     $default = 'You don\'t have the right permissions to download this file';
-                    $message = _t(__CLASS__ . '..INSUFFICIENTRIGHTS', $default);
+                    $message = _t(__CLASS__ . '.INSUFFICIENTRIGHTS', $default);
                     return DBField::create_field('HTMLText', sprintf(
                         '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
                         htmlspecialchars($name, ENT_QUOTES),
