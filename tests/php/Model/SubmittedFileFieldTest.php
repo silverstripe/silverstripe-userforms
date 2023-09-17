@@ -74,35 +74,47 @@ class SubmittedFileFieldTest extends SapphireTest
         // Set an explicit base URL so we get a reliable value for the test
         Director::config()->set('alternate_base_url', 'http://mysite.com');
         $fileName = $this->submittedFile->getFileName();
-        $message = "You don&#039;t have the right permissions to download this file";
+        $link = 'http://mysite.com/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt';
 
         $this->file->CanViewType = 'OnlyTheseUsers';
         $this->file->write();
 
-        $this->loginWithPermission('ADMIN');
+        // Userforms submission filled in by non-logged in user being emailed to recipient
+        $this->logOut();
         $this->assertEquals(
             sprintf(
-                '%s - <a href="http://mysite.com/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt" target="_blank">Download File</a>',
-                $fileName
+                '%s - <a href="%s" target="_blank">%s</a> - <em>%s</em>',
+                $fileName,
+                $link,
+                'Download File',
+                'You must be logged in to view this file'
             ),
             $this->submittedFile->getFormattedValue()->value
         );
-
         $this->logOut();
-        $this->loginWithPermission('CMS_ACCESS_CMSMain');
+
+        // Logged in CMS user without permissions to view file in the CMS
+        $this->logInWithPermission('CMS_ACCESS_CMSMain');
         $this->assertEquals(
             sprintf(
                 '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
                 $fileName,
-                $message
+                'You don&#039;t have the right permissions to download this file'
             ),
             $this->submittedFile->getFormattedValue()->value
         );
+        $this->logOut();
 
-        $store = Injector::inst()->get(AssetStore::class);
-        $this->assertFalse(
-            $store->canView($fileName, $this->file->getHash()),
-            'Users without canView rights on the file should not have been session granted access to it'
+        // Logged in CMS user with permissions to view file in the CMS
+        $this->loginWithPermission('ADMIN');
+        $this->assertEquals(
+            sprintf(
+                '%s - <a href="%s" target="_blank">%s</a>',
+                $fileName,
+                $link,
+                'Download File'
+            ),
+            $this->submittedFile->getFormattedValue()->value
         );
     }
 }
