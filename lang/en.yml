@@ -328,6 +328,7 @@ en:
       one: 'A Submitted File Field'
       other: '{count} Submitted File Fields'
     SINGULARNAME: 'Submitted File Field'
+    YOUMUSTBELOGGEDIN: 'You must be logged in to view this file'
     has_one_UploadedFile: 'Uploaded file'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Submitted Forms'
