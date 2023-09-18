@@ -178,7 +178,6 @@ class UserDefinedFormController extends PageController
     public function Form()
     {
         $form = UserForm::create($this, 'Form_' . $this->ID);
-        /** @skipUpgrade */
         $form->setFormAction(Controller::join_links($this->Link(), 'Form'));
         $this->generateConditionalJavascript();
         return $form;
@@ -434,15 +433,17 @@ JS
                     $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailFromField()->Name);
 
                     if ($submittedFormField && $submittedFormField->Value && is_string($submittedFormField->Value)) {
-                        $email->setReplyTo(explode(',', $submittedFormField->Value ?? ''));
+                        $emailSendTo = $this->validEmailsToArray($submittedFormField->Value);
+                        $email->addReplyTo(...$emailSendTo);
                     }
                 } elseif ($recipient->EmailReplyTo) {
-                    $email->setReplyTo(explode(',', $recipient->EmailReplyTo ?? ''));
+                    $emailReplyTo = $this->validEmailsToArray($recipient->EmailReplyTo);
+                    $email->addReplyTo(...$emailReplyTo);
                 }
 
                 // check for a specified from; otherwise fall back to server defaults
                 if ($recipient->EmailFrom) {
-                    $email->setFrom(explode(',', $recipient->EmailFrom ?? ''));
+                    $email->setFrom($this->validEmailsToArray($recipient->EmailFrom));
                 }
 
                 // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
@@ -453,12 +454,12 @@ JS
                         $submittedFormField = $submittedFields->find('Name', $recipient->SendEmailToField()->Name);
 
                         if ($submittedFormField && is_string($submittedFormField->Value)) {
-                            $email->setTo(explode(',', $submittedFormField->Value ?? ''));
+                            $email->setTo($this->validEmailsToArray($submittedFormField->Value));
                         } else {
-                            $email->setTo(explode(',', $recipient->EmailAddress ?? ''));
+                            $email->setTo($this->validEmailsToArray($recipient->EmailAddress));
                         }
                     } else {
-                        $email->setTo(explode(',', $recipient->EmailAddress ?? ''));
+                        $email->setTo($this->validEmailsToArray($recipient->EmailAddress));
                     }
                 } catch (Swift_RfcComplianceException $e) {
                     // The sending address is empty and/or invalid. Log and skip sending.
@@ -672,5 +673,22 @@ EOS;
         }
 
         return $result;
+    }
+
+    /**
+     * Check validity of email and return array of valid emails
+     */
+    private function validEmailsToArray(?string $emails): array
+    {
+        $emailsArray = [];
+        $emails = explode(',', $emails ?? '');
+        foreach ($emails as $email) {
+            $email = trim($email);
+            if (Email::is_valid_address($email)) {
+                $emailsArray[] = $email;
+            }
+        }
+
+        return $emailsArray;
     }
 }

@@ -38,11 +38,11 @@ en:
     belongs_to_SubmittedFileField: 'Submitted file field'
     db_UserFormUpload: 'User form upload'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Required field ''{name}'' cannot be placed within a conditional page'
-    NO_PAGE: 'Field ''{name}'' found before any pages'
-    UNEXPECTED_BREAK: 'Unexpected page break ''{name}'' inside nested field ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' found without a matching group'
-    WRONG_GROUP_END: '''{name}'' found closes the wrong group ''{group}'''
+    CONDITIONAL_REQUIRED: "Required field '{name}' cannot be placed within a conditional page"
+    NO_PAGE: "Field '{name}' found before any pages"
+    UNEXPECTED_BREAK: "Unexpected page break '{name}' inside nested field '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' found without a matching group"
+    WRONG_GROUP_END: "'{name}' found closes the wrong group '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filter
     FILTERSUBMISSIONS: 'Filter Submissions..'
@@ -86,7 +86,7 @@ en:
       one: 'An Editable Form Field'
       other: '{count} Editable Form Fields'
     REQUIRED: 'Is this field Required?'
-    REQUIRED_DESCRIPTION: 'Please note that conditional fields can''t be required'
+    REQUIRED_DESCRIPTION: "Please note that conditional fields can't be required"
     RIGHTTITLE: 'Right title'
     SHOWINSUMMARY: 'Show in summary gridfield'
     SINGULARNAME: 'Editable Form Field'
@@ -207,7 +207,7 @@ en:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Hide from reports?'
-    HIDELABEL: 'Hide ''Title'' label on frontend?'
+    HIDELABEL: "Hide 'Title' label on frontend?"
     PLURALNAME: 'HTML Blocks'
     PLURALS:
       one: 'A HTML Block'
@@ -322,7 +322,7 @@ en:
     has_one_Parent: Parent
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download File'
-    INSUFFICIENTRIGHTS: 'You don''t have the right permissions to download this file'
+    INSUFFICIENTRIGHTS: "You don't have the right permissions to download this file"
     PLURALNAME: 'Submitted File Fields'
     PLURALS:
       one: 'A Submitted File Field'
@@ -373,7 +373,7 @@ en:
     HIDEINVISIBLEFIELDS: 'Hide invisible fields from email?'
     NORECIPIENTS: 'Warning: You have not configured any recipients. Form submissions may be missed.'
     ONCOMPLETELABEL: 'Show on completion'
-    ONCOMPLETEMESSAGE: 'Thanks, we''ve received your submission.'
+    ONCOMPLETEMESSAGE: "Thanks, we've received your submission."
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     PLURALNAME: 'Base Pages'
@@ -385,7 +385,7 @@ en:
     PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'
     RECIPIENTS: Recipients
     REPLYADDRESS: 'Email for reply to'
-    REPLYADDRESS_DESCRIPTION: 'The email address which the recipient is able to ''reply'' to.'
+    REPLYADDRESS_DESCRIPTION: "The email address which the recipient is able to 'reply' to."
     RulesDescription: 'Emails will only be sent to the recipient if the custom rules are met. If no rules are defined, this recipient will receive notifications for every submission.'
     SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SELECTAFIELDTOSETSUBJECT: '.. or select a field to use as the subject'

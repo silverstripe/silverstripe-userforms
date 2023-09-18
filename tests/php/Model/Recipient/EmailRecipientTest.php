@@ -20,13 +20,13 @@ class EmailRecipientTest extends SapphireTest
         $recipient->EmailBodyHtml = '<p>Some email content. About us: [sitetree_link,id=' . $page->ID . '].</p>';
 
         $result = $recipient->getEmailBodyContent();
-        $this->assertStringContainsString('/about-us/', $result);
+        $this->assertStringContainsString('/about-us', $result);
 
         $recipient->SendPlain = true;
         $recipient->EmailBody = 'Some email content. About us: [sitetree_link,id=' . $page->ID . '].';
 
         $result = $recipient->getEmailBodyContent();
-        $this->assertStringContainsString('/about-us/', $result);
+        $this->assertStringContainsString('/about-us', $result);
     }
 
     public function testEmptyRecipientFailsValidation()

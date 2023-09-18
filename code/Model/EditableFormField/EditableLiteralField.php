@@ -123,16 +123,16 @@ class EditableLiteralField extends EditableFormField
             $fields->removeByName(['Default', 'Validation', 'RightTitle']);
 
             $fields->addFieldsToTab('Root.Main', [
-                HTMLEditorField::create('Content', _t(__CLASS__.'.CONTENT', 'HTML'))
+                HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'HTML'))
                     ->setRows(4)
                     ->setColumns(20),
                 CheckboxField::create(
                     'HideFromReports',
-                    _t(__CLASS__.'.HIDEFROMREPORT', 'Hide from reports?')
+                    _t(__CLASS__ . '.HIDEFROMREPORT', 'Hide from reports?')
                 ),
                 CheckboxField::create(
                     'HideLabel',
-                    _t(__CLASS__.'.HIDELABEL', "Hide 'Title' label on frontend?")
+                    _t(__CLASS__ . '.HIDELABEL', "Hide 'Title' label on frontend?")
                 )
             ]);
         });

@@ -103,7 +103,7 @@ class EditableMultipleOptionField extends EditableFormField
                 $optionsConfig
             );
 
-            $fields->insertAfter(Tab::create('Options', _t(__CLASS__.'.OPTIONSTAB', 'Options')), 'Main');
+            $fields->insertAfter('Main', Tab::create('Options', _t(__CLASS__.'.OPTIONSTAB', 'Options')));
             $fields->addFieldToTab('Root.Options', $optionsGrid);
         });
 
@@ -115,12 +115,9 @@ class EditableMultipleOptionField extends EditableFormField
     /**
      * Duplicate a pages content. We need to make sure all the fields attached
      * to that page go with it
-     *
-     * @param bool $doWrite @deprecated
-     * @param string $manyMany @deprecated
      * {@inheritDoc}
      */
-    public function duplicate($doWrite = true, $manyMany = 'many_many')
+    public function duplicate(bool $doWrite = true, array|null $relations = null): static
     {
         $clonedNode = parent::duplicate(true);
 

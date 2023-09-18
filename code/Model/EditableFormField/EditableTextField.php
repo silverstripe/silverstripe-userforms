@@ -32,7 +32,6 @@ class EditableTextField extends EditableFormField
 
     private static $has_placeholder = true;
 
-    /** @skipUpgrade */
     private static $autocomplete_options = [
         'off' => 'Off',
         'on' => 'On',

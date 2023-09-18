@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use ReflectionClass;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
@@ -36,8 +37,6 @@ use function filesize;
 class UserDefinedFormControllerTest extends FunctionalTest
 {
     protected static $fixture_file = '../UserFormsTest.yml';
-
-    protected static $use_draft_site = true;
 
     protected static $disable_themes = true;
 
@@ -109,7 +108,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
         $nohtml = $this->findEmail('nohtml@example.com', 'no-reply@example.com', 'Email Subject');
 
-        $this->assertStringContainsString('Basic Text Field: Basic Value', $nohtml['Content'], 'Email contains no html');
+        $this->assertStringContainsString('* Basic Value <b>HTML</b>', $nohtml['Content'], 'Email contains no html');
 
         // submitted html tags are not escaped because the email is being sent as text/plain
         $value = 'My body text Basic Value <b>HTML</b>';
@@ -132,8 +131,8 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         // check that multiple email addresses are supported in to and from
         $this->assertEmailSent(
-            'test1@example.com; test2@example.com',
-            'test3@example.com; test4@example.com',
+            'test1@example.com, test2@example.com',
+            'test3@example.com, test4@example.com',
             'Test Email'
         );
     }
@@ -581,5 +580,37 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->expectException('\InvalidArgumentException');
         $controller = new SizeStringTestableController(); // extends UserDefinedFormController
         $controller->convertSizeStringToBytes($input);
+    }
+
+    public function provideValidEmailsToArray()
+    {
+        return [
+            [[], [null]],
+            [[], [' , , ']],
+            [[], ['broken.email, broken@.email, broken2.@email']],
+            [
+                ['broken@email', 'correctemail@email.com'],
+                [', broken@email, email@-email.com,correctemail@email.com,']
+            ],
+            [
+                ['correctemail1@email.com', 'correctemail2@email.com', 'correctemail3@email.com'],
+                ['correctemail1@email.com, correctemail2@email.com, correctemail3@email.com']
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider provideValidEmailsToArray
+     * Test that provided email is valid
+     */
+    public function testValidEmailsToArray(array $expectedOutput, array $input)
+    {
+        $class = new ReflectionClass(UserDefinedFormController::class);
+        $method = $class->getMethod('validEmailsToArray');
+        $method->setAccessible(true);
+
+        $controller = new UserDefinedFormController();
+
+        $this->assertEquals($expectedOutput, $method->invokeArgs($controller, $input));
     }
 }

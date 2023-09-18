@@ -16,6 +16,7 @@ class SubmittedFileFieldTest extends SapphireTest
 {
     protected $file;
     protected $submittedForm;
+    protected $submittedFile;
 
     protected function setUp(): void
     {
@@ -90,6 +91,7 @@ class SubmittedFileFieldTest extends SapphireTest
             ),
             $this->submittedFile->getFormattedValue()->value
         );
+        $this->logOut();
 
         // Logged in CMS user without permissions to view file in the CMS
         $this->logInWithPermission('CMS_ACCESS_CMSMain');
@@ -101,6 +103,7 @@ class SubmittedFileFieldTest extends SapphireTest
             ),
             $this->submittedFile->getFormattedValue()->value
         );
+        $this->logOut();
 
         // Logged in CMS user with permissions to view file in the CMS
         $this->loginWithPermission('ADMIN');

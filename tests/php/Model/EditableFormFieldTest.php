@@ -14,8 +14,6 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\Dev\Deprecation;
 use SilverStripe\UserForms\Model\EditableCustomRule;
 
 /**
@@ -60,38 +58,6 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertTrue($text->canView());
         $this->assertFalse($text->canEdit());
         $this->assertFalse($text->canDelete());
-    }
-
-    public function testCustomRules()
-    {
-        if (Deprecation::isEnabled()) {
-            $this->markTestSkipped('Test calls deprecated code');
-        }
-        $this->logInWithPermission('ADMIN');
-        $form = $this->objFromFixture(UserDefinedForm::class, 'custom-rules-form');
-
-        $checkbox = $form->Fields()->find('ClassName', EditableCheckbox::class);
-        $field = $form->Fields()->find('ClassName', EditableTextField::class);
-
-        $rules = $checkbox->DisplayRules();
-
-        // form has 2 fields - a checkbox and a text field
-        // it has 1 rule - when ticked the checkbox hides the text field
-        $this->assertEquals(1, $rules->Count());
-
-        // EffectiveDisplayRules rule has been deprecated
-        $this->assertEquals($rules, $checkbox->EffectiveDisplayRules());
-
-        $checkboxRule = $rules->First();
-        $checkboxRule->ConditionFieldID = $field->ID;
-
-        $this->assertEquals($checkboxRule->Display, 'Hide');
-        $this->assertEquals($checkboxRule->ConditionOption, 'HasValue');
-        $this->assertEquals($checkboxRule->FieldValue, '6');
-
-        // If field is required then all custom rules are disabled
-        $checkbox->Required = true;
-        $this->assertEquals(0, $checkbox->EffectiveDisplayRules()->count());
     }
 
     public function testEditableOptionEmptyValue()
