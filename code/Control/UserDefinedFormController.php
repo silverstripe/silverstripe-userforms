@@ -316,7 +316,7 @@ JS
                         }
 
                         $stage = $this->config()->get('file_upload_stage');
-                        $file = Versioned::withVersionedMode(function () use ($field, $form, $stage) {                    
+                        $file = Versioned::withVersionedMode(function () use ($field, $form, $stage) {
                             Versioned::set_stage($stage);
 
                             $foldername = $field->getFormField()->getFolderName();
