@@ -61,7 +61,6 @@ class EditableCheckboxGroupField extends EditableMultipleOptionField
     public function getSelectorField(EditableCustomRule $rule, $forOnLoad = false)
     {
         // watch out for checkboxs as the inputs don't have values but are 'checked
-        // @todo - Test this
         if ($rule->FieldValue) {
             return "$(\"input[name='{$this->Name}[]'][value='{$rule->FieldValue}']\")";
         } else {

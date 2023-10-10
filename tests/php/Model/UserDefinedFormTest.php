@@ -49,7 +49,6 @@ class UserDefinedFormTest extends FunctionalTest
             'UserDefinedForm::rollback() has not been implemented completely'
         );
 
-        // @todo
         $this->logInWithPermission('ADMIN');
         /** @var UserDefinedForm|Versioned $form  */
         $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
