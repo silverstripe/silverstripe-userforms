@@ -135,8 +135,6 @@ class UserForm extends Form
      * can manipulate these by using {@link updateFormActions()} on
      * a decorator.
      *
-     * @todo Make form actions editable via their own field editor.
-     *
      * @return FieldList
      */
     public function getFormActions()

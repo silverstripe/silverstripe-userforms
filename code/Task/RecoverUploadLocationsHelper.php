@@ -447,8 +447,6 @@ class RecoverUploadLocationsHelper
                     '"SubmittedFileFieldTable"."UploadedFileID" > ?' => $greaterThanID
                 ])->execute();
 
-            // TODO: Versioned::prepopulate_versionnumber_cache
-
             foreach ($chunk as $item) {
                 yield $item;
                 $greaterThanID = $item['UploadedFileID'];
