@@ -177,7 +177,7 @@ class EmailRecipient extends DataObject
         }
 
         // Revert to checking for a form from the session
-        // LeftAndMain::sessionNamespace is protected. @todo replace this with a non-deprecated equivalent.
+        // LeftAndMain::sessionNamespace is protected.
         $sessionNamespace = $this->config()->get('session_namespace') ?: CMSMain::class;
 
         $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
