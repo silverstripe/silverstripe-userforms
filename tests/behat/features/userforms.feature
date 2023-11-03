@@ -66,6 +66,7 @@ Feature: Userforms
     # Drag and drop my text field 2 to Page Two
     Then I drag the ".ss-gridfield-item[data-id='4'] .handle" element to the ".ss-gridfield-item[data-id='6'] .handle" element
     And I press the "Publish" button
+    And I wait for 5 seconds
 
     # Add email recipient with custom text and custom rules
     When I click the "Recipients" CMS tab
