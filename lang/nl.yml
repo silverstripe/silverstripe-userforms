@@ -33,6 +33,7 @@ nl:
     ADD_FIELD_GROUP: 'Veldengroep toevoegen'
     ADD_PAGE_BREAK: 'Nieuwe pagina toevoegen'
     FORMFIELDS: Velden
+    has_many_Fields: Velden
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Het verplichte veld ''{}'' kan niet in een optionele pagina geplaatst worden'
     NO_PAGE: 'Veld ''{}'' staat vóór eerste pagina'
@@ -52,6 +53,7 @@ nl:
       one: Voorwaarde
       other: '{count} voorwaarden'
     SINGULARNAME: Voorwaarden
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Standaard aanvinken'
     CUSTOMERROR: 'Aangepaste foutmelding'
@@ -90,6 +92,7 @@ nl:
     db_RightTitle: 'Titel rechts'
     db_Sort: Volgorde
     db_Title: Titel
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkbox
     PLURALS:
@@ -123,6 +126,7 @@ nl:
       one: 'Een keuzelijst'
       other: '{count} Keuzelijsten'
     SINGULARNAME: Keuzelijst
+    db_EmptyString: 'Waarde bij leeg'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'E-mail veld'
     PLURALS:
@@ -220,6 +224,7 @@ nl:
     db_Sort: Volgorde
     db_Title: Titel
     db_Value: Waarde
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Keuzerondje velden'
     PLURALS:
@@ -262,6 +267,7 @@ nl:
       one: 'Voorwaarde voor versturen'
       other: '{count} Voorwaarden voor versturen'
     SINGULARNAME: 'Voorwaarde voor versturen'
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
     INSUFFICIENTRIGHTS: 'Je hebt onvoldoende rechten om dit bestand te downloaden'
@@ -277,6 +283,7 @@ nl:
       other: '{count} Ingestuurde formulieren'
     SINGULARNAME: 'Ingestuurd formulier'
     SUBMITTER: 'Ingelogde afzender'
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Ingestuurde formuliervelden'
     PLURALS:
@@ -286,6 +293,7 @@ nl:
     db_Name: Naam
     db_Title: Titel
     db_Value: Waarde
+    has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
     CLEARBUTTON: Wissen
@@ -341,4 +349,5 @@ nl:
     TYPETO: 'Typ het e-mailadres...'
     UnrestrictedFileUploadWarning: 'Toegang tot de ingestelde map "{path}" is niet afgeschermd. Ingezonden bestanden zijn daarmee publiek toegankelijk, als de URL geraden wordt.'
     db_EnableLiveValidation: 'Real-time validatie aanzetten'
+    has_many_Fields: Velden
     has_many_Submissions: Inzendingen
