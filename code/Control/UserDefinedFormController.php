@@ -355,7 +355,8 @@ JS
 
                         // attach a file to recipient email only if lower than configured size
                         if ($file->getAbsoluteSize() <= $this->getMaximumAllowedEmailAttachmentSize()) {
-                            $attachments[] = $file;
+                            // using the field name as array index is fine as file upload field only allows one file
+                            $attachments[$field->Name] = $file;
                         }
                     }
                 }
@@ -393,17 +394,22 @@ JS
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments && (bool) $recipient->HideFormData === false) {
-                    foreach ($attachments as $file) {
+                    foreach ($attachments as $uploadFieldName => $file) {
                         /** @var File $file */
                         if ((int) $file->ID === 0) {
                             continue;
                         }
 
-                        $email->addAttachmentFromData(
-                            $file->getString(),
-                            $file->getFilename(),
-                            $file->getMimeType()
-                        );
+                        $canAttachFileForRecipient = true;
+                        $this->extend('updateCanAttachFileForRecipient', $canAttachFileForRecipient, $recipient, $uploadFieldName, $file);
+
+                        if ($canAttachFileForRecipient) {
+                            $email->addAttachmentFromData(
+                                $file->getString(),
+                                $file->getFilename(),
+                                $file->getMimeType()
+                            );
+                        }
                     }
                 }
 
