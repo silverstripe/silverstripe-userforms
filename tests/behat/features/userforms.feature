@@ -56,7 +56,10 @@ Feature: Userforms
     # Click save on the file upload modal to use the default "Form-submissions" folder
     And I press the "Save and continue" button
     And I wait for 5 seconds
-    And I press the "Save" button
+    And I select "File Upload Field" from the "Form_Fields_GridFieldEditableColumns_7_ClassName" field
+    And I press the "Save and continue" button
+    And I wait for 5 seconds
+    And I press the "Publish" button
 
     # Edit My textfield 3
     When I click on the ".ss-gridfield-item[data-id='6'] .edit-link" element
