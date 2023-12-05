@@ -8,6 +8,7 @@ Feature: Userforms
     And the "group" "ADMIN group" has permissions "Full administrative rights"
     And a "group" "ADMIN group" has the "Code" "administrators"
 
+@sboyd
   Scenario: Operate userforms
     Given I am logged in as a member of "EDITOR" group
     When I go to "/admin/pages"
@@ -50,14 +51,13 @@ Feature: Userforms
     And I fill in "Form_Fields_GridFieldEditableColumns_7_Title" with "My upload field"
     # Weird behat limitation where the only the select field on the first row is selectable
     And I drag the ".ss-gridfield-item[data-id='7'] .handle" element to the ".ss-gridfield-item[data-id='2'] .handle" element
-    And I select "File Upload Field" from the "Form_Fields_GridFieldEditableColumns_7_ClassName" field
+    And I wait for 1 seconds
     # Click save on the file upload modal to use the default "Form-submissions" folder
-    And I press the "Save and continue" button
-    And I wait for 5 seconds
     And I select "File Upload Field" from the "Form_Fields_GridFieldEditableColumns_7_ClassName" field
     And I press the "Save and continue" button
-    And I wait for 5 seconds
+    And I wait for 2 seconds
     And I press the "Publish" button
+    And I wait for 5 seconds
 
     # Edit My textfield 3
     When I click on the ".ss-gridfield-item[data-id='6'] .edit-link" element
@@ -68,6 +68,7 @@ Feature: Userforms
 
     # Drag and drop my text field 2 to Page Two
     Then I drag the ".ss-gridfield-item[data-id='4'] .handle" element to the ".ss-gridfield-item[data-id='6'] .handle" element
+    And I wait for 1 seconds
     And I press the "Publish" button
     And I wait for 5 seconds
 
