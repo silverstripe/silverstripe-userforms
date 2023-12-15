@@ -28,7 +28,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
  * @property int $FolderConfirmed
  * @property int $FolderID
  * @property float $MaxFileSizeMB
- * @method Folder Folder
+ * @method Folder Folder()
  */
 class EditableFileField extends EditableFormField
 {

@@ -28,7 +28,7 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 /**
- * @method DataList|EditableFormField[] Fields()
+ * @method SilverStripe\ORM\HasManyList<EditableFormField> Fields()
  */
 class UserFormFieldEditorExtension extends DataExtension
 {

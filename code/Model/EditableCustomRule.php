@@ -20,8 +20,8 @@ use SilverStripe\Versioned\Versioned;
  * @property string $Display
  * @property string $FieldValue
  * @property int $ParentID
- * @method EditableFormField Parent()
  * @method EditableFormField ConditionField()
+ * @method EditableFormField Parent()
  */
 class EditableCustomRule extends DataObject
 {

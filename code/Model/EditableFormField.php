@@ -57,9 +57,9 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
  * @property int $ShowInSummary
  * @property int $ShowOnLoad
  * @property int $Sort
- * @method UserDefinedForm Parent() Parent page
- * @method HasManyList|EditableCustomRule[] DisplayRules() List of EditableCustomRule objects
  * @mixin Versioned
+ * @method HasManyList<EditableCustomRule> DisplayRules()
+ * @method DataObject Parent()
  */
 class EditableFormField extends DataObject
 {

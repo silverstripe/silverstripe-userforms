@@ -12,7 +12,7 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Specifies that this ends a group of fields
  *
  * @property int $EditableFieldGroupEndID
- * @method EditableFieldGroupEnd EditableFieldGroupEnd()
+ * @method EditableFieldGroupEnd End()
  */
 class EditableFieldGroup extends EditableFormField
 {
