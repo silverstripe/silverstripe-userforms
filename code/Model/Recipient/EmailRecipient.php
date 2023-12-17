@@ -62,7 +62,7 @@ use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
  * @property int $SendEmailFromFieldID
  * @property int $SendEmailSubjectFieldID
  * @property int $SendEmailToFieldID
- * @method HasManyList|EmailRecipientCondition[] CustomRules()
+ * @method HasManyList<EmailRecipientCondition> CustomRules()
  * @method DataObject Form()
  * @method EditableFormField SendEmailFromField()
  * @method EditableFormField SendEmailSubjectField()

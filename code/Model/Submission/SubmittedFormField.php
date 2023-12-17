@@ -13,6 +13,7 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * @package userforms
  * @property string $Name
  * @property string $Value
+ * @method SubmittedForm Parent()
  */
 class SubmittedFormField extends DataObject
 {

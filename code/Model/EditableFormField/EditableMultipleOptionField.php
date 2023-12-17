@@ -31,7 +31,7 @@ use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
  * @see EditableDropdownField
  *
  * @package userforms
- * @method HasManyList|EditableOption[] Options()
+ * @method HasManyList<EditableOption> Options()
  */
 class EditableMultipleOptionField extends EditableFormField
 {
