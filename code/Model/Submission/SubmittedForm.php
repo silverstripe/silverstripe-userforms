@@ -39,7 +39,7 @@ class SubmittedForm extends DataObject
     ];
 
     private static $summary_fields = [
-        'ID'
+        'ID',
         'Created.Nice' => 'Created'
     ];
 
