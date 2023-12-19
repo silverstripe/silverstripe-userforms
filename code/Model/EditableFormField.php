@@ -29,7 +29,6 @@ use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
-use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
