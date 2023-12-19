@@ -39,7 +39,7 @@ class SubmittedForm extends DataObject
     ];
 
     private static $summary_fields = [
-        'ID' => 'ID',
+        'ID'
         'Created.Nice' => 'Created'
     ];
 
@@ -100,12 +100,6 @@ class SubmittedForm extends DataObject
                 ReadonlyField::create('Submitter', _t(__CLASS__ . '.SUBMITTER', 'Submitter'), $submitter)
                     ->addExtraClass('form-field--no-divider')
             );
-
-            $fields->insertAfter('Submitter', ReadonlyField::create('Created', _t(__CLASS__ . '.CREATED', 'Created'), $this->Created)
-                                       ->addExtraClass('form-field--no-divider'));
-
-            $fields->insertAfter('Created', ReadonlyField::create('LastEdited', _t(__CLASS__ . '.LASTEDITED', 'Last changed'), $this->LastEdited)
-                                       ->addExtraClass('form-field--no-divider'));
 
             $values = GridField::create(
                 'Values',
