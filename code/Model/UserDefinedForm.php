@@ -9,6 +9,8 @@ use SilverStripe\UserForms\Control\UserDefinedFormController;
 
 /**
  * @package userforms
+ * @method SilverStripe\ORM\HasManyList<SilverStripe\UserForms\Model\Recipient\EmailRecipient> EmailRecipients()
+ * @method SilverStripe\ORM\HasManyList<SilverStripe\UserForms\Model\Submission\SubmittedForm> Submissions()
  */
 class UserDefinedForm extends Page
 {

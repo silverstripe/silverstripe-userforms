@@ -16,8 +16,8 @@ use SilverStripe\Versioned\Versioned;
  * @property int $ParentID
  * @property int $Sort
  * @property string $Value
- * @method EditableMultipleOptionField Parent()
  * @mixin Versioned
+ * @method EditableMultipleOptionField Parent()
  */
 class EditableOption extends DataObject
 {

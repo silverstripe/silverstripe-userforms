@@ -14,7 +14,7 @@ use SilverStripe\Versioned\Versioned;
 
 /**
  * @property string $UserFormUpload
- * @method File SubmittedFileField
+ * @method SubmittedFileField SubmittedFileField()
  */
 class UserFormFileExtension extends DataExtension
 {
