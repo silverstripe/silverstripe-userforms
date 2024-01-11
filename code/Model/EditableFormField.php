@@ -950,10 +950,8 @@ class EditableFormField extends DataObject
         ];
 
         // Check for field dependencies / default
-        /** @var EditableCustomRule $rule */
         foreach ($this->DisplayRules() as $rule) {
             // Get the field which is effected
-            /** @var EditableFormField $formFieldWatch */
             $formFieldWatch = DataObject::get_by_id(EditableFormField::class, $rule->ConditionFieldID);
             // Skip deleted fields
             if (!$formFieldWatch) {

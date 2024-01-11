@@ -40,7 +40,6 @@ abstract class UserFormsCompositeField extends CompositeField implements UserFor
         if (get_class($field) === EditableFormField::class || !$field->getFormField()) {
             return $this;
         }
-        /** @var EditableFormField $formField */
         $formField = $field->getFormField();
 
         // Save this field

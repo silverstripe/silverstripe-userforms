@@ -48,7 +48,7 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
     /**
      * Get some placeholder field values to display in the preview
      *
-     * @return ArrayList
+     * @return ArrayList<ArrayData>
      */
     protected function getPreviewFieldData()
     {

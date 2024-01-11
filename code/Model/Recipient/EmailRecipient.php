@@ -464,7 +464,6 @@ class EmailRecipient extends DataObject
         // Check all rules
         $isAnd = $this->CustomRulesCondition === 'And';
         foreach ($customRules as $customRule) {
-            /** @var EmailRecipientCondition  $customRule */
             $matches = $customRule->matches($data);
             if ($isAnd && !$matches) {
                 return false;
@@ -715,7 +714,7 @@ class EmailRecipient extends DataObject
     }
 
     /**
-     * @return DataList|null
+     * @return DataList<EditableMultipleOptionField>|null
      */
     protected function getMultiOptionFields()
     {
@@ -726,7 +725,7 @@ class EmailRecipient extends DataObject
     }
 
     /**
-     * @return ArrayList|null
+     * @return ArrayList<EditableFormField>|null
      */
     protected function getValidSubjectFields()
     {
@@ -745,7 +744,7 @@ class EmailRecipient extends DataObject
     }
 
     /**
-     * @return DataList|null
+     * @return DataList<EditableEmailField>|null
      */
     protected function getValidEmailFromFields()
     {
@@ -758,7 +757,7 @@ class EmailRecipient extends DataObject
     }
 
     /**
-     * @return ArrayList|DataList|null
+     * @return ArrayList<EditableFormField>|DataList<EditableFormField>|null
      */
     protected function getValidEmailToFields()
     {

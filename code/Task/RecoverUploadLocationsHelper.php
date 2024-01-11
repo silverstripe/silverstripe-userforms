@@ -560,7 +560,7 @@ limit 100
      * Returns DataList object containing every
      * uploaded file record
      *
-     * @return DataList
+     * @return DataList<SubmittedFileField>
      */
     private function getCountQuery()
     {

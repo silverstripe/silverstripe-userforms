@@ -38,7 +38,7 @@ use Swift_RfcComplianceException;
 /**
  * Controller for the {@link UserDefinedForm} page type.
  *
- * @package userforms
+ * @extends PageController<UserDefinedForm>
  */
 class UserDefinedFormController extends PageController
 {
@@ -200,7 +200,6 @@ class UserDefinedFormController extends PageController
         $watch = [];
 
         if ($formFields) {
-            /** @var EditableFormField $field */
             foreach ($formFields as $field) {
                 if ($result = $field->formatDisplayRules()) {
                     $watch[] = $result;

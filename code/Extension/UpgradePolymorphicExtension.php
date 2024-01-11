@@ -23,6 +23,8 @@ use SilverStripe\UserForms\UserForm;
  * certain amount of manual checking is required to ensure that upgrades are performed smoothly.
  *
  * @internal This API is likely to be removed in later major versions of silverstripe/userforms
+ *
+ * @extends DataExtension<UserDefinedForm>
  */
 class UpgradePolymorphicExtension extends DataExtension
 {
