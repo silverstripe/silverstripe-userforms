@@ -350,7 +350,7 @@ SQL;
      * Converts the RelationList to an ArrayList so that manipulation
      * of the original source data isn't possible.
      *
-     * @return ArrayList
+     * @return ArrayList<EmailRecipient>
      */
     public function FilteredEmailRecipients($data = null, $form = null)
     {

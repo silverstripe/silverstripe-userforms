@@ -10,11 +10,12 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Queries\SQLUpdate;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
-use SilverStripe\Versioned\Versioned;
 
 /**
  * @property string $UserFormUpload
  * @method SubmittedFileField SubmittedFileField()
+ *
+ * @extends DataExtension<File&static>
  */
 class UserFormFileExtension extends DataExtension
 {
@@ -45,7 +46,6 @@ class UserFormFileExtension extends DataExtension
      */
     public function updateTrackedFormUpload(&$value): void
     {
-        /** @var File|Versioned|UserFormFileExtension $file */
         $file = $this->owner;
         if ($file->UserFormUpload != self::USER_FORM_UPLOAD_UNKNOWN) {
             $value = $file->UserFormUpload == self::USER_FORM_UPLOAD_TRUE;

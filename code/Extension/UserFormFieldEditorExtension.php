@@ -15,6 +15,7 @@ use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\UserForms\Form\GridFieldAddClassesButton;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
@@ -228,11 +229,11 @@ class UserFormFieldEditorExtension extends DataExtension
     /**
      * When duplicating a UserDefinedForm, duplicate all of its fields and display rules
      *
-     * @see \SilverStripe\ORM\DataObject::duplicate
-     * @param \SilverStripe\ORM\DataObject $oldPage
+     * @see DataObject::duplicate
+     * @param DataObject $oldPage
      * @param bool $doWrite
      * @param string $manyMany
-     * @return \SilverStripe\ORM\DataObject
+     * @return DataObject
      */
     public function onAfterDuplicate($oldPage, $doWrite, $manyMany)
     {

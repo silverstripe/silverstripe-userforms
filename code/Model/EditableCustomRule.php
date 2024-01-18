@@ -152,7 +152,6 @@ class EditableCustomRule extends DataObject
      */
     public function buildExpression()
     {
-        /** @var EditableFormField $formFieldWatch */
         $formFieldWatch = $this->ConditionField();
         //Encapsulated the action to the object
         $action = $formFieldWatch->getJsEventHandler();

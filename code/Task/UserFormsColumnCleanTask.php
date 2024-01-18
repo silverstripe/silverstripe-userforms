@@ -30,7 +30,6 @@ class UserFormsColumnCleanTask extends MigrationTask
      */
     public function run($request)
     {
-        /** @var \SilverStripe\ORM\DataObjectSchema $schema */
         $schema = DataObject::getSchema();
 
         foreach ($this->tables as $db) {

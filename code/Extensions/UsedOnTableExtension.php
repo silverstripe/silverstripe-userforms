@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Extensions;
 
+use SilverStripe\Admin\Forms\UsedOnTable;
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\UserForms\Model\EditableFormField;
@@ -11,10 +12,11 @@ use SilverStripe\UserForms\Model\UserDefinedForm;
 
 /**
  * Update DataObjects on the file "Used On" table
+ *
+ * @extends Extension<UsedOnTable>
  */
 class UsedOnTableExtension extends Extension
 {
-
     /**
      * Link submitted file fields to their parent page
      *
@@ -26,7 +28,6 @@ class UsedOnTableExtension extends Extension
         if (!($dataObject instanceof SubmittedFileField)) {
             return;
         }
-        /** @var SubmittedForm $submittedForm */
         $submittedForm = $dataObject->Parent();
         if (!$submittedForm) {
             $dataObject = null;
