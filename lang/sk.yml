@@ -42,6 +42,7 @@ sk:
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Vlastné pravidlá'
     SINGULARNAME: 'Vlastne pravidlo'
+    db_Version: Verzia
     has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Zaškrtnuté v predvolenom režime?'
@@ -73,6 +74,7 @@ sk:
     db_RightTitle: 'Popis vpravo'
     db_Sort: Usporiadanie
     db_Title: Názov
+    db_Version: Verzia
     has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Zaškrtávacie polia (checkbox)'
@@ -148,6 +150,7 @@ sk:
     db_Sort: Usporiadanie
     db_Title: Názov
     db_Value: Hodnota
+    db_Version: Verzia
     has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Prepínacie polia (radio)'
