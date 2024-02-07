@@ -96,11 +96,10 @@ This decides whether to send the email based on two options
 
 ## File Upload Field
 
-[note]
-This functionality is specifically included in Silverstripe core functionality 4.6 and above,
-[silverstripe-userforms](https://github.com/silverstripe/silverstripe-userforms/) 5.3 and above and is also included in
-the module [silverstripe-elemental-userforms](https://github.com/dnadesign/silverstripe-elemental-userforms).
-[/note]
+> [!NOTE]
+> This functionality is specifically included in Silverstripe core functionality 4.6 and above,
+> [silverstripe-userforms](https://github.com/silverstripe/silverstripe-userforms/) 5.3 and above and is also included in
+> the module [silverstripe-elemental-userforms](https://github.com/dnadesign/silverstripe-elemental-userforms).
 
 Files and other data that is uploaded by your website visitors should be handled with care to reduce the risk of exposing sensitive data.
 Files which are uploaded through a form inherit the permissions of the folder they are being placed into, so it's important that you
@@ -131,10 +130,9 @@ Indicates that a file/folder has restricted access and will only be visible to c
 
 ![Overview of icons usage on thumbnails and headers in the Files area](_images/overview-icons.png)
 
-[note]
-Folder with restricted access containing files with custom permissions and their associated file icons.
-* FS - Form submission
-[/note]
+> [!NOTE]
+> Folder with restricted access containing files with custom permissions and their associated file icons.
+> * FS - Form submission
 
 To get started, create a new **User Defined Form** page in the CMS. See [Creating and editing forms](creating-and-editing-forms)
 to learn more. To add a File Upload field to the form, click on the ***Form Fields*** tab in the page editing view.
