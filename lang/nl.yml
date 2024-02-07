@@ -9,7 +9,7 @@ nl:
     DISABLECSRFSECURITYTOKEN: 'CSRF-token uitschakelen'
     DISPLAYERRORMESSAGESATTOP: 'Toon foutmeldingen bovenaan het formulier'
     ENABLELIVEVALIDATION: 'Zet real-time validatie aan'
-    NORECIPIENTS: 'Let op: Er zijn geen ontvangers ingesteld, mogelijk mist u hiermee inzendingen.'
+    NORECIPIENTS: 'Let op: Er zijn geen ontvangers ingesteld, mogelijk mis je hiermee inzendingen.'
     ONCOMPLETELABEL: 'Toon wanneer gereed'
     RECIPIENTS: Ontvangers
     SAVESUBMISSIONS: 'Formulier-inzendingen niet opslaan in het CMS'
@@ -34,6 +34,9 @@ nl:
     ADD_PAGE_BREAK: 'Nieuwe pagina toevoegen'
     FORMFIELDS: Velden
     has_many_Fields: Velden
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Geupload-bestand veld'
+    db_UserFormUpload: 'Zelf-instelbaar formulier upload'
   SilverStripe\UserForms\Extension\UserFormValidator:
     CONDITIONAL_REQUIRED: 'Het verplichte veld ''{}'' kan niet in een optionele pagina geplaatst worden'
     NO_PAGE: 'Veld ''{}'' staat vóór eerste pagina'
@@ -53,6 +56,11 @@ nl:
       one: Voorwaarde
       other: '{count} voorwaarden'
     SINGULARNAME: Voorwaarden
+    db_ConditionOption: 'Optionele keuze'
+    db_Display: Weergeven
+    db_FieldValue: 'Veld waarde'
+    db_Version: Versie
+    has_one_ConditionField: 'Optioneel veld'
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Standaard aanvinken'
@@ -87,11 +95,20 @@ nl:
     TYPE_EMPTY: 'Kies soort veld'
     VALIDATION: Validatie
     'YES': Ja
+    db_CustomErrorMessage: 'Eigen foutmelding'
+    db_Default: Standaard
+    db_DisplayRulesConjunction: 'Weergave regels samenvoeging'
+    db_ExtraClass: 'Extra class'
     db_Name: Naam
     db_Placeholder: Placeholder
+    db_Required: Verplicht
     db_RightTitle: 'Titel rechts'
+    db_ShowInSummary: 'Toon in overzicht'
+    db_ShowOnLoad: 'Toon bij laden'
     db_Sort: Volgorde
     db_Title: Titel
+    db_Version: Versie
+    has_many_DisplayRules: 'Weergave regels'
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Checkbox
@@ -99,6 +116,7 @@ nl:
       one: Checkbox
       other: '{count} checkboxes'
     SINGULARNAME: Checkbox
+    db_CheckedDefault: 'Standaard aangevinkt'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
     PLURALNAME: 'Checkbox groep'
     PLURALS:
@@ -114,12 +132,15 @@ nl:
       other: '{count} Keuzelijsten van landen'
     SINGULARNAME: 'Keuzelijst landen'
     USE_EMPTY_STRING: 'Toestaan om geen keuze te maken?'
+    db_EmptyString: 'Waarde bij leeg'
+    db_UseEmptyString: 'Gebruik lege waarde'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: Datumvelden
     PLURALS:
       one: 'Een datumveld'
       other: '{count} datumvelden'
     SINGULARNAME: 'Datum veld'
+    db_DefaultToToday: 'Standaard op vandaag'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: Keuzelijsten
     PLURALS:
@@ -127,6 +148,7 @@ nl:
       other: '{count} Keuzelijsten'
     SINGULARNAME: Keuzelijst
     db_EmptyString: 'Waarde bij leeg'
+    db_UseEmptyString: 'Gebruik lege waarde'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'E-mail veld'
     PLURALS:
@@ -139,6 +161,7 @@ nl:
       one: 'Een veldengroep'
       other: '{count} veldengroepen'
     SINGULARNAME: Veldengroep
+    has_one_End: Einde
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_END: '{group} einde'
     FIELD_GROUP_START: 'Groep {group}'
@@ -158,7 +181,9 @@ nl:
       one: Uploadveld
       other: '{count} Uploadvelden'
     SELECTUPLOADFOLDER: 'Selecteer upload-locatie'
-    SINGULARNAME: 'Uploaden veld'
+    SINGULARNAME: Upload-veld
+    db_FolderConfirmed: 'Folder bevestigd'
+    db_MaxFileSizeMB: 'Max grootte MB'
     has_one_Folder: Map
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Kies grootte van kopje'
@@ -167,6 +192,8 @@ nl:
       one: 'Een kopje'
       other: '{count} kopje'
     SINGULARNAME: Kopje
+    db_HideFromReports: 'Verberg van rapporten'
+    db_Level: Level
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     PLURALNAME: 'Nieuwe pagina'
     PLURALS:
@@ -187,6 +214,8 @@ nl:
       other: '{count} HTML blok'
     SINGULARNAME: 'HTML blok'
     db_Content: Inhoud
+    db_HideFromReports: 'Verberg van rapporten'
+    db_HideLabel: 'Verberg label'
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ledenlijst velden'
     PLURALS:
@@ -214,16 +243,20 @@ nl:
     RANGE: 'Toegestane numerieke waarden'
     RANGE_TO: tot
     SINGULARNAME: 'Getal veld'
+    db_MaxValue: 'Max waarde'
+    db_MinValue: 'Minimale waarde'
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Bewerkbare opties'
     PLURALS:
       one: 'Bewerkbare optie'
       other: '{count} Bewerkbare opties'
     SINGULARNAME: 'Bewerkbare opties'
+    db_Default: Standaard
     db_Name: Naam
     db_Sort: Volgorde
     db_Title: Titel
     db_Value: Waarde
+    db_Version: Versie
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Keuzerondje velden'
@@ -247,6 +280,9 @@ nl:
     SINGULARNAME: Tekstveld
     TEXTLENGTH: 'Tekst lengte'
     db_Autocomplete: 'Automatisch aanvullen'
+    db_MaxLength: 'Maximale lengte'
+    db_MinLength: 'Minimale lengte'
+    db_Rows: Rijen
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Voorwaarde voor versturen'
     EMAILCONTENTTAB: 'Inhoud e-mail'
@@ -258,15 +294,31 @@ nl:
       one: 'E-mail ontvanger'
       other: '{count} E-mail ontvangers'
     SINGULARNAME: 'E-mail ontvanger'
+    db_CustomRulesCondition: 'Voorwaardelijke regels'
     db_EmailAddress: E-mailadres
+    db_EmailBody: 'E-mail inhoud'
+    db_EmailBodyHtml: 'E-mail inhoud HTML'
+    db_EmailFrom: 'E-mail van'
+    db_EmailReplyTo: 'E-mail antwoord-aan'
     db_EmailSubject: E-mailonderwerp
     db_EmailTemplate: E-mailtemplate
+    db_HideFormData: 'Verberg formulierdata'
+    db_HideInvisibleFields: 'Verberg onzichtbare velden'
+    db_SendPlain: 'Verstuur als platte tekst'
+    has_many_CustomRules: 'Conditionele regels'
+    has_one_Form: Formulier
+    has_one_SendEmailFromField: 'Verstuur e-mail vanaf-veld'
+    has_one_SendEmailSubjectField: 'Verstuur e-mail onderwerp-veld'
+    has_one_SendEmailToField: 'Verstuur e-mail naar-veld'
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
     PLURALNAME: 'Voorwaarden voor versturen'
     PLURALS:
       one: 'Voorwaarde voor versturen'
       other: '{count} Voorwaarden voor versturen'
     SINGULARNAME: 'Voorwaarde voor versturen'
+    db_ConditionOption: 'Optionele keuze'
+    db_ConditionValue: 'Optionele waarde'
+    has_one_ConditionField: 'Optioneel veld'
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
@@ -276,6 +328,8 @@ nl:
       one: 'Ingestuurd bestandsveld'
       other: '{count} Ingestuurde bestandsvelden'
     SINGULARNAME: 'Ingestuurd bestand'
+    YOUMUSTBELOGGEDIN: 'Je moet ingelogd zijn om dit bestand te bekijken'
+    has_one_UploadedFile: 'Geüploade bestand'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Ingestuurde formulieren'
     PLURALS:
@@ -283,13 +337,16 @@ nl:
       other: '{count} Ingestuurde formulieren'
     SINGULARNAME: 'Ingestuurd formulier'
     SUBMITTER: 'Ingelogde afzender'
+    has_many_Values: Waarden
     has_one_Parent: Bovenliggende
+    has_one_SubmittedBy: 'Ingezonden door'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Ingestuurde formuliervelden'
     PLURALS:
       one: 'Ingestuurd formulierveld'
       other: '{count} Ingestuurde formuliervelden'
     SINGULARNAME: 'Ingestuurd formulierveld'
+    db_Displayed: Weergegeven
     db_Name: Naam
     db_Title: Titel
     db_Value: Waarde
@@ -314,7 +371,7 @@ nl:
     FROMADDRESS: 'E-mailadres afzender'
     HIDEFORMDATA: 'Verberg formulier-gegevens in de e-mail'
     HIDEINVISIBLEFIELDS: 'Niet-zichtbare velden verbergen in de e-mail'
-    NORECIPIENTS: 'Let op: Er zijn geen ontvangers ingesteld, mogelijk mist u hiermee inzendingen.'
+    NORECIPIENTS: 'Let op: Er zijn geen ontvangers ingesteld, mogelijk mis je hiermee inzendingen.'
     ONCOMPLETELABEL: 'Melding na succesvolle inzending'
     ONCOMPLETEMESSAGE: 'Bedankt voor uw inzending, deze is in goede orde ontvangen.'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoord-adres'
@@ -348,6 +405,15 @@ nl:
     TYPESUBJECT: 'Typ het onderwerp...'
     TYPETO: 'Typ het e-mailadres...'
     UnrestrictedFileUploadWarning: 'Toegang tot de ingestelde map "{path}" is niet afgeschermd. Ingezonden bestanden zijn daarmee publiek toegankelijk, als de URL geraden wordt.'
+    db_ClearButtonText: 'Knop om formulier te legen'
+    db_DisableAuthenicatedFinishAction: 'Uitschakelen bedanktpagina zonder insturen'
+    db_DisableCsrfSecurityToken: 'Uitschakelen CSRF token'
+    db_DisableSaveSubmissions: 'Uitschakelen opslaan inzendingen'
+    db_DisplayErrorMessagesAtTop: 'Toon fouten bovenaan formulier'
     db_EnableLiveValidation: 'Real-time validatie aanzetten'
+    db_OnCompleteMessage: 'Melding na inzenden'
+    db_ShowClearButton: 'Toon knop voor leegmaken formulier'
+    db_SubmitButtonText: 'Tekst op verstuurknop'
+    has_many_EmailRecipients: E-mailontvangers
     has_many_Fields: Velden
     has_many_Submissions: Inzendingen
