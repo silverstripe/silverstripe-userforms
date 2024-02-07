@@ -328,6 +328,7 @@ eo:
       one: 'Unu sendita dosiera kampo'
       other: '{count} senditaj dosieraj kampoj'
     SINGULARNAME: 'Kampo de sendita dosiero'
+    YOUMUSTBELOGGEDIN: 'Vi devas ensaluti por vidigi ĉi tiun dosieron.'
     has_one_UploadedFile: 'Alŝutita dosiero'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     PLURALNAME: 'Senditaj formularoj'
