@@ -1,1 +1,471 @@
-sl: {  }
+sl:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Osnovno
+  SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Dodaj prejemnika'
+    CLEARBUTTON: Ponastavi
+    CONFIGURATION: Nastavitve
+    DISABLEAUTHENICATEDFINISHACTION: 'Onemogoči avtentikacijo na koncu.'
+    DISABLECSRFSECURITYTOKEN: 'Onemogoči CSRF žeton'
+    DISPLAYERRORMESSAGESATTOP: 'Prikaži sporočila o napakah nad obrazcem?'
+    ENABLELIVEVALIDATION: 'Omogoči neposredno preverjanje'
+    NORECIPIENTS: 'Opozorilo: Niste nastavili prejemnikov. Posledično bodo lahko manjkali vnosi v obrazcu.'
+    ONCOMPLETELABEL: 'Prikaži ob zaključku'
+    RECIPIENTS: Prejemniki
+    SAVESUBMISSIONS: 'Onemogoči shranjevanje podatkov na strežnik'
+    SHOWCLEARFORM: 'Prikaži gumb za praznjenje obrazca'
+    SUBMISSIONS: 'Oddani obrazci'
+    SUBMITBUTTON: Oddaj
+    TEXTONCLEAR: 'Tekst na gumbu za čiščenje:'
+    TEXTONSUBMIT: 'Tekst na gumbu za oddajo:'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Prekliči
+    CONFIRM_FOLDER_LABEL_A: 'Da bi zmanjšali tveganje za razkritje občutljivih podatkov, morajo biti datoteke, ki jih uporabniki naložijo, skrbno shranjene. Poskrbite, da bo vaša izbrana mapa vidna le primernim uporabnikom. Dovoljenja za ogled datotek lahko urejate znotraj področja za datoteke.'
+    CONFIRM_FOLDER_LABEL_B: 'Izbrana mapa bo postala privzeta za ta obrazec. To lahko spremenite individualno v polju za nalaganje datotek.'
+    FOLDER_OPTIONS_EXISTING: 'Uporabi obstoječ direktorij'
+    FOLDER_OPTIONS_NEW: 'Ustvari nov direktorij (priporočeno)'
+    FOLDER_OPTIONS_TITLE: 'Možnosti oblikovanja mape'
+    FORM_ACTION_CONFIRM: 'Shrani in nadaljuj'
+    INVALID_REQUEST: 'Zahteva je neveljavna.'
+    MENUTITLE: Obrazec
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Dodaj polje'
+    ADD_FIELD_GROUP: 'Dodaj skupino polj'
+    ADD_PAGE_BREAK: 'Dodaj prelom strani'
+    FORMFIELDS: 'Polja v obrazcu'
+    has_many_Fields: Polja
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Polje za nalaganje datotek'
+    db_UserFormUpload: 'Nalaganje uporabniškega obrazca'
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: 'Obvezno polje ''{name}'' ne more biti umeščeno znotraj pogojene strani'
+    NO_PAGE: 'Polje ''{name}'' je pred katero koli stranjo'
+    UNEXPECTED_BREAK: 'Nepričakovan prelom strani ''{name}'' znotraj vgnezdenega polja ''{group}'''
+    UNEXPECTED_GROUP_END: '''{name}'' nima pripadajoče skupine'
+    WRONG_GROUP_END: '''{name}'' zapira napačno skupino ''{group}'''
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTER: Filter
+    FILTERSUBMISSIONS: 'Filtriraj predložitve.'
+    FROM: Od
+    RESET: Ponastavi
+    TILL: Do
+    WHEREVALUEIS: 'kjer je vrednost..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    PLURALNAME: 'Prilagojena pravila z možnostjo urejanja'
+    PLURALS:
+      few: '{count} prilagojenih pravil z možnostjo urejanja'
+      one: 'Prilagojeno pravilo z možnostjo urejanja'
+      other: '{count} prilagojenih pravil z možnostjo urejanja'
+      two: '{count} prilagojeni pravili z možnostjo urejanja'
+    SINGULARNAME: 'Prilagojeno pravilo z možnostjo urejanja'
+    db_ConditionOption: 'Izbira pogoja'
+    db_Display: Prikaz
+    db_FieldValue: 'Vrednost polja'
+    db_Version: Verzija
+    has_one_ConditionField: 'Polje za pogoj'
+    has_one_Parent: 'Nadrejeno pravilo'
+  SilverStripe\UserForms\Model\EditableFormField:
+    CHECKEDBYDEFAULT: 'Privzeto označeno?'
+    CUSTOMERROR: 'Prilagojeno sporočilo o napaki'
+    CUSTOMOPTIONS: Možnosti
+    CUSTOMRULES: 'Prilagojena pravila'
+    DEFAULT: 'Privzeta vrednost'
+    DEFAULTTOTODAY: 'Privzeto do danes?'
+    DISPLAYIF: 'Prikaži kadar'
+    EXTRACLASS_MULTIPLE: 'Loči vsak CSS razred z enim presledkom'
+    EXTRACLASS_SELECT: 'Izberi s seznama dovoljenih stilov'
+    EXTRACLASS_TITLE: 'Dodatno oblikovanje/prikaz'
+    EXTRACLASS_Title: 'Dodatni CSS razredi'
+    FIELDISREQUIRED: 'Polje {name} morate izpolniti'
+    GROUP: Skupina
+    INITIALVISIBILITY: 'Prvotna vidnost'
+    MERGEFIELDNAME: 'Združi polje'
+    NAME: Ime
+    'NO': Ne
+    PLACEHOLDER: 'Označba mesta'
+    PLURALNAME: 'Vnosna polja z možnostjo urejanja'
+    PLURALS:
+      few: '{count} vnosnih polj z možnostjo urejanja'
+      one: 'Vnosno polje z možnostjo urejanja'
+      other: '{count} vnosnih polj z možnostjo urejanja'
+      two: '{count} vnosni polji z možnostjo urejanja'
+    REQUIRED: 'Je to polje potrebno?'
+    REQUIRED_DESCRIPTION: 'Pozor, pogojena polja ne morejo biti obvezna'
+    RIGHTTITLE: 'Desni naslov'
+    SHOWINSUMMARY: 'Izpiši na seznamu s povzetki'
+    SINGULARNAME: 'Vnosno polje z možnostjo urejanja'
+    TITLE: Naziv
+    TYPE: Tip
+    TYPE_EMPTY: 'Izberite tip polja'
+    VALIDATION: Validacija
+    'YES': Da
+    db_CustomErrorMessage: 'Prilagojeno sporočilo o napaki'
+    db_Default: Privzeto
+    db_DisplayRulesConjunction: 'Prikaži povezavo pravil'
+    db_ExtraClass: 'Dodaten razred'
+    db_Name: Ime
+    db_Placeholder: 'Označba mesta'
+    db_Required: Obvezno
+    db_RightTitle: 'Desni naslov'
+    db_ShowInSummary: 'Izpiši v povzetku'
+    db_ShowOnLoad: 'Prikaži ob nalaganju'
+    db_Sort: Razvrščanje
+    db_Title: Naziv
+    db_Version: Verzija
+    has_many_DisplayRules: 'Prikaži pravila'
+    has_one_Parent: 'Nadrejeno pravilo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALNAME: 'Potrditvena polja'
+    PLURALS:
+      few: '{count} potrditvenih polj'
+      one: 'Potrditveno polje'
+      other: '{count} potrditvenih polj'
+      two: '{count} potrditveni polji'
+    SINGULARNAME: 'Potrditveno polje'
+    db_CheckedDefault: 'Privzeto označeno'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Skupine potrditvenih polj'
+    PLURALS:
+      few: '{count} skupin potrditvenih polj'
+      one: 'Skupine potrditvenih polj'
+      other: '{count} skupine potrditvenih polj'
+      two: '{count} skupini potrditvenih polj'
+    SINGULARNAME: 'Skupina potrditvenih polj'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Privzeta vrednost'
+    EMPTY_STRING: 'Prazna vrednost'
+    PLURALNAME: 'Spustni seznami držav'
+    PLURALS:
+      few: '{count} spustnih seznamov držav'
+      one: 'Spustni seznam držav'
+      other: '{count} spustnih seznamov držav'
+      two: '{count} spustna seznama držav'
+    SINGULARNAME: 'Spustni seznam držav'
+    USE_EMPTY_STRING: 'Nastavi privzeto prazno vrednost'
+    db_EmptyString: 'Prazna vrednost'
+    db_UseEmptyString: 'Uporabi prazno vrednost'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Datumska polja'
+    PLURALS:
+      few: '{count} datumskih polj'
+      one: 'Datumsko polje'
+      other: '{count} datumskih polj'
+      two: '{count} datumski polji'
+    SINGULARNAME: 'Datumsko polje'
+    db_DefaultToToday: 'Privzeto do danes'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALNAME: 'Spustni seznami'
+    PLURALS:
+      few: '{count} spustnih seznamov'
+      one: 'Spustni seznam'
+      other: '{count} spustnih seznamov'
+      two: '{count} spustna seznama'
+    SINGULARNAME: 'Spustni seznam'
+    db_EmptyString: 'Prazna vrednost'
+    db_UseEmptyString: 'Uporabi prazno vrednost'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'Polja za e-pošto'
+    PLURALS:
+      few: '{count} polj za e-pošto'
+      one: 'Polje za e-pošto'
+      other: '{count} polj za e-pošto'
+      two: '{count} polji za e-pošto'
+    SINGULARNAME: 'Polje za e-pošto'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Skupine polj z možnostjo urejanja'
+    PLURALS:
+      few: '{count} skupin polj z možnostjo urejanja'
+      one: 'Skupine polj z možnostjo urejanja'
+      other: '{count} skupin polj z možnostjo urejanja'
+      two: '{count} skupini polj z možnostjo urejanja'
+    SINGULARNAME: 'Skupina polj z možnostjo urejanja'
+    has_one_End: Zaključi
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: 'Zaključi {group}'
+    FIELD_GROUP_START: 'Skupina {group}'
+    PLURALNAME: 'Zaključki skupin z možnostjo urejanja'
+    PLURALS:
+      few: '{count} zaključkov skupin z možnostjo urejanja'
+      one: 'Zaključek skupin z možnostjo urejanja'
+      other: '{count} zaključkov skupin z možnostjo urejanja'
+      two: '{count} zaključka skupin z možnostjo urejanja'
+    SINGULARNAME: 'Zaključek skupin z možnostjo urejanja'
+    belongs_to_Group: Skupina
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    ANYONE: 'Neomejen dostop, prenosi bodi vidni vsem'
+    INHERIT: 'Vidnost mape je prevzeta od nadrejene mape'
+    LOGGED_IN: 'Omejen dostop, prenosi bodo vidni le prijavljenim uporabnikom'
+    ONLY_GROUPS: 'Omejen dostop, prenosi bodo vidni le naslednjim skupinam:'
+    PLURALNAME: 'Polja za nalaganje datotek'
+    PLURALS:
+      few: '{count} polj za nalaganje datotek'
+      one: 'Polja za nalaganje datotek'
+      other: '{count} polj za nalaganje datotek'
+      two: '{count} polji za nalaganje datotek'
+    SELECTUPLOADFOLDER: 'Izberite mapo za nalaganje'
+    SINGULARNAME: 'Polje za nalaganje datotek'
+    db_FolderConfirmed: 'Potrjena mapa'
+    db_MaxFileSizeMB: 'Največja dovoljena velikost datoteke v MB'
+    has_one_Folder: Mapa
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Izberite nivo poglavja'
+    PLURALNAME: Poglavja
+    PLURALS:
+      few: '{count} poglavij'
+      one: Poglavje
+      other: '{count} poglavij'
+      two: '{count} poglavji'
+    SINGULARNAME: Poglavje
+    db_HideFromReports: 'Izključi iz poročil'
+    db_Level: Nivo
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    PLURALNAME: 'Prelomi strani'
+    PLURALS:
+      few: '{count} prelomi strani'
+      one: 'Prelom strani'
+      other: '{count} prelomi strani'
+      two: '{count} preloma strani'
+    SINGULARNAME: 'Prelom strani'
+    STEP_NEXT: Naprej
+    STEP_PREV: Nazaj
+    STEP_TITLE: 'Stran {page}'
+    TITLE_FIRST: 'Prva stran'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    CONTENT: HTML
+    HIDEFROMREPORT: 'Izključi iz poročil?'
+    HIDELABEL: 'Skrij oznako ''Naslov'' na frontendu?'
+    PLURALNAME: 'HTML bloki'
+    PLURALS:
+      few: '{count} HTML blokov'
+      one: 'HTML blok'
+      other: '{count} HTML blokov'
+      two: '{count} HTML bloka'
+    SINGULARNAME: 'HTML blok'
+    db_Content: Vsebina
+    db_HideFromReports: 'Izključi iz poročil'
+    db_HideLabel: 'Skrij oznako'
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    PLURALNAME: 'Polja s seznamom članov'
+    PLURALS:
+      few: '{count} polj s seznamom članov'
+      one: 'Polje s seznamom članov'
+      other: '{count} polj s seznamom članov'
+      two: '{count} polji s seznamom članov'
+    SINGULARNAME: 'Polje s seznamom članov'
+    has_one_Group: Skupina
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    DEFAULT: 'Privzeto izbrano?'
+    OPTIONSTAB: Možnosti
+    PLURALNAME: 'Multiopcijska polja z možnostjo urejanja'
+    PLURALS:
+      few: '{count} multiopcijskih polj z možnostjo urejanja'
+      one: 'Multiopcijsko polje z možnostjo urejanja'
+      other: '{count} multiopcijskih polj z možnostjo urejanja'
+      two: '{count} multiopcijski polji z možnostjo urejanja'
+    SINGULARNAME: 'Multiopcijsko polje z možnostjo urejanja'
+    TITLE: Naziv
+    VALUE: Vrednost
+    has_many_Options: Možnosti
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    ORDER_WARNING: 'Minimalna dolžina mora biti manjša od maksimalne dolžine.'
+    PLURALNAME: 'Numerična polja'
+    PLURALS:
+      few: '{count} numeričnih polj'
+      one: 'Numerično polje'
+      other: '{count} numeričnih polj'
+      two: '{count} numerični polji'
+    RANGE: 'Dovoljen numerični razpon'
+    RANGE_TO: za
+    SINGULARNAME: 'Numerično polje'
+    db_MaxValue: 'Maximalna vrednost'
+    db_MinValue: 'Minimalna vrednost'
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Možnosti urejanja'
+    PLURALS:
+      few: '{count} možnosti urejanja'
+      one: 'Možnost urejanja'
+      other: '{count} možnosti urejanja'
+      two: '{count} možnosti urejanja'
+    SINGULARNAME: 'Možnost urejanja'
+    db_Default: Privzeto
+    db_Name: Ime
+    db_Sort: Razvrščanje
+    db_Title: Naziv
+    db_Value: Vrednost
+    db_Version: Verzija
+    has_one_Parent: 'Nadrejeno pravilo'
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
+    PLURALNAME: 'Izbirne skupine'
+    PLURALS:
+      few: '{count} izbirnih skupin'
+      one: 'Izbirna skupina'
+      other: '{count} izbirnih skupin'
+      two: '{count} izbirni skupini'
+    SINGULARNAME: 'Izbirna skupina'
+  SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: 'Samodejno izpolnjevanje'
+    AUTOCOMPLETE_DESCRIPTION: 'Podprti brskalniki bodo samodejno poskušali zapolniti to polje z uporabnikovimi informacijami, uporabite za nastavitev vrednosti kot zapolnjene'
+    MAX_LENGTH: 'Maksimalna dolžina teksta'
+    MINMAXLENGTHCHECK: 'Minimalna dolžina mora biti manjša od maksimalne dolžine.'
+    MIN_LENGTH: 'Minimalna dolžina teksta'
+    NUMBERROWS: 'Število vrstic'
+    NUMBERROWS_DESCRIPTION: 'Polja z več kot eno vrstico bodo generirana kot tekstovno področje'
+    PLURALNAME: 'Tekstovna polja'
+    PLURALS:
+      few: '{count} tekstovnih polj'
+      one: 'Tekstovno polje'
+      other: '{count} tekstovnih polj'
+      two: '{count} tekstovni polji'
+    RANGE_TO: za
+    SINGULARNAME: 'Tekstovno polje'
+    TEXTLENGTH: 'Dovoljena dolžina teksta'
+    db_Autocomplete: 'Samodejno izpolnjevanje'
+    db_MaxLength: 'Maximalna dolžina'
+    db_MinLength: 'Minimalna dolžina'
+    db_Rows: Vrstice
+  SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Prilagojena pravila'
+    EMAILCONTENTTAB: 'Vsebina e-sporočila'
+    EMAILDETAILSTAB: 'Podrobnosti e-sporočila'
+    EMAILFROMREQUIRED: '"Naslov pošiljatelja" je obvezen'
+    EMAILTOREQUIRED: '"Naslov prejemnika" je obvezen'
+    PLURALNAME: 'Prejemniki e-pošte'
+    PLURALS:
+      few: '{count} prejemnikov e-pošte'
+      one: 'Prejemnik e-pošte'
+      other: '{count} prejemnikov e-pošte'
+      two: '{count} prejemnika e-pošte'
+    SINGULARNAME: 'Prejemnik e-pošte'
+    db_CustomRulesCondition: 'Pogoj prilagojenih pravil'
+    db_EmailAddress: E-naslov
+    db_EmailBody: 'Vsebina e-sporočila'
+    db_EmailBodyHtml: 'Vsebina e-sporočila html'
+    db_EmailFrom: 'Pošiljatelj e-sporočila'
+    db_EmailReplyTo: 'Odgovor na e-sporočilo'
+    db_EmailSubject: 'Predmet e-sporočila'
+    db_EmailTemplate: 'Predloga e-sporočila'
+    db_HideFormData: 'Skrij podatke'
+    db_HideInvisibleFields: 'Skrij nevidna polja'
+    db_SendPlain: 'Pošlji navadno'
+    has_many_CustomRules: 'Prilagojena pravila'
+    has_one_Form: Obrazec
+    has_one_SendEmailFromField: 'Pošlji e-sporočilo iz polja'
+    has_one_SendEmailSubjectField: 'Pošlji polje za zadevo e-sporočila'
+    has_one_SendEmailToField: 'Pošlji e-sporočilo v polje'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'Pogoji prejemnika e-sporočila'
+    PLURALS:
+      few: '{count} pogojev prejemnika e-sporočila'
+      one: 'Pogoj prejemnika e-sporočila'
+      other: '{count} pogojev prejemnika e-sporočila'
+      two: '{count} pogoja prejemnika e-sporočila'
+    SINGULARNAME: 'Pogoj prejemnika e-sporočila'
+    db_ConditionOption: 'Izbira pogoja'
+    db_ConditionValue: 'Vrednost pogoja'
+    has_one_ConditionField: 'Polje za pogoj'
+    has_one_Parent: 'Nadrejeno pravilo'
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
+    DOWNLOADFILE: 'Prenesi datoteko'
+    INSUFFICIENTRIGHTS: 'Za prenos te datoteke nimate pravih pooblastil'
+    PLURALNAME: 'Polja za nalaganje datotek'
+    PLURALS:
+      few: '{count} polj za nalaganje datotek'
+      one: 'Polje za nalaganje datotek'
+      other: '{count} polj za nalaganje datotek'
+      two: '{count} polji za nalaganje datotek'
+    SINGULARNAME: 'Polje za nalaganje datotek'
+    YOUMUSTBELOGGEDIN: 'Za ogled te datoteke morate biti prijavljeni'
+    has_one_UploadedFile: 'Naložena datoteka'
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    PLURALNAME: 'Naložene datoteke'
+    PLURALS:
+      few: '{count} naloženih datotek'
+      one: 'Naložena datoteka'
+      other: '{count} naloženih datotek'
+      two: '{count} naloženi datoteki'
+    SINGULARNAME: 'Naložena datoteka'
+    SUBMITTER: Vlagatelj
+    has_many_Values: Vrednosti
+    has_one_Parent: 'Nadrejeno pravilo'
+    has_one_SubmittedBy: Naložil/-a
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    PLURALNAME: 'Polja za nalaganje obrazcev'
+    PLURALS:
+      few: '{count} Polj za nalaganje obrazcev'
+      one: 'Polje za nalaganje obrazcev'
+      other: '{count} Polj za nalaganje obrazcev'
+      two: '{count} Polji za nalaganje obrazcev'
+    SINGULARNAME: 'Polje za nalaganje obrazcev'
+    db_Displayed: Prikazano
+    db_Name: Ime
+    db_Title: Naziv
+    db_Value: Vrednost
+    has_one_Parent: 'Nadrejeno pravilo'
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    ADDEMAILRECIPIENT: 'Dodaj prejemnika'
+    CLEARBUTTON: Ponastavi
+    CONFIGURATION: Nastavitve
+    DESCRIPTION: 'Doda prilagojen obrazec.'
+    DISABLEAUTHENICATEDFINISHACTION: 'Onemogoči avtentikacijo na koncu.'
+    DISABLECSRFSECURITYTOKEN: 'Onemogoči CSRF žeton'
+    DISPLAYERRORMESSAGESATTOP: 'Prikaži sporočila o napakah nad obrazcem?'
+    EMAILADDRESS: E-pošta
+    EMAILBODY: Vsebina
+    EMAILBODYHTML: Vsebina
+    EMAILFROM: Od
+    EMAILSUBJECT: 'Predmet e-sporočila'
+    EMAILTEMPLATE: 'Predloga e-sporočila'
+    EMAIL_RECIPIENT_UNSAVED_FORM: 'Izbiranje med potrjenimi polji obrazca bo omogočeno po tem, ko boste shranili vnos.'
+    ENABLELIVEVALIDATION: 'Omogoči neposredno preverjanje'
+    EmailFromContent: 'Naslov vam omogoča nastavitev pošiljatelja e-pošte. Na večini strežnikov bo potrebno nastaviti e-poštni naslov na isti domeni kot vaše spletno mesto. Na primer, na vasastran.com bo potreben e-poštni naslov nekaj@vasastran.com. Lahko pa nastavite kateri koli e-poštni naslov kot odgovor za naslov.'
+    FROMADDRESS: 'Pošlji e-sporočilo od'
+    HIDEFORMDATA: 'Skrij podatke iz e-sporočila?'
+    HIDEINVISIBLEFIELDS: 'Skrij skrita polja v elektronskem sporočilu?'
+    NORECIPIENTS: 'Opozorilo: Niste nastavili prejemnikov. Posledično bodo lahko manjkali podatki v obrazcu.'
+    ONCOMPLETELABEL: 'Prikaži ob zaključku'
+    ONCOMPLETEMESSAGE: 'Hvala, zabeležili smo vaš vnos.'
+    ORSELECTAFIELDTOUSEASFROM: '.. ali izberite polje, ki naj se uporabi kot ''od'''
+    ORSELECTAFIELDTOUSEASTO: '.. ali izberite polje, ki naj se uporabi kot ''za'''
+    PLURALNAME: 'Izvorne strani'
+    PLURALS:
+      few: '{count} izvornih strani'
+      one: 'Izvorna stran'
+      other: '{count} izvornih strani'
+      two: '{count} izvorni strani'
+    PREVIEW_EMAIL: 'Predogled e-sporočila'
+    PREVIEW_EMAIL_DESCRIPTION: 'Opomba: Neshranjene spremembe ne bodo vidne v predogledu.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'To e-sporočilo si lahko predogledate šele ko shranite prejemnika.'
+    RECIPIENTS: Prejemniki
+    REPLYADDRESS: 'E-naslov za odgovor'
+    REPLYADDRESS_DESCRIPTION: 'E-naslov, na katerega lahko prejemnik ''odgovori''.'
+    RulesDescription: 'E-sporočila bodo poslana prejemnikom le, če so upoštevana prilagojena pravila. Če pravila niso določena, bo ta prejemnik prejel obvestilo za vsako oddajo.'
+    SAVESUBMISSIONS: 'Onemogoči shranjevanje podatkov na strežnik'
+    SELECTAFIELDTOSETSUBJECT: '.. ali izberi polje, ki naj se uporabi kot predmet'
+    SENDEMAILTO: 'Pošlji e-sporočilo naslovniku'
+    SENDEMAILTO_DESCRIPTION: 'Vnesete lahko več e-naslovov, med seboj ločenih z vejicami.'
+    SENDIF: 'Pogoji za pošiljanje'
+    SENDIFAND: 'Vsi pogoji so resnični'
+    SENDIFOR: 'Nekateri pogoji so resnični'
+    SENDPLAIN: 'Pošlji e-sporočilo kot navaden tekst? (HTML bo očiščen)'
+    SHOWCLEARFORM: 'Prikaži gumb za praznjenje obrazca'
+    SINGULARNAME: 'Uporabniško definiran obrazec'
+    SUBMISSIONS: Predložitve
+    SUBMITBUTTON: Oddaj
+    TEXTONCLEAR: 'Tekst na gumbu za čiščenje:'
+    TEXTONSUBMIT: 'Tekst na gumbu za oddajo:'
+    TYPEREPLY: 'Vnesi naslov za odgovor'
+    TYPESUBJECT: 'Vnesi zadevo sporočila'
+    TYPETO: 'Vnesi naslov'
+    UnrestrictedFileUploadWarning: 'Dostop do trenutne mape za nalaganje "{path}" ni omejen. Naložene datoteke bodo javno dostopne vsem, ki poznajo točen URL naslov.'
+    db_ClearButtonText: 'Besedilo gumba počisti'
+    db_DisableAuthenicatedFinishAction: 'Onemogoči avtentikacijo na koncu'
+    db_DisableCsrfSecurityToken: 'Onemogoči csrf varnostni žeton'
+    db_DisableSaveSubmissions: 'Onemogoči shranjevanje predložitev'
+    db_DisplayErrorMessagesAtTop: 'Prikaži sporočila o napakah na vrhu'
+    db_EnableLiveValidation: 'Omogoči neposredno preverjanje'
+    db_OnCompleteMessage: 'Pri zaključenem sporočilu'
+    db_ShowClearButton: 'Prikaži polje počisti'
+    db_SubmitButtonText: 'Besedilo gumba za oddajo'
+    has_many_EmailRecipients: 'Naslovniki elektronskega sporočila'
+    has_many_Fields: Polja
+    has_many_Submissions: Predložitve
