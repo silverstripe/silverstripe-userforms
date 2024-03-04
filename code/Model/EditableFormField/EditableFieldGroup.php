@@ -48,7 +48,7 @@ class EditableFieldGroup extends EditableFormField
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
-            $fields->removeByName(['MergeField', 'Default', 'Validation', 'DisplayRules']);
+            $fields->removeByName(['MergeField', 'Default', 'Validation']);
         });
 
         return parent::getCMSFields();
@@ -97,6 +97,11 @@ class EditableFieldGroup extends EditableFormField
         // if this field has an extra class
         if ($this->ExtraClass) {
             $field->addExtraClass($this->ExtraClass);
+        }
+
+        // if ShowOnLoad is false hide the field
+        if (!$this->ShowOnLoad) {
+            $field->addExtraClass($this->ShowOnLoadNice());
         }
     }
 }

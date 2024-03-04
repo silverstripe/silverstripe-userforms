@@ -160,7 +160,7 @@ class EditableCustomRule extends DataObject
         // is this field a special option field
         $checkboxField = $formFieldWatch->isCheckBoxField();
         $radioField = $formFieldWatch->isRadioField();
-        $target = sprintf('$("%s")', $formFieldWatch->getSelectorFieldOnly());
+        $target = $formFieldWatch->getSelectorFieldOnly();
         $fieldValue = Convert::raw2js($this->FieldValue);
 
         $conditionOptions = [
@@ -174,7 +174,9 @@ class EditableCustomRule extends DataObject
         switch ($this->ConditionOption) {
             case 'IsNotBlank':
             case 'IsBlank':
-                $expression = ($checkboxField || $radioField) ? "!{$target}.is(\":checked\")" : "{$target}.val() == ''";
+                $expression = ($checkboxField || $radioField)
+                    ? sprintf("document.querySelector(\"%s:checked\") !== null", $target)
+                    : "document.querySelector(\"{$target}\").value == ''";
                 if ((string) $this->ConditionOption === 'IsNotBlank') {
                     //Negate
                     $expression = "!({$expression})";
@@ -185,9 +187,9 @@ class EditableCustomRule extends DataObject
                 if ($checkboxField) {
                     if ($formFieldWatch->isCheckBoxGroupField()) {
                         $expression = sprintf(
-                            "$.inArray('%s', %s.filter(':checked').map(function(){ return $(this).val();}).get()) > -1",
+                            '[...document.querySelectorAll("%s:checked")].map(function(i) {  return i ? i.getAttribute("value") : null; }).indexOf(\'%s\') > -1',
+                            $target,
                             $fieldValue,
-                            $target
                         );
                     } else {
                         $expression = "{$target}.prop('checked')";
@@ -195,12 +197,12 @@ class EditableCustomRule extends DataObject
                 } elseif ($radioField) {
                     // We cannot simply get the value of the radio group, we need to find the checked option first.
                     $expression = sprintf(
-                        '%s.closest(".field, .control-group").find("input:checked").val() == "%s"',
+                        'closest(document.querySelector("%s"), ".field, .control-group").querySelector("input:checked").value == "%s"',
                         $target,
                         $fieldValue
                     );
                 } else {
-                    $expression = sprintf('%s.val() == "%s"', $target, $fieldValue);
+                    $expression = sprintf('document.querySelector("%s").value == "%s"', $target, $fieldValue);
                 }
 
                 if ((string) $this->ConditionOption === 'ValueNot') {
@@ -213,7 +215,7 @@ class EditableCustomRule extends DataObject
             case 'ValueGreaterThan':
             case 'ValueGreaterThanEqual':
                 $expression = sprintf(
-                    '%s.val() %s parseFloat("%s")',
+                    'document.querySelector("%s").value %s parseFloat("%s")',
                     $target,
                     $conditionOptions[$this->ConditionOption],
                     $fieldValue
@@ -299,11 +301,11 @@ class EditableCustomRule extends DataObject
      */
     public function toggleDisplayText($initialState, $invert = false)
     {
-        $action = strtolower($initialState ?? '') === 'hide' ? 'removeClass' : 'addClass';
+        $action = strtolower($initialState ?? '') === 'hide' ? 'remove' : 'add';
         if ($invert) {
-            $action = $action === 'removeClass' ? 'addClass' : 'removeClass';
+            $action = $action === 'remove' ? 'add' : 'remove';
         }
-        return sprintf('%s("hide")', $action);
+        return sprintf('classList.%s("hide")', $action);
     }
 
     /**

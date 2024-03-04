@@ -28,15 +28,7 @@ const copyData = [
   {
     from: 'client/src/images',
     to: 'images'
-  },
-  {
-    from: PATHS.MODULES + '/jquery/dist/jquery.min.js',
-    to: PATHS.DIST_JS
-  },
-  {
-    from: PATHS.MODULES + '/jquery.are-you-sure/jquery.are-you-sure.js',
-    to: PATHS.DIST_JS + '/jquery.are-you-sure/jquery.are-you-sure.js'
-  },
+  }
 ];
 
 /**
@@ -60,7 +52,6 @@ const addMinFiles = (from, to) => {
   });
 };
 
-addMinFiles('/jquery-validation/dist', '/jquery-validation');
 
 
 const config = [
