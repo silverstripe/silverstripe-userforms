@@ -35,6 +35,7 @@ Feature: Userforms
     And I fill in "Options[GridFieldAddNewInlineButton][2][Value]" with "2"
     And I press the "Save" button
     And I follow "My userform"
+    And I click the "Form Fields" CMS tab
 
     # Create textfields
     And I press the "Add Field" button
@@ -64,6 +65,7 @@ Feature: Userforms
     And I check "Is this field Required?"
     And I press the "Save" button
     And I follow "My userform"
+    And I click the "Form Fields" CMS tab
 
     # Drag and drop my text field 2 to Page Two
     Then I drag the ".ss-gridfield-item[data-id='4'] .handle" element to the ".ss-gridfield-item[data-id='6'] .handle" element
