@@ -341,6 +341,9 @@ SQL;
             $this->Submissions()->sort('Created', 'DESC'),
             $config
         );
+
+        $this->extend('updateSubmissionsGridField', $submissions);
+
         return $submissions;
     }
 
