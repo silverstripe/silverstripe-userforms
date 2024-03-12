@@ -325,8 +325,6 @@ SQL;
         // attach every column to the print view form
         $columns['Created'] = 'Created';
         $columns['SubmittedBy.Email'] = 'Submitter';
-        $this->extend('updateSubmissionsGridFieldExportColumns', $columns);
-
         $filter->setColumns($columns);
 
         // print configuration
@@ -343,6 +341,9 @@ SQL;
             $this->Submissions()->sort('Created', 'DESC'),
             $config
         );
+
+        $this->extend('updateSubmissionsGridField', $submissions);
+
         return $submissions;
     }
 
