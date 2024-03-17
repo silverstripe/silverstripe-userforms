@@ -37,11 +37,12 @@ class EmailRecipientCondition extends DataObject
         'ValueLessThan' => 'Less than',
         'ValueLessThanEqual' => 'Less than or equal',
         'ValueGreaterThan' => 'Greater than',
-        'ValueGreaterThanEqual' => 'Greater than or equal'
+        'ValueGreaterThanEqual' => 'Greater than or equal',
+        'Includes' => 'Includes'
     ];
 
     private static $db = [
-        'ConditionOption' => 'Enum("IsBlank,IsNotBlank,Equals,NotEquals,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual")',
+        'ConditionOption' => 'Enum("IsBlank,IsNotBlank,Equals,NotEquals,ValueLessThan,ValueLessThanEqual,ValueGreaterThan,ValueGreaterThanEqual,Includes")',
         'ConditionValue' => 'Varchar'
     ];
 
@@ -95,6 +96,11 @@ class EmailRecipientCondition extends DataObject
                 if ($this->ConditionOption == 'NotEquals') {
                     $result = !($result);
                 }
+                break;
+            case 'Includes':
+                $result = is_array($fieldValue)
+                    ? in_array($conditionValue, $fieldValue)
+                    : stripos($fieldValue ?? '', $conditionValue) !== false;
                 break;
             default:
                 throw new LogicException("Unhandled rule {$this->ConditionOption}");
