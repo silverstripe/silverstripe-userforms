@@ -100,7 +100,7 @@ class EmailRecipientCondition extends DataObject
             case 'Includes':
                 $result = is_array($fieldValue)
                     ? in_array($conditionValue, $fieldValue)
-                    : stripos($fieldValue, $conditionValue) !== false;
+                    : stripos($fieldValue ?? '', $conditionValue) !== false;
                 break;
             default:
                 throw new LogicException("Unhandled rule {$this->ConditionOption}");
