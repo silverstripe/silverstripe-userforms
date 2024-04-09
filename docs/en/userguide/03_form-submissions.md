@@ -30,7 +30,7 @@ Simply insert the merge field into the email content, and the field's value will
 
 ### Email details
 
-#### Email Subject
+#### Email subject
 
 The subject of the email, you can either type a custom subject here or select a field from the form to use as the email subject.
 
@@ -40,7 +40,7 @@ This is the recipient's address where the email will be sent.
 
 #### Send email from
 
-This shows where the email was sent from, and will most likely need to be an email address on the same domain as your site. For example If your website is yoursite.com, the email address for this field should be something@yoursite.com.
+This shows where the email was sent from, and will most likely need to be an email address on the same domain as your site. For example If your website is `example.com`, the email address for this field should be `something@example.com`.
 
 #### Email for reply to
 
@@ -70,13 +70,12 @@ template can be selected to provide a standard formatted email to contain the ed
 
 The list of available templates can be controlled by specifying the folder for these template files in YAML config.
 
-
-```yaml
+```yml
 UserDefinedForm:
   email_template_directory: mysite/templates/useremails/
 ```
 
-### Custom Rules
+### Custom rules
 
 In this section you can determine whether to send the email to the recipient based on the data in the form submission.
 
@@ -85,16 +84,16 @@ In this section you can determine whether to send the email to the recipient bas
 This decides whether to send the email based on two options
 
 1. *All* conditions are true (Every single custom rule must be met in order to send the email)
-2. *Any* conditions are true (At least one of the custom rules must be met in order to send the email)
+1. *Any* conditions are true (At least one of the custom rules must be met in order to send the email)
 
 #### Adding a custom rule
 
-* Click 'Add' to add a custom sending rule.
-* Select the field which you want the custom rule to apply to
-* Select the condition the field must follow
-* enter for the condition (the 'is blank' and 'is not blank' conditions do not require any text)
+- Click 'Add' to add a custom sending rule.
+- Select the field which you want the custom rule to apply to
+- Select the condition the field must follow
+- enter for the condition (the 'is blank' and 'is not blank' conditions do not require any text)
 
-## File Upload Field
+## File upload field
 
 > [!NOTE]
 > This functionality is specifically included in Silverstripe core functionality 4.6 and above,
@@ -124,7 +123,7 @@ A caution symbol is added to the form submission icon because it has a higher ri
 **Restricted access:** ![User with lock icon](_images/user-lock.png)
 
 Indicates that a file/folder has restricted access and will only be visible to certain users or groups. To learn more about the usage of this particular icon refer to
-[File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions).
+[File Permissions](https://userhelp.silverstripe.org/en/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions).
 
 ## Overview of files with custom permissions
 
@@ -132,7 +131,8 @@ Indicates that a file/folder has restricted access and will only be visible to c
 
 > [!NOTE]
 > Folder with restricted access containing files with custom permissions and their associated file icons.
-> * FS - Form submission
+>
+> - FS - Form submission
 
 To get started, create a new **User Defined Form** page in the CMS. See [Creating and editing forms](creating-and-editing-forms)
 to learn more. To add a File Upload field to the form, click on the ***Form Fields*** tab in the page editing view.
@@ -148,7 +148,7 @@ You can either create a new folder or use an existing folder to store your file 
 The folder you select will become the default folder for this form and any additional Upload Fields which are added.
 Each File Upload Field can use different folders for storing its files, this can be managed by editing the folder location on each individual field.
 
-#### Option 1, create a new folder (recommended):
+#### Option 1, create a new folder (recommended)
 
 This option is only available the first time you add an upload field to your form. Once the first upload folder for the form has been established,
 all subsequent file uploads from the same form will use this folder by default.
@@ -160,7 +160,7 @@ It will be recommended for this folder (and the submission files) to be placed w
 You can either use the suggested folder name or create your own by altering the folder name. You can also manually add deeper folder levels
  by adding ‘/’ in the text field provided e.g ‘Competition-entries/May-2020’.
 
-By default the ‘/Form-submissions’ folder is set so only [Admins](https://userhelp.silverstripe.org/en/4/managing_your_website/managing_roles_and_permissions/#using-roles)
+By default the ‘/Form-submissions’ folder is set so only [Admins](https://userhelp.silverstripe.org/en/managing_your_website/managing_roles_and_permissions/#using-roles)
 have permissions to access it (restricted access), any files or folders in this folder will inherit these permissions.
 This can be changed manually on a per file/folder basis from the **Files** area.
 
@@ -168,7 +168,7 @@ Click **Save and continue** to continue editing your form.
 
 ![Create a new folder option](_images/modal-create-new-folder.png)
 
-#### Option 2, use an existing folder:
+#### Option 2, use an existing folder
 
 If you choose to use a folder that already exists you can select the folder from the **Select folder** dropdown. Once you select a folder,
 an icon will indicate whether or not the folder has restricted access and provide information for who the file uploads will be visible to.
@@ -192,13 +192,13 @@ When viewing/selecting folder locations from the form you will see an icon indic
 You will either see a **restricted access** icon, or a **warning** icon.
 
 To store your files in a safer manor you can do one of several things:
-* Create a new folder from the Files area, or if this is your first time setting up an Upload Field for this form you will
-be guided through the process, for more information see [Setting up a folder to store file uploads for your form](#Setting-up-a-folder-to-store-file-uploads-for-your-form).
-* Change the upload folder to one which already has restricted access. Edit the Upload Field and select a folder from the **Select a folder** dropdown.
-* Change the view access permissions of the current folder in the Files area to restrict access to the file.
+
+- Create a new folder from the Files area, or if this is your first time setting up an Upload Field for this form you will be guided through the process, for more information see [Setting up a folder to store file uploads for your form](#setting-up-a-folder-to-store-file-uploads-for-your-form).
+- Change the upload folder to one which already has restricted access. Edit the Upload Field and select a folder from the **Select a folder** dropdown.
+- Change the view access permissions of the current folder in the Files area to restrict access to the file.
 
 You can manage your folder permissions by navigating to the Files section in the CMS menu and edit the folders details.
-See [File Permissions](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions)
-for more information and [Roles and permissions](https://userhelp.silverstripe.org/en/4/managing_your_website/managing_roles_and_permissions/) to learn more.
+See [File Permissions](https://userhelp.silverstripe.org/en/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions)
+for more information and [Roles and permissions](https://userhelp.silverstripe.org/en/managing_your_website/managing_roles_and_permissions/) to learn more.
 
-For more information on the usage of these icons in the files area, please refer to [File Indicators](https://userhelp.silverstripe.org/en/4/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions/#file-indicators).
+For more information on the usage of these icons in the files area, please refer to [File Indicators](https://userhelp.silverstripe.org/en/creating_pages_and_content/creating_and_editing_content/images_and_documents/file_permissions/#file-indicators).
