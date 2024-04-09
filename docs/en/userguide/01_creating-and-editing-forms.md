@@ -18,10 +18,8 @@ drop-down menu will show up. Select "User Defined Form" Then hit the "Go" button
 
 You will notice that a new page has been created, with the name of "New User Defined Form." You will be taken to edit the page once you click "Create."
 
-<div class="note" markdown="1">
-Don't worry if you create your page in the "wrong" place. Pages can be moved and re-ordered
-easily.
-</div>
+> [!NOTE]
+> Don't worry if you create your page in the "wrong" place. Pages can be moved and re-ordered easily.
 
 ## Combining forms and content
 
@@ -31,10 +29,10 @@ however. You will notice in a newly created form page, there is some text in the
 of the editing menu to begin with: "$UserDefinedForm"
 
 The purpose of this little block of text is to tell the website where in the page you
-would like to put the form. The form will appear on the website wherever the "$UserDefinedForm"
+would like to put the form. The form will appear on the website wherever the `$UserDefinedForm`
 appears in the editing pane, whether it is before text, after text, inside a table, etc.
 
-If $UserDefinedForm is deleted by accident (or on purpose), SilverStripe automatically
+If $UserDefinedForm is deleted by accident (or on purpose), Silverstripe CMS automatically
 puts the form at the end of all the content.
 
 ![Form in content](_images/form-in-content.png)
@@ -67,3 +65,10 @@ Each message links to it's corresponding field so users can easily make the requ
 The 'Configuration' tab has a number of options used for customising your form's behaviour and appearance.
 
 ![Configuration](_images/userforms-config.png)
+
+## Creating a multi-page form
+
+To create a multi-page form, simply click the "Add Page Break" button.
+This will create a page break field which is used to create a new page in the form. You can drag and drop this page break to separate form fields at the desired location.
+
+![Multi-page forms](_images/multi-page-forms.png)
