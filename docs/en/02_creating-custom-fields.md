@@ -1,10 +1,14 @@
+---
+title: Creating custom fields
+---
+
 # Creating custom fields
 
 To create and use your own custom fields, depending on what you want to accomplish, you may need to create two
 new classes subclassed from the following:
 
-- `EditableFormField` - this Field represents what will be seen/used in the CMS userforms interface
-- `FormField` - this Field represents what will be seen/used in the frontend user form when the above field has been
+- [`EditableFormField`](api:SilverStripe\UserForms\Model\EditableFormField) - this Field represents what will be seen/used in the CMS userforms interface
+- [`FormField`](api:SilverStripe\Forms\FormField) - this Field represents what will be seen/used in the frontend user form when the above field has been
 added
 
 ## How (without the "why")
@@ -13,9 +17,9 @@ You need to create your own subclass of `EditableFormField` (the field which wil
 implement the method `getFormField()`, which will need to return an instantiated `FormField` to be used in the
 frontend form.
 
-`EditableTextField` and `TextField` are two existing classes and probably the best example to look in to.
+[`EditableTextField`](api:SilverStripe\UserForms\Model\EditableFormField\EditableTextField) and [`TextField`](api:SilverStripe\Forms\TextField) are two existing classes and probably the best example to look in to.
 
-## Why two different Fields?
+## Why two different fields?
 
 Consider the following example (`EditableTextField` and `TextField`).
 
