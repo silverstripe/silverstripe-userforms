@@ -1,6 +1,6 @@
 <% if $Steps.Count > 1 %>
 	<div id="userform-progress" class="userform-progress" aria-hidden="true" style="display:none;">
-		<p>Page <span class="current-step-number">1</span> of <span class="total-step-number">$Steps.Count</span></p>
+		<p class="page-progress">Page <span class="current-step-number">1</span> of <span class="total-step-number">$Steps.Count</span></p>
 		<div class="progress">
 			<div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="$Steps.Count"></div>
 		</div>
