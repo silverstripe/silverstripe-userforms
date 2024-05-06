@@ -10,10 +10,10 @@ de_DE:
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     RECIPIENTS: Empfänger
     SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
-    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
+    SHOWCLEARFORM: "Zeige 'Löschen'-Button"
     SUBMISSIONS: Einsendungen
     SUBMITBUTTON: Absenden
-    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONCLEAR: "Text auf 'Löschen'-Button"
     TEXTONSUBMIT: 'Text auf Absende-Button'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Abbrechen
@@ -110,7 +110,7 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
-    HIDELABEL: '''Titel''-Label in Frontend verbergen?'
+    HIDELABEL: "'Titel'-Label in Frontend verbergen?"
     PLURALNAME: HTML-Blöcke
     SINGULARNAME: HTML-Block
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
@@ -216,11 +216,11 @@ de_DE:
     SENDIFAND: 'Alle Bedingungen sind wahr'
     SENDIFOR: 'Beliebige Bedingung ist wahr'
     SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
-    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
+    SHOWCLEARFORM: "Zeige 'Löschen'-Button"
     SINGULARNAME: 'Anpassbares Formular'
     SUBMISSIONS: Einsendungen
     SUBMITBUTTON: Senden
-    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONCLEAR: "Text auf 'Löschen'-Button"
     TEXTONSUBMIT: 'Text auf Absende-Button'
     TYPEREPLY: 'Antwort-Adresse eingeben'
     TYPESUBJECT: 'Betreff eingeben'

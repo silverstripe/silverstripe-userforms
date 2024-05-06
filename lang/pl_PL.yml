@@ -16,8 +16,8 @@ pl_PL:
     SHOWCLEARFORM: 'Pokaż przycisk Wyczyść formularz'
     SUBMISSIONS: Zgłoszenia
     SUBMITBUTTON: Wyślij
-    TEXTONCLEAR: 'Napis na przycisku ''wyczyść'':'
-    TEXTONSUBMIT: 'Napis na przycisku ''submit'':'
+    TEXTONCLEAR: "Napis na przycisku 'wyczyść':"
+    TEXTONSUBMIT: "Napis na przycisku 'submit':"
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Anuluj
     CONFIRM_FOLDER_LABEL_A: 'Pliki przesyłane przez użytkowników powinny być starannie przechowywane, aby zmniejszyć ryzyko ujawnienia poufnych danych. Upewnij się, że wybrany folder może być wyświetlany tylko przez odpowiednie strony. Uprawnieniami do folderów można zarządzać w obszarze Pliki.'
@@ -34,7 +34,7 @@ pl_PL:
     ADD_PAGE_BREAK: 'Dodaj podział strony'
     FORMFIELDS: 'Pola formularza'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Wymagane pole ''{name}'' nie może być umieszczone na stronie warunkowej'
+    CONDITIONAL_REQUIRED: "Wymagane pole '{name}' nie może być umieszczone na stronie warunkowej"
     NO_PAGE: 'Pole „{name}” znalezione przed stronami'
     UNEXPECTED_BREAK: 'Nieoczekiwany podział strony „{name}” w zagnieżdżonym polu „{group}”'
     UNEXPECTED_GROUP_END: 'Znaleziono „{name}” bez pasującej grupy'
@@ -388,8 +388,8 @@ pl_PL:
     SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Zgłoszenia
     SUBMITBUTTON: Submit
-    TEXTONCLEAR: 'Napis na przycisku ''wyczyść'':'
-    TEXTONSUBMIT: 'Napis na przycisku ''submit'':'
+    TEXTONCLEAR: "Napis na przycisku 'wyczyść':"
+    TEXTONSUBMIT: "Napis na przycisku 'submit':"
     TYPEREPLY: 'Podaj adres odpowiedzi'
     TYPESUBJECT: 'Podaj temat'
     TYPETO: 'Podaj adres'

@@ -5,14 +5,14 @@ fr:
     ADDEMAILRECIPIENT: 'Ajouter un mail de destination'
     CLEARBUTTON: Effacer
     CONFIGURATION: Configuration
-    DISABLEAUTHENICATEDFINISHACTION: 'Désactiver l''authentification à la fin de l''action'
+    DISABLEAUTHENICATEDFINISHACTION: "Désactiver l'authentification à la fin de l'action"
     DISABLECSRFSECURITYTOKEN: 'Désactiver le "token" CSRF'
-    DISPLAYERRORMESSAGESATTOP: 'Afficher les messages d''erreur au dessus du formulaire'
+    DISPLAYERRORMESSAGESATTOP: "Afficher les messages d'erreur au dessus du formulaire"
     ENABLELIVEVALIDATION: 'Activer la validation en temps réel'
-    NORECIPIENTS: 'Attention: Vous n''avez configuré aucun destinataire. Les soumissions peuvent être manquées'
-    ONCOMPLETELABEL: 'Afficher après l''envoi'
+    NORECIPIENTS: "Attention: Vous n'avez configuré aucun destinataire. Les soumissions peuvent être manquées"
+    ONCOMPLETELABEL: "Afficher après l'envoi"
     RECIPIENTS: Destinataires
-    SAVESUBMISSIONS: 'Désactiver l''enregistrement des soumissions sur le serveur'
+    SAVESUBMISSIONS: "Désactiver l'enregistrement des soumissions sur le serveur"
     SHOWCLEARFORM: 'Afficher le bouton Effacer le formulaire'
     SUBMISSIONS: Soumissions
     SUBMITBUTTON: Envoyer
@@ -20,13 +20,13 @@ fr:
     TEXTONSUBMIT: 'Texte sur le bouton envoyer :'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Annuler
-    CONFIRM_FOLDER_LABEL_A: 'Les fichiers que vos utilisateurs téléversent doivent être stockés avec soin pour réduire le risque d''exposition de données sensibles. Assurez-vous que le dossier que vous sélectionnez ne peut être consulté que par les parties appropriées. Les autorisations des dossiers peuvent être gérées dans la zone Fichiers.'
+    CONFIRM_FOLDER_LABEL_A: "Les fichiers que vos utilisateurs téléversent doivent être stockés avec soin pour réduire le risque d'exposition de données sensibles. Assurez-vous que le dossier que vous sélectionnez ne peut être consulté que par les parties appropriées. Les autorisations des dossiers peuvent être gérées dans la zone Fichiers."
     CONFIRM_FOLDER_LABEL_B: 'Le dossier sélectionné deviendra le dossier par défaut pour ce formulaire. Cela peut être modifié individuellement dans le champ <i>File uploaded field</i>'
     FOLDER_OPTIONS_EXISTING: 'Utiliser un dossier existant'
     FOLDER_OPTIONS_NEW: 'Créer un nouveau dossier (recommandé)'
     FOLDER_OPTIONS_TITLE: 'Options du dossier du formulaire'
     FORM_ACTION_CONFIRM: 'Sauvegarder et continuer'
-    INVALID_REQUEST: 'Cette requête n''était pas valide'
+    INVALID_REQUEST: "Cette requête n'était pas valide"
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Ajouter un champ'
     ADD_FIELD_GROUP: 'Ajouter un group de champs'
@@ -37,17 +37,17 @@ fr:
     belongs_to_SubmittedFileField: 'Champ du fichier soumis'
     db_UserFormUpload: 'Téléversement du formulaire utilisateur'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Le champ obligatoire ''{name}'' ne peut être placé dans une page conditionnelle'
-    NO_PAGE: 'Champ ''{name}'' trouvé avant toutes pages'
-    UNEXPECTED_BREAK: 'Un séparateur de page ''{name}'' inattendu imbriqué dans ''{group}'' de champs'
-    UNEXPECTED_GROUP_END: '''{name}'' trouvé sans groupe correspondant'
-    WRONG_GROUP_END: '''{name}'' trouvé ferme le mauvais groupe ''{group}'''
+    CONDITIONAL_REQUIRED: "Le champ obligatoire '{name}' ne peut être placé dans une page conditionnelle"
+    NO_PAGE: "Champ '{name}' trouvé avant toutes pages"
+    UNEXPECTED_BREAK: "Un séparateur de page '{name}' inattendu imbriqué dans '{group}' de champs"
+    UNEXPECTED_GROUP_END: "'{name}' trouvé sans groupe correspondant"
+    WRONG_GROUP_END: "'{name}' trouvé ferme le mauvais groupe '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filtrer
     FILTERSUBMISSIONS: 'Filtrer les soumissions..'
     FROM: De
     RESET: Réinitialiser
-    TILL: 'Jusqu''au'
+    TILL: "Jusqu'au"
     WHEREVALUEIS: 'Où la valeur est..'
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Règles personnalisées modifiables'
@@ -64,11 +64,11 @@ fr:
     has_one_Parent: Parent
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Coché par défaut ?'
-    CUSTOMERROR: 'Message d''erreur personnalisé'
+    CUSTOMERROR: "Message d'erreur personnalisé"
     CUSTOMOPTIONS: Options
     CUSTOMRULES: 'Règles personnalisées'
     DEFAULT: 'Valeur par défaut'
-    DEFAULTTOTODAY: 'Par défaut Aujourd''hui ?'
+    DEFAULTTOTODAY: "Par défaut Aujourd'hui ?"
     DISPLAYIF: 'Basculer la visibilité lorsque'
     EXTRACLASS_MULTIPLE: 'Séparer chaque classe CSS avec un seul espace'
     EXTRACLASS_SELECT: 'Sélectionnez dans la liste des styles autorisés'
@@ -87,7 +87,7 @@ fr:
     TYPE_EMPTY: 'Sélectionner le type de champ'
     VALIDATION: Validation
     'YES': Oui
-    db_CustomErrorMessage: 'Message d''erreur personnalisé'
+    db_CustomErrorMessage: "Message d'erreur personnalisé"
     db_Default: 'Par défaut'
     db_Name: Nom
     db_Required: Obligatoire
@@ -133,7 +133,7 @@ fr:
       one: 'Un champ date'
       other: '{count} champs dates'
     SINGULARNAME: 'Champ date'
-    db_DefaultToToday: 'Par défaut, aujourd''hui'
+    db_DefaultToToday: "Par défaut, aujourd'hui"
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
     PLURALNAME: 'Liste déroulante'
     PLURALS:
@@ -271,22 +271,22 @@ fr:
     db_Rows: Lignes
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Règles personnalisées'
-    EMAILCONTENTTAB: 'Contenu de l''e-mail'
-    EMAILDETAILSTAB: 'Détails de l''e-mail'
+    EMAILCONTENTTAB: "Contenu de l'e-mail"
+    EMAILDETAILSTAB: "Détails de l'e-mail"
     EMAILFROMREQUIRED: 'L''adresse "E-mail de" est requise'
     EMAILTOREQUIRED: 'L''adresse "Envoyer l''email à" ou le champ est obligatoire'
     PLURALNAME: 'Destinataires des e-mails'
     PLURALS:
-      many: '{count} destinataires d''e-mail'
-      one: 'Un destinataire d''e-mail'
-      other: '{count} destinataires d''e-mail'
-    SINGULARNAME: 'Destinataire d''e-mail'
+      many: "{count} destinataires d'e-mail"
+      one: "Un destinataire d'e-mail"
+      other: "{count} destinataires d'e-mail"
+    SINGULARNAME: "Destinataire d'e-mail"
     db_EmailAddress: 'Adresse email'
-    db_EmailBody: 'Corps de l''e-mail'
-    db_EmailBodyHtml: 'Corps de l''e-mail HTML'
+    db_EmailBody: "Corps de l'e-mail"
+    db_EmailBodyHtml: "Corps de l'e-mail HTML"
     db_EmailFrom: 'Email de'
-    db_EmailSubject: 'Sujet de l''email'
-    db_EmailTemplate: 'Modèle d''e-mail'
+    db_EmailSubject: "Sujet de l'email"
+    db_EmailTemplate: "Modèle d'e-mail"
     db_HideFormData: 'Masquer les données du formulaire'
     db_HideInvisibleFields: 'Masquer les champs invisibles'
     has_many_CustomRules: 'Règles personnalisées'
@@ -320,25 +320,25 @@ fr:
     ADDEMAILRECIPIENT: 'Ajouter un mail de destination'
     CLEARBUTTON: Effacer
     CONFIGURATION: Configuration
-    DISABLEAUTHENICATEDFINISHACTION: 'Désactiver l''authentification à la fin de l''action'
+    DISABLEAUTHENICATEDFINISHACTION: "Désactiver l'authentification à la fin de l'action"
     DISABLECSRFSECURITYTOKEN: 'Désactiver le jeton CSRF'
-    DISPLAYERRORMESSAGESATTOP: 'Afficher les messages d''erreur au dessus du formulaire'
+    DISPLAYERRORMESSAGESATTOP: "Afficher les messages d'erreur au dessus du formulaire"
     EMAILADDRESS: Email
     EMAILFROM: De
-    EMAILSUBJECT: 'Sujet de l''email'
-    EMAILTEMPLATE: 'Modèle d''e-mail'
+    EMAILSUBJECT: "Sujet de l'email"
+    EMAILTEMPLATE: "Modèle d'e-mail"
     ENABLELIVEVALIDATION: 'Activer la validation en temps réel'
-    NORECIPIENTS: 'Attention: Vous n''avez configuré aucun destinataire. Les soumissions peuvent être manquées'
+    NORECIPIENTS: "Attention: Vous n'avez configuré aucun destinataire. Les soumissions peuvent être manquées"
     ONCOMPLETELABEL: 'Afficher après la soumission'
     ONCOMPLETEMESSAGE: 'Merci, nous avons reçu votre soumission.'
     PLURALNAME: 'Base Pages'
-    PREVIEW_EMAIL: 'Aperçu de l''e-mail'
-    PREVIEW_EMAIL_DESCRIPTION: 'Remarque: Les modifications non enregistrées n''apparaissent pas dans l''aperçu'
+    PREVIEW_EMAIL: "Aperçu de l'e-mail"
+    PREVIEW_EMAIL_DESCRIPTION: "Remarque: Les modifications non enregistrées n'apparaissent pas dans l'aperçu"
     PREVIEW_EMAIL_UNAVAILABLE: 'Vous pouvez prévisualiser cet e-mail une fois que vous avez enregistré le destinataire.'
     RECIPIENTS: Destinataires
     SAVESUBMISSIONS: 'Désactiver le sauvegarde des soumissions sur le serveur'
     SELECTAFIELDTOSETSUBJECT: '.. ou sélectionnez un champ à utiliser comme sujet'
-    SENDEMAILTO: 'Envoyer l''e-mail à'
+    SENDEMAILTO: "Envoyer l'e-mail à"
     SENDEMAILTO_DESCRIPTION: 'Vous pouvez saisir une liste de plusieurs adresses e-mails séparée par des virgules'
     SENDIFAND: 'Toutes les conditions sont vraies'
     SHOWCLEARFORM: 'Afficher le bouton Effacer le formulaire'
@@ -346,14 +346,14 @@ fr:
     SUBMITBUTTON: Envoyer
     TEXTONCLEAR: 'Texte sur le bouton effacer'
     TEXTONSUBMIT: 'Texte sur le bouton envoyer :'
-    UnrestrictedFileUploadWarning: 'L''accès au dossier de téléversement actuel "{path}" n''est pas restreint. Les fichiers téléversés seront accessibles au public si l''URL exacte est connue.'
+    UnrestrictedFileUploadWarning: "L'accès au dossier de téléversement actuel \"{path}\" n'est pas restreint. Les fichiers téléversés seront accessibles au public si l'URL exacte est connue."
     db_ClearButtonText: 'Effacer le texte du bouton'
     db_DisableCsrfSecurityToken: 'Désactiver le token de sécurité CSRF'
     db_DisableSaveSubmissions: 'Désactiver le sauvegardes des soumissions'
-    db_DisplayErrorMessagesAtTop: 'Afficher les messages d''erreur en haut'
+    db_DisplayErrorMessagesAtTop: "Afficher les messages d'erreur en haut"
     db_EnableLiveValidation: 'Activer la validation en temps réel'
     db_ShowClearButton: 'Afficher le bouton effacer'
-    db_SubmitButtonText: 'Texte du bouton d''envoi'
+    db_SubmitButtonText: "Texte du bouton d'envoi"
     has_many_EmailRecipients: 'Mails destinataires'
     has_many_Fields: Champs
     has_many_Submissions: Soumissions

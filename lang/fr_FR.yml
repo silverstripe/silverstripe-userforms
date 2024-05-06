@@ -10,10 +10,10 @@ fr_FR:
     FROM: From
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Vérifié par défaut ?'
-    CUSTOMERROR: 'Message d''erreur personnalisé'
+    CUSTOMERROR: "Message d'erreur personnalisé"
     CUSTOMOPTIONS: Options
     CUSTOMRULES: 'Custom Rules'
-    DEFAULTTOTODAY: 'Par défaut pour aujourd''hui ?'
+    DEFAULTTOTODAY: "Par défaut pour aujourd'hui ?"
     EXTRACLASS_TITLE: 'Style/sortie supplémentaire'
     GROUP: Groupe
     PLURALNAME: 'Champs de formulaire modifiable'
@@ -41,8 +41,8 @@ fr_FR:
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Groupe
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'Champs pour l''upload de fichier'
-    SINGULARNAME: 'Champ pour l''upload de fichier'
+    PLURALNAME: "Champs pour l'upload de fichier"
+    SINGULARNAME: "Champ pour l'upload de fichier"
   SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
     LEVEL: 'Sélectionnez le niveau de tête'
     PLURALNAME: Principaux
@@ -92,7 +92,7 @@ fr_FR:
     EMAILBODYHTML: Body
     EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
-    EmailFromContent: 'Le champ pour l''adresse de vous permet de définir d''où provient l''email. Sur la plupart des serveurs cela nécessitera que l''adresse mail soit du même domaine que votre site. Par exemple sur votresite.com l''adresse mail devra sûrement être exemple@votresite.com. Cependant vous pouvez mettre n''importe qu''elle adresse email, à laquelle vous souhaitez qu''on réponde. '
+    EmailFromContent: "Le champ pour l'adresse de vous permet de définir d'où provient l'email. Sur la plupart des serveurs cela nécessitera que l'adresse mail soit du même domaine que votre site. Par exemple sur votresite.com l'adresse mail devra sûrement être exemple@votresite.com. Cependant vous pouvez mettre n'importe qu'elle adresse email, à laquelle vous souhaitez qu'on réponde. "
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Utiliser la complétion'

@@ -38,11 +38,11 @@ nl:
     belongs_to_SubmittedFileField: 'Geupload-bestand veld'
     db_UserFormUpload: 'Zelf-instelbaar formulier upload'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Het verplichte veld ''{}'' kan niet in een optionele pagina geplaatst worden'
-    NO_PAGE: 'Veld ''{}'' staat vóór eerste pagina'
-    UNEXPECTED_BREAK: 'Onverwachte nieuwe pagina gevonden ''{name}'', binnen een veldengroep ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' gevonden zonder bijbehorende groep'
-    WRONG_GROUP_END: '''{name}'' gevonden, welke de verkeerde groep sluit ''{group}'''
+    CONDITIONAL_REQUIRED: "Het verplichte veld '{}' kan niet in een optionele pagina geplaatst worden"
+    NO_PAGE: "Veld '{}' staat vóór eerste pagina"
+    UNEXPECTED_BREAK: "Onverwachte nieuwe pagina gevonden '{name}', binnen een veldengroep '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' gevonden zonder bijbehorende groep"
+    WRONG_GROUP_END: "'{name}' gevonden, welke de verkeerde groep sluit '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filter
     FILTERSUBMISSIONS: 'Inzendingen filteren'
@@ -198,7 +198,7 @@ nl:
     PLURALNAME: 'Nieuwe pagina'
     PLURALS:
       one: 'Nieuwe pagina'
-      other: '{count} nieuwe pagina''s'
+      other: "{count} nieuwe pagina's"
     SINGULARNAME: 'Nieuwe pagina'
     STEP_NEXT: Volgende
     STEP_PREV: Vorige
@@ -207,7 +207,7 @@ nl:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Verbergen in overzichten'
-    HIDELABEL: 'Verberg ''Titel'' label in het formulier'
+    HIDELABEL: "Verberg 'Titel' label in het formulier"
     PLURALNAME: 'HTML blokken'
     PLURALS:
       one: 'Een HTML blok'
@@ -376,16 +376,16 @@ nl:
     ONCOMPLETEMESSAGE: 'Bedankt voor uw inzending, deze is in goede orde ontvangen.'
     ORSELECTAFIELDTOUSEASFROM: '.. of selecteer een veld om te gebruiken als antwoord-adres'
     ORSELECTAFIELDTOUSEASTO: '.. of selecteer een veld om te gebruiken als ontvanger'
-    PLURALNAME: 'Formulierpagina''s'
+    PLURALNAME: "Formulierpagina's"
     PLURALS:
       one: Formulierpagina
-      other: '{count} Formulierpagina''s'
+      other: "{count} Formulierpagina's"
     PREVIEW_EMAIL: 'Voorbeeld van e-mail bekijken'
     PREVIEW_EMAIL_DESCRIPTION: 'Let op: sla eerst de wijzigingen op, om deze in het voorbeeld te kunnen bekijken.'
     PREVIEW_EMAIL_UNAVAILABLE: 'De e-mail is te bekijken, als er een ontvanger is opgeslagen'
     RECIPIENTS: Ontvangers
     REPLYADDRESS: 'E-mail voor antwoord op'
-    REPLYADDRESS_DESCRIPTION: 'Het mailadres waarnaar een reactie verzonden wordt, als je op ''reply'' klikt.'
+    REPLYADDRESS_DESCRIPTION: "Het mailadres waarnaar een reactie verzonden wordt, als je op 'reply' klikt."
     RulesDescription: 'De e-mail wordt alleen verstuurd als aan deze voorwaarden voldaan is. Als er geen voorwaarden ingesteld zijn, wordt bij elke inzending een mail gestuurd.'
     SAVESUBMISSIONS: 'Formulier-inzendingen niet opslaan in het CMS'
     SELECTAFIELDTOSETSUBJECT: '.. of selecteer een veld om te gebruiken als onderwerp'

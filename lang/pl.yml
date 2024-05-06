@@ -19,6 +19,7 @@ pl:
     TYPE: 'Rodzaj strony'
     'YES': Tak
     db_Name: Nazwa
+    db_Sort: Sortuj
     db_Title: Tytuł
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Grupa
@@ -37,6 +38,7 @@ pl:
     RANGE_TO: do
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Name: Nazwa
+    db_Sort: Sortuj
     db_Title: Tytuł
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     RANGE_TO: do

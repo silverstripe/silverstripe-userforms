@@ -38,11 +38,11 @@ eo:
     belongs_to_SubmittedFileField: 'Kampo de sendita dosiero'
     db_UserFormUpload: 'Alŝuti formularon de uzanto'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Ne eblas meti nepran kampon ''{name}'' en kondiĉa paĝo'
-    NO_PAGE: 'Trovis kampon ''{name}'' antaŭ eventualaj paĝoj'
-    UNEXPECTED_BREAK: 'Neatendita paĝosalto ''{name}'' en ingita kampo ''{group}'''
-    UNEXPECTED_GROUP_END: 'troviĝas ''{name}'' sen kongrua grupo'
-    WRONG_GROUP_END: 'trovita ''{name}'' fermas malĝustan grupon ''{group}'''
+    CONDITIONAL_REQUIRED: "Ne eblas meti nepran kampon '{name}' en kondiĉa paĝo"
+    NO_PAGE: "Trovis kampon '{name}' antaŭ eventualaj paĝoj"
+    UNEXPECTED_BREAK: "Neatendita paĝosalto '{name}' en ingita kampo '{group}'"
+    UNEXPECTED_GROUP_END: "troviĝas '{name}' sen kongrua grupo"
+    WRONG_GROUP_END: "trovita '{name}' fermas malĝustan grupon '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filtri
     FILTERSUBMISSIONS: 'Filtri sendaĵojn..'
@@ -207,7 +207,7 @@ eo:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Ĉu kaŝi de raportoj?'
-    HIDELABEL: 'Ĉu kaŝi etikedon ''Titolo'' en fasado?'
+    HIDELABEL: "Ĉu kaŝi etikedon 'Titolo' en fasado?"
     PLURALNAME: HTML-blokoj
     PLURALS:
       one: 'Unu HTML-bloko'
@@ -385,7 +385,7 @@ eo:
     PREVIEW_EMAIL_UNAVAILABLE: 'Konservinte la ricevonton vi povos antaŭvidi la retpoŝton.'
     RECIPIENTS: Ricevontoj
     REPLYADDRESS: 'Retpoŝto al kiu respondi'
-    REPLYADDRESS_DESCRIPTION: 'La retpoŝta adreso al kiu la ricevonto povos ''respondi''.'
+    REPLYADDRESS_DESCRIPTION: "La retpoŝta adreso al kiu la ricevonto povos 'respondi'."
     RulesDescription: 'Retpoŝtoj sendiĝos al la ricevonto nur se la propraj reguloj estas plenumitaj. Se neniu regulo estas agordita, tiu ricevonto ricevos atentigon por ĉiu sendo.'
     SAVESUBMISSIONS: 'Malŝalti konservi sendaĵojn al servilo'
     SELECTAFIELDTOSETSUBJECT: '.. aŭ elekti kampon uzotan kiel la temon'

@@ -27,11 +27,11 @@ sk:
     FORMFIELDS: Formulár
     has_many_Fields: Políčka
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Vyžadované pole ''{name}'' nemôže byť umiestnené do podmienenej stránky'
-    NO_PAGE: 'Pole ''{name}'' nájdené pred akoukoľvek stránkou'
-    UNEXPECTED_BREAK: 'Neočakávaný zlom strany ''{name}'' vnútri obaľovacej skupiny ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' nájdený bez odpovedajúcho začiatku'
-    WRONG_GROUP_END: '''{name}'' nájdený vrámci zle uzatvorenej obaľovacej skupiny ''{group}'''
+    CONDITIONAL_REQUIRED: "Vyžadované pole '{name}' nemôže byť umiestnené do podmienenej stránky"
+    NO_PAGE: "Pole '{name}' nájdené pred akoukoľvek stránkou"
+    UNEXPECTED_BREAK: "Neočakávaný zlom strany '{name}' vnútri obaľovacej skupiny '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' nájdený bez odpovedajúcho začiatku"
+    WRONG_GROUP_END: "'{name}' nájdený vrámci zle uzatvorenej obaľovacej skupiny '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filter
     FILTERSUBMISSIONS: 'Filtrovať ...'
@@ -122,7 +122,7 @@ sk:
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
     CONTENT: HTML
     HIDEFROMREPORT: 'Skryť z reportu?'
-    HIDELABEL: 'Skryť ''Názov'' na FrontEnd-e?'
+    HIDELABEL: "Skryť 'Názov' na FrontEnd-e?"
     PLURALNAME: 'HTML bloky'
     SINGULARNAME: 'HTML blok'
     db_Content: Obsah
