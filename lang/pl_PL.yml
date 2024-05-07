@@ -16,8 +16,8 @@ pl_PL:
     SHOWCLEARFORM: 'Pokaż przycisk Wyczyść formularz'
     SUBMISSIONS: Zgłoszenia
     SUBMITBUTTON: Wyślij
-    TEXTONCLEAR: 'Napis na przycisku ''wyczyść'':'
-    TEXTONSUBMIT: 'Napis na przycisku ''submit'':'
+    TEXTONCLEAR: "Napis na przycisku 'wyczyść':"
+    TEXTONSUBMIT: "Napis na przycisku 'submit':"
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Anuluj
     CONFIRM_FOLDER_LABEL_A: 'Pliki przesyłane przez użytkowników powinny być starannie przechowywane, aby zmniejszyć ryzyko ujawnienia poufnych danych. Upewnij się, że wybrany folder może być wyświetlany tylko przez odpowiednie strony. Uprawnieniami do folderów można zarządzać w obszarze Pliki.'
@@ -34,7 +34,7 @@ pl_PL:
     ADD_PAGE_BREAK: 'Dodaj podział strony'
     FORMFIELDS: 'Pola formularza'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Wymagane pole ''{name}'' nie może być umieszczone na stronie warunkowej'
+    CONDITIONAL_REQUIRED: "Wymagane pole '{name}' nie może być umieszczone na stronie warunkowej"
     NO_PAGE: 'Pole „{name}” znalezione przed stronami'
     UNEXPECTED_BREAK: 'Nieoczekiwany podział strony „{name}” w zagnieżdżonym polu „{group}”'
     UNEXPECTED_GROUP_END: 'Znaleziono „{name}” bez pasującej grupy'
@@ -59,7 +59,6 @@ pl_PL:
     CHECKEDBYDEFAULT: 'Zaznaczenie domyślne?'
     CUSTOMERROR: 'Własny komunikat o błędzie'
     CUSTOMOPTIONS: Opcje
-    CUSTOMRULES: 'Custom Rules'
     DEFAULT: 'Domyślna wartość'
     DEFAULTTOTODAY: 'Domyślnie to dzisiaj?'
     DISPLAYIF: 'Przełącz widoczność, gdy'
@@ -73,7 +72,6 @@ pl_PL:
     MERGEFIELDNAME: 'Złącz pole'
     NAME: Nazwa
     'NO': Nie
-    PLACEHOLDER: Placeholder
     PLURALNAME: 'Edytowalne pole formularza'
     PLURALS:
       few: 'Edytowanych pól formularza {count}'
@@ -88,39 +86,31 @@ pl_PL:
     TITLE: Tytuł
     TYPE: Typ
     TYPE_EMPTY: 'Wybierz typ pola'
-    VALIDATION: Validation
     'YES': Tak
     db_Name: Nazwa
-    db_Placeholder: Placeholder
     db_RightTitle: 'Right Title'
     db_Title: Tytuł
     has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Checkboxes
     PLURALS:
       few: 'Pól wyboru {count}'
       many: "Pól wyboru {count}\_"
       one: 'Pole wyboru'
       other: "Pola wyboru {count}\_"
-    SINGULARNAME: 'Checkbox Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
     PLURALS:
       few: "Grup pól wyboru {count}\_"
       many: "Grup pól wyboru {count}\_"
       one: 'Grupa pól wyboru'
       other: 'Grupy pól wyboru {count}'
-    SINGULARNAME: 'Checkbox Group'
   SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     DEFAULT: 'Domyślna wartość'
     EMPTY_STRING: 'Pusty tekst'
-    PLURALNAME: 'Country Dropdowns'
     PLURALS:
       few: 'List krajów {count}'
       many: 'List krajów {count}'
       one: 'Lista krajów'
       other: 'Lista krajów {count}'
-    SINGULARNAME: 'Country Dropdown'
     USE_EMPTY_STRING: 'Ustaw domyślny pusty tekst'
   SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
     PLURALNAME: 'Pola daty'
@@ -131,21 +121,17 @@ pl_PL:
       other: 'Pól daty {count}'
     SINGULARNAME: 'Pole daty'
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Dropdowns
     PLURALS:
       few: 'Menu rozwijanych {count}'
       many: 'Menu rozwijanych {count}'
       one: 'Menu rozwijane'
       other: 'Menu rozwijane {count}'
-    SINGULARNAME: 'Dropdown Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: 'Email Fields'
     PLURALS:
       few: 'Pola e-mail {count}'
       many: 'Pola e-mail {count}'
       one: 'Pole e-mail'
       other: 'Pola e-mail {count}'
-    SINGULARNAME: 'Email Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
     PLURALNAME: 'Edytowalne grupy pól'
     PLURALS:
@@ -153,17 +139,14 @@ pl_PL:
       many: 'Edytowalne grupy pól {count}'
       one: 'Edytowalna grupa pól'
       other: 'Edytowalne grupy pól {count}'
-    SINGULARNAME: 'Editable Field Group'
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     FIELD_GROUP_END: '{group} koniec'
     FIELD_GROUP_START: 'Grupa {group}'
-    PLURALNAME: 'Editable Field Group Ends'
     PLURALS:
       few: '{count} Editable Field Group Ends'
       many: '{count} Editable Field Group Ends'
       one: 'An Editable Field Group End'
       other: '{count} Editable Field Group Ends'
-    SINGULARNAME: 'Editable Field Group End'
     belongs_to_Group: Grupa
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     ANYONE: 'Nieograniczony dostęp, przesłane pliki będą widoczne dla wszystkich'
@@ -200,36 +183,28 @@ pl_PL:
     STEP_TITLE: 'Strona {page}'
     TITLE_FIRST: 'Pierwsza strona'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    CONTENT: HTML
-    HIDEFROMREPORT: 'Hide from reports?'
     HIDELABEL: 'Ukryć etykietę „Tytuł” w interfejsie użytkownika?'
-    PLURALNAME: 'HTML Blocks'
     PLURALS:
       few: 'Bloki HTML {count}'
       many: 'Bloki HTML {count}'
       one: 'Blok HTML'
       other: 'Bloki HTML {count}'
-    SINGULARNAME: 'HTML Block'
     db_Content: Zawartość
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    PLURALNAME: 'Member List Fields'
     PLURALS:
       few: 'Pola listy członków {count}'
       many: 'Pola listy członków {count}'
       one: 'Pole listy członków'
       other: 'Pola listy członków {count}'
-    SINGULARNAME: 'Member List Field'
     has_one_Group: Grupa
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     DEFAULT: 'Wybrane domyślnie?'
     OPTIONSTAB: Opcje
-    PLURALNAME: 'Editable Multiple Option Fields'
     PLURALS:
       few: 'Edytowalne pola wielu opcji {count}'
       many: 'Edytowalne pola wielu opcji {count}'
       one: 'Edytowalne pole wielu opcji'
       other: 'Edytowalne pola wielu opcji {count}'
-    SINGULARNAME: 'Editable Multiple Option Field'
     TITLE: Tytuł
     VALUE: Wartość
     has_many_Options: Opcje
@@ -308,32 +283,25 @@ pl_PL:
     SINGULARNAME: 'Stan odbiorcy wiadomości e-mail'
     has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
-    DOWNLOADFILE: 'Download File'
-    PLURALNAME: 'Submitted File Fields'
     PLURALS:
       few: 'Przesłanych pól formularza {count}'
       many: 'Przesłanych pól formularza {count}'
       one: 'Przesłane pole formularza'
       other: 'Przesłane pola formularza {count}'
-    SINGULARNAME: 'Submitted File Field'
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
     PLURALS:
       few: 'Przesłane pola formularza {count}'
       many: 'Przesłane pola formularza {count}'
       one: 'Przesłane pola formularza'
       other: 'Przesłane pola formularza {count}'
-    SINGULARNAME: 'Submitted Form'
     SUBMITTER: Wysyłający
     has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
-    PLURALNAME: 'Submitted Form Fields'
     PLURALS:
       few: 'Przesłanych pól formularza'
       many: 'Przesłanych pól formularza {count}'
       one: 'Przesłane pole formularza'
       other: 'Przesłane pola formularza {count}'
-    SINGULARNAME: 'Submitted Form Field'
     db_Name: Nazwa
     db_Title: Tytuł
     db_Value: Wartość
@@ -346,23 +314,16 @@ pl_PL:
     DISABLEAUTHENICATEDFINISHACTION: 'Wyłącz uwierzytelnienie na koniec działania'
     DISABLECSRFSECURITYTOKEN: 'Wyłącz token CSRF'
     DISPLAYERRORMESSAGESATTOP: 'Wyświetlać komunikaty o błędach nad formularzem?'
-    EMAILADDRESS: Email
-    EMAILBODY: Body
-    EMAILBODYHTML: Body
-    EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
     EMAILTEMPLATE: 'Szablon e-mail'
     EMAIL_RECIPIENT_UNSAVED_FORM: 'Po zapisaniu tego rekordu będziesz mógł wybierać spośród prawidłowych pól formularza.'
     ENABLELIVEVALIDATION: 'Włącz sprawdzanie na żywo'
-    EmailFromContent: 'The from address allows you to set who the email comes from. On most servers this will need to be set to an email address on the same domain name as your site. For example on yoursite.com the from address may need to be something@yoursite.com. You can however, set any email address you wish as the reply to address.'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     HIDEINVISIBLEFIELDS: 'Ukryć niewidoczne pola przed e-mailem?'
     NORECIPIENTS: 'Ostrzeżenie: nie skonfigurowałeś żadnych odbiorców. Przesłane formularze mogą zostać pominięte.'
     ONCOMPLETELABEL: 'Pokaż po zakończeniu'
     ONCOMPLETEMESSAGE: 'Dziękujemy, otrzymaliśmy Twoje zgłoszenie.'
-    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
-    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     PLURALNAME: 'Podstawowa strona'
     PLURALS:
       few: 'Zdefiniowanych formularzy {count}'
@@ -385,11 +346,9 @@ pl_PL:
     SENDIFOR: 'Któreś warunki są spełnione'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SHOWCLEARFORM: 'Pokaż przycisk – wyczyść formularz'
-    SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Zgłoszenia
-    SUBMITBUTTON: Submit
-    TEXTONCLEAR: 'Napis na przycisku ''wyczyść'':'
-    TEXTONSUBMIT: 'Napis na przycisku ''submit'':'
+    TEXTONCLEAR: "Napis na przycisku 'wyczyść':"
+    TEXTONSUBMIT: "Napis na przycisku 'submit':"
     TYPEREPLY: 'Podaj adres odpowiedzi'
     TYPESUBJECT: 'Podaj temat'
     TYPETO: 'Podaj adres'

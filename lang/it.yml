@@ -5,7 +5,7 @@ it:
     ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
-    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLEAUTHENICATEDFINISHACTION: "Disabilita autenticazione sull'azione finale"
     DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
     DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
     ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
@@ -27,11 +27,11 @@ it:
     FORMFIELDS: 'Campi del modulo'
     has_many_Fields: Campi
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Il campo richiesto ''{name}'' non può essere posizionato all''interno di una pagina condizionale'
-    NO_PAGE: 'Il campo ''{name}'' è stato trovato prima di una qualunque pagina'
-    UNEXPECTED_BREAK: 'Interruzione di pagina ''{name}'' inattesa all''interno del campo nidificato ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' trovato senza un gruppo corrispondente'
-    WRONG_GROUP_END: '''{name}'' trovato chiude il gruppo sbagliato ''{group}'''
+    CONDITIONAL_REQUIRED: "Il campo richiesto '{name}' non può essere posizionato all'interno di una pagina condizionale"
+    NO_PAGE: "Il campo '{name}' è stato trovato prima di una qualunque pagina"
+    UNEXPECTED_BREAK: "Interruzione di pagina '{name}' inattesa all'interno del campo nidificato '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' trovato senza un gruppo corrispondente"
+    WRONG_GROUP_END: "'{name}' trovato chiude il gruppo sbagliato '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filtra
     FILTERSUBMISSIONS: 'Filtra invii..'
@@ -57,7 +57,6 @@ it:
     FIELDISREQUIRED: '{name} è richiesto'
     GROUP: Gruppo
     NAME: Nome
-    'NO': 'No'
     PLACEHOLDER: Segnaposto
     PLURALNAME: 'Campi modulo modificabili'
     REQUIRED: 'Questo campo è obbligatorio?'
@@ -119,9 +118,8 @@ it:
     STEP_TITLE: 'Pagina {page}'
     TITLE_FIRST: 'Prima pagina'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    CONTENT: HTML
     HIDEFROMREPORT: 'Nascondi dai rapporti?'
-    HIDELABEL: 'Nascondi etichetta ''Titolo'' dal frontend?'
+    HIDELABEL: "Nascondi etichetta 'Titolo' dal frontend?"
     PLURALNAME: 'Blocchi HTML'
     SINGULARNAME: 'Blocco HTML'
     db_Content: Contenuto
@@ -162,17 +160,17 @@ it:
     TEXTLENGTH: 'Lunghezza testo consentita'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
     CUSTOMRULESTAB: 'Regole personalizzate'
-    EMAILCONTENTTAB: 'Contenuto dell''e-mail'
-    EMAILDETAILSTAB: 'Dettagli dell''e-mail'
-    PLURALNAME: 'Destinatari e-mail del modulo definito dall''utente'
-    SINGULARNAME: 'Destinatario e-mail del modulo definito dall''utente'
+    EMAILCONTENTTAB: "Contenuto dell'e-mail"
+    EMAILDETAILSTAB: "Dettagli dell'e-mail"
+    PLURALNAME: "Destinatari e-mail del modulo definito dall'utente"
+    SINGULARNAME: "Destinatario e-mail del modulo definito dall'utente"
     db_EmailAddress: 'Indirizzo email'
     db_EmailSubject: 'Oggetto e-mail'
     db_EmailTemplate: 'Schema e-mail'
     has_one_Form: Modulo
   SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
-    PLURALNAME: 'Condizioni per il destinatario del modulo definito dall''utente'
-    SINGULARNAME: 'Condizione per il destinatario del modulo definito dall''utente'
+    PLURALNAME: "Condizioni per il destinatario del modulo definito dall'utente"
+    SINGULARNAME: "Condizione per il destinatario del modulo definito dall'utente"
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Scarica file'
@@ -194,7 +192,7 @@ it:
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
-    DISABLEAUTHENICATEDFINISHACTION: 'Disabilita autenticazione sull''azione finale'
+    DISABLEAUTHENICATEDFINISHACTION: "Disabilita autenticazione sull'azione finale"
     DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'
     DISPLAYERRORMESSAGESATTOP: 'Mostra messaggi di errore sopra il modulo?'
     EMAILADDRESS: E-mail
@@ -204,20 +202,20 @@ it:
     EMAILSUBJECT: 'Oggetto e-mail'
     EMAILTEMPLATE: 'Schema e-mail'
     ENABLELIVEVALIDATION: 'Abilita la validazione in tempo reale'
-    EmailFromContent: 'L''indirizzo mittente ti permette di impostare da chi viene l''e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l''indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere.'
+    EmailFromContent: "L'indirizzo mittente ti permette di impostare da chi viene l'e-mail. Su molti server questo sarà impostato su un indirizzo e-mail dello stesso nome a dominio del tuo sito. Per esempio su iltuosito.com l'indirizzo mittente potrebbe essere qualcuno@iltuosito.com. Puoi, comunque, impostare qualunque indirizzo email desideri come indirizzo a cui rispondere."
     FROMADDRESS: 'Manda e-mail da'
-    HIDEFORMDATA: 'Nascondi dati del modulo nell''email?'
+    HIDEFORMDATA: "Nascondi dati del modulo nell'email?"
     NORECIPIENTS: 'Attenzione: Non hai configurato nessun destinatario. Potresti perderti delle risposte al modulo.'
     ONCOMPLETELABEL: 'Mostra al completamento'
     ORSELECTAFIELDTOUSEASFROM: '.. o seleziona un campo da usare come indirizzo a cui rispondere'
     ORSELECTAFIELDTOUSEASTO: '.. o seleziona un campo da usare come indirizzo destinatario'
     PLURALNAME: 'Pagine Base'
     PREVIEW_EMAIL: 'Anteprima e-mail'
-    PREVIEW_EMAIL_DESCRIPTION: 'Nota: Le modifiche non salvate non appariranno nell''anteprima'
-    PREVIEW_EMAIL_UNAVAILABLE: 'Puoi vedere un''anteprima di questa email dopo aver salvato il destinatario.'
+    PREVIEW_EMAIL_DESCRIPTION: "Nota: Le modifiche non salvate non appariranno nell'anteprima"
+    PREVIEW_EMAIL_UNAVAILABLE: "Puoi vedere un'anteprima di questa email dopo aver salvato il destinatario."
     RECIPIENTS: Destinatari
     REPLYADDRESS: 'Indirizzo e-mail a cui rispondere'
-    REPLYADDRESS_DESCRIPTION: 'L''indirizzo email a cui il destinatario può ''rispondere''.'
+    REPLYADDRESS_DESCRIPTION: "L'indirizzo email a cui il destinatario può 'rispondere'."
     RulesDescription: 'Le email saranno spedite solo al destinatario se sono soddisfatte le regole personalizzate. Se non è definita nessuna regola, il destinatario riceverà notifiche per ogni invio.'
     SAVESUBMISSIONS: 'Disabilita il salvataggio degli invii sul server'
     SELECTAFIELDTOSETSUBJECT: '.. o seleziona un campo da usare come oggetto'
@@ -226,16 +224,16 @@ it:
     SENDIF: 'Condizione di invio'
     SENDIFAND: 'Tutte le condizioni sono vere'
     SENDIFOR: 'Una qualunque delle condizioni è vera'
-    SENDPLAIN: 'Manda e-mail come testo semplice? (L''HTML verrà rimosso)'
+    SENDPLAIN: "Manda e-mail come testo semplice? (L'HTML verrà rimosso)"
     SHOWCLEARFORM: 'Mostra il pulsante per azzerare il modulo'
-    SINGULARNAME: 'Modulo definito dall''utente'
+    SINGULARNAME: "Modulo definito dall'utente"
     SUBMISSIONS: Invii
     SUBMITBUTTON: Invia
     TEXTONCLEAR: 'Testo sul pulsante di azzeramento:'
     TEXTONSUBMIT: 'Testo sul pulsante di invio:'
-    TYPEREPLY: 'Inserisci l''e-mail di risposta'
-    TYPESUBJECT: 'Inserisci l''oggetto'
-    TYPETO: 'Inserisci l''e-mail destinatario'
+    TYPEREPLY: "Inserisci l'e-mail di risposta"
+    TYPESUBJECT: "Inserisci l'oggetto"
+    TYPETO: "Inserisci l'e-mail destinatario"
     db_EnableLiveValidation: 'Abilita la validazione in tempo reale'
     has_many_Fields: Campi
     has_many_Submissions: Invii

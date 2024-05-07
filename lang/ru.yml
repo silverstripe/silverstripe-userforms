@@ -65,7 +65,6 @@ ru:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Сбросить
     CONFIGURATION: Конфигурация
-    EMAILADDRESS: Email
     EMAILFROM: От
     EMAILSUBJECT: 'Тема письма'
     PLURALNAME: 'Базовые страницы'

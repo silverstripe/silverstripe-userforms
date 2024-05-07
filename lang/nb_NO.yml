@@ -10,10 +10,8 @@ nb_NO:
     SUBMITBUTTON: Send
     TEXTONSUBMIT: 'Tekst på "send" knapp'
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FILTERSUBMISSIONS: 'Filtrer innsendte...'
     FROM: Fra
-    RESET: Reset
     WHEREVALUEIS: 'hvor verdi er...'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Valgt som standard?'
@@ -105,8 +103,6 @@ nb_NO:
     CONFIGURATION: Konfigurasjon
     DESCRIPTION: 'Legg til konfigurerbart skjema'
     EMAILADDRESS: Epost
-    EMAILBODY: Body
-    EMAILBODYHTML: Body
     EMAILFROM: Fra
     EMAILSUBJECT: 'Epost emne'
     ENABLELIVEVALIDATION: 'Slå på sanntid validering'
