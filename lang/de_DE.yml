@@ -10,10 +10,10 @@ de_DE:
     ONCOMPLETELABEL: 'Nach Vervollständigung anzeigen'
     RECIPIENTS: Empfänger
     SAVESUBMISSIONS: 'Deaktiviere Speichern von Einsendungen auf dem Server'
-    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
+    SHOWCLEARFORM: "Zeige 'Löschen'-Button"
     SUBMISSIONS: Einsendungen
     SUBMITBUTTON: Absenden
-    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONCLEAR: "Text auf 'Löschen'-Button"
     TEXTONSUBMIT: 'Text auf Absende-Button'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Abbrechen
@@ -26,7 +26,6 @@ de_DE:
     FORMFIELDS: Formularfelder
     has_many_Fields: Felder
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FILTERSUBMISSIONS: 'Einreichungen filtern..'
     FROM: Formular
     RESET: Zurücksetzen
@@ -49,7 +48,6 @@ de_DE:
     FIELDISREQUIRED: '{name} ist ein Pflichtfeld'
     GROUP: Gruppe
     INITIALVISIBILITY: 'Interne Sichtbarkeit'
-    NAME: Name
     'NO': Nein
     PLACEHOLDER: Platzhalter
     PLURALNAME: 'Editierbare Formularfelder'
@@ -62,7 +60,6 @@ de_DE:
     TYPE_EMPTY: 'Wähle Feld-Typ'
     VALIDATION: Validierung
     'YES': Ja
-    db_Name: Name
     db_Placeholder: Platzhalter
     db_RightTitle: 'Titel rechts'
     db_Title: Titel
@@ -81,7 +78,6 @@ de_DE:
     PLURALNAME: Datumsfelder
     SINGULARNAME: Datumsfeld
   SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Dropdowns
     SINGULARNAME: 'Dropdown Feld'
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: E-Mail-Felder
@@ -108,9 +104,8 @@ de_DE:
     STEP_TITLE: 'Seite {page}'
     TITLE_FIRST: 'Erste Seite'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    CONTENT: HTML
     HIDEFROMREPORT: 'Nicht in Berichten anzeigen?'
-    HIDELABEL: '''Titel''-Label in Frontend verbergen?'
+    HIDELABEL: "'Titel'-Label in Frontend verbergen?"
     PLURALNAME: HTML-Blöcke
     SINGULARNAME: HTML-Block
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
@@ -134,7 +129,6 @@ de_DE:
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     PLURALNAME: 'Editierbare Optionen'
     SINGULARNAME: 'Editierbare Option'
-    db_Name: Name
     db_Title: Titel
     db_Value: Wert
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
@@ -177,7 +171,6 @@ de_DE:
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
     PLURALNAME: 'Abgesendete Formularfelder'
     SINGULARNAME: 'Abgesendetes Formularfeld'
-    db_Name: Name
     db_Title: Titel
     db_Value: Wert
   SilverStripe\UserForms\Model\UserDefinedForm:
@@ -216,11 +209,11 @@ de_DE:
     SENDIFAND: 'Alle Bedingungen sind wahr'
     SENDIFOR: 'Beliebige Bedingung ist wahr'
     SENDPLAIN: 'E-Mail als Text versenden (HTML wird entfernt)'
-    SHOWCLEARFORM: 'Zeige ''Löschen''-Button'
+    SHOWCLEARFORM: "Zeige 'Löschen'-Button"
     SINGULARNAME: 'Anpassbares Formular'
     SUBMISSIONS: Einsendungen
     SUBMITBUTTON: Senden
-    TEXTONCLEAR: 'Text auf ''Löschen''-Button'
+    TEXTONCLEAR: "Text auf 'Löschen'-Button"
     TEXTONSUBMIT: 'Text auf Absende-Button'
     TYPEREPLY: 'Antwort-Adresse eingeben'
     TYPESUBJECT: 'Betreff eingeben'

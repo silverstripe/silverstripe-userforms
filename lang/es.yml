@@ -15,7 +15,6 @@ es:
     FIELDISREQUIRED: 'Se requiere {name} '
     GROUP: Grupo
     NAME: Nombre
-    'NO': 'No'
     TITLE: Título
     TYPE: Tipo
     'YES': Sí

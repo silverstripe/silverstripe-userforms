@@ -9,7 +9,6 @@ de:
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Abbrechen
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FROM: Von
     RESET: Zurücksetzen
   SilverStripe\UserForms\Model\EditableCustomRule:
@@ -18,12 +17,10 @@ de:
     CUSTOMOPTIONS: Optionen
     FIELDISREQUIRED: '{name} muss ausgefüllt werden'
     GROUP: Gruppe
-    NAME: Name
     'NO': Nein
     TITLE: Titel
     TYPE: Typ
     'YES': Ja
-    db_Name: Name
     db_Sort: Sortierung
     db_Title: Titel
     has_one_Parent: Übergeordnet
@@ -46,7 +43,6 @@ de:
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: bis
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    db_Name: Name
     db_Sort: Sortierung
     db_Title: Titel
     has_one_Parent: Übergeordnet
@@ -62,7 +58,6 @@ de:
   SilverStripe\UserForms\Model\Submission\SubmittedForm:
     has_one_Parent: Übergeordnet
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
-    db_Name: Name
     db_Title: Titel
     has_one_Parent: Übergeordnet
   SilverStripe\UserForms\Model\UserDefinedForm:

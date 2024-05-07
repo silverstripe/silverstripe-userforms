@@ -7,7 +7,6 @@ hr:
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Odustani
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FROM: Od
     RESET: Resetiraj
   SilverStripe\UserForms\Model\EditableCustomRule:
@@ -55,6 +54,5 @@ hr:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Očisti
     CONFIGURATION: Konfiguracija
-    EMAILADDRESS: Email
     EMAILFROM: Od
     PLURALNAME: 'Osnovne stranice'
