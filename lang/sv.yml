@@ -17,7 +17,6 @@ sv:
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Avbryt
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FILTERSUBMISSIONS: 'Filtrera inskickade svar'
     FROM: Från
     RESET: Rensa
