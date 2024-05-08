@@ -38,13 +38,12 @@ sl:
     belongs_to_SubmittedFileField: 'Polje za nalaganje datotek'
     db_UserFormUpload: 'Nalaganje uporabniškega obrazca'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Obvezno polje ''{name}'' ne more biti umeščeno znotraj pogojene strani'
-    NO_PAGE: 'Polje ''{name}'' je pred katero koli stranjo'
-    UNEXPECTED_BREAK: 'Nepričakovan prelom strani ''{name}'' znotraj vgnezdenega polja ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' nima pripadajoče skupine'
-    WRONG_GROUP_END: '''{name}'' zapira napačno skupino ''{group}'''
+    CONDITIONAL_REQUIRED: "Obvezno polje '{name}' ne more biti umeščeno znotraj pogojene strani"
+    NO_PAGE: "Polje '{name}' je pred katero koli stranjo"
+    UNEXPECTED_BREAK: "Nepričakovan prelom strani '{name}' znotraj vgnezdenega polja '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' nima pripadajoče skupine"
+    WRONG_GROUP_END: "'{name}' zapira napačno skupino '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
-    FILTER: Filter
     FILTERSUBMISSIONS: 'Filtriraj predložitve.'
     FROM: Od
     RESET: Ponastavi
@@ -231,9 +230,8 @@ sl:
     STEP_TITLE: 'Stran {page}'
     TITLE_FIRST: 'Prva stran'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    CONTENT: HTML
     HIDEFROMREPORT: 'Izključi iz poročil?'
-    HIDELABEL: 'Skrij oznako ''Naslov'' na frontendu?'
+    HIDELABEL: "Skrij oznako 'Naslov' na frontendu?"
     PLURALNAME: 'HTML bloki'
     PLURALS:
       few: '{count} HTML blokov'
@@ -424,8 +422,8 @@ sl:
     NORECIPIENTS: 'Opozorilo: Niste nastavili prejemnikov. Posledično bodo lahko manjkali podatki v obrazcu.'
     ONCOMPLETELABEL: 'Prikaži ob zaključku'
     ONCOMPLETEMESSAGE: 'Hvala, zabeležili smo vaš vnos.'
-    ORSELECTAFIELDTOUSEASFROM: '.. ali izberite polje, ki naj se uporabi kot ''od'''
-    ORSELECTAFIELDTOUSEASTO: '.. ali izberite polje, ki naj se uporabi kot ''za'''
+    ORSELECTAFIELDTOUSEASFROM: ".. ali izberite polje, ki naj se uporabi kot 'od'"
+    ORSELECTAFIELDTOUSEASTO: ".. ali izberite polje, ki naj se uporabi kot 'za'"
     PLURALNAME: 'Izvorne strani'
     PLURALS:
       few: '{count} izvornih strani'
@@ -437,7 +435,7 @@ sl:
     PREVIEW_EMAIL_UNAVAILABLE: 'To e-sporočilo si lahko predogledate šele ko shranite prejemnika.'
     RECIPIENTS: Prejemniki
     REPLYADDRESS: 'E-naslov za odgovor'
-    REPLYADDRESS_DESCRIPTION: 'E-naslov, na katerega lahko prejemnik ''odgovori''.'
+    REPLYADDRESS_DESCRIPTION: "E-naslov, na katerega lahko prejemnik 'odgovori'."
     RulesDescription: 'E-sporočila bodo poslana prejemnikom le, če so upoštevana prilagojena pravila. Če pravila niso določena, bo ta prejemnik prejel obvestilo za vsako oddajo.'
     SAVESUBMISSIONS: 'Onemogoči shranjevanje podatkov na strežnik'
     SELECTAFIELDTOSETSUBJECT: '.. ali izberi polje, ki naj se uporabi kot predmet'

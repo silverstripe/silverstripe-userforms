@@ -80,7 +80,6 @@ nl_NL:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Herstellen
     DESCRIPTION: 'Formulier pagina'
-    EMAILADDRESS: Email
     EMAILBODY: Tekst
     EMAILFROM: Van
     EMAILSUBJECT: Onderwerp

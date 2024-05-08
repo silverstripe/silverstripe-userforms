@@ -25,7 +25,6 @@ fi_FI:
     FOLDER_OPTIONS_TITLE: 'Lomakkeen kansion asetukset'
     FORM_ACTION_CONFIRM: 'Tallenna ja jatka'
     INVALID_REQUEST: 'Pyyntö oli virheellinen'
-    MENUTITLE: SilverStripe\UserForms\Control\UserDefinedForm
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Lisää kenttä'
     ADD_FIELD_GROUP: 'Lisää kenttäryhmä'
@@ -33,11 +32,11 @@ fi_FI:
     FORMFIELDS: Lomakekentät
     has_many_Fields: Kentät
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: 'Pakollista kenttää ''{name}'' ei voida sijoittaa ehdolliseen sivuun'
-    NO_PAGE: 'Kenttä ''{name}'' löytyi ennen yhtäkään sivua'
-    UNEXPECTED_BREAK: 'Odottamaton sivunvaihto ''{name}'' sisäkkäisestä kentästä: ''{group}'''
-    UNEXPECTED_GROUP_END: '''{name}'' löydetty ilman vastaavaa ryhmää'
-    WRONG_GROUP_END: '''{name}'' sulkee väärän ryhmän: ''{group}'''
+    CONDITIONAL_REQUIRED: "Pakollista kenttää '{name}' ei voida sijoittaa ehdolliseen sivuun"
+    NO_PAGE: "Kenttä '{name}' löytyi ennen yhtäkään sivua"
+    UNEXPECTED_BREAK: "Odottamaton sivunvaihto '{name}' sisäkkäisestä kentästä: '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' löydetty ilman vastaavaa ryhmää"
+    WRONG_GROUP_END: "'{name}' sulkee väärän ryhmän: '{group}'"
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Suodatin
     FILTERSUBMISSIONS: 'Suodata vastaanotettuja lomakkeita..'
@@ -54,7 +53,7 @@ fi_FI:
     CUSTOMOPTIONS: Asetukset
     CUSTOMRULES: 'Mukautetut säännöt'
     DEFAULT: Oletusarvo
-    DEFAULTTOTODAY: 'Oletus ''Tänään''?'
+    DEFAULTTOTODAY: "Oletus 'Tänään'?"
     DISPLAYIF: 'Päivitä näkyvyys kun'
     EXTRACLASS_MULTIPLE: 'Erota jokainen CSS-luokka yhdellä välilyönnillä'
     EXTRACLASS_SELECT: 'Valitse sallittujen tyylien listalta'
@@ -168,9 +167,8 @@ fi_FI:
     STEP_TITLE: 'Sivu {page}'
     TITLE_FIRST: 'Ensimmäinen sivu'
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    CONTENT: HTML
     HIDEFROMREPORT: 'Piilota yhteenvedoista?'
-    HIDELABEL: 'Piilota ''Otsikko'' näytettävältä lomakkeelta?'
+    HIDELABEL: "Piilota 'Otsikko' näytettävältä lomakkeelta?"
     PLURALNAME: HTML-alueet
     SINGULARNAME: HTML-alue
     db_Content: Sisältö

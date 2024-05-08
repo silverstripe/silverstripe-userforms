@@ -36,7 +36,6 @@ es_ES:
     FIELDISREQUIRED: '{name} es requerido'
     GROUP: Grupo
     INITIALVISIBILITY: 'Visibilidad inicial'
-    'NO': 'No'
     PLURALNAME: 'Campos de formulario editables'
     REQUIRED: 'Este campo es necesario para este formulario y no puede ser borrado'
     REQUIRED_DESCRIPTION: 'Por favor tomar en cuenta que los campos con condiciones no pueden marcarse como requeridos'
@@ -135,7 +134,6 @@ es_ES:
     ADDEMAILRECIPIENT: 'Agregar destinatario de email'
     CONFIGURATION: Configuración
     DESCRIPTION: 'Agrega un formulario personalizable.'
-    EMAILADDRESS: Email
     EMAILBODY: Cuerpo
     EMAILBODYHTML: Cuerpo
     EMAILFROM: De

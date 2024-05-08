@@ -3,132 +3,60 @@ et_EE:
     TABMAIN: Avaleht
   SilverStripe\UserForms:
     ONCOMPLETELABEL: 'Näita lõpetamisel'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
-    SHOWCLEARFORM: 'Show Clear Form Button'
     SUBMISSIONS: Kaastööd
-    SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Kiri saatmise nupul:'
   SilverStripe\UserForms\Control\UserDefinedFormAdmin:
     CANCEL: Loobu
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Filtreeri
-    FROM: From
     RESET: Lähtesta
   SilverStripe\UserForms\Model\EditableFormField:
-    CHECKEDBYDEFAULT: 'Checked by Default?'
-    CUSTOMERROR: 'Custom Error Message'
-    CUSTOMOPTIONS: Options
-    CUSTOMRULES: 'Custom Rules'
-    DEFAULTTOTODAY: 'Default to Today?'
     GROUP: Grupp
     NAME: Nimi
     'NO': Ei
-    PLURALNAME: 'Editable Form Fields'
     REQUIRED: 'See väli on vormis vajalik ja seda ei saa kustutada'
-    SINGULARNAME: 'Editable Form Field'
     TITLE: Pealkiri
-    VALIDATION: Validation
     'YES': Jah
     db_Name: Nimi
     db_Title: Pealkiri
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
-    PLURALNAME: Checkboxes
-    SINGULARNAME: 'Checkbox Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
-    PLURALNAME: 'Checkbox Groups'
-    SINGULARNAME: 'Checkbox Group'
-  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
-    PLURALNAME: 'Country Dropdowns'
-    SINGULARNAME: 'Country Dropdown'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
-    PLURALNAME: 'Date Fields'
-    SINGULARNAME: 'Date Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
-    PLURALNAME: Dropdowns
-    SINGULARNAME: 'Dropdown Field'
-  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
-    PLURALNAME: 'Email Fields'
-    SINGULARNAME: 'Email Field'
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Grupp
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    PLURALNAME: 'File Upload Fields'
-    SINGULARNAME: 'File Upload Field'
     has_one_Folder: Kaust
-  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
-    LEVEL: 'Select Heading Level'
-    PLURALNAME: Headings
-    SINGULARNAME: Heading
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Eelmine
     STEP_PREV: Eelmine
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
-    HIDEFROMREPORT: 'Hide from reports?'
-    PLURALNAME: 'HTML Blocks'
-    SINGULARNAME: 'HTML Block'
     db_Content: Sisu
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
-    PLURALNAME: 'Member List Fields'
-    SINGULARNAME: 'Member List Field'
     has_one_Group: Grupp
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
-    OPTIONSTAB: Options
-    PLURALNAME: 'Editable Multiple Option Fields'
-    SINGULARNAME: 'Editable Multiple Option Field'
     TITLE: Pealkiri
-    VALUE: Value
-    has_many_Options: Options
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
     RANGE_TO: kuni
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
-    PLURALNAME: 'Editable Options'
-    SINGULARNAME: 'Editable Option'
     db_Name: Nimi
     db_Title: Pealkiri
-    db_Value: Value
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
     NUMBERROWS: 'Arv ridu'
-    PLURALNAME: 'Text Fields'
     RANGE_TO: kuni
-    SINGULARNAME: 'Text Field'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    CUSTOMRULESTAB: 'Custom Rules'
     PLURALNAME: 'User Defined Form Email Recipients'
     SINGULARNAME: 'User Defined Form Email Recipient'
     db_EmailAddress: 'E-posti aadressi'
     db_EmailSubject: 'Email Subject'
     has_one_Form: Vorm
-  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
-    DOWNLOADFILE: 'Download File'
-    PLURALNAME: 'Submitted File Fields'
-    SINGULARNAME: 'Submitted File Field'
-  SilverStripe\UserForms\Model\Submission\SubmittedForm:
-    PLURALNAME: 'Submitted Forms'
-    SINGULARNAME: 'Submitted Form'
   SilverStripe\UserForms\Model\Submission\SubmittedFormField:
-    PLURALNAME: 'Submitted Form Fields'
-    SINGULARNAME: 'Submitted Form Field'
     db_Name: Nimi
     db_Title: Pealkiri
-    db_Value: Value
   SilverStripe\UserForms\Model\UserDefinedForm:
-    EMAILADDRESS: Email
-    EMAILBODY: Body
-    EMAILBODYHTML: Body
-    EMAILFROM: From
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Näita lõpetamisel'
-    ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
-    ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
     PLURALNAME: 'User Defined Forms'
-    SAVESUBMISSIONS: 'Disable Saving Submissions to Server'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SHOWCLEARFORM: 'Show Clear Form Button'
-    SINGULARNAME: 'User Defined Form'
     SUBMISSIONS: Kaastööd
-    SUBMITBUTTON: Submit
     TEXTONSUBMIT: 'Kiri saatmise nupul:'
     has_many_Submissions: Kaastööd

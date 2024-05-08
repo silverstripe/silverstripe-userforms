@@ -6,7 +6,6 @@ id:
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTER: Saring
     FROM: Dari
-    RESET: Reset
   SilverStripe\UserForms\Model\EditableCustomRule:
     has_one_Parent: Induk
   SilverStripe\UserForms\Model\EditableFormField:
@@ -23,8 +22,6 @@ id:
     has_one_Parent: Induk
   SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
     belongs_to_Group: Grup
-  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
-    has_one_Folder: Folder
   SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
     STEP_NEXT: Selanjutnya
   SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
@@ -53,7 +50,6 @@ id:
     db_Value: Nilai
     has_one_Parent: Induk
   SilverStripe\UserForms\Model\UserDefinedForm:
-    EMAILADDRESS: Email
     EMAILFROM: Dari
     EMAILSUBJECT: 'Subyek email'
     PLURALNAME: 'Laman Dasar'
