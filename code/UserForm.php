@@ -234,9 +234,9 @@ trait UserForm
                 ->getComponentByType(GridFieldDetailForm::class)
                 ->setItemRequestClass(UserFormRecipientItemRequest::class);
 
-            $fields->addFieldsToTab('Root.FormOptions', $onCompleteFieldSet);
+            $fields->addFieldToTab('Root.FormOptions', $onCompleteFieldSet);
             $fields->addFieldToTab('Root.Recipients', $emailRecipients);
-            $fields->addFieldsToTab('Root.FormOptions', $this->getFormOptions());
+            $fields->addFieldsToTab('Root.FormOptions', $this->getFormOptions()->toArray());
 
             $submissions = $this->getSubmissionsGridField();
             $fields->findOrMakeTab('Root.Submissions')->setTitle(_t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SUBMISSIONS', 'Submissions'));

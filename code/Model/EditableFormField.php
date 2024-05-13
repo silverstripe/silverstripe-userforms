@@ -318,14 +318,14 @@ class EditableFormField extends DataObject
         // Validation
         $validationFields = $this->getFieldValidationOptions();
         if ($validationFields && $validationFields->count()) {
-            $fields->addFieldsToTab('Root.Validation', $validationFields);
+            $fields->addFieldsToTab('Root.Validation', $validationFields->toArray());
             $fields->fieldByName('Root.Validation')->setTitle(_t(__CLASS__.'.VALIDATION', 'Validation'));
         }
 
         // Add display rule fields
         $displayFields = $this->getDisplayRuleFields();
         if ($displayFields && $displayFields->count()) {
-            $fields->addFieldsToTab('Root.DisplayRules', $displayFields);
+            $fields->addFieldsToTab('Root.DisplayRules', $displayFields->toArray());
         }
 
         // Placeholder
