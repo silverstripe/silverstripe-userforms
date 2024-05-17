@@ -1,9 +1,9 @@
 name: Merge-up
 
 on:
-  # At 10:50 PM UTC, only on Thursday
+  # At 8:40 AM UTC, only on Wednesday
   schedule:
-    - cron: '50 22 * * 4'
+    - cron: '40 8 * * 3'
   workflow_dispatch:
 
 permissions: {}
