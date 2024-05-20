@@ -23,7 +23,7 @@ class UsedOnTableExtension extends Extension
      * @param array $ancestorDataObjects
      * @param DataObject $dataObject|null
      */
-    public function updateUsageDataObject(?DataObject &$dataObject)
+    protected function updateUsageDataObject(?DataObject &$dataObject)
     {
         if (!($dataObject instanceof SubmittedFileField)) {
             return;
@@ -41,7 +41,7 @@ class UsedOnTableExtension extends Extension
      * @param array $ancestorDataObjects
      * @param DataObject $dataObject
      */
-    public function updateUsageAncestorDataObjects(array &$ancestorDataObjects, DataObject $dataObject)
+    protected function updateUsageAncestorDataObjects(array &$ancestorDataObjects, DataObject $dataObject)
     {
         // SubmittedFileField was changed to a Submitted Form in updateUsageModifyOrExcludeDataObject()
         if (!($dataObject instanceof SubmittedForm)) {

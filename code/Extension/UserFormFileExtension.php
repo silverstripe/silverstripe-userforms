@@ -44,7 +44,7 @@ class UserFormFileExtension extends DataExtension
      * @param bool $value
      * @see File::isTrackedFormUpload(), UserDefinedFormController::process()
      */
-    public function updateTrackedFormUpload(&$value): void
+    protected function updateTrackedFormUpload(&$value): void
     {
         $file = $this->owner;
         if ($file->UserFormUpload != self::USER_FORM_UPLOAD_UNKNOWN) {
