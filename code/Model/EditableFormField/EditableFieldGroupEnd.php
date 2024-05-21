@@ -77,7 +77,7 @@ class EditableFieldGroupEnd extends EditableFormField
         return false;
     }
 
-    public function onAfterWrite()
+    protected function onAfterWrite()
     {
         parent::onAfterWrite();
 

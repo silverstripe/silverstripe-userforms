@@ -421,7 +421,7 @@ class EditableFormField extends DataObject
         );
     }
 
-    public function onBeforeWrite()
+    protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
 

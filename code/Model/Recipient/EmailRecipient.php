@@ -137,7 +137,7 @@ class EmailRecipient extends DataObject
         DB::query("UPDATE \"UserDefinedForm_EmailRecipient\" SET \"FormClass\" = 'Page' WHERE \"FormClass\" IS NULL");
     }
 
-    public function onBeforeWrite()
+    protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
 

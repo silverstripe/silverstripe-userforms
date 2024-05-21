@@ -275,7 +275,7 @@ class EditableFileField extends EditableFormField
         return round(static::get_php_max_file_size() / 1024 / 1024, 1);
     }
 
-    public function onBeforeWrite()
+    protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
 
