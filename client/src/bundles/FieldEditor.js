@@ -12,7 +12,7 @@ jQuery.entwine('ss', ($) => {
       let thisLevel = 0;
       let depth = 0;
       const $buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('sticky-buttons');
-      const navHeight = $('.cms-content-header.north').first().height()
+      const navHeight = $('.cms-content-header').first().height()
         + parseInt($('.sticky-buttons').css('padding-top'), 10);
       const fieldEditor = $('.uf-field-editor');
 
