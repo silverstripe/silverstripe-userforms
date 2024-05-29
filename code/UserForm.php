@@ -37,6 +37,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Configurable;
+use SilverStripe\Dev\Deprecation;
 
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
@@ -318,9 +319,11 @@ SQL;
             $config->addComponent(new BulkManager);
         }
 
-        $sort->setThrowExceptionOnBadDataType(false);
-        $filter->setThrowExceptionOnBadDataType(false);
-        $pagination->setThrowExceptionOnBadDataType(false);
+        Deprecation::withNoReplacement(function () use ($sort, $filter, $pagination) {
+            $sort->setThrowExceptionOnBadDataType(false);
+            $filter->setThrowExceptionOnBadDataType(false);
+            $pagination->setThrowExceptionOnBadDataType(false);
+        });
 
         // attach every column to the print view form
         $columns['Created'] = 'Created';
