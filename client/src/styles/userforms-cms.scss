@@ -1,5 +1,6 @@
 .uf-field-editor {
   padding-bottom: 0;
+  position: relative;
 
   // Row styles
   .grid-field__table {
@@ -122,14 +123,15 @@
     }
   }
 
-  .sticky-buttons {
-    position: fixed;
-    top: 73px;
+  .ss-gridfield-buttonrow-before {
+    position: sticky;
+    top: -1.5rem;
     z-index: 1;
+    transform: translate(0, -0.1rem);
+    width: calc(100% + 3.1rem) !important;
     background: $body-bg;
     border-bottom: 1px solid $border-color-light;
-    padding: 12px;
-    margin-left: -12px;
+    padding: 1rem;
 
     & button.action {
       margin-bottom: 0;
