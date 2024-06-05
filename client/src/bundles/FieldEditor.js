@@ -5,17 +5,10 @@
 import jQuery from 'jquery';
 
 jQuery.entwine('ss', ($) => {
-  let stickyHeaderInterval = null;
-
   $('.uf-field-editor .ss-gridfield-items').entwine({
     onmatch() {
       let thisLevel = 0;
       let depth = 0;
-      const $buttonrow = $('.uf-field-editor .ss-gridfield-buttonrow').addClass('sticky-buttons');
-      const navHeight = $('.cms-content-header.north').first().height()
-        + parseInt($('.sticky-buttons').css('padding-top'), 10);
-      const fieldEditor = $('.uf-field-editor');
-
       this._super();
 
       // Loop through all rows and set necessary styles
@@ -45,22 +38,9 @@ jQuery.entwine('ss', ($) => {
           $(el).toggleClass(`infieldgroup-level-${i}`, thisLevel >= i);
         }
       });
-
-      // Make sure gridfield buttons stick to top of page when user scrolls down
-      stickyHeaderInterval = setInterval(() => {
-        const offsetTop = fieldEditor.offset().top;
-        $buttonrow.width('100%');
-        if (offsetTop > navHeight || offsetTop === 0) {
-          $buttonrow.removeClass('sticky-buttons');
-        } else {
-          $buttonrow.addClass('sticky-buttons');
-        }
-      }, 300);
     },
     onunmatch() {
       this._super();
-
-      clearInterval(stickyHeaderInterval);
     },
   });
 
