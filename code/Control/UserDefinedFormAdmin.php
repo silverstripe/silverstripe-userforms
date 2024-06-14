@@ -297,7 +297,7 @@ class UserDefinedFormAdmin extends LeftAndMain
     private static function updateFormSubmissionFolderPermissions()
     {
         // ensure the FormSubmissions folder is only accessible to Administrators
-        $formSubmissionsFolder = Folder::find(self::config()->get('form_submissions_folder'));
+        $formSubmissionsFolder = Folder::find(static::config()->get('form_submissions_folder'));
         $formSubmissionsFolder->CanViewType = InheritedPermissions::ONLY_THESE_USERS;
         $formSubmissionsFolder->ViewerGroups()->removeAll();
         $formSubmissionsFolder->ViewerGroups()->add(Group::get_one(Group::class, ['"Code"' => 'administrators']));
@@ -314,16 +314,16 @@ class UserDefinedFormAdmin extends LeftAndMain
      */
     public static function getFormSubmissionFolder(string $subFolder = null): ?Folder
     {
-        $folderPath = self::config()->get('form_submissions_folder');
+        $folderPath = static::config()->get('form_submissions_folder');
         if ($subFolder) {
             $folderPath .= '/' . $subFolder;
         }
-        $formSubmissionsFolderExists = !!Folder::find(self::config()->get('form_submissions_folder'));
+        $formSubmissionsFolderExists = !!Folder::find(static::config()->get('form_submissions_folder'));
         $folder = Folder::find_or_make($folderPath);
 
         // Set default permissions if this is the first time we create the form submission folder
         if (!$formSubmissionsFolderExists) {
-            self::updateFormSubmissionFolderPermissions();
+            UserDefinedFormAdmin::updateFormSubmissionFolderPermissions();
             // Make sure we return the folder with the latest permission
             $folder = Folder::find($folderPath);
         }

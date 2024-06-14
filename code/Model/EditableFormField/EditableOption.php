@@ -55,7 +55,7 @@ class EditableOption extends DataObject
      */
     public static function allow_empty_values()
     {
-        return (bool) self::$allow_empty_values;
+        return (bool) EditableOption::$allow_empty_values;
     }
 
     /**
@@ -65,7 +65,7 @@ class EditableOption extends DataObject
      */
     public static function set_allow_empty_values($allow)
     {
-        self::$allow_empty_values = (bool) $allow;
+        EditableOption::$allow_empty_values = (bool) $allow;
     }
 
     /**
@@ -77,7 +77,7 @@ class EditableOption extends DataObject
     public function getValue()
     {
         $value = $this->getField('Value');
-        if (empty($value) && !self::allow_empty_values()) {
+        if (empty($value) && !EditableOption::allow_empty_values()) {
             return $this->Title;
         }
         return $value;
