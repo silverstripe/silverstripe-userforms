@@ -47,8 +47,8 @@ class UserFormFileExtension extends DataExtension
     public function updateTrackedFormUpload(&$value): void
     {
         $file = $this->owner;
-        if ($file->UserFormUpload != self::USER_FORM_UPLOAD_UNKNOWN) {
-            $value = $file->UserFormUpload == self::USER_FORM_UPLOAD_TRUE;
+        if ($file->UserFormUpload != UserFormFileExtension::USER_FORM_UPLOAD_UNKNOWN) {
+            $value = $file->UserFormUpload == UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
             return;
         }
         if ($file->ClassName == Folder::class) {
@@ -71,7 +71,7 @@ class UserFormFileExtension extends DataExtension
         }
         $tableName = Convert::raw2sql(DataObject::getSchema()->tableName(File::class));
         $column = 'UserFormUpload';
-        $enumVal = $value ? self::USER_FORM_UPLOAD_TRUE : self::USER_FORM_UPLOAD_FALSE;
+        $enumVal = $value ? UserFormFileExtension::USER_FORM_UPLOAD_TRUE : UserFormFileExtension::USER_FORM_UPLOAD_FALSE;
         SQLUpdate::create()
             ->setTable(sprintf('"%s"', $tableName))
             ->addWhere(['"ID" = ?' => [$this->owner->ID]])
