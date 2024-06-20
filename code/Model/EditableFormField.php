@@ -281,9 +281,9 @@ class EditableFormField extends DataObject
         $fields->fieldByName('Root.Main')->setTitle(_t('SilverStripe\\CMS\\Model\\SiteTree.TABMAIN', 'Main'));
 
         // Custom settings
-        if (!empty(self::$allowed_css)) {
+        if (!empty(EditableFormField::$allowed_css)) {
             $cssList = [];
-            foreach (self::$allowed_css as $k => $v) {
+            foreach (EditableFormField::$allowed_css as $k => $v) {
                 if (!is_array($v)) {
                     $cssList[$k]=$v;
                 } elseif ($k === $this->ClassName) {
@@ -351,7 +351,7 @@ class EditableFormField extends DataObject
 
         // make sure to migrate the class across (prior to v5.x)
         DB::query("UPDATE \"EditableFormField\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
-        if (self::has_extension(Versioned::class)) {
+        if (EditableFormField::has_extension(Versioned::class)) {
             DB::query("UPDATE \"EditableFormField_Live\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
             DB::query("UPDATE \"EditableFormField_Versions\" SET \"ParentClass\" = 'Page' WHERE \"ParentClass\" IS NULL");
         }
@@ -602,7 +602,7 @@ class EditableFormField extends DataObject
     {
         if (is_array($allowed)) {
             foreach ($allowed as $k => $v) {
-                self::$allowed_css[$k] = (!is_null($v)) ? $v : $k;
+                EditableFormField::$allowed_css[$k] = (!is_null($v)) ? $v : $k;
             }
         }
     }

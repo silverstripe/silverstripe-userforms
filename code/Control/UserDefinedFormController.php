@@ -59,7 +59,7 @@ class UserDefinedFormController extends PageController
     /**
      * Size that an uploaded file must not excede for it to be attached to an email
      * Follows PHP "shorthand bytes" definition rules.
-     * @see self::parseByteSizeString()
+     * @see UserDefinedFormController::parseByteSizeString()
      *
      * @var int
      * @config
@@ -314,7 +314,7 @@ JS
                         }
 
                         $file = Versioned::withVersionedMode(function () use ($field, $form) {
-                            $stage = Injector::inst()->get(self::class)->config()->get('file_upload_stage');
+                            $stage = Injector::inst()->get(UserDefinedFormController::class)->config()->get('file_upload_stage');
                             Versioned::set_stage($stage);
 
                             $foldername = $field->getFormField()->getFolderName();
