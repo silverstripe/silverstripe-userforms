@@ -9,6 +9,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading;
 use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
 use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
 
 /**
@@ -34,13 +35,17 @@ class UserFormRecipientItemRequest extends GridFieldDetailForm_ItemRequest
         Config::nest();
         Config::modify()->set(SSViewer::class, 'theme_enabled', true);
 
+        Requirements::clear();
+
         $content = $this->customise([
             'Body' => $this->record->getEmailBodyContent(),
             'HideFormData' => (bool) $this->record->HideFormData,
             'Fields' => $this->getPreviewFieldData()
         ])->renderWith($this->record->EmailTemplate);
 
+        Requirements::restore();
         Config::unnest();
+
 
         return $content;
     }
