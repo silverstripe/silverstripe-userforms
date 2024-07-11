@@ -1,4 +1,6 @@
-<$Tag class="CompositeField $extraClass<% if $ColumnCount %> multicolumn<% end_if %>"<% if $Tag == 'fieldset' && $RightTitle %> aria-describedby="{$Name}_right_title"<% end_if %>>
+<$Tag id="{$Name}"
+    class="CompositeField $extraClass<% if $ColumnCount %> multicolumn<% end_if %>"<% if $Tag == 'fieldset' && $RightTitle %>
+    aria-describedby="{$Name}_right_title"<% end_if %>>
 	<% if $Tag == 'fieldset' && $Legend %>
 		<legend>$Legend</legend>
 	<% end_if %>

@@ -1,3 +1,8 @@
 .DS_Store
 .sass-cache/
 node_modules/
+userforms-cms.js.map
+userforms.js.map
+userforms-cms.css.map
+userforms.css.map
+
