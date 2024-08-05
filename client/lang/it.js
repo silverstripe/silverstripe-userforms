@@ -13,7 +13,6 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.ADDING_OPTION": "In aggiunta di opzione",
     "UserForms.ADDING_RULE": "In aggiunta di una regola",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Tutti gli invii saranno permanentemente rimossi. Continuare?",
-    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Errore durante la creazione del campo",
     "UserForms.ERROR_CREATING_OPTION": "Errore durante la creazione dell'opzione",
     "UserForms.HIDE_OPTIONS": "Nascondi opzioni",

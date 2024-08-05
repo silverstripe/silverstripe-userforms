@@ -6,7 +6,6 @@
     "UserForms.ADDING_OPTION": "Lisätään valinta",
     "UserForms.ADDING_RULE": "Lisätään sääntö",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Kaikki lähetetyt viestit poistetaan pysyvästi. Jatketaanko?",
-    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Virhe luotaessa kenttää",
     "UserForms.ERROR_CREATING_OPTION": "Virhe luotaessa valintaa",
     "UserForms.HIDE_OPTIONS": "Piilota valinnat",
