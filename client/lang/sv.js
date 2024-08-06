@@ -13,11 +13,9 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.ADDING_OPTION": "Lägger till alternativ",
     "UserForms.ADDING_RULE": "Lägger till regel",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "Alla inskickade svar kommer att tas bort permanent. Vill du fortsätta?",
-    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "Fel när fält skapades",
     "UserForms.ERROR_CREATING_OPTION": "Fel när alternativ skapades",
     "UserForms.HIDE_OPTIONS": "Göm alternativ",
-    "UserForms.LEAVE_CONFIRMATION": "You have unsaved changes!",
     "UserForms.REMOVED_OPTION": "Raderade alternativ",
     "UserForms.SHOW_OPTIONS": "Visa alternativ"
 });

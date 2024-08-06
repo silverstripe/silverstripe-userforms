@@ -13,11 +13,9 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
     "UserForms.ADDING_OPTION": "إضافة خيار",
     "UserForms.ADDING_RULE": "إضافة قاعدة",
     "UserForms.CONFIRM_DELETE_ALL_SUBMISSIONS": "ستتم إزالة جميع الطلبات المقدمة بشكل دائم. المتابعة؟",
-    "UserForms.ERROR_CONTAINER_HEADER": "Please correct the following errors and try again:",
     "UserForms.ERROR_CREATING_FIELD": "خطأ في إنشاء الحقل",
     "UserForms.ERROR_CREATING_OPTION": "خطأ في إنشاء الخيار",
     "UserForms.HIDE_OPTIONS": "إخفاء الخيارات",
-    "UserForms.LEAVE_CONFIRMATION": "You have unsaved changes!",
     "UserForms.REMOVED_OPTION": "تمت إزالة الخيار",
     "UserForms.SHOW_OPTIONS": "إظهار الخيارات"
 });
