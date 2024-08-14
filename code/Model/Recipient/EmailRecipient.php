@@ -575,6 +575,7 @@ class EmailRecipient extends DataObject
                 foreach ($addresses as $address) {
                     $trimAddress = trim($address ?? '');
                     if ($trimAddress && !Email::is_valid_address($trimAddress)) {
+                        /** @phpstan-ignore translation.key (can't simplify the key without lots of duplicated code) */
                         $error = _t(
                             __CLASS__.".$translation",
                             "Invalid email address $trimAddress"
