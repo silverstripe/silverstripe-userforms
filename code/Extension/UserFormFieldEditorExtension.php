@@ -49,6 +49,12 @@ class UserFormFieldEditorExtension extends DataExtension
         'Fields'
     ];
 
+    private static array $scaffold_cms_fields_settings = [
+        'ignoreRelations' => [
+            'Fields',
+        ],
+    ];
+
     /**
      * Adds the field editor to the page.
      *

@@ -15,10 +15,14 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LiteralField;
@@ -161,6 +165,46 @@ class EmailRecipient extends DataObject
             $fields['EmailFrom'] = _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.EMAILFROM', 'From');
         }
         return $fields;
+    }
+
+    public function scaffoldFormFieldForHasMany(
+        string $relationName,
+        ?string $fieldTitle,
+        DataObject $ownerRecord,
+        bool &$includeInOwnTab
+    ): FormField {
+        $includeInOwnTab = true;
+        return $this->scaffoldFormFieldForManyRelation($relationName, $fieldTitle, $ownerRecord);
+    }
+
+    public function scaffoldFormFieldForManyMany(
+        string $relationName,
+        ?string $fieldTitle,
+        DataObject $ownerRecord,
+        bool &$includeInOwnTab
+    ): FormField {
+        $includeInOwnTab = true;
+        return $this->scaffoldFormFieldForManyRelation($relationName, $fieldTitle, $ownerRecord);
+    }
+
+    private function scaffoldFormFieldForManyRelation(
+        string $relationName,
+        ?string $fieldTitle,
+        DataObject $ownerRecord
+    ): FormField {
+        $emailRecipientsConfig = GridFieldConfig_RecordEditor::create(10);
+        $emailRecipientsConfig->getComponentByType(GridFieldAddNewButton::class)
+            ->setButtonName(
+                _t(UserDefinedForm::class . '.ADDEMAILRECIPIENT', 'Add Email Recipient')
+            );
+        $emailRecipientsConfig->getComponentByType(GridFieldDetailForm::class)
+            ->setItemRequestClass(UserFormRecipientItemRequest::class);
+        return GridField::create(
+            $relationName,
+            $fieldTitle,
+            $ownerRecord->$relationName(),
+            $emailRecipientsConfig
+        );
     }
 
     /**
