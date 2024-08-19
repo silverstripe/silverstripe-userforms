@@ -47,7 +47,7 @@ class UpgradePolymorphicExtension extends DataExtension
      */
     protected $defaultReplacement = UserDefinedForm::class;
 
-    public function requireDefaultRecords()
+    protected function onRequireDefaultRecords()
     {
         if (!UserDefinedForm::config()->get('upgrade_on_build')) {
             return;
