@@ -13,7 +13,7 @@ use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\HasManyList;
@@ -32,7 +32,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 /**
  * @method HasManyList<EditableFormField> Fields()
  */
-class UserFormFieldEditorExtension extends DataExtension
+class UserFormFieldEditorExtension extends Extension
 {
     /**
      * @var array

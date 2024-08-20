@@ -4,7 +4,7 @@ namespace SilverStripe\UserForms\Extension;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationException;
@@ -24,9 +24,9 @@ use SilverStripe\UserForms\UserForm;
  *
  * @internal This API is likely to be removed in later major versions of silverstripe/userforms
  *
- * @extends DataExtension<UserDefinedForm>
+ * @extends Extension<UserDefinedForm>
  */
-class UpgradePolymorphicExtension extends DataExtension
+class UpgradePolymorphicExtension extends Extension
 {
     /**
      * A list of userforms classes that have had polymorphic relationships added in SilverStripe 4, and the fields

@@ -328,7 +328,7 @@ SQL;
     }
 
     /**
-     * Allow overriding the EmailRecipients on a {@link DataExtension}
+     * Allow overriding the EmailRecipients on a {@link Extension}
      * so you can customise who receives an email.
      * Converts the RelationList to an ArrayList so that manipulation
      * of the original source data isn't possible.
