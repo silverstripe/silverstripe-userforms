@@ -103,6 +103,10 @@ class EmailRecipient extends DataObject
         'CustomRules',
     ];
 
+    private static $cascade_duplicates = [
+        'CustomRules',
+    ];
+
     private static $summary_fields = [
         'EmailAddress',
         'EmailSubject',
