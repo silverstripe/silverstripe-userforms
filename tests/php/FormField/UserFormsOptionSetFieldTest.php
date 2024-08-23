@@ -17,7 +17,7 @@ class UserFormsOptionSetFieldTest extends SapphireTest
         $radio->Required = true;
         $radio->CustomErrorMessage = 'My custom error message with \'single\' and "double" quotes';
         $userFormsOptionSetField = $radio->getFormField();
-        $html = $userFormsOptionSetField->renderWith(UserFormsOptionSetField::class)->getValue();
+        $html = $userFormsOptionSetField->setTemplate(UserFormsOptionSetField::class)->Field()->getValue();
         $attributesHTML = 'data-rule-required="true" data-msg-required="My custom error message with &amp;#039;single&amp;#039; and &amp;quot;double&amp;quot; quotes"';
         $this->assertTrue(strpos($html ?? '', $attributesHTML ?? '') > 0);
     }
