@@ -55,6 +55,10 @@ class EditableMultipleOptionField extends EditableFormField
         'Options',
     ];
 
+    private static $cascade_duplicates = [
+        'Options',
+    ];
+
     private static $table_name = 'EditableMultipleOptionField';
 
     /**
@@ -110,25 +114,6 @@ class EditableMultipleOptionField extends EditableFormField
         $fields = parent::getCMSFields();
 
         return $fields;
-    }
-
-    /**
-     * Duplicate a pages content. We need to make sure all the fields attached
-     * to that page go with it
-     * {@inheritDoc}
-     */
-    public function duplicate(bool $doWrite = true, array|null $relations = null): static
-    {
-        $clonedNode = parent::duplicate(true);
-
-        foreach ($this->Options() as $field) {
-            $newField = $field->duplicate(false);
-            $newField->ParentID = $clonedNode->ID;
-            $newField->Version = 0;
-            $newField->write();
-        }
-
-        return $clonedNode;
     }
 
     /**

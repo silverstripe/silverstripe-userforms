@@ -363,7 +363,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form2 = $this->objFromFixture(UserDefinedForm::class, 'page-with-group');
         $form2Validator = new UserFormValidator();
         $form2Validator->setForm(new Form(new Controller(), Form::class, new FieldList(), new FieldList()));
-        $this->assertTrue($form2Validator->php($form2->toMap()));
+        $this->assertTrue($form2Validator->php($form2->toMap()), json_encode($form2Validator->getResult()->getMessages()));
 
         // Check field groups exist
         $form2GroupStart = $form2->Fields()->filter('ClassName', EditableFieldGroup::class)->first();
@@ -374,7 +374,7 @@ class UserDefinedFormTest extends FunctionalTest
         $form3 = $form2->duplicate();
         $form3Validator = new UserFormValidator();
         $form3Validator->setForm(new Form(new Controller(), Form::class, new FieldList(), new FieldList()));
-        $this->assertTrue($form3Validator->php($form3->toMap()));
+        $this->assertTrue($form3Validator->php($form3->toMap()), json_encode($form3Validator->getResult()->getMessages()));
         // Check field groups exist
         $form3GroupStart = $form3->Fields()->filter('ClassName', EditableFieldGroup::class)->first();
         $form3GroupEnd = $form3->Fields()->filter('ClassName', EditableFieldGroupEnd::class)->first();
