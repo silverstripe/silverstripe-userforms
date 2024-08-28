@@ -181,7 +181,9 @@ class EditableFormField extends DataObject
         'DisplayRules',
     ];
 
-    private static $cascade_duplicates = false;
+    private static $cascade_duplicates = [
+        'DisplayRules',
+    ];
 
     /**
      * This is protected rather that private so that it's unit testable

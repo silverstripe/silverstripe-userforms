@@ -42,6 +42,8 @@ class UserFormFieldEditorExtension extends DataExtension
     );
 
     private static $owns = [
+        // Note we explicitly cannot use $cascade_duplicates to duplicate this relation.
+        // See onAfterDuplicate()
         'Fields'
     ];
 
@@ -234,13 +236,14 @@ class UserFormFieldEditorExtension extends DataExtension
     }
 
     /**
-     * When duplicating a UserDefinedForm, duplicate all of its fields and display rules
+     * Duplicate the Fields() relation.
+     * When duplicating a UserDefinedForm, ensure the group ends aren't duplicated twice,
+     * but also ensure they are connected to the correct duplicated Group.
      *
      * @see DataObject::duplicate
      * @param DataObject $oldPage
      * @param bool $doWrite
-     * @param string $manyMany
-     * @return DataObject
+     * @param null|array $manyMany
      */
     protected function onAfterDuplicate($oldPage, $doWrite, $manyMany)
     {
@@ -249,10 +252,7 @@ class UserFormFieldEditorExtension extends DataExtension
         foreach ($oldPage->Fields() as $field) {
             /** @var EditableFormField $newField */
             $newField = $field->duplicate(false);
-            $newField->ParentID = $this->owner->ID;
-            $newField->ParentClass = $this->owner->ClassName;
-            $newField->Version = 0;
-            $newField->write();
+            $this->getOwner()->Fields()->add($newField);
 
             // If we encounter a group start, record it for later use
             if ($field instanceof EditableFieldGroup) {
@@ -264,13 +264,6 @@ class UserFormFieldEditorExtension extends DataExtension
                 $groupStart = $fieldGroups[$field->ID];
                 $groupStart->EndID = $newField->ID;
                 $groupStart->write();
-            }
-
-            foreach ($field->DisplayRules() as $customRule) {
-                $newRule = $customRule->duplicate(false);
-                $newRule->ParentID = $newField->ID;
-                $newRule->Version = 0;
-                $newRule->write();
             }
         }
     }

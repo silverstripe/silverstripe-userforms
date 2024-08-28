@@ -121,7 +121,9 @@ trait UserForm
         'EmailRecipients',
     ];
 
-    private static $cascade_duplicates = false;
+    private static $cascade_duplicates = [
+        'EmailRecipients',
+    ];
 
     /**
      * @var array
@@ -168,9 +170,8 @@ trait UserForm
     private static $non_live_permissions = ['SITETREE_VIEW_ALL'];
 
     /**
-     * Temporary storage of field ids when the form is duplicated.
-     * Example layout: array('EditableCheckbox3' => 'EditableCheckbox14')
-     * @var array
+     * Unused property
+     * @deprecated 5.3.0 Will be removed without equivalent functionality to replace it
      */
     protected $fieldsFromTo = [];
 
