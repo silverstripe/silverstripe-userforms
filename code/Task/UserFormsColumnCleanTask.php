@@ -2,10 +2,13 @@
 
 namespace SilverStripe\UserForms\Task;
 
-use SilverStripe\Dev\MigrationTask;
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\PolyExecution\PolyOutput;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Model\EditableFormField;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 
 /**
  * UserForms Column Clean Task
@@ -15,11 +18,13 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * @package userforms
  */
 
-class UserFormsColumnCleanTask extends MigrationTask
+class UserFormsColumnCleanTask extends BuildTask
 {
-    protected $title = 'UserForms EditableFormField Column Clean task';
+    protected static string $commandName = 'userforms-column-clean';
 
-    protected $description = 'Removes unused columns from EditableFormField for MySQL databases;';
+    protected string $title = 'UserForms EditableFormField Column Clean task';
+
+    protected static string $description = 'Removes unused columns from EditableFormField for MySQL databases;';
 
     protected $tables = [EditableFormField::class];
 
@@ -28,7 +33,7 @@ class UserFormsColumnCleanTask extends MigrationTask
     /**
      * Publish the existing forms.
      */
-    public function run($request)
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $schema = DataObject::getSchema();
 
@@ -40,28 +45,29 @@ class UserFormsColumnCleanTask extends MigrationTask
             $query = "SHOW TABLES LIKE 'Backup_$db'";
             $tableExists = DB::query($query)->value();
             if ($tableExists != null) {
-                echo "Tasks run already on $db exiting";
-                return;
+                $output->writeln("Tasks run already on $db exiting");
+                return Command::SUCCESS;
             }
             $backedUp = 0;
             foreach ($liveColumns as $index => $column) {
                 if ($backedUp == 0) {
-                    echo "Backing up $db <br />";
-                    echo "Creating Backup_$db <br />";
+                    $output->writeln("Backing up $db <br />");
+                    $output->writeln("Creating Backup_$db <br />");
                     // backup table
                     $query = "CREATE TABLE Backup_$db LIKE $db";
                     DB::query($query);
-                    echo "Populating Backup_$db <br />";
+                    $output->writeln("Populating Backup_$db <br />");
                     $query = "INSERT Backup_$db SELECT * FROM $db";
                     DB::query($query);
                     $backedUp = 1;
                 }
                 if (!isset($columns[$column]) && !in_array($column, $this->keepColumns ?? [])) {
-                    echo "Dropping $column from $db <br />";
+                    $output->writeln("Dropping $column from $db <br />");
                     $query = "ALTER TABLE $db DROP COLUMN $column";
                     DB::query($query);
                 }
             }
         }
+        return Command::SUCCESS;
     }
 }

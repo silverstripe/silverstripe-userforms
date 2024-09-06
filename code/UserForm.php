@@ -65,7 +65,7 @@ trait UserForm
     private static $email_template_directory = 'silverstripe/userforms:templates/email/';
 
     /**
-     * Should this module automatically upgrade on dev/build?
+     * Should this module automatically upgrade on db build?
      *
      * @config
      * @var bool

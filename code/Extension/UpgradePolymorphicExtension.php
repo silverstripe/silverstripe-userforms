@@ -15,7 +15,7 @@ use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\UserForm;
 
 /**
- * This extension provides a hook that runs during a dev/build which will check for existing data in various
+ * This extension provides a hook that runs when building the db which will check for existing data in various
  * polymorphic relationship fields for userforms models, and ensure that the data is correct.
  *
  * Various `Parent` relationships in silverstripe/userforms for SilverStripe 3 were mapped directly to UserDefinedForm
@@ -83,9 +83,9 @@ class UpgradePolymorphicExtension extends Extension
                         $entry->write();
                         $updated++;
                     } catch (ValidationException $ex) {
-                        // no-op, allow the rest of dev/build to continue. There may be an error indicating that the
+                        // no-op, allow the rest of the db build to continue. There may be an error indicating that the
                         // object's class doesn't exist, which can be fixed by {@link DatabaseAdmin::doBuild} and this
-                        // logic will work the next time dev/build is run.
+                        // logic will work the next time the db is built.
                     }
                 }
             }

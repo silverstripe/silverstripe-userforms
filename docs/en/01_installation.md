@@ -12,7 +12,7 @@ composer require silverstripe/userforms
 
 ## Configuration
 
-After installation, make sure you rebuild your database through `dev/build`.
+After installation, make sure you rebuild your database through `sake db:build --flush`.
 
 You should see a new page type in the CMS called "User Defined Form". This has a new "Form" tab which has your form builder.
 
