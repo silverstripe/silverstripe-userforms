@@ -4,6 +4,7 @@ namespace SilverStripe\UserForms\Tests\Model;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class EditableCustomRulesTest
@@ -61,7 +62,7 @@ class EditableCustomRuleTest extends SapphireTest
         $this->assertSame('userform.field.hide', $rule1->toggleDisplayEvent('hide', true));
     }
 
-    public function dataProviderValidateAgainstFormData()
+    public static function dataProviderValidateAgainstFormData()
     {
         return [
             'IsNotBlank with blank value' =>
@@ -114,8 +115,8 @@ class EditableCustomRuleTest extends SapphireTest
     /**
      * Test that methods are returned for manipulating the presence of the "hide" CSS class depending
      * on whether the field should be hidden or shown
-     * @dataProvider dataProviderValidateAgainstFormData
      */
+    #[DataProvider('dataProviderValidateAgainstFormData')]
     public function testValidateAgainstFormData($condition, $targetValue, $value, $expected)
     {
         $rule1 = $this->objFromFixture(EditableCustomRule::class, 'rule1');

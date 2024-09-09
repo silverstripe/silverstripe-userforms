@@ -15,6 +15,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @package userforms
@@ -257,7 +258,7 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertStringContainsString('/images/editabletextfield.png', $field->getIcon());
     }
 
-    public function displayedProvider()
+    public static function displayedProvider()
     {
         $one = ['basic_text_name' => 'foobar'];
         $two = array_merge($one, ['basic_text_name_2' => 'foobar']);
@@ -301,8 +302,8 @@ class EditableFormFieldTest extends FunctionalTest
      * @param $fieldName
      * @param $data
      * @param $expected
-     * @dataProvider displayedProvider
      */
+    #[DataProvider('displayedProvider')]
     public function testIsDisplayed($fieldName, $data, $expected)
     {
         /** @var EditableFormField $field */

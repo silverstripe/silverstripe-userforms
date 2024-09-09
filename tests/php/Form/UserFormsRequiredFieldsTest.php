@@ -8,6 +8,7 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Form\UserFormsRequiredFields;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Form\UserForm;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class UserFormsRequiredFieldsTest extends SapphireTest
 {
@@ -29,7 +30,7 @@ class UserFormsRequiredFieldsTest extends SapphireTest
         $this->assertInstanceOf(UserFormsRequiredFields::class, $validator, 'Uses UserFormsRequiredFields validator');
     }
 
-    public function dataProviderValidationOfConditionalRequiredFields()
+    public static function dataProviderValidationOfConditionalRequiredFields()
     {
         return [
             'Passes when non-conditional required field has a value' => [
@@ -62,8 +63,8 @@ class UserFormsRequiredFieldsTest extends SapphireTest
     /**
      * @param $data
      * @param $expected
-     * @dataProvider dataProviderValidationOfConditionalRequiredFields
      */
+    #[DataProvider('dataProviderValidationOfConditionalRequiredFields')]
     public function testValidationOfConditionalRequiredFields($data, $expected)
     {
         $page = $this->objFromFixture(UserDefinedForm::class, 'required-custom-rules-form');
@@ -78,7 +79,7 @@ class UserFormsRequiredFieldsTest extends SapphireTest
         $this->assertEquals($expected, $validator->php($data));
     }
 
-    public function dataProviderValidationOfNestedConditionalRequiredFields()
+    public static function dataProviderValidationOfNestedConditionalRequiredFields()
     {
         return [
             'Fails when non-conditional required field is empty' => [[], false],
@@ -133,8 +134,8 @@ class UserFormsRequiredFieldsTest extends SapphireTest
     /**
      * @param string $data
      * @param array $expected
-     * @dataProvider dataProviderValidationOfNestedConditionalRequiredFields
      */
+    #[DataProvider('dataProviderValidationOfNestedConditionalRequiredFields')]
     public function testValidationOfNestedConditionalRequiredFields($data, $expected)
     {
         $page = $this->objFromFixture(UserDefinedForm::class, 'required-nested-custom-rules-form');

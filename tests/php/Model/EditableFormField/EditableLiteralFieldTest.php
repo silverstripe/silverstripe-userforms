@@ -59,7 +59,7 @@ class EditableLiteralFieldTest extends SapphireTest
     public function testLiteralFieldHasUpdateFormFieldMethodCalled()
     {
         $field = $this->getMockBuilder(EditableLiteralField::class)
-            ->setMethods(array('doUpdateFormField'))
+            ->onlyMethods(array('doUpdateFormField'))
             ->getMock();
 
         $field->expects($this->once())->method('doUpdateFormField');

@@ -30,6 +30,7 @@ use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 use function filesize;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @package userforms
@@ -525,7 +526,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertSame(5 * 1024 * 1024, $udfController->getMaximumAllowedEmailAttachmentSize());
     }
 
-    public function getParseByteSizeStringTestValues()
+    public static function getParseByteSizeStringTestValues()
     {
         return [
             ['9846', 9846],
@@ -549,16 +550,14 @@ class UserDefinedFormControllerTest extends FunctionalTest
         ];
     }
 
-    /**
-     * @dataProvider getParseByteSizeStringTestValues
-     */
+    #[DataProvider('getParseByteSizeStringTestValues')]
     public function testParseByteSizeString($input, $expectedOutput)
     {
         $controller = new SizeStringTestableController(); // extends UserDefinedFormController
         $this->assertSame($expectedOutput, $controller->convertSizeStringToBytes($input));
     }
 
-    public function getParseByteSizeStringTestBadValues()
+    public static function getParseByteSizeStringTestBadValues()
     {
         return [
             ['1234b'],
@@ -572,9 +571,9 @@ class UserDefinedFormControllerTest extends FunctionalTest
     }
 
     /**
-     * @dataProvider getParseByteSizeStringTestBadValues
      * @expectedException \InvalidArgumentException
      */
+    #[DataProvider('getParseByteSizeStringTestBadValues')]
     public function testParseByteSizeStringBadValuesThrowException($input)
     {
         $this->expectException('\InvalidArgumentException');
@@ -582,7 +581,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $controller->convertSizeStringToBytes($input);
     }
 
-    public function provideValidEmailsToArray()
+    public static function provideValidEmailsToArray()
     {
         return [
             [[], [null]],
@@ -600,9 +599,9 @@ class UserDefinedFormControllerTest extends FunctionalTest
     }
 
     /**
-     * @dataProvider provideValidEmailsToArray
      * Test that provided email is valid
      */
+    #[DataProvider('provideValidEmailsToArray')]
     public function testValidEmailsToArray(array $expectedOutput, array $input)
     {
         $class = new ReflectionClass(UserDefinedFormController::class);
