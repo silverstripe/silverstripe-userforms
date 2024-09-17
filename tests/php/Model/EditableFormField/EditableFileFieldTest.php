@@ -4,7 +4,7 @@ namespace SilverStripe\UserForms\Tests\Model\EditableFormField;
 
 use SilverStripe\Assets\Folder;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\ORM\ValidationException;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 
 /**

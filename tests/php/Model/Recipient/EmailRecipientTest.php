@@ -31,7 +31,7 @@ class EmailRecipientTest extends SapphireTest
 
     public function testEmptyRecipientFailsValidation()
     {
-        $this->expectException(\SilverStripe\ORM\ValidationException::class);
+        $this->expectException(\SilverStripe\Core\Validation\ValidationException::class);
         $this->expectExceptionMessage('"Send email to" address or field is required');
         $recipient = new EmailRecipient();
         $recipient->EmailFrom = 'test@example.com';

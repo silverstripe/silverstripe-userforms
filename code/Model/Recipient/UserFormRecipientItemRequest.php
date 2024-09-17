@@ -4,11 +4,11 @@ namespace SilverStripe\UserForms\Model\Recipient;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading;
 use SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
 
