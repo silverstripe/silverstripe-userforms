@@ -60,7 +60,7 @@ class UserFormFieldEditorExtension extends DataExtension
     {
         $fieldEditor = $this->getFieldEditorGrid();
 
-        $fields->insertAfter('Main', new Tab('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')));
+        $fields->insertAfter('Main', Tab::create('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')));
         $fields->addFieldToTab('Root.FormFields', $fieldEditor);
 
         return $fields;
@@ -81,7 +81,7 @@ class UserFormFieldEditorExtension extends DataExtension
 
         $this->createInitialFormStep(true);
 
-        $editableColumns = new GridFieldEditableColumns();
+        $editableColumns = GridFieldEditableColumns::create();
         $fieldClasses = singleton(EditableFormField::class)->getEditableFieldClasses();
         $editableColumns->setDisplayFields([
             'ClassName' => function ($record, $column, $grid) use ($fieldClasses) {
@@ -103,7 +103,7 @@ class UserFormFieldEditorExtension extends DataExtension
         $config = GridFieldConfig::create()
             ->addComponents(
                 $editableColumns,
-                new GridFieldButtonRow(),
+                GridFieldButtonRow::create(),
                 (new GridFieldAddClassesButton(EditableTextField::class))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
                     ->setButtonClass('btn-primary'),
@@ -113,13 +113,13 @@ class UserFormFieldEditorExtension extends DataExtension
                 (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
                     ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group'))
                     ->setButtonClass('btn-secondary'),
-                $editButton = new GridFieldEditButton(),
-                new GridFieldDeleteAction(),
-                new GridFieldToolbarHeader(),
-                new GridFieldOrderableRows('Sort'),
-                new GridFieldDetailForm(),
+                $editButton = GridFieldEditButton::create(),
+                GridFieldDeleteAction::create(),
+                GridFieldToolbarHeader::create(),
+                GridFieldOrderableRows::create('Sort'),
+                GridFieldDetailForm::create(),
                 // Betterbuttons prev and next is enabled by adding a GridFieldPaginator component
-                new GridFieldPaginator(999)
+                GridFieldPaginator::create(999)
             );
 
         $editButton->removeExtraClass('grid-field__icon-action--hidden-on-hover');
