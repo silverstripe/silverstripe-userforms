@@ -320,7 +320,7 @@ SQL;
             $config->addComponent(new BulkManager);
         }
 
-        Deprecation::withNoReplacement(function () use ($sort, $filter, $pagination) {
+        Deprecation::withSuppressedNotice(function () use ($sort, $filter, $pagination) {
             $sort->setThrowExceptionOnBadDataType(false);
             $filter->setThrowExceptionOnBadDataType(false);
             $pagination->setThrowExceptionOnBadDataType(false);
