@@ -27,7 +27,7 @@ use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Tests\Control\fixtures\SizeStringTestableController;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\SSViewer;
 use function filesize;
 use PHPUnit\Framework\Attributes\DataProvider;

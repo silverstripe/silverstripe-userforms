@@ -16,10 +16,10 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\ORM\ValidationException;
-use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Core\Validation\ValidationException;
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Extension\UserFormFileExtension;
 use SilverStripe\UserForms\Form\UserForm;
@@ -29,10 +29,10 @@ use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
-use SilverStripe\View\ViewableData;
+use SilverStripe\Model\ModelData;
 use Swift_RfcComplianceException;
 
 /**
@@ -578,7 +578,7 @@ JS
      * This action handles rendering the "finished" message, which is
      * customizable by editing the ReceivedFormSubmission template.
      *
-     * @return ViewableData
+     * @return ModelData
      */
     public function finished()
     {

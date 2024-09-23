@@ -7,7 +7,7 @@ use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\RequiredFields;
-use SilverStripe\ORM\ArrayLib;
+use SilverStripe\Core\ArrayLib;
 use SilverStripe\UserForms\Model\EditableFormField;
 
 /**

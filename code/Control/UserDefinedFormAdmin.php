@@ -18,7 +18,7 @@ use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\Schema\FormSchema;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
-use SilverStripe\ORM\ValidationException;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\Security\Group;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\Security\Permission;
