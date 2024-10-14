@@ -14,6 +14,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\ArrayList;
@@ -421,7 +422,9 @@ JS
                 // Include any parsed merge field references from the CMS editor - this is already escaped
                 // This string substitution works for both HTML and plain text emails.
                 // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
-                $emailData['Body'] = SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields);
+                $emailData['Body'] = Deprecation::withSuppressedNotice(
+                    fn () => SSViewer::execute_string($recipient->getEmailBodyContent(), $mergeFields)
+                );
                 // only include visible fields if recipient visibility flag is set
                 if ((bool) $recipient->HideInvisibleFields) {
                     $emailData['Fields'] = $visibleSubmittedFields;
@@ -487,10 +490,14 @@ JS
                     if ($submittedFormField && trim($submittedFormField->Value ?? '')) {
                         $email->setSubject($submittedFormField->Value);
                     } else {
-                        $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
+                        $email->setSubject(Deprecation::withSuppressedNotice(
+                            fn () => SSViewer::execute_string($recipient->EmailSubject, $mergeFields)
+                        ));
                     }
                 } else {
-                    $email->setSubject(SSViewer::execute_string($recipient->EmailSubject, $mergeFields));
+                    $email->setSubject(Deprecation::withSuppressedNotice(
+                        fn () => SSViewer::execute_string($recipient->EmailSubject, $mergeFields)
+                    ));
                 }
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
