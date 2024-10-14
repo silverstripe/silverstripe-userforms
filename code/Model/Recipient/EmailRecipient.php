@@ -137,6 +137,12 @@ class EmailRecipient extends DataObject
      */
     private static $allow_unbound_recipient_fields = false;
 
+    /**
+     * The regex used to find template files for rendering emails.
+     * By default this finds ss template files.
+     */
+    private static string $email_template_regex = '/^.*\.ss$/';
+
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
@@ -562,7 +568,7 @@ class EmailRecipient extends DataObject
         $templates = [];
 
         $finder = new FileFinder();
-        $finder->setOption('name_regex', '/^.*\.ss$/');
+        $finder->setOption('name_regex', static::config()->get('email_template_regex'));
 
         $parent = $this->getFormParent();
 
