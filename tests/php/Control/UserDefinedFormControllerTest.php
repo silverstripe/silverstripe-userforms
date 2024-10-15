@@ -584,16 +584,41 @@ class UserDefinedFormControllerTest extends FunctionalTest
     public static function provideValidEmailsToArray()
     {
         return [
-            [[], [null]],
-            [[], [' , , ']],
-            [[], ['broken.email, broken@.email, broken2.@email']],
             [
-                ['broken@email', 'correctemail@email.com'],
-                [', broken@email, email@-email.com,correctemail@email.com,']
+                'input' => [
+                    null
+                ],
+                'expected' => [],
             ],
             [
-                ['correctemail1@email.com', 'correctemail2@email.com', 'correctemail3@email.com'],
-                ['correctemail1@email.com, correctemail2@email.com, correctemail3@email.com']
+                'input' => [
+                    ' , , '
+                ],
+                'expected' => [],
+            ],
+            [
+                'input' => [
+                    'broken.email, broken@.email, broken2.@email'
+                ],
+                'expected' => [],
+            ],
+            [
+                'input' => [
+                    ', broken@email, email@-email.com,correctemail@email.com,'
+                ],
+                'expected' => [
+                    'correctemail@email.com'
+                ],
+            ],
+            [
+                'input' => [
+                    'correctemail1@email.com, correctemail2@email.com, correctemail3@email.com'
+                ],
+                'expected' => [
+                    'correctemail1@email.com',
+                    'correctemail2@email.com',
+                    'correctemail3@email.com'
+                ],
             ]
         ];
     }
@@ -602,7 +627,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
      * Test that provided email is valid
      */
     #[DataProvider('provideValidEmailsToArray')]
-    public function testValidEmailsToArray(array $expectedOutput, array $input)
+    public function testValidEmailsToArray(array $input, array $expected)
     {
         $class = new ReflectionClass(UserDefinedFormController::class);
         $method = $class->getMethod('validEmailsToArray');
@@ -610,6 +635,6 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $controller = new UserDefinedFormController();
 
-        $this->assertEquals($expectedOutput, $method->invokeArgs($controller, $input));
+        $this->assertEquals($expected, $method->invokeArgs($controller, $input));
     }
 }
