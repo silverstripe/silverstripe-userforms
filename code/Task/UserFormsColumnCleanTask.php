@@ -33,32 +33,32 @@ class UserFormsColumnCleanTask extends MigrationTask
         $schema = DataObject::getSchema();
 
         foreach ($this->tables as $db) {
+            $table = $schema->tableName($db);
             $columns = $schema->databaseFields($db);
-            $query = "SHOW COLUMNS FROM $db";
+            $query = "SHOW COLUMNS FROM $table";
             $liveColumns = DB::query($query)->column();
-            $backedUp = 0;
-            $query = "SHOW TABLES LIKE 'Backup_$db'";
+            $query = "SHOW TABLES LIKE 'Backup_$table'";
             $tableExists = DB::query($query)->value();
             if ($tableExists != null) {
-                echo "Tasks run already on $db exiting";
+                echo "Tasks run already on $table exiting";
                 return;
             }
-            $backedUp = 0;
-            foreach ($liveColumns as $index => $column) {
-                if ($backedUp == 0) {
-                    echo "Backing up $db <br />";
-                    echo "Creating Backup_$db <br />";
+            $backedUp = false;
+            foreach ($liveColumns as $column) {
+                if (!$backedUp) {
+                    echo "Backing up $table <br />";
+                    echo "Creating Backup_$table <br />";
                     // backup table
-                    $query = "CREATE TABLE Backup_$db LIKE $db";
+                    $query = "CREATE TABLE Backup_$table LIKE $table";
                     DB::query($query);
-                    echo "Populating Backup_$db <br />";
-                    $query = "INSERT Backup_$db SELECT * FROM $db";
+                    echo "Populating Backup_$table <br />";
+                    $query = "INSERT Backup_$table SELECT * FROM $table";
                     DB::query($query);
-                    $backedUp = 1;
+                    $backedUp = true;
                 }
                 if (!isset($columns[$column]) && !in_array($column, $this->keepColumns ?? [])) {
-                    echo "Dropping $column from $db <br />";
-                    $query = "ALTER TABLE $db DROP COLUMN $column";
+                    echo "Dropping $column from $table <br />";
+                    $query = "ALTER TABLE $table DROP COLUMN $column";
                     DB::query($query);
                 }
             }
