@@ -229,15 +229,7 @@ class EmailRecipient extends DataObject
             $formClass = $this->FormClass;
             return $formClass::get()->byID($this->FormID);
         }
-
-        // Revert to checking for a form from the session
-        // LeftAndMain::sessionNamespace is protected.
-        $sessionNamespace = $this->config()->get('session_namespace') ?: CMSMain::class;
-
-        $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
-        if ($formID) {
-            return UserDefinedForm::get()->byID($formID);
-        }
+        return null;
     }
 
     public function getTitle()
