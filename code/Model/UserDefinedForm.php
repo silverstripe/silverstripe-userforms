@@ -19,7 +19,7 @@ class UserDefinedForm extends Page
     /**
      * @var string
      */
-    private static $icon_class = 'font-icon-p-list';
+    private static $cms_icon_class = 'font-icon-p-list';
 
     private static $class_description = 'Adds a customizable form.';
 
