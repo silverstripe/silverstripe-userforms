@@ -47,6 +47,8 @@ class UserDefinedFormAdmin extends LeftAndMain
 
     private static $url_segment = 'user-forms';
 
+    private static $ignore_menuitem = true;
+
     /**
      * @var string The name of the folder where form submissions will be placed by default
      */
