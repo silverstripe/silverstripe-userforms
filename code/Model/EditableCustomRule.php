@@ -119,7 +119,7 @@ class EditableCustomRule extends DataObject
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
-            return Controller::curr()->currentPage();
+            return Controller::curr()->currentRecord();
         }
 
         // No page being edited

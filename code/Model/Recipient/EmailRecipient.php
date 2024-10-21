@@ -228,7 +228,7 @@ class EmailRecipient extends DataObject
         // LeftAndMain::sessionNamespace is protected.
         $sessionNamespace = $this->config()->get('session_namespace') ?: CMSMain::class;
 
-        $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentPage');
+        $formID = Controller::curr()->getRequest()->getSession()->get($sessionNamespace . '.currentRecord');
         if ($formID) {
             return UserDefinedForm::get()->byID($formID);
         }
@@ -460,7 +460,7 @@ class EmailRecipient extends DataObject
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
-            return Controller::curr()->currentPage();
+            return Controller::curr()->currentRecord();
         }
 
         // No page being edited
