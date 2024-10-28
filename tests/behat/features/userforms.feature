@@ -71,6 +71,7 @@ Feature: Userforms
     Then I drag the ".ss-gridfield-item[data-id='4'] .handle" element to the ".ss-gridfield-item[data-id='6'] .handle" element
     And I wait for 1 seconds
     And I press the "Publish" button
+    And I wait for 1 seconds
     And I dismiss all toasts
 
     # Add email recipient with custom text and custom rules
