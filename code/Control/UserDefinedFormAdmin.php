@@ -27,7 +27,7 @@ use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 /**
  * Provides a few endpoints the user form CMS UI targets with some AJAX request.

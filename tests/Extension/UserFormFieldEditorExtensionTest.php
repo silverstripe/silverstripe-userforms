@@ -5,7 +5,7 @@ namespace SilverStripe\UserForms\Tests\Extension;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 class UserFormFieldEditorExtensionTest extends SapphireTest
 {

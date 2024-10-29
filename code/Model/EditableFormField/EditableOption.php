@@ -4,7 +4,7 @@ namespace SilverStripe\UserForms\Model\EditableFormField;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 /**
  * Base Class for EditableOption Fields such as the ones used in

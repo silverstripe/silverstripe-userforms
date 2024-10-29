@@ -26,7 +26,7 @@ use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Tests\Control\fixtures\SizeStringTestableController;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 use SilverStripe\Model\ArrayData;
 use SilverStripe\View\SSViewer;
 use function filesize;

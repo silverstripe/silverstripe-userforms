@@ -5,7 +5,7 @@ namespace SilverStripe\UserForms\Model\Submission;
 use SilverStripe\Assets\File;
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 
