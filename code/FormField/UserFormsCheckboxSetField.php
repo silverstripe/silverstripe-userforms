@@ -12,10 +12,10 @@ class UserFormsCheckboxSetField extends CheckboxSetField
 {
 
     /**
-     * If your project uses a custom UserFormsCheckboxSetField.ss, ensure that it includes
+     * If your project uses a custom UserFormsCheckboxSetField template, ensure that it includes
      * `$Top.getValidationAttributesHTML().RAW` so that custom validation messages work
      * For further details see
-     * templates/SilverStripe/UserForms/FormField/UserFormsCheckboxSetField.ss
+     * templates/SilverStripe/UserForms/FormField/UserFormsCheckboxSetField template
      *
      * Use on a template with .RAW - single and double quoted strings will be safely escaped
      *
