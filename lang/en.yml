@@ -353,6 +353,7 @@ en:
     has_one_Parent: Parent
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
+    CLASS_DESCRIPTION: 'Adds a customizable form.'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
     DESCRIPTION: 'Adds a customizable form.'
