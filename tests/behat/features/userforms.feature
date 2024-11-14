@@ -8,7 +8,11 @@ Feature: Userforms
     And the "group" "ADMIN group" has permissions "Full administrative rights"
     And a "group" "ADMIN group" has the "Code" "administrators"
 
+@sboyd
   Scenario: Operate userforms
+  
+Given I take a screenshot after every step
+
     Given I am logged in as a member of "EDITOR" group
     When I go to "/admin/pages"
     And I press the "Add new" button
