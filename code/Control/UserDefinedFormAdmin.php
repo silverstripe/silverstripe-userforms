@@ -2,8 +2,7 @@
 
 namespace SilverStripe\UserForms\Control;
 
-use SilverStripe\Admin\AdminRootController;
-use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Admin\FormSchemaController;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
@@ -31,10 +30,8 @@ use SilverStripe\Versioned\Versioned;
 
 /**
  * Provides a few endpoints the user form CMS UI targets with some AJAX request.
- *
- * @note While this is a LeftAndMain controller, it doesn't actually appear in the Left side CMS navigation.
  */
-class UserDefinedFormAdmin extends LeftAndMain
+class UserDefinedFormAdmin extends FormSchemaController
 {
     private static $allowed_actions = [
         'confirmfolderformschema',
@@ -46,8 +43,6 @@ class UserDefinedFormAdmin extends LeftAndMain
     private static $required_permission_codes = 'CMS_ACCESS_CMSMain';
 
     private static $url_segment = 'user-forms';
-
-    private static $ignore_menuitem = true;
 
     /**
      * @var string The name of the folder where form submissions will be placed by default
@@ -79,7 +74,6 @@ class UserDefinedFormAdmin extends LeftAndMain
 
         return $textField;
     }
-
 
     public function index(HTTPRequest $request): HTTPResponse
     {
@@ -141,7 +135,7 @@ class UserDefinedFormAdmin extends LeftAndMain
         }
 
         // create the schema response
-        $parts = $this->getRequest()->getHeader(static::SCHEMA_HEADER);
+        $parts = $this->getRequest()->getHeader(FormSchemaController::SCHEMA_HEADER);
         $schemaID = $this->getRequest()->getURL();
         $data = FormSchema::singleton()->getMultipartSchema($parts, $schemaID, $form);
 
