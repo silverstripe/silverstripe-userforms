@@ -3,7 +3,6 @@
 namespace SilverStripe\UserForms\Tests\FormField;
 
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\UserForms\Form\UserFormsRequiredFields;
 use SilverStripe\UserForms\FormField\UserFormsCheckboxSetField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField;
 
@@ -14,27 +13,26 @@ class UserFormsCheckboxSetFieldTest extends SapphireTest
     public function testValidate()
     {
         $field = new UserFormsCheckboxSetField('Field', 'My field', ['One' => 'One', 'Two' => 'Two']);
-        $validator = new UserFormsRequiredFields();
 
         // String values
         $field->setValue('One');
-        $this->assertTrue($field->validate($validator));
+        $this->assertTrue($field->validate()->isValid());
         $field->setValue('One,Two');
-        $this->assertTrue($field->validate($validator));
+        $this->assertTrue($field->validate()->isValid());
         $field->setValue('Three,Four');
-        $this->assertFalse($field->validate($validator));
+        $this->assertFalse($field->validate()->isValid());
 
         // Array values
         $field->setValue(array('One'));
-        $this->assertTrue($field->validate($validator));
+        $this->assertTrue($field->validate()->isValid());
         $field->setValue(array('One', 'Two'));
-        $this->assertTrue($field->validate($validator));
+        $this->assertTrue($field->validate()->isValid());
 
         // Invalid
         $field->setValue('Three');
-        $this->assertFalse($field->validate($validator));
+        $this->assertFalse($field->validate()->isValid());
         $field->setValue(array('Three', 'Four'));
-        $this->assertFalse($field->validate($validator));
+        $this->assertFalse($field->validate()->isValid());
     }
 
     public function testCustomErrorMessageValidationAttributesHTML()
