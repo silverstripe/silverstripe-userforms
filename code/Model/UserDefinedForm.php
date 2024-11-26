@@ -21,12 +21,6 @@ class UserDefinedForm extends Page
      */
     private static $icon_class = 'font-icon-p-list';
 
-    /**
-     * @var string
-     * @deprecated 5.4.0 use class_description instead.
-     */
-    private static $description = 'Adds a customizable form.';
-
     private static $class_description = 'Adds a customizable form.';
 
     /**
