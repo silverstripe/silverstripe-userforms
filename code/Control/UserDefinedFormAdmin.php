@@ -308,7 +308,7 @@ class UserDefinedFormAdmin extends FormSchemaController
      * @return Folder
      * @throws ValidationException
      */
-    public static function getFormSubmissionFolder(string $subFolder = null): ?Folder
+    public static function getFormSubmissionFolder(?string $subFolder = null): ?Folder
     {
         $folderPath = static::config()->get('form_submissions_folder');
         if ($subFolder) {

@@ -134,7 +134,7 @@ class UserDefinedFormController extends PageController
      *
      * @return array
      */
-    public function index(HTTPRequest $request = null)
+    public function index(?HTTPRequest $request = null)
     {
         $form = $this->Form();
         if ($this->Content && $form && !$this->config()->disable_form_content_shortcode) {
