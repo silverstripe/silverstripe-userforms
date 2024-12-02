@@ -313,7 +313,7 @@ class RecoverUploadLocationsHelper
      *
      * @return int Number of files recovered
      */
-    protected function checkResidual($fileId, File $file, File $draft = null)
+    protected function checkResidual($fileId, File $file, ?File $draft = null)
     {
         if (!$this->filesVersioned) {
             return 0;

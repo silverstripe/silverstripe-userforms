@@ -62,7 +62,7 @@ class EditableFileField extends EditableFormField
      * @param Folder|null $folder
      * @return string
      */
-    public static function getFolderPermissionString(Folder $folder = null)
+    public static function getFolderPermissionString(?Folder $folder = null)
     {
         $folderPermissions = static::getFolderPermissionTuple($folder);
 
@@ -84,7 +84,7 @@ class EditableFileField extends EditableFormField
      * @param Folder|null $folder
      * @return array
      */
-    private static function getFolderPermissionTuple(Folder $folder = null)
+    private static function getFolderPermissionTuple(?Folder $folder = null)
     {
         $viewersOptionsField = [
             InheritedPermissions::INHERIT => _t(__CLASS__.'.INHERIT', 'Visibility for this folder is inherited from the parent folder'),
