@@ -155,7 +155,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
             'required-email' => 'invalid',
             'required-text' => 'bob'
         ]);
-        $this->assertStringContainsString('Please enter an email address', $response->getBody());
+        $this->assertStringContainsString('Invalid email address', $response->getBody());
 
         // Post with only required
         $this->get($form->URLSegment);

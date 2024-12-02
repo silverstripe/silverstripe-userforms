@@ -2,8 +2,8 @@
 
 namespace SilverStripe\UserForms\FormField;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\CheckboxSetField;
-use SilverStripe\UserForms\Model\EditableFormField;
 
 /**
  * @package userforms
@@ -45,33 +45,16 @@ class UserFormsCheckboxSetField extends CheckboxSetField
         return $options;
     }
 
-    /**
-     * @inheritdoc
-     *
-     * @param Validator $validator
-     *
-     * @return bool
-     */
-    public function validate($validator)
+    public function getValueForValidation(): mixed
     {
-        // get the previous values (could contain comma-delimited list)
-
-        $previous = $value = $this->Value();
-
-        if (is_string($value) && strstr($value ?? '', ",")) {
-            $value = explode(",", $value ?? '');
+        $value = $this->Value();
+        if (is_iterable($value) || is_null($value)) {
+            return $value;
         }
-
-        // set the value as an array for parent validation
-
-        $this->setValue($value);
-
-        $validated = parent::validate($validator);
-
-        // restore previous value after validation
-
-        $this->setValue($previous);
-
-        return $validated;
+        // Value may contain a comma-delimited list of values
+        if (is_string($value) && strstr($value, ',')) {
+            return explode(',', $value);
+        }
+        return [$value];
     }
 }
