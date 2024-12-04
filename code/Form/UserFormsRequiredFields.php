@@ -35,12 +35,6 @@ class UserFormsRequiredFields extends RequiredFields
         $valid = true;
         $fields = $this->form->Fields();
 
-        foreach ($fields as $field) {
-            $result = $field->validate();
-            $valid = $result->isValid() && $valid;
-            $this->result->combineAnd($result);
-        }
-
         if (empty($this->required)) {
             return $valid;
         }
