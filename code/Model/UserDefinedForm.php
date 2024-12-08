@@ -18,12 +18,13 @@ class UserDefinedForm extends Page
 
     /**
      * @var string
+     * @deprecated 6.4.0 Will be renamed to cms_icon_class
      */
     private static $icon_class = 'font-icon-p-list';
 
     /**
      * @var string
-     * @deprecated 5.4.0 use class_description instead.
+     * @deprecated 6.4.0 use class_description instead.
      */
     private static $description = 'Adds a customizable form.';
 
