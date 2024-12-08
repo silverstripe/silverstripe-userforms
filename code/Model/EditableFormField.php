@@ -509,7 +509,7 @@ class EditableFormField extends DataObject
             // This is to restore User Forms 2.x backwards compatibility.
             $controller = Controller::curr();
             if ($controller && $controller instanceof CMSPageEditController) {
-                $parent = $controller->getRecord($controller->currentPageID());
+                $parent = $controller->getRecord($controller->currentRecordID());
                 // Only allow this behaviour on pages using UserFormFieldEditorExtension, such
                 // as UserDefinedForm page type.
                 if ($parent && $parent->hasExtension(UserFormFieldEditorExtension::class)) {
@@ -572,7 +572,7 @@ class EditableFormField extends DataObject
         }
         // Hack in currently edited page if context is missing
         if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
-            return Controller::curr()->currentPage();
+            return Controller::curr()->currentRecord();
         }
 
         // No page being edited
