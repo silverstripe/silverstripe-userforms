@@ -2,10 +2,10 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\UserForms\Model\EditableFormField;
 
-class Validator extends RequiredFields
+class Validator extends RequiredFieldsValidator
 {
     /**
      *
