@@ -9,6 +9,7 @@ use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Core\ArrayLib;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\Dev\Deprecation;
 
 /**
  * An extension of RequiredFields which handles conditionally required fields.
@@ -19,9 +20,17 @@ use SilverStripe\UserForms\Model\EditableFormField;
  *
  * Required fields will be validated as usual.
  * Conditionally required fields will be validated IF the display rules are satisfied in the submitted dataset.
+ *
+ * @deprecated 5.4.0 Will be renamed to SilverStripe\UserForms\Form\UserFormsRequiredFieldsValidator
  */
 class UserFormsRequiredFields extends RequiredFields
 {
+    public function __construct()
+    {
+        Deprecation::noticeWithNoReplacment('5.4.0', 'Will be renamed to SilverStripe\\UserForms\\Form\\UserFormsRequiredFieldsValidator', Deprecation::SCOPE_CLASS);
+        parent::__construct(...func_get_args());
+    }
+
     /**
      * Allows validation of fields via specification of a php function for
      * validation which is executed after the form is submitted.
