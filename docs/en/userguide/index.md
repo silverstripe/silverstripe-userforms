@@ -24,14 +24,13 @@ Here are a few tips to get you started:
 - Ensure you have the necessary consents for processing and storing data according to your legislation (e.g. GDPR)
 - Only accept form submissions via encrypted transfers (HTTPS) - check our [Secure Coding](https://docs.silverstripe.org/en/developer_guides/security/secure_coding/) guidelines
 - Control access to form submissions (via CMS page access controls)
-- Control access to files uploaded with submissions (via [folder access controls](field-types.md#file-upload-field))
+- Control access to files uploaded with submissions (via [folder access controls](./field-types#file-upload-field))
 - Create a process to limit the types of data you are allowed to collect via this feature (e.g. no payment information or health data)
 - Create a process for limiting submission storage duration (manual deletion)
 - Consider further safeguards such as at-rest encryption (check [encryption related addons](https://addons.silverstripe.org/add-ons?search=encrypt))
 
 ## Features
 
-- [Create and edit forms](creating-and-editing-forms.md)
-- [Add different field types to a form](field-types.md)
-- [Set up multipage forms](multipage-forms.md)
-- [View submissions and set up automated emails upon form completion](form-submissions.md)
+- [Create and edit forms](./creating-and-editing-forms)
+- [Add different field types to a form](./field-types)
+- [View submissions and set up automated emails upon form completion](./form-submissions)
