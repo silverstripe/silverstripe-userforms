@@ -13,7 +13,7 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\Forms\Schema\FormSchema;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
@@ -192,7 +192,7 @@ class UserDefinedFormAdmin extends FormSchemaController
                 ->setUseButtonTag(true)
         );
 
-        return Form::create($this, 'ConfirmFolderForm', $fields, $actions, RequiredFields::create('ID'))
+        return Form::create($this, 'ConfirmFolderForm', $fields, $actions, RequiredFieldsValidator::create('ID'))
             ->setFormAction($this->Link('ConfirmFolderForm'))
             ->addExtraClass('form--no-dividers');
     }

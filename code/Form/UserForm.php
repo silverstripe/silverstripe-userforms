@@ -160,7 +160,7 @@ class UserForm extends Form
     /**
      * Get the required form fields for this form.
      *
-     * @return RequiredFields
+     * @return RequiredFieldsValidator
      */
     public function getRequiredFields()
     {
@@ -172,7 +172,7 @@ class UserForm extends Form
             ->filter('Required', true)
             ->column('Name');
         $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());
-        $required = UserFormsRequiredFields::create($requiredNames);
+        $required = UserFormsRequiredFieldsValidator::create($requiredNames);
         $this->extend('updateRequiredFields', $required);
         $required->setForm($this);
         return $required;
@@ -203,7 +203,7 @@ class UserForm extends Form
     }
 
     /**
-     * Push fields into the RequiredFields array if they are used by any Email recipients.
+     * Push fields into the RequiredFieldsValidator array if they are used by any Email recipients.
      * Ignore if there is a backup i.e. the plain string field is set
      *
      * @return array required fields names

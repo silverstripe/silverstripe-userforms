@@ -2,13 +2,13 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 
-class UserFormValidator extends RequiredFields
+class UserFormValidator extends RequiredFieldsValidator
 {
     public function php($data)
     {

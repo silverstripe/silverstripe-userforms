@@ -5,12 +5,12 @@ namespace SilverStripe\UserForms\Tests\Form;
 use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\UserForms\Form\UserFormsRequiredFields;
+use SilverStripe\UserForms\Form\UserFormsRequiredFieldsValidator;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\UserForms\Form\UserForm;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class UserFormsRequiredFieldsTest extends SapphireTest
+class UserFormsRequiredFieldsValidatorTest extends SapphireTest
 {
     protected static $fixture_file = '../UserFormsTest.yml';
 
@@ -21,13 +21,13 @@ class UserFormsRequiredFieldsTest extends SapphireTest
         return $form->getValidator();
     }
 
-    public function testUsesUserFormsRequiredFieldsValidator()
+    public function testUsesUserFormsRequiredFormFieldsValidator()
     {
         $page = $this->objFromFixture(UserDefinedForm::class, 'required-custom-rules-form');
         $this->assertEquals(3, $page->Fields()->count());
         $validator = $this->getValidatorFromPage($page);
         $this->assertNotNull($validator);
-        $this->assertInstanceOf(UserFormsRequiredFields::class, $validator, 'Uses UserFormsRequiredFields validator');
+        $this->assertInstanceOf(UserFormsRequiredFieldsValidator::class, $validator, 'Uses UserFormsRequiredFieldsValidator validator');
     }
 
     public static function dataProviderValidationOfConditionalRequiredFields()
