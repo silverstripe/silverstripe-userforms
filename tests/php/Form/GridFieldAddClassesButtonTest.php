@@ -31,7 +31,7 @@ class GridFieldAddClassesButtonTest extends SapphireTest
         $request = new HTTPRequest('GET', '/');
         $request->setSession(new Session([]));
         $controller->setRequest($request);
-        $controller->setCurrentPageID($udf->ID);
+        $controller->setCurrentRecordID($udf->ID);
         $controller->pushCurrent();
         $list = new DataList(EditableFormField::class);
         $field = EditableTextField::create([
