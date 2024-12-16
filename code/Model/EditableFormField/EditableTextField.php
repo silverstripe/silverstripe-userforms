@@ -105,10 +105,7 @@ class EditableTextField extends EditableFormField
         return parent::getCMSFields();
     }
 
-    /**
-     * @return ValidationResult
-     */
-    public function validate()
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
 

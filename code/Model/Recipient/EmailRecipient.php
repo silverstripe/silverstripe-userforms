@@ -603,10 +603,8 @@ class EmailRecipient extends DataObject
 
     /**
      * Validate that valid email addresses are being used
-     *
-     * @return ValidationResult
      */
-    public function validate()
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
         $checkEmail = [
