@@ -7,6 +7,7 @@ use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\Core\Validation\ValidationResult;
 
 /**
  * EditableNumericField
@@ -85,7 +86,7 @@ class EditableNumericField extends EditableFormField
         }
     }
 
-    public function validate()
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
         if ($this->MinValue > $this->MaxValue) {
