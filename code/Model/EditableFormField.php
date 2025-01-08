@@ -28,6 +28,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Core\Validation\ValidationException;
+use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
@@ -924,13 +925,11 @@ class EditableFormField extends DataObject
         return $editableFieldClasses;
     }
 
-    /**
-     * @return EditableFormField\Validator
-     */
-    public function getCMSValidator()
+    public function getCMSCompositeValidator(): CompositeValidator
     {
-        return EditableFormField\Validator::create()
-            ->setRecord($this);
+        $validator = parent::getCMSCompositeValidator();
+        $validator->addValidator(EditableFormField\Validator::create()->setRecord($this));
+        return $validator;
     }
 
     /**
