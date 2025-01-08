@@ -33,7 +33,6 @@ use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Configurable;
-use SilverStripe\Dev\Deprecation;
 
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
@@ -170,12 +169,6 @@ trait UserForm
     private static $non_live_permissions = ['SITETREE_VIEW_ALL'];
 
     /**
-     * Unused property
-     * @deprecated 5.3.0 Will be removed without equivalent functionality to replace it
-     */
-    protected $fieldsFromTo = [];
-
-    /**
     * @var array
     */
     public function populateDefaults()
@@ -269,13 +262,13 @@ SQL;
 
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldToolbarHeader());
-        $config->addComponent($sort = new GridFieldSortableHeader());
+        $config->addComponent(new GridFieldSortableHeader());
         $config->addComponent($filter = new UserFormsGridFieldFilterHeader());
         $config->addComponent(new GridFieldDataColumns());
         $config->addComponent(new GridFieldEditButton());
         $config->addComponent(new GridFieldDeleteAction());
         $config->addComponent(new GridFieldPageCount('toolbar-header-right'));
-        $config->addComponent($pagination = new GridFieldPaginator(25));
+        $config->addComponent(new GridFieldPaginator(25));
         $config->addComponent(new GridFieldDetailForm(null, true, false));
         $config->addComponent(new GridFieldButtonRow('after'));
         $config->addComponent($export = new GridFieldExportButton('buttons-after-left'));
@@ -296,12 +289,6 @@ SQL;
         if (class_exists(BulkManager::class)) {
             $config->addComponent(new BulkManager);
         }
-
-        Deprecation::withSuppressedNotice(function () use ($sort, $filter, $pagination) {
-            $sort->setThrowExceptionOnBadDataType(false);
-            $filter->setThrowExceptionOnBadDataType(false);
-            $pagination->setThrowExceptionOnBadDataType(false);
-        });
 
         // attach every column to the print view form
         $columns['Created'] = 'Created';
