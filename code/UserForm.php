@@ -23,6 +23,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
@@ -374,11 +375,10 @@ SQL;
         return $this->config()->get('error_container_id');
     }
 
-    /**
-     * Validate formfields
-     */
-    public function getCMSValidator()
+    public function getCMSCompositeValidator(): CompositeValidator
     {
-        return UserFormValidator::create();
+        $validator = parent::getCMSCompositeValidator();
+        $validator->addValidator(UserFormValidator::create());
+        return $validator;
     }
 }
