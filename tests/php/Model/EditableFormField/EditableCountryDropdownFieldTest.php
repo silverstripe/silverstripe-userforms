@@ -38,7 +38,7 @@ class EditableCountryDropdownFieldTest extends SapphireTest
         /** @var EditableCountryDropdownField $field */
         $field = EditableCountryDropdownField::create();
         $field->Default = 'nz';
-        $this->assertEquals($field->getFormField()->Value(), 'nz');
+        $this->assertEquals($field->getFormField()->getValue(), 'nz');
     }
 
     public function testEmptyDefaultValue()
