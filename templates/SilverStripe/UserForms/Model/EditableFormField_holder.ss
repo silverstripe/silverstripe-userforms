@@ -1,5 +1,5 @@
 <div id="$Name" class="field<% if $extraClass %> $extraClass<% end_if %>">
-	<% if $Title %><label class="left" for="$ID">$Title</label><% end_if %>
+	<% if $Title %><label class="left form-label" for="$ID">$Title</label><% end_if %>
 	<div class="middleColumn">
 		$Field
 	</div>

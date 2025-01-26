@@ -264,7 +264,7 @@ class EditableFormField extends DataObject
                 LiteralField::create(
                     'MergeField',
                     '<div class="form-group field readonly">' .
-                        '<label class="left form__field-label" for="Form_ItemEditForm_MergeField">'
+                        '<label class="left form__field-label form-label" for="Form_ItemEditForm_MergeField">'
                             . _t(__CLASS__.'.MERGEFIELDNAME', 'Merge field')
                         . '</label>'
                         . '<div class="form__field-holder">'
