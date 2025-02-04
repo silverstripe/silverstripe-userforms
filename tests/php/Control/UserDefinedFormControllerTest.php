@@ -50,7 +50,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $config = Config::modify();
         $config->set(UserDefinedFormController::class, 'maximum_email_attachment_size', "1M");
-        $config->merge(SSViewer::class, 'themes', ['simple', '$default']);
+        $config->merge(SSViewer::class, 'themes', ['startup-theme', '$default']);
     }
 
     protected function tearDown(): void
