@@ -57,12 +57,19 @@ class UserFormsRequiredFields extends RequiredFields
                 continue;
             }
 
+            $originalFieldName = $fieldName;
+
             // get form field
             if ($fieldName instanceof FormField) {
                 $formField = $fieldName;
                 $fieldName = $fieldName->getName();
+                $originalFieldName = $fieldName;
             } else {
                 $formField = $fields->dataFieldByName($fieldName);
+
+                if ($formField instanceof FileField && strpos($fieldName ?? '', '[') !== false) {
+                    $fieldName = preg_replace('#\[(.*?)\]$#', '', $fieldName ?? '');
+                }
             }
 
             // get editable form field - owns display rules for field
@@ -75,7 +82,7 @@ class UserFormsRequiredFields extends RequiredFields
 
             // handle error case
             if ($formField && $error) {
-                $this->handleError($formField, $fieldName);
+                $this->handleError($formField, $originalFieldName);
                 $valid = false;
             }
         }
@@ -122,7 +129,7 @@ class UserFormsRequiredFields extends RequiredFields
             if ($field instanceof FileField && isset($value['error']) && $value['error']) {
                 $error = true;
             } else {
-                $error = (count($value ?? [])) ? false : true;
+                $error = (count(array_filter($value ?? []))) ? false : true;
             }
         } else {
             // assume a string or integer

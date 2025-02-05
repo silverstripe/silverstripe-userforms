@@ -308,54 +308,79 @@ JS
 
             if (!empty($data[$field->Name])) {
                 if (in_array(EditableFileField::class, $field->getClassAncestry() ?? [])) {
-                    if (!empty($_FILES[$field->Name]['name'])) {
+                    if (($names = $_FILES[$field->Name]['name'] ?? '') && (!is_array($names) || array_filter($names))) {
                         if (!$field->getFolderExists()) {
                             $field->createProtectedFolder();
                         }
 
-                        $file = Versioned::withVersionedMode(function () use ($field, $form) {
-                            $stage = Injector::inst()->get(UserDefinedFormController::class)->config()->get('file_upload_stage');
-                            Versioned::set_stage($stage);
+                        $processFile = function ($fileData) use ($field, $form, &$attachments) {
+                            $file = Versioned::withVersionedMode(function () use ($fileData, $field, $form, &$attachments) {
+                                $stage = Injector::inst()->get(UserDefinedFormController::class)->config()->get('file_upload_stage');
+                                Versioned::set_stage($stage);
 
-                            $foldername = $field->getFormField()->getFolderName();
-                            // create the file from post data
-                            $upload = Upload::create();
-                            try {
-                                $upload->loadIntoFile($_FILES[$field->Name], null, $foldername);
-                            } catch (ValidationException $e) {
-                                $validationResult = $e->getResult();
-                                foreach ($validationResult->getMessages() as $message) {
-                                    $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                                $foldername = $field->getFormField()->getFolderName();
+                                // create the file from post data
+                                $upload = Upload::create();
+                                try {
+                                    $upload->loadIntoFile($fileData, null, $foldername);
+                                } catch (ValidationException $e) {
+                                    $validationResult = $e->getResult();
+                                    foreach ($validationResult->getMessages() as $message) {
+                                        $form->sessionMessage($message['message'], ValidationResult::TYPE_ERROR);
+                                    }
+                                    Controller::curr()->redirectBack();
+                                    return null;
                                 }
-                                Controller::curr()->redirectBack();
+                                /** @var AssetContainer|File $file */
+                                $file = $upload->getFile();
+                                $file->ShowInSearch = 0;
+                                $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
+                                $file->write();
+
+                                return $file;
+                            });
+
+                            if (is_null($file)) {
                                 return null;
                             }
-                            /** @var AssetContainer|File $file */
-                            $file = $upload->getFile();
-                            $file->ShowInSearch = 0;
-                            $file->UserFormUpload = UserFormFileExtension::USER_FORM_UPLOAD_TRUE;
-                            $file->write();
+
+                            // generate image thumbnail to show in asset-admin
+                            // you can run userforms without asset-admin, so need to ensure asset-admin is installed
+                            if (class_exists(AssetAdmin::class)) {
+                                AssetAdmin::singleton()->generateThumbnails($file);
+                            }
+
+                            // attach a file to recipient email only if lower than configured size
+                            if ($file->getAbsoluteSize() <= $this->getMaximumAllowedEmailAttachmentSize()) {
+                                $attachments[$field->Name][] = $file;
+                            }
 
                             return $file;
-                        });
+                        };
 
-                        if (is_null($file)) {
-                            return;
-                        }
+                        $files = $_FILES[$field->Name];
 
-                        // generate image thumbnail to show in asset-admin
-                        // you can run userforms without asset-admin, so need to ensure asset-admin is installed
-                        if (class_exists(AssetAdmin::class)) {
-                            AssetAdmin::singleton()->generateThumbnails($file);
-                        }
+                        if (is_array($files['name'])) {
+                            foreach (array_keys($files['name']) as $index) {
+                                $fileData = [];
+                                foreach ($files as $key => $value) {
+                                    $fileData[$key] = $value[$index];
+                                }
 
-                        // write file to form field
-                        $submittedField->UploadedFileID = $file->ID;
+                                if (!$file = $processFile($fileData)) {
+                                    return;
+                                }
 
-                        // attach a file to recipient email only if lower than configured size
-                        if ($file->getAbsoluteSize() <= $this->getMaximumAllowedEmailAttachmentSize()) {
-                            // using the field name as array index is fine as file upload field only allows one file
-                            $attachments[$field->Name] = $file;
+                                // write file to form field
+                                $submittedField->UploadedFiles()->add($file);
+                            }
+                        } else {
+                            if (!$file = $processFile($files)) {
+                                return;
+                            }
+
+                            // write file to form field
+                            $submittedField->UploadedFileID = $file->ID;
                         }
                     }
                 }
@@ -393,21 +418,23 @@ JS
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
 
                 if ($attachments && (bool) $recipient->HideFormData === false) {
-                    foreach ($attachments as $uploadFieldName => $file) {
-                        /** @var File $file */
-                        if ((int) $file->ID === 0) {
-                            continue;
-                        }
+                    foreach ($attachments as $uploadFieldName => $files) {
+                        foreach ($files as $file) {
+                            /** @var File $file */
+                            if ((int) $file->ID === 0) {
+                                continue;
+                            }
 
-                        $canAttachFileForRecipient = true;
-                        $this->extend('updateCanAttachFileForRecipient', $canAttachFileForRecipient, $recipient, $uploadFieldName, $file);
+                            $canAttachFileForRecipient = true;
+                            $this->extend('updateCanAttachFileForRecipient', $canAttachFileForRecipient, $recipient, $uploadFieldName, $file);
 
-                        if ($canAttachFileForRecipient) {
-                            $email->addAttachmentFromData(
-                                $file->getString(),
-                                $file->getFilename(),
-                                $file->getMimeType()
-                            );
+                            if ($canAttachFileForRecipient) {
+                                $email->addAttachmentFromData(
+                                    $file->getString(),
+                                    $file->getFilename(),
+                                    $file->getMimeType()
+                                );
+                            }
                         }
                     }
                 }

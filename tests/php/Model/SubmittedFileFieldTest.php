@@ -47,7 +47,7 @@ class SubmittedFileFieldTest extends SapphireTest
 
     public function testDeletingSubmissionRemovesFile()
     {
-        $this->assertStringContainsString('test-SubmittedFileFieldTest', $this->submittedFile->getFileName(), 'Submitted file is linked');
+        $this->assertStringContainsString('test-SubmittedFileFieldTest', $this->submittedFile->getFileNames()[0], 'Submitted file is linked');
 
         $this->submittedForm->delete();
         $fileId = $this->file->ID;
@@ -73,7 +73,7 @@ class SubmittedFileFieldTest extends SapphireTest
     {
         // Set an explicit base URL so we get a reliable value for the test
         Director::config()->set('alternate_base_url', 'http://mysite.com');
-        $fileName = $this->submittedFile->getFileName();
+        $fileName = $this->submittedFile->getFileNames()[0];
         $link = 'http://mysite.com/assets/3c01bdbb26/test-SubmittedFileFieldTest.txt';
 
         $this->file->CanViewType = 'OnlyTheseUsers';
