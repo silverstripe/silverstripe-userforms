@@ -36,10 +36,8 @@ class SubmittedFileField extends SubmittedFormField
     /**
      * Return the value of this field for inclusion into things such as
      * reports.
-     *
-     * @return string
      */
-    public function getFormattedValue()
+    public function getFormattedValue(): ?DBField
     {
         $name = $this->getFileName();
         $link = $this->getLink(false);
@@ -77,7 +75,7 @@ class SubmittedFileField extends SubmittedFormField
                 ));
             }
         }
-        return false;
+        return null;
     }
 
     /**

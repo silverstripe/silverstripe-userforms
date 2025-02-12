@@ -47,7 +47,7 @@ class UserFormsCheckboxSetField extends CheckboxSetField
 
     public function getValueForValidation(): mixed
     {
-        $value = $this->Value();
+        $value = $this->getValue();
         if (is_iterable($value) || is_null($value)) {
             return $value;
         }
