@@ -132,6 +132,7 @@ es_ES:
     db_Value: Valor
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Agregar destinatario de email'
+    CLASS_DESCRIPTION: 'Agrega un formulario personalizable.'
     CONFIGURATION: Configuración
     DESCRIPTION: 'Agrega un formulario personalizable.'
     EMAILBODY: Cuerpo

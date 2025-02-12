@@ -401,6 +401,7 @@ sl:
     has_one_Parent: 'Nadrejeno pravilo'
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Dodaj prejemnika'
+    CLASS_DESCRIPTION: 'Doda prilagojen obrazec.'
     CLEARBUTTON: Ponastavi
     CONFIGURATION: Nastavitve
     DESCRIPTION: 'Doda prilagojen obrazec.'

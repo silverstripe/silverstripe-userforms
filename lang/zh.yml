@@ -137,6 +137,7 @@ zh:
     has_one_Parent: 父
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 添加电子邮件收件人
+    CLASS_DESCRIPTION: 添加一个可定制的表格。
     CLEARBUTTON: 清除
     CONFIGURATION: 配置
     DESCRIPTION: 添加一个可定制的表格。

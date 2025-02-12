@@ -42,6 +42,7 @@ it:
   SilverStripe\UserForms\Model\EditableCustomRule:
     PLURALNAME: 'Regole personalizzate modificabili'
     SINGULARNAME: 'Regola personalizzata modificabile'
+    db_Version: Versione
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Spuntato di default?'
@@ -72,6 +73,7 @@ it:
     db_RightTitle: 'Titolo a destra'
     db_Sort: Ordine
     db_Title: Titolo
+    db_Version: Versione
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: 'Caselle di controllo'
@@ -147,6 +149,7 @@ it:
     db_Sort: Ordine
     db_Title: Titolo
     db_Value: Valore
+    db_Version: Versione
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
     PLURALNAME: 'Gruppi di pulsanti a scelta singola'
@@ -189,6 +192,7 @@ it:
     has_one_Parent: Parente
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aggiungi destinatario e-mail'
+    CLASS_DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
