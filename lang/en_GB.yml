@@ -6,6 +6,7 @@ en_GB:
     SINGULARNAME: 'User Defined Form Email Recipient'
     db_EmailSubject: 'Email Subject'
   SilverStripe\UserForms\Model\UserDefinedForm:
+    CLASS_DESCRIPTION: 'Adds a customisable form.'
     DESCRIPTION: 'Adds a customisable form.'
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'

@@ -308,6 +308,7 @@ pl_PL:
     has_one_Parent: Rodzic
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Dodaj e-mail odbiorcy'
+    CLASS_DESCRIPTION: 'Dodaj własny formularz'
     CLEARBUTTON: Czyść
     CONFIGURATION: Konfiguracja
     DESCRIPTION: 'Dodaj własny formularz'
