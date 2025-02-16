@@ -346,6 +346,7 @@ nl:
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
+    CLASS_DESCRIPTION: 'Zelf-instelbaar formulier.'
     CLEARBUTTON: Wissen
     CONFIGURATION: Configuratie
     DESCRIPTION: 'Zelf-instelbaar formulier.'
