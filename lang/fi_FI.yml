@@ -231,6 +231,7 @@ fi_FI:
     db_Value: Arvo
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Lisää sähköpostin vastaanottaja'
+    CLASS_DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
     CLEARBUTTON: Tyhjennä
     CONFIGURATION: Asetukset
     DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'

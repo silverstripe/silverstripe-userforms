@@ -190,6 +190,7 @@ sk:
     has_one_Parent: 'Komentovaný príspevok'
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Pridať príjemcu'
+    CLASS_DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
     CLEARBUTTON: Vyčistiť
     CONFIGURATION: Konfigurácia
     DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'

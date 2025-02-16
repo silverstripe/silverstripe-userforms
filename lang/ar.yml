@@ -137,6 +137,7 @@ ar:
     has_one_Parent: والد
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
+    CLASS_DESCRIPTION: 'يضيف استمارة مخصصة.'
     CONFIGURATION: المواصفات
     DESCRIPTION: 'يضيف استمارة مخصصة.'
     EMAILADDRESS: 'البريد الإلكتروني'

@@ -351,6 +351,7 @@ eo:
     has_one_Parent: Patra
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Aldoni retpoŝtan ricevonton'
+    CLASS_DESCRIPTION: 'Aldonas adapteblan formularon'
     CLEARBUTTON: Vakigi
     CONFIGURATION: Agordaro
     DESCRIPTION: 'Aldonas adapteblan formularon'
