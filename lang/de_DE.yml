@@ -175,6 +175,7 @@ de_DE:
     db_Value: Wert
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
+    CLASS_DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
     CLEARBUTTON: Löschen
     CONFIGURATION: Konfiguration
     DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'

@@ -143,6 +143,7 @@ sv:
     has_one_Parent: Förälder
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Lägg till e-postmottagare'
+    CLASS_DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
     CLEARBUTTON: Rensa
     CONFIGURATION: Konfiguration
     DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
