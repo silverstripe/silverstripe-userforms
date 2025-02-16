@@ -457,8 +457,9 @@ class EmailRecipient extends DataObject
             return $args[1][Form::class];
         }
         // Hack in currently edited page if context is missing
-        if (Controller::has_curr() && Controller::curr() instanceof CMSMain) {
-            return Controller::curr()->currentRecord();
+        $controller = Controller::curr();
+        if ($controller instanceof CMSMain) {
+            return $controller->currentRecord();
         }
 
         // No page being edited
