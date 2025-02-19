@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Task;
 
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\Dev\MigrationTask;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
@@ -13,6 +14,7 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Column clean up tasks for Userforms
  *
  * @package userforms
+ * @deprecated 6.4.0 Will be removed without equivalent functionality to replace it
  */
 
 class UserFormsColumnCleanTask extends MigrationTask
@@ -24,6 +26,12 @@ class UserFormsColumnCleanTask extends MigrationTask
     protected $tables = [EditableFormField::class];
 
     protected $keepColumns = ['ID'];
+
+    public function __construct()
+    {
+        Deprecation::noticeWithNoReplacment('6.4.0', '', Deprecation::SCOPE_CLASS);
+        parent::__construct();
+    }
 
     /**
      * Publish the existing forms.
