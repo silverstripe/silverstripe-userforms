@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model\EditableFormField;
 
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
@@ -185,7 +186,7 @@ class EditableTextField extends EditableFormField
         }
 
         if (is_numeric($this->MaxLength) && $this->MaxLength > 0) {
-            if ($field instanceof TextField) {
+            if (ClassInfo::hasMethod($field, 'setMaxLength')) {
                 $field->setMaxLength((int) $this->MaxLength);
             }
             $field->setAttribute('data-rule-maxlength', (int) $this->MaxLength);
