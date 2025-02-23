@@ -233,7 +233,7 @@ class EditableFormFieldTest extends FunctionalTest
         // textarea
         $textField->Rows = 3;
         $attributes = $textField->getFormField()->getAttributes();
-        $this->assertFalse(isset($attributes['maxLength']));
+        $this->assertEquals(20, $attributes['maxlength']);
         $this->assertEquals(10, $attributes['data-rule-minlength']);
         $this->assertEquals(20, $attributes['data-rule-maxlength']);
     }
