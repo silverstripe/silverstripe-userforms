@@ -135,7 +135,7 @@ class UserDefinedFormAdmin extends FormSchemaController
         }
 
         // create the schema response
-        $parts = $this->getRequest()->getHeader(FormSchemaController::SCHEMA_HEADER);
+        $parts = $this->getRequest()->getHeader(FormSchema::SCHEMA_HEADER);
         $schemaID = $this->getRequest()->getURL();
         $data = FormSchema::singleton()->getMultipartSchema($parts, $schemaID, $form);
 
