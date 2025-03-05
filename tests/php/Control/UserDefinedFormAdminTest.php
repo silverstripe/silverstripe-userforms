@@ -2,34 +2,13 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
-use SilverStripe\Assets\Dev\TestAssetStore;
-use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
-use SilverStripe\Assets\Storage\AssetStore;
-use SilverStripe\Assets\Upload_Validator;
-use InvalidArgumentException;
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPResponse;
-use SilverStripe\Control\Session;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\FormAction;
-use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\InheritedPermissions;
-use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Control\UserDefinedFormAdmin;
-use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
-use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
-use SilverStripe\UserForms\Model\UserDefinedForm;
-use SilverStripe\Model\ArrayData;
-use SilverStripe\View\SSViewer;
 
 /**
  * @package userforms
