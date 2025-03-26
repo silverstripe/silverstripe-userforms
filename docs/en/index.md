@@ -1,5 +1,6 @@
 ---
 title: UserForms
+summary: CMS managed dynamic forms with customizable fields, validation, email notifications, and submission management
 ---
 
 # UserForms
