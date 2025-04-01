@@ -8,6 +8,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -926,9 +927,11 @@ class EditableFormField extends DataObject
 
     /**
      * @return EditableFormField\Validator
+     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator()
      */
     public function getCMSValidator()
     {
+        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator()');
         return EditableFormField\Validator::create()
             ->setRecord($this);
     }
