@@ -412,9 +412,11 @@ SQL;
 
     /**
      * Validate formfields
+     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator()
      */
     public function getCMSValidator()
     {
+        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator()');
         return UserFormValidator::create();
     }
 }

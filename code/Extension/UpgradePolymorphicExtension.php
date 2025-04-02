@@ -4,6 +4,7 @@ namespace SilverStripe\UserForms\Extension;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
@@ -21,8 +22,6 @@ use SilverStripe\UserForms\UserForm;
  * Various `Parent` relationships in silverstripe/userforms for SilverStripe 3 were mapped directly to UserDefinedForm
  * instances, and were made polymorphic in SilverStripe 4 (which also requires a class name). This means that a
  * certain amount of manual checking is required to ensure that upgrades are performed smoothly.
- *
- * @internal This API is likely to be removed in later major versions of silverstripe/userforms
  *
  * @extends DataExtension<UserDefinedForm>
  */
@@ -47,8 +46,12 @@ class UpgradePolymorphicExtension extends DataExtension
      */
     protected $defaultReplacement = UserDefinedForm::class;
 
+    /**
+     * @deprecated 6.4.0 Will be renamed to onRequireDefaultRecords()
+     */
     public function requireDefaultRecords()
     {
+        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be renamed to onRequireDefaultRecords()');
         if (!UserDefinedForm::config()->get('upgrade_on_build')) {
             return;
         }
