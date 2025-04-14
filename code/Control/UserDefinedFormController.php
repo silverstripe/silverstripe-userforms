@@ -34,7 +34,7 @@ use SilverStripe\View\Requirements;
 use SilverStripe\Model\ModelData;
 use SilverStripe\View\TemplateEngine;
 use SilverStripe\View\ViewLayerData;
-use Swift_RfcComplianceException;
+use Symfony\Component\Mime\Exception\RfcComplianceException;
 
 /**
  * Controller for the {@link UserDefinedForm} page type.
@@ -468,7 +468,7 @@ JS
                     } else {
                         $email->setTo($this->validEmailsToArray($recipient->EmailAddress));
                     }
-                } catch (Swift_RfcComplianceException $e) {
+                } catch (RfcComplianceException $e) {
                     // The sending address is empty and/or invalid. Log and skip sending.
                     $error = sprintf(
                         'Failed to set sender for userform submission %s: %s',
