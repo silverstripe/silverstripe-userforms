@@ -54,5 +54,6 @@ hr:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Očisti
     CONFIGURATION: Konfiguracija
+    CONFIRMATIONPAGE: 'Stranica za potvrdu'
     EMAILFROM: Od
     PLURALNAME: 'Osnovne stranice'

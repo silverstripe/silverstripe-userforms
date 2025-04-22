@@ -139,6 +139,7 @@ ar:
     ADDEMAILRECIPIENT: 'أضف متلقي البريد الإلكتروني'
     CLASS_DESCRIPTION: 'يضيف استمارة مخصصة.'
     CONFIGURATION: المواصفات
+    CONFIRMATIONPAGE: 'صفحة التأكيد المخصصة'
     DESCRIPTION: 'يضيف استمارة مخصصة.'
     EMAILADDRESS: 'البريد الإلكتروني'
     EMAILBODY: هيئة

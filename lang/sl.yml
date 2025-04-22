@@ -404,6 +404,7 @@ sl:
     CLASS_DESCRIPTION: 'Doda prilagojen obrazec.'
     CLEARBUTTON: Ponastavi
     CONFIGURATION: Nastavitve
+    CONFIRMATIONPAGE: 'Stran za potrditev po meri'
     DESCRIPTION: 'Doda prilagojen obrazec.'
     DISABLEAUTHENICATEDFINISHACTION: 'Onemogoči avtentikacijo na koncu.'
     DISABLECSRFSECURITYTOKEN: 'Onemogoči CSRF žeton'

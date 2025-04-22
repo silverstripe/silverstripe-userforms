@@ -47,6 +47,7 @@ pl:
     db_Title: Tytuł
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Wyczyść
+    CONFIRMATIONPAGE: 'Strona potwierdzenia'
     EMAILFROM: Od
     PLURALNAME: 'Podstawowe strony'
     RECIPIENTS: Odbiorcy

@@ -140,6 +140,7 @@ zh:
     CLASS_DESCRIPTION: 添加一个可定制的表格。
     CLEARBUTTON: 清除
     CONFIGURATION: 配置
+    CONFIRMATIONPAGE: '自定义确认页面'
     DESCRIPTION: 添加一个可定制的表格。
     EMAILADDRESS: 电子邮件
     EMAILBODY: 正文

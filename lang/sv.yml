@@ -146,6 +146,7 @@ sv:
     CLASS_DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
     CLEARBUTTON: Rensa
     CONFIGURATION: Konfiguration
+    CONFIRMATIONPAGE: 'Anpassad bekräftelsesida'
     DESCRIPTION: 'Lägger till ett konfigurerbart formulär'
     DISABLECSRFSECURITYTOKEN: 'Inaktivera CSRF-tecken'
     EMAILADDRESS: E-post

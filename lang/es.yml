@@ -60,6 +60,7 @@ es:
     has_one_Parent: Padre
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Limpiar
+    CONFIRMATIONPAGE: 'Página de confirmación personalizada'
     EMAILADDRESS: 'Correo electrónico'
     EMAILFROM: De
     EMAILSUBJECT: 'Asunto del Email'

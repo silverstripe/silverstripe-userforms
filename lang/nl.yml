@@ -349,6 +349,7 @@ nl:
     CLASS_DESCRIPTION: 'Zelf-instelbaar formulier.'
     CLEARBUTTON: Wissen
     CONFIGURATION: Configuratie
+    CONFIRMATIONPAGE: 'Aangepaste bevestigingspagina'
     DESCRIPTION: 'Zelf-instelbaar formulier.'
     DISABLEAUTHENICATEDFINISHACTION: 'Bedanktpagina toegankelijk maken zonder formulier-inzending'
     DISABLECSRFSECURITYTOKEN: 'CSRF-token uitschakelen'

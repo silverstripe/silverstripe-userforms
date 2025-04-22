@@ -193,6 +193,7 @@ sk:
     CLASS_DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
     CLEARBUTTON: Vyčistiť
     CONFIGURATION: Konfigurácia
+    CONFIRMATIONPAGE: 'Vlastná potvrdzovacia stránka'
     DESCRIPTION: 'Umožňuje vytvoriť užívateľom definovaný formulár.'
     DISABLEAUTHENICATEDFINISHACTION: 'Zakázať autentifikáciu po odoslaní formulára?'
     DISABLECSRFSECURITYTOKEN: 'Zakázať CSRF token?'

@@ -65,6 +65,7 @@ ru:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: Сбросить
     CONFIGURATION: Конфигурация
+    CONFIRMATIONPAGE: 'Пользовательская страница подтверждения'
     EMAILFROM: От
     EMAILSUBJECT: 'Тема письма'
     PLURALNAME: 'Базовые страницы'

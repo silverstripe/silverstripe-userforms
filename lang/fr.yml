@@ -302,6 +302,7 @@ fr:
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Ajouter un mail de destination'
     CLEARBUTTON: Effacer
+    CONFIRMATIONPAGE: 'Page de confirmation personnalisée'
     DISABLEAUTHENICATEDFINISHACTION: "Désactiver l'authentification à la fin de l'action"
     DISABLECSRFSECURITYTOKEN: 'Désactiver le jeton CSRF'
     DISPLAYERRORMESSAGESATTOP: "Afficher les messages d'erreur au dessus du formulaire"

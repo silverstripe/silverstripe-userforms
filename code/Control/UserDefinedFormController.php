@@ -556,6 +556,14 @@ JS
             $session->set('userformssubmission'. $this->ID, $submittedForm->ID);
         }
 
+        // If set, redirect to custom thank you page
+        if ($this->data()->ConfirmationPageID) {
+            $confirmationPage = $this->data()->ConfirmationPage();
+            if ($confirmationPage && $confirmationPage->exists()) {
+                return $this->redirect($confirmationPage->Link() . $referrer);
+            }
+        }
+
         return $this->redirect($this->Link('finished') . $referrer . $this->config()->get('finished_anchor'));
     }
 
