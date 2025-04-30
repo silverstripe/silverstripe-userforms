@@ -927,11 +927,11 @@ class EditableFormField extends DataObject
 
     /**
      * @return EditableFormField\Validator
-     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator()
+     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator() in a future major release
      */
     public function getCMSValidator()
     {
-        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator()');
+        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator() in a future major release');
         return EditableFormField\Validator::create()
             ->setRecord($this);
     }
