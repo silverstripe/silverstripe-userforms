@@ -14,7 +14,7 @@ use SilverStripe\UserForms\Model\EditableFormField;
  * Column clean up tasks for Userforms
  *
  * @package userforms
- * @deprecated 6.4.0 Will be removed without equivalent functionality to replace it
+ * @deprecated 6.4.0 Will be removed without equivalent functionality to replace it in a future major release
  */
 
 class UserFormsColumnCleanTask extends MigrationTask

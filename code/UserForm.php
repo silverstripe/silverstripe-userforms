@@ -164,7 +164,7 @@ trait UserForm
 
     /**
      * Unused property
-     * @deprecated 5.3.0 Will be removed without equivalent functionality to replace it
+     * @deprecated 5.3.0 Will be removed without equivalent functionality to replace it in a future major release
      */
     protected $fieldsFromTo = [];
 
@@ -412,11 +412,11 @@ SQL;
 
     /**
      * Validate formfields
-     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator()
+     * @deprecated 6.4.0 Will be replaced with getCMSCompositeValidator() in a future major release
      */
     public function getCMSValidator()
     {
-        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator()');
+        Deprecation::noticeWithNoReplacment('6.4.0', 'Will be replaced with getCMSCompositeValidator() in a future major release');
         return UserFormValidator::create();
     }
 }
