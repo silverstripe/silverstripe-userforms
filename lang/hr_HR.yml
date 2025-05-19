@@ -9,6 +9,5 @@ hr_HR:
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
-    PLURALNAME: 'User Defined Forms'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'

@@ -375,7 +375,7 @@ eo:
     ONCOMPLETEMESSAGE: 'Dankon. Nii ricevis vian sendaĵon.'
     ORSELECTAFIELDTOUSEASFROM: '.. aŭ elekti kampon uzotan kiel respondi-al-adreson'
     ORSELECTAFIELDTOUSEASTO: '.. aŭ elekti kampon uzotan kiel la al-adreson'
-    PLURALNAME: 'Bazaj paĝoj'
+    PLURALNAME: 'Propre difinitaj formularoj'
     PLURALS:
       one: '{count} baza paĝo'
       other: '{count} bazaj paĝoj'

@@ -16,7 +16,6 @@ tr_TR:
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Tamamlanınca görüntüle'
-    PLURALNAME: 'User Defined Forms'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SUBMISSIONS: Gönderiler
