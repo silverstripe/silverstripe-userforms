@@ -61,6 +61,7 @@ fr_FR:
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Utiliser la complétion'
+    PLURALNAME: "Formulaires définits de l'utilisateur"
     REPLYADDRESS: 'Email pour répondre à'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
