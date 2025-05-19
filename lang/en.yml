@@ -377,10 +377,10 @@ en:
     ONCOMPLETEMESSAGE: "Thanks, we've received your submission."
     ORSELECTAFIELDTOUSEASFROM: '.. or select a field to use as reply to address'
     ORSELECTAFIELDTOUSEASTO: '.. or select a field to use as the to address'
-    PLURALNAME: 'Base Pages'
+    PLURALNAME: 'User Defined Forms'
     PLURALS:
       one: 'An User Defined Form'
-      other: '{count} Base Pages'
+      other: '{count} User Defined Forms'
     PREVIEW_EMAIL: 'Preview email'
     PREVIEW_EMAIL_DESCRIPTION: 'Note: Unsaved changes will not appear in the preview.'
     PREVIEW_EMAIL_UNAVAILABLE: 'You can preview this email once you have saved the Recipient.'

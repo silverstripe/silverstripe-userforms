@@ -160,7 +160,7 @@ sv:
     ONCOMPLETELABEL: 'Visa vid slutförande'
     ORSELECTAFIELDTOUSEASFROM: '.. eller välj ett fält att använda som svarsadress'
     ORSELECTAFIELDTOUSEASTO: '.. eller välj ett fält att använda som mottagare'
-    PLURALNAME: Bas-sidor
+    PLURALNAME: 'Bas sidor'
     REPLYADDRESS: 'E-postadress att svara till'
     SAVESUBMISSIONS: 'Spara inte inskickade formulär på servern'
     SELECTAFIELDTOSETSUBJECT: '.. eller välj ett fält att använda som ämne'
