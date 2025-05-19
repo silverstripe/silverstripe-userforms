@@ -17,7 +17,6 @@ ru_RU:
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Показать после отправки'
-    PLURALNAME: 'User Defined Forms'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SUBMISSIONS: Полученное
