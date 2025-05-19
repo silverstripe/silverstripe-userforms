@@ -252,7 +252,7 @@ fi_FI:
     ONCOMPLETELABEL: 'Näytä valmistuessa'
     ORSELECTAFIELDTOUSEASFROM: '.. tai valitse kenttä, jota käytetään Reply To -osoitteena'
     ORSELECTAFIELDTOUSEASTO: '.. tai valitse kenttä, jota käytetään vastaanottajan osoitteena'
-    PLURALNAME: Pohjasivut
+    PLURALNAME: 'Käyttäjän määrittelemät lomakkeet'
     PREVIEW_EMAIL: 'Esikatsele sähköposti'
     PREVIEW_EMAIL_DESCRIPTION: 'Huomio: tallentamattomat muutokset eivät näy esikatselussa.'
     PREVIEW_EMAIL_UNAVAILABLE: 'Voit esikatsella tämän sähköpostin, kunhan olet tallentanut Vastaanottajan.'
