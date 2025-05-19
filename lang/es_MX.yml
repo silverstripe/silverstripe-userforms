@@ -47,7 +47,6 @@ es_MX:
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'
     ONCOMPLETELABEL: 'Mostrar cuando se complete'
-    PLURALNAME: 'User Defined Forms'
     SENDEMAILTO: 'Send Email To'
     SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
     SUBMISSIONS: Peticiones

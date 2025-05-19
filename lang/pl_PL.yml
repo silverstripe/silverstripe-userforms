@@ -325,7 +325,7 @@ pl_PL:
     NORECIPIENTS: 'Ostrzeżenie: nie skonfigurowałeś żadnych odbiorców. Przesłane formularze mogą zostać pominięte.'
     ONCOMPLETELABEL: 'Pokaż po zakończeniu'
     ONCOMPLETEMESSAGE: 'Dziękujemy, otrzymaliśmy Twoje zgłoszenie.'
-    PLURALNAME: 'Podstawowa strona'
+    PLURALNAME: 'Strony bazowe'
     PLURALS:
       few: 'Zdefiniowanych formularzy {count}'
       many: 'Zdefiniowanych formularzy {count}'

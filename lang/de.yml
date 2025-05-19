@@ -58,6 +58,7 @@ de:
     TITLE: Titel
     has_many_Options: Optionen
   SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    RANGE: 'Erlaubte numerische Range'
     RANGE_TO: bis
   SilverStripe\UserForms\Model\EditableFormField\EditableOption:
     db_Sort: Sortierung
