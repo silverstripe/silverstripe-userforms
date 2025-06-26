@@ -296,7 +296,7 @@ class UserDefinedFormAdmin extends FormSchemaController
         $formSubmissionsFolder = Folder::find(static::config()->get('form_submissions_folder'));
         $formSubmissionsFolder->CanViewType = InheritedPermissions::ONLY_THESE_USERS;
         $formSubmissionsFolder->ViewerGroups()->removeAll();
-        $formSubmissionsFolder->ViewerGroups()->add(Group::get_one(Group::class, ['"Code"' => 'administrators']));
+        $formSubmissionsFolder->ViewerGroups()->add(Group::get()->setUseCache(true)->find('Code', 'administrators'));
         $formSubmissionsFolder->write();
     }
 

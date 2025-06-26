@@ -499,7 +499,7 @@ class UserDefinedFormControllerTest extends FunctionalTest
 
         $controller->process($data, $controller->Form());
 
-        $field = EditableFileField::get_by_id($field->ID);
+        $field = EditableFileField::get()->setUseCache(true)->byID($field->ID);
         $filter = [
             'ParentID' => $field->Folder()->ID,
             'Name' => 'testfile.jpg',
