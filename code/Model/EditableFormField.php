@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Model;
 
+use Psr\Log\LoggerInterface;
 use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
@@ -13,6 +14,7 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormField;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
@@ -720,11 +722,17 @@ class EditableFormField extends DataObject
      * Return a FormField to appear on the front end. Implement on
      * your subclass.
      *
-     * @return FormField
+     * @return FormField|null
      */
     public function getFormField()
     {
-        user_error("Please implement a getFormField() on your EditableFormClass ". $this->ClassName, E_USER_ERROR);
+        Injector::inst()->get(LoggerInterface::class)
+            ->warning(
+                'EditableFormField::getFormField() should be implemented in a subclass',
+                ['class' => static::class]
+            );
+
+        return null;
     }
 
     /**

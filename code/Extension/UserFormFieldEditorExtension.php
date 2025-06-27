@@ -60,7 +60,7 @@ class UserFormFieldEditorExtension extends DataExtension
     {
         $fieldEditor = $this->getFieldEditorGrid();
 
-        $fields->insertAfter('Main', Tab::create('FormFields', _t(__CLASS__.'.FORMFIELDS', 'Form Fields')));
+        $fields->insertAfter('Main', Tab::create('FormFields', _t(__CLASS__ . '.FORMFIELDS', 'Form Fields')));
         $fields->addFieldToTab('Root.FormFields', $fieldEditor);
 
         return $fields;
@@ -90,6 +90,11 @@ class UserFormFieldEditorExtension extends DataExtension
                     if ($record instanceof EditableFileField) {
                         $field->setAttribute('data-folderconfirmed', $record->FolderConfirmed ? 1 : 0);
                     }
+
+                    if ($record->getObsoleteClassName()) {
+                        $field->setEmptyString(_t(__CLASS__ . '.OBSOLETE_CLASS', '(Obsolete Class)'));
+                    }
+
                     return $field;
                 }
             },
@@ -105,13 +110,13 @@ class UserFormFieldEditorExtension extends DataExtension
                 $editableColumns,
                 GridFieldButtonRow::create(),
                 (new GridFieldAddClassesButton(EditableTextField::class))
-                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
+                    ->setButtonName(_t(__CLASS__ . '.ADD_FIELD', 'Add Field'))
                     ->setButtonClass('btn-primary'),
                 (new GridFieldAddClassesButton(EditableFormStep::class))
-                    ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break'))
+                    ->setButtonName(_t(__CLASS__ . '.ADD_PAGE_BREAK', 'Add Page Break'))
                     ->setButtonClass('btn-secondary'),
                 (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
-                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group'))
+                    ->setButtonName(_t(__CLASS__ . '.ADD_FIELD_GROUP', 'Add Field Group'))
                     ->setButtonClass('btn-secondary'),
                 $editButton = GridFieldEditButton::create(),
                 GridFieldDeleteAction::create(),

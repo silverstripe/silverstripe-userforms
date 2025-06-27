@@ -40,10 +40,13 @@ abstract class UserFormsCompositeField extends CompositeField implements UserFor
         if (get_class($field) === EditableFormField::class || !$field->getFormField()) {
             return $this;
         }
+
         $formField = $field->getFormField();
 
         // Save this field
-        $this->push($formField);
+        if ($formField) {
+            $this->push($formField);
+        }
 
         // Nest fields that are containers
         if ($formField instanceof UserFormsFieldContainer) {
