@@ -69,6 +69,7 @@ trait UserForm
      *
      * @config
      * @var bool
+     * @deprecated 6.1.0 Will be removed without equivalent functionality to replace it in a future major release.
      */
     private static $upgrade_on_build = true;
 

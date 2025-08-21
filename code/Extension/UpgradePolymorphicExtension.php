@@ -8,6 +8,7 @@ use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Validation\ValidationException;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
@@ -23,6 +24,7 @@ use SilverStripe\UserForms\UserForm;
  * certain amount of manual checking is required to ensure that upgrades are performed smoothly.
  *
  * @extends Extension<UserDefinedForm>
+ * @deprecated 6.1.0 Will be removed without equivalent functionality to replace it in a future major release.
  */
 class UpgradePolymorphicExtension extends Extension
 {
@@ -45,9 +47,14 @@ class UpgradePolymorphicExtension extends Extension
      */
     protected $defaultReplacement = UserDefinedForm::class;
 
+    public function __construct()
+    {
+        Deprecation::noticeWithNoReplacment('6.1.0');
+    }
+
     protected function onRequireDefaultRecords()
     {
-        if (!UserDefinedForm::config()->get('upgrade_on_build')) {
+        if (!Deprecation::withSuppressedNotice(fn () => UserDefinedForm::config()->get('upgrade_on_build'))) {
             return;
         }
 
