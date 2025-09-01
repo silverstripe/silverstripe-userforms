@@ -162,7 +162,7 @@ jQuery(document).ready(($) => {
         describedBy += ` ${elementID}`;
       }
 
-      $input.attr('aria-describedby', describedBy);
+      $input.attr('aria-describedby', describedBy.trim());
     }
   };
 
