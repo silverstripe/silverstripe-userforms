@@ -12,7 +12,7 @@ To view form submissions navigate to the 'Submissions' tab. You can click any of
 
 ## Setting up automated emails for submissions
 
-It is possible to set up automated emails upon each form submission, to do this navigate to the "Recipients" tab and click "Add Email Recipient".
+It is possible to set up automated emails upon each form submission, to do this navigate to the "Recipients" tab and click "Add new Email Recipient".
 
 ![Add email recipient](_images/add-email-recipient.png)
 
@@ -136,7 +136,7 @@ Indicates that a file/folder has restricted access and will only be visible to c
 
 To get started, create a new **User Defined Form** page in the CMS. See [Creating and editing forms](creating-and-editing-forms)
 to learn more. To add a File Upload field to the form, click on the ***Form Fields*** tab in the page editing view.
-Click the ***Add Field*** button then select **File Upload Field** from the dropdown.
+Click the ***Add new Field*** button then select **File Upload Field** from the dropdown.
 
 ![Adding a File Upload Field](_images/userforms-creation.png)
 
