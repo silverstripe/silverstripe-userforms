@@ -178,7 +178,7 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
         if (!$buttonName) {
             // provide a default button name, can be changed by calling {@link setButtonName()} on this component
             $objectName = $singleton->i18n_singular_name();
-            $buttonName = _t('SilverStripe\\Forms\\GridField\\GridField.Add', 'Add {name}', ['name' => $objectName]);
+            $buttonName = _t(GridField::class . '.AddNew', 'Add new {name}', ['name' => $objectName]);
         }
 
         $addAction = GridField_FormAction::create(

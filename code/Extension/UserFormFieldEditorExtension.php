@@ -111,13 +111,13 @@ class UserFormFieldEditorExtension extends Extension
                 $editableColumns,
                 GridFieldButtonRow::create(),
                 (new GridFieldAddClassesButton(EditableTextField::class))
-                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD', 'Add Field'))
+                    ->setButtonName(_t(__CLASS__.'.ADD_NEW_FIELD', 'Add new Field'))
                     ->setButtonClass('btn-primary'),
                 (new GridFieldAddClassesButton(EditableFormStep::class))
-                    ->setButtonName(_t(__CLASS__.'.ADD_PAGE_BREAK', 'Add Page Break'))
+                    ->setButtonName(_t(__CLASS__.'.ADD_NEW_PAGE_BREAK', 'Add new Page Break'))
                     ->setButtonClass('btn-secondary'),
                 (new GridFieldAddClassesButton([EditableFieldGroup::class, EditableFieldGroupEnd::class]))
-                    ->setButtonName(_t(__CLASS__.'.ADD_FIELD_GROUP', 'Add Field Group'))
+                    ->setButtonName(_t(__CLASS__.'.ADD_NEW_FIELD_GROUP', 'Add new Field Group'))
                     ->setButtonClass('btn-secondary'),
                 $editButton = GridFieldEditButton::create(),
                 GridFieldDeleteAction::create(),

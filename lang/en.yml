@@ -3,6 +3,7 @@ en:
     TABMAIN: Main
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
+    ADDNEWEMAILRECIPIENT: 'Add new Email Recipient'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
     DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
@@ -32,6 +33,9 @@ en:
     ADD_FIELD: 'Add Field'
     ADD_FIELD_GROUP: 'Add Field Group'
     ADD_PAGE_BREAK: 'Add Page Break'
+    ADD_NEW_FIELD: 'Add new Field'
+    ADD_NEW_FIELD_GROUP: 'Add new Field Group'
+    ADD_NEW_PAGE_BREAK: 'Add new Page Break'
     FORMFIELDS: 'Form Fields'
     has_many_Fields: Fields
   SilverStripe\UserForms\Extension\UserFormFileExtension:
@@ -353,6 +357,7 @@ en:
     has_one_Parent: Parent
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
+    ADDNEWEMAILRECIPIENT: 'Add new Email Recipient'
     CLASS_DESCRIPTION: 'Adds a customizable form.'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration

@@ -39,7 +39,7 @@ puts the form at the end of all the content.
 
 ## Adding fields
 
-To add a field to the form, click on the "Form Fields" in the Editing Pane. Click the "Add Field" button then select the type of field you want from the dropdown.
+To add a field to the form, click on the "Form Fields" in the Editing Pane. Click the "Add new Field" button then select the type of field you want from the dropdown.
 Save or publish the form to start editing your new field's properties.
 
 ![Adding fields](_images/add-field.png)
@@ -48,7 +48,7 @@ To get details of the available form fields and what they do see [form field typ
 
 ## Adding field groups
 
-Creating field groups is as simple as clicking the 'Add Field Group' button. This creates two 'markers' which act as the beginning and end for the field group. Any fields place between these two markers will be automatically included within the field group.
+Creating field groups is as simple as clicking the 'Add new Field Group' button. This creates two 'markers' which act as the beginning and end for the field group. Any fields place between these two markers will be automatically included within the field group.
 
 ![Adding fieldgroups](_images/fieldgroups.png)
 
@@ -68,7 +68,7 @@ The 'Configuration' tab has a number of options used for customising your form's
 
 ## Creating a multi-page form
 
-To create a multi-page form, simply click the "Add Page Break" button.
+To create a multi-page form, simply click the "Add new Page Break" button.
 This will create a page break field which is used to create a new page in the form. You can drag and drop this page break to separate form fields at the desired location.
 
 ![Multi-page forms](_images/multi-page-forms.png)

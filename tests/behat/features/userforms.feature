@@ -20,7 +20,7 @@ Feature: Userforms
     When I click the "Form Fields" CMS tab
 
     # Create drop down field
-    And I press the "Add Field" button
+    And I press the "Add new Field" button
     And I fill in "Form_Fields_GridFieldEditableColumns_2_Title" with "My dropdown"
     And I select "Dropdown Field" from "Form_Fields_GridFieldEditableColumns_2_ClassName"
     And I press the "Save" button
@@ -38,14 +38,14 @@ Feature: Userforms
     And I click the "Form Fields" CMS tab
 
     # Create textfields
-    And I press the "Add Field" button
-    And I press the "Add Field" button
+    And I press the "Add new Field" button
+    And I press the "Add new Field" button
     When I fill in "Form_Fields_GridFieldEditableColumns_3_Title" with "My textfield 1"
     When I fill in "Form_Fields_GridFieldEditableColumns_4_Title" with "My textfield 2"
     And I press the "Save" button
-    When I press the "Add Page Break" button
-    And I press the "Add Field" button
-    And I press the "Add Field" button
+    When I press the "Add new Page Break" button
+    And I press the "Add new Field" button
+    And I press the "Add new Field" button
     And I fill in "Form_Fields_GridFieldEditableColumns_5_Title" with "Second Page"
     When I fill in "Form_Fields_GridFieldEditableColumns_6_Title" with "My textfield 3"
     And I fill in "Form_Fields_GridFieldEditableColumns_7_Title" with "My upload field"
@@ -75,7 +75,7 @@ Feature: Userforms
 
     # Add email recipient with custom text and custom rules
     When I click the "Recipients" CMS tab
-    And I press the "Add Email Recipient" button
+    And I press the "Add new Email Recipient" button
     And I fill in "Type subject" with "New userform submission"
     And I fill in "Type to address" with "to@example.com"
     And I fill in "Send email from" with "from@example.com"
