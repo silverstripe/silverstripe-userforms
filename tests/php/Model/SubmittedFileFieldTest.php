@@ -97,7 +97,7 @@ class SubmittedFileFieldTest extends SapphireTest
         $this->logInWithPermission('CMS_ACCESS_CMSMain');
         $this->assertEquals(
             sprintf(
-                '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
+                '<span class="icon font-icon-lock" aria-hidden="true"></span> %s - <em>%s</em>',
                 $fileName,
                 'You don&#039;t have the right permissions to download this file'
             ),

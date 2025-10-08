@@ -50,7 +50,7 @@ class SubmittedFileField extends SubmittedFormField
                     $default = 'You don\'t have the right permissions to download this file';
                     $message = _t(__CLASS__ . '.INSUFFICIENTRIGHTS', $default);
                     return DBField::create_field('HTMLText', sprintf(
-                        '<i class="icon font-icon-lock"></i> %s - <em>%s</em>',
+                        '<span class="icon font-icon-lock" aria-hidden="true"></span> %s - <em>%s</em>',
                         htmlspecialchars($name, ENT_QUOTES),
                         htmlspecialchars($message, ENT_QUOTES)
                     ));
