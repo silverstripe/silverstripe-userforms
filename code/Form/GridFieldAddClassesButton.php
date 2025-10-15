@@ -188,7 +188,7 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
             $this->getAction(),
             array()
         );
-        $addAction->addExtraClass('font-icon-plus btn');
+        $addAction->addExtraClass('btn')->setIcon('plus');
 
         if ($this->getButtonClass()) {
             $addAction->addExtraClass($this->getButtonClass());
