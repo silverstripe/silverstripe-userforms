@@ -32,10 +32,10 @@ en:
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Add Field'
     ADD_FIELD_GROUP: 'Add Field Group'
-    ADD_PAGE_BREAK: 'Add Page Break'
     ADD_NEW_FIELD: 'Add new Field'
     ADD_NEW_FIELD_GROUP: 'Add new Field Group'
     ADD_NEW_PAGE_BREAK: 'Add new Page Break'
+    ADD_PAGE_BREAK: 'Add Page Break'
     FORMFIELDS: 'Form Fields'
     has_many_Fields: Fields
   SilverStripe\UserForms\Extension\UserFormFileExtension:
