@@ -1,6 +1,10 @@
 nl_NL:
+  SilverStripe\UserForms:
+    CLEARBUTTON: Herstellen
+    SUBMITBUTTON: Verzenden
   SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
     FILTERSUBMISSIONS: 'Inzendingen filteren'
+    FROM: Van
     WHEREVALUEIS: 'waar waarde is...'
   SilverStripe\UserForms\Model\EditableFormField:
     CHECKEDBYDEFAULT: 'Standaard aangevinkt'
@@ -14,6 +18,7 @@ nl_NL:
     RIGHTTITLE: 'Titel rechts'
     SINGULARNAME: 'Bewerkbaar formulierveld'
     VALIDATION: Validatie
+    db_RightTitle: 'Titel rechts'
   SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
     PLURALNAME: Selectievakjes
     SINGULARNAME: Selectievakje
@@ -32,6 +37,8 @@ nl_NL:
   SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
     PLURALNAME: 'Email velden'
     SINGULARNAME: 'Email veld'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    belongs_to_Group: Groep
   SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
     PLURALNAME: 'Velden voor bestand uploaden'
     SELECTUPLOADFOLDER: 'Selecteer upload locatie'
@@ -47,6 +54,7 @@ nl_NL:
   SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
     PLURALNAME: 'Ledenlijst velden'
     SINGULARNAME: 'Ledenlijst veld'
+    has_one_Group: Groep
   SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
     PLURALNAME: 'Bewerkbare meerdere optie velden'
     SINGULARNAME: 'Bewerkbare meerdere optie veld'
@@ -65,8 +73,10 @@ nl_NL:
     SINGULARNAME: 'Tekst veld'
     TEXTLENGTH: 'Tekst lengte'
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
+    CUSTOMRULESTAB: 'Aanpasbare regels'
     PLURALNAME: 'Email Ontvangers'
     SINGULARNAME: 'Email Ontvanger'
+    db_EmailSubject: Onderwerp
   SilverStripe\UserForms\Model\Submission\SubmittedFileField:
     DOWNLOADFILE: 'Download bestand'
     PLURALNAME: 'Ingediende bestandsvelden'
@@ -78,9 +88,11 @@ nl_NL:
     PLURALNAME: 'Ingediende formvelden'
     SINGULARNAME: 'Ingediende formveld'
   SilverStripe\UserForms\Model\UserDefinedForm:
+    CLASS_DESCRIPTION: 'Formulier pagina'
     CLEARBUTTON: Herstellen
     DESCRIPTION: 'Formulier pagina'
     EMAILBODY: Tekst
+    EMAILBODYHTML: Tekst
     EMAILFROM: Van
     EMAILSUBJECT: Onderwerp
     EmailFromContent: 'Met het vanaf adres kunt u instellen waar het ingediende formulier vandaag komt. Op de meeste servers dien je een email in te vullen van hetzelfde domein als deze website. Bijvoorbeeld op jouwwebsite.nl dan dien je het volgende adres in te stellen iets@jouwwebsite.nl. Echter kunt u bij antwoorden op ieder email adres invullen.'
