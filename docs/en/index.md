@@ -18,6 +18,16 @@ and without getting involved in any PHP code.
 - Define custom error messages and validation settings
 - Optionally display and hide fields using JavaScript based on users input
 
+## Installation
+
+```bash
+composer require silverstripe/userforms
+```
+
+## GitHub repository
+
+<https://github.com/silverstripe/silverstripe-userforms>
+
 ## Thanks
 
 I would like to thank everyone who has contributed to the module, bugfixers,

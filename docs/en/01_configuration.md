@@ -1,22 +1,14 @@
 ---
-title: Installation
+title: Configuration
 ---
 
-# Installation
-
-Installation should be done using Composer:
-
-```bash
-composer require silverstripe/userforms
-```
-
-## Configuration
+# Configuration
 
 After installation, make sure you rebuild your database through `sake db:build --flush`.
 
 You should see a new page type in the CMS called "User Defined Form". This has a new "Form" tab which has your form builder.
 
-### File uploads and security
+## File uploads and security
 
 The module allows adding a "File Upload Field" to a form.
 The field enables users of this form to upload files to the website's assets
@@ -32,7 +24,7 @@ configuration setting.
 The allowed upload size can be set in the CMS as long as it doesn't exceed the PHP configuration
 for this website (the smaller value of `upload_max_filesize` or `post_max_size`).
 
-### Securing uploaded files
+## Securing uploaded files
 
 By adding a File Upload Field to your user form you can allow your website users to upload files, which will be stored in a user-defined folder in your Silverstripe CMS system. You can access these files via the "Submissions" tab, or from the "Files" area in the admin interface.
 
@@ -44,7 +36,7 @@ You should think carefully about the use case for file uploads.
 Unauthorised viewing of files might be desired, e.g. submissions for public competitions.
 In other cases, submissions could be expected to contain private data.
 
-### Custom email templates
+## Custom email templates
 
 If you want to use custom email templates set the following config option.
 
@@ -55,7 +47,7 @@ SilverStripe\UserForms\Model\UserDefinedForm:
 
 Any templates placed in your `email_template_directory` directory will be available for use with submission emails.
 
-### Custom multi-step button text
+## Custom multi-step button text
 
 If you want to change the button text when using the Multi-Step/Page Break feature, simply add the following to your `config.yml`:
 
