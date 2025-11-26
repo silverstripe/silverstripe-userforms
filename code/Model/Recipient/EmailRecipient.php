@@ -533,8 +533,7 @@ class EmailRecipient extends DataObject
      */
     public function emailTemplateExists($template = '')
     {
-        $t = ($template ? $template : $this->EmailTemplate);
-
+        $t = ($template ? $template : $this->EmailTemplate) ?? '';
         return array_key_exists($t, (array) $this->getEmailTemplateDropdownValues());
     }
 
