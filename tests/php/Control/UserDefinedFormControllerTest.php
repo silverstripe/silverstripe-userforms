@@ -631,8 +631,6 @@ class UserDefinedFormControllerTest extends FunctionalTest
     {
         $class = new ReflectionClass(UserDefinedFormController::class);
         $method = $class->getMethod('validEmailsToArray');
-        $method->setAccessible(true);
-
         $controller = new UserDefinedFormController();
 
         $this->assertEquals($expected, $method->invokeArgs($controller, $input));

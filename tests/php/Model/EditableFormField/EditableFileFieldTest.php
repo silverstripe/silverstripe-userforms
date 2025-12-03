@@ -84,7 +84,7 @@ class EditableFileFieldTest extends SapphireTest
         $defaultFolder = Folder::find('Form-submissions');
         $this->assertNotEmpty($defaultFolder, 'Default Folder was created along with the EditableFileField');
         $this->assertFalse($defaultFolder->canView(), 'Default Folder default to being restricted');
-        $this->assertFalse((boolean)$fileField->FolderConfirmed, 'EditableFileField are not Folder Confirmed initially');
+        $this->assertFalse((bool) $fileField->FolderConfirmed, 'EditableFileField are not Folder Confirmed initially');
 
         $this->assertEquals(
             $defaultFolder->ID,
@@ -95,7 +95,7 @@ class EditableFileFieldTest extends SapphireTest
         $fileField->FolderID = Folder::find_or_make('boom')->ID;
         $fileField->write();
         $this->assertTrue(
-            (boolean)$fileField->FolderConfirmed,
+            (bool) $fileField->FolderConfirmed,
             'EditableFileField are Folder Confirmed once you assigned them a folder'
         );
 
