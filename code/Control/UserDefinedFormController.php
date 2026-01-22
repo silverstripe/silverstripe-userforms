@@ -489,10 +489,10 @@ JS
                     if ($submittedFormField && trim($submittedFormField->Value ?? '')) {
                         $email->setSubject($submittedFormField->Value);
                     } else {
-                        $email->setSubject($engine->renderString($recipient->EmailSubject, ViewLayerData::create($mergeFields)));
+                        $email->setSubject($engine->renderString($recipient->EmailSubject ?? '', ViewLayerData::create($mergeFields)));
                     }
                 } else {
-                    $email->setSubject($engine->renderString($recipient->EmailSubject, ViewLayerData::create($mergeFields)));
+                    $email->setSubject($engine->renderString($recipient->EmailSubject ?? '', ViewLayerData::create($mergeFields)));
                 }
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
