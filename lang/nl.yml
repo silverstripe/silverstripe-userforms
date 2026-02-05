@@ -3,6 +3,7 @@ nl:
     TABMAIN: Hoofdgedeelte
   SilverStripe\UserForms:
     ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
+    ADDNEWEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
     CLEARBUTTON: Wissen
     CONFIGURATION: Configuratie
     DISABLEAUTHENICATEDFINISHACTION: 'Bedanktpagina toegankelijk maken zonder formulier-inzending'
@@ -30,6 +31,9 @@ nl:
   SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
     ADD_FIELD: 'Veld toevoegen'
     ADD_FIELD_GROUP: 'Veldengroep toevoegen'
+    ADD_NEW_FIELD: 'Veld toevoegen'
+    ADD_NEW_FIELD_GROUP: 'Veldengroep toevoegen'
+    ADD_NEW_PAGE_BREAK: 'Nieuwe pagina toevoegen'
     ADD_PAGE_BREAK: 'Nieuwe pagina toevoegen'
     FORMFIELDS: Velden
     has_many_Fields: Velden
@@ -37,7 +41,7 @@ nl:
     belongs_to_SubmittedFileField: 'Geupload-bestand veld'
     db_UserFormUpload: 'Zelf-instelbaar formulier upload'
   SilverStripe\UserForms\Extension\UserFormValidator:
-    CONDITIONAL_REQUIRED: "Het verplichte veld '{}' kan niet in een optionele pagina geplaatst worden"
+    CONDITIONAL_REQUIRED: "Het verplichte veld '{name}' kan niet in een optionele pagina geplaatst worden"
     NO_PAGE: "Veld '{}' staat vóór eerste pagina"
     UNEXPECTED_BREAK: "Onverwachte nieuwe pagina gevonden '{name}', binnen een veldengroep '{group}'"
     UNEXPECTED_GROUP_END: "'{name}' gevonden zonder bijbehorende groep"
@@ -346,6 +350,7 @@ nl:
     has_one_Parent: Bovenliggende
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
+    ADDNEWEMAILRECIPIENT: 'E-mail ontvanger toevoegen'
     CLASS_DESCRIPTION: 'Zelf-instelbaar formulier.'
     CLEARBUTTON: Wissen
     CONFIGURATION: Configuratie
