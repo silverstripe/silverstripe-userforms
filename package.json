@@ -32,7 +32,7 @@
     "jquery": "^3.6.1",
     "jquery-validation": "^1.19.5",
     "jquery.are-you-sure": "^1.9.0",
-    "qs": "^6.11.0",
+    "qs": "^6.14.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
