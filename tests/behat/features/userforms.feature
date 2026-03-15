@@ -108,7 +108,7 @@ Feature: Userforms
     And I should not see "My textfield 2"
     And I should not see "My textfield 3"
 
-    # Pressing '2' buton should do nothing at this stage
+    # Pressing '2' button should do nothing at this stage
     When I press the "2" button
     Then I should see "First Page"
 

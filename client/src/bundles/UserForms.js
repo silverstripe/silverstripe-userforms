@@ -217,7 +217,7 @@ jQuery(document).ready(($) => {
       });
     }
 
-    // Ensure that page visibilty updates the step navigation
+    // Ensure that page visibility updates the step navigation
     this
       .$elButton
       .on('userform.field.hide userform.field.show', () => {
@@ -514,7 +514,7 @@ jQuery(document).ready(($) => {
       }, 0);
     },
     // Callback for handling the actual submit when the form is valid.
-    // Submission in the jQuery.validate sence is handled at step level.
+    // Submission in the jQuery.validate sense is handled at step level.
     // So when the final step is submitted we have to also check all previous steps are valid.
     submitHandler: (form) => {
       let isValid = true;
@@ -631,7 +631,7 @@ jQuery(document).ready(($) => {
     }
 
     // Validate the form.
-    // This well effectivly validate the current step and not the entire form.
+    // This will effectively validate the current step and not the entire form.
     // This is because hidden fields are excluded from validation, and all fields
     // on all other steps, are currently hidden.
     isValid = this.$el.valid();

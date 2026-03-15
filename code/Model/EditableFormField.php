@@ -1020,7 +1020,7 @@ class EditableFormField extends DataObject
         foreach ($displayRules as $rule) {
             $controllingField = $rule->ConditionField();
 
-            // recursively check - if any of the dependant fields are hidden, assume the rule can not be satisfied
+            // recursively check - if any of the dependent fields are hidden, assume the rule can not be satisfied
             $ruleSatisfied = $this->checkIsDisplayedRecursionProtection()
             && $controllingField->isDisplayed($data)
             && $rule->validateAgainstFormData($data);

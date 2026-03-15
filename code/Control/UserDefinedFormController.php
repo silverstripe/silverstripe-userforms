@@ -58,7 +58,7 @@ class UserDefinedFormController extends PageController
     private static string $file_upload_stage = Versioned::DRAFT;
 
     /**
-     * Size that an uploaded file must not excede for it to be attached to an email
+     * Size that an uploaded file must not exceed for it to be attached to an email
      * Follows PHP "shorthand bytes" definition rules.
      * @see UserDefinedFormController::parseByteSizeString()
      *
@@ -100,7 +100,7 @@ class UserDefinedFormController extends PageController
     }
 
     /**
-     * Add the necessary jQuery validate i18n translation files, either by locale or by langauge,
+     * Add the necessary jQuery validate i18n translation files, either by locale or by language,
      * e.g. 'en_NZ' or 'en'. This adds "methods_abc.min.js" as well as "messages_abc.min.js" from the
      * jQuery validate thirdparty library from dist/js.
      */
@@ -453,7 +453,7 @@ JS
                     $email->setFrom($this->validEmailsToArray($recipient->EmailFrom));
                 }
 
-                // check to see if they are a dynamic reciever eg based on a dropdown field a user selected
+                // check to see if they are a dynamic receiver eg based on a dropdown field a user selected
                 $emailTo = $recipient->SendEmailToField();
 
                 try {
@@ -542,7 +542,7 @@ JS
                 $session->set('FormProcessed', $data['SecurityID']);
             } else {
                 // if the form has had tokens disabled we still need to set FormProcessed
-                // to allow us to get through the finshed method
+                // to allow us to get through the finished method
                 if (!$this->Form()->getSecurityToken()->isEnabled()) {
                     $randNum = rand(1, 1000);
                     $randHash = md5($randNum ?? '');
@@ -660,7 +660,7 @@ JS
 EOS;
             if ($isFormStep) {
                 // Hide the step jump button if the FormStep has is initially hidden.
-                // This is particularly important beacause the next/prev page buttons logic is controlled by
+                // This is particularly important because the next/prev page buttons logic is controlled by
                 // the visibility of the FormStep buttons
                 // The HTML for the FormStep buttons is defined in the UserFormProgress template
                 $id = str_replace('#', '', $target ?? '');

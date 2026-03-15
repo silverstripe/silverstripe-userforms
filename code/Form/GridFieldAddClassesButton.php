@@ -30,7 +30,7 @@ class GridFieldAddClassesButton implements GridField_HTMLProvider, GridField_Act
     protected $buttonName;
 
     /**
-     * Additonal CSS classes for the button
+     * Additional CSS classes for the button
      *
      * @var string
      */
