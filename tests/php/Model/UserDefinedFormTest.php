@@ -68,8 +68,8 @@ class UserDefinedFormTest extends FunctionalTest
 
         $form->rollbackRecursive($origVersion);
 
-        $orignal = Versioned::get_one_by_stage(UserDefinedForm::class, 'Stage', "\"UserDefinedForm\".\"ID\" = $form->ID");
-        $this->assertEquals($orignal->SubmitButtonText, 'Button Text');
+        $original = Versioned::get_one_by_stage(UserDefinedForm::class, 'Stage', "\"UserDefinedForm\".\"ID\" = $form->ID");
+        $this->assertEquals($original->SubmitButtonText, 'Button Text');
     }
 
     public function testGetCMSFields()
