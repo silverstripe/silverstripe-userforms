@@ -5,6 +5,7 @@ namespace SilverStripe\UserForms\Control;
 use Exception;
 use PageController;
 use Psr\Log\LoggerInterface;
+use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
@@ -70,6 +71,11 @@ class UserDefinedFormController extends PageController
     protected function init()
     {
         parent::init();
+
+        // prevent frontend JS/CSS requirements in the admin context (especially jQuery)
+        if (Controller::curr() instanceof LeftAndMain) {
+            return;
+        }
 
         $page = $this->data();
 
