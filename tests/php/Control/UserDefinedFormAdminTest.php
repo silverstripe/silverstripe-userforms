@@ -192,7 +192,7 @@ class UserDefinedFormAdminTest extends FunctionalTest
         $fieldID = $this->idFromFixture(EditableFileField::class, 'file-field-1');
 
         $response = $this->post($url, ['ID' => $fieldID, 'FolderOptions' => 'existing', 'FolderID' => -1]);
-        $this->assertEquals(400, $response->getStatusCode(), 'Confirm a non-existant folder fails with 400');
+        $this->assertEquals(400, $response->getStatusCode(), 'Confirm a non-existent folder fails with 400');
     }
 
     public function testConfirmfolderRootFolder()

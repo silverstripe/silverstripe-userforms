@@ -77,7 +77,7 @@ class UserDefinedFormAdmin extends FormSchemaController
 
     public function index(HTTPRequest $request): HTTPResponse
     {
-        // Don't serve anythign under the main URL.
+        // Don't serve anything under the main URL.
         return $this->httpError(404);
     }
 
@@ -146,7 +146,7 @@ class UserDefinedFormAdmin extends FormSchemaController
     }
 
     /**
-     * Return the ConfirmFolderForm. This is only exposed so the treeview has somewhere to direct it's AJAX calss.
+     * Return the ConfirmFolderForm. This is only exposed so the treeview has somewhere to direct it's AJAX calls.
      * @return Form
      */
     public function ConfirmFolderForm(): Form
@@ -287,7 +287,7 @@ class UserDefinedFormAdmin extends FormSchemaController
     }
 
     /**
-     * Set the permission for the default submisison folder.
+     * Set the permission for the default submission folder.
      * @throws ValidationException
      */
     private static function updateFormSubmissionFolderPermissions()
