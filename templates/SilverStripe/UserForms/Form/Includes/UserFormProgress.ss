@@ -9,7 +9,8 @@
 				<% loop $Steps %>
 				<li class="step-button-wrapper<% if $IsFirst %> current<% end_if %>" data-for="$Name">
 					<%-- Remove js-align class to remove javascript positioning --%>
-					<button class="step-button-jump js-align" disabled="disabled" data-step="$Pos"><% if $Top.ButtonText %>$Top.ButtonText <% end_if %>$Pos</button>
+					<%-- Accessibility patch (silverstripeltd fork): aria-disabled keeps screen readers informed rather than removing the disabled attribute. --%>
+					<button class="step-button-jump js-align" aria-disabled="true" data-step="$Pos"><% if $Top.ButtonText %>$Top.ButtonText <% end_if %>$Pos</button>
 				</li>
 				<% end_loop %>
 			</ul>
