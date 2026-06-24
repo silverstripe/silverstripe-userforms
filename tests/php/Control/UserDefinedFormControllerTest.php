@@ -402,6 +402,37 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEmailSent('test@example.com', 'no-reply@example.com', 'Email Subject: Basic Value');
     }
 
+    /**
+     * The EmailSubject is rendered as a template. An author controlled subject must never have PHP
+     * within it evaluated (which previously allowed remote code execution via the <%t %> default
+     * string handling). The payload below must be treated as inert text.
+     */
+    public function testRecipientSubjectDoesNotEvaluatePhp()
+    {
+        $form = $this->setupFormFrontend();
+
+        $rceFile = ASSETS_PATH . '/userforms_rce_test.txt';
+        if (file_exists($rceFile ?? '')) {
+            unlink($rceFile ?? '');
+        }
+
+        $recipient = $this->objFromFixture(EmailRecipient::class, 'recipient-1');
+        $recipient->EmailSubject = '<%t Foo "{${\'file_put_contents\'(\''
+            . $rceFile . '\',\'pwned\')}}" %>';
+        $recipient->write();
+
+        $this->autoFollowRedirection = false;
+        $this->clearEmails();
+
+        $this->get($form->URLSegment);
+
+        $field = $this->objFromFixture(EditableTextField::class, 'basic-text');
+        $this->submitForm('UserForm_Form_' . $form->ID, null, [$field->Name => 'Basic Value']);
+
+        // The payload must not have been executed, so no file should have been written.
+        $this->assertFileDoesNotExist($rceFile);
+    }
+
     public function testImageThumbnailCreated()
     {
         Config::modify()->set(Upload_Validator::class, 'use_is_uploaded_file', false);
