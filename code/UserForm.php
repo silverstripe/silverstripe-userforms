@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms;
 
 use Colymba\BulkManager\BulkManager;
+use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -14,6 +15,7 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\GridField\GridFieldPageCount;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
@@ -22,18 +24,18 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LabelField;
 use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\SingleSelectField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
-use SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader;
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\Filters\SubmittedFieldFilter;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
-use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
-use SilverStripe\Core\Config\Configurable;
 
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
@@ -265,7 +267,8 @@ SQL;
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldToolbarHeader());
         $config->addComponent(new GridFieldSortableHeader());
-        $config->addComponent($filter = new UserFormsGridFieldFilterHeader());
+        $config->addComponent(new GridFieldButtonRow('before'));
+        $config->addComponent($filter = new GridFieldFilterHeader());
         $config->addComponent(new GridFieldDataColumns());
         $config->addComponent(new GridFieldEditButton());
         $config->addComponent(new GridFieldDeleteAction());
@@ -292,11 +295,6 @@ SQL;
             $config->addComponent(new BulkManager);
         }
 
-        // attach every column to the print view form
-        $columns['Created'] = 'Created';
-        $columns['SubmittedBy.Email'] = 'Submitter';
-        $filter->setColumns($columns);
-
         // print configuration
         $print->setPrintHasHeader(true);
         $print->setPrintColumns($columns);
@@ -311,6 +309,23 @@ SQL;
             $this->Submissions()->sort('Created', 'DESC'),
             $config
         );
+
+        // modify the search context for the searchable fields
+        $context = $filter->getSearchContext($submissions);
+        $searchFields = $this->Fields()->filter('Searchable', true);
+        if ($searchFields->exists()) {
+            foreach ($searchFields as $formField) {
+                $field = $formField->getFormField();
+                if ($field instanceof SingleSelectField) {
+                    $field->setEmptyString('(' . _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ANY', 'Any') . ')');
+                }
+
+                $context->addField($field);
+                $context->addFilter(new SubmittedFieldFilter($formField->Name));
+            }
+        }
+
+        $filter->setSearchContext($context);
 
         $this->extend('updateSubmissionsGridField', $submissions);
 
