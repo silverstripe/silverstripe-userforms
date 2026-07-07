@@ -6,6 +6,7 @@ use Colymba\BulkManager\BulkManager;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
@@ -32,6 +33,7 @@ use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\UserForms\Model\Filters\SubmittedFieldFilter;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
@@ -316,7 +318,12 @@ SQL;
         if ($searchFields->exists()) {
             foreach ($searchFields as $formField) {
                 $field = $formField->getFormField();
-                if ($field instanceof SingleSelectField) {
+                $field->setValue('');
+
+                if ($formField instanceof EditableMultipleOptionField) {
+                    $field = DropdownField::create($field->getName(), $field->Title(), $field->getSource())
+                        ->setEmptyString('(' . _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ANY', 'Any') . ')');
+                } elseif ($field instanceof SingleSelectField) {
                     $field->setEmptyString('(' . _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ANY', 'Any') . ')');
                 }
 
