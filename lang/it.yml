@@ -195,6 +195,7 @@ it:
     CLASS_DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
     CLEARBUTTON: Azzera
     CONFIGURATION: Configurazione
+    CONFIRMATIONPAGE: 'Pagina di conferma personalizzata'
     DESCRIPTION: 'Aggiungi un modulo personalizzabile.'
     DISABLEAUTHENICATEDFINISHACTION: "Disabilita autenticazione sull'azione finale"
     DISABLECSRFSECURITYTOKEN: 'Disabilita token CSRF'

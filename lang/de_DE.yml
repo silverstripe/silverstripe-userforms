@@ -178,6 +178,7 @@ de_DE:
     CLASS_DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
     CLEARBUTTON: Löschen
     CONFIGURATION: Konfiguration
+    CONFIRMATIONPAGE: 'Benutzerdefinierte Bestätigungsseite'
     DESCRIPTION: 'Fügt ein anpassbares Formular hinzu.'
     DISABLECSRFSECURITYTOKEN: 'Deaktiviere CSRF-Token'
     DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'

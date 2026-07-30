@@ -96,6 +96,7 @@ fa_IR:
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: پاک‌کردن
     CONFIGURATION: پیکربندی
+    CONFIRMATIONPAGE: 'صفحه تأیید سفارشی'
     DISABLECSRFSECURITYTOKEN: 'غیر فعال کردن CSRF'
     EMAILADDRESS: ایمیل
     EMAILFROM: از

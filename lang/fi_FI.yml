@@ -234,6 +234,7 @@ fi_FI:
     CLASS_DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
     CLEARBUTTON: Tyhjennä
     CONFIGURATION: Asetukset
+    CONFIRMATIONPAGE: 'Mukautettu vahvistussivu'
     DESCRIPTION: 'Lisää kustomoitavan lomakkeen.'
     DISABLEAUTHENICATEDFINISHACTION: 'Poista Autentikointi viimeistelytoiminnosta'
     DISABLECSRFSECURITYTOKEN: 'Poista CSRF Token'

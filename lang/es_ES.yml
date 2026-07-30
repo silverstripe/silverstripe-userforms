@@ -134,6 +134,7 @@ es_ES:
     ADDEMAILRECIPIENT: 'Agregar destinatario de email'
     CLASS_DESCRIPTION: 'Agrega un formulario personalizable.'
     CONFIGURATION: Configuración
+    CONFIRMATIONPAGE: 'Página de confirmación personalizada'
     DESCRIPTION: 'Agrega un formulario personalizable.'
     EMAILBODY: Cuerpo
     EMAILBODYHTML: Cuerpo

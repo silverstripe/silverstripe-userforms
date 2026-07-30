@@ -354,6 +354,7 @@ eo:
     CLASS_DESCRIPTION: 'Aldonas adapteblan formularon'
     CLEARBUTTON: Vakigi
     CONFIGURATION: Agordaro
+    CONFIRMATIONPAGE: 'Propra konfirma paĝo'
     DESCRIPTION: 'Aldonas adapteblan formularon'
     DISABLEAUTHENICATEDFINISHACTION: 'Malŝalti aŭtentigon de kompletiga ago'
     DISABLECSRFSECURITYTOKEN: 'Malŝalti CSRF-ĵetonon'

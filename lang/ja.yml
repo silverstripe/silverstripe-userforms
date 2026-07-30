@@ -109,6 +109,7 @@ ja:
     db_Value: 数値
   SilverStripe\UserForms\Model\UserDefinedForm:
     CLEARBUTTON: クリア
+    CONFIRMATIONPAGE: 'カスタム確認ページ'
     EMAILADDRESS: メール
     EMAILBODY: ボディ
     EMAILBODYHTML: ボディ

@@ -13,6 +13,7 @@ bg_BG:
     db_EmailSubject: 'Email Subject'
     has_one_Form: Формуляр
   SilverStripe\UserForms\Model\UserDefinedForm:
+    CONFIRMATIONPAGE: 'Потребителска страница за потвърждение'
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'

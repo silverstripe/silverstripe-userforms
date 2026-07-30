@@ -34,6 +34,8 @@ use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Configurable;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\TreeDropdownField;
 
 /**
  * Defines the user defined functionality to be applied to any {@link DataObject}
@@ -116,6 +118,13 @@ trait UserForm
     private static $has_many = [
         'EmailRecipients' => EmailRecipient::class,
         'Submissions' => SubmittedForm::class,
+    ];
+
+    /**
+     * @var array
+     */
+    private static $has_one = [
+        'ConfirmationPage' => SiteTree::class,
     ];
 
     private static $cascade_deletes = [
@@ -211,7 +220,12 @@ trait UserForm
                 CheckboxField::create(
                     'DisableSaveSubmissions',
                     _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SAVESUBMISSIONS', 'Disable Saving Submissions to Server')
-                )
+                ),
+                TreeDropdownField::create(
+                    'ConfirmationPageID',
+                    _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.CONFIRMATIONPAGE', 'Custom confirmation page'),
+                    SiteTree::class
+                ),
             ]);
             $editor->setRows(3);
             $label->addExtraClass('left');

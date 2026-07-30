@@ -102,6 +102,7 @@ nb_NO:
     ADDEMAILRECIPIENT: 'Legg til e-post mottaker'
     CLASS_DESCRIPTION: 'Legg til konfigurerbart skjema'
     CONFIGURATION: Konfigurasjon
+    CONFIRMATIONPAGE: 'Egendefinert bekreftelsesside'
     DESCRIPTION: 'Legg til konfigurerbart skjema'
     EMAILADDRESS: Epost
     EMAILFROM: Fra

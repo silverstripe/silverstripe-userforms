@@ -13,6 +13,7 @@ da_DK:
     db_EmailSubject: 'Email Subject'
     has_one_Form: Formular
   SilverStripe\UserForms\Model\UserDefinedForm:
+    CONFIRMATIONPAGE: 'Brugerdefineret bekræftelsesside'
     EMAILSUBJECT: 'Email Subject'
     FROMADDRESS: 'Send Email From'
     HIDEFORMDATA: 'Hide Form Data from Email'

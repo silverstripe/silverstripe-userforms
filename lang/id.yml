@@ -50,6 +50,7 @@ id:
     db_Value: Nilai
     has_one_Parent: Induk
   SilverStripe\UserForms\Model\UserDefinedForm:
+    CONFIRMATIONPAGE: 'Halaman konfirmasi kustom'
     EMAILFROM: Dari
     EMAILSUBJECT: 'Subyek email'
     PLURALNAME: 'Laman Dasar'

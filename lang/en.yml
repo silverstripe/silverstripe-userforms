@@ -361,6 +361,7 @@ en:
     CLASS_DESCRIPTION: 'Adds a customizable form.'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
+    CONFIRMATIONPAGE: 'Custom confirmation page'
     DESCRIPTION: 'Adds a customizable form.'
     DISABLEAUTHENICATEDFINISHACTION: 'Disable Authentication on finish action'
     DISABLECSRFSECURITYTOKEN: 'Disable CSRF Token'

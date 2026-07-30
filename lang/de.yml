@@ -82,6 +82,7 @@ de:
     ADDEMAILRECIPIENT: 'E-Mail-Empfänger hinzufügen'
     CLEARBUTTON: Löschen
     CONFIGURATION: Einstellungen
+    CONFIRMATIONPAGE: 'Benutzerdefinierte Bestätigungsseite'
     DISABLECSRFSECURITYTOKEN: 'Deaktiviere CSRF-Token'
     DISPLAYERRORMESSAGESATTOP: 'Fehlermeldungen über dem Formular anzeigen?'
     EMAILADDRESS: E-Mail
