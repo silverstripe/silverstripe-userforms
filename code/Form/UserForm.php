@@ -10,6 +10,7 @@ use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\UserForms\FormField\UserFormsStepField;
 use SilverStripe\UserForms\FormField\UserFormsFieldList;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 
 /**
  * @package userforms
@@ -165,12 +166,23 @@ class UserForm extends Form
     public function getRequiredFields()
     {
         // Generate required field validator
-        $requiredNames = $this
+        $requiredFields = $this
             ->getController()
             ->data()
             ->Fields()
-            ->filter('Required', true)
-            ->column('Name');
+            ->filter('Required', true);
+
+        $requiredNames = [];
+        foreach ($requiredFields as $requiredField) {
+            $requiredName = $requiredField->Name;
+
+            if ($requiredField instanceof EditableFileField && $requiredField->Multiple) {
+                $requiredName .= '[]';
+            }
+
+            $requiredNames[] = $requiredName;
+        }
+
         $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());
         $required = UserFormsRequiredFields::create($requiredNames);
         $this->extend('updateRequiredFields', $required);

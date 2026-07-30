@@ -9,6 +9,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
@@ -18,6 +19,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\UserForms\Control\UserDefinedFormAdmin;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
+use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
 
@@ -40,6 +42,7 @@ class EditableFileField extends EditableFormField
     private static $db = [
         'MaxFileSizeMB' => 'Float',
         'FolderConfirmed' => 'Boolean',
+        'Multiple' => 'Boolean',
     ];
 
     private static $has_one = [
@@ -173,6 +176,12 @@ class EditableFileField extends EditableFormField
                     ->setDescription("Note: Maximum php allowed size is {$this->getPHPMaxFileSizeMB()} MB")
             );
 
+            $fields->addFieldToTab(
+                'Root.Main',
+                CheckboxField::create('Multiple')
+                    ->setTitle('Allow multiple files')
+            );
+
             $fields->removeByName('Default');
         });
 
@@ -209,7 +218,7 @@ class EditableFileField extends EditableFormField
 
     public function getFormField()
     {
-        $field = FileField::create($this->Name, $this->Title ?: false)
+        $field = FileField::create(($originalName = $this->Name) . ($this->Multiple ? '[]' : ''), $this->Title ?: false)
             ->setFieldHolderTemplate(EditableFormField::class . '_holder')
             ->setTemplate(__CLASS__)
             ->setValidator(Injector::inst()->get(Upload_Validator::class . '.userforms', false));
@@ -231,6 +240,10 @@ class EditableFileField extends EditableFormField
             $field->getValidator()->setAllowedMaxFileSize(static::get_php_max_file_size());
         }
 
+        if ($this->Multiple) {
+            $field->setAttribute('multiple', 'multiple');
+        }
+
         $folder = $this->Folder();
         if ($folder && $folder->exists()) {
             $field->setFolderName(
@@ -239,6 +252,8 @@ class EditableFileField extends EditableFormField
         }
 
         $this->doUpdateFormField($field);
+
+        $field->setAttribute('htmlID', $originalName);
 
         return $field;
     }
@@ -299,5 +314,10 @@ class EditableFileField extends EditableFormField
         if ($folderChanged) {
             $this->FolderConfirmed = true;
         }
+    }
+
+    public function getSelectorFieldOnly()
+    {
+        return $this->Multiple ? "[name='{$this->Name}[]']" : parent::getSelectorFieldOnly();
     }
 }
