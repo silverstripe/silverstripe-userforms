@@ -35,6 +35,12 @@ class UserFormsRequiredFieldsValidator extends RequiredFieldsValidator
         $valid = true;
         $fields = $this->form->Fields();
 
+        // Form name comes in as <classname>_<form-id>, which is about the only way to
+        // extract the parent ID. We pull off the number after the last underscore
+        // as sometimes it's a <fully_qualified_class_name>
+        preg_match('/_(\d+)$/', $this->form->FormName(), $matches);
+        $parentId = (int) ($matches[1] ?? 0);
+
         if (empty($this->required)) {
             return $valid;
         }
@@ -53,7 +59,7 @@ class UserFormsRequiredFieldsValidator extends RequiredFieldsValidator
             }
 
             // get editable form field - owns display rules for field
-            $editableFormField = $this->getEditableFormFieldByName($fieldName);
+            $editableFormField = $this->getEditableFormFieldByName($fieldName, $parentId);
 
             // Validate if the field is displayed
             $error =
@@ -73,11 +79,20 @@ class UserFormsRequiredFieldsValidator extends RequiredFieldsValidator
     /**
      * Retrieve an Editable Form field by its name.
      * @param string $name
+     * @param int $parentId
      * @return EditableFormField
      */
-    private function getEditableFormFieldByName($name)
+    private function getEditableFormFieldByName($name, $parentId)
     {
-        $field = EditableFormField::get()->filter(['Name' => $name])->first();
+        $filterFields = [
+            'Name' => $name,
+        ];
+
+        if ($parentId > 0) {
+            $filterFields['ParentID'] = $parentId;
+        }
+
+        $field = EditableFormField::get()->filter($filterFields)->first();
 
         if ($field) {
             return $field;
