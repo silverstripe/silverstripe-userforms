@@ -455,8 +455,6 @@ class EditableFormField extends DataObject
      */
     protected function onBeforeDuplicate($doWrite, $relations)
     {
-        parent::onBeforeDuplicate($doWrite, $relations);
-
         // Re-generate a name for this field so that it doesn't get found during validate by accident
         $this->Name = $this->generateName();
     }
