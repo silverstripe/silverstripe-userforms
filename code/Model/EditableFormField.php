@@ -403,8 +403,8 @@ class EditableFormField extends DataObject
                 'ShowOnLoad',
                 _t(__CLASS__.'.INITIALVISIBILITY', 'Initial visibility'),
                 [
-                    1 => 'Show',
                     0 => 'Hide',
+                    1 => 'Show',
                 ]
             ),
             DropdownField::create(
