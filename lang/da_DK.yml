@@ -1,24 +1,413 @@
 da_DK:
+  SilverStripe\CMS\Model\SiteTree:
+    TABMAIN: Primær
   SilverStripe\UserForms:
+    ADDEMAILRECIPIENT: 'Tilføj e-mail modtager'
+    ADDNEWEMAILRECIPIENT: 'Tilføj ny e-mail modtager'
+    CLEARBUTTON: Ryd
+    CONFIGURATION: Konfiguration
+    DISABLEAUTHENICATEDFINISHACTION: 'Deaktiver godkendelse ved indsendelse'
+    DISABLECSRFSECURITYTOKEN: 'Deaktiver CSRF token'
+    DISPLAYERRORMESSAGESATTOP: 'Vis fejlbeskeder over formularen?'
+    ENABLELIVEVALIDATION: 'Vis live validering'
+    NORECIPIENTS: 'Advarsel: du har ikke konfigureret nogen modtagere. Indsendelser bliver potentielt overset.'
     ONCOMPLETELABEL: 'Vis ved gennemført'
-    SUBMISSIONS: Indsendelse
-    TEXTONSUBMIT: 'Tekst på send-knap'
+    RECIPIENTS: Modtagere
+    SAVESUBMISSIONS: 'Gem ikke indsendelser på serveren'
+    SHOWCLEARFORM: 'Vis "ryd" formular knappen'
+    SUBMISSIONS: Indsendelser
+    SUBMITBUTTON: Indsend
+    TEXTONCLEAR: 'Tekst på "ryd" knap'
+    TEXTONSUBMIT: 'Tekst på "send" knap'
+  SilverStripe\UserForms\Control\UserDefinedFormAdmin:
+    CANCEL: Annuller
+    CONFIRM_FOLDER_LABEL_A: 'Filer, som dine brugere uploader, bør opbevares omhyggeligt for at reducere risikoen for at eksponere følsomme data. Sørg for, at den mappe, du vælger, kun kan ses af de relevante parter. Mappetilladelser kan administreres i området Filer.'
+    CONFIRM_FOLDER_LABEL_B: 'Den valgte mappe bliver standardmappen for denne formular. Dette kan ændres for det individuelle felt <i>File upload field.</i>'
+    FOLDER_OPTIONS_EXISTING: 'Brug en eksisterende mappe'
+    FOLDER_OPTIONS_NEW: 'Opret en ny mappe (anbefalet)'
+    FOLDER_OPTIONS_TITLE: 'Formular mappe optioner'
+    FORM_ACTION_CONFIRM: 'Gem og fortsæt'
+    INVALID_REQUEST: 'Anmodningen var ugyldig'
+  SilverStripe\UserForms\Extension\UserFormFieldEditorExtension:
+    ADD_FIELD: 'Tilføj felt'
+    ADD_FIELD_GROUP: 'Tilføj felt-gruppe'
+    ADD_NEW_FIELD: 'Tilføj nyt felt'
+    ADD_NEW_FIELD_GROUP: 'Tilføj ny felt-gruppe'
+    ADD_NEW_PAGE_BREAK: 'Tilføj nyt side-skift'
+    ADD_PAGE_BREAK: 'Tilføj side-skift'
+    FORMFIELDS: 'Formular felter'
+    has_many_Fields: Felter
+  SilverStripe\UserForms\Extension\UserFormFileExtension:
+    belongs_to_SubmittedFileField: 'Indsendt fil felt'
+    db_UserFormUpload: 'Bruger formular overførsel'
+  SilverStripe\UserForms\Extension\UserFormValidator:
+    CONDITIONAL_REQUIRED: "Det obligatoriske felt '{name}' kan ikke placeres på en betinget side"
+    NO_PAGE: "Feltet '{name}' fundet før nogen sider"
+    UNEXPECTED_BREAK: "Uventet sideskift '{name}' inde i det indlejrede felt '{group}'"
+    UNEXPECTED_GROUP_END: "'{name}' fundet uden en matchende gruppe"
+    WRONG_GROUP_END: "'{name}' fundet lukker den forkerte gruppe '{group}'"
+  SilverStripe\UserForms\Form\UserFormsGridFieldFilterHeader:
+    FILTERSUBMISSIONS: 'Filtrer indsendelser'
+    FROM: Fra
+    RESET: Nulstil
+    TILL: Til
+    WHEREVALUEIS: 'hvor værdien er..'
+  SilverStripe\UserForms\Model\EditableCustomRule:
+    PLURALNAME: 'Redigerbare regler'
+    PLURALS:
+      one: 'En redigerbar regel'
+      other: '{count} redigerbare regler'
+    SINGULARNAME: 'Redigerbar regel'
+    db_ConditionOption: 'Betingelses optioner'
+    db_Display: Vis
+    db_FieldValue: 'Felt værdi'
+    has_one_ConditionField: Betingelses-felt
+    has_one_Parent: Forælder
   SilverStripe\UserForms\Model\EditableFormField:
-    REQUIRED: 'Dette felt er påkrævet i denne formular og kan derfor ikke slettet'
+    CHECKEDBYDEFAULT: 'Markeret som standard?'
+    CUSTOMERROR: 'Tilpasset fejl-besked'
+    CUSTOMOPTIONS: Optioner
+    CUSTOMRULES: 'Tilpassede regler'
+    DEFAULT: 'Standard værdi'
+    DEFAULTTOTODAY: 'Sæt standard til i dag?'
+    DISPLAYIF: 'Skift synlighed når'
+    EXTRACLASS_MULTIPLE: 'Adskil hver CSS-klasse med et enkelt mellemrum'
+    EXTRACLASS_SELECT: 'Vælg fra listen over tilladte "styles"'
+    EXTRACLASS_TITLE: 'Ekstra Styling/Layout'
+    EXTRACLASS_Title: 'Ekstra CSS classer'
+    FIELDISREQUIRED: '{name} er påkrævet'
+    GROUP: Gruppe
+    INITIALVISIBILITY: 'Indledende synlighed'
+    MERGEFIELDNAME: Flette-felter
+    NAME: Navn
+    'NO': Nej
+    PLACEHOLDER: Pladsholder
+    PLURALNAME: 'Redigerbare formfelter'
+    PLURALS:
+      one: 'Et redigerbart form-felt'
+      other: '{count} redigerbare form-felter'
+    REQUIRED: 'Er dette felt påkrævet?'
+    REQUIRED_DESCRIPTION: 'Bemærk venligst, at betingede felter ikke kan være obligatoriske'
+    RIGHTTITLE: 'Titel til højre'
+    SHOWINSUMMARY: 'Vis i oversigtstabel'
+    SINGULARNAME: 'Redigerbart formfelt'
+    TITLE: Titel
+    TYPE_EMPTY: 'Vælg felt-type'
+    VALIDATION: Validering
+    'YES': Ja
+    db_CustomErrorMessage: 'Special fejlbesked'
+    db_Default: Standard
+    db_DisplayRulesConjunction: 'Vis/Display regler konjunktion'
+    db_ExtraClass: 'Ekstra class'
+    db_Name: Navn
+    db_Placeholder: Pladsholder
+    db_Required: Påkrævet
+    db_RightTitle: 'Titel til højre'
+    db_ShowInSummary: 'Vis i oversigt'
+    db_ShowOnLoad: 'Vis under indlæsning'
+    db_Sort: Sortering
+    db_Title: Titel
+    has_many_DisplayRules: 'Vis/Display regler'
+    has_one_Parent: Forælder
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+    PLURALS:
+      one: 'Et afkrydsningsfelt'
+      other: '{count} afkrydsningsfelter'
+    SINGULARNAME: Afkrydsningsfelt
+    db_CheckedDefault: 'Markeret som standard'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+    PLURALNAME: 'Afkrydsningsfelt grupper'
+    PLURALS:
+      one: 'En afkrydsningsfelt gruppe'
+      other: '{count} afkrydsningsfelt grupper'
+    SINGULARNAME: 'Afkrydsningsfelt gruppe'
+  SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
+    DEFAULT: 'Standard værdi'
+    EMPTY_STRING: 'Tom streng'
+    PLURALNAME: 'Lande dropdown'
+    PLURALS:
+      one: 'En lande dropdown'
+      other: '{count} Lande dropdowns'
+    SINGULARNAME: 'Lande dropdown'
+    USE_EMPTY_STRING: 'Sæt standard tom tekst'
+    db_EmptyString: 'Tom streng'
+    db_UseEmptyString: 'Brug tom streng'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDateField:
+    PLURALNAME: 'Dato felter'
+    PLURALS:
+      one: 'Et dato felt'
+      other: '{count} dato felter'
+    SINGULARNAME: 'Dato felt'
+    db_DefaultToToday: 'Sæt i dag som standard'
+  SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+    PLURALS:
+      one: 'Et dropdown felt'
+      other: '{count} dropdowns'
+    SINGULARNAME: 'Dropdown felt'
+    db_EmptyString: 'Tom streng'
+    db_UseEmptyString: 'Brug tom streng'
+  SilverStripe\UserForms\Model\EditableFormField\EditableEmailField:
+    PLURALNAME: 'E-mail felter'
+    PLURALS:
+      one: 'Et e-mail felt'
+      other: '{count} E-mail felter'
+    SINGULARNAME: 'Email felt'
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup:
+    PLURALNAME: 'Redigerbare felt-grupper'
+    PLURALS:
+      one: 'En redigerbar felt-gruppe'
+      other: '{count} redigerbare felt-grupper'
+    SINGULARNAME: 'Redigerbar felt-gruppe'
+    has_one_End: Slut
+  SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd:
+    FIELD_GROUP_END: '{group} slut'
+    FIELD_GROUP_START: 'Gruppe {group}'
+    PLURALNAME: 'Redigerbare felt-gruppe slut'
+    PLURALS:
+      one: 'En redigerbar felt-gruppe slut'
+      other: '{count} redigerbare felt-grupper slut'
+    SINGULARNAME: 'Redigerbar felt-gruppe slut'
+    belongs_to_Group: Gruppe
+  SilverStripe\UserForms\Model\EditableFormField\EditableFileField:
+    ANYONE: 'Ubegrænset adgang, uploads vil være synlige for alle'
+    INHERIT: 'Synligheden for denne mappe er arvet fra den overordnede mappe'
+    LOGGED_IN: 'Begrænset adgang, uploads vil være synlige for brugere, der er logget ind'
+    ONLY_GROUPS: 'Begrænset adgang, uploads vil være synlige for følgende grupper:'
+    PLURALNAME: 'Fil upload-felter'
+    PLURALS:
+      one: 'Et fil upload-felt'
+      other: '{count} fil upload-felter'
+    SELECTUPLOADFOLDER: 'Vælg mappe til overførsel'
+    SINGULARNAME: 'Fil overførsels-felt'
+    db_FolderConfirmed: 'Mappe bekræftet'
+    db_MaxFileSizeMB: 'Maks fil størrelse i MB'
+    has_one_Folder: Mappe
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormHeading:
+    LEVEL: 'Vælg overskriftsstørrelse'
+    PLURALNAME: Overskrifter
+    PLURALS:
+      one: 'En overskrift'
+      other: '{count} overskrifter'
+    SINGULARNAME: Overskrift
+    db_HideFromReports: 'Skjul fra reporter'
+    db_Level: Niveau
+  SilverStripe\UserForms\Model\EditableFormField\EditableFormStep:
+    PLURALNAME: Sideskifts
+    PLURALS:
+      one: 'Et side skift'
+      other: '{count} sideskift'
+    SINGULARNAME: Sideskift
+    STEP_NEXT: Næste
+    STEP_PREV: Forrige
+    STEP_TITLE: 'Side {page}'
+    TITLE_FIRST: 'Første side'
+  SilverStripe\UserForms\Model\EditableFormField\EditableLiteralField:
+    HIDEFROMREPORT: 'Skjul fra reporter?'
+    HIDELABEL: "Skjul 'Titel' label i frontend?"
+    PLURALNAME: 'HTML Blokke'
+    PLURALS:
+      one: 'En HTML blok'
+      other: '{count} HTML Blokke'
+    SINGULARNAME: 'HTML Blok'
+    db_Content: Indhold
+    db_HideFromReports: 'Skjul fra reporter'
+    db_HideLabel: 'Skjul label'
+  SilverStripe\UserForms\Model\EditableFormField\EditableMemberListField:
+    PLURALNAME: 'Bruger liste felt'
+    PLURALS:
+      one: 'Et bruger liste felt'
+      other: '{count} bruger liste felt'
+    SINGULARNAME: 'Bruger liste felt'
+    has_one_Group: Gruppe
+  SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField:
+    DEFAULT: 'Valgt som standard?'
+    OPTIONSTAB: Optioner
+    PLURALNAME: 'Redigerbar multi-valg felter'
+    PLURALS:
+      one: 'Et redigerbart multi-valg felter'
+      other: '{count} Redigerbare multi-valg felter'
+    SINGULARNAME: 'Redigerbart multi-valg felter'
+    TITLE: Titel
+    VALUE: Værdi
+    has_many_Options: Optioner
+  SilverStripe\UserForms\Model\EditableFormField\EditableNumericField:
+    ORDER_WARNING: 'Minimumslængden skal være kortere end maksimumslængden.'
+    PLURALNAME: Numerisk-felt
+    PLURALS:
+      one: 'Et numerisk-felt'
+      other: '{count} numeriske-felter'
+    RANGE: 'Tilladt numerisk område'
+    RANGE_TO: til
+    SINGULARNAME: Numerisk-felt
+    db_MaxValue: 'Maks værdi'
+    db_MinValue: 'Min. værdi'
+  SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+    PLURALNAME: 'Redigerbare optioner'
+    PLURALS:
+      one: 'En redigerbar option'
+      other: '{count} redigerbare optioner'
+    SINGULARNAME: 'Redigerbar option'
+    db_Default: Standard
+    db_Name: Navn
+    db_Sort: Sortering
+    db_Title: Titel
+    has_one_Parent: Forælder
+  SilverStripe\UserForms\Model\EditableFormField\EditableRadioField:
+    PLURALNAME: 'Radio grupper'
+    PLURALS:
+      one: 'En radio gruppe'
+      other: '{count} radio grupper'
+    SINGULARNAME: 'Radio gruppe'
   SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+    AUTOCOMPLETE: Autoudfyld
+    AUTOCOMPLETE_DESCRIPTION: 'Understøttede browsere vil forsøge at udfylde dette felt automatisk med brugerens oplysninger. Brug det til at indstille den udfyldte værdi.'
+    MAX_LENGTH: 'Maksimale tekst længde'
+    MINMAXLENGTHCHECK: 'Minimumslængden skal være mindre end maksimumslængden.'
+    MIN_LENGTH: 'Minimale tekst længde'
     NUMBERROWS: 'Antal rækker'
+    NUMBERROWS_DESCRIPTION: 'Felter med mere end én række vil blive genereret som et tekstområde'
+    PLURALNAME: 'Tekst felter'
+    PLURALS:
+      one: 'Et tekst felt'
+      other: '{count} tekst felter'
+    RANGE_TO: til
+    SINGULARNAME: 'Tekst felt'
+    TEXTLENGTH: 'Tilladt tekst længde'
+    db_Autocomplete: Autoudfyld
+    db_MaxLength: 'Maks længde'
+    db_MinLength: 'Min. længde'
+    db_Rows: Rækker
   SilverStripe\UserForms\Model\Recipient\EmailRecipient:
-    PLURALNAME: 'User Defined Form Email Recipients'
-    SINGULARNAME: 'User Defined Form Email Recipient'
-    db_EmailSubject: 'Email Subject'
+    CUSTOMRULESTAB: 'Special regler'
+    EMAILCONTENTTAB: 'E-mail indhold'
+    EMAILDETAILSTAB: 'E-mail detaljer'
+    EMAILFROMREQUIRED: '"E-mail fra" adresse er påkrævet'
+    EMAILTOREQUIRED: '"Send e-mail til" adresse er krævet'
+    PLURALNAME: 'E-mail modtagere'
+    PLURALS:
+      one: 'En e-mail modtager'
+      other: '{count} e-mail modtagere'
+    SINGULARNAME: 'E-mail modtager'
+    db_CustomRulesCondition: 'Special regler betingelse'
+    db_EmailAddress: 'E-mail adresse'
+    db_EmailBody: 'E-mail body'
+    db_EmailBodyHtml: 'E-mail body html'
+    db_EmailFrom: 'E-mail fra'
+    db_EmailReplyTo: 'E-mail svar-til'
+    db_EmailSubject: 'E-mail emne'
+    db_EmailTemplate: 'E-mail skabelon'
+    db_HideFormData: 'Skjul fra data'
+    db_HideInvisibleFields: 'Skjul usynlige felter'
+    db_SendPlain: 'Send ren tekst'
+    has_many_CustomRules: 'Special regler'
     has_one_Form: Formular
+    has_one_SendEmailFromField: 'Send e-mail fra felt'
+    has_one_SendEmailSubjectField: 'Send e-mail emne felt'
+    has_one_SendEmailToField: 'Send e-mail til felt'
+  SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition:
+    PLURALNAME: 'E-mail modtager betingelser'
+    PLURALS:
+      one: 'En e-mail modtager betingelse'
+      other: '{count} e-mail modtager betingelser'
+    SINGULARNAME: 'E-mail modtager betingelse'
+    db_ConditionOption: 'Betingelses option'
+    db_ConditionValue: Betingelsesværdi
+    has_one_ConditionField: Betingelses-felt
+    has_one_Parent: Forælder
+  SilverStripe\UserForms\Model\Submission\SubmittedFileField:
+    DOWNLOADFILE: 'Download fil'
+    INSUFFICIENTRIGHTS: 'Du har ikke de rette tilladelser til at downloade denne fil'
+    PLURALNAME: 'Indsendte fil-felter'
+    PLURALS:
+      one: 'Et indsendt fil-felt'
+      other: '{count} indsendte fil-felter'
+    SINGULARNAME: 'Indsendt fil felt'
+    YOUMUSTBELOGGEDIN: 'Du skal være logget ind for at se denne fil'
+    has_one_UploadedFile: 'Overført fil'
+  SilverStripe\UserForms\Model\Submission\SubmittedForm:
+    PLURALNAME: 'Indsendte formularer'
+    PLURALS:
+      one: 'En indsendt formular'
+      other: '{count} formularer'
+    SINGULARNAME: 'Indsendt formular'
+    SUBMITTER: Indsender
+    has_many_Values: Værdier
+    has_one_Parent: Forælder
+    has_one_SubmittedBy: 'Indsendt af'
+  SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+    PLURALNAME: 'Indsendte formular felter'
+    PLURALS:
+      one: 'Et indsendt formular felt'
+      other: '{count} indsendte form felter'
+    SINGULARNAME: 'Indsendt formular felt'
+    db_Displayed: Vist
+    db_Name: Navn
+    db_Title: Titel
+    db_Value: Værdi
+    has_one_Parent: Forælder
   SilverStripe\UserForms\Model\UserDefinedForm:
-    EMAILSUBJECT: 'Email Subject'
-    FROMADDRESS: 'Send Email From'
-    HIDEFORMDATA: 'Hide Form Data from Email'
+    ADDEMAILRECIPIENT: 'Tilføj e-mail modtager'
+    ADDNEWEMAILRECIPIENT: 'Tilføj ny e-mail modtager'
+    CLASS_DESCRIPTION: 'Tilføjer en redigerbar formular'
+    CLEARBUTTON: Ryd
+    CONFIGURATION: Konfiguration
+    DESCRIPTION: 'Tilføjer en redigerbar formular'
+    DISABLEAUTHENICATEDFINISHACTION: 'Deaktiver godkendelse ved indsendelse'
+    DISABLECSRFSECURITYTOKEN: 'Deaktiver CSRF token'
+    DISPLAYERRORMESSAGESATTOP: 'Vis fejlbeskeder over formularen?'
+    EMAILADDRESS: E-mail
+    EMAILFROM: Fra
+    EMAILSUBJECT: 'E-mail emne'
+    EMAILTEMPLATE: 'E-mail skabelon'
+    EMAIL_RECIPIENT_UNSAVED_FORM: 'Du vil kunne vælge mellem gyldige formularfelter, når du har gemt denne post.'
+    ENABLELIVEVALIDATION: 'Vis live validering'
+    EmailFromContent: 'Fra-adressen giver dig mulighed for at angive, hvem e-mailen kommer fra. På de fleste servere skal denne indstilles til en e-mailadresse på samme domænenavn som dit websted. For eksempel på ditwebsted.dk skal fra-adressen muligvis være noget@ditwebsted.dk. Du kan dog angive en hvilken som helst e-mailadresse, du ønsker, som svaradresse.'
+    FROMADDRESS: 'Send e-mail fra'
+    HIDEFORMDATA: 'Skjul data fra e-mail'
+    HIDEINVISIBLEFIELDS: 'Skjul usynlige felter fra e-mail?'
+    NORECIPIENTS: 'Advarsel: du har ikke konfigureret nogen modtagere. Indsendelser bliver potentielt overset.'
     ONCOMPLETELABEL: 'Vis ved gennemført'
-    SENDEMAILTO: 'Send Email To'
-    SENDPLAIN: 'Send Email as Plain Text (HTML will be stripped)'
-    SUBMISSIONS: Indsendelse
+    ONCOMPLETEMESSAGE: 'Tak, vi har modtaget din henvendelse'
+    ORSELECTAFIELDTOUSEASFROM: '.. eller vælg et felt til at bruge som svar-til adresse'
+    ORSELECTAFIELDTOUSEASTO: '.. eller vælg et felt at bruge som til-adressen'
+    PLURALNAME: 'Brugerdefinerede formularer'
+    PLURALS:
+      one: 'En brugerdefineret formular'
+      other: '{count} brugerdefinerede formularer '
+    PREVIEW_EMAIL: 'Forhåndsvis e-mail'
+    PREVIEW_EMAIL_DESCRIPTION: 'Bemærk: Ændringer, der ikke er gemt, vises ikke i forhåndsvisningen.'
+    PREVIEW_EMAIL_UNAVAILABLE: 'Du kan se et eksempel på denne e-mail, når du har gemt modtageren.'
+    RECIPIENTS: Modtagere
+    REPLYADDRESS: 'E-mail til svar-til'
+    REPLYADDRESS_DESCRIPTION: "Den e-mailadresse, som modtageren kan 'svare' til."
+    RulesDescription: 'E-mails sendes kun til modtageren, hvis de brugerdefinerede regler er opfyldt. Hvis der ikke er defineret nogen regler, vil denne modtager modtage notifikationer for hver indsendelse.'
+    SAVESUBMISSIONS: 'Gem ikke indsendelser på serveren'
+    SELECTAFIELDTOSETSUBJECT: '.. eller vælg et felt at bruge som emne'
+    SENDEMAILTO: 'Send e-mail til'
+    SENDEMAILTO_DESCRIPTION: 'Du kan indtaste flere e-mailadresser som en kommasepareret liste.'
+    SENDIF: 'Send betingelser'
+    SENDIFAND: 'Alle betingelser er sande'
+    SENDIFOR: 'En eller flere betingelser er sande'
+    SENDPLAIN: 'Send e-mail som ren tekst (HTML bliver fjernet)'
+    SHOWCLEARFORM: 'Vis "ryd" formular knappen'
+    SINGULARNAME: 'Brugerdefineret formular'
+    SUBMISSIONS: Indsendelser
+    SUBMITBUTTON: Indsend
+    TEXTONCLEAR: 'Tekst på "ryd" knap'
     TEXTONSUBMIT: 'Tekst på send-knap'
-    has_many_Submissions: Indsendelse
+    TYPEREPLY: 'Type svar-adresse'
+    TYPESUBJECT: 'Type emne'
+    TYPETO: 'Type til svar-adresse'
+    UnrestrictedFileUploadWarning: 'Adgang til den aktuelle uploadmappe "{path}" er ikke begrænset. Uploadede filer vil være offentligt tilgængelige, hvis den nøjagtige URL er kendt.'
+    db_ClearButtonText: 'Tekst på "ryd" knap'
+    db_DisableAuthenicatedFinishAction: 'Deaktiver godkendelse ved indsendelse'
+    db_DisableCsrfSecurityToken: 'Deaktiver csrf sikkerheds-token'
+    db_DisableSaveSubmissions: 'Gem ikke indsendelser'
+    db_DisplayErrorMessagesAtTop: 'Vis fejlbeskeder over formularen?'
+    db_EnableLiveValidation: 'Vis live validering'
+    db_OnCompleteMessage: 'Besked ved gennemført'
+    db_ShowClearButton: 'Vis "ryd" knap'
+    db_SubmitButtonText: 'Tekst på "indsend" knap'
+    has_many_EmailRecipients: 'E-mail modtagere'
+    has_many_Fields: Felter
+    has_many_Submissions: Indsendelser
