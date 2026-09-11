@@ -450,6 +450,16 @@ class EditableFormField extends DataObject
     }
 
     /**
+     * @param bool $doWrite
+     * @param array|null $relations
+     */
+    protected function onBeforeDuplicate($doWrite, $relations)
+    {
+        // Re-generate a name for this field so that it doesn't get found during validate by accident
+        $this->Name = $this->generateName();
+    }
+
+    /**
      * Generate a new non-conflicting Name value
      *
      * @return string
