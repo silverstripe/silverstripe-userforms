@@ -43,6 +43,15 @@ class SubmittedForm extends DataObject
         'Created.Nice' => 'Created'
     ];
 
+    private static $searchable_fields = [
+        'Created' => [
+            'title' => 'Created',
+        ],
+        'SubmittedBy.Email' => [
+            'title' => 'Submitter',
+        ],
+    ];
+
     private static $table_name = 'SubmittedForm';
 
     public function requireDefaultRecords()

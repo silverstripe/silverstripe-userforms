@@ -1,0 +1,51 @@
+SilverStripe\UserForms\Model\EditableFormField\EditableOption:
+  test-option-1:
+    Name: Option1
+    Title: Option 1
+
+  test-option-2:
+    Name: Option2
+    Title: Option 2
+
+SilverStripe\UserForms\Model\EditableFormField\EditableDropdown:
+  test-dropdown:
+    Name: test_dropdown
+    Title: Test Dropdown Field
+    Options:
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.test-option-1
+      - =>SilverStripe\UserForms\Model\EditableFormField\EditableOption.test-option-2
+    Searchable: true
+
+SilverStripe\UserForms\Model\Submission\SubmittedFormField:
+  value1:
+    Title: Basic Text Field
+    Name: basic_text_name
+    Value: Test Value 1
+
+  value2:
+    Title: Test Dropdown Field
+    Name: test_dropdown
+    Value: Option 1
+
+  value3:
+    Title: Basic Text Field
+    Name: basic_text_name
+    Value: Test Value 2
+
+  value4:
+    Title: Test Dropdown Field
+    Name: test_dropdown
+    Value: Option 2
+
+SilverStripe\UserForms\Model\Submission\SubmittedForm:
+  submission1:
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.basic-form-page
+    Values:
+      - =>SilverStripe\UserForms\Model\Submission\SubmittedFormField.value1
+      - =>SilverStripe\UserForms\Model\Submission\SubmittedFormField.value2
+
+  submission2:
+    Parent: =>SilverStripe\UserForms\Model\UserDefinedForm.basic-form-page
+    Values:
+      - =>SilverStripe\UserForms\Model\Submission\SubmittedFormField.value3
+      - =>SilverStripe\UserForms\Model\Submission\SubmittedFormField.value4
