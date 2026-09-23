@@ -24,8 +24,8 @@ use SilverStripe\Forms\SegmentField;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\HasManyList;
@@ -34,6 +34,7 @@ use SilverStripe\ORM\ValidationException;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Modifier\DisambiguationSegmentFieldModifier;
@@ -423,9 +424,11 @@ class EditableFormField extends DataObject
     {
         parent::onBeforeWrite();
 
-        $formField = $this->getFormField();
-        if ($formField && !$formField->hasData()) {
-            $this->Required = false;
+        if ($this->Required && !($this instanceof EditableFileField)) {
+            $formField = $this->getFormField();
+            if ($formField && !$formField->hasData()) {
+                $this->Required = false;
+            }
         }
 
         // Set a field name.
