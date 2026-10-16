@@ -2,7 +2,7 @@
 
 namespace SilverStripe\UserForms\Extension;
 
-use SilverStripe\Control\Director;
+use SilverStripe\Core\Environment;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataList;
@@ -98,7 +98,7 @@ class UpgradePolymorphicExtension extends Extension
 
         if ($updated) {
             $message = "Corrected {$updated} default polymorphic class names to {$this->defaultReplacement}";
-            if (Director::is_cli()) {
+            if (Environment::isCli()) {
                 echo sprintf(" * %s\n", $message);
             } else {
                 echo sprintf("<li>%s</li>\n", $message);
