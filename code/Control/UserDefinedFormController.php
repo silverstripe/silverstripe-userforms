@@ -12,6 +12,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Core\Convert;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
@@ -32,8 +33,6 @@ use SilverStripe\Versioned\Versioned;
 use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\Model\ModelData;
-use SilverStripe\View\TemplateEngine;
-use SilverStripe\View\ViewLayerData;
 use Symfony\Component\Mime\Exception\RfcComplianceException;
 
 /**
@@ -392,6 +391,8 @@ JS
 
                 // Merge fields are used for CMS authors to reference specific form fields in email content
                 $mergeFields = $this->getMergeFieldsMap($emailData['Fields']);
+                // Let developers add their own merge-field variables (substituted as literal text, not evaluated)
+                $this->extend('updateMergeFields', $mergeFields, $recipient, $submittedForm);
 
                 if ($attachments && (bool) $recipient->HideFormData === false) {
                     foreach ($attachments as $uploadFieldName => $file) {
@@ -422,8 +423,7 @@ JS
                 // Include any parsed merge field references from the CMS editor - this is already escaped
                 // This string substitution works for both HTML and plain text emails.
                 // $recipient->getEmailBodyContent() will retrieve the relevant version of the email
-                $engine = Injector::inst()->create(TemplateEngine::class);
-                $emailData['Body'] = $engine->renderString($recipient->getEmailBodyContent(), ViewLayerData::create($mergeFields));
+                $emailData['Body'] = $this->replaceMergeFields((string) $recipient->getEmailBodyContent(), $mergeFields);
                 // only include visible fields if recipient visibility flag is set
                 if ((bool) $recipient->HideInvisibleFields) {
                     $emailData['Fields'] = $visibleSubmittedFields;
@@ -489,10 +489,10 @@ JS
                     if ($submittedFormField && trim($submittedFormField->Value ?? '')) {
                         $email->setSubject($submittedFormField->Value);
                     } else {
-                        $email->setSubject($engine->renderString($recipient->EmailSubject ?? '', ViewLayerData::create($mergeFields)));
+                        $email->setSubject($this->replaceMergeFields($recipient->EmailSubject ?? '', $mergeFields));
                     }
                 } else {
-                    $email->setSubject($engine->renderString($recipient->EmailSubject ?? '', ViewLayerData::create($mergeFields)));
+                    $email->setSubject($this->replaceMergeFields($recipient->EmailSubject ?? '', $mergeFields));
                 }
 
                 $this->extend('updateEmail', $email, $recipient, $emailData);
@@ -574,6 +574,39 @@ JS
         }
 
         return $data;
+    }
+
+    /**
+     * Substitute merge-field references ($FieldName, {$FieldName} or a dotted $Name.Path) in
+     * author-controlled email content with the matching value from the merge-field map. Only a known
+     * name with a safely renderable value is replaced; any other token is left exactly as it was. The
+     * content is never evaluated as a template, so template syntax an author entered stays inert text
+     * rather than executing against the application.
+     */
+    private function replaceMergeFields(string $content, ArrayData $mergeFields): string
+    {
+        $values = $mergeFields->toMap();
+        $token = '[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*';
+        $result = preg_replace_callback(
+            '/\{\$(' . $token . ')\}|\$(' . $token . ')/',
+            function (array $matches) use ($values): string {
+                $name = ($matches[1] ?? '') !== '' ? $matches[1] : ($matches[2] ?? '');
+                if ($name === '' || !array_key_exists($name, $values)) {
+                    return $matches[0];
+                }
+                $value = $values[$name];
+                if ($value instanceof DBField) {
+                    return (string) $value->forTemplate();
+                }
+                if (is_scalar($value) || $value instanceof \Stringable) {
+                    return Convert::raw2xml((string) $value);
+                }
+                // Leave any token we cannot render safely exactly as it was.
+                return $matches[0];
+            },
+            $content
+        );
+        return $result ?? '';
     }
 
     /**
