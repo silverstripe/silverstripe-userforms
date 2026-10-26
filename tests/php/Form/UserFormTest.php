@@ -22,4 +22,17 @@ class UserFormTest extends SapphireTest
         $form = new UserForm($controller);
         $this->assertEquals(2, $form->getSteps()->count());
     }
+
+    public function testAllowIncompleteStepsAttribute()
+    {
+        $page = $this->objFromFixture(UserDefinedForm::class, 'empty-page');
+        $controller = ModelAsController::controller_for($page);
+
+        $form = new UserForm($controller);
+        $this->assertFalse($form->getAttributes()['data-allowincompletesteps']);
+
+        $page->AllowIncompleteSteps = true;
+        $form = new UserForm($controller);
+        $this->assertTrue($form->getAttributes()['data-allowincompletesteps']);
+    }
 }

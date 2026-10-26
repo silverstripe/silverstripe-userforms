@@ -358,6 +358,7 @@ en:
   SilverStripe\UserForms\Model\UserDefinedForm:
     ADDEMAILRECIPIENT: 'Add Email Recipient'
     ADDNEWEMAILRECIPIENT: 'Add new Email Recipient'
+    ALLOWINCOMPLETESTEPS: 'Allow moving between pages without completing required fields'
     CLASS_DESCRIPTION: 'Adds a customizable form.'
     CLEARBUTTON: Clear
     CONFIGURATION: Configuration
@@ -411,6 +412,7 @@ en:
     TYPESUBJECT: 'Type subject'
     TYPETO: 'Type to address'
     UnrestrictedFileUploadWarning: 'Access to the current upload folder "{path}" is not restricted. Uploaded files will be publicly accessible if the exact URL is known.'
+    db_AllowIncompleteSteps: 'Allow incomplete steps'
     db_ClearButtonText: 'Clear button text'
     db_DisableAuthenicatedFinishAction: 'Disable authenicated finish action'
     db_DisableCsrfSecurityToken: 'Disable csrf security token'
