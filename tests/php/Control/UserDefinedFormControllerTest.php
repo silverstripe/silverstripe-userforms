@@ -556,6 +556,62 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertSame(5 * 1024 * 1024, $udfController->getMaximumAllowedEmailAttachmentSize());
     }
 
+    /**
+     * Test that file validation failures properly redirect back to the form
+     * instead of returning null. This ensures users see the validation error
+     * rather than encountering a broken page.
+     *
+     * Regression test for fix where redirectBack() was called but null was returned,
+     * preventing the redirect from executing.
+     */
+    public function testFileValidationFailureRedirectsBack()
+    {
+        Config::modify()->set(Upload_Validator::class, 'use_is_uploaded_file', false);
+
+        // Set extremely small max file size to trigger validation failure
+        Config::modify()->set(Upload_Validator::class, 'default_max_file_size', 1);
+
+        $userForm = $this->setupFormFrontend('upload-form');
+        $controller = new UserDefinedFormController($userForm);
+        $field = $this->objFromFixture(EditableFileField::class, 'file-field-1');
+
+        // Use existing test file which will exceed the 1 byte limit
+        $path = realpath(__DIR__ . '/fixtures/testfile.jpg');
+        $data = [
+            $field->Name => [
+                'name' => 'testfile.jpg',
+                'type' => 'image/jpeg',
+                'tmp_name' => $path,
+                'error' => 0,
+                'size' => filesize($path ?? ''),
+            ]
+        ];
+        $_FILES[$field->Name] = $data[$field->Name];
+
+        $controller->getRequest()->setSession(new Session([]));
+
+        // Process the form - this should trigger validation failure
+        $response = $controller->process($data, $controller->Form());
+
+        // Critical: Response must not be null (the bug being fixed)
+        $this->assertInstanceOf(HTTPResponse::class, $response,
+            'Response should be HTTPResponse, not null, when file validation fails');
+
+        // Assert it's a redirect (302)
+        $this->assertEquals(302, $response->getStatusCode(),
+            'Should redirect back to form on validation failure');
+
+        // Assert we don't redirect to the 'finished' success page
+        $location = $response->getHeader('Location');
+        $this->assertStringNotContainsString('finished', $location,
+            'Should not redirect to success page when validation fails');
+
+        // Assert no file was created in the database
+        $uploadedFiles = File::get()->filter(['Name:StartsWith' => 'testfile']);
+        $this->assertEquals(0, $uploadedFiles->count(),
+            'No file should be created when validation fails');
+    }
+
     public function getParseByteSizeStringTestValues()
     {
         return [
