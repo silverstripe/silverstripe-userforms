@@ -15,6 +15,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\UserDefinedForm;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
@@ -309,6 +310,26 @@ class EditableFormFieldTest extends FunctionalTest
         /** @var EditableFormField $field */
         $field = $this->objFromFixture(EditableTextField::class, $fieldName);
         $this->assertEquals($expected, $field->isDisplayed($data));
+    }
+
+    public static function provideRequiredIdentifierEscapesTitle(): array
+    {
+        return [
+            'plain title is unchanged' => ['Required Text Field', 'Required Text Field'],
+            'html payload is escaped' => ['<img src=x onerror=alert(1)>', '&lt;img src=x onerror=alert(1)&gt;'],
+            'quotes and ampersands are escaped' => ['Your "name" & nickname\'s', 'Your &quot;name&quot; &amp; nickname&#039;s'],
+        ];
+    }
+
+    #[DataProvider('provideRequiredIdentifierEscapesTitle')]
+    public function testRequiredIdentifierEscapesTitle(string $title, string $expectedTitle): void
+    {
+        Config::modify()->set(UserDefinedForm::class, 'required_identifier', '*');
+        $field = $this->objFromFixture(EditableTextField::class, 'required-text');
+        $field->Title = $title;
+        $formField = $field->getFormField();
+        $expected = $expectedTitle . ' <span class=\'required-identifier\'>*</span>';
+        $this->assertSame($expected, (string) $formField->Title());
     }
 
     public function testChangingDataFieldTypeToDatalessRemovesRequiredSetting()
