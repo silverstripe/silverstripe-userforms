@@ -6,7 +6,7 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
   }
 } else {
   ss.i18n.addDictionary('en', {
-    "GRIDFIELD.ERRORINTRANSACTION": "An error occured while fetching data from the server\n Please try again later.",
+    "GRIDFIELD.ERRORINTRANSACTION": "An error occurred while fetching data from the server\n Please try again later.",
     "UserForms.ADDED_FIELD": "Added new field",
     "UserForms.ADDED_OPTION": "Added option",
     "UserForms.ADDING_FIELD": "Adding new field",
