@@ -83,6 +83,11 @@ jQuery(document).ready(($) => {
     $itemElement.on('click', (e) => {
       e.preventDefault();
       userform.jumpToStep(step.id);
+
+      // Highlight the fields on the step that need attention.
+      if (userform.currentStep === step) {
+        userform.$el.valid();
+      }
     });
 
     this.$el.find('.error-list').append($itemElement);
@@ -251,6 +256,11 @@ jQuery(document).ready(($) => {
     this.$buttons = this.$el.find('.step-button-jump');
     this.$jsAlign = this.$el.find('.js-align');
     const userform = this.$el.closest('.userform').data('inst');
+
+    // Users can jump to any step if they don't have to complete each one first.
+    if (CONSTANTS.ALLOW_INCOMPLETE_STEPS) {
+      this.$buttons.removeAttr('disabled');
+    }
 
     // Update the progress bar when 'step' buttons are clicked.
     this.$buttons.each((i, stepButton) => {
@@ -520,6 +530,16 @@ jQuery(document).ready(($) => {
       let isValid = true;
       const userform = $(form).closest('.userform').data('inst');
 
+      // Steps that weren't validated when the user left them need validating now.
+      if (CONSTANTS.ALLOW_INCOMPLETE_STEPS) {
+        $.each(userform.steps, (i, step) => {
+          if (step !== userform.currentStep && !step.conditionallyHidden()) {
+            // eslint-disable-next-line no-param-reassign
+            step.valid = userform.validateStep(step);
+          }
+        });
+      }
+
       // Validate the current step
       if (userform.currentStep) {
         userform.currentStep.valid = $(form).valid();
@@ -603,6 +623,29 @@ jQuery(document).ready(($) => {
   };
 
   /**
+   * @func UserForm.validateStep
+   * @param {object} step - An instance of FormStep.
+   * @return {boolean} - Whether the step is valid.
+   * @desc Validates a step that isn't currently displayed.
+   * Hidden fields are excluded from validation, so the step is briefly displayed in place of the current step.
+   */
+  UserForm.prototype.validateStep = function validateStep(step) {
+    if (step === this.currentStep) {
+      return this.$el.valid();
+    }
+
+    this.currentStep.$el.hide();
+    step.$el.show();
+
+    const isValid = this.$el.valid();
+
+    step.$el.hide();
+    this.currentStep.$el.show();
+
+    return isValid;
+  };
+
+  /**
    * @func UserForm.jumpToStep
    * @param {number} stepNumber
    * @param {boolean} [direction] - Defaults to forward (true).
@@ -610,7 +653,6 @@ jQuery(document).ready(($) => {
    */
   UserForm.prototype.jumpToStep = function jumpToStep(stepNumber, direction) {
     const targetStep = this.steps[stepNumber];
-    let isValid = false;
     const forward = direction === undefined ? true : direction;
 
     // Make sure the target step exists.
@@ -630,18 +672,21 @@ jQuery(document).ready(($) => {
       return;
     }
 
-    // Validate the form.
-    // This will effectively validate the current step and not the entire form.
-    // This is because hidden fields are excluded from validation, and all fields
-    // on all other steps, are currently hidden.
-    isValid = this.$el.valid();
+    // If incomplete steps are allowed, validation is left until the form is submitted.
+    if (!CONSTANTS.ALLOW_INCOMPLETE_STEPS) {
+      // Validate the form.
+      // This will effectively validate the current step and not the entire form.
+      // This is because hidden fields are excluded from validation, and all fields
+      // on all other steps, are currently hidden.
+      const isValid = this.$el.valid();
 
-    // Set the 'valid' property on the current step.
-    this.currentStep.valid = isValid;
+      // Set the 'valid' property on the current step.
+      this.currentStep.valid = isValid;
 
-    // Users can navigate to step's they've already viewed even if the current step is invalid.
-    if (isValid === false && targetStep.viewed === false) {
-      return;
+      // Users can navigate to step's they've already viewed even if the current step is invalid.
+      if (isValid === false && targetStep.viewed === false) {
+        return;
+      }
     }
 
     this.currentStep.hide();
@@ -680,6 +725,7 @@ jQuery(document).ready(($) => {
 
     CONSTANTS.ENABLE_LIVE_VALIDATION = $userform.data('livevalidation') !== undefined;
     CONSTANTS.DISPLAY_ERROR_MESSAGES_AT_TOP = $userform.data('toperrors') !== undefined;
+    CONSTANTS.ALLOW_INCOMPLETE_STEPS = $userform.data('allowincompletesteps') !== undefined;
 
     // Extend the default validation options with conditional options
     // that are set by the user in the CMS.

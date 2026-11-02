@@ -98,6 +98,7 @@ trait UserForm
         'DisableSaveSubmissions' => 'Boolean',
         'EnableLiveValidation' => 'Boolean',
         'DisplayErrorMessagesAtTop' => 'Boolean',
+        'AllowIncompleteSteps' => 'Boolean',
         'DisableAuthenicatedFinishAction' => 'Boolean',
         'DisableCsrfSecurityToken' => 'Boolean'
     ];
@@ -357,6 +358,7 @@ SQL;
             CheckboxField::create('ShowClearButton', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.SHOWCLEARFORM', 'Show Clear Form Button'), $this->ShowClearButton),
             CheckboxField::create('EnableLiveValidation', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ENABLELIVEVALIDATION', 'Enable live validation')),
             CheckboxField::create('DisplayErrorMessagesAtTop', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISPLAYERRORMESSAGESATTOP', 'Display error messages above the form?')),
+            CheckboxField::create('AllowIncompleteSteps', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.ALLOWINCOMPLETESTEPS', 'Allow moving between pages without completing required fields')),
             CheckboxField::create('DisableCsrfSecurityToken', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISABLECSRFSECURITYTOKEN', 'Disable CSRF Token')),
             CheckboxField::create('DisableAuthenicatedFinishAction', _t('SilverStripe\\UserForms\\Model\\UserDefinedForm.DISABLEAUTHENICATEDFINISHACTION', 'Disable Authentication on finish action'))
         );

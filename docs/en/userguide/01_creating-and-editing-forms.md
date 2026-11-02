@@ -72,3 +72,9 @@ To create a multi-page form, simply click the "Add new Page Break" button.
 This will create a page break field which is used to create a new page in the form. You can drag and drop this page break to separate form fields at the desired location.
 
 ![Multi-page forms](_images/multi-page-forms.png)
+
+By default, users must complete all required fields on a page before they can move on to the next one.
+Checking 'Allow moving between pages without completing required fields' in the 'Configuration' tab lets users move
+freely between pages, for example to look through the whole form before starting to fill it in.
+Required fields are still checked when the form is submitted, and the user is shown a list of links to any pages with
+missing or invalid answers.

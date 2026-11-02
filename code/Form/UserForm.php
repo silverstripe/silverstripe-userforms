@@ -190,6 +190,7 @@ class UserForm extends Form
         $attrs['class'] = $attrs['class'] . ' userform';
         $attrs['data-livevalidation'] = (bool)$this->controller->EnableLiveValidation;
         $attrs['data-toperrors'] = (bool)$this->controller->DisplayErrorMessagesAtTop;
+        $attrs['data-allowincompletesteps'] = (bool)$this->controller->AllowIncompleteSteps;
 
         return $attrs;
     }
