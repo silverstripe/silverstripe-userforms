@@ -101,6 +101,7 @@ SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
   basic-text:
     Name: basic_text_name
     Title: Basic Text Field
+    Searchable: true
 
   basic-text-2:
     Name: basic_text_name

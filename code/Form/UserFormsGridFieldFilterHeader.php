@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Form;
 
 use SilverStripe\Core\Convert;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;
@@ -12,10 +13,10 @@ use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Model\List\ArrayList;
-use SilverStripe\ORM\FieldType\DBDate;
-use SilverStripe\Model\List\SS_List;
 use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\List\SS_List;
+use SilverStripe\ORM\FieldType\DBDate;
 
 /**
  * Extension to the build in SilverStripe {@link GridField} to allow for
@@ -23,6 +24,7 @@ use SilverStripe\Model\ArrayData;
  * entering the value of a field
  *
  * @package userforms
+ * @deprecated 7.2.0 Will be removed without equivalent functionality in a future major release
  */
 class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
 {
@@ -31,6 +33,11 @@ class UserFormsGridFieldFilterHeader extends GridFieldFilterHeader
      * @var array
      */
     protected $columns;
+
+    public function __construct()
+    {
+        Deprecation::noticeWithNoReplacment('7.2.0', '', Deprecation::SCOPE_CLASS);
+    }
 
     public function setColumns($columns)
     {

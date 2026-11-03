@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Model;
 
+use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Core\Convert;
@@ -11,6 +12,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\ORM\DB;
 use SilverStripe\UserForms\Extension\UserFormFieldEditorExtension;
 use SilverStripe\UserForms\Extension\UserFormValidator;
@@ -21,6 +23,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroup;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFieldGroupEnd;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 use SilverStripe\Versioned\Versioned;
 
@@ -31,7 +34,10 @@ class UserDefinedFormTest extends FunctionalTest
 {
     protected $usesTransactions = false;
 
-    protected static $fixture_file = '../UserFormsTest.yml';
+    protected static $fixture_file = [
+        '../UserFormsTest.yml',
+        'UserDefinedFormTest.yml',
+    ];
 
     protected static $required_extensions = [
         UserDefinedForm::class => [UserFormFieldEditorExtension::class],
@@ -557,5 +563,63 @@ class UserDefinedFormTest extends FunctionalTest
         $result = $recipient->validate();
         $this->assertTrue($result->isValid());
         $this->assertEmpty($result->getMessages());
+    }
+
+    public function testFormFieldSearch()
+    {
+        $this->logInWithPermission('ADMIN');
+
+        $form = $this->objFromFixture(UserDefinedForm::class, 'basic-form-page');
+        $form->Fields()->add($this->objFromFixture(EditableDropdown::class, 'test-dropdown'));
+        $submission1 = $this->objFromFixture(SubmittedForm::class, 'submission1');
+        $submission2 = $this->objFromFixture(SubmittedForm::class, 'submission2');
+
+        // get the submissions grid and filter header
+        $gridField = $form->getCMSFields()->dataFieldByName('Submissions')->setForm(new Form(CMSMain::singleton(), 'TestForm'));
+        $component = $gridField->getConfig()->getComponentByType(GridFieldFilterHeader::class);
+
+        // set the state to filter based on the basic_text_name field having "Test Value 1"
+        $state = $gridField->State;
+        $state->GridFieldFilterHeader = [];
+        $state->GridFieldFilterHeader->Columns = [];
+        $state->GridFieldFilterHeader->Columns->basic_text_name = 'Test Value 1';
+
+        // make sure the list contains the submission1 but not submission2
+        $this->assertListContains(
+            [
+                ['ID' => $submission1->ID],
+            ],
+            $gridField->getManipulatedList(),
+            SubmittedForm::class . '.submission1 was not found in the GridField\'s list when it should be',
+        );
+        $this->assertListNotContains(
+            [
+                ['ID' => $submission2->ID],
+            ],
+            $gridField->getManipulatedList(),
+            SubmittedForm::class . '.submission2 was found in the GridField\'s list when it should not be',
+        );
+
+        // set the state to filter based on the basic-dropdown field having "Option 2"
+        $state = $gridField->State;
+        $state->GridFieldFilterHeader = [];
+        $state->GridFieldFilterHeader->Columns = [];
+        $state->GridFieldFilterHeader->Columns->test_dropdown = 'Option 2';
+
+        // make sure the list contains the submission2 but not submission1
+        $this->assertListContains(
+            [
+                ['ID' => $submission2->ID],
+            ],
+            $gridField->getManipulatedList(),
+            SubmittedForm::class . '.submission2 was not found in the GridField\'s list when it should be',
+        );
+        $this->assertListNotContains(
+            [
+                ['ID' => $submission1->ID],
+            ],
+            $gridField->getManipulatedList(),
+            SubmittedForm::class . '.submission1 was found in the GridField\'s list when it should not be',
+        );
     }
 }

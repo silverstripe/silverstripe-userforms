@@ -133,6 +133,7 @@ class EditableFormField extends DataObject
         'RightTitle' => 'Varchar(255)',
         'ShowOnLoad' => 'Boolean(1)',
         'ShowInSummary' => 'Boolean',
+        'Searchable' => 'Boolean',
         'Placeholder' => 'Varchar(255)',
         'DisplayRulesConjunction' => 'Enum("And,Or","Or")',
     ];
@@ -261,6 +262,7 @@ class EditableFormField extends DataObject
                     $this->i18n_singular_name()
                 ),
                 CheckboxField::create('ShowInSummary', _t(__CLASS__.'.SHOWINSUMMARY', 'Show in summary gridfield')),
+                CheckboxField::create('Searchable', _t(__CLASS__.'.SHOWINSEARCH', 'Show in summary search')),
                 LiteralField::create(
                     'MergeField',
                     '<div class="form-group field readonly">' .
