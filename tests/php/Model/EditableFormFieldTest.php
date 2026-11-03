@@ -180,7 +180,7 @@ class EditableFormFieldTest extends FunctionalTest
     {
         $fileField1 = $this->objFromFixture(EditableFileField::class, 'file-field-without-folder');
         $fileField2 = $this->objFromFixture(EditableFileField::class, 'file-field-with-folder');
-        
+
         $this->assertFalse($fileField1->getFolderExists());
         $this->assertTrue($fileField2->getFolderExists());
     }
@@ -205,6 +205,26 @@ class EditableFormFieldTest extends FunctionalTest
         $this->assertMatchesRegularExpression('/^EditableTextField_.+/', $textfield2->Name);
         $this->assertMatchesRegularExpression('/^EditableCheckbox_.+/', $checkboxField->Name);
         $this->assertNotEquals($textfield1->Name, $textfield2->Name);
+    }
+
+    /**
+     * Verify that duplicating a field re-rolls its Name, rather than duplicating it
+     */
+    public function testDuplicateUniqueName()
+    {
+        $textField = $this->objFromFixture(EditableTextField::class, 'basic-text');
+
+        $duplicate = $textField->duplicate();
+
+        $this->assertNotEquals(
+            $textField->Name,
+            $duplicate->Name,
+            'Duplicated field should not share the same Name as the original'
+        );
+        $this->assertMatchesRegularExpression('/^EditableTextField_.+/', $duplicate->Name);
+
+        // Original field is untouched
+        $this->assertEquals('basic_text_name', $textField->Name);
     }
 
     public function testLengthRange()
