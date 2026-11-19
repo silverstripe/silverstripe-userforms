@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Control;
 
 use Exception;
+use InvalidArgumentException;
 use PageController;
 use Psr\Log\LoggerInterface;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
@@ -19,6 +20,7 @@ use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
 use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Model\List\SS_List;
+use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataObjectSchema;
 use SilverStripe\ORM\EagerLoadedList;
@@ -233,7 +235,8 @@ class UserDefinedFormController extends PageController
         }
 
         $fieldRows = $this->readFieldRows($list);
-        if ($fieldRows === null) {
+        // Nothing to preload for a form without fields, which keeps its relation list
+        if (!$fieldRows) {
             return $list;
         }
 
@@ -311,15 +314,40 @@ class UserDefinedFormController extends PageController
             $rowsByParent[(int) $row['ParentID']][] = $row;
         }
 
+        $canFilterEmptyList = static::canFilterEmptyEagerLoadedList();
         foreach ($fieldIDs as $fieldID) {
-            $children = new EagerLoadedList($childClass, HasManyList::class, $fieldID);
             $rows = $rowsByParent[$fieldID] ?? [];
+            if (!$rows && !$canFilterEmptyList) {
+                // Left to its relation list, so filter() on it still returns an empty list
+                continue;
+            }
+            $children = new EagerLoadedList($childClass, HasManyList::class, $fieldID);
             $children->addRows($rows);
             if ($childClass === EditableCustomRule::class) {
                 $this->addEagerLoadedConditionFields($fields, $children, $rows);
             }
             $fields->addEagerLoadedData($relation, $fieldID, $children);
         }
+    }
+
+    /**
+     * Whether filter() on an empty EagerLoadedList returns an empty list. Before silverstripe/framework
+     * 6.3.2 it throws "Can't filter by column", so a field with no options or no display rules is then
+     * left to read them through its relation (getDefaultOptions() filters the options), at the cost of
+     * a query for each such field.
+     */
+    private static function canFilterEmptyEagerLoadedList(): bool
+    {
+        static $canFilter = null;
+        if ($canFilter === null) {
+            try {
+                (new EagerLoadedList(EditableOption::class, DataList::class))->filter('ID', 0);
+                $canFilter = true;
+            } catch (InvalidArgumentException) {
+                $canFilter = false;
+            }
+        }
+        return $canFilter;
     }
 
     /**

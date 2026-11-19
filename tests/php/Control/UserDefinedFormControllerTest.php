@@ -2,6 +2,7 @@
 
 namespace SilverStripe\UserForms\Tests\Control;
 
+use InvalidArgumentException;
 use ReflectionClass;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\File;
@@ -17,6 +18,7 @@ use SilverStripe\Dev\CSSContentParser;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
+use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\View\Requirements;
 use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
@@ -24,6 +26,7 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
 use SilverStripe\ORM\EagerLoadedList;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
+use SilverStripe\UserForms\Model\EditableFormField\EditableDropdown;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
@@ -272,10 +275,14 @@ class UserDefinedFormControllerTest extends FunctionalTest
         foreach ($fields as $field) {
             // Each field's own columns are already in its record, so none is lazy-loaded
             $this->assertArrayHasKey('Required', $field->getQueriedDatabaseFields());
-            $this->assertInstanceOf(EagerLoadedList::class, $field->DisplayRules());
             $ruleCount += $field->DisplayRules()->count();
+            if ($field->DisplayRules()->exists() || $this->canFilterEmptyEagerLoadedList()) {
+                $this->assertInstanceOf(EagerLoadedList::class, $field->DisplayRules());
+            }
             if ($field instanceof EditableMultipleOptionField) {
-                $this->assertInstanceOf(EagerLoadedList::class, $field->Options());
+                if ($field->Options()->exists() || $this->canFilterEmptyEagerLoadedList()) {
+                    $this->assertInstanceOf(EagerLoadedList::class, $field->Options());
+                }
                 $this->assertSame(
                     EditableOption::get()->filter('ParentID', $field->ID)->column('ID'),
                     $field->Options()->column('ID')
@@ -285,6 +292,51 @@ class UserDefinedFormControllerTest extends FunctionalTest
         }
         $this->assertGreaterThan(0, $optionCount, 'The fixture should have options');
         $this->assertGreaterThan(0, $ruleCount, 'The fixture should have display rules');
+    }
+
+    public function testPreloadedFormWithoutFieldsOptionsOrDisplayRules()
+    {
+        // A form without fields is not preloaded and still builds its required fields
+        $emptyForm = $this->objFromFixture(UserDefinedForm::class, 'empty-form');
+        $controller = new UserDefinedFormController($emptyForm);
+        $this->assertNotInstanceOf(EagerLoadedList::class, $controller->getEditableFields());
+        $this->assertSame([], $controller->Form()->getValidator()->getRequired());
+
+        // A dropdown with no options and a field with no display rules: getDefaultOptions() filters
+        // the options, which must give an empty list rather than throw
+        $page = UserDefinedForm::create(['Title' => 'No options']);
+        $page->write();
+        $dropdown = EditableDropdown::create(['Name' => 'Choice', 'Title' => 'Choice', 'Required' => true]);
+        $dropdown->ParentID = $page->ID;
+        $dropdown->ParentClass = UserDefinedForm::class;
+        $dropdown->write();
+        $text = EditableTextField::create(['Name' => 'Text', 'Title' => 'Text']);
+        $text->ParentID = $page->ID;
+        $text->ParentClass = UserDefinedForm::class;
+        $text->write();
+
+        UserDefinedFormController::config()->set('preload_fields', false);
+        $withoutPreload = $this->describeForm(new UserDefinedFormController($page));
+
+        UserDefinedFormController::config()->set('preload_fields', true);
+        $controller = new UserDefinedFormController($page);
+        $withPreload = $this->describeForm($controller);
+        $this->assertInstanceOf(EagerLoadedList::class, $controller->getEditableFields());
+        $this->assertSame($withoutPreload, $withPreload, 'Preloading should not change the form');
+        $this->assertSame(['Choice'], $withPreload['required']);
+    }
+
+    /**
+     * Whether this framework's EagerLoadedList can filter an empty list (silverstripe/framework 6.3.2+)
+     */
+    private function canFilterEmptyEagerLoadedList(): bool
+    {
+        try {
+            (new EagerLoadedList(EditableOption::class, DataList::class))->filter('ID', 0);
+            return true;
+        } catch (InvalidArgumentException) {
+            return false;
+        }
     }
 
     /**
