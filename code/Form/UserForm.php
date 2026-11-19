@@ -8,6 +8,8 @@ use SilverStripe\Control\Session;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
+use SilverStripe\Model\List\SS_List;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\FormField\UserFormsStepField;
 use SilverStripe\UserForms\FormField\UserFormsFieldList;
 
@@ -121,13 +123,24 @@ class UserForm extends Form
         $fields = UserFormsFieldList::create();
         $target = $fields;
 
-        foreach ($this->controller->data()->Fields() as $field) {
+        foreach ($this->getEditableFields() as $field) {
             $target = $target->processNext($field);
         }
         $fields->clearEmptySteps();
         $this->extend('updateFormFields', $fields);
         $fields->setForm($this);
         return $fields;
+    }
+
+    /**
+     * The editable fields this form is built from
+     */
+    protected function getEditableFields(): SS_List
+    {
+        if ($this->controller instanceof UserDefinedFormController) {
+            return $this->controller->getEditableFields();
+        }
+        return $this->controller->data()->Fields();
     }
 
     /**
@@ -166,9 +179,7 @@ class UserForm extends Form
     {
         // Generate required field validator
         $requiredNames = $this
-            ->getController()
-            ->data()
-            ->Fields()
+            ->getEditableFields()
             ->filter('Required', true)
             ->column('Name');
         $requiredNames = array_merge($requiredNames, $this->getEmailRecipientRequiredFields());

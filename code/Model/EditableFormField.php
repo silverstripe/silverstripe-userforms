@@ -954,9 +954,9 @@ class EditableFormField extends DataObject
         // Check for field dependencies / default
         foreach ($this->DisplayRules() as $rule) {
             // Get the field which is effected
-            $formFieldWatch = EditableFormField::get()->setUseCache(true)->byID($rule->ConditionFieldID);
+            $formFieldWatch = $rule->ConditionField();
             // Skip deleted fields
-            if (!$formFieldWatch) {
+            if (!$formFieldWatch || !$formFieldWatch->exists()) {
                 continue;
             }
 

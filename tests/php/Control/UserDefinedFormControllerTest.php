@@ -18,6 +18,10 @@ use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\View\Requirements;
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\ORM\EagerLoadedList;
 use SilverStripe\Security\InheritedPermissions;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
@@ -241,6 +245,60 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertEquals($controller->Form()->Fields()->Count(), 1); // disabled SecurityID token fields
         $this->assertEquals($controller->Form()->Actions()->Count(), 1);
         $this->assertEquals(count($controller->Form()->getValidator()->getRequired() ?? []), 1);
+    }
+
+    public function testFormPreloadsFieldsOptionsAndDisplayRules()
+    {
+        $page = $this->objFromFixture(UserDefinedForm::class, 'required-custom-rules-form');
+
+        UserDefinedFormController::config()->set('preload_fields', false);
+        $controller = new UserDefinedFormController($page);
+        $withoutPreload = $this->describeForm($controller);
+        $this->assertNotEmpty($withoutPreload['script'], 'The fixture should have display rules');
+        $this->assertNotInstanceOf(EagerLoadedList::class, $controller->getEditableFields());
+
+        UserDefinedFormController::config()->set('preload_fields', true);
+        $controller = new UserDefinedFormController($page);
+        $withPreload = $this->describeForm($controller);
+        $this->assertSame($withoutPreload, $withPreload, 'Preloading should not change the form');
+
+        $fields = $controller->getEditableFields();
+        $this->assertInstanceOf(EagerLoadedList::class, $fields);
+        $this->assertSame($page->Fields()->column('ID'), $fields->column('ID'));
+        $this->assertNotInstanceOf(EagerLoadedList::class, $page->Fields(), 'The record should be left as it was');
+
+        $optionCount = 0;
+        $ruleCount = 0;
+        foreach ($fields as $field) {
+            // Each field's own columns are already in its record, so none is lazy-loaded
+            $this->assertArrayHasKey('Required', $field->getQueriedDatabaseFields());
+            $this->assertInstanceOf(EagerLoadedList::class, $field->DisplayRules());
+            $ruleCount += $field->DisplayRules()->count();
+            if ($field instanceof EditableMultipleOptionField) {
+                $this->assertInstanceOf(EagerLoadedList::class, $field->Options());
+                $this->assertSame(
+                    EditableOption::get()->filter('ParentID', $field->ID)->column('ID'),
+                    $field->Options()->column('ID')
+                );
+                $optionCount += $field->Options()->count();
+            }
+        }
+        $this->assertGreaterThan(0, $optionCount, 'The fixture should have options');
+        $this->assertGreaterThan(0, $ruleCount, 'The fixture should have display rules');
+    }
+
+    /**
+     * The parts of a rendered form that preloading must not change
+     */
+    private function describeForm(UserDefinedFormController $controller): array
+    {
+        Requirements::clear();
+        $form = $controller->Form();
+        return [
+            'html' => (string) $form->forTemplate(),
+            'required' => $form->getValidator()->getRequired(),
+            'script' => Requirements::backend()->getCustomScripts()['UserFormsConditional-' . $controller->ID] ?? '',
+        ];
     }
 
     public function testGetFormFields()
