@@ -32,6 +32,10 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use SilverStripe\UserForms\Model\Recipient\EmailRecipient;
 use SilverStripe\UserForms\Model\Submission\SubmittedFormField;
 use SilverStripe\UserForms\Model\UserDefinedForm;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
+use SilverStripe\UserForms\Model\Recipient\EmailRecipientCondition;
+use SilverStripe\UserForms\Model\EditableFormField\EditableFormStep;
+use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Tests\Control\fixtures\SizeStringTestableController;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\Model\ArrayData;
@@ -324,6 +328,100 @@ class UserDefinedFormControllerTest extends FunctionalTest
         $this->assertInstanceOf(EagerLoadedList::class, $controller->getEditableFields());
         $this->assertSame($withoutPreload, $withPreload, 'Preloading should not change the form');
         $this->assertSame(['Choice'], $withPreload['required']);
+    }
+
+    /**
+     * A multi-step form with a dropdown, a required field, a display rule hiding another required field
+     * and a recipient with a custom rule submits as before (the steps of the userforms.feature scenario
+     * after its file upload)
+     */
+    #[DataProvider('providePreloadFields')]
+    public function testSubmitMultiStepFormWithRules(bool $preload)
+    {
+        UserDefinedFormController::config()->set('preload_fields', $preload);
+        $page = UserDefinedForm::create(['Title' => 'My userform', 'URLSegment' => 'my-userform']);
+        $page->write();
+        $sort = 0;
+        $add = function (string $class, array $data) use ($page, &$sort) {
+            $field = $class::create($data);
+            $field->ParentID = $page->ID;
+            $field->ParentClass = UserDefinedForm::class;
+            $field->Sort = ++$sort;
+            $field->write();
+            return $field;
+        };
+        $add(EditableFormStep::class, ['Title' => 'First Page']);
+        $dropdown = $add(EditableDropdown::class, ['Name' => 'dropdown', 'Title' => 'My dropdown']);
+        foreach (['1' => true, '2' => false] as $value => $default) {
+            $option = EditableOption::create(['Title' => "My option $value", 'Value' => (string) $value, 'Default' => $default]);
+            $option->ParentID = $dropdown->ID;
+            $option->write();
+        }
+        $add(EditableTextField::class, ['Name' => 'text1', 'Title' => 'My textfield 1']);
+        $add(EditableFormStep::class, ['Title' => 'Second Page']);
+        $text2 = $add(EditableTextField::class, ['Name' => 'text2', 'Title' => 'My textfield 2']);
+        $add(EditableTextField::class, ['Name' => 'text3', 'Title' => 'My textfield 3', 'Required' => true]);
+        // Required, but hidden unless option 2 is chosen, so it must not block the submission
+        $extra = $add(
+            EditableTextField::class,
+            ['Name' => 'extra', 'Title' => 'Extra', 'Required' => true, 'ShowOnLoad' => false]
+        );
+        $rule = EditableCustomRule::create(['Display' => 'Show', 'ConditionOption' => 'HasValue', 'FieldValue' => '2']);
+        $rule->ParentID = $extra->ID;
+        $rule->ConditionFieldID = $dropdown->ID;
+        $rule->write();
+
+        $recipient = EmailRecipient::create([
+            'EmailAddress' => 'to@example.com',
+            'EmailFrom' => 'from@example.com',
+            'EmailSubject' => 'New userform submission',
+            'CustomRulesCondition' => 'And',
+        ]);
+        $recipient->FormID = $page->ID;
+        $recipient->FormClass = UserDefinedForm::class;
+        $recipient->write();
+        $condition = EmailRecipientCondition::create(['ConditionOption' => 'Equals', 'ConditionValue' => 'do send']);
+        $condition->ParentID = $recipient->ID;
+        $condition->ConditionFieldID = $text2->ID;
+        $condition->write();
+
+        $this->actWithPermission('ADMIN', fn () => $page->publishRecursive());
+        $this->autoFollowRedirection = false;
+        $this->clearEmails();
+        $formID = 'UserForm_Form_' . $page->ID;
+
+        // The required field on step 2 is missing
+        $this->get($page->Link());
+        $this->submitForm($formID, null, ['dropdown' => '1', 'text1' => 'My value 1', 'text2' => 'do not send']);
+        $this->assertSame(0, SubmittedForm::get()->count());
+
+        $this->get($page->Link());
+        $response = $this->submitForm(
+            $formID,
+            null,
+            ['dropdown' => '1', 'text1' => 'My value 1', 'text2' => 'do not send', 'text3' => 'My value 3']
+        );
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertStringContainsString('finished', $response->getHeader('Location'));
+        $this->assertSame(1, SubmittedForm::get()->count());
+        $this->assertNull($this->findEmail('to@example.com', null, 'New userform submission'));
+
+        // The recipient's rule passes this time
+        $this->get($page->Link());
+        $response = $this->submitForm($formID, null, ['text2' => 'do send', 'text3' => 'lorem ipsum']);
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertStringContainsString('finished', $response->getHeader('Location'));
+        $this->assertNotNull($this->findEmail('to@example.com', null, 'New userform submission'));
+
+        // Choosing option 2 shows the hidden required field, which then blocks the submission
+        $this->get($page->Link());
+        $this->submitForm($formID, null, ['dropdown' => '2', 'text3' => 'lorem ipsum']);
+        $this->assertSame(2, SubmittedForm::get()->count());
+    }
+
+    public static function providePreloadFields(): array
+    {
+        return ['preloaded' => [true], 'not preloaded' => [false]];
     }
 
     /**
