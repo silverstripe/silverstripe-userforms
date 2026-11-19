@@ -3,6 +3,7 @@
 namespace SilverStripe\UserForms\Control;
 
 use Exception;
+use InvalidArgumentException;
 use PageController;
 use Psr\Log\LoggerInterface;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;
@@ -12,18 +13,28 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\Form;
 use SilverStripe\i18n\i18n;
 use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\List\SS_List;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DataObjectSchema;
+use SilverStripe\ORM\EagerLoadedList;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Security\Security;
 use SilverStripe\UserForms\Extension\UserFormFileExtension;
 use SilverStripe\UserForms\Form\UserForm;
+use SilverStripe\UserForms\Model\EditableCustomRule;
 use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableMultipleOptionField;
+use SilverStripe\UserForms\Model\EditableFormField\EditableOption;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 use SilverStripe\UserForms\Model\Submission\SubmittedFileField;
@@ -66,6 +77,17 @@ class UserDefinedFormController extends PageController
      * @config
      */
     private static $maximum_email_attachment_size = '1M';
+
+    /**
+     * Whether getEditableFields() reads the form's fields, their options and their display rules in a fixed
+     * number of queries before building the form, rather than a few queries per field.
+     */
+    private static bool $preload_fields = true;
+
+    /**
+     * The form's fields, read once by getEditableFields()
+     */
+    private ?EagerLoadedList $preloadedFields = null;
 
     protected function init()
     {
@@ -185,6 +207,163 @@ class UserDefinedFormController extends PageController
     }
 
     /**
+     * The editable fields the form is built from.
+     *
+     * Building a form reads the field list several times (the fields, the required fields, the
+     * display rules script), each field lazy-loads its own columns, and each field reads its
+     * display rules and, for a field with options, its options more than once. Each of those was
+     * a query. With preload_fields on, the fields are read once, each with all of its own columns,
+     * and their options and display rules in one query each, so all of those reads are answered
+     * from memory.
+     *
+     * The preloaded list is read-only and is kept for the life of this controller. It is not used
+     * when preload_fields is off, when the record is not saved, or when a stored field class no
+     * longer exists; the record's Fields() relation is returned instead.
+     *
+     * @return SS_List<EditableFormField>
+     */
+    public function getEditableFields(): SS_List
+    {
+        if ($this->preloadedFields) {
+            return $this->preloadedFields;
+        }
+
+        $record = $this->data();
+        $list = $record->Fields();
+        if (!$record->isInDB() || !$list instanceof HasManyList || !static::config()->get('preload_fields')) {
+            return $list;
+        }
+
+        $fieldRows = $this->readFieldRows($list);
+        // Nothing to preload for a form without fields, which keeps its relation list
+        if (!$fieldRows) {
+            return $list;
+        }
+
+        $fields = new EagerLoadedList(EditableFormField::class, HasManyList::class, (int) $record->ID);
+        $fields->addRows($fieldRows);
+
+        $fieldIDs = [];
+        $optionFieldIDs = [];
+        foreach ($fieldRows as $row) {
+            $fieldIDs[] = (int) $row['ID'];
+            if (is_a($row['RecordClassName'] ?? $row['ClassName'], EditableMultipleOptionField::class, true)) {
+                $optionFieldIDs[] = (int) $row['ID'];
+            }
+        }
+        // Options first: a display rule is given its condition field, which must already have them
+        $this->addEagerLoadedChildren($fields, $optionFieldIDs, EditableOption::class, 'Options');
+        $this->addEagerLoadedChildren($fields, $fieldIDs, EditableCustomRule::class, 'DisplayRules');
+
+        return $this->preloadedFields = $fields;
+    }
+
+    /**
+     * Each field's row with all of its own class's columns, in one query, or null when a stored
+     * class no longer exists
+     */
+    private function readFieldRows(HasManyList $list): ?array
+    {
+        $schema = DataObject::getSchema();
+        $columnsByClass = [];
+        $columns = [];
+        // Which classes are present: one cheap query, so the full one joins only their tables
+        foreach ($list->columnUnique('ClassName') as $class) {
+            if (!ClassInfo::exists($class) || !is_a($class, EditableFormField::class, true)) {
+                return null;
+            }
+            $columnsByClass[$class] = array_fill_keys(
+                array_keys($schema->fieldSpecs($class, DataObjectSchema::DB_ONLY)),
+                true
+            );
+            $columns += $columnsByClass[$class];
+        }
+
+        if (!$columns) {
+            return [];
+        }
+
+        $rows = [];
+        foreach ($list->setQueriedColumns(array_keys($columns))->dataQuery()->execute() as $row) {
+            $class = $row['RecordClassName'] ?? $row['ClassName'] ?? null;
+            if (!isset($columnsByClass[$class])) {
+                return null;
+            }
+            // Keep only the field's own columns, so it carries no other class's (null) fields
+            $rows[] = array_intersect_key($row, $columnsByClass[$class] + ['RecordClassName' => true]);
+        }
+        return $rows;
+    }
+
+    /**
+     * Give each listed field its has_many children of one class, read in one query in their
+     * default order. A field with none gets an empty list, so it does not query for them.
+     */
+    private function addEagerLoadedChildren(
+        EagerLoadedList $fields,
+        array $fieldIDs,
+        string $childClass,
+        string $relation
+    ): void {
+        if (!$fieldIDs) {
+            return;
+        }
+
+        $rowsByParent = [];
+        foreach (DataObject::get($childClass)->filter('ParentID', $fieldIDs)->dataQuery()->execute() as $row) {
+            $rowsByParent[(int) $row['ParentID']][] = $row;
+        }
+
+        $canFilterEmptyList = static::canFilterEmptyEagerLoadedList();
+        foreach ($fieldIDs as $fieldID) {
+            $rows = $rowsByParent[$fieldID] ?? [];
+            if (!$rows && !$canFilterEmptyList) {
+                // Left to its relation list, so filter() on it still returns an empty list
+                continue;
+            }
+            $children = new EagerLoadedList($childClass, HasManyList::class, $fieldID);
+            $children->addRows($rows);
+            if ($childClass === EditableCustomRule::class) {
+                $this->addEagerLoadedConditionFields($fields, $children, $rows);
+            }
+            $fields->addEagerLoadedData($relation, $fieldID, $children);
+        }
+    }
+
+    /**
+     * Whether filter() on an empty EagerLoadedList returns an empty list. Before silverstripe/framework
+     * 6.3.2 it throws "Can't filter by column", so a field with no options or no display rules is then
+     * left to read them through its relation (getDefaultOptions() filters the options), at the cost of
+     * a query for each such field.
+     */
+    private static function canFilterEmptyEagerLoadedList(): bool
+    {
+        static $canFilter = null;
+        if ($canFilter === null) {
+            try {
+                (new EagerLoadedList(EditableOption::class, DataList::class))->filter('ID', 0);
+                $canFilter = true;
+            } catch (InvalidArgumentException) {
+                $canFilter = false;
+            }
+        }
+        return $canFilter;
+    }
+
+    /**
+     * Give each display rule the field it watches, which is one of the form's own fields
+     */
+    private function addEagerLoadedConditionFields(EagerLoadedList $fields, EagerLoadedList $rules, array $rows): void
+    {
+        foreach ($rows as $row) {
+            $conditionField = $fields->byID((int) $row['ConditionFieldID']);
+            if ($conditionField) {
+                $rules->addEagerLoadedData('ConditionField', (int) $row['ID'], $conditionField);
+            }
+        }
+    }
+
+    /**
      * Generate the javascript for the conditional field show / hiding logic.
      *
      * @return void
@@ -196,7 +375,7 @@ class UserDefinedFormController extends PageController
         if (!$form) {
             return;
         }
-        $formFields = $form->Fields();
+        $formFields = $this->getEditableFields();
 
         $watch = [];
 
