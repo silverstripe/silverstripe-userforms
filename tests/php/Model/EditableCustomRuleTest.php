@@ -4,6 +4,7 @@ namespace SilverStripe\UserForms\Tests\Model;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\UserForms\Model\EditableCustomRule;
+use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
@@ -132,6 +133,72 @@ class EditableCustomRuleTest extends SapphireTest
             $expected,
             $rule1->validateAgainstFormData(['CountrySelection' => $value])
         );
+    }
+
+    public static function dataProviderCheckboxGroup()
+    {
+        return [
+            'HasValue, option ticked' => ['HasValue', ['Phone' => 'Phone', 'Email' => 'Email'], true],
+            'HasValue, other option ticked' => ['HasValue', ['Email' => 'Email'], false],
+            'HasValue, nothing ticked' => ['HasValue', null, false],
+            'ValueNot, option ticked' => ['ValueNot', ['Phone' => 'Phone'], false],
+            'ValueNot, other option ticked' => ['ValueNot', ['Email' => 'Email'], true],
+            'ValueNot, nothing ticked' => ['ValueNot', null, true],
+            'IsNotBlank, an option ticked' => ['IsNotBlank', ['Email' => 'Email'], true],
+            'IsNotBlank, nothing ticked' => ['IsNotBlank', null, false],
+            'IsBlank, nothing ticked' => ['IsBlank', null, true],
+            'IsBlank, an option ticked' => ['IsBlank', ['Email' => 'Email'], false],
+        ];
+    }
+
+    /**
+     * A checkbox group posts an array of ticked values, or nothing; the rule must be judged as the
+     * browser judges it, by the ticked options
+     */
+    #[DataProvider('dataProviderCheckboxGroup')]
+    public function testValidateAgainstCheckboxGroup($condition, $ticked, $expected)
+    {
+        $rule = $this->objFromFixture(EditableCustomRule::class, 'groupRule');
+        $rule->ConditionOption = $condition;
+        $data = $ticked === null ? [] : ['ContactBy' => $ticked];
+
+        $this->assertSame($expected, $rule->validateAgainstFormData($data));
+    }
+
+    public static function dataProviderCheckbox()
+    {
+        return [
+            'HasValue, ticked' => ['HasValue', '1', true],
+            'HasValue, unticked' => ['HasValue', null, false],
+            'ValueNot, ticked' => ['ValueNot', '1', false],
+            'ValueNot, unticked' => ['ValueNot', null, true],
+            'IsNotBlank, ticked' => ['IsNotBlank', '1', true],
+            'IsBlank, unticked' => ['IsBlank', null, true],
+            'IsBlank, ticked' => ['IsBlank', '1', false],
+        ];
+    }
+
+    /**
+     * A single checkbox posts nothing when unticked, and the browser's "has value" means ticked
+     * whatever the rule's value
+     */
+    #[DataProvider('dataProviderCheckbox')]
+    public function testValidateAgainstCheckbox($condition, $ticked, $expected)
+    {
+        $rule = $this->objFromFixture(EditableCustomRule::class, 'checkboxRule');
+        $rule->ConditionOption = $condition;
+        $data = $ticked === null ? [] : ['Agree' => $ticked];
+
+        $this->assertSame($expected, $rule->validateAgainstFormData($data));
+    }
+
+    public function testFieldShownByACheckboxGroupIsDisplayed()
+    {
+        $phone = $this->objFromFixture(EditableTextField::class, 'phoneField');
+
+        $this->assertTrue($phone->isDisplayed(['ContactBy' => ['Phone' => 'Phone']]));
+        $this->assertFalse($phone->isDisplayed(['ContactBy' => ['Email' => 'Email']]));
+        $this->assertFalse($phone->isDisplayed([]));
     }
 
     public function testValidateAgainstFormDataWithNonSenseRule()

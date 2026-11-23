@@ -57,6 +57,24 @@ class EditableCustomRule extends DataObject
         Versioned::class . "('Stage', 'Live')"
     ];
 
+    private const CONDITION_IS_BLANK = 'IsBlank';
+
+    private const CONDITION_IS_NOT_BLANK = 'IsNotBlank';
+
+    private const CONDITION_HAS_VALUE = 'HasValue';
+
+    private const CONDITION_VALUE_NOT = 'ValueNot';
+
+    /**
+     * Conditions a checkbox or checkbox group is judged on by its ticked options
+     */
+    private const CHECKBOX_CONDITIONS = [
+        EditableCustomRule::CONDITION_IS_BLANK,
+        EditableCustomRule::CONDITION_IS_NOT_BLANK,
+        EditableCustomRule::CONDITION_HAS_VALUE,
+        EditableCustomRule::CONDITION_VALUE_NOT,
+    ];
+
     private static $table_name = 'EditableCustomRule';
 
     /**
@@ -246,6 +264,10 @@ class EditableCustomRule extends DataObject
 
         $controllingField = $this->ConditionField();
 
+        if ($controllingField->isCheckBoxField() && in_array($this->ConditionOption, EditableCustomRule::CHECKBOX_CONDITIONS, true)) {
+            return $this->validateAgainstCheckedOptions($controllingField, $data[$controllingField->Name] ?? null);
+        }
+
         if (!isset($data[$controllingField->Name])) {
             return false;
         }
@@ -288,6 +310,42 @@ class EditableCustomRule extends DataObject
         return $valid;
     }
 
+
+    /**
+     * Whether a rule on a checkbox or checkbox group is satisfied, judged as the front-end rule
+     * built by {@see EditableCustomRule::buildExpression()} judges it: by which options are ticked.
+     *
+     * A checkbox posts nothing when unticked, and a checkbox group posts an array of the ticked
+     * options' values, so neither can be compared to the rule's value as a string.
+     *
+     * @param EditableFormField $field The controlling checkbox or checkbox group
+     * @param mixed $value The submitted value: null, a string, or an array of ticked values
+     * @return bool
+     */
+    protected function validateAgainstCheckedOptions(EditableFormField $field, $value)
+    {
+        $ticked = array_values(array_filter(
+            array_map('strval', is_array($value) ? $value : [$value]),
+            fn (string $option) => $option !== ''
+        ));
+        // A single checkbox has no option values: "has value" means ticked, as in the browser
+        $hasValue = $field->isCheckBoxGroupField()
+            ? in_array((string) $this->FieldValue, $ticked, true)
+            : $ticked !== [];
+
+        switch ($this->ConditionOption) {
+            case EditableCustomRule::CONDITION_IS_NOT_BLANK:
+                return $ticked !== [];
+            case EditableCustomRule::CONDITION_IS_BLANK:
+                return $ticked === [];
+            case EditableCustomRule::CONDITION_HAS_VALUE:
+                return $hasValue;
+            case EditableCustomRule::CONDITION_VALUE_NOT:
+                return !$hasValue;
+        }
+
+        throw new LogicException("Unhandled rule {$this->ConditionOption}");
+    }
 
     /**
      * Returns the opposite visibility function for the value of the initial visibility field, e.g. show/hide. This

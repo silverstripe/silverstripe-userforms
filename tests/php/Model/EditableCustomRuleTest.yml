@@ -5,7 +5,21 @@ SilverStripe\UserForms\Model\EditableFormField\EditableCountryDropdownField:
     DisplayRulesConjunction: And
     ShowOnLoad: false
 
+SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField:
+  contactGroup:
+    Name: ContactBy
+    Title: "How should we contact you?"
+
+SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox:
+  agreeCheckbox:
+    Name: Agree
+    Title: "I agree"
+
 SilverStripe\UserForms\Model\EditableFormField\EditableTextField:
+  phoneField:
+    Name: Phone
+    Title: "Phone number"
+    ShowOnLoad: false
   irdNumberField:
     Name: IRDNumber
     Title: "Enter your IRD Number"
@@ -27,4 +41,15 @@ SilverStripe\UserForms\Model\EditableCustomRule:
     ConditionOption: ValueGreaterThan
     FieldValue: 1
     ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.countryTextField
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.irdNumberField
+  groupRule:
+    Display: Show
+    ConditionOption: HasValue
+    FieldValue: Phone
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckboxGroupField.contactGroup
+    Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.phoneField
+  checkboxRule:
+    Display: Show
+    ConditionOption: HasValue
+    ConditionField: =>SilverStripe\UserForms\Model\EditableFormField\EditableCheckbox.agreeCheckbox
     Parent: =>SilverStripe\UserForms\Model\EditableFormField\EditableTextField.irdNumberField
